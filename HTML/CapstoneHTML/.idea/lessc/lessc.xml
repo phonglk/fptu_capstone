@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LessManager">
+    <option name="lessProfiles">
+      <map>
+        <entry key="Bootstrap">
+          <value>
+            <LessProfile>
+              <option name="cssDirectories">
+                <list>
+                  <CssDirectory>
+                    <option name="path" value="E:\Study\FU\Capstone\capstone_source180513\trunk\HTML\CapstoneHTML\css" />
+                  </CssDirectory>
+                </list>
+              </option>
+              <option name="lessDirPath" value="E:\Study\FU\Capstone\capstone_source180513\trunk\HTML\CapstoneHTML\less" />
+              <option name="name" value="Bootstrap" />
+            </LessProfile>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
+
