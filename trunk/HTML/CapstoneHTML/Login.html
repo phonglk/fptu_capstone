@@ -38,6 +38,35 @@
                     <a href="Register.html" class="btn btn-success"><i class="icon-plus-sign"></i> Đăng ký</a>
                     <a href="Login.html" class="btn btn-primary pull-right"><i class="icon-user"></i> Đăng nhập</a>
                     <!--Area:User Widget.End-->
+                    <form action="user" method="post" class="formLogin" name="formLogin">
+                        <div id="modalLogin" class="modal hide">
+                            <div class="modal-header">
+                                <button type="button" class="close" name="btnClose">×</button>
+                                <h3>Login</h3>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="control-group">
+                                    <label class="control-label"><strong>Email:</strong></label>
+                                    <div class="controls">
+                                        <input type="text" name="txtEmail" class="input-xlarge"/>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label"><strong>Password:</strong></label>
+                                    <div class="controls">
+                                        <input type="password" id="password" name="txtPassword" class="input-xlarge"/>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" type="button" name="btnClose">Close</button>
+                                <button class="btn btn-primary" type="submit" name="action" value="login">Login</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="row">
@@ -120,18 +149,16 @@
             <div class="input-append">
                 <input class="span9 input-height-large" type="text" required
                        placeholder="Tìm kiếm sự kiện, ca sĩ, địa điểm ...">
-                <!-- Sửa lại chỗ này chút TungDN để chuyển sang trang kết quả tìm kiếm -->
-                <a class="btn btn-warning btn-large" href="SearchResult.html">Tìm kiếm</a>
-                <!--
-                  <button class="btn btn-warning btn-large" type="submit">Tìm kiếm</button>
-                -->
-
+                <button class="btn btn-warning btn-large" type="submit">Tìm kiếm</button>
             </div>
         </form>
     </div>
     <!--Area: Page Header & Navigation & Search.END-->
     <div class="row" id="content">
         <!--Content Here-->
+        <div class="container">
+
+        </div>
     </div>
     <!--Area: Footer-->
     <div class="container">
