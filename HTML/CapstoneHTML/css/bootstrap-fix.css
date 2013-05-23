@@ -3,3 +3,6 @@ input[type='text'].input-height-large {
   font-size: 20px;
   line-height: 25px;
 }
+.add-on-input {
+  height: 30px !important;
+}
