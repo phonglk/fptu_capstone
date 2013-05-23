@@ -105,33 +105,77 @@
     <div class="user-tab">
         <ul class="nav nav-tabs">
             <li class="active offset1">
-                <a href="#">Trang chủ</a>
-            </li>
-            <li class="">
-                <a href="SellerHomepage.html">Bán</a>
-            </li>
-            <li class="">
-                <a href="#">Mua</a>
+                <a href="#">Đăng kí</a>
             </li>
         </ul>
-    </div>
-    <div class="search">
-        <form class="offset1">
-            <div class="input-append">
-                <input class="span9 input-height-large" type="text" required
-                       placeholder="Tìm kiếm sự kiện, ca sĩ, địa điểm ...">
-                <!-- Sửa lại chỗ này chút TungDN để chuyển sang trang kết quả tìm kiếm -->
-                <a class="btn btn-warning btn-large" href="SearchResult.html">Tìm kiếm</a>
-                <!--
-                  <button class="btn btn-warning btn-large" type="submit">Tìm kiếm</button>
-                -->
-
-            </div>
-        </form>
     </div>
     <!--Area: Page Header & Navigation & Search.END-->
     <div class="row" id="content">
         <!--Content Here-->
+        <div id="middle">
+            <div id="middle_content">
+                <div id="left_content">
+                    <div class="left_content_header" >ĐĂNG KÝ TÀI KHOẢN MỚI</div>
+                    <div class="left_content_main">
+                        <form id="register_form" onsubmit="return checkMinLength()" action="RegisterProcessing" method="POST">
+
+                            <p>Tên tài khoản *</p>
+                            <input type="text" name="txtUsername" placeholder="Tên tài khoản từ 5-15 kí tự" required maxlength="15" class="checkMin"/>
+
+                            <p>Email *</p>
+                            <input type="email" name="txtEmail" placeholder="example@abc.com" required maxlength="30" pattern="[^@]+@[^\.]+\..+"/><br/>
+
+                            <p>Mật khẩu *</p>
+                            <input type="password" name="txtPassword" placeholder="Mật khẩu từ 5-15 kí tự" required maxlength="15" class="checkMin"/>
+
+                            <p>Xác nhận mật khẩu *</p>
+                            <input type="password" name="txtConfirm" required maxlength="15" class="checkMin"/>
+
+                            <p>Tỉnh, Thành Phố *</p>
+                            <select>
+                                <option>TP. Hồ Chí Minh</option>
+                                <option>Hà Nội</option>
+                                <option>An Giang</option>
+                                <option>Bắc Kạn</option>
+                                <option>Bình Dương</option>
+                            </select>
+
+                            <p>Quận, Huyện *</p>
+                            <select>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+
+                            <p>Địa chỉ *</p>
+                            <input type="text" name="txtAddress" required />
+
+                            <p>Số điện thoại nhà riêng *</p>
+                            <input type="tel" name="nmbHome" placeholder="083123456" required="">
+
+                            <p>Số điện thoại di động *</p>
+                            <input type="tel" name="nmbTele" placeholder="0901234567" required="">
+
+                            <p>Họ Tên đầy đủ *</p>
+                            <input type="text" name="txtUsername" placeholder="Nguyễn Văn A" required="" />
+
+                            <p>Các điều khoản</p>
+                            <textarea rows="3"></textarea>
+                            <p><label class="checkbox inline">
+                                <input type="checkbox" id="chckboxAgree" value="AgreeTerm"> Tôi đồng ý với tất cả những điều khoản trên
+                            </label></p>
+
+
+
+                            <p><button type="submit">Đăng kí</button>
+                            <button type="reset">Nhập lại</button></p>
+                        </form>
+                    </div><!-- end div.right_content_main -->
+                </div><!-- end div.right_content -->
+            </div><!-- end div#middle_content -->
+        </div><!-- end div#middle -->
     </div>
     <!--Area: Footer-->
     <div class="container">
