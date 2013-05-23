@@ -2021,13 +2021,17 @@ table {
   margin-bottom: 20px;
 }
 
+#table1 {
+    margin-left: 160px;
+}
+
 .table th,
 .table td {
   padding: 8px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  border-top: 2px solid #dddddd;
 }
 
 .table th {
@@ -6190,4 +6194,8 @@ a.badge:focus {
 
 .affix {
   position: fixed;
+}
+
+.menu {
+
 }
