@@ -113,24 +113,24 @@
 <div class="row" id="content">
     <!--Content Here-->
     <div id="middle">
-        <div class="row-fluid">
+        <div class="span6">
 
             <div class="left_content_header" ><legend><h2>ĐĂNG NHẬP</legend></h2></div>
             <div class="content_main">
                 <form id="login_form" action="LoginProcessing" method="POST">
 
-                        <p><strong>Email *</strong></p>
-                        <input type="email" name="txtEmail" placeholder="example@abc.com"/><br/>
+                        <p><strong>Email</strong></p>
+                        <input type="email" name="txtEmail" placeholder="example@abc.com" required maxlength="30" pattern="[^@]+@[^\.]+\..+"/><br/>
 
-                        <p><strong>Mật khẩu *</strong></p>
-                        <input type="password" name="txtPassword"/>
+                        <p><strong>Mật khẩu</strong></p>
+                        <input type="password" name="txtPassword" placeholder="Mật khẩu từ 5-15 kí tự" required maxlength="15" class="checkMin"/>
 
 
                         <p><label class="checkbox inline">
                             <input type="checkbox" id="chckboxLogin" value="Remember">Nhớ mật khẩu
                         </label></p>
                     <button class="btn btn-large btn-primary" type="submit">Đăng nhập</button>
-                    <button class="btn btn-large" type="submit">Thoát</button>
+                    <a href="Layout.html" class="btn btn-large btn-inverse">Trở về trang chủ</a>
                 </form>
             </div><!-- end div.content_main -->
 
