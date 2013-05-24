@@ -25,3 +25,8 @@ table.event-detail td.action .btn {
   display: block;
   margin-bottom: 5px;
 }
+td.action .btn {
+    width: 60px;
+    display: block;
+    margin-bottom: 5px;
+}
