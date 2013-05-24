@@ -105,7 +105,7 @@
     <div class="user-tab">
         <ul class="nav nav-tabs">
             <li class="active offset1">
-                <a href="#">Đăng kí</a>
+                <a href="#"><strong>Đăng kí</strong></a>
             </li>
         </ul>
     </div>
@@ -113,25 +113,26 @@
     <div class="row" id="content">
         <!--Content Here-->
         <div id="middle">
-            <div id="middle_content">
-                <div id="left_content">
-                    <div class="left_content_header" >ĐĂNG KÝ TÀI KHOẢN MỚI</div>
-                    <div class="left_content_main">
-                        <form id="register_form" onsubmit="return checkMinLength()" action="RegisterProcessing" method="POST">
+            <div class="row-fluid">
 
-                            <p>Tên tài khoản *</p>
+                    <div class="left_content_header" ><h2>ĐĂNG KÝ TÀI KHOẢN MỚI</h2></div>
+                    <div class="content_main">
+                        <form id="register_form" onsubmit="return checkMinLength()" action="RegisterProcessing" method="POST">
+                            <div class="span6">
+
+                            <p><strong>Tên tài khoản *</strong></p>
                             <input type="text" name="txtUsername" placeholder="Tên tài khoản từ 5-15 kí tự" required maxlength="15" class="checkMin"/>
 
-                            <p>Email *</p>
+                            <p><strong>Email *</strong></p>
                             <input type="email" name="txtEmail" placeholder="example@abc.com" required maxlength="30" pattern="[^@]+@[^\.]+\..+"/><br/>
 
-                            <p>Mật khẩu *</p>
+                            <p><strong>Mật khẩu *</strong></p>
                             <input type="password" name="txtPassword" placeholder="Mật khẩu từ 5-15 kí tự" required maxlength="15" class="checkMin"/>
 
-                            <p>Xác nhận mật khẩu *</p>
+                            <p><strong>Xác nhận mật khẩu *</strong></p>
                             <input type="password" name="txtConfirm" required maxlength="15" class="checkMin"/>
 
-                            <p>Tỉnh, Thành Phố *</p>
+                            <p><strong>Tỉnh, Thành Phố *</strong></p>
                             <select>
                                 <option>TP. Hồ Chí Minh</option>
                                 <option>Hà Nội</option>
@@ -140,7 +141,7 @@
                                 <option>Bình Dương</option>
                             </select>
 
-                            <p>Quận, Huyện *</p>
+                            <p><strong>Quận, Huyện *</strong></p>
                             <select>
                                 <option>1</option>
                                 <option>2</option>
@@ -148,32 +149,36 @@
                                 <option>4</option>
                                 <option>5</option>
                             </select>
+                            </div>
 
-                            <p>Địa chỉ *</p>
+                            <div class="span6">
+
+                            <p><strong>Địa chỉ *</strong></p>
                             <input type="text" name="txtAddress" required />
 
-                            <p>Số điện thoại nhà riêng *</p>
+                            <p><strong>Số điện thoại nhà riêng *</strong></p>
                             <input type="tel" name="nmbHome" placeholder="083123456" required="">
 
-                            <p>Số điện thoại di động *</p>
+                            <p><strong>Số điện thoại di động *</strong></p>
                             <input type="tel" name="nmbTele" placeholder="0901234567" required="">
 
-                            <p>Họ Tên đầy đủ *</p>
+                            <p><strong>Họ tên đầy đủ *</strong></p>
                             <input type="text" name="txtUsername" placeholder="Nguyễn Văn A" required="" />
 
-                            <p>Các điều khoản</p>
+                            <p><strong>Các điều khoản</strong></p>
                             <textarea rows="3"></textarea>
                             <p><label class="checkbox inline">
-                                <input type="checkbox" id="chckboxAgree" value="AgreeTerm"> Tôi đồng ý với tất cả những điều khoản trên
+                                <input type="checkbox" id="chckboxAgree" value="AgreeTerm"> <strong>Tôi đồng ý với tất cả những điều khoản trên</strong>
                             </label></p>
+                            </div>
 
 
 
                             <p><button type="submit">Đăng kí</button>
                             <button type="reset">Nhập lại</button></p>
                         </form>
-                    </div><!-- end div.right_content_main -->
-                </div><!-- end div.right_content -->
+                    </div><!-- end div.content_main -->
+
             </div><!-- end div#middle_content -->
         </div><!-- end div#middle -->
     </div>
