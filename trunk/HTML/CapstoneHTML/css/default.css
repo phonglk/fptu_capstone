@@ -36,3 +36,23 @@ ul.bullets {
     padding: 0;
     margin: 0;
 }
+
+#buyticket {
+    border: 1px solid #eee;
+    margin-left: 5px;
+    margin-right: 10px;
+    text-align: center;
+}
+#buyticket a {
+    margin: 10px 10px 10px 30px;
+}
+
+#ticket-detail th {
+    border-top: 1px solid #eee;
+}
+#ticket-detail td {
+    border-bottom: 1px solid #eee
+}
+.time {
+    width: 150px;
+}
