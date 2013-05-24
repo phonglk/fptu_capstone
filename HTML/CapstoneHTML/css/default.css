@@ -56,3 +56,43 @@ ul.bullets {
 .time {
     width: 150px;
 }
+
+#advanced-search {
+    border: 1px solid #eee;
+    margin-left: 10px;
+}
+#advanced-search form {
+    margin: 20px 15px 10px 15px;
+}
+
+#a-z {
+    border: 1px solid #eee;
+}
+#a-z ul{
+    list-style: none;
+}
+#a-z li{
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: 2px solid #000;
+}
+
+#event-list {
+    margin-left: 10px;
+}
+#event-list ul {
+    list-style: none;
+}
+#event-list a {
+    padding-left: 5px;
+}
+#new-event a {
+    color: #faa732;
+    text-decoration: none;
+    padding-left: 10px;
+}
+#new-event a:hover {
+    color: #faa732;
+    text-decoration: underline;
+}
