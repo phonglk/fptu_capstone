@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Detail Admin - Calendar</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!-- bootstrap -->
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet">
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/elements.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+
+    <!-- libraries -->
+    <link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href='css/lib/fullcalendar.css' rel='stylesheet' />
+    <link href='css/lib/fullcalendar.print.css' rel='stylesheet' media='print' />
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="css/compiled/calendar.css" type="text/css" media="screen" />
+
+    <!-- open sans font -->
+    <link href='font/OpenSans.css' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <a class="brand" href="index.html"><img src="img/logo.png"></a>
+            
+            <!-- shows same menu as sidebar but for mobile devices -->
+            <button type="button" class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>            
+            <div class="nav-collapse collapse visible-phone mobile-menu">
+                <ul class="nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chart-showcase.html">Charts</a></li>
+                    <li><a href="user-list.html">Users</a></li>
+                    <li><a href="form-showcase.html">Forms</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                    <li class="active"><a href="calendar.html">Calendar</a></li>
+                    <li><a href="tables.html">Tables</a></li>
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                </ul>
+            </div>
+            <!-- end navbar for mobile devices -->
+
+            <ul class="nav pull-right">
+                <li class="hidden-phone">
+                    <input class="search" type="text" />
+                </li>
+                <li class="settings">
+                    <a href="personal-info.html" role="button">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+                <li id="fat-menu" class="dropdown">
+                    <a href="signin.html" role="button" class="logout">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+            </ul>            
+        </div>
+    </div>
+    <!-- end navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-nav" class="hidden-phone">
+        <ul id="dashboard-menu">
+            <li class="">
+                <a class="tab1" href="index.html">
+                    <i class="sidebar-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab2" href="chart-showcase.html">
+                    <i class="sidebar-charts"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab2" href="user-list.html">
+                    <i class="icon-group"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab3" href="form-showcase.html">
+                    <i class="sidebar-forms"></i>
+                    <span>Forms</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab4" href="gallery.html">
+                    <i class="sidebar-gallery"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab5" href="icons.html">
+                    <i class="sidebar-widgets"></i>
+                    <span>Icons</span>
+                </a>
+            </li>
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a class="tab6" href="calendar.html">
+                    <i class="sidebar-calendar"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li class="">                
+                <a class="tab7" href="tables.html">
+                    <i class="sidebar-tables"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab8" href="ui-elements.html">
+                    <i class="sidebar-ui"></i>
+                    <span>UI Elements</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab9" href="personal-info.html">
+                    <i class="sidebar-gear"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab10" href="signin.html">
+                    <i class="sidebar-logout"></i>
+                    <span>Login page</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+        <div class="pointer">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+        </div>
+        <div class="container-fluid">
+            <div id="pad-wrapper">
+                <div class="row-fluid calendar-wrapper">
+                    <div class="span12">
+
+                        <!-- div that fullcalendar plugin uses  -->
+                        <div id='calendar'></div>
+
+                        <!-- edit image pop up -->
+                        <div class="new-event popup">
+                            <div class="pointer">
+                                <div class="arrow"></div>
+                                <div class="arrow_border"></div>
+                            </div>
+                            <i class="close-pop table-delete"></i>
+                            <h5>New event popup example</h5>
+                            <div class="field">
+                                Date: 
+                                <span class="date">Thu, 18 April</span>
+                            </div>
+                            <div class="field">
+                                Event:
+                                <input type="text" class="event-input" />
+                            </div>
+                            <input type="submit" value="Create" class="btn-glow primary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+
+	<!-- scripts for this page -->
+    <script src="js/jquery-latest.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src='js/fullcalendar.min.js'></script>
+    <script src="js/theme.js"></script>
+
+    <!-- builds fullcalendar example -->
+    <script>
+        $(document).ready(function() {
+        
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'month,agendaWeek,agendaDay',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: new Date(y, m, 1)
+                    },
+                    {
+                        title: 'Long Event',
+                        start: new Date(y, m, d-5),
+                        end: new Date(y, m, d-2)
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d-3, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d+4, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Meeting',
+                        start: new Date(y, m, d, 10, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Lunch',
+                        start: new Date(y, m, d, 12, 0),
+                        end: new Date(y, m, d, 14, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: new Date(y, m, d+1, 19, 0),
+                        end: new Date(y, m, d+1, 22, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Click for Google',
+                        start: new Date(y, m, 28),
+                        end: new Date(y, m, 29),
+                        url: '../google.com/default.htm'
+                    }
+                ],
+                eventBackgroundColor: '#278ccf'
+            });
+            
+            // handler to close the new event popup just for displaying purposes
+            // more documentation for fullcalendar on http://arshaw.com/fullcalendar/
+            $(".popup .close-pop").click(function () {
+                $(".new-event").fadeOut("fast");
+            });
+        });
+    </script>
+</body>
+</html>
