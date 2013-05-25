@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url(themes.googleusercontent.com/static/fonts/lato/v6/nQhiC-wSiJx0pvEuJl8d8A.eot);
+  src: local('Lato Regular'), local('Lato-Regular'), url(themes.googleusercontent.com/static/fonts/lato/v6/nQhiC-wSiJx0pvEuJl8d8A.eot) format('embedded-opentype'), url(themes.googleusercontent.com/static/fonts/lato/v6/9k-RPmcnxYEPm8CNFsH2gg.woff) format('woff');
+}

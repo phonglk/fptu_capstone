@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Detail Admin - New User Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <!-- bootstrap -->
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet">
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/elements.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.css">
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="css/compiled/new-user.css" type="text/css" media="screen" />
+
+    <!-- open sans font -->
+    <link href='font/OpenSans.css' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+      <script src="js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <a class="brand" href="index.html"><img src="img/logo.png"></a>
+
+            <!-- shows same menu as sidebar but for mobile devices -->
+            <button type="button" class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse visible-phone mobile-menu">
+                <ul class="nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="chart-showcase.html">Charts</a></li>
+                    <li class="active"><a href="user-list.html">Users</a></li>
+                    <li><a href="form-showcase.html">Forms</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="tables.html">Tables</a></li>
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                </ul>
+            </div>
+            <!-- end navbar for mobile devices -->
+
+            <ul class="nav pull-right">
+                <li class="hidden-phone">
+                    <input class="search" type="text" />
+                </li>
+                <li class="settings">
+                    <a href="personal-info.html" role="button">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+                <li id="fat-menu" class="dropdown">
+                    <a href="signin.html" role="button" class="logout">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <!-- end navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-nav" class="hidden-phone">
+        <ul id="dashboard-menu">
+            <li class="">
+                <a class="tab1" href="index.html">
+                    <i class="sidebar-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab2" href="chart-showcase.html">
+                    <i class="sidebar-charts"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a class="tab2" href="user-list.html">
+                    <i class="icon-group"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab3" href="form-showcase.html">
+                    <i class="sidebar-forms"></i>
+                    <span>Forms</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab4" href="gallery.html">
+                    <i class="sidebar-gallery"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab5" href="icons.html">
+                    <i class="sidebar-widgets"></i>
+                    <span>Icons</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab6" href="calendar.html">
+                    <i class="sidebar-calendar"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab7" href="tables.html">
+                    <i class="sidebar-tables"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab8" href="ui-elements.html">
+                    <i class="sidebar-ui"></i>
+                    <span>UI Elements</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab9" href="personal-info.html">
+                    <i class="sidebar-gear"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab10" href="signin.html">
+                    <i class="sidebar-logout"></i>
+                    <span>Login page</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+	<!-- main container -->
+    <div class="content">
+        <div class="pointer">
+            <div class="arrow"></div>
+            <div class="arrow_border"></div>
+        </div>
+        <div class="container-fluid">
+            <!-- tabs to navigate through forms related pages -->
+            <div id="tabs-wrapper">
+                <div class="row-fluid">
+                    <a class="span2 tab" href="form-showcase.html">
+                        Forms
+                    </a>
+                    <a class="span2 tab" href="user-list.html">
+                        Users list
+                    </a>
+                    <a class="span2 tab active" href="new-user.html">
+                        New user form
+                    </a>
+                    <a class="span2 tab" href="user-profile.html">
+                        User profile
+                    </a>
+                </div>
+            </div>
+
+            <div id="pad-wrapper" class="new-user">
+                <div class="row-fluid header">
+                    <h3>Create a new user</h3>
+                </div>
+
+                <div class="row-fluid form-wrapper">
+                    <!-- left column -->
+                    <div class="span9 with-sidebar">
+                        <div class="container">
+                            <form class="new_user_form inline-input">
+                                <div class="span12 field-box">
+                                    <label>Name:</label>
+                                    <input class="span9" type="text">
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>State:</label>
+                                    <div class="ui-select span5">
+                                        <select>
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="AZ">Arizona</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Company:</label>
+                                    <input class="span9" type="text">
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Email:</label>
+                                    <input class="span9" type="text">
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Phone:</label>
+                                    <input class="span9" type="text">
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Website:</label>
+                                    <input class="span9" type="text">
+                                </div>
+                                <div class="span12 field-box">
+                                    <label>Address:</label>
+                                    <div class="address-fields">
+                                        <input class="span12" type="text" placeholder="Street address">
+                                        <input class="span12 small" type="text" placeholder="City">
+                                        <input class="span12 small" type="text" placeholder="State">
+                                        <input class="span12 small last" type="text" placeholder="Postal Code">
+                                    </div>
+                                </div>
+                                <div class="span12 field-box textarea">
+                                    <label>Notes:</label>
+                                    <textarea class="span9"></textarea>
+                                    <span class="charactersleft">90 characters remaining. Field limited to 100 characters</span>
+                                </div>
+                                <div class="span11 field-box actions">
+                                    <input type="button" class="btn-glow primary" value="Create user">
+                                    <span>OR</span>
+                                    <input type="reset" value="Cancel" class="reset">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- side right column -->
+                    <div class="span3 form-sidebar pull-right">
+                        <div class="btn-group toggle-inputs hidden-tablet">
+                            <button class="glow left active" data-input="inline">INLINE INPUTS</button>
+                            <button class="glow right" data-input="normal">NORMAL INPUTS</button>
+                        </div>
+                        <div class="alert alert-info hidden-tablet">
+                            <i class="icon-lightbulb pull-left"></i>
+                            Click above to see difference between inline and normal inputs on a form
+                        </div>                        
+                        <h6>Sidebar text for instructions</h6>
+                        <p>Add multiple users at once</p>
+                        <p>Choose one of the following file types:</p>
+                        <ul>
+                            <li><a href="#">Upload a vCard file</a></li>
+                            <li><a href="#">Import from a CSV file</a></li>
+                            <li><a href="#">Import from an Excel file</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+
+	<!-- scripts -->
+    <script src="js/jquery-latest.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/theme.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            // toggle form between inline and normal inputs
+            var $buttons = $(".toggle-inputs button");
+            var $form = $("form.new_user_form");
+
+            $buttons.click(function () {
+                var mode = $(this).data("input");
+                $buttons.removeClass("active");
+                $(this).addClass("active");
+
+                if (mode === "inline") {
+                    $form.addClass("inline-input");
+                } else {
+                    $form.removeClass("inline-input");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
