@@ -41,10 +41,15 @@ ul.bullets {
     border: 1px solid #eee;
     margin-left: 5px;
     margin-right: 10px;
+}
+#buyticket h4 {
     text-align: center;
 }
-#buyticket a {
-    margin: 10px 10px 10px 30px;
+#buyticket form {
+    padding-left: 50px;
+}
+#buyticket textarea {
+    width: 270px;
 }
 
 #ticket-detail th {
