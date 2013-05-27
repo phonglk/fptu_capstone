@@ -92,12 +92,16 @@ ul.bullets {
 #event-list a {
     padding-left: 5px;
 }
+#event-list .active{
+    color: #faa732;
+    text-decoration: underline;
+}
 #new-event a {
     color: #faa732;
     text-decoration: none;
     padding-left: 10px;
 }
-#new-event a:hover {
+#new-event a:hover,a:active {
     color: #faa732;
     text-decoration: underline;
 }
