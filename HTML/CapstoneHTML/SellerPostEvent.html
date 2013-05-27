@@ -127,198 +127,224 @@
 </div>
 <!--Area: Page Header & Navigation & Search.END-->
 <div class="row" id="content">
-    <div class="row-fluid">
-        <div class="span3">
-            <div class="sidebar-nav">
-                <div class="well" style="padding: 8px 0;">
-                    <ul class="nav nav-list">
-                        <li class="nav-header">Cá nhân</li>
-                        <li><a href="#"><i class="icon-user"></i> Thông tin bổi bật</a></li>
-                        <li><a href="#"><i class="icon-tasks"></i> Lịch sử giao dịch <span
-                                class="badge badge-info">4</span></a></li>
-                        <li><a href="#"><i class="icon-random"></i>Vé đang bán <span
-                                class="badge badge-info">10</span></a></li>
-                        <li class="divider"></li>
-                        <li class="nav-header">Events</li>
-                        <li class="active">
-                            <a href="#">Tạo Mới <i class="icon-arrow-right pull-right"></i></a>
-                        </li>
-                        <li>
-                            <a href="#">Các ca sĩ nữ </a>
-                        </li>
-                        <li>
-                            <a href="#">Các ca sĩ nam</a>
-                        </li>
-                        <li>
-                            <a href="#">Các nhóm nhạc nữ</a>
-                        </li>
-                        <li>
-                            <a href="#">Các nhóm nhạc nam</a>
-                        </li>
-                        <li>
-                            <a href="#">TV Shows</a>
-                        </li>
-                        <li>
-                            <a href="#">Ca nhạc định kỳ</a>
-                        </li>
-                        <li>
-                            <a href="#">Khác</a>
-                        </li>
-                    </ul>
-                </div>
+<div class="row-fluid">
+    <div class="span3">
+        <div class="sidebar-nav">
+            <div class="well" style="padding: 8px 0;">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Cá nhân</li>
+                    <li><a href="#"><i class="icon-user"></i> Thông tin bổi bật</a></li>
+                    <li><a href="#"><i class="icon-tasks"></i> Lịch sử giao dịch <span
+                            class="badge badge-info">4</span></a></li>
+                    <li><a href="#"><i class="icon-random"></i>Vé đang bán <span
+                            class="badge badge-info">10</span></a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Events</li>
+                    <li class="active">
+                        <a href="#">Tạo Mới <i class="icon-arrow-right pull-right"></i></a>
+                    </li>
+                    <li>
+                        <a href="#">Các ca sĩ nữ </a>
+                    </li>
+                    <li>
+                        <a href="#">Các ca sĩ nam</a>
+                    </li>
+                    <li>
+                        <a href="#">Các nhóm nhạc nữ</a>
+                    </li>
+                    <li>
+                        <a href="#">Các nhóm nhạc nam</a>
+                    </li>
+                    <li>
+                        <a href="#">TV Shows</a>
+                    </li>
+                    <li>
+                        <a href="#">Ca nhạc định kỳ</a>
+                    </li>
+                    <li>
+                        <a href="#">Khác</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="span9">
-            <div class="container">
-                <div class="row">
-                    <div id="event-list" class="span9">
-                        <h3>
-                            <legend>ĐĂNG VÉ</legend>
-                        </h3>
+    </div>
+    <div class="span9">
+        <h3>
+            <legend>ĐĂNG VÉ</legend>
+        </h3>
+        <form id="form-sell-ticket" class="form-horizontal row">
+            <div class="control-group">
+                <label class="control-label" for="event-name">Tên Sự kiện:</label>
+
+                <div class="controls">
+                    <div>
+                        <input type="text" id="event-name">
                     </div>
-                    <div class="span9">
-                        <label class="span3">Tên sự kiện</label>
-                        <input type="text" class="span6">
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Nơi tổ chức</label>
-                        <select>
-                            <option>Nhà hát lớn Hà Nội</option>
-                            <option>Sân vận động Mỹ Đình</option>
-                            <option>Nhà thi đấu Quân khu 7</option>
-                            <option>Sân vận động...</option>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Nơi tổ chức:</label>
+
+                <div class="controls">
+                    <select>
+                        <option>Nhà hát lớn Hà Nội</option>
+                        <option>Sân vận động Mỹ Đình</option>
+                        <option>Nhà thi đấu Quân khu 7</option>
+                        <option>Sân vận động...</option>
+                    </select>
+                    <a href="#"> Không có trong danh sách?</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="address">Địa chỉ:</label>
+
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" id="address" placeholder="Nhập địa chỉ nơi tổ chức event" value="">
+                        <select class="add-on add-on-input">
+                            <option selected>TPHCM</option>
+                            <option>Hà Nội</option>
+                            <option>Khác</option>
                         </select>
-                        <a href="">Không có trong danh sách?</a>
                     </div>
-                    <div class="span9">
-                        <label class="span3">Địa chỉ</label>
-                        <textarea rows="3" class="span6"></textarea>
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Thời gian</label>
-
-                        <div class="controls">
-                            <div class="span2">
-                                <input type="time" class="span12">
-                            </div>
-
-                        </div>
-
-                        <div class="controls">
-                            <div class="row-fluid">
-                                <div class="span2">
-                                    <select class="input-block-level">
-                                        <option>January</option>
-                                        <option>...</option>
-                                        <option>December</option>
-                                    </select>
-                                </div>
-                                <div class="span2">
-                                    <select class="input-block-level">
-                                        <option>2013</option>
-                                        <option>...</option>
-                                        <option>2015</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Miêu tả vé</label>
-                        <textarea rows="3" class="span6"></textarea>
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Ghi chú (tùy chọn)</label>
-                        <textarea rows="3" class="span6"></textarea>
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Giá muốn bán</label>
-                        <input type="text" class="span6" placeholder="VND">
-                    </div>
-                    <div class="span9">
-                        <label class="span3">Số tiền nhận được sau khi trừ các khoản thuế</label>
-                        <input type="text" class="span6" placeholder="VND">
-                    </div>
-                    <div class="span9">
-                        <label class="checkbox">
-                            <input type="checkbox" checked> Người mua có thể toàn quyền sử dụng vé này mà không cần
-                            chứng nhận ủy quyền của người bán
-                        </label>
-                        <button type="submit" class="btn btn-success">Đăng vé</button>
-                        <button type="button" class="btn btn-inverse">Nhập lại</button>
-                    </div>
-
-
                 </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Thời gian:</label>
+
+                <div class="controls">
+                    <div class="span3">
+                        <input type="time" class="span12">
+                    </div>
+                </div>
+                <div class="controls">
+                    <div id="time" class="span3">
+                        <select class="input-block-level">
+                            <option>January</option>
+                            <option>...</option>
+                            <option>December</option>
+                        </select>
+                    </div>
+                    <div class="span3">
+                        <select class="input-block-level">
+                            <option>2013</option>
+                            <option>...</option>
+                            <option>2015</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Miêu tả vé</label>
+
+                <div class="controls">
+                    <textarea rows="3" class="span9"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Ghi chú (tùy chọn)</label>
+
+                <div class="controls">
+                    <textarea rows="3" class="span9"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="suggest-money">Giá muốn bán </label>
+
+                <div class="controls">
+                    <div>
+                        <input type="text" id="suggest-money"> VND
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="recieve-money">Số tiền nhận được sau khi trừ các khoản thuế (7%) </label>
+
+                <div class="controls">
+                    <div>
+                        <input type="text" id="recieve-money" placeholder="-7%"> VND
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="checkbox">
+                    <input type="checkbox" checked>Người mua có toàn quyền sử dụng vé này mà không cần
+                    chứng nhận ủy quyền của người bán
+                </label>
+
+                <div class="controls">
+                    <input type="submit" class="btn btn-primary" value="Đăng vé"/>
+                    <input type="reset" class="btn btn-inverse" value="Nhập lại"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--Area: Footer-->
+<div class="container">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Sự kiện</h5>
+                    </li>
+                    <li><a href="#">Ca nhạc</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Thể thao</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Người bán</h5>
+                    </li>
+                    <li><a href="#">Lần đầu bán vé ?</a></li>
+                    <li><a href="#">Làm sao thu được tiền</a></li>
+                    <li><a href="#">Phòng tránh lừa đảo</a></li>
+                    <li><a href="#">Người mua cần gì?</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Người mua</h5>
+                    </li>
+                    <li><a href="#">Lần đầu mua vé?</a></li>
+                    <li><a href="#">Làm sao để trả tiền</a></li>
+                    <li><a href="#">Làm sao để nhận vé</a></li>
+                    <li><a href="#">Phòng tránh lừa đảo</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Về chúng tôi</h5>
+                    </li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Chính sách</a></li>
+                    <li><a href="#">Giá trị cốt lõi</a></li>
+                    <li><a href="#">Liên lạc</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <!--Area: Footer-->
-    <div class="container">
-        <hr/>
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="span3">
-                    <ul class="unstyled">
-                        <li>
-                            <h5>Sự kiện</h5>
-                        </li>
-                        <li><a href="#">Ca nhạc</a></li>
-                        <li><a href="#">TV Shows</a></li>
-                        <li><a href="#">Thể thao</a></li>
-                    </ul>
-                </div>
-                <div class="span3">
-                    <ul class="unstyled">
-                        <li>
-                            <h5>Người bán</h5>
-                        </li>
-                        <li><a href="#">Lần đầu bán vé ?</a></li>
-                        <li><a href="#">Làm sao thu được tiền</a></li>
-                        <li><a href="#">Phòng tránh lừa đảo</a></li>
-                        <li><a href="#">Người mua cần gì?</a></li>
-                    </ul>
-                </div>
-                <div class="span3">
-                    <ul class="unstyled">
-                        <li>
-                            <h5>Người mua</h5>
-                        </li>
-                        <li><a href="#">Lần đầu mua vé?</a></li>
-                        <li><a href="#">Làm sao để trả tiền</a></li>
-                        <li><a href="#">Làm sao để nhận vé</a></li>
-                        <li><a href="#">Phòng tránh lừa đảo</a></li>
-                    </ul>
-                </div>
-                <div class="span3">
-                    <ul class="unstyled">
-                        <li>
-                            <h5>Về chúng tôi</h5>
-                        </li>
-                        <li><a href="#">Giới thiệu</a></li>
-                        <li><a href="#">Chính sách</a></li>
-                        <li><a href="#">Giá trị cốt lõi</a></li>
-                        <li><a href="#">Liên lạc</a></li>
-                    </ul>
-                </div>
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span8">
+                <a href="#">Điều khoản dịch vụ</a>
+                <a href="#">Riêng tư</a>
+                <a href="#">Bảo mật</a>
             </div>
-        </div>
-        <hr>
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="span8">
-                    <a href="#">Điều khoản dịch vụ</a>
-                    <a href="#">Riêng tư</a>
-                    <a href="#">Bảo mật</a>
-                </div>
-                <div class="span4">
-                    <p class="muted pull-right">© 2013 DropIt. All rights reserved</p>
-                </div>
+            <div class="span4">
+                <p class="muted pull-right">© 2013 DropIt. All rights reserved</p>
             </div>
         </div>
     </div>
-    <!--Area: Footer.END-->
+</div>
+<!--Area: Footer.END-->
 </div>
 </div>
 
