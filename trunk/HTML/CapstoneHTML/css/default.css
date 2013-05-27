@@ -101,3 +101,13 @@ ul.bullets {
     color: #faa732;
     text-decoration: underline;
 }
+
+#event-name {
+    width: 380px;
+}
+#form-needticket textarea{
+ width: 380px;
+}
+#time {
+    padding-left: 10px;
+}
