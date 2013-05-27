@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request-Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=1024">
+    <meta name="keywords" content="keywords"/>
+    <meta name="description" content="description"/>
+    <script src="js/jquery.js"></script>
+    <script src="include/bootstrap/js/bootstrap.js"></script>
+    <script src="js/default.js"></script>
+    <link rel="stylesheet" href="include/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="include/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/bootstrap-fix.css">
+    <link rel="stylesheet" href="css/default.css">
+    <!--Area: Additional CSS-->
+    <!--Area: Additional CSS.END-->
+    <!--Area: Additional JS-->
+    <!--Area: Additional JS.END-->
+</head>
+<body>
+<div id="page" class="container">
+<!--Area: Page Header & Navigation & Search-->
+<div class="row header">
+    <!--Area: Page Header-->
+    <div class="span3 logo-area">
+        <h1 class="muted">DropIt</h1>
+    </div>
+    <div class="span9">
+        <div class="row">
+            <div class="span6">
+                <h4>Trang web môi giới vé lớn nhất Việt Nam<br/>
+                    Chúng tôi đã bán 99,999 vé cho 999 sự kiện!</h4>
+            </div>
+            <div class="span3">
+                <!--Area:User Widget-->
+                <div style="height: 20px"></div>
+                <a href="#" class="btn btn-success"><i class="icon-plus-sign"></i> Đăng ký</a>
+                <a href="#" class="btn btn-primary pull-right"><i class="icon-user"></i> Đăng nhập</a>
+                <!--Area:User Widget.End-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <ul class="nav">
+                            <li><a href="#"><i class="icon-home"></i> Trang chủ</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="icon-ticket"></i> Sự kiện <i
+                                        class="icon-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Các ca sĩ nữ</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Các ca sĩ nam</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Các nhóm nhạc nữ</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Các nhóm nhạc nam</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">TV Shows</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Ca nhạc định kỳ</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Khác</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-flag"></i>
+                                    Dành cho người mới <i
+                                            class="icon-angle-down"></i> </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">Bạn muốn bán vé ?</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Bạn muốn mua vé</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Quy trình mua hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Chính sách bảo mật</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="icon-hospital"></i> Về chúng tôi</a></li>
+                            <li><a href="#"><i class="icon-envelope"></i> Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Area: Page Header.END-->
+</div>
+<div class="user-tab">
+    <ul class="nav nav-tabs">
+        <li class="active offset1">
+            <a href="#">Trang chủ</a>
+        </li>
+        <li class="">
+            <a href="#">Bán</a>
+        </li>
+        <li class="">
+            <a href="#">Mua</a>
+        </li>
+    </ul>
+</div>
+<div class="search">
+    <form class="offset1">
+        <div class="input-append">
+            <input class="span9 input-height-large" type="text" required
+                   placeholder="Tìm kiếm sự kiện, ca sĩ, địa điểm ...">
+            <button class="btn btn-warning btn-large" type="submit">Tìm kiếm</button>
+        </div>
+    </form>
+</div>
+<!--Area: Page Header & Navigation & Search.END-->
+<div class="row" id="content">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="sidebar-nav">
+                <div class="well" style="padding: 8px 0;">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Cá nhân</li>
+                        <li><a href="#"><i class="icon-user"></i> Thông tin tài khoản</a></li>
+                        <li><a href="#"><i class="icon-tasks"></i> Lịch sử giao dịch <span
+                                class="badge badge-info">4</span></a></li>
+                        <li><a href="#"><i class="icon-random"></i> Danh sách theo dõi <span
+                                class="badge badge-info">10</span></a></li>
+                        <li><a href="#"><i class="icon-circle-arrow-up"></i> Rao mua vé</a></li>
+                        <li><a href="#"><i class="icon-bookmark"></i> Quản lí rao mua <span
+                                class="badge badge-info">5</span></a></li>
+                        <li class="divider"></li>
+                        <li class="nav-header">Mua vé</li>
+                        <li>
+                            <a href="#">Các ca sĩ nữ</a>
+                        </li>
+                        <li>
+                            <a href="#">Các ca sĩ nam</a>
+                        </li>
+                        <li>
+                            <a href="#">Các nhóm nhạc nữ</a>
+                        </li>
+                        <li>
+                            <a href="#">Các nhóm nhạc nam</a>
+                        </li>
+                        <li>
+                            <a href="#">TV Shows</a>
+                        </li>
+                        <li>
+                            <a href="#">Ca nhạc định kỳ</a>
+                        </li>
+                        <li>
+                            <a href="#">Khác</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="span9">
+            <h3>Chi tiết lời rao</h3>
+            <hr/>
+            <form id="form-detailrequest" class="form-horizontal row">
+                <div class="control-group">
+                    <label class="control-label">Tên Sự kiện:</label>
+
+                    <div class="controls">
+                           <a href="#">Rock Storm 2013</a>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Nơi tổ chức:</label>
+
+                    <div class="controls">
+                     <a href="">SVĐ Quân Khu 7</a>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Địa chỉ:</label>
+
+                    <div class="controls">
+                   <p>100 Hoàng văn thụ, Quận Tân Bình, TPHCM</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Thời gian:</label>
+
+                    <div class="controls">
+                               <p>20h00', 19, June, 2013</p>
+                        </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ghi chú:</label>
+
+                    <div class="controls">
+                       <p>Chỉ giao dịch bằng hình thức thanh toán tạm giữ.</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Thông tin liên lạc:</label>
+
+                    <div class="controls">
+                       <p>105 Đào Duy Anh, Q Tân Bình, TPHCM. Phone: 0918111555222</p>
+                    </div>
+                </div>
+            </form>
+
+            <h3>Thông tin về vé phù hợp với yêu cầu</h3>
+            <blockquote>
+                Bạn sẽ nhận được các thông tin về vé từ phía các sellers.
+            </blockquote>
+
+            <table class="table table-condensed">
+                <thead>
+                <tr class="header warning">
+                    <th>Người bán</th>
+                    <th>Giá vé</th>
+                    <th>Thông tin chi tiết</th>
+                    <th>Mua vé</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Phong LK</td>
+                    <td>150,000 VNĐ</td>
+                    <td>Miễn phí giao vé ở khu vực TPHCM</td>
+                    <td class="action">
+                        <a href="#" class="btn btn-primary btn-small" title="Đi tới trang chi tiết sự kiện">Mua vé</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phong LK</td>
+                    <td>150,000 VNĐ</td>
+                    <td>Miễn phí giao vé ở khu vực TPHCM</td>
+                    <td class="action">
+                        <a href="#" class="btn btn-primary btn-small" title="Đi tới trang chi tiết sự kiện">Mua vé</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phong LK</td>
+                    <td>150,000 VNĐ</td>
+                    <td>Miễn phí giao vé ở khu vực TPHCM</td>
+                    <td class="action">
+                        <a href="#" class="btn btn-primary btn-small" title="Đi tới trang chi tiết sự kiện">Mua vé</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phong LK</td>
+                    <td>150,000 VNĐ</td>
+                    <td>Miễn phí giao vé ở khu vực TPHCM</td>
+                    <td class="action">
+                        <a href="#" class="btn btn-primary btn-small" title="Đi tới trang chi tiết sự kiện">Mua vé</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phong LK</td>
+                    <td>150,000 VNĐ</td>
+                    <td>Miễn phí giao vé ở khu vực TPHCM</td>
+                    <td class="action">
+                        <a href="#" class="btn btn-primary btn-small" title="Đi tới trang chi tiết sự kiện">Mua vé</a>
+                    </td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+    </div>
+</div>
+<!--Area: Footer-->
+<div class="container">
+    <hr/>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Sự kiện</h5>
+                    </li>
+                    <li><a href="#">Ca nhạc</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Thể thao</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Người bán</h5>
+                    </li>
+                    <li><a href="#">Lần đầu bán vé ?</a></li>
+                    <li><a href="#">Làm sao thu được tiền</a></li>
+                    <li><a href="#">Phòng tránh lừa đảo</a></li>
+                    <li><a href="#">Người mua cần gì?</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Người mua</h5>
+                    </li>
+                    <li><a href="#">Lần đầu mua vé?</a></li>
+                    <li><a href="#">Làm sao để trả tiền</a></li>
+                    <li><a href="#">Làm sao để nhận vé</a></li>
+                    <li><a href="#">Phòng tránh lừa đảo</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <ul class="unstyled">
+                    <li>
+                        <h5>Về chúng tôi</h5>
+                    </li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Chính sách</a></li>
+                    <li><a href="#">Giá trị cốt lõi</a></li>
+                    <li><a href="#">Liên lạc</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span8">
+                <a href="#">Điều khoản dịch vụ</a>
+                <a href="#">Riêng tư</a>
+                <a href="#">Bảo mật</a>
+            </div>
+            <div class="span4">
+                <p class="muted pull-right">© 2013 DropIt. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Area: Footer.END-->
+</div>
+</body>
+</html>

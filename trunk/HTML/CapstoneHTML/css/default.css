@@ -111,3 +111,7 @@ ul.bullets {
 #time {
     padding-left: 10px;
 }
+
+#form-detailrequest .control-label {
+    padding-top: 0 !important;
+}
