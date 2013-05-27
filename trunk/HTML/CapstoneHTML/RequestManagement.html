@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NeedTicket</title>
+    <title>RequestManagement</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=1024">
     <meta name="keywords" content="keywords"/>
@@ -168,103 +168,77 @@
                 </div>
             </div>
         </div>
-        <div class="span9">
-            <h3>Bạn cần mua vé?</h3>
+
+        <div id="history" class="span9">
+            <h3>Danh sách các loại vé đang được rao mua</h3>
             <blockquote>
-                Hãy điền đầy đủ các thông tin vào form bên dưới để rao mua vé được nhanh nhất.
+                Click vào nút "Chi tiết" để xem chi tiết các reply.
             </blockquote>
-            <hr/>
-            <form id="form-needticket" class="form-horizontal row">
-                <div class="control-group">
-                    <label class="control-label" for="event-name">Tên Sự kiện:</label>
+            <hr>
+            <table id="managerequest-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Tên sự kiện</th>
+                    <th>Nơi diễn ra sự kiện</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2012/05/06</td>
+                    <td>Chung kết VN idol</td>
+                    <td>SVĐ Lan Anh,105 Hoàng văn thụ</td>
+                    <td><span class="label label-success">1 reply</span></td>
+                    <td class="action">
+                        <a href="#" class="btn btn-info btn-small">Chi tiết</a>
+                        <a href="#" class="btn btn-danger btn-small">Hủy bỏ</a>
+                    </td>
+                </tr>
 
-                    <div class="controls">
-                        <div>
-                            <input type="text" id="event-name"
-                                   placeholder="Nhập tên sự kiện cần tìm">
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Nơi tổ chức:</label>
-
-                    <div class="controls">
-                        <select>
-                            <option>Nhà hát lớn Hà Nội</option>
-                            <option>Sân vận động Mỹ Đình</option>
-                            <option>Nhà thi đấu Quân khu 7</option>
-                            <option>Sân vận động...</option>
-                        </select>
-                        <a href="#"> Không có trong danh sách?</a>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="address">Địa chỉ:</label>
-
-                    <div class="controls">
-                        <div class="input-append">
-                            <input type="text" id="address" placeholder="Nhập địa chỉ nơi tổ chức event" value="">
-                            <select class="add-on add-on-input">
-                                <option>Quận 0</option>
-                                <option>Quận 1</option>
-                                <option selected>Quận 2</option>
-                                <option>Quận 3</option>
-                            </select>
-                            <select class="add-on add-on-input">
-                                <option selected>TPHCM</option>
-                                <option>Hà Nội</option>
-                                <option>Khác</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Thời gian:</label>
-
-                    <div class="controls">
-                        <div class="span3">
-                            <input type="time" class="span12">
-                        </div>
-                    </div>
-                    <div class="controls">
-                            <div id="time" class="span3">
-                                <select class="input-block-level">
-                                    <option>January</option>
-                                    <option>...</option>
-                                    <option>December</option>
-                                </select>
-                            </div>
-                            <div class="span3">
-                                <select class="input-block-level">
-                                    <option>2013</option>
-                                    <option>...</option>
-                                    <option>2015</option>
-                                </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Ghi chú:</label>
-
-                    <div class="controls">
-                        <textarea rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Thông tin liên lạc:</label>
-
-                    <div class="controls">
-                        <textarea rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label"></label>
-                    <div class="controls">
-                        <input type="submit" class="btn btn-primary" value="Đăng lời rao"/>
-                    </div>
-                </div>
-            </form>
-
+                <tr>
+                    <td>2012/05/06</td>
+                    <td>Chung kết VN idol</td>
+                    <td>SVĐ Lan Anh,105 Hoàng văn thụ</td>
+                    <td><span class="label">Không có reply</span></td>
+                    <td class="action">
+                        <a href="#" class="btn btn-info btn-small">Chi tiết</a>
+                        <a href="#" class="btn btn-danger btn-small">Hủy bỏ</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2012/05/06</td>
+                    <td>Chung kết VN idol</td>
+                    <td>SVĐ Lan Anh,105 Hoàng văn thụ</td>
+                    <td><span class="label label-warning">Lời rao chưa được đăng</span></td>
+                    <td class="action">
+                        <a href="#" class="btn btn-info btn-small">Chi tiết</a>
+                        <a href="#" class="btn btn-danger btn-small">Hủy bỏ</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2012/05/06</td>
+                    <td>Chung kết VN idol</td>
+                    <td>SVĐ Lan Anh,105 Hoàng văn thụ</td>
+                    <td><span class="label label-success">1 reply</span></td>
+                    <td class="action">
+                        <a href="#" class="btn btn-info btn-small">Chi tiết</a>
+                        <a href="#" class="btn btn-danger btn-small">Hủy bỏ</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2012/05/06</td>
+                    <td>Chung kết VN idol</td>
+                    <td>SVĐ Lan Anh,105 Hoàng văn thụ</td>
+                    <td><span class="label label-success">1 reply</span></td>
+                    <td class="action">
+                        <a href="#" class="btn btn-info btn-small">Chi tiết</a>
+                        <a href="#" class="btn btn-danger btn-small">Hủy bỏ</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
