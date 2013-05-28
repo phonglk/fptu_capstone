@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Admin - ManageTicket</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap -->
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet">
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/elements.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+
+    <!-- libraries -->
+    <link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet"/>
+
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="css/compiled/ticket.css" type="text/css" media="screen"/>
+
+    <!-- open sans font -->
+    <link href='font/OpenSans.css' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand" href="index.html"><img src="img/logo.png"></a>
+
+        <!-- shows same menu as sidebar but for mobile devices -->
+        <button type="button" class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="nav-collapse collapse visible-phone mobile-menu">
+            <ul class="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chart-showcase.html">Charts</a></li>
+                <li><a href="user-list.html">Users</a></li>
+                <li><a href="form-showcase.html">Forms</a></li>
+                <li class="active"><a href="Ticket.html">Tickets</a></li>
+                <li><a href="icons.html">Icons</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
+                <li><a href="tables.html">Tables</a></li>
+                <li><a href="ui-elements.html">UI Elements</a></li>
+            </ul>
+        </div>
+        <!-- end navbar for mobile devices -->
+
+        <ul class="nav pull-right">
+            <li class="hidden-phone">
+                <input class="search" type="text"/>
+            </li>
+            <li class="settings">
+                <a href="personal-info.html" role="button">
+                    <span class="navbar_icon"></span>
+                </a>
+            </li>
+            <li id="fat-menu" class="dropdown">
+                <a href="signin.html" role="button" class="logout">
+                    <span class="navbar_icon"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<!-- end navbar -->
+
+<!-- sidebar -->
+<div id="sidebar-nav" class="hidden-phone">
+    <ul id="dashboard-menu">
+        <li class="">
+            <a class="tab1" href="index.html">
+                <i class="sidebar-home"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab2" href="chart-showcase.html">
+                <i class="sidebar-charts"></i>
+                <span>Charts</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab2" href="user-list.html">
+                <i class="icon-group"></i>
+                <span>Users</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab3" href="form-showcase.html">
+                <i class="sidebar-forms"></i>
+                <span>Forms</span>
+            </a>
+        </li>
+        <li class="active">
+            <div class="pointer">
+                <div class="arrow"></div>
+                <div class="arrow_border"></div>
+            </div>
+            <a class="tab4" href="Ticket.html">
+                <i class="sidebar-gallery"></i>
+                <span>Tickets</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab5" href="icons.html">
+                <i class="sidebar-widgets"></i>
+                <span>Icons</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab6" href="calendar.html">
+                <i class="sidebar-calendar"></i>
+                <span>Calendar</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab7" href="tables.html">
+                <i class="sidebar-tables"></i>
+                <span>Tables</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab8" href="ui-elements.html">
+                <i class="sidebar-ui"></i>
+                <span>UI Elements</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab9" href="personal-info.html">
+                <i class="sidebar-gear"></i>
+                <span>My Info</span>
+            </a>
+        </li>
+        <li class="">
+            <a class="tab10" href="signin.html">
+                <i class="sidebar-logout"></i>
+                <span>Login page</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- end sidebar -->
+
+<!-- main container -->
+<div class="content">
+<div class="pointer">
+    <div class="arrow"></div>
+    <div class="arrow_border"></div>
+</div>
+<div class="container-fluid">
+<div id="tabs-wrapper">
+    <div class="row-fluid">
+        <a class="span2 tab active" href="Ticket-List.html">
+            Tickets list
+        </a>
+        <a class="span2 tab" href="new-ticket.html">
+            New Tickets
+        </a>
+        <a class="span2 tab" href="Ticket-detail.html">
+            Ticket Details
+        </a>
+    </div>
+</div>
+
+<div id="pad-wrapper" class="users-list">
+<div class="row-fluid header">
+    <h3>Tickets</h3>
+
+    <div class="span10 pull-right">
+        <input type="text" class="span5 search" placeholder="Search ticket name...">
+
+        <!-- custom popup filter -->
+        <!-- styles are located in css/elements.css -->
+        <!-- script that enables this dropdown is located in js/theme.js -->
+        <div class="ui-dropdown">
+            <div class="head" data-toggle="tooltip" title="Click me!">
+                Filter
+                <i class="arrow-down"></i>
+            </div>
+            <div class="dialog">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <div class="body">
+                    <p class="title">
+                        Show tickets where:
+                    </p>
+
+                    <div class="form">
+                        <select>
+                            <option>Name</option>
+                            <option>Quantity</option>
+                            <option>Sold</option>
+                            <option>New</option>
+                        </select>
+                        <select>
+                            <option>is equal to</option>
+                            <option>is not equal to</option>
+                            <option>is greater than</option>
+                            <option>starts with</option>
+                            <option>contains</option>
+                        </select>
+                        <input type="text"/>
+                        <a class="btn-flat small">Add filter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="new-ticket.html" class="btn-flat success pull-right">
+            <span>&#43;</span>
+            NEW TICKET
+        </a>
+    </div>
+</div>
+
+<!-- Ticket table -->
+<div class="row-fluid table">
+<table id="ticket-table" class="table table-hover">
+<thead>
+<tr>
+    <th class="span2 sortable">
+        Name
+    </th>
+    <th class="span2 sortable">
+        <span class="line"></span>Venue
+    </th>
+    <th class="span2 sortable">
+        <span class="line"></span>Date
+    </th>
+    <th class="span2 sortable">
+        <span class="line"></span>Description
+    </th>
+    <th class="span2 sortable">
+        <span class="line"></span>Price
+    </th>
+    <th class="span2 sortable align-right">
+        <span class="line"></span>Action
+    </th>
+</tr>
+</thead>
+<tbody>
+<!-- row -->
+<tr class="first">
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+<!-- row -->
+<tr>
+    <td>
+        <a href="Ticket-detail.html" class="name">Rock Storm 2013</a>
+    </td>
+    <td>
+        SVĐ Quân Khu 7
+    </td>
+    <td>
+        Jun 03, 2013
+    </td>
+    <td>
+        This is description
+    </td>
+    <td>
+        150,000 VNĐ
+    </td>
+    <td class="align-right">
+        <ul class="actions">
+            <li><i class="table-edit"></i></li>
+            <li><i class="table-settings"></i></li>
+            <li class="last"><i class="table-delete"></i></li>
+        </ul>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pagination pull-right">
+    <ul>
+        <li><a href="#">&#8249;</a></li>
+        <li><a class="active" href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&#8250;</a></li>
+    </ul>
+</div>
+<!-- end users table -->
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+<!-- end main container -->
+
+
+<!-- this page scripts -->
+<script src="js/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/theme.js"></script>
+</body>
+</html>
