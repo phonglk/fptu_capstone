@@ -1,0 +1,27 @@
+﻿người dùng không thấy thông tin liên lạc.
+những trạng thái của người mua và bán (đặc biệt là ng mua)
+các tình huống có thể xảy ra của ng bán và mua.
+Prefix nơi bán để ng mua có thể filter [HCM] [HN], [TQ]
+Chọn màu tím
+dùng class diagram để vẽ lại ERD
+Những cái Id thì không cần dùng Shift _
+Mỗi vé là 1 thực thể: bỏ quantity. vì ta quản lý theo số seri
+
+Trong tình huống 100 vé bán: thì ng nhập nhập thông tin chung và số lượng => mình sẽ list ra 100 thực thể khác nhau.
+Thực thể Request nối với Event
+Thực thể Venue nối với Event
+
+Sẽ có liên hệ giữa Ticket và Request
+Khi ng mua đăng lên => ng bán đc quyền apply vào nhiều request 
+
+
+
+Admin dùng toàn bộ tiếng việt.
+Admin được phép edit nhưng vé đó không đc đăng. Trạng thái vé đó sẽ ng bán thay đổi 
+
+Search:
+Event name
+Location
+Time
+
+Chỉ xóa trên giao diện trên admin. Dưới database ko xóa.
