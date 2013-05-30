@@ -25,3 +25,21 @@ Location
 Time
 
 Chỉ xóa trên giao diện trên admin. Dưới database ko xóa.
+
+Note 30/05/2013
+Bỏ tên RequestTicket đi, vì nó là attribute
+Bỏ những operation()
+Suy nghĩ bỏ Artist entity đi, thay vào đó là 1 colum trong Event: text
+[Trong trường hợp ng mua order thật nhiều vé để đảm bảo khả năng giao dịch thành công. => 1 vé chỉ đc 0..1 Order]
+Thêm 1 trường vào Order entity để giao hàng đến địa chỉ khách hàng yêu cầu.
+Lưu lại 2 cái giá trong Ticket để sau này có thể thay đổi 
+Seat có dạng text cho phép null
+Thêm 1 entity thành phố/tỉnh nối với Venue hỗ trợ search.
+Cái Role không cần tách bảng riêng.
+
+Database:
+Quản lý event: khi được approve thì mới được show
+Có thuộc tính ở Event để biết nó được approve hay chưa
+Một user chỉ được tạo 1 request cho 1 event.  Trong table Request sẽ có 2 khóa chính là UserId và RequestId
+Bảng ReponseRequest sẽ có 3 khóa chính là UserId, EventId, RequestId
+Sẽ bị hỏi: tại sao vừa có UserId vừa Username: vì UserId xuất hiện ở nhiều bảng nên khi kết bảng thì dùng kiểu int để tăng tốc.
