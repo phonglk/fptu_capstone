@@ -1,0 +1,43 @@
+﻿@model DropIt.Models.Venue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Venue</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VenueName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VenueName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Province.ProvinceName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Province.ProvinceName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.VenueId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
