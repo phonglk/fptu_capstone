@@ -1,0 +1,60 @@
+﻿@model DropIt.Models.Venue
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Venue</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VenueName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VenueName)
+            @Html.ValidationMessageFor(model => model.VenueName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProvinceId, "Province")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProvinceId", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProvinceId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

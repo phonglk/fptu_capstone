@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a7c80a61fa674cea81ce8a21fa2f5799" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Order" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.OrderDetail" Width="1.5" PointX="7.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.RespondRequest" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Ticket" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.UserFollowEvent" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Venue" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Drop_ItModel.FK_Category_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Event_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Event_Venue" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Request_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Ticket_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_UserFollowEvent_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_OrderDetail_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_User_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Venue_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Request_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_RespondRequest_Request" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_RespondRequest_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_Ticket_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Drop_ItModel.FK_UserFollowEvent_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,22 @@
+﻿@model DropIt.Models.Province
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Province</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProvinceName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProvinceName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ProvinceId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
