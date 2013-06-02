@@ -1,11 +1,11 @@
 ﻿(function() {
-  var MenuAdmin, menuAdmins;
+  var MenuAdmin;
 
   MenuAdmin = (function() {
 
     function MenuAdmin(_arg) {
-      var _ref, _ref1, _ref2, _ref3, _ref4;
-      this.Name = _arg.Name, this.Controller = _arg.Controller, this.Action = _arg.Action, this.Url = _arg.Url, this.Icon = _arg.Icon;
+      var child, _i, _len, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+      this.Name = _arg.Name, this.Controller = _arg.Controller, this.Action = _arg.Action, this.Url = _arg.Url, this.Icon = _arg.Icon, this.Childs = _arg.Childs;
       this.self = this;
             if ((_ref = this.Name) != null) {
         _ref;
@@ -38,9 +38,26 @@
         this.Icon = "chevron-sign-right";
       };
       this.IsActive = false;
+      this.Parent = null;
+            if ((_ref5 = this.Childs) != null) {
+        _ref5;
+
+      } else {
+        this.Childs = [];
+      };
+      _ref6 = this.Childs;
+      for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+        child = _ref6[_i];
+        child.Parent = this;
+        child.Controller = this.Controller;
+        child.Url = "/" + child.Controller + "/" + child.Action;
+        if (((_ref7 = this.Controller) != null ? _ref7.toLowerCase() : void 0) === Routing.Controller.toLowerCase() && ((_ref8 = child.Action) != null ? _ref8.toLowerCase() : void 0) === Routing.Action.toLowerCase()) {
+          child.IsActive = true;
+        }
+      }
       if (this.Url === null) {
         this.Url = "/" + this.Controller + "/";
-        if (this.Controller.toLowerCase() === Routing.Controller.toLowerCase()) {
+        if (((_ref9 = this.Controller) != null ? _ref9.toLowerCase() : void 0) === Routing.Controller.toLowerCase()) {
           this.IsActive = true;
         }
         if (this.Action !== null) {
@@ -53,7 +70,7 @@
 
   })();
 
-  menuAdmins = [
+  window.menuAdmins = [
     new MenuAdmin({
       Name: "Dashboard",
       Controller: "Admin",
@@ -73,7 +90,19 @@
       Name: "Sự kiện",
       Controller: "Event",
       Action: "AdminList",
-      Icon: "volume-up"
+      Icon: "volume-up",
+      Childs: [
+        new MenuAdmin({
+          Name: "Event List",
+          Action: "List"
+        }), new MenuAdmin({
+          Name: "Create",
+          Action: "Create"
+        }), new MenuAdmin({
+          Name: "Aprrove",
+          Action: "Approve"
+        })
+      ]
     }), new MenuAdmin({
       Name: "Địa điểm",
       Controller: "Venue",
@@ -84,7 +113,7 @@
   $(function() {
     return ko.applyBindings({
       _MenuAdmin: menuAdmins
-    }, $("#sidebar-nav")[0]);
+    });
   });
 
 }).call(this);
