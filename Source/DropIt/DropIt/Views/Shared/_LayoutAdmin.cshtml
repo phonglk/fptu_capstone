@@ -172,22 +172,17 @@
         <div class="container-fluid">
 
             <!-- tabs to navigate through forms related pages -->
+            <!-- ko foreach:_MenuAdmin -->
+            <!-- ko if: IsActive -->
             <div id="tabs-wrapper">
-                <div class="row-fluid">
-                    <a class="span2 tab" href="form-showcase.html">
-                        Forms
-                    </a>
-                    <a class="span2 tab active" href="user-list.html">
-                        Users list
-                    </a>
-                    <a class="span2 tab" href="new-user.html">
-                        New user form
-                    </a>
-                    <a class="span2 tab" href="user-profile.html">
-                        User profile
+                <div class="row-fluid" data-bind="foreach: Childs">
+                    <a class="span2 tab" href="#" data-bind="attr: { href: Url }, css: { active: IsActive }">
+                        <span data-bind="text: Name"></span>
                     </a>
                 </div>
             </div>
+            <!-- /ko -->
+            <!-- /ko -->
 
             <div id="pad-wrapper">
                 <!-- UI Elements section -->
