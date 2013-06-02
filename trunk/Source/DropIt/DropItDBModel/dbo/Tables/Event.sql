@@ -6,10 +6,12 @@
     [Status]       INT            NOT NULL,
     [CategoryId]   INT            NOT NULL,
     [VenueId]      INT            NOT NULL,
-    [CreatedDate]  DATETIME       NOT NULL,
-    [ModifiedDate] DATETIME       NOT NULL,
+    [CreatedDate]  DATETIME       NULL,
+    [ModifiedDate] DATETIME       NULL,
     CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED ([EventId] ASC),
     CONSTRAINT [FK_Event_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Category] ([CategoryId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Event_Venue] FOREIGN KEY ([VenueId]) REFERENCES [dbo].[Venue] ([VenueId]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 

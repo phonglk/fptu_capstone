@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Admin</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/Admin")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <a class="brand" href="index.html">
+                <img src="img/logo.png"></a>
+
+            <!-- shows same menu as sidebar but for mobile devices -->
+            <button type="button" class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse visible-phone mobile-menu">
+                <ul class="nav">
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="chart-showcase.html">Charts</a></li>
+                    <li><a href="user-list.html">Users</a></li>
+                    <li><a href="form-showcase.html">Forms</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="event-list.html">Tables</a></li>
+                    <li><a href="ui-elements.html">UI Elements</a></li>
+                </ul>
+            </div>
+            <!-- end navbar for mobile devices -->
+
+            <ul class="nav pull-right">
+                <li class="hidden-phone">
+                    <input class="search" type="text" />
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">Your account
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="personal-info.html">Personal info</a></li>
+                        <li><a href="#">Account settings</a></li>
+                        <li><a href="#">Billing</a></li>
+                        <li><a href="#">Export your data</a></li>
+                        <li><a href="#">Send feedback</a></li>
+                    </ul>
+                </li>
+                <li class="settings">
+                    <a href="personal-info.html" role="button">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+                <li id="fat-menu" class="dropdown">
+                    <a href="signin.html" role="button" class="logout">
+                        <span class="navbar_icon"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-nav" class="hidden-phone">
+        <ul id="dashboard-menu">
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a class="tab1" href="index.html">
+                    <i class="sidebar-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab2" href="chart-showcase.html">
+                    <i class="sidebar-charts"></i>
+                    <span>Charts</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab2" href="user-list.html">
+                    <i class="icon-group"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab3" href="form-showcase.html">
+                    <i class="sidebar-forms"></i>
+                    <span>Forms</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab4" href="gallery.html">
+                    <i class="sidebar-gallery"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab5" href="icons.html">
+                    <i class="sidebar-widgets"></i>
+                    <span>Icons</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab6" href="calendar.html">
+                    <i class="sidebar-calendar"></i>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab7" href="event-list.html">
+                    <i class="sidebar-tables"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab8" href="ui-elements.html">
+                    <i class="sidebar-ui"></i>
+                    <span>UI Elements</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab9" href="personal-info.html">
+                    <i class="sidebar-gear"></i>
+                    <span>My Info</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="tab10" href="signin.html">
+                    <i class="sidebar-logout"></i>
+                    <span>Login page</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+    <!-- main container -->
+    <div class="content">
+
+        <div class="container-fluid">
+
+            <!-- tabs to navigate through forms related pages -->
+            <div id="tabs-wrapper">
+                <div class="row-fluid">
+                    <a class="span2 tab" href="form-showcase.html">
+                        Forms
+                    </a>
+                    <a class="span2 tab active" href="user-list.html">
+                        Users list
+                    </a>
+                    <a class="span2 tab" href="new-user.html">
+                        New user form
+                    </a>
+                    <a class="span2 tab" href="user-profile.html">
+                        User profile
+                    </a>
+                </div>
+            </div>
+
+            <div id="pad-wrapper">
+                <!-- UI Elements section -->
+                <div class="row-fluid section ui-elements">
+                        @RenderBody();
+                </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/Admin")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -29,6 +29,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -193,6 +195,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="DAL\BaseRepository.cs" />
+    <Compile Include="DAL\EventRepository.cs" />
+    <Compile Include="DAL\IBaseRepository.cs" />
+    <Compile Include="DAL\IEventReposity.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,8 +253,100 @@
       <DependentUpon>DropItModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Event.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\css\bootstrap\bootstrap-overrides.css" />
+    <Content Include="Content\Admin\css\bootstrap\bootstrap-responsive.css" />
+    <Content Include="Content\Admin\css\bootstrap\bootstrap.css" />
+    <Content Include="Content\Admin\css\compiled\calendar.css" />
+    <Content Include="Content\Admin\css\compiled\chart-showcase.css" />
+    <Content Include="Content\Admin\css\compiled\elements.css" />
+    <Content Include="Content\Admin\css\compiled\form-showcase.css" />
+    <Content Include="Content\Admin\css\compiled\index.css" />
+    <Content Include="Content\Admin\css\compiled\layout.css" />
+    <Content Include="Content\Admin\css\compiled\new-user.css" />
+    <Content Include="Content\Admin\css\compiled\personal-info.css" />
+    <Content Include="Content\Admin\css\compiled\signin.css" />
+    <Content Include="Content\Admin\css\compiled\signup.css" />
+    <Content Include="Content\Admin\css\compiled\tables.css" />
+    <Content Include="Content\Admin\css\compiled\ticket.css" />
+    <Content Include="Content\Admin\css\compiled\ui-elements.css" />
+    <Content Include="Content\Admin\css\compiled\user-list.css" />
+    <Content Include="Content\Admin\css\compiled\user-profile.css" />
+    <Content Include="Content\Admin\css\compiled\web-app-icons.css" />
+    <Content Include="Content\Admin\css\elements.css" />
+    <Content Include="Content\Admin\css\icons.css" />
+    <Content Include="Content\Admin\css\layout.css" />
+    <Content Include="Content\Admin\css\lib\bootstrap-wysihtml5.css" />
+    <Content Include="Content\Admin\css\lib\bootstrap.datepicker.css" />
+    <Content Include="Content\Admin\css\lib\font-awesome.css" />
+    <Content Include="Content\Admin\css\lib\fullcalendar.css" />
+    <Content Include="Content\Admin\css\lib\fullcalendar.print.css" />
+    <Content Include="Content\Admin\css\lib\jquery-ui-1.10.2.custom.css" />
+    <Content Include="Content\Admin\css\lib\morris.css" />
+    <Content Include="Content\Admin\css\lib\select2.css" />
+    <Content Include="Content\Admin\css\lib\uniform.default.css" />
+    <Content Include="Content\Admin\font\Lato.css" />
+    <Content Include="Content\Admin\font\OpenSans.css" />
+    <Content Include="Content\Admin\img\11dh.jpg" />
+    <Content Include="Content\Admin\img\bgs\10.jpg" />
+    <Content Include="Content\Admin\img\bgs\11.jpg" />
+    <Content Include="Content\Admin\img\bgs\7.jpg" />
+    <Content Include="Content\Admin\img\bgs\8.jpg" />
+    <Content Include="Content\Admin\img\bgs\9.jpg" />
+    <Content Include="Content\Admin\img\bgs\blueish.jpg" />
+    <Content Include="Content\Admin\img\bgs\landscape.jpg" />
+    <Content Include="Content\Admin\img\btn-attach.png" />
+    <Content Include="Content\Admin\img\btn-setting.png" />
+    <Content Include="Content\Admin\img\btn-shuffle.png" />
+    <Content Include="Content\Admin\img\btn-tool.png" />
+    <Content Include="Content\Admin\img\contact-img.png" />
+    <Content Include="Content\Admin\img\contact-img2.png" />
+    <Content Include="Content\Admin\img\contact-profile.png" />
+    <Content Include="Content\Admin\img\gallery-preview.jpg" />
+    <Content Include="Content\Admin\img\gallery1.jpg" />
+    <Content Include="Content\Admin\img\gallery2.jpg" />
+    <Content Include="Content\Admin\img\gallery3.jpg" />
+    <Content Include="Content\Admin\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Admin\img\glyphicons-halflings.png" />
+    <Content Include="Content\Admin\img\ico-arrow-black.png" />
+    <Content Include="Content\Admin\img\ico-calendar.png" />
+    <Content Include="Content\Admin\img\ico-charts.png" />
+    <Content Include="Content\Admin\img\ico-forms.png" />
+    <Content Include="Content\Admin\img\ico-gallery-edit.png" />
+    <Content Include="Content\Admin\img\ico-gallery-trash.png" />
+    <Content Include="Content\Admin\img\ico-gallery.png" />
+    <Content Include="Content\Admin\img\ico-gear.png" />
+    <Content Include="Content\Admin\img\ico-home.png" />
+    <Content Include="Content\Admin\img\ico-logout.png" />
+    <Content Include="Content\Admin\img\ico-mail.png" />
+    <Content Include="Content\Admin\img\ico-phone.png" />
+    <Content Include="Content\Admin\img\ico-table-delete.png" />
+    <Content Include="Content\Admin\img\ico-table-edit.png" />
+    <Content Include="Content\Admin\img\ico-table-new.png" />
+    <Content Include="Content\Admin\img\ico-tables.png" />
+    <Content Include="Content\Admin\img\ico-ui.png" />
+    <Content Include="Content\Admin\img\ico-widgets.png" />
+    <Content Include="Content\Admin\img\jquery-ui\slider-handler.png" />
+    <Content Include="Content\Admin\img\jquery-ui\slider-handler2.png" />
+    <Content Include="Content\Admin\img\jquery-ui\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\Admin\img\jquery-ui\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\Admin\img\lens.png" />
+    <Content Include="Content\Admin\img\logo-white.png" />
+    <Content Include="Content\Admin\img\logo.png" />
+    <Content Include="Content\Admin\img\navbar-icons.png" />
+    <Content Include="Content\Admin\img\new-gallery-img.png" />
+    <Content Include="Content\Admin\img\no-img-gallery.png" />
+    <Content Include="Content\Admin\img\personal-info.png" />
+    <Content Include="Content\Admin\img\select-bg.png" />
+    <Content Include="Content\Admin\img\select2\select2.png" />
+    <Content Include="Content\Admin\img\select2\select2x2.png" />
+    <Content Include="Content\Admin\img\select2\spinner.gif" />
+    <Content Include="Content\Admin\img\table-img.png" />
+    <Content Include="Content\Admin\img\uniform\bg-input-focus.png" />
+    <Content Include="Content\Admin\img\uniform\bg-input.png" />
+    <Content Include="Content\Admin\img\uniform\sprite.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -322,12 +420,58 @@
       <DependentUpon>DropItModels.edmx</DependentUpon>
       <LastGenOutput>DropItModels.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\Admin\css\bootstrap\Descr.WD3" />
+    <Content Include="Content\Admin\css\compiled\Descr.WD3" />
+    <Content Include="Content\Admin\css\Descr.WD3" />
+    <Content Include="Content\Admin\css\lib\Descr.WD3" />
+    <Content Include="Content\Admin\font\css%40family=Open+Sans_3A300italic,400italic,700italic,800italic,400,300,600,700,800" />
+    <Content Include="Content\Admin\font\Descr.WD3" />
+    <Content Include="Content\Admin\font\fontawesome-webfont.eot%40" />
+    <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
+    <Content Include="Content\Admin\font\fontawesome-webfont.ttf%40v=3.0.1" />
+    <Content Include="Content\Admin\font\fontawesome-webfont.woff%40v=3.0.1" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\9k-RPmcnxYEPm8CNFsH2gg.woff" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\Descr.WD3" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\nQhiC-wSiJx0pvEuJl8d8A.eot" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\opensans\v6\cJZKeOuBrn4kERxqtaUH3fY6323mHUZFJMgTvxaG2iE.eot" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\opensans\v6\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
+    <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\opensans\v6\Descr.WD3" />
+    <Content Include="Content\Admin\img\bgs\Descr.WD3" />
+    <Content Include="Content\Admin\img\Descr.WD3" />
+    <Content Include="Content\Admin\img\jquery-ui\Descr.WD3" />
+    <Content Include="Content\Admin\img\select2\Descr.WD3" />
+    <Content Include="Content\Admin\img\uniform\Descr.WD3" />
+    <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\Admin\bootstrap-wysihtml5-0.0.2.js" />
+    <Content Include="Scripts\Admin\bootstrap.datepicker.js" />
+    <Content Include="Scripts\Admin\bootstrap.min.js" />
+    <Content Include="Scripts\Admin\fullcalendar.min.js" />
+    <Content Include="Scripts\Admin\html5.js" />
+    <Content Include="Scripts\Admin\jquery.flot.js" />
+    <Content Include="Scripts\Admin\jquery.flot.resize.js" />
+    <Content Include="Scripts\Admin\jquery.flot.stack.js" />
+    <Content Include="Scripts\Admin\jquery.knob.js" />
+    <Content Include="Scripts\Admin\jquery.uniform.min.js" />
+    <Content Include="Scripts\Admin\morris.min.js" />
+    <Content Include="Scripts\Admin\select2.min.js" />
+    <Content Include="Scripts\Admin\theme.js" />
+    <Content Include="Scripts\Admin\wysihtml5-0.3.0.js" />
+    <Content Include="Scripts\bootstrap-wysihtml5-0.0.2.js" />
+    <Content Include="Scripts\bootstrap.datepicker.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.flot.js" />
+    <Content Include="Scripts\jquery.flot.resize.js" />
+    <Content Include="Scripts\jquery.flot.stack.js" />
+    <Content Include="Scripts\jquery.knob.js" />
+    <Content Include="Scripts\jquery.uniform.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -337,6 +481,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\morris.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\wysihtml5-0.3.0.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -396,9 +543,11 @@
     <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -422,7 +571,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>14291</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2065/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

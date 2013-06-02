@@ -17,7 +17,8 @@ namespace DropIt
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
-
+            bundles.Add(new ScriptBundle("~/bundles/Admin")
+                .IncludeDirectory("~/Scripts/Admin", "*.js"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -38,6 +39,15 @@ namespace DropIt
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+            bundles.Add(new StyleBundle("~/Content/Admin")
+                .IncludeDirectory("~/Content/Admin/css/bootstrap", "*.css")
+                .Include("~/Content/Admin/css/lib/jquery-ui-1.10.2.custom.css")
+                .Include("~/Content/Admin/css/lib/font-awesome.css",
+                            "~/Content/Admin/css/compiled/layout.css",
+                            "~/Content/Admin/css/elements.css",
+                            "~/Content/Admin/css/icons.css",
+                            "~/Content/Admin/font/OpenSans.css",
+                            "~/Content/Admin/font/Lato.css"));
         }
     }
 }

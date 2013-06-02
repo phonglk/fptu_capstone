@@ -6,19 +6,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
+using DropIt.DAL;
 
 namespace DropIt.Controllers
 {
     public class EventController : Controller
     {
         private Drop_ItContext db = new Drop_ItContext();
-
+        private IEventReposity eventRepository;
         //
         // GET: /Event/
 
+        public EventController()
+        {
+            this.eventRepository = new EventRepository(db);
+        }
+
         public ActionResult Index()
         {
-            var events = db.Events.Include(e => e.Category).Include(e => e.Venue);
+            var events = eventRepository.GetAll();
             return View(events.ToList());
         }
 
@@ -27,7 +33,7 @@ namespace DropIt.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Event evt= db.Events.Find(id);
+            Event evt = eventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
@@ -48,14 +54,14 @@ namespace DropIt.Controllers
         //
         // POST: /Event/Create
 
-        [HttpPost]
+        [HttpPost]  
         [ValidateAntiForgeryToken]
         public ActionResult Create(Event evt)
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(evt);
-                db.SaveChanges();
+                eventRepository.AddOrUpdate(evt);
+                eventRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +75,7 @@ namespace DropIt.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Event evt= db.Events.Find(id);
+            Event evt = eventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
@@ -88,8 +94,8 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(evt).State = EntityState.Modified;
-                db.SaveChanges();
+                eventRepository.AddOrUpdate(evt);
+                eventRepository.Save();
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
@@ -102,7 +108,7 @@ namespace DropIt.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Event evt= db.Events.Find(id);
+            Event evt = eventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
@@ -117,9 +123,8 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event evt= db.Events.Find(id);
-            db.Events.Remove(evt);
-            db.SaveChanges();
+            eventRepository.Delete(id);
+            eventRepository.Save();
             return RedirectToAction("Index");
         }
 
