@@ -8,14 +8,14 @@ namespace DropIt.DAL
 {
     public class BaseRepository
     {
-        protected Drop_ItContext ctx;
+        protected DropItContext ctx;
 
         public BaseRepository()
         {
-            ctx = new Drop_ItContext();
+            ctx = new DropItContext();
         }
 
-        public BaseRepository(Drop_ItContext ctx)
+        public BaseRepository(DropItContext ctx)
         {
             this.ctx = ctx;
         }

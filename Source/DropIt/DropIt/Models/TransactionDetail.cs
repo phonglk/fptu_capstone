@@ -12,13 +12,13 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class TransactionDetail
     {
-        public int OrderDetailId { get; set; }
-        public int OrderId { get; set; }
+        public int TransactionDetailId { get; set; }
+        public int TransactionId { get; set; }
         public int TicketId { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Ticket Ticket { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }

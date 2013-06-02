@@ -11,7 +11,7 @@ namespace DropIt.Controllers
 {
     public class CategoryController : Controller
     {
-        private Drop_ItContext db = new Drop_ItContext();
+        private DropItContext db = new DropItContext();
 
         //
         // GET: /Category/

@@ -10,7 +10,7 @@ namespace DropIt.DAL
 {
     public class EventRepository : BaseRepository,IEventReposity
     {
-        public EventRepository(Drop_ItContext ctx)
+        public EventRepository(DropItContext ctx)
         {
             this.ctx = ctx;
         }

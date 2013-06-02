@@ -13,10 +13,10 @@ namespace DropIt.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Drop_ItContext : DbContext
+    public partial class DropItContext : DbContext
     {
-        public Drop_ItContext()
-            : base("name=Drop_ItContext")
+        public DropItContext()
+            : base("name=DropItContext")
         {
         }
     
@@ -27,12 +27,12 @@ namespace DropIt.Models
     
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<RespondRequest> RespondRequests { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionDetail> TransactionDetails { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserFollowEvent> UserFollowEvents { get; set; }
         public DbSet<Venue> Venues { get; set; }

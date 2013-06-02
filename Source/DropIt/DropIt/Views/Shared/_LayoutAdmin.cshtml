@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/Admin")
     @Scripts.Render("~/bundles/modernizr")
+    <script>
+        var Routing = {
+            Controller: "@ViewContext.RouteData.Values["controller"]",
+            Action: "@ViewContext.RouteData.Values["action"]"
+        }
+    </script>
 </head>
 <body>
 
@@ -70,12 +76,19 @@
 
     <!-- sidebar -->
     <div id="sidebar-nav" class="hidden-phone">
-        <ul id="dashboard-menu">
+        <ul id="dashboard-menu" data-bind="foreach: _MenuAdmin">
+            <li class="">
+                <a class="tab2" href="#" data-bind="attr: {href: Url}">
+                    <i class="" data-bind="attr: {class : 'icon-'+Icon}"></i>
+                    <span data-bind="text:Name"></span>
+                </a>
+            </li>
+            <!--
             <li class="active">
-                <div class="pointer">
+                @*<div class="pointer">
                     <div class="arrow"></div>
                     <div class="arrow_border"></div>
-                </div>
+                </div>*@
                 <a class="tab1" href="index.html">
                     <i class="sidebar-home"></i>
                     <span>Home</span>
@@ -141,6 +154,7 @@
                     <span>Login page</span>
                 </a>
             </li>
+                -->
         </ul>
     </div>
     <!-- end sidebar -->
