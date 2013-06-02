@@ -5,9 +5,11 @@
     [Status]       INT            NOT NULL,
     [TicketId]     INT            NOT NULL,
     [UserId]       INT            NOT NULL,
-    [CreatedDate]  DATETIME       NOT NULL,
-    [ModifiedDate] DATETIME       NOT NULL,
+    [CreatedDate]  DATETIME       NULL,
+    [ModifiedDate] DATETIME       NULL,
     CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED ([OrderId] ASC),
     CONSTRAINT [FK_Order_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 

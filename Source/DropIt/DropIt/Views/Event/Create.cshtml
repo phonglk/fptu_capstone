@@ -1,7 +1,8 @@
-﻿@model DropIt.Models.Event
+﻿@model DropIt.ViewModels.CreateEvent
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Create</h2>
@@ -60,23 +61,6 @@
             @Html.DropDownList("VenueId", String.Empty)
             @Html.ValidationMessageFor(model => model.VenueId)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreatedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreatedDate)
-            @Html.ValidationMessageFor(model => model.CreatedDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ModifiedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ModifiedDate)
-            @Html.ValidationMessageFor(model => model.ModifiedDate)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>

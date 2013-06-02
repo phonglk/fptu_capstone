@@ -28,8 +28,8 @@ namespace DropIt.Models
         public int Status { get; set; }
         public int CategoryId { get; set; }
         public int VenueId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Venue Venue { get; set; }

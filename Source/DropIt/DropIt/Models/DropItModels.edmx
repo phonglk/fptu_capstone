@@ -102,8 +102,8 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="VenueId" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedDate" Type="datetime" StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedDate" Type="datetime" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -115,8 +115,8 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="TicketId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -166,8 +166,8 @@
           <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="timestamp" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -523,8 +523,8 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="VenueId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Identity" Nullable="true" />
+          <Property Name="ModifiedDate" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" Nullable="true" />
           <NavigationProperty Name="Category" Relationship="Drop_ItModel.FK_Event_Category" FromRole="Event" ToRole="Category" />
           <NavigationProperty Name="Venue" Relationship="Drop_ItModel.FK_Event_Venue" FromRole="Event" ToRole="Venue" />
           <NavigationProperty Name="Requests" Relationship="Drop_ItModel.FK_Request_Event" FromRole="Event" ToRole="Request" />
@@ -541,8 +541,8 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="TicketId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderDetails" Relationship="Drop_ItModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -603,8 +603,8 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedDate" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Event" Relationship="Drop_ItModel.FK_Ticket_Event" FromRole="Ticket" ToRole="Event" />
           <NavigationProperty Name="OrderDetails" Relationship="Drop_ItModel.FK_OrderDetail_Ticket" FromRole="Ticket" ToRole="OrderDetail" />
           <NavigationProperty Name="RespondRequests" Relationship="Drop_ItModel.FK_RespondRequest_Ticket" FromRole="Ticket" ToRole="RespondRequest" />
