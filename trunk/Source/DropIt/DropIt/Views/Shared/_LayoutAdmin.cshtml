@@ -77,9 +77,15 @@
     <!-- sidebar -->
     <div id="sidebar-nav" class="hidden-phone">
         <ul id="dashboard-menu" data-bind="foreach: _MenuAdmin">
-            <li class="">
+            <li class="" data-bind="css: {active: IsActive}">
+                <!-- ko if: IsActive -->
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <!-- /ko -->
                 <a class="tab2" href="#" data-bind="attr: {href: Url}">
-                    <i class="" data-bind="attr: {class : 'icon-'+Icon}"></i>
+                    <i class="" style="font-size:20px" data-bind="attr: {class : 'icon-'+Icon}"></i>
                     <span data-bind="text:Name"></span>
                 </a>
             </li>

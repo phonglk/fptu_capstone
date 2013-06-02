@@ -7,15 +7,17 @@ class MenuAdmin
         @Controller ?= null
         @Action ?= null
         @Url ?= null
-        @Icon = "reorder"
+        @Icon ?= "chevron-sign-right"
+        @IsActive = false
 
         if @Url is null
             @Url = "/#{@Controller}/"
+            @IsActive = true if @Controller.toLowerCase() is Routing.Controller.toLowerCase()
             @Url += "#{@Action}/" if @Action isnt null
 
-window._MenuAdmin = [
+menuAdmins = [
     new MenuAdmin 
-        Name : "Home"
+        Name : "Dashboard"
         Controller : "Admin"
         Icon : "home"
     new MenuAdmin 
@@ -25,4 +27,20 @@ window._MenuAdmin = [
         Name : "Ticket"
         Controller : "Ticket"
         Action : "AdminList"
+    new MenuAdmin 
+        Name : "Danh mục"
+        Controller : "Category"
+        Icon : "reorder"
+    new MenuAdmin 
+        Name : "Sự kiện"
+        Controller : "Event"
+        Action : "AdminList"
+        Icon : "volume-up"
+    new MenuAdmin 
+        Name : "Địa điểm"
+        Controller : "Venue"
+        Icon : "hospital"
     ]
+
+$ ()->
+    ko.applyBindings({_MenuAdmin:menuAdmins },$("#sidebar-nav")[0])
