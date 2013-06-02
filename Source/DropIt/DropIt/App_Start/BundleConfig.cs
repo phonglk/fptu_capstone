@@ -44,7 +44,7 @@ namespace DropIt
             bundles.Add(new StyleBundle("~/Content/Admin")
                 .IncludeDirectory("~/Content/Admin/css/bootstrap", "*.css")
                 .Include("~/Content/Admin/css/lib/jquery-ui-1.10.2.custom.css")
-                .Include("~/Content/Admin/css/lib/font-awesome.css",
+                .Include("~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
                             "~/Content/Admin/css/compiled/layout.css",
                             "~/Content/Admin/css/elements.css",
                             "~/Content/Admin/css/icons.css",

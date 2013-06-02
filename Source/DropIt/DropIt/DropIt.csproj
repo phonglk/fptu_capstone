@@ -282,6 +282,10 @@
     <Content Include="Content\Admin\css\lib\bootstrap-wysihtml5.css" />
     <Content Include="Content\Admin\css\lib\bootstrap.datepicker.css" />
     <Content Include="Content\Admin\css\lib\font-awesome.css" />
+    <Content Include="Content\Admin\css\lib\font-awesome\css\font-awesome-ie7.css" />
+    <Content Include="Content\Admin\css\lib\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Content\Admin\css\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Admin\css\lib\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\Admin\css\lib\fullcalendar.css" />
     <Content Include="Content\Admin\css\lib\fullcalendar.print.css" />
     <Content Include="Content\Admin\css\lib\jquery-ui-1.10.2.custom.css" />
@@ -406,14 +410,27 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Admin\css\bootstrap\Descr.WD3" />
     <Content Include="Content\Admin\css\compiled\Descr.WD3" />
-    <Content Include="Content\Admin\css\Descr.WD3" />
     <Content Include="Content\Admin\css\lib\Descr.WD3" />
     <Content Include="Content\Admin\font\css%40family=Open+Sans_3A300italic,400italic,700italic,800italic,400,300,600,700,800" />
     <Content Include="Content\Admin\font\Descr.WD3" />
-    <Content Include="Content\Admin\font\fontawesome-webfont.eot%40" />
+    <Content Include="Content\Admin\css\lib\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="Content\Admin\css\lib\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Content\Admin\css\lib\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\Admin\css\lib\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="Content\Admin\css\lib\font-awesome\font\FontAwesome.otf" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\bootstrap.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\core.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\extras.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\font-awesome-ie7.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\icons.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\mixins.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\path.less" />
+    <Content Include="Content\Admin\css\lib\font-awesome\less\variables.less" />
+    <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
-    <Content Include="Content\Admin\font\fontawesome-webfont.ttf%40v=3.0.1" />
-    <Content Include="Content\Admin\font\fontawesome-webfont.woff%40v=3.0.1" />
+    <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
+    <None Include="Content\Admin\font\fontawesome-webfont.woff" />
     <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\9k-RPmcnxYEPm8CNFsH2gg.woff" />
     <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\Descr.WD3" />
     <Content Include="Content\Admin\font\themes.googleusercontent.com\static\fonts\lato\v6\nQhiC-wSiJx0pvEuJl8d8A.eot" />

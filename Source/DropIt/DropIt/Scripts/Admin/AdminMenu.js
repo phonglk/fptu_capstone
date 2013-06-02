@@ -1,10 +1,10 @@
 ﻿(function() {
-  var MenuAdmin;
+  var MenuAdmin, menuAdmins;
 
   MenuAdmin = (function() {
 
     function MenuAdmin(_arg) {
-      var _ref, _ref1, _ref2, _ref3;
+      var _ref, _ref1, _ref2, _ref3, _ref4;
       this.Name = _arg.Name, this.Controller = _arg.Controller, this.Action = _arg.Action, this.Url = _arg.Url, this.Icon = _arg.Icon;
       this.self = this;
             if ((_ref = this.Name) != null) {
@@ -31,9 +31,18 @@
       } else {
         this.Url = null;
       };
-      this.Icon = "reorder";
+            if ((_ref4 = this.Icon) != null) {
+        _ref4;
+
+      } else {
+        this.Icon = "chevron-sign-right";
+      };
+      this.IsActive = false;
       if (this.Url === null) {
         this.Url = "/" + this.Controller + "/";
+        if (this.Controller.toLowerCase() === Routing.Controller.toLowerCase()) {
+          this.IsActive = true;
+        }
         if (this.Action !== null) {
           this.Url += "" + this.Action + "/";
         }
@@ -44,9 +53,9 @@
 
   })();
 
-  window._MenuAdmin = [
+  menuAdmins = [
     new MenuAdmin({
-      Name: "Home",
+      Name: "Dashboard",
       Controller: "Admin",
       Icon: "home"
     }), new MenuAdmin({
@@ -56,7 +65,26 @@
       Name: "Ticket",
       Controller: "Ticket",
       Action: "AdminList"
+    }), new MenuAdmin({
+      Name: "Danh mục",
+      Controller: "Category",
+      Icon: "reorder"
+    }), new MenuAdmin({
+      Name: "Sự kiện",
+      Controller: "Event",
+      Action: "AdminList",
+      Icon: "volume-up"
+    }), new MenuAdmin({
+      Name: "Địa điểm",
+      Controller: "Venue",
+      Icon: "hospital"
     })
   ];
+
+  $(function() {
+    return ko.applyBindings({
+      _MenuAdmin: menuAdmins
+    }, $("#sidebar-nav")[0]);
+  });
 
 }).call(this);
