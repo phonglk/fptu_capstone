@@ -12,23 +12,24 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Transaction
     {
-        public Order()
+        public Transaction()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.TransactionDetails = new HashSet<TransactionDetail>();
         }
     
-        public int OrderId { get; set; }
+        public int TransactionId { get; set; }
         public System.DateTime ShipDate { get; set; }
         public string Description { get; set; }
+        public string Address { get; set; }
         public int Status { get; set; }
         public int TicketId { get; set; }
         public int UserId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual User User { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
     }
 }

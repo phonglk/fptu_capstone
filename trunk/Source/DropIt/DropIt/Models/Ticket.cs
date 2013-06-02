@@ -16,23 +16,24 @@ namespace DropIt.Models
     {
         public Ticket()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
             this.RespondRequests = new HashSet<RespondRequest>();
+            this.TransactionDetails = new HashSet<TransactionDetail>();
         }
     
         public int TicketId { get; set; }
-        public double Price { get; set; }
+        public double SellPrice { get; set; }
+        public double ReceiveMoney { get; set; }
         public string Seat { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
         public int UserId { get; set; }
         public int EventId { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public byte[] ModifiedDate { get; set; }
     
         public virtual Event Event { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<RespondRequest> RespondRequests { get; set; }
+        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace DropIt.Controllers
 {
     public class EventController : Controller
     {
-        private Drop_ItContext db = new Drop_ItContext();
+        private DropItContext db = new DropItContext();
         private IEventReposity eventRepository;
         //
         // GET: /Event/
