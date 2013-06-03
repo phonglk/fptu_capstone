@@ -1,7 +1,8 @@
-﻿@model DropIt.Models.Category
+﻿@model DropIt.ViewModels.Category
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Create</h2>
@@ -22,7 +23,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ParentCategoryId, "Category2")
+            @Html.LabelFor(model => model.ParentCategoryId, "ParentCategory")
         </div>
         <div class="editor-field">
             @Html.DropDownList("ParentCategoryId", String.Empty)
