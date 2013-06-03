@@ -78,7 +78,7 @@ namespace DropIt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "ParentCategoryName", category.ParentCategoryId);
+            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", category.ParentCategoryId);
             return View(category);
         }
 
