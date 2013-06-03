@@ -169,29 +169,29 @@
     <!-- main container -->
     <div class="content">
 
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <!-- tabs to navigate through forms related pages -->
-            <!-- ko foreach:_MenuAdmin -->
-            <!-- ko if: IsActive -->
-            <div id="tabs-wrapper">
-                <div class="row-fluid" data-bind="foreach: Childs">
-                    <a class="span2 tab" href="#" data-bind="attr: { href: Url }, css: { active: IsActive }">
-                        <span data-bind="text: Name"></span>
-                    </a>
-                </div>
+        <!-- tabs to navigate through forms related pages -->
+        <!-- ko foreach:_MenuAdmin -->
+        <!-- ko if: IsActive -->
+        <div id="tabs-wrapper">
+            <div class="row-fluid" data-bind="foreach: Childs">
+                <a class="span2 tab" href="#" data-bind="attr: { href: Url }, css: { active: IsActive }">
+                    <span data-bind="text: Name"></span>
+                </a>
             </div>
-            <!-- /ko -->
-            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
 
-            <div id="pad-wrapper">
-                <!-- UI Elements section -->
-                <div class="row-fluid section ui-elements">
-                        @RenderBody();
-                </div>
+        <div id="pad-wrapper">
+            <!-- UI Elements section -->
+            <div class="row-fluid section ui-elements">
+                @RenderBody();
+            </div>
         </div>
     </div>
-
+        </div>>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/Admin")
