@@ -22,10 +22,10 @@ namespace DropIt.Controllers
             this.eventRepository = new EventRepository(db);
         }
 
-        public ActionResult Index()
+        public ActionResult List()
         {
             var events = eventRepository.GetAll();
-            return View(events.ToList());
+            return View(events.ToList());          
         }
 
         //
@@ -62,7 +62,7 @@ namespace DropIt.Controllers
             {
                 eventRepository.AddOrUpdate(evt);
                 eventRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
@@ -96,7 +96,7 @@ namespace DropIt.Controllers
             {
                 eventRepository.AddOrUpdate(evt);
                 eventRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
             ViewBag.VenueId = new SelectList(db.Venues, "VenueId", "VenueName", evt.VenueId);
@@ -125,7 +125,7 @@ namespace DropIt.Controllers
         {
             eventRepository.Delete(id);
             eventRepository.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)
