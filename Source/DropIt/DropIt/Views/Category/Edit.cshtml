@@ -1,4 +1,4 @@
-﻿@model DropIt.ViewModels.Category
+﻿@model DropIt.Models.Category
 
 @{
     ViewBag.Title = "Edit";
@@ -28,7 +28,8 @@
             @Html.LabelFor(model => model.ParentCategoryId, "Category2")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ParentCategoryId", String.Empty)
+            @*@Html.DropDownList("ParentCategoryId", String.Empty)*@
+            @Html.DropDownList("ParentCategoryId", ViewData["CategoryId"] as SelectList)
             @Html.ValidationMessageFor(model => model.ParentCategoryId)
         </div>
 
