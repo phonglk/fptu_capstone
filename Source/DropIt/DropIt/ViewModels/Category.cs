@@ -17,7 +17,6 @@ namespace DropIt.ViewModels
         [Required]
         public string Description { get; set; }
 
-        [Required]
-        public int ParentCategoryId { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }
