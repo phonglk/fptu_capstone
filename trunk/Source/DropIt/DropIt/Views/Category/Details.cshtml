@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Details</h2>
@@ -17,10 +18,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category2.CategoryName)
+         @Html.DisplayNameFor(model => model.ParentCategoryId)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Category2.CategoryName)
+        @Html.DisplayFor(model => model.ParentCategoryId)
     </div>
 
     <div class="display-label">

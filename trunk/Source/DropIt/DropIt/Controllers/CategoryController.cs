@@ -6,20 +6,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
+using DropIt.DAL;
 
 namespace DropIt.Controllers
 {
     public class CategoryController : Controller
     {
         private DropItContext db = new DropItContext();
+        private ICategoryRepository categoryRepository;
 
         //
         // GET: /Category/
+        public CategoryController()
+        {
+            this.categoryRepository = new CategoryRepository(db);
+        }
 
         public ActionResult Index()
         {
-            var categories = db.Categories.Include(c => c.Category2);
-            return View(categories.ToList());
+            var cats = categoryRepository.GetAll();
+            return View(cats.ToList());          
         }
 
         //
@@ -27,7 +33,7 @@ namespace DropIt.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Category category = db.Categories.Find(id);
+            Category category = categoryRepository.GetById(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -53,8 +59,8 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                categoryRepository.AddOrUpdate(category);
+                categoryRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -67,12 +73,12 @@ namespace DropIt.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Category category = db.Categories.Find(id);
+            Category category = categoryRepository.GetById(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", category.ParentCategoryId);
+            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "ParentCategoryName", category.ParentCategoryId);
             return View(category);
         }
 
@@ -85,11 +91,11 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                categoryRepository.AddOrUpdate(category);
+                categoryRepository.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", category.ParentCategoryId);
+            ViewBag.ParentCategoryId = new SelectList(db.Categories, "CategoryId", "ParentCategoryName", category.ParentCategoryId);
             return View(category);
         }
 
@@ -98,7 +104,7 @@ namespace DropIt.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Category category = db.Categories.Find(id);
+            Category category = categoryRepository.GetById(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -113,9 +119,8 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            categoryRepository.Delete(id);
+            categoryRepository.Save();
             return RedirectToAction("Index");
         }
 
