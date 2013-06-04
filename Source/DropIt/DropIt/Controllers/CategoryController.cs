@@ -13,13 +13,13 @@ namespace DropIt.Controllers
     public class CategoryController : Controller
     {
         private DropItContext db = new DropItContext();
-        private ICategoryRepository categoryRepository;
+        private BaseRepository<Category> categoryRepository;
 
         //
         // GET: /Category/
         public CategoryController()
         {
-            this.categoryRepository = new CategoryRepository(db);
+            this.categoryRepository = new BaseRepository<Category>(db);
         }
 
         public ActionResult Index()

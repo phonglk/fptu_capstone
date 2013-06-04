@@ -13,13 +13,13 @@ namespace DropIt.Controllers
     public class EventController : Controller
     {
         private DropItContext db = new DropItContext();
-        private IEventReposity eventRepository;
+        private BaseRepository<Event> eventRepository;
         //
         // GET: /Event/
 
         public EventController()
         {
-            this.eventRepository = new EventRepository(db);
+            this.eventRepository = new BaseRepository<Event>(db);
         }
 
         public ActionResult List()

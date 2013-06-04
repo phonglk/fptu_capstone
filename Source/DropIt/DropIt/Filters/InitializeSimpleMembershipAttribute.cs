@@ -25,11 +25,11 @@ namespace DropIt.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<DropItContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new DropItContext())
                     {
                         if (!context.Database.Exists())
                         {
@@ -37,8 +37,8 @@ namespace DropIt.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
                     }
-
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    if (!WebSecurity.Initialized)
+                        WebSecurity.InitializeDatabaseConnection("DropItContext_User", "User", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

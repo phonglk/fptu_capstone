@@ -87,6 +87,20 @@ namespace DropIt.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string Phone { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public int ProvinceId { get; set; }
+
     }
 
     public class ExternalLogin

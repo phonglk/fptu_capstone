@@ -29,7 +29,7 @@ namespace DropIt.Models
         public int UserId { get; set; }
         public int EventId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public byte[] ModifiedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual Event Event { get; set; }
         public virtual ICollection<RespondRequest> RespondRequests { get; set; }
