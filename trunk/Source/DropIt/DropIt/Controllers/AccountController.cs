@@ -19,6 +19,7 @@ namespace DropIt.Controllers
     {
         //
         // GET: /Account/Login
+        DropItContext db = new DropItContext();
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -63,6 +64,7 @@ namespace DropIt.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
             return View();
         }
 
@@ -263,14 +265,13 @@ namespace DropIt.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
-                {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                
+                    User user = db.Users.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.Users.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -282,7 +283,7 @@ namespace DropIt.Controllers
                     {
                         ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
                     }
-                }
+                
             }
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;

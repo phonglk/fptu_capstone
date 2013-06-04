@@ -25,7 +25,8 @@ namespace DropIt
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -42,7 +43,9 @@ namespace DropIt
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/Admin")
-                .IncludeDirectory("~/Content/Admin/css/bootstrap", "*.css")
+                .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
+                            "~/Content/Admin/css/bootstrap/bootstrap-responsive.css",
+                            "~/Content/Admin/css/bootstrap/bootstrap-overrides.css")
                 .Include("~/Content/Admin/css/lib/jquery-ui-1.10.2.custom.css")
                 .Include("~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
                             "~/Content/Admin/css/compiled/layout.css",

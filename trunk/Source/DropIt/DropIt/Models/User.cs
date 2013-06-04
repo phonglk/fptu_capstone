@@ -31,7 +31,7 @@ namespace DropIt.Models
         public int Status { get; set; }
         public int Role { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public byte[] ModifiedDate { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
         public int ProvinceId { get; set; }
     
         public virtual Province Province { get; set; }
