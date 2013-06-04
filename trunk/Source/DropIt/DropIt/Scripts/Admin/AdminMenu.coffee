@@ -3,6 +3,8 @@ class MenuAdmin
     constructor: ({@Name,@Controller,@Action,@Url,@Icon,@Childs}) ->
         @self = this;
 
+        @Area = "Administration"
+
         @Name ?= "NoName"
         @Controller ?= null
         @Action ?= null
@@ -12,14 +14,24 @@ class MenuAdmin
         @Parent = null
         @Childs ?= []
 
+        
+
         for child in @Childs
             child.Parent = this
             child.Controller = @Controller
-            child.Url = "/#{child.Controller}/#{child.Action}"
+            if child.Area?
+                child.Url = "/#{@Area}";
+            else
+                child.Url = "";
+            child.Url += "/#{child.Controller}/#{child.Action}"
             if @Controller?.toLowerCase() is Routing.Controller.toLowerCase() and child.Action?.toLowerCase() is Routing.Action.toLowerCase()
                 child.IsActive = true;
         if @Url is null
-            @Url = "/#{@Controller}/"
+            if @Area?
+                @Url = "/#{@Area}";
+            else
+                @Url = "";
+            @Url += "/#{@Controller}/"
             @IsActive = true if @Controller?.toLowerCase() is Routing.Controller.toLowerCase()
 
             @Url += "#{@Action}/" if @Action isnt null
@@ -43,7 +55,7 @@ window.menuAdmins = [
     new MenuAdmin 
         Name : "Sự kiện"
         Controller : "Event"
-        Action : "AdminList"
+        Action : "List"
         Icon : "volume-up"
         Childs : [
             new MenuAdmin 
@@ -63,4 +75,5 @@ window.menuAdmins = [
     ]
 
 $ ()->
-    ko.applyBindings({_MenuAdmin:menuAdmins })
+    ko.applyBindings({_MenuAdmin:menuAdmins },$("#dashboard-menu")[0])
+    ko.applyBindings({_MenuAdmin:menuAdmins },$("#tabs-wrapper")[0])

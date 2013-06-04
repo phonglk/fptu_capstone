@@ -7,6 +7,7 @@
       var child, _i, _len, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
       this.Name = _arg.Name, this.Controller = _arg.Controller, this.Action = _arg.Action, this.Url = _arg.Url, this.Icon = _arg.Icon, this.Childs = _arg.Childs;
       this.self = this;
+      this.Area = "Administration";
             if ((_ref = this.Name) != null) {
         _ref;
 
@@ -50,13 +51,23 @@
         child = _ref6[_i];
         child.Parent = this;
         child.Controller = this.Controller;
-        child.Url = "/" + child.Controller + "/" + child.Action;
+        if (child.Area != null) {
+          child.Url = "/" + this.Area;
+        } else {
+          child.Url = "";
+        }
+        child.Url += "/" + child.Controller + "/" + child.Action;
         if (((_ref7 = this.Controller) != null ? _ref7.toLowerCase() : void 0) === Routing.Controller.toLowerCase() && ((_ref8 = child.Action) != null ? _ref8.toLowerCase() : void 0) === Routing.Action.toLowerCase()) {
           child.IsActive = true;
         }
       }
       if (this.Url === null) {
-        this.Url = "/" + this.Controller + "/";
+        if (this.Area != null) {
+          this.Url = "/" + this.Area;
+        } else {
+          this.Url = "";
+        }
+        this.Url += "/" + this.Controller + "/";
         if (((_ref9 = this.Controller) != null ? _ref9.toLowerCase() : void 0) === Routing.Controller.toLowerCase()) {
           this.IsActive = true;
         }
@@ -89,7 +100,7 @@
     }), new MenuAdmin({
       Name: "Sự kiện",
       Controller: "Event",
-      Action: "AdminList",
+      Action: "List",
       Icon: "volume-up",
       Childs: [
         new MenuAdmin({
@@ -111,9 +122,12 @@
   ];
 
   $(function() {
+    ko.applyBindings({
+      _MenuAdmin: menuAdmins
+    }, $("#dashboard-menu")[0]);
     return ko.applyBindings({
       _MenuAdmin: menuAdmins
-    });
+    }, $("#tabs-wrapper")[0]);
   });
 
 }).call(this);

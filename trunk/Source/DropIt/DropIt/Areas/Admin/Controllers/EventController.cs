@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using DropIt.Models;
 using DropIt.DAL;
 
-namespace DropIt.Controllers
+namespace DropIt.Areas.Admin.Controllers
 {
     public class EventController : Controller
     {
@@ -21,17 +21,32 @@ namespace DropIt.Controllers
             
         }
 
+        public ActionResult Index(){
+            return View();
+        }
+
         public ActionResult List()
         {
             var events = this.unitOfWork.EventRepository.Get();
             return View(events.ToList());          
         }
 
-        public ActionResult Admin_List()
+        public JsonResult Get()
         {
             var events = this.unitOfWork.EventRepository.Get();
-            return View(events.ToList());
+            return Json(new
+            {
+                Result = events.Select(e => new {
+                    e.EventId,
+                    e.EventName,
+                    e.Artist,
+                    e.HoldDate,
+                    e.Description,
+                })
+            }, JsonRequestBehavior.AllowGet);
         }
+
+
 
         //
         // GET: /Event/Details/5

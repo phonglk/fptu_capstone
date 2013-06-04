@@ -4,90 +4,90 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Alias="Self" Namespace="Drop_ItModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
         <EntityContainer Name="Drop_ItModelStoreContainer">
-          <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Province" EntityType="Drop_ItModel.Store.Province" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Request" EntityType="Drop_ItModel.Store.Request" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="RespondRequest" EntityType="Drop_ItModel.Store.RespondRequest" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Ticket" EntityType="Drop_ItModel.Store.Ticket" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Transaction" EntityType="Drop_ItModel.Store.Transaction" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TransactionDetail" EntityType="Drop_ItModel.Store.TransactionDetail" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="Drop_ItModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserFollowEvent" EntityType="Drop_ItModel.Store.UserFollowEvent" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Venue" EntityType="Drop_ItModel.Store.Venue" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Drop_ItModel.Store.Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Drop_ItModel.Store.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RespondRequest" EntityType="Drop_ItModel.Store.RespondRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Drop_ItModel.Store.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Drop_ItModel.Store.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetail" EntityType="Drop_ItModel.Store.TransactionDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Drop_ItModel.Store.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFollowEvent" EntityType="Drop_ItModel.Store.UserFollowEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venue" EntityType="Drop_ItModel.Store.Venue" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Category_Category" Association="Drop_ItModel.Store.FK_Category_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Category1" EntitySet="Category" />
+            <End EntitySet="Category" Role="Category" />
+            <End EntitySet="Category" Role="Category1" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Category" Association="Drop_ItModel.Store.FK_Event_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Event" EntitySet="Event" />
+            <End EntitySet="Category" Role="Category" />
+            <End EntitySet="Event" Role="Event" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Venue" Association="Drop_ItModel.Store.FK_Event_Venue">
-            <End Role="Venue" EntitySet="Venue" />
-            <End Role="Event" EntitySet="Event" />
+            <End EntitySet="Venue" Role="Venue" />
+            <End EntitySet="Event" Role="Event" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Drop_ItModel.Store.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Transaction" EntitySet="Transaction" />
+            <End EntitySet="User" Role="User" />
+            <End EntitySet="Transaction" Role="Transaction" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="Drop_ItModel.Store.FK_OrderDetail_Order">
-            <End Role="Transaction" EntitySet="Transaction" />
-            <End Role="TransactionDetail" EntitySet="TransactionDetail" />
+            <End EntitySet="Transaction" Role="Transaction" />
+            <End EntitySet="TransactionDetail" Role="TransactionDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Ticket" Association="Drop_ItModel.Store.FK_OrderDetail_Ticket">
-            <End Role="Ticket" EntitySet="Ticket" />
-            <End Role="TransactionDetail" EntitySet="TransactionDetail" />
+            <End EntitySet="Ticket" Role="Ticket" />
+            <End EntitySet="TransactionDetail" Role="TransactionDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_Event" Association="Drop_ItModel.Store.FK_Request_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Request" EntitySet="Request" />
+            <End EntitySet="Event" Role="Event" />
+            <End EntitySet="Request" Role="Request" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_User" Association="Drop_ItModel.Store.FK_Request_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Request" EntitySet="Request" />
+            <End EntitySet="User" Role="User" />
+            <End EntitySet="Request" Role="Request" />
           </AssociationSet>
           <AssociationSet Name="FK_RespondRequest_Request" Association="Drop_ItModel.Store.FK_RespondRequest_Request">
-            <End Role="Request" EntitySet="Request" />
-            <End Role="RespondRequest" EntitySet="RespondRequest" />
+            <End EntitySet="Request" Role="Request" />
+            <End EntitySet="RespondRequest" Role="RespondRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_RespondRequest_Ticket" Association="Drop_ItModel.Store.FK_RespondRequest_Ticket">
-            <End Role="Ticket" EntitySet="Ticket" />
-            <End Role="RespondRequest" EntitySet="RespondRequest" />
+            <End EntitySet="Ticket" Role="Ticket" />
+            <End EntitySet="RespondRequest" Role="RespondRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_Event" Association="Drop_ItModel.Store.FK_Ticket_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Ticket" EntitySet="Ticket" />
+            <End EntitySet="Event" Role="Event" />
+            <End EntitySet="Ticket" Role="Ticket" />
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_User" Association="Drop_ItModel.Store.FK_Ticket_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Ticket" EntitySet="Ticket" />
+            <End EntitySet="User" Role="User" />
+            <End EntitySet="Ticket" Role="Ticket" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Province" Association="Drop_ItModel.Store.FK_User_Province">
-            <End Role="Province" EntitySet="Province" />
-            <End Role="User" EntitySet="User" />
+            <End EntitySet="Province" Role="Province" />
+            <End EntitySet="User" Role="User" />
           </AssociationSet>
           <AssociationSet Name="FK_UserFollowEvent_Event" Association="Drop_ItModel.Store.FK_UserFollowEvent_Event">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="UserFollowEvent" EntitySet="UserFollowEvent" />
+            <End EntitySet="Event" Role="Event" />
+            <End EntitySet="UserFollowEvent" Role="UserFollowEvent" />
           </AssociationSet>
           <AssociationSet Name="FK_UserFollowEvent_User" Association="Drop_ItModel.Store.FK_UserFollowEvent_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserFollowEvent" EntitySet="UserFollowEvent" />
+            <End EntitySet="User" Role="User" />
+            <End EntitySet="UserFollowEvent" Role="UserFollowEvent" />
           </AssociationSet>
           <AssociationSet Name="FK_Venue_Province" Association="Drop_ItModel.Store.FK_Venue_Province">
-            <End Role="Province" EntitySet="Province" />
-            <End Role="Venue" EntitySet="Venue" />
+            <End EntitySet="Province" Role="Province" />
+            <End EntitySet="Venue" Role="Venue" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
           </Key>
-          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CategoryId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="CategoryName" Nullable="false" MaxLength="50" Type="nvarchar" />
           <Property Name="ParentCategoryId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
@@ -95,14 +95,14 @@
           <Key>
             <PropertyRef Name="EventId" />
           </Key>
-          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="EventName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Artist" Type="nvarchar" MaxLength="50" />
-          <Property Name="HoldDate" Type="datetime" Nullable="false" />
+          <Property Name="EventId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="EventName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Artist" MaxLength="50" Type="nvarchar" />
+          <Property Name="HoldDate" Nullable="false" Type="datetime" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="VenueId" Type="int" Nullable="false" />
+          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="CategoryId" Nullable="false" Type="int" />
+          <Property Name="VenueId" Nullable="false" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -110,19 +110,19 @@
           <Key>
             <PropertyRef Name="ProvinceId" />
           </Key>
-          <Property Name="ProvinceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ProvinceName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProvinceId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="ProvinceName" Nullable="false" MaxLength="50" Type="nvarchar" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="EventId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Nullable="false" Type="int" />
+          <Property Name="EventId" Nullable="false" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="ModifiedDate" Nullable="false" Type="datetime" />
         </EntityType>
         <EntityType Name="RespondRequest">
           <Key>
@@ -130,23 +130,23 @@
             <PropertyRef Name="EventId" />
             <PropertyRef Name="TicketId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
-          <Property Name="TicketId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Nullable="false" Type="int" />
+          <Property Name="EventId" Nullable="false" Type="int" />
+          <Property Name="TicketId" Nullable="false" Type="int" />
+          <Property Name="Description" Nullable="false" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="TicketId" />
           </Key>
-          <Property Name="TicketId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="SellPrice" Type="float" Nullable="false" />
-          <Property Name="ReceiveMoney" Type="float" Nullable="false" />
+          <Property Name="TicketId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="SellPrice" Nullable="false" Type="float" />
+          <Property Name="ReceiveMoney" Nullable="false" Type="float" />
           <Property Name="Seat" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Status" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="UserId" Nullable="false" Type="int" />
+          <Property Name="EventId" Nullable="false" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -154,13 +154,13 @@
           <Key>
             <PropertyRef Name="TransactionId" />
           </Key>
-          <Property Name="TransactionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ShipDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="ShipDate" Nullable="false" Type="datetime" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="TicketId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="TicketId" Nullable="false" Type="int" />
+          <Property Name="UserId" Nullable="false" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
@@ -168,47 +168,47 @@
           <Key>
             <PropertyRef Name="TransactionDetailId" />
           </Key>
-          <Property Name="TransactionDetailId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionId" Type="int" Nullable="false" />
-          <Property Name="TicketId" Type="int" Nullable="false" />
+          <Property Name="TransactionDetailId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="TransactionId" Nullable="false" Type="int" />
+          <Property Name="TicketId" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="Role" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Password" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Email" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Phone" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Address" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="Status" Nullable="false" Type="int" />
+          <Property Name="Role" Nullable="false" Type="int" />
+          <Property Name="CreatedDate" Nullable="false" Type="datetime" />
+          <Property Name="ModifiedDate" Nullable="false" Type="datetime" />
+          <Property Name="ProvinceId" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="UserFollowEvent">
           <Key>
             <PropertyRef Name="FollowEventId" />
           </Key>
-          <Property Name="FollowEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="FollowEventId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="UserId" Nullable="false" Type="int" />
+          <Property Name="EventId" Nullable="false" Type="int" />
         </EntityType>
         <EntityType Name="Venue">
           <Key>
             <PropertyRef Name="VenueId" />
           </Key>
-          <Property Name="VenueId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="VenueName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="VenueId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="VenueName" Nullable="false" MaxLength="50" Type="nvarchar" />
+          <Property Name="Address" Nullable="false" Type="nvarchar(max)" />
+          <Property Name="ProvinceId" Nullable="false" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Category_Category">
-          <End Role="Category" Type="Drop_ItModel.Store.Category" Multiplicity="0..1" />
-          <End Role="Category1" Type="Drop_ItModel.Store.Category" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Category" Multiplicity="0..1" Role="Category" />
+          <End Type="Drop_ItModel.Store.Category" Multiplicity="*" Role="Category1" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="CategoryId" />
@@ -219,10 +219,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_Category">
-          <End Role="Category" Type="Drop_ItModel.Store.Category" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Category" Multiplicity="1" Role="Category">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Event" Type="Drop_ItModel.Store.Event" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Event" Multiplicity="*" Role="Event" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="CategoryId" />
@@ -233,10 +233,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Event_Venue">
-          <End Role="Venue" Type="Drop_ItModel.Store.Venue" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Venue" Multiplicity="1" Role="Venue">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Event" Type="Drop_ItModel.Store.Event" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Event" Multiplicity="*" Role="Event" />
           <ReferentialConstraint>
             <Principal Role="Venue">
               <PropertyRef Name="VenueId" />
@@ -247,10 +247,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User">
-          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.User" Multiplicity="1" Role="User">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Transaction" Type="Drop_ItModel.Store.Transaction" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Transaction" Multiplicity="*" Role="Transaction" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -261,10 +261,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Order">
-          <End Role="Transaction" Type="Drop_ItModel.Store.Transaction" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Transaction" Multiplicity="1" Role="Transaction">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="TransactionDetail" Type="Drop_ItModel.Store.TransactionDetail" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.TransactionDetail" Multiplicity="*" Role="TransactionDetail" />
           <ReferentialConstraint>
             <Principal Role="Transaction">
               <PropertyRef Name="TransactionId" />
@@ -275,8 +275,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Ticket">
-          <End Role="Ticket" Type="Drop_ItModel.Store.Ticket" Multiplicity="1" />
-          <End Role="TransactionDetail" Type="Drop_ItModel.Store.TransactionDetail" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Ticket" Multiplicity="1" Role="Ticket" />
+          <End Type="Drop_ItModel.Store.TransactionDetail" Multiplicity="*" Role="TransactionDetail" />
           <ReferentialConstraint>
             <Principal Role="Ticket">
               <PropertyRef Name="TicketId" />
@@ -287,10 +287,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Event">
-          <End Role="Event" Type="Drop_ItModel.Store.Event" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Event" Multiplicity="1" Role="Event">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Request" Type="Drop_ItModel.Store.Request" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Request" Multiplicity="*" Role="Request" />
           <ReferentialConstraint>
             <Principal Role="Event">
               <PropertyRef Name="EventId" />
@@ -301,10 +301,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_User">
-          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.User" Multiplicity="1" Role="User">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Request" Type="Drop_ItModel.Store.Request" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Request" Multiplicity="*" Role="Request" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -315,8 +315,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RespondRequest_Request">
-          <End Role="Request" Type="Drop_ItModel.Store.Request" Multiplicity="1" />
-          <End Role="RespondRequest" Type="Drop_ItModel.Store.RespondRequest" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Request" Multiplicity="1" Role="Request" />
+          <End Type="Drop_ItModel.Store.RespondRequest" Multiplicity="*" Role="RespondRequest" />
           <ReferentialConstraint>
             <Principal Role="Request">
               <PropertyRef Name="UserId" />
@@ -329,10 +329,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RespondRequest_Ticket">
-          <End Role="Ticket" Type="Drop_ItModel.Store.Ticket" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Ticket" Multiplicity="1" Role="Ticket">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="RespondRequest" Type="Drop_ItModel.Store.RespondRequest" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.RespondRequest" Multiplicity="*" Role="RespondRequest" />
           <ReferentialConstraint>
             <Principal Role="Ticket">
               <PropertyRef Name="TicketId" />
@@ -343,10 +343,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ticket_Event">
-          <End Role="Event" Type="Drop_ItModel.Store.Event" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Event" Multiplicity="1" Role="Event">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Ticket" Type="Drop_ItModel.Store.Ticket" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Ticket" Multiplicity="*" Role="Ticket" />
           <ReferentialConstraint>
             <Principal Role="Event">
               <PropertyRef Name="EventId" />
@@ -357,10 +357,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ticket_User">
-          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.User" Multiplicity="1" Role="User">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Ticket" Type="Drop_ItModel.Store.Ticket" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Ticket" Multiplicity="*" Role="Ticket" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -371,8 +371,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Province">
-          <End Role="Province" Type="Drop_ItModel.Store.Province" Multiplicity="1" />
-          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Province" Multiplicity="1" Role="Province" />
+          <End Type="Drop_ItModel.Store.User" Multiplicity="*" Role="User" />
           <ReferentialConstraint>
             <Principal Role="Province">
               <PropertyRef Name="ProvinceId" />
@@ -383,10 +383,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserFollowEvent_Event">
-          <End Role="Event" Type="Drop_ItModel.Store.Event" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.Event" Multiplicity="1" Role="Event">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="UserFollowEvent" Type="Drop_ItModel.Store.UserFollowEvent" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.UserFollowEvent" Multiplicity="*" Role="UserFollowEvent" />
           <ReferentialConstraint>
             <Principal Role="Event">
               <PropertyRef Name="EventId" />
@@ -397,10 +397,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserFollowEvent_User">
-          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+          <End Type="Drop_ItModel.Store.User" Multiplicity="1" Role="User">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="UserFollowEvent" Type="Drop_ItModel.Store.UserFollowEvent" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.UserFollowEvent" Multiplicity="*" Role="UserFollowEvent" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -411,8 +411,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Venue_Province">
-          <End Role="Province" Type="Drop_ItModel.Store.Province" Multiplicity="1" />
-          <End Role="Venue" Type="Drop_ItModel.Store.Venue" Multiplicity="*" />
+          <End Type="Drop_ItModel.Store.Province" Multiplicity="1" Role="Province" />
+          <End Type="Drop_ItModel.Store.Venue" Multiplicity="*" Role="Venue" />
           <ReferentialConstraint>
             <Principal Role="Province">
               <PropertyRef Name="ProvinceId" />
@@ -512,7 +512,7 @@
           <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ParentCategoryId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Category1" Relationship="Drop_ItModel.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="Category1" ToRole="Category1" FromRole="Category" Relationship="Drop_ItModel.FK_Category_Category" />
           <NavigationProperty Name="Category2" Relationship="Drop_ItModel.FK_Category_Category" FromRole="Category1" ToRole="Category" />
           <NavigationProperty Name="Events" Relationship="Drop_ItModel.FK_Event_Category" FromRole="Category" ToRole="Event" />
         </EntityType>

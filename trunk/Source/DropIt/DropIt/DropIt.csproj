@@ -190,6 +190,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\EventController.cs" />
     <Compile Include="Contants\Contants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -427,6 +429,14 @@
     <Content Include="Content\Admin\css\lib\font-awesome\less\mixins.less" />
     <Content Include="Content\Admin\css\lib\font-awesome\less\path.less" />
     <Content Include="Content\Admin\css\lib\font-awesome\less\variables.less" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Event\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Event\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
@@ -461,6 +471,14 @@
     </Content>
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
+    <Content Include="Scripts\Admin\Event\Index.coffee" />
+    <Content Include="Scripts\Admin\Event\Index.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\Event\Index.min.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.coffee" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Admin\AdminMenu.js">
       <DependentUpon>AdminMenu.coffee</DependentUpon>
@@ -481,6 +499,12 @@
     <Content Include="Scripts\Admin\morris.min.js" />
     <Content Include="Scripts\Admin\select2.min.js" />
     <Content Include="Scripts\Admin\theme.js" />
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.js">
+      <DependentUpon>AdminEvent.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.min.js">
+      <DependentUpon>AdminEvent.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\bootstrap-wysihtml5-0.0.2.js" />
     <Content Include="Scripts\bootstrap.datepicker.js" />
@@ -575,6 +599,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

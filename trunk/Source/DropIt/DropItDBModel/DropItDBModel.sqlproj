@@ -71,4 +71,7 @@
     <Build Include="dbo\Tables\Transaction.sql" />
     <Build Include="dbo\Tables\TransactionDetail.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeploymentDropIt.sql" />
+  </ItemGroup>
 </Project>
