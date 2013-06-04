@@ -6,20 +6,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
+using DropIt.DAL;
 
 namespace DropIt.Controllers
 {
     public class VenueController : Controller
     {
-        private DropItContext db = new DropItContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         //
         // GET: /Venue/
 
+        public VenueController()
+        {
+            
+        }
+
         public ActionResult Index()
         {
-            var venues = db.Venues.Include(v => v.Province);
-            return View(venues.ToList());
+            //var venues = db.Venues.Include(v => v.Province);
+            //return View(venues.ToList());
+            var venue = this.unitOfWork.VenueRepository.Get();
+            return View(venue.ToList());
         }
 
         //
@@ -27,7 +35,7 @@ namespace DropIt.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Venue venue = db.Venues.Find(id);
+            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
             if (venue == null)
             {
                 return HttpNotFound();
@@ -40,7 +48,7 @@ namespace DropIt.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName");
             return View();
         }
 
@@ -53,12 +61,12 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Venues.Add(venue);
-                db.SaveChanges();
+                this.unitOfWork.VenueRepository.AddOrUpdate(venue);
+                this.unitOfWork.VenueRepository.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", venue.ProvinceId);
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
             return View(venue);
         }
 
@@ -67,12 +75,12 @@ namespace DropIt.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Venue venue = db.Venues.Find(id);
+            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
             if (venue == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", venue.ProvinceId);
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
             return View(venue);
         }
 
@@ -85,11 +93,13 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(venue).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(venue).State = EntityState.Modified;
+                //db.SaveChanges();
+                this.unitOfWork.VenueRepository.AddOrUpdate(venue);
+                this.unitOfWork.VenueRepository.Save();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", venue.ProvinceId);
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
             return View(venue);
         }
 
@@ -98,7 +108,7 @@ namespace DropIt.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Venue venue = db.Venues.Find(id);
+            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
             if (venue == null)
             {
                 return HttpNotFound();
@@ -113,15 +123,14 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Venue venue = db.Venues.Find(id);
-            db.Venues.Remove(venue);
-            db.SaveChanges();
+            this.unitOfWork.VenueRepository.Delete(id);
+            this.unitOfWork.VenueRepository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
