@@ -41,7 +41,7 @@ Database:
 Quản lý event: khi được approve thì mới được show
 Có thuộc tính ở Event để biết nó được approve hay chưa
 Một user chỉ được tạo 1 request cho 1 event.  Trong table Request sẽ có 2 khóa chính là UserId và RequestId
-Bảng ReponseRequest sẽ có 3 khóa chính là UserId, EventId, RequestId
+Bảng ReponseRequest sẽ có 3 khóa chính là UserId, EventId, TicketId
 Sẽ bị hỏi: tại sao vừa có UserId vừa Username: vì UserId xuất hiện ở nhiều bảng nên khi kết bảng thì dùng kiểu int để tăng tốc.
 
 Usecase
@@ -50,3 +50,9 @@ Thay Trade thành Buy và Sell
 Thay Order thành Transaction
 Xem lại generalization thay cho extend trong manage request.
 
+Note ngày 04/06/2013
+
+Thay insert bằng add new
+Bổ sung tính năng auto closed request sau khi sự kiện đã diễn ra.
+Thêm Manage auto 
+Config Request, Event
