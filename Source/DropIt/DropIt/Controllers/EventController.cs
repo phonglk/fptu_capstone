@@ -12,19 +12,18 @@ namespace DropIt.Controllers
 {
     public class EventController : Controller
     {
-        private DropItContext db = new DropItContext();
-        private BaseRepository<Event> eventRepository;
+        private UnitOfWork unitOfWork = new UnitOfWork();
         //
         // GET: /Event/
 
         public EventController()
         {
-            this.eventRepository = new BaseRepository<Event>(db);
+            
         }
 
         public ActionResult List()
         {
-            var events = eventRepository.GetAll();
+            var events = this.unitOfWork.EventRepository.Get();
             return View(events.ToList());          
         }
 
@@ -33,7 +32,7 @@ namespace DropIt.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Event evt = eventRepository.GetById(id);
+            Event evt = this.unitOfWork.EventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
@@ -46,8 +45,8 @@ namespace DropIt.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName");
-            ViewBag.VenueId = new SelectList(db.Venues, "VenueId", "VenueName");
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
             return View();
         }
 
@@ -60,13 +59,13 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                eventRepository.AddOrUpdate(evt);
-                eventRepository.Save();
+                this.unitOfWork.EventRepository.AddOrUpdate(evt);
+                this.unitOfWork.Save();
                 return RedirectToAction("List");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
-            ViewBag.VenueId = new SelectList(db.Venues, "VenueId", "VenueName", evt.VenueId);
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", evt.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", evt.VenueId);
             return View(evt);
         }
 
@@ -75,13 +74,13 @@ namespace DropIt.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Event evt = eventRepository.GetById(id);
+            Event evt = this.unitOfWork.EventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
-            ViewBag.VenueId = new SelectList(db.Venues, "VenueId", "VenueName", evt.VenueId);
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", evt.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", evt.VenueId);
             return View(evt);
         }
 
@@ -94,12 +93,12 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid)
             {
-                eventRepository.AddOrUpdate(evt);
-                eventRepository.Save();
+                this.unitOfWork.EventRepository.AddOrUpdate(evt);
+                this.unitOfWork.EventRepository.Save();
                 return RedirectToAction("List");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", evt.CategoryId);
-            ViewBag.VenueId = new SelectList(db.Venues, "VenueId", "VenueName", evt.VenueId);
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", evt.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", evt.VenueId);
             return View(evt);
         }
 
@@ -108,7 +107,7 @@ namespace DropIt.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Event evt = eventRepository.GetById(id);
+            Event evt = this.unitOfWork.EventRepository.GetById(id);
             if (evt == null)
             {
                 return HttpNotFound();
@@ -123,14 +122,14 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            eventRepository.Delete(id);
-            eventRepository.Save();
+            this.unitOfWork.EventRepository.Delete(id);
+            this.unitOfWork.EventRepository.Save();
             return RedirectToAction("List");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            unitOfWork.Dispose();
             base.Dispose(disposing);
         }
     }
