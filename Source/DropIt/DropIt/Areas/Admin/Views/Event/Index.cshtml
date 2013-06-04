@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/Admin/Event/Index").Include(
+        "~/Scripts/Admin/ViewModels/AdminEvent.js",
+        "~/Scripts/Admin/Event/Index.js"));
+}
+@section Scripts{
+    @Scripts.Render("~/Scripts/Admin/Event/Index");
+}
+
+
+<!-- events table-->
+<!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+<div class="table-wrapper events-table section">
+    <div class="row-fluid head">
+        <div class="span12">
+            <h4>Events</h4>
+        </div>
+    </div>
+    <div class="row-fluid filter-block">
+        <div class="pull-right">
+            <div class="ui-select">
+                <select>
+                    <option>Filter events</option>
+                    <option>abc</option>
+                    <option>xyz</option>
+                </select>
+            </div>
+            <input type="text" class="search">
+            <a class="btn-flat success new-event" href="Create">+ Add event</a>
+        </div>
+    </div>
+    <div id="pad-wrapper">
+        <div class="row-fluid">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="">
+                            <input type="checkbox">
+                        </th>
+                        <th>
+                            Event
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Artist
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Time
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Discription
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: events">
+
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox" data-bind="value: EventId">
+                        </td>
+                        <td>
+                            <span data-bind="text:EventName"
+                        </td>
+                        <td>
+                            <span class="icon-time" data-bind="text: HoldDate">
+                            </span>
+                        </td>
+                        <td class="">
+                            <span data-bind="text: Description"
+                        </td>
+                        <td class="description"></td>
+                        <td></td>
+                    </tr>
+                                              
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end events table -->
+</div>
+
