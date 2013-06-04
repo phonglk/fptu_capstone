@@ -9,12 +9,12 @@ using System.Data;
 
 namespace DropIt.DAL
 {
-    public class BaseRepository<TEntity> : IDisposable where TEntity : class
+    public class GenericRepository<TEntity> where TEntity : class
     {
         protected DropItContext context;
         protected DbSet<TEntity> dbSet;
 
-        public BaseRepository(DropItContext ctx)
+        public GenericRepository(DropItContext ctx)
         {
             this.context = ctx;
             this.dbSet = ctx.Set<TEntity>();
@@ -135,24 +135,5 @@ namespace DropIt.DAL
             context.SaveChanges();
         }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }
