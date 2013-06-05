@@ -48,12 +48,12 @@
     return "" + (this.substr(0, length)) + "...";
   };
 
-  Object.prototype.toFormData = function() {
+  window.toFormData = function(obj) {
     var key, str, value;
     str = "";
-    for (key in this) {
-      value = this[key];
-      if (this.hasOwnProperty(key)) {
+    for (key in obj) {
+      value = obj[key];
+      if (obj.hasOwnProperty(key)) {
         str += "" + key + "=" + value + "&";
       }
     }

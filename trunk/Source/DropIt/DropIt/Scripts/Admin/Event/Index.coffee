@@ -26,12 +26,14 @@ class BaseViewModel
                     ko.applyBindings(this,@bindingTarget)
                 return
         return
+    deleteItem:(item)->
+        @data.remove(item)
     delete:()->
         url = Url(Action:@routing.delete.action)
         $.ajax
             url: url
             dataType:"json"
-            data: {}.toFormData()
+            data: ""
             success:(data) =>
                 if data.Result?.length > 0
                     for item in data.Result 
@@ -43,7 +45,7 @@ class BaseViewModel
     detail:()->
     edit:()->
 
-    data:[]
+    data:ko.observableArray([])
 
 class EventIndexViewModel extends BaseViewModel
     constructor:()->

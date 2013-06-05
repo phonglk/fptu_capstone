@@ -68,7 +68,4 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\UserFollowEvent.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Script.PostDeploymentDropIt.sql" />
-  </ItemGroup>
 </Project>
