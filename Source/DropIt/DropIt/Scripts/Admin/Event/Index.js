@@ -49,6 +49,10 @@
       });
     };
 
+    BaseViewModel.prototype.deleteItem = function(item) {
+      return this.data.remove(item);
+    };
+
     BaseViewModel.prototype["delete"] = function() {
       var url,
         _this = this;
@@ -58,7 +62,7 @@
       $.ajax({
         url: url,
         dataType: "json",
-        data: {}.toFormData(),
+        data: "",
         success: function(data) {
           var item, _i, _len, _ref, _ref1;
           if (((_ref = data.Result) != null ? _ref.length : void 0) > 0) {
@@ -79,7 +83,7 @@
 
     BaseViewModel.prototype.edit = function() {};
 
-    BaseViewModel.prototype.data = [];
+    BaseViewModel.prototype.data = ko.observableArray([]);
 
     return BaseViewModel;
 

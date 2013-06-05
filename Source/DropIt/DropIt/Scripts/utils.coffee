@@ -21,10 +21,10 @@ Date.fromRawJSON = (string)->
     return new Date(parseInt(string.match(/\d+/)))
 String::makeExcerpt = (length) ->
     return "#{this.substr(0,length)}..."
-Object::toFormData = ()->
+window.toFormData = (obj)->
     str = ""
-    for key,value of this
-        if this.hasOwnProperty(key)
+    for key,value of obj
+        if obj.hasOwnProperty(key)
             str+="#{key}=#{value}&"
     if str.length > 0
         str = str.substr(0,str.length-1)
