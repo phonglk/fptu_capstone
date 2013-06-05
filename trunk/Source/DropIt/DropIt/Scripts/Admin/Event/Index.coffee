@@ -1,18 +1,59 @@
 ﻿# CoffeeScript
-window.eventIndexViewModel = 
-    events : []
-i = 0;
-GetAll = ()->
-    $.ajax 
-        url: 'Get'
-        dataType:"json"
-        success:(data)->
-            if data.Result?
-                for event in data.Result 
-                    eventIndexViewModel.events.push new AdminEvent(event)
-                console.log(eventIndexViewModel);
-                ko.applyBindings(eventIndexViewModel,$(".events-table")[0])
-            return true
-    return true
+defaultRoutingMapping = 
+    getAll : 
+        action : "Get"
+    delete : 
+        action : "Delete"
+    detail :
+        action : "Detail"
+    edit :
+        action : "Update"
+
+class BaseViewModel
+    constructor:({@itemViewModel,@bindingTarget,@routing,@entityMapping})->
+        @self = this;    
+        @routing = $.extend({},defaultRoutingMapping,@routing)
+
+    getAll: ()->
+        url = Url(Action:@routing.getAll.action)
+        $.ajax
+            url: url
+            dataType:"json"
+            success:(data) =>
+                if data.Result?.length > 0
+                    for item in data.Result 
+                        @data.push new @itemViewModel(item)
+                    ko.applyBindings(this,@bindingTarget)
+                return
+        return
+    delete:()->
+        url = Url(Action:@routing.delete.action)
+        $.ajax
+            url: url
+            dataType:"json"
+            data: {}.toFormData()
+            success:(data) =>
+                if data.Result?.length > 0
+                    for item in data.Result 
+                        @data.push new @itemViewModel(item)
+                    ko.applyBindings(this,@bindingTarget)
+                return
+        return
+    afterDelete:()->
+    detail:()->
+    edit:()->
+
+    data:[]
+
+class EventIndexViewModel extends BaseViewModel
+    constructor:()->
+        super 
+            itemViewModel:AdminEvent
+            bindingTarget:$(".events-table")[0]
+            entityMapping:
+                Id : "EventId"
+                EventName : { update : true }
+window.eventIndexViewModel = new EventIndexViewModel();
+
 $ ()->
-    GetAll();
+    eventIndexViewModel.getAll();

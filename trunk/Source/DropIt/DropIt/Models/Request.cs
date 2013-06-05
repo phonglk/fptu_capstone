@@ -14,11 +14,6 @@ namespace DropIt.Models
     
     public partial class Request
     {
-        public Request()
-        {
-            this.RespondRequests = new HashSet<RespondRequest>();
-        }
-    
         public int UserId { get; set; }
         public int EventId { get; set; }
         public string Description { get; set; }
@@ -27,6 +22,5 @@ namespace DropIt.Models
     
         public virtual Event Event { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<RespondRequest> RespondRequests { get; set; }
     }
 }

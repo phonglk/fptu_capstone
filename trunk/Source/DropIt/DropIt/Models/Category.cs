@@ -23,6 +23,7 @@ namespace DropIt.Models
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public Nullable<int> ParentCategoryId { get; set; }
+        public int Status { get; set; }
         public string Description { get; set; }
     
         public virtual ICollection<Category> Category1 { get; set; }

@@ -11,6 +11,7 @@
           this.self[prop] = obj[prop];
         }
       }
+      this.HoldDate = Date.fromRawJSON(this.HoldDate);
     }
 
     return AdminEvent;
