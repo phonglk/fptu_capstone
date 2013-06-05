@@ -9,7 +9,9 @@ namespace DropIt
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/utils.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -17,9 +19,13 @@ namespace DropIt
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ko")
+                .Include("~/Scripts/knockout-{version}.js",
+                        "~/Scripts/custom-binding.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/Admin")
-                .IncludeDirectory("~/Scripts/Admin", "*.js")
-                .Include("~/Scripts/knockout-{version}.js"));
+                .IncludeDirectory("~/Scripts/Admin", "*.js"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

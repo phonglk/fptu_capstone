@@ -37,21 +37,21 @@
             @Html.LabelFor(m => m.Email)
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(m => m.Email)
+            @Html.EditorFor(m => m.Email)
         </div>
         <div class="editor-label">
             @Html.LabelFor(m => m.Phone)
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(m => m.Phone)
+            @Html.EditorFor(m => m.Phone)
         </div>
         <div class="editor-label">
             @Html.LabelFor(m => m.Address)
         </div>
         <div class="editor-field">
             <div class="input-append">
-                @Html.PasswordFor(m => m.Address)
-                @Html.DropDownList("ProvinceId", (IEnumerable<System.Web.Mvc.SelectListItem>)ViewData["ProvinceId"], new { @class="add-on" })
+                @Html.EditorFor(m => m.Address)
+                @Html.DropDownList("ProvinceId",String.Empty)
             </div>
         </div>
 

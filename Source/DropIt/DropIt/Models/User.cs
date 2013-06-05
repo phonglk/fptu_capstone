@@ -18,7 +18,7 @@ namespace DropIt.Models
         {
             this.Requests = new HashSet<Request>();
             this.Tickets = new HashSet<Ticket>();
-            this.Transactions = new HashSet<Transaction>();
+            this.Tickets1 = new HashSet<Ticket>();
             this.UserFollowEvents = new HashSet<UserFollowEvent>();
         }
     
@@ -28,16 +28,17 @@ namespace DropIt.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public int Status { get; set; }
+        public bool Active { get; set; }
+        public bool Sellable { get; set; }
         public int Role { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public byte[] ModifiedDate { get; set; }
         public int ProvinceId { get; set; }
     
         public virtual Province Province { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Ticket> Tickets1 { get; set; }
         public virtual ICollection<UserFollowEvent> UserFollowEvents { get; set; }
     }
 }

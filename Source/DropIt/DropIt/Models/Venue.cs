@@ -23,6 +23,7 @@ namespace DropIt.Models
         public string VenueName { get; set; }
         public string Address { get; set; }
         public int ProvinceId { get; set; }
+        public int Status { get; set; }
         public string Description { get; set; }
     
         public virtual ICollection<Event> Events { get; set; }

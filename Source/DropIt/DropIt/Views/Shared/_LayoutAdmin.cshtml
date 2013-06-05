@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <script>
         var Routing = {
+            Area: "@ViewContext.RouteData.DataTokens["area"]",
             Controller: "@ViewContext.RouteData.Values["controller"]",
             Action: "@ViewContext.RouteData.Values["action"]"
         }

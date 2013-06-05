@@ -62,14 +62,11 @@
     <Build Include="dbo\Tables\Venue.sql" />
     <Build Include="dbo\Tables\Request.sql" />
     <Build Include="dbo\Tables\Event.sql" />
-    <Build Include="dbo\Tables\RespondRequest.sql" />
     <Build Include="dbo\Tables\Province.sql" />
     <Build Include="dbo\Tables\Category.sql" />
     <Build Include="dbo\Tables\Ticket.sql" />
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\UserFollowEvent.sql" />
-    <Build Include="dbo\Tables\Transaction.sql" />
-    <Build Include="dbo\Tables\TransactionDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeploymentDropIt.sql" />
