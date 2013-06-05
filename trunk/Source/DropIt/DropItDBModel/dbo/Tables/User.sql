@@ -9,11 +9,13 @@
     [Sellable]     BIT            NOT NULL,
     [Role]         INT            NOT NULL,
     [CreatedDate]  DATETIME       NOT NULL,
-    [ModifiedDate] ROWVERSION     NOT NULL,
+    [ModifiedDate] DATETIME       NOT NULL,
     [ProvinceId]   INT            NOT NULL,
     CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserId] ASC),
     CONSTRAINT [FK_User_Province] FOREIGN KEY ([ProvinceId]) REFERENCES [dbo].[Province] ([ProvinceId])
 );
+
+
 
 
 
