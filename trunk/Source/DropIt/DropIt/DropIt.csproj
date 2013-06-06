@@ -202,6 +202,8 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administration\Controllers\EventController.cs" />
+    <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
+    <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Contants\Contants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -274,6 +276,12 @@
     <Compile Include="ViewModels\Event.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\admin.css">
+      <DependentUpon>admin.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Admin\admin.min.css">
+      <DependentUpon>admin.less</DependentUpon>
+    </Content>
     <Content Include="Content\Admin\css\bootstrap\bootstrap-overrides.css" />
     <Content Include="Content\Admin\css\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\Admin\css\bootstrap\bootstrap.css" />
@@ -369,6 +377,9 @@
     <Content Include="Content\Admin\img\uniform\bg-input-focus.png" />
     <Content Include="Content\Admin\img\uniform\bg-input.png" />
     <Content Include="Content\Admin\img\uniform\sprite.png" />
+    <Content Include="Content\bootstrap-modal.css" />
+    <Content Include="Content\bootstrap-modal\css\bootstrap-modal.css" />
+    <Content Include="Content\bootstrap-modal\img\ajax-loader.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -454,6 +465,8 @@
     <Content Include="Areas\Administration\Views\Event\List.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Administration\Views\Dashboard\Index.cshtml" />
+    <Content Include="Content\Admin\admin.less" />
+    <Content Include="Areas\Administration\Views\Venue\Index.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
@@ -488,7 +501,15 @@
     </Content>
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
-    <Content Include="Scripts\Admin\bootstrap.js" />
+    <Content Include="Scripts\Admin\Venue\Index.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\Venue\Index.min.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\bootstrap\bootstrap-modal.js" />
+    <Content Include="Scripts\bootstrap\bootstrap-modalmanager.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\Admin\fullcalendar.js" />
     <Content Include="Scripts\Admin\Event\Index.coffee" />
     <Content Include="Scripts\Admin\Event\Index.js">
@@ -498,7 +519,23 @@
       <DependentUpon>Index.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\Admin\ViewModels\AdminEvent.coffee" />
-    <Content Include="Scripts\custom-binding.coffee" />
+    <Content Include="Scripts\bootstrap-modal.js" />
+    <Content Include="Scripts\bootstrap-modalmanager.js" />
+    <Content Include="Scripts\Common\custom-binding.js">
+      <DependentUpon>custom-binding.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\custom-binding.min.js">
+      <DependentUpon>custom-binding.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\GenericViewModels.js">
+      <DependentUpon>GenericViewModels.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\GenericViewModels.min.js">
+      <DependentUpon>GenericViewModels.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\GenericViewModels.coffee" />
+    <Content Include="Scripts\Common\custom-binding.coffee" />
+    <Content Include="Scripts\Admin\Venue\Index.coffee" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Admin\AdminMenu.js">
       <DependentUpon>AdminMenu.coffee</DependentUpon>
@@ -508,7 +545,7 @@
     </Content>
     <Content Include="Scripts\Admin\bootstrap-wysihtml5-0.0.2.js" />
     <Content Include="Scripts\Admin\bootstrap.datepicker.js" />
-    <Content Include="Scripts\Admin\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\Admin\fullcalendar.min.js" />
     <Content Include="Scripts\Admin\html5.js" />
     <Content Include="Scripts\Admin\jquery.flot.js" />
@@ -529,12 +566,6 @@
     <Content Include="Scripts\bootstrap-wysihtml5-0.0.2.js" />
     <Content Include="Scripts\bootstrap.datepicker.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\custom-binding.js">
-      <DependentUpon>custom-binding.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\custom-binding.min.js">
-      <DependentUpon>custom-binding.coffee</DependentUpon>
-    </Content>
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -555,13 +586,21 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout-bootstrap.js" />
+    <Content Include="Scripts\knockout-bootstrap.min.js" />
+    <Content Include="Scripts\Common\modal-helper.js">
+      <DependentUpon>modal-helper.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\modal-helper.min.js">
+      <DependentUpon>modal-helper.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\select2.min.js" />
-    <Content Include="Scripts\utils.js">
+    <Content Include="Scripts\Common\utils.js">
       <DependentUpon>utils.coffee</DependentUpon>
     </Content>
-    <Content Include="Scripts\utils.min.js">
+    <Content Include="Scripts\Common\utils.min.js">
       <DependentUpon>utils.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\wysihtml5-0.3.0.js" />
@@ -628,7 +667,11 @@
     <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Event\List.cshtml" />
-    <Content Include="Scripts\utils.coffee" />
+    <Content Include="Scripts\Common\utils.coffee" />
+    <Content Include="Scripts\knockout-bootstrap.min.js.map">
+      <DependentUpon>knockout-bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Common\modal-helper.coffee" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -641,6 +684,12 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BootstrapExtensions\BootstrapExtensions.csproj">
+      <Project>{b03600a5-81c0-48cd-acfb-614cc1455f94}</Project>
+      <Name>BootstrapExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

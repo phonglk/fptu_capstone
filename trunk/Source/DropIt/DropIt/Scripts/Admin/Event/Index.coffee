@@ -1,51 +1,6 @@
 ﻿# CoffeeScript
-defaultRoutingMapping = 
-    getAll : 
-        action : "Get"
-    delete : 
-        action : "Delete"
-    detail :
-        action : "Detail"
-    edit :
-        action : "Update"
 
-class BaseViewModel
-    constructor:({@itemViewModel,@bindingTarget,@routing,@entityMapping})->
-        @self = this;    
-        @routing = $.extend({},defaultRoutingMapping,@routing)
-
-    getAll: ()->
-        url = Url(Action:@routing.getAll.action)
-        $.ajax
-            url: url
-            dataType:"json"
-            success:(data) =>
-                if data.Result?.length > 0
-                    for item in data.Result 
-                        @data.push new @itemViewModel(item)
-                    ko.applyBindings(this,@bindingTarget)
-                return
-        return
-    deleteItem:(item)->
-        @data.remove(item)
-    delete:()->
-        url = Url(Action:@routing.delete.action)
-        $.ajax
-            url: url
-            dataType:"json"
-            data: ""
-            success:(data) =>
-                if data.Result?.length > 0
-                    for item in data.Result 
-                        @data.push new @itemViewModel(item)
-                    ko.applyBindings(this,@bindingTarget)
-                return
-        return
-    afterDelete:()->
-    detail:()->
-    edit:()->
-
-    data:ko.observableArray([])
+        
 
 class EventIndexViewModel extends BaseViewModel
     constructor:()->
@@ -53,8 +8,40 @@ class EventIndexViewModel extends BaseViewModel
             itemViewModel:AdminEvent
             bindingTarget:$(".events-table")[0]
             entityMapping:
-                Id : "EventId"
-                EventName : { update : true }
+                Id :
+                    keyName: "EventId"
+                    requestName: "Id"
+                EventName : 
+                    label : "Tên sự kiện"
+                    index : 1
+                Artist : 
+                    label : "Nghệ sĩ tham gia"
+                    index : 2
+                HoldDate : 
+                    label : "Ngày tổ chức"
+                    index : 3
+                Description : 
+                    label : "Chú thích"
+                    index : 6
+                Status : 
+                    detail :
+                        allow : false
+                Category : 
+                    label : "Danh mục"
+                    index : 4
+                Venue : 
+                    label : "Địa điểm tổ chức"
+                    index : 5
+                RequestCount : 
+                    label : "Số lượt yêu cầu vé"
+                FollowerCount : 
+                    label : "Số lượt theo dõi"
+                CreatedDate : 
+                    detail:
+                        allow:false
+                ModifiedDate : 
+                    label : "Ngày cập nhật gần nhất"
+                    
 window.eventIndexViewModel = new EventIndexViewModel();
 
 $ ()->

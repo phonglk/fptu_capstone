@@ -11,7 +11,7 @@ namespace DropIt
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.min.js",
-                        "~/Scripts/utils.js"));
+                        "~/Scripts/Common/utils.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -20,12 +20,18 @@ namespace DropIt
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/bootstrap/bootstrap.js",
+                        "~/Scripts/bootstrap/bootstrap-modalmanager.js",
+                        "~/Scripts/bootstrap/bootstrap-modal.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/ko")
                 .Include("~/Scripts/knockout-{version}.js",
-                        "~/Scripts/custom-binding.js"));
+                        "~/Scripts/Common/custom-binding.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin")
-                .IncludeDirectory("~/Scripts/Admin", "*.js"));
+                .IncludeDirectory("~/Scripts/Admin", "*.js")
+                .Include("~/Scripts/Common/GenericViewModels.js"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -48,6 +54,13 @@ namespace DropIt
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
+            bundles.Add(new StyleBundle("~/Content/bootstrap")
+                    .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
+                            "~/Content/Admin/css/bootstrap/bootstrap-responsive.css",
+                            "~/Content/Admin/css/bootstrap/bootstrap-overrides.css",
+                            "~/Content/bootstrap-modal/css/bootstrap-modal.css")
+                            );
+
             bundles.Add(new StyleBundle("~/Content/Admin")
                 .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
                             "~/Content/Admin/css/bootstrap/bootstrap-responsive.css",
@@ -58,7 +71,8 @@ namespace DropIt
                             "~/Content/Admin/css/elements.css",
                             "~/Content/Admin/css/icons.css",
                             "~/Content/Admin/font/OpenSans.css",
-                            "~/Content/Admin/font/Lato.css"));
+                            "~/Content/Admin/font/Lato.css",
+                            "~/Content/Admin/admin.css"));
         }
     }
 }

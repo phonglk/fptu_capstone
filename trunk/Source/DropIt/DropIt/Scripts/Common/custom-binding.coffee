@@ -5,7 +5,10 @@ ko.bindingHandlers.stopBindings =
 
 ko.bindingHandlers.date =
     formattedDate : (date)->
-        return "#{date.getDate()}/#{date.getMonth()}/#{date.getFullYear()} - #{date.getHours()}:#{date.getMinutes()}"
+        try
+            return "#{date.getDate()}/#{date.getMonth()}/#{date.getFullYear()} - #{date.getHours()}:#{date.getMinutes()}"
+        catch e
+            return date
     init:(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) ->
         self = ko.bindingHandlers.date;
         date = ko.utils.unwrapObservable(valueAccessor());
@@ -25,8 +28,8 @@ ko.bindingHandlers.popover =
     init:(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) ->
         self = ko.bindingHandlers.tooltip;
         value = ko.utils.unwrapObservable(valueAccessor());
-        data = value.data || "you are missing data here"
-        title = value.title || "title"
+        data = value.data || "No content"
+        title = value.title || "Title"
         text = value.text || "More"
         $a = $("<a href='javascript:void(0)' 
         data-toggle='popover' 

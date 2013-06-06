@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropIt", "DropIt\DropIt.csp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DropItDBModel", "DropItDBModel\DropItDBModel.sqlproj", "{7B47C971-70D1-4E0D-9442-1C2B0E6BF1C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapExtensions", "BootstrapExtensions\BootstrapExtensions.csproj", "{B03600A5-81C0-48CD-ACFB-614CC1455F94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7B47C971-70D1-4E0D-9442-1C2B0E6BF1C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B47C971-70D1-4E0D-9442-1C2B0E6BF1C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B47C971-70D1-4E0D-9442-1C2B0E6BF1C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B03600A5-81C0-48CD-ACFB-614CC1455F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03600A5-81C0-48CD-ACFB-614CC1455F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03600A5-81C0-48CD-ACFB-614CC1455F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03600A5-81C0-48CD-ACFB-614CC1455F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
