@@ -10,7 +10,11 @@
 
   ko.bindingHandlers.date = {
     formattedDate: function(date) {
-      return "" + (date.getDate()) + "/" + (date.getMonth()) + "/" + (date.getFullYear()) + " - " + (date.getHours()) + ":" + (date.getMinutes());
+      try {
+        return "" + (date.getDate()) + "/" + (date.getMonth()) + "/" + (date.getFullYear()) + " - " + (date.getHours()) + ":" + (date.getMinutes());
+      } catch (e) {
+        return date;
+      }
     },
     init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
       var date, self;
@@ -38,8 +42,8 @@
       var $a, data, self, text, title, value;
       self = ko.bindingHandlers.tooltip;
       value = ko.utils.unwrapObservable(valueAccessor());
-      data = value.data || "you are missing data here";
-      title = value.title || "title";
+      data = value.data || "No content";
+      title = value.title || "Title";
       text = value.text || "More";
       $a = $("<a href='javascript:void(0)'         data-toggle='popover'         title='" + title + "'         data-content='" + data + "'        data-placement='top'        data-trigger='hover'>" + text + "</a>");
       $(element).html($a);

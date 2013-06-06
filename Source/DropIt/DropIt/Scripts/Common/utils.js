@@ -63,6 +63,34 @@
     return str;
   };
 
+  window.nullOrEmptyString = function(val) {
+    if (val === null) {
+      return "";
+    }
+    return val;
+  };
+
+  window.listPropertiesOfObjectToCoffee = function(obj, level) {
+    var i, key, output, spaces, value, _i;
+    output = "";
+    if (obj instanceof Object) {
+      spaces = "";
+      for (i = _i = 0; 0 <= level ? _i <= level : _i >= level; i = 0 <= level ? ++_i : --_i) {
+        spaces += "\t";
+      }
+      for (key in obj) {
+        value = obj[key];
+        if (obj.hasOwnProperty(key)) {
+          output += "\n" + spaces + key + " : ";
+          output += listPropertiesOfObjectToCoffee(obj[key], level + 1);
+        }
+      }
+    } else {
+      output += "" + (obj.toString());
+    }
+    return output;
+  };
+
   window.bootstrap = {
     active: function() {
       $('[data-toggle="tooltip"][data-active!="actived"]').each(function() {
@@ -97,6 +125,34 @@
       url += "" + newRouting.Action;
     }
     return url;
+  };
+
+  window.loading = function(show) {
+    if ($("body").modalmanager) {
+      if (show === true) {
+        return $("body").modalmanager('loading', false);
+      } else {
+        return $("body").modalmanager('loading', true);
+      }
+    }
+  };
+
+  window.modalFactory = function(options) {
+    var $modal, defaultOptions, modalHTML;
+    defaultOptions = {
+      id: "modal" + new Date().getTime(),
+      tabindex: -1,
+      styles: "",
+      backdrop: true,
+      headerText: "Modal header",
+      bodyHTML: "<b>BodyHTML</b>",
+      footerHTML: "            <button type=\"button\" data-dismiss=\"modal\" class=\"btn\">Close</button>\n<button type=\"button\" class=\"btn btn-primary\">Ok</button>"
+    };
+    options = $.extend({}, defaultOptions, options);
+    modalHTML = "<div id='" + options.id + "' class='modal hide fade' data-backdrop='" + options.backdrop + "' tabindex='" + options.tab + "' style='" + options.styles + "' aria-hidden='true'>\n<div class='modal-header'>\n	    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>\n	    <h3>" + options.headerText + "</h3>\n</div>\n<div class='modal-body' style=\"\">\n	    " + options.bodyHTML + "\n</div>\n<div class='modal-footer'>\n	    " + options.footerHTML + "\n</div></div>";
+    $modal = $(modalHTML);
+    $("document.body").append($modal);
+    return $modal;
   };
 
   $(function() {

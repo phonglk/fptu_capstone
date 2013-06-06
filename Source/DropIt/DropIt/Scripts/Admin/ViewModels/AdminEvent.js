@@ -4,14 +4,17 @@
   AdminEvent = (function() {
 
     function AdminEvent(obj) {
-      var prop;
+      var prop, value;
       this.self = this;
       for (prop in obj) {
         if (obj.hasOwnProperty(prop)) {
-          this.self[prop] = obj[prop];
+          value = obj[prop];
+          if (/\/Date\(\d+\)\//.test(value)) {
+            value = Date.fromRawJSON(value);
+          }
+          this.self[prop] = value;
         }
       }
-      this.HoldDate = Date.fromRawJSON(this.HoldDate);
     }
 
     return AdminEvent;

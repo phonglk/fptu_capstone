@@ -55,12 +55,12 @@ window.menuAdmins = [
     new MenuAdmin 
         Name : "Sự kiện"
         Controller : "Event"
-        Action : "List"
+        Action : "Index"
         Icon : "volume-up"
         Childs : [
             new MenuAdmin 
                 Name : "Event List"
-                Action : "List"
+                Action : "Index"
             new MenuAdmin 
                 Name : "Create"
                 Action : "Create"
