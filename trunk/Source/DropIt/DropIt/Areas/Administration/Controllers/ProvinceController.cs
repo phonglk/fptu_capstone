@@ -1,7 +1,9 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
 using DropIt.Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -100,6 +102,34 @@ namespace DropIt.Areas.Administration.Controllers
             catch (Exception e)
             {
                 return Json(new JSONResult(e));
+            }
+
+        }
+
+        public class veResult{
+            public string id;
+            public Boolean status;
+        }
+
+        public ActionResult CheckUnique(string fieldId, string ProvinceName)
+        {
+            var province = unitOfWork.ProvinceRepository.Get(x => x.ProvinceName == ProvinceName).FirstOrDefault();
+            if (province == null)
+            {
+                return Content(JsonConvert.SerializeObject(new ArrayList
+                {
+                    fieldId,
+                    true
+                }));
+            }
+            else
+            {
+                return Content(JsonConvert.SerializeObject(new ArrayList
+                {
+                    fieldId,
+                    false,
+                    "Đã có tỉnh(thành phó) "+ProvinceName
+                }));
             }
 
         }
