@@ -4,6 +4,32 @@
 
     }
 
+    var customFunction = {
+        unique: function (fieldName,fieldOptions,options) {
+            var myCustom = {}
+            var myCustomNameFunc = "DropItRule" + new Date().getTime();
+            var myCustomNameAjax = myCustomNameFunc + "Ajax";
+
+            myCustom[myCustomNameFunc] = {
+                "func": function (field, rules, i, options) {
+                    options.allrules[myCustomNameAjax].extraData = fieldName + "=" + field.val();
+                    return true;
+                },
+                "alertText":"This just a dummy"
+            }
+            myCustom[myCustomNameAjax] = {
+                url: options.actions.uniqueAction,
+                extraData: "nodata",
+                alertText: "Giá trị không hợp lệ",
+                alertTextLoad : "Đang kiểm tra..."
+            }
+            window[myCustomNameFunc] = myCustom[myCustomNameFunc].func;
+            $.extend($.validationEngineLanguage.allRules, $.validationEngineLanguage.allRules, myCustom);
+
+            return "funcCall["+myCustomNameFunc+"],ajax["+myCustomNameAjax+"]";
+        }
+    }
+
     if (!window.dropit) window.dropit = {}
     dropit.jtInit = function (options) {
         options = $.extend({}, defaultOptions, options);
@@ -14,7 +40,8 @@
 				    'listAction': { Action: "List" },
 				    'deleteAction': { Action: "Delete" },
 				    'updateAction': { Action: "Update" },
-				    'createAction': { Action: "Create" }
+				    'createAction': { Action: "Create" },
+                    'uniqueAction': { Action: "CheckUnique"}
 				}
             currentRouting = Routing;
 
@@ -33,13 +60,17 @@
         flagValidation = false;
 
         if (options.fields) {
-            options.fields.eachOwnProperties(function (name, value, fields) {
+            options.fields.eachOwnProperties(function (fieldName, value, fields) {
                 value.eachOwnProperties(function (name, value, field) {
                     if (name == "validation") {
                         var classes = "validate["
                         for (var i = 0; i < value.length; i++) {
-                            if (i > 0) classes += ","
-                            classes += value[i]
+                            if (i > 0) classes += ",";
+                            var ruleName = value[i];
+                            if (customFunction.hasOwnProperty(ruleName)) {
+                                ruleName = customFunction[ruleName].call(this, fieldName, field, options);
+                            }
+                            classes += ruleName
                         }
                         classes += "]"
 
@@ -64,7 +95,27 @@
                         options[event] = function (evt, data) {
                             switch (event) {
                                 case "formCreated":
-                                    data.form.validationEngine({ promptPosition: "topLeft" });
+                                    
+                                    data.form.validationEngine('attach', {
+                                        promptPosition: "topLeft",
+                                        onValidationComplete: function (from, status) {
+
+                                            return false;
+                                        },
+                                        scroll:false
+                                    });
+                                    $(".jtable-dialog-form").bind("keypress",function (e) {
+                                        
+                                        try{
+                                            
+                                        } catch (e) {
+                                            
+                                        }
+                                        if (e.keyCode == 13) {
+                                            //$(".ui-dialog-buttonset button:eq(2)").trigger("click");
+                                        }
+                                        return true;
+                                    })
                                     break;
                                 case "formSubmitting":
                                     return data.form.validationEngine('validate');
@@ -84,5 +135,4 @@
 
         return options
     }
-
 })(jQuery)
