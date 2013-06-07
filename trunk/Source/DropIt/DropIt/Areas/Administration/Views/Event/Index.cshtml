@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+    BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/Admin/Event/Index").Include(
+        "~/Scripts/Admin/ViewModels/AdminEvent.js",
+        "~/Scripts/Admin/Event/Index.js"));
+}
+@section Scripts{
+    @Scripts.Render("~/Scripts/Admin/Event/Index");
+}
+
+@*<div class="row-fluid">
+    <!-- /ko foreach: data -->
+    <!-- /ko if: EventId == $root.currentItemId -->
+    <form class="inline-input">
+        <div class="span12 field-box">
+            <label>Event Name: </label>
+            <input class="span9" name="EventName" />
+        </div>
+        <div class="span12 field-box">
+            <label>Artist: </label>
+            <input class="span9" name="Artist" />
+        </div>
+        <div class="span12 field-box">
+            <label>Hold Date: </label>
+            <input class="span9" name="HoldDate" />
+        </div>
+        <div class="span12 field-box">
+            <label>Category: </label>
+            <input class="span9" name="Category" />
+        </div>
+        <div class="span12 field-box">
+            <label>Venue: </label>
+            <input class="span9" name="Venue" />
+        </div>
+        <div class="span12 field-box">
+            <label>Last Update </label>
+            <input class="span9" name="ModifiedDate" />
+        </div>
+        <div class="span12 field-box">
+            <label>Description: </label>
+            <textarea class="span9" name="Description"></textarea>
+        </div>
+    </form>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>*@
+<!-- events table-->
+<!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+<div class="table-wrapper events-table section">
+    <div class="row-fluid head">
+        <div class="span12">
+            <h4>Events</h4>
+        </div>
+    </div>
+    <div class="row-fluid filter-block">
+        <div class="pull-right">
+            <div class="ui-select">
+                <select>
+                    <option>Filter events</option>
+                    <option>abc</option>
+                    <option>xyz</option>
+                </select>
+            </div>
+            <input type="text" class="search">
+            <a class="btn-flat success new-event" href="Create">+ Add event</a>
+        </div>
+    </div>
+    <div id="pad-wrapper">
+        <div class="row-fluid">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="">
+                            <input type="checkbox">
+                        </th>
+                        <th class="span4">
+                            Event
+                        </th>
+                        <th class="">
+                            <span class="line"></span>Artist
+                        </th>
+                        <th class="">
+                            <span class="line"></span>Time
+                        </th>
+                        <th class="">
+                            <span class="line"></span>Discription
+                        </th>
+                        <th class="">
+                            <span class="line"></span>Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: data">
+
+                    <tr class="first">
+                        <td>
+                            <input type="checkbox" data-bind="value: EventId">
+                        </td>
+                        <td>
+                            <a data-bind="text:EventName,click: $root.detailItem" href="javascript:void(0)"></a>
+                        </td>
+                        <td>
+                            <span class="" data-bind="text: Artist">
+                            </span>
+                        </td>
+                        <td>
+                            <span class="icon-time"></span>
+                            &nbsp;&nbsp;
+                            <span class="" data-bind="date: HoldDate">
+
+                            </span>
+                        </td>
+                        <td class="">
+                            @*<a href="#" data-toggle="tooltip" title="" data-bind="attr: {title: Description}">Description</a>*@
+                            <span data-bind="popover: { data: nullOrEmptyString(Description), text: nullOrEmptyString(Description).makeExcerpt(10), title: 'Description' }"></span>
+                        </td>
+                        <td class="">
+                            <a href="#" class="btn btn-danger" data-bind="click: $root.deleteItem">
+                                <i class="icon-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                                              
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end events table -->
+</div>
+

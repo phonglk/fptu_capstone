@@ -18,146 +18,119 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Venue/
 
-        public VenueController()
-        {
-            
-        }
-
         public ActionResult Index()
         {
            
             return View();
         }
 
-
-        public JsonResult Get()
+        [HttpPost]
+        public JsonResult List(int ProvinceId = -1,int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
         {
-            var venues = this.unitOfWork.VenueRepository.Get();
-            return Json(new
+            try
             {
-                Result = venues.Select(e => new
+
+                var venues = this.unitOfWork.VenueRepository.JTGet(jtStartIndex,jtPageSize,jtSorting);
+
+                if (ProvinceId > -1)
+                {
+                    venues = venues.Where(x => x.ProvinceId == ProvinceId);
+                }
+
+                var Records = venues.Select(e => new
                 {
                     VenueId = e.VenueId,
                     VenueName = e.VenueName,
                     Address = e.Address,
-                    ProvinceName = e.Province.ProvinceName,
+                    ProvinceId = e.ProvinceId,
                     Description = e.Description
-                })
-            }, JsonRequestBehavior.AllowGet);
-        }
-
-        //
-        // GET: /Venue/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
-            if (venue == null)
-            {
-                return HttpNotFound();
-            }
-            return View(venue);
-        }
-
-        //
-        // GET: /Venue/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName");
-            return View();
-        }
-
-        //
-        // POST: /Venue/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Venue venue)
-        {
-            if (ModelState.IsValid)
-            {
-                this.unitOfWork.VenueRepository.AddOrUpdate(venue);
-                this.unitOfWork.VenueRepository.Save();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
-            return View(venue);
-        }
-
-        //
-        // GET: /Venue/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
-            if (venue == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
-            return View(venue);
-        }
-
-        //
-        // POST: /Venue/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Venue venue)
-        {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(venue).State = EntityState.Modified;
-                //db.SaveChanges();
-                this.unitOfWork.VenueRepository.AddOrUpdate(venue);
-                this.unitOfWork.VenueRepository.Save();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.VenueRepository.Get(), "ProvinceId", "ProvinceName", venue.ProvinceId);
-            return View(venue);
-        }
-
-        //
-        // GET: /Venue/Delete/5
-
-        public JsonResult Delete(int id)
-        {
-            Venue venue = this.unitOfWork.VenueRepository.GetById(id);
-            if (venue == null)
-            {
-                return Json(new JSONResult
+                });
+                return Json(new JSONResult(Records)
                 {
-                    IsOK = false,
-                    Reason = "Not found Id",
+                    TotalRecordCount = this.unitOfWork.VenueRepository.Count
                 });
             }
-            else
+            catch (Exception e)
             {
-                try
-                {
-                    this.unitOfWork.VenueRepository.Delete(id);
-                    this.unitOfWork.VenueRepository.Save();
-                    return Json(new JSONResult
-                    {
-                        IsOK = true,
-                        Reason = "Delete success",
-                    });
-                }
-                catch (Exception e)
-                {
-                    return Json(new JSONResult
-                    {
-                        IsOK = false,
-                        Reason = "Unexpected Error while deleting",
-                    });
-                }
+                return Json(new JSONResult(e));
             }
         }
 
-        //
-        // POST: /Venue/Delete/5
+        [HttpPost]
+        public JsonResult Create(Venue venue)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new JSONResult("Form is not valid"));
+                }
+
+                var addedVenue = unitOfWork.VenueRepository.AddOrUpdate(venue);
+                unitOfWork.Save();
+                return Json(new JSONResult(addedVenue,"Record"));
+
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Update(Venue venue)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new JSONResult("Form is invalid"));
+                }
+
+                unitOfWork.VenueRepository.AddOrUpdate(venue);
+                unitOfWork.Save();
+                return Json(new JSONResult());
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
+        }
+
+        public JsonResult Delete(int VenueId)
+        {
+            try
+            {
+                this.unitOfWork.VenueRepository.Delete(VenueId);
+                this.unitOfWork.VenueRepository.Save();
+
+                return Json(new JSONResult());
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
+            
+        }
+
+        [HttpPost]
+        public JsonResult GetProvinceOptions()
+        {
+            try
+            {
+                var provinces = unitOfWork.ProvinceRepository.GetAll().Select(
+                    p => new { DisplayText = p.ProvinceName, Value = p.ProvinceId });
+
+                    return Json(new JSONResult(provinces,"Options"));
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new JSONResult(e));
+            }
+        }
 
         
 

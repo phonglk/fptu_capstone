@@ -6,6 +6,7 @@ using DropIt.Models;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Data;
+using DropIt.Common;
 
 namespace DropIt.DAL
 {
@@ -23,6 +24,27 @@ namespace DropIt.DAL
         public IEnumerable<TEntity> GetAll()
         {
             return dbSet.ToList();
+        }
+        
+        public int Count { 
+            get { return dbSet.Count();}
+        }
+
+        public virtual IEnumerable<TEntity> JTGet(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            var query = GetAll();
+
+            if (jtSorting != null)
+            {
+                query = query.OrderBy(jtSorting);
+            }
+
+            if (jtPageSize != 0)
+            {
+                query = query.Skip(jtStartIndex).Take(jtPageSize);
+            }
+
+            return query.ToList();
         }
 
         public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
@@ -72,7 +94,7 @@ namespace DropIt.DAL
             dbSet.Remove(entityToDelete);
         }
 
-        public void AddOrUpdate(TEntity entity)
+        public TEntity AddOrUpdate(TEntity entity)
         {
             DateTime now = DateTime.Now;
             var currentUser = GetCurrentUser();
@@ -102,7 +124,15 @@ namespace DropIt.DAL
                 {
                     lastModifiedBy.SetValue(entity, (currentUser != null) ? currentUser.UserId : 1, null);
                 }
-                dbSet.Add(entity);
+                try
+                {
+                    return dbSet.Add(entity);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                
             }
             else
             {
@@ -116,6 +146,8 @@ namespace DropIt.DAL
                 }
                 context.Entry(entity).State = EntityState.Modified;
             }
+
+            return null;
         }
 
         protected User GetCurrentUser()
@@ -124,7 +156,7 @@ namespace DropIt.DAL
             {
                 return context.Users.First(u => u.UserName.Equals(HttpContext.Current.User.Identity.Name));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 return null;
             }
