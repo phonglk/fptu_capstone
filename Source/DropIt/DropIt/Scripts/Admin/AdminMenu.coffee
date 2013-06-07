@@ -72,6 +72,11 @@ window.menuAdmins = [
         Name : "Địa điểm"
         Controller : "Venue"
         Icon : "hospital"
+    
+    new MenuAdmin 
+        Name : "Tỉnh"
+        Controller : "Province"
+        Icon : "map-marker"
     ]
 
 $ ()->

@@ -6,7 +6,7 @@
         "~/Scripts/Admin/Venue/Index.js"));
 }
 @section Scripts{
-    @Scripts.Render("~/Scripts/Admin/Venue/Index");
+    @*@Scripts.Render("~/Scripts/Admin/Venue/Index")*@;
 }
 <div class="table-wrapper venues-table section">
     <div class="row-fluid head">
@@ -29,63 +29,85 @@
     </div>
     <div id="pad-wrapper">
         <div class="row-fluid">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="">
-                            <input type="checkbox">
-                        </th>
-                        <th class="span4">
-                            Venue Name
-                        </th>
-                        <th class="">
-                            <span class="line"></span>Address
-                        </th>
-                        <th class="">
-                            <span class="line"></span>Province Name
-                        </th>
-                        <th class="">
-                            <span class="line"></span>Description
-                        </th>
-                        <th class="">
-                            <span class="line"></span>Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: data">
-
-                    <tr class="first">
-                        <td>
-                            <input type="checkbox" data-bind="value: VenueId">
-                        </td>
-                        <td>
-                            <a data-bind="text:VenueName,click: $root.detailItem" href="javascript:void(0)"></a>
-                        </td>
-                        <td>
-                            <span class="" data-bind="text: Address">
-                            </span>
-                        </td>
-                        <td>
-                            <span class="icon-time"></span>
-                            &nbsp;&nbsp;
-                            <span class="" data-bind="date: ProvinceName">
-
-                            </span>
-                        </td>
-                        <td class="">
-                            @*<a href="#" data-toggle="tooltip" title="" data-bind="attr: {title: Description}">Description</a>*@
-                            <span data-bind="popover: { data: nullOrEmptyString(Description), text: nullOrEmptyString(Description).makeExcerpt(10), title: 'Description' }"></span>
-                        </td>
-                        <td class="">
-                            <a href="#" class="btn btn-danger" data-bind="click: $root.deleteItem">
-                                <i class="icon-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                                              
-                </tbody>
-            </table>
+            <div id="VenueTable" style="width: 580px; margin: auto;"></div>
         </div>
     </div>
     <!-- end events table -->
 </div>
+<script>
+    $(document).ready(function () {
+
+        //Prepare jtable plugin
+        $('#VenueTable').jtable({
+            title: 'Danh sách địa điểm',
+            paging: true,
+            pageSize: 3,
+            sorting: true,
+            selecting: true,
+            multiselect: true,
+            selectingCheckboxes:true,
+            actions: {
+                listAction:     Url({ Action: "List"    }),
+                deleteAction:   Url({ Action: "Delete"  }),
+                updateAction:   Url({ Action: "Update"  }),
+                createAction:   Url({ Action: "Create"  })
+            },
+            fields: {
+                VenueId: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                VenueName: {
+                    title: 'Tên địa điểm',
+                    width: '15%'
+                },
+                Address: {
+                    title: 'Địa chỉ',
+                    list: false,
+                    type: "textarea"
+                },
+                ProvinceId: {
+                    title: 'Tỉnh',
+                    options: Url({Action:"GetProvinceOptions"})
+                },
+                Description: {
+                    title: 'Chú thích',
+                    list:false
+                }/*,
+                Events: {
+                    title: "",
+                    width: "3%",
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (venueData) {
+                        var $img = $("<i class='icon-volumne-up' style='font-size:20px;text-align:center'></i>")
+
+                        $img.click(function () {
+                            $("#VenueTable").jtable("openChildTable",
+                                $img.closet(), {
+                                    title: "Sự kiện tại " + venueData.record.VenueName,
+                                    actions: {
+                                        listAction: Url({ Controller: "Province", Action: "List" }),
+                                        deleteAction: Url({ Controller: "Province", Action: "Delete" }),
+                                        updateAction: Url({ Controller: "Province", Action: "Update" }),
+                                        createAction: Url({ Controller: "Province", Action: "Create" })
+                                    },
+                                    fields: {
+
+                                    }
+                                })
+                        })
+
+                        return $img;
+                    }
+                }*/
+            }
+        });
+
+        
+        $('#VenueTable').jtable('load');
+    });
+</script>
