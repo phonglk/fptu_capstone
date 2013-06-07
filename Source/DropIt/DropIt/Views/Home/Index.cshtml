@@ -1,45 +1,182 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+<div id="role-tab" class="container">
+    <div class="user-tab">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#">Bán Vé</a>
+            </li>
+            <li class="">
+                <a href="#">Mua Vé</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!--Area: Page Header & Navigation & Search.END-->
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                <div>
+                    <ul id="left-nav" class="nav nav-list">
+                        <li class="nav-header">Cá Nhân</li>
+                        <li><a href="#">Thông tin tài khoản</a></li>
+                        <li><a href="#">Giao dịch đang thực hiên <span
+                            class="badge badge-info">4</span></a></li>
+                        <li><a href="#">Lịch sử giao dịch</a></li>
+                        <li class=""><a href="#">Danh sách theo dõi</a></li>
+                        <li><a href="#">Quản lí rao mua</a></li>
+                        <li class="nav-header">Mua Vé</li>
+                        <li><a href="#">Đăng rao mua</a></li>
+                        <li class=""><a href="#">Ca nhạc</a></li>
+                        <li class=""><a href="">TV Show</a></li>
+                        <li><a href="#">Thể thao</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+        <div class="span9">
+            <div id="main-nav" class="navbar span9">
+                <ul class="nav">
+                    <li class="active"><a href="">Top 10 Events</a></li>
+                    <li><a href="">Recent Events</a></li>
+                    <li><a href="">Sports & Music</a></li>
+                </ul>
+            </div>
+            <div id="ticket-show" class="span9">
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+                            <p>Số vé đã bán: 666</p>
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
+
+                            <p>Số vé đã bán: 666</p>
+
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
+
+                            <p>Số vé đã bán: 666</p>
+
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
+
+                            <p>Số vé đã bán: 666</p>
+
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
+
+                            <p>Số vé đã bán: 666</p>
+
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item span3">
+                        <img src="images/event.png" alt="image">
+                        <div class="item-event-date">
+                            <div class="item-date">17</div>
+                            <div class="item-time">
+                                <div class="item-month">09</div>
+                                <div class="item-year">2013</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
+
+                            <p>Số vé đã bán: 666</p>
+
+                            <p>Số vé còn lại: 33</p>
+
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
