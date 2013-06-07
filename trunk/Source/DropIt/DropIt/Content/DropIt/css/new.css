@@ -20,7 +20,7 @@ body {
 
 .upper-header {
     height: 52px;
-    background: url("../images/upper.png") repeat-x;
+    background: url("../../../Images/upper.png") repeat-x;
 }
 
 .upper-header p {
@@ -42,7 +42,7 @@ body {
 }
 
 .middle-header {
-    background: url("../images/middle.png") repeat-x;
+    background: url("../../../Images/middle.png") repeat-x;
     height: 43px;
 }
 
@@ -132,6 +132,7 @@ body {
 }
 .dropdown-menu > li > a:hover {
     background-color: #320a45;
+    background-image:none;
 }
 
 #home-nav .nav li.dropdown.open > .dropdown-menu {
@@ -172,13 +173,14 @@ body {
     background-color: #fff;
 }
 
-.icon-footer {
+.logo-footer {
     float: left;
+    padding-right: 10px;
+    border-right: 1px solid #ddd;
 }
 
-.icon-footer > img {
+.logo-footer > img {
     margin-left: 10px;
-    max-width: 0;
 }
 
 hr {
@@ -233,6 +235,31 @@ hr {
 .item:hover {
     background-color: #592e51;
 }
+.item-event-date {
+    color: #fff;
+    font-size: 10px;
+}
+.item-date {
+    position: absolute;
+    top: 115px;
+    left: 3px;
+    font-size: 32px;
+    
+}
+.item-time {
+    position: absolute;
+    top: 113px;
+    left: 44px;
+}
+.item-month {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: bold;
+}
+.item-year {
+    line-height: 13px;
+    opacity: 0.9;
+}
 
 .detail h5 {
     font-size: 14px;
@@ -256,7 +283,7 @@ hr {
 }
 
 #bord {
-    background: url("../images/boder1.png") repeat-x;
+    background: url("../../../Images/boder1.png") repeat-x;
 }
 
 #left-nav > li > a:hover, #left-nav > li > a:focus {
@@ -264,4 +291,7 @@ hr {
     background-color: #fff;
     color: #582d52;
     border-left: 6px solid #c3afc1;
+}
+#role-tab {
+    padding-top: 10px;
 }

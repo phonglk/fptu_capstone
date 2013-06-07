@@ -49,10 +49,20 @@ namespace DropIt
                 "~/Scripts/ValidationEngine/jquery.validationEngine.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/bundles/DropIt")
+               .IncludeDirectory("~/Scripts/DropIt", "*.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            bundles.Add(new StyleBundle("~/Content/DropIt")
+                .Include("~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
+                            "~/Content/Admin/font/OpenSans.css")
+                        .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
+                    "~/Content/DropIt/css/bootstrap-fix.css",
+                    "~/Content/DropIt/css/new.css"));
 
             bundles.Add(new StyleBundle("~/Content/css")
                 .Include("~/Content/site.css"));
