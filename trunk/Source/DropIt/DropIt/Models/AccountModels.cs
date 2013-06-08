@@ -89,16 +89,16 @@ namespace DropIt.Models
         public string ConfirmPassword { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Required]
+     //   [Required]
         public string Email { get; set; }
 
-        [Required]
+    //    [Required]
         public string Phone { get; set; }
 
-        [Required]
+    //    [Required]
         public string Address { get; set; }
 
-        [Required]
+    //    [Required]
         public int ProvinceId { get; set; }
 
     }
