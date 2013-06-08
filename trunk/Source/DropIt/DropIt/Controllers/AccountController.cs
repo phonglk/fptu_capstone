@@ -63,7 +63,7 @@ namespace DropIt.Controllers
 
         [AllowAnonymous]
         public ActionResult Register()
-        {
+        {            
             ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
             return View();
         }
