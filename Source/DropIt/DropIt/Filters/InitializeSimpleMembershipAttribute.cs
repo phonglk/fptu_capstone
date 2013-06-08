@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using DropIt.Models;
+using System.Web.Security;
 
 namespace DropIt.Filters
 {
@@ -25,8 +27,7 @@ namespace DropIt.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<DropItContext>(null);
-
+                Database.SetInitializer<DropItContext>(null);                
                 try
                 {
                     using (var context = new DropItContext())
@@ -38,7 +39,21 @@ namespace DropIt.Filters
                         }
                     }
                     if (!WebSecurity.Initialized)
+                    {
                         WebSecurity.InitializeDatabaseConnection("DropItContext_User", "User", "UserId", "UserName", autoCreateTables: true);
+                    }                    
+                    //if (!Roles.GetRolesForUser("lelong37").Contains("Administrator"))
+                    //    Roles.AddUsersToRoles(new[] { "lelong37" }, new[] { "Administrator" });
+                    if (!Roles.RoleExists("Administrator"))
+                        Roles.CreateRole("Administrator");
+
+                    if (!WebSecurity.UserExists("kkkk"))
+                        WebSecurity.CreateUserAndAccount(
+                            "kkkk",
+                            "password");
+
+                    if (!Roles.GetRolesForUser("kkkk").Contains("Administrator"))
+                        Roles.AddUsersToRoles(new[] { "kkkk" }, new[] { "Administrator" });
                 }
                 catch (Exception ex)
                 {
@@ -47,4 +62,5 @@ namespace DropIt.Filters
             }
         }
     }
+
 }
