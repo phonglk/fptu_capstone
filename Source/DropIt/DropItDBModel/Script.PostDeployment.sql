@@ -38,10 +38,69 @@ WHEN NOT MATCHED BY TARGET THEN
 
 SET @xmlData = N'
 <provinces>
-  <province ProvinceId="1" ProvinceName="HCM"/>
-  <province ProvinceId="2" ProvinceName="HN"/>
-  <province ProvinceId="3" ProvinceName="TQ"/>
-  <province ProvinceId="4" ProvinceName="HaiPhong"/>  
+	<province ProvinceId="1" ProvinceName="An Giang"/>
+	<province ProvinceId="1" ProvinceName="Bà Rịa - Vũng Tàu"/>
+	<province ProvinceId="1" ProvinceName="Bắc Giang"/>
+	<province ProvinceId="1" ProvinceName="Bắc Kạn"/>
+	<province ProvinceId="1" ProvinceName="Bạc Liêu"/>
+	<province ProvinceId="1" ProvinceName="Bắc Ninh"/>
+	<province ProvinceId="1" ProvinceName="Bến Tre"/>
+	<province ProvinceId="1" ProvinceName="Bình Định"/>
+	<province ProvinceId="1" ProvinceName="Bình Dương"/>
+	<province ProvinceId="1" ProvinceName="Bình Phước"/>
+	<province ProvinceId="1" ProvinceName="Bình Thuận"/>
+	<province ProvinceId="1" ProvinceName="Cà Mau"/>
+	<province ProvinceId="1" ProvinceName="Cao Bằng"/>
+	<province ProvinceId="1" ProvinceName="Đắk Lắk"/>
+	<province ProvinceId="1" ProvinceName="Đắk Nông"/>
+	<province ProvinceId="1" ProvinceName="Điện Biên"/>
+	<province ProvinceId="1" ProvinceName="Đồng Nai"/>
+	<province ProvinceId="1" ProvinceName="Đồng Tháp"/>
+	<province ProvinceId="1" ProvinceName="Gia Lai"/>
+	<province ProvinceId="1" ProvinceName="Hà Giang"/>
+	<province ProvinceId="1" ProvinceName="Hà Nam"/>
+	<province ProvinceId="1" ProvinceName="Hà Tĩnh"/>
+	<province ProvinceId="1" ProvinceName="Hải Dương"/>
+	<province ProvinceId="1" ProvinceName="Hậu Giang"/>
+	<province ProvinceId="1" ProvinceName="Hòa Bình"/>
+	<province ProvinceId="1" ProvinceName="Hưng Yên"/>
+	<province ProvinceId="1" ProvinceName="Khánh Hòa"/>
+	<province ProvinceId="1" ProvinceName="Kiên Giang"/>
+	<province ProvinceId="1" ProvinceName="Kon Tum"/>
+	<province ProvinceId="1" ProvinceName="Lai Châu"/>
+	<province ProvinceId="1" ProvinceName="Lâm Đồng"/>
+	<province ProvinceId="1" ProvinceName="Lạng Sơn"/>
+	<province ProvinceId="1" ProvinceName="Lào Cai"/>
+	<province ProvinceId="1" ProvinceName="Long An"/>
+	<province ProvinceId="1" ProvinceName="Nam Định"/>
+	<province ProvinceId="1" ProvinceName="Nghệ An"/>
+	<province ProvinceId="1" ProvinceName="Ninh Bình"/>
+	<province ProvinceId="1" ProvinceName="Ninh Thuận"/>
+	<province ProvinceId="1" ProvinceName="Phú Thọ"/>
+	<province ProvinceId="1" ProvinceName="Quảng Bình"/>
+	<province ProvinceId="1" ProvinceName="Quảng Nam"/>
+	<province ProvinceId="1" ProvinceName="Quảng Ngãi"/>
+	<province ProvinceId="1" ProvinceName="Quảng Ninh"/>
+	<province ProvinceId="1" ProvinceName="Quảng Trị"/>
+	<province ProvinceId="1" ProvinceName="Sóc Trăng"/>
+	<province ProvinceId="1" ProvinceName="Sơn La"/>
+	<province ProvinceId="1" ProvinceName="Tây Ninh"/>
+	<province ProvinceId="1" ProvinceName="Thái Bình"/>
+	<province ProvinceId="1" ProvinceName="Thái Nguyên"/>
+	<province ProvinceId="1" ProvinceName="Thanh Hóa"/>
+	<province ProvinceId="1" ProvinceName="Thừa Thiên Huế"/>
+	<province ProvinceId="1" ProvinceName="Tiền Giang"/>
+	<province ProvinceId="1" ProvinceName="Trà Vinh"/>
+	<province ProvinceId="1" ProvinceName="Tuyên Quang"/>
+	<province ProvinceId="1" ProvinceName="Vĩnh Long"/>
+	<province ProvinceId="1" ProvinceName="Vĩnh Phúc"/>
+	<province ProvinceId="1" ProvinceName="Yên Bái"/>
+	<province ProvinceId="1" ProvinceName="Phú Yên"/>
+	<province ProvinceId="1" ProvinceName="Cần Thơ"/>
+	<province ProvinceId="1" ProvinceName="Đà Nẵng"/>
+	<province ProvinceId="1" ProvinceName="Hải Phòng"/>
+	<province ProvinceId="1" ProvinceName="Hà Nội"/>
+	<province ProvinceId="1" ProvinceName="TP HCM"/> 
 </provinces>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
