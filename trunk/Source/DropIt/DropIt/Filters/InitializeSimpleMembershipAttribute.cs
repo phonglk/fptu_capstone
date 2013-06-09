@@ -38,22 +38,19 @@ namespace DropIt.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
                     }
-                    if (!WebSecurity.Initialized)
-                    {
+                    
                         WebSecurity.InitializeDatabaseConnection("DropItContext_User", "User", "UserId", "UserName", autoCreateTables: true);
-                    }                    
-                    //if (!Roles.GetRolesForUser("lelong37").Contains("Administrator"))
-                    //    Roles.AddUsersToRoles(new[] { "lelong37" }, new[] { "Administrator" });
+                    
                     if (!Roles.RoleExists("Administrator"))
                         Roles.CreateRole("Administrator");
 
-                    if (!WebSecurity.UserExists("kkkk"))
+                    if (!WebSecurity.UserExists("admin"))
                         WebSecurity.CreateUserAndAccount(
-                            "kkkk",
-                            "password");
+                            "admin",
+                            "password", new { Email = "admin@gmail.com", Phone = "0909777777", Address = "123 To Ky", ProvinceId = "1", Sellable = false, Active = false, CreatedDate = DateTime.Now, ModifiedDate = DateTime.Now}, false);
 
-                    if (!Roles.GetRolesForUser("kkkk").Contains("Administrator"))
-                        Roles.AddUsersToRoles(new[] { "kkkk" }, new[] { "Administrator" });
+                    if (!Roles.GetRolesForUser("admin").Contains("Administrator"))
+                        Roles.AddUsersToRoles(new[] { "admin" }, new[] { "Administrator" });
                 }
                 catch (Exception ex)
                 {
