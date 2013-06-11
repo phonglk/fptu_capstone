@@ -222,9 +222,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mailers\IPasswordResetMailer.cs" />
-    <Compile Include="Mailers\Models\MailerModel.cs" />
-    <Compile Include="Mailers\PasswordResetMailer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
@@ -385,6 +382,8 @@
     <Content Include="Content\bootstrap-modal.css" />
     <Content Include="Content\bootstrap-modal\css\bootstrap-modal.css" />
     <Content Include="Content\bootstrap-modal\img\ajax-loader.gif" />
+    <Content Include="Content\DropIt\css\bootstrap-fix.css" />
+    <Content Include="Content\DropIt\css\new.css" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_glass_65_ffffff_1x400.png" />

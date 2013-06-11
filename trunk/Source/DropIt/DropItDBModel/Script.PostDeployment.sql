@@ -173,29 +173,29 @@ WHEN NOT MATCHED BY TARGET THEN
 -----------user------------------
 SET @xmlData = N'
 <users>
-  <user UserId="1" UserName="user1" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
-  <user UserId="2" UserName="user2" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="2"/>
-  <user UserId="3" UserName="user3" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="0" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="3"/>
-  <user UserId="4" UserName="user4" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>
-  <user UserId="5" UserName="user5" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="0" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
-  <user UserId="6" UserName="user6" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="2"/>
-  <user UserId="7" UserName="user7" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="3"/>
-  <user UserId="8" UserName="user8" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>
-  <user UserId="9" UserName="admin" Password="1234567" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" Role="0" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
+  <user UserId="1" UserName="user1" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
+  <user UserId="2" UserName="user2" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="2"/>
+  <user UserId="3" UserName="user3" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="0" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="3"/>
+  <user UserId="4" UserName="user4" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>
+  <user UserId="5" UserName="user5" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="0" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
+  <user UserId="6" UserName="user6" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="2"/>
+  <user UserId="7" UserName="user7" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="3"/>
+  <user UserId="8" UserName="user8" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>
+  <user UserId="9" UserName="admin" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
 </users>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
 MERGE [User] AS target USING (
-    SELECT s.UserId, s.UserName, s.Password, s.Email, s.Phone, s.Address, s.Active, s.Sellable, s.Role, s.CreatedDate, s.ModifiedDate, s.ProvinceId
+    SELECT s.UserId, s.UserName, s.Email, s.Phone, s.Address, s.Active, s.Sellable, s.CreatedDate, s.ModifiedDate, s.ProvinceId
     FROM OPENXML(@xml, '/users/user', 1)
-    WITH (UserId int, UserName nvarchar(50), Password nvarchar(50), Email nvarchar(50), Phone int, Address nvarchar(MAX), Active bit, Sellable bit, Role int, CreatedDate datetime, ModifiedDate datetime, ProvinceId int) as s) 
-	AS source (UserId, UserName, Password, Email, Phone, Address, Active, Sellable, Role, CreatedDate, ModifiedDate, ProvinceId)
+    WITH (UserId int, UserName nvarchar(50), Email nvarchar(50), Phone nvarchar (14), Address nvarchar(MAX), Active bit, Sellable bit, CreatedDate datetime, ModifiedDate datetime, ProvinceId int) as s) 
+	AS source (UserId, UserName, Email, Phone, Address, Active, Sellable, CreatedDate, ModifiedDate, ProvinceId)
 ON (source.UserId = target.UserId)
 --WHEN MATCHED THEN
 --    UPDATE SET ProvinceName = source.ProvinceName
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (UserName, Password, Email, Phone, Address, Active, Sellable, Role, CreatedDate, ModifiedDate, ProvinceId) values (source.UserName, source.Password, source.Email, source.Phone, source.Address, source.Active, source.Sellable, source.Role, source.CreatedDate, source.ModifiedDate, source.ProvinceId)
+    INSERT (UserName, Email, Phone, Address, Active, Sellable, CreatedDate, ModifiedDate, ProvinceId) values (source.UserName, source.Email, source.Phone, source.Address, source.Active, source.Sellable, source.CreatedDate, source.ModifiedDate, source.ProvinceId)
 ;
 -----------Request------------------
 SET @xmlData = N'
