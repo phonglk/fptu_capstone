@@ -38,8 +38,11 @@ namespace DropIt.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
                     }
-                    
+
+                    if(!WebSecurity.Initialized)
+                    {
                         WebSecurity.InitializeDatabaseConnection("DropItContext_User", "User", "UserId", "UserName", autoCreateTables: true);
+                    }                                            
                     
                     if (!Roles.RoleExists("Administrator"))
                         Roles.CreateRole("Administrator");
