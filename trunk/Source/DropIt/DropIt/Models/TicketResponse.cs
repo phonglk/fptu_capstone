@@ -12,21 +12,15 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Request
+    public partial class TicketResponse
     {
-        public Request()
-        {
-            this.TicketResponses = new HashSet<TicketResponse>();
-        }
-    
         public int UserId { get; set; }
         public int EventId { get; set; }
+        public int TicketId { get; set; }
+        public int Status { get; set; }
         public string Description { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
     
-        public virtual Event Event { get; set; }
-        public virtual User User { get; set; }
-        public virtual ICollection<TicketResponse> TicketResponses { get; set; }
+        public virtual Request Request { get; set; }
+        public virtual Ticket Ticket { get; set; }
     }
 }
