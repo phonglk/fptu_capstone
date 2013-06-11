@@ -13,6 +13,8 @@ namespace DropIt.DAL
         private GenericRepository<Category> categoryRepository;
         private GenericRepository<Venue> venueRepository;
         private GenericRepository<Province> provinceRepository;
+        private UserRepository userRepository;
+
 
         public EventRepository EventRepository
         {
@@ -62,6 +64,20 @@ namespace DropIt.DAL
                     this.provinceRepository = new GenericRepository<Province>(context);
                 }
                 return provinceRepository;
+            }
+        }
+
+        // UserDetal 
+        public UserRepository UserRepository
+        {
+            get
+            {
+
+                if (this.userRepository == null)
+                {
+                    this.userRepository = new UserRepository(context);
+                }
+                return userRepository;
             }
         }
 
