@@ -325,8 +325,8 @@
                                         tmp.getDate(),
                                         tmp.getHours(),
                                         tmp.getMinutes(),
-                                        tmp.getSeconds(),
-                                        tmp.getMilliseconds())
+                                        0,
+                                        0)//custom fix
                 }
             }
             this.viewDate = UTCDate(this._date.getUTCFullYear(), this._date.getUTCMonth(), 1, 0, 0, 0, 0);
@@ -1073,7 +1073,7 @@
             }
         }
     };
-
+    window.DateTimePicker = DateTimePicker;
     $.fn.datetimepicker = function (option, val) {
         return this.each(function () {
             var $this = $(this),

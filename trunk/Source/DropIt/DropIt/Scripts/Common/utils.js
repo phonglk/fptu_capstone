@@ -8,12 +8,22 @@ String.prototype.makeExcerpt = function (length) {
 };
 
 String.prototype.eval = function () {
-    var s = this;
+    var s = this.toString();
+    var args = arguments;
     var toReplaces = s.match(/#{[^}]*}/g);
     if (toReplaces && toReplaces.length > 0) {
-        $.each(toReplaces,function(idx,value){
-            var v = value.match(/{([^}]*)}/)[1];
-            s = s.replace(value,eval(v))
+        $.each(toReplaces, function (idx, value) {
+            try{
+                var v = value.match(/{([^}]*)}/)[1];
+                if ($.isNumeric(v)) {
+                    var reg = new RegExp(value.replace("{", "\\{").replace("}", "\\}"), "g");
+                    s = s.replace(reg, args[parseInt(v)])
+                } else {
+                    s = s.replace(value, eval(v))
+                }
+            } catch (e) {
+                console.error("Failed to eval string")
+            }
         })
     }
     return s;
