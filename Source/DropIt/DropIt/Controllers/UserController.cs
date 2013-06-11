@@ -37,13 +37,7 @@ namespace DropIt.Controllers
         {
             if(ModelState.IsValid)
             {
-                //var u = this.unitOfWork.UserRepository.GetById(WebSecurity.GetUserId(User.Identity.Name));                
-                //user.Address = u.Address;
-                //user.Email = u.Email;
-                //user.ProvinceId = u.ProvinceId;
-                //user.Phone = u.Phone;
-
-                this.unitOfWork.UserRepository.UpdateUserInfo(user);
+                this.unitOfWork.UserRepository.AddOrUpdate(user);
                 this.unitOfWork.UserRepository.Save();
                 return RedirectToAction("Index", "Home");
             }
