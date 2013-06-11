@@ -1811,6 +1811,7 @@ THE SOFTWARE.
         /* Updates values of a record from given form
         *************************************************************************/
         _updateRecordValuesFromForm: function (record, $form) {
+            debugger;
             for (var i = 0; i < this._fieldList.length; i++) {
                 var fieldName = this._fieldList[i];
                 var field = this.options.fields[fieldName];

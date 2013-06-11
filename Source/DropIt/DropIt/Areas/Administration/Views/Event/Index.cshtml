@@ -16,7 +16,7 @@
     </div>
     <div id="pad-wrapper">
         <div class="row-fluid">
-            <div id="ProvinceTable" style="width: 580px; margin: auto;"></div>
+            <div id="ProvinceTable" style="width: 100%; margin: auto;"></div>
         </div>
     </div>
     <!-- end events table -->
@@ -55,16 +55,16 @@
                     title: "Ngày tổ chức",
                     validation: ["required"],
                     type: "datetime",
-                    displayFormat: "dd-MM-yyyy hh:mm",
+                    displayFormat: "dd/MM/yyyy hh:mm:ss"/*,
                     input: function (data) {
                         var html = "";
                         if (data.record) {
-
+                            html += "<div class='input-append' id='HoldDatePicker'><input value='" + $.format.date($.hik.jtable.prototype._parseDate(data.value), "dd-MM-yyyy hh:mm") + "' class='validate[required]' data-format='dd-MM-yyyy hh:mm' type='text' name='HoldDate' data-toggle='datetimepicker'/><span class='add-on'><i class='icon-calendar'></i></span></div>"
                         } else {
                             html += "<div class='input-append' id='HoldDatePicker'><input class='validate[required]' data-format='dd-MM-yyyy hh:mm' type='text' name='HoldDate' data-toggle='datetimepicker'/><span class='add-on'><i class='icon-calendar'></i></span></div>"
                         }
                         return html;
-                    }
+                    }*/
                 },
                 CategoryId: {
                     title: "Danh mục",
@@ -79,7 +79,7 @@
             },
             formCreated: function () {
                 $("#HoldDatePicker").datetimepicker({ pickSeconds: false, maskInput: false });
-                $(".jtable-dialog-form select").select2();
+                
             }
         }
 

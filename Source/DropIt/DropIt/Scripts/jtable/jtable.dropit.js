@@ -95,7 +95,15 @@
                         options[event] = function (evt, data) {
                             switch (event) {
                                 case "formCreated":
-                                    
+                                    $(".jtable-dialog-form select").select2();
+                                    $.each($(".select2-container"), function (i, n) {
+                                        $(n).next().show().fadeTo(0, 0).height("0px").css("left", "auto"); // make the original select visible for validation engine and hidden for us
+                                        $(n).prepend($(n).next());
+                                        $(n).delay(500).queue(function () {
+                                            $(this).removeClass("validate[required]"); //remove the class name from select2 container(div), so that validation engine dose not validate it
+                                            $(this).dequeue();
+                                        });
+                                    });
                                     data.form.validationEngine('attach', {
                                         promptPosition: "topLeft",
                                         onValidationComplete: function (from, status) {
@@ -118,7 +126,9 @@
                                     })
                                     break;
                                 case "formSubmitting":
-                                    return data.form.validationEngine('validate');
+                                    var valid = data.form.validationEngine('validate', { ignore: "div" });
+                                    
+                                    return valid;
                                     break;
                                 case "formClosed":
                                     data.form.validationEngine('hide');
@@ -143,7 +153,7 @@
 
         var displayFormat = field.displayFormat || this.options.defaultDateFormat;
         var date = this._parseDate(fieldValue);
-        return $.format.date(new Date(), field.displayFormat)
+        return $.format.date(date, field.displayFormat)
         //return $.datepicker.formatDate(displayFormat, date);
     }
 
@@ -175,17 +185,21 @@
         }
     }
 
-    $.hik.jtable.prototype._createDateTimeInputForField= function (field, fieldName, value) {
-        var $input = $('<input class="' + field.inputClass + '" id="Edit-' + fieldName + '" type="text" name="' + fieldName + '"></input>');
-        if(value != undefined) {
-            $input.val(value);
+    $.hik.jtable.prototype._createDateTimeInputForField = function (field, fieldName, value) {
+
+        var html = "<div class='input-append' id='#{0}Picker'>"
+        html += "<input data-format='#{1}' class='#{2}' type='text' name='#{0}' data-toggle='datetimepicker'/>"
+        html += "<span class='add-on'><i class='icon-calendar'></i></span></div>";
+        html = $(html.eval(fieldName, field.displayFormat, field.inputClass));
+        //var $input = $('<input class="' + field.inputClass + '" id="Edit-' + fieldName + '" type="text" name="' + fieldName + '"></input>');
+        if (value != undefined) {
+            html.find("input").val($.format.date($.hik.jtable.prototype._parseDate(value), field.displayFormat));
         }
             
-        var displayFormat = field.displayFormat || this.options.defaultDateFormat;
-        $input.datetimepicker();
+        //var displayFormat = field.displayFormat || this.options.defaultDateFormat;
         return $('<div />')
             .addClass('jtable-input jtable-date-input')
-            .append($input);
+            .append(html);
     }
 
     $.hik.jtable.prototype._createInputForRecordField = function (funcParams) {
@@ -281,6 +295,69 @@
             }
         }
         return {}; //no option found
+    }
+
+    $.hik.jtable.prototype._updateRecordValuesFromForm = function (record, $form) {
+        for (var i = 0; i < this._fieldList.length; i++) {
+            var fieldName = this._fieldList[i];
+            var field = this.options.fields[fieldName];
+
+            //Do not update non-editable fields
+            if (field.edit == false) {
+                continue;
+            }
+
+            //Get field name and the input element of this field in the form
+            var $inputElement = $form.find('[name="' + fieldName + '"]');
+            if ($inputElement.length <= 0) {
+                continue;
+            }
+
+            //Update field in record according to it's type
+            if (field.type == 'date') {
+                var dateVal = $inputElement.val();
+                if (dateVal) {
+                    var displayFormat = field.displayFormat || this.options.defaultDateFormat;
+                    try {
+                        var date = $.datepicker.parseDate(displayFormat, dateVal);
+                        record[fieldName] = '/Date(' + date.getTime() + ')/';
+                    } catch (e) {
+                        //TODO: Handle incorrect/different date formats
+                        this._logWarn('Date format is incorrect for field ' + fieldName + ': ' + dateVal);
+                        record[fieldName] = undefined;
+                    }
+                } else {
+                    this._logDebug('Date is empty for ' + fieldName);
+                    record[fieldName] = undefined; //TODO: undefined, null or empty string?
+                }
+            } else if (field.type == "datetime") {
+                debugger;
+                var dateVal = $inputElement.val();
+                if (dateVal) {
+                    try {
+                        dateSplit = dateVal.split(/[-/: ]/);
+                        var date = new Date(dateSplit[2],dateSplit[1],dateSplit[0],dateSplit[3],dateSplit[4])
+                        record[fieldName] = '/Date(' + date.getTime() + ')/';
+                    } catch (e) {
+                        //TODO: Handle incorrect/different date formats
+                        this._logWarn('Date format is incorrect for field ' + fieldName + ': ' + dateVal);
+                        record[fieldName] = undefined;
+                    }
+                } else {
+                    this._logDebug('Date is empty for ' + fieldName);
+                    record[fieldName] = undefined; //TODO: undefined, null or empty string?
+                }
+            } else if (field.options && field.type == 'radiobutton') {
+                var $checkedElement = $inputElement.filter(':checked');
+                if ($checkedElement.length) {
+                    record[fieldName] = $checkedElement.val();
+                } else {
+                    record[fieldName] = undefined;
+                }
+            } else {
+                record[fieldName] = $inputElement.val();
+            }
+        }
     }
 
 })(jQuery)

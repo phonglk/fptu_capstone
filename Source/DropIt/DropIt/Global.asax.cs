@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DropIt.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,6 +24,9 @@ namespace DropIt
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeBinder());
+            ModelBinders.Binders.Add(typeof(DateTime?), new NullableDateTimeBinder());
         }
     }
 }
