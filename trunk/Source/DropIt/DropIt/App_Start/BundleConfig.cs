@@ -28,7 +28,10 @@ namespace DropIt
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap/bootstrap.js",
                         "~/Scripts/bootstrap/bootstrap-modalmanager.js",
-                        "~/Scripts/bootstrap/bootstrap-modal.js"));
+                        "~/Scripts/bootstrap/bootstrap-modal.js",
+                        "~/Scripts/bootstrap/datetimepicker/bootstrap-datetimepicker.js",
+                        "~/Scripts/select2/select2.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/ko")
                 .Include("~/Scripts/knockout-{version}.js",
@@ -39,6 +42,7 @@ namespace DropIt
 
             bundles.Add(new ScriptBundle("~/bundles/utils")
                 .Include(
+                "~/Scripts/jquery.format.date.js",
                 "~/Scripts/Common/utils.js",
                 "~/Scripts/Common/utilClasses.js",
                 "~/Scripts/Common/GenericEntity.js",
@@ -91,8 +95,10 @@ namespace DropIt
                     .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
                             "~/Content/Admin/css/bootstrap/bootstrap-responsive.css",
                             "~/Content/Admin/css/bootstrap/bootstrap-overrides.css",
-                            "~/Content/bootstrap-modal/css/bootstrap-modal.css")
-                            );
+                            "~/Content/bootstrap-modal/css/bootstrap-modal.css",
+                            "~/Scripts/bootstrap/datetimepicker/bootstrap-datetimepicker.css",
+                            "~/Scripts/select2/select2.css"
+                            ));
 
             bundles.Add(new StyleBundle("~/Content/Admin")
                 .Include("~/Content/Admin/css/bootstrap/bootstrap.css",

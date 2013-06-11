@@ -14,30 +14,30 @@ namespace DropIt.Areas.Administration.Controllers
     public class VenueController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-
+        private GenericRepository<Venue> Repository;
         //
         // GET: /Venue/
 
+        public VenueController()
+        {
+            Repository = unitOfWork.VenueRepository;
+        }
+
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int ProvinceId = -1,int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
         {
             try
             {
 
-                var venues = this.unitOfWork.VenueRepository.JTGet(jtStartIndex,jtPageSize,jtSorting);
+                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
 
-                if (ProvinceId > -1)
-                {
-                    venues = venues.Where(x => x.ProvinceId == ProvinceId);
-                }
-
-                var Records = venues.Select(e => new
+                var Records = records.Select(e => new
                 {
                     VenueId = e.VenueId,
                     VenueName = e.VenueName,
@@ -47,7 +47,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = this.unitOfWork.VenueRepository.Count
+                    TotalRecordCount = Repository.Count
                 });
             }
             catch (Exception e)
@@ -57,7 +57,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(Venue venue)
+        public JsonResult Create(Venue Venue)
         {
             try
             {
@@ -66,9 +66,9 @@ namespace DropIt.Areas.Administration.Controllers
                     return Json(new JSONResult("Form is not valid"));
                 }
 
-                var addedVenue = unitOfWork.VenueRepository.AddOrUpdate(venue);
+                var addedRecord = Repository.AddOrUpdate(Venue);
                 unitOfWork.Save();
-                return Json(new JSONResult(addedVenue,"Record"));
+                return Json(new JSONResult(addedRecord, "Record"));
 
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Update(Venue venue)
+        public JsonResult Update(Venue Venue)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace DropIt.Areas.Administration.Controllers
                     return Json(new JSONResult("Form is invalid"));
                 }
 
-                unitOfWork.VenueRepository.AddOrUpdate(venue);
+                Repository.AddOrUpdate(Venue);
                 unitOfWork.Save();
                 return Json(new JSONResult());
             }
@@ -102,8 +102,8 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                this.unitOfWork.VenueRepository.Delete(VenueId);
-                this.unitOfWork.VenueRepository.Save();
+                Repository.Delete(VenueId);
+                unitOfWork.Save();
 
                 return Json(new JSONResult());
             }
@@ -111,7 +111,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new JSONResult(e));
             }
-            
+
         }
 
         [HttpPost]
@@ -132,7 +132,22 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        
+        [HttpPost]
+        public JsonResult GetOptions()
+        {
+            try
+            {
+                var Records = Repository.GetAll().Select(
+                    p => new { DisplayText = p.VenueName, Value = p.VenueId });
+                return Json(new JSONResult(Records, "Options"));
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new JSONResult(e));
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -7,6 +7,18 @@ String.prototype.makeExcerpt = function (length) {
     return "" + (this.substr(0, length)) + "...";
 };
 
+String.prototype.eval = function () {
+    var s = this;
+    var toReplaces = s.match(/#{[^}]*}/g);
+    if (toReplaces && toReplaces.length > 0) {
+        $.each(toReplaces,function(idx,value){
+            var v = value.match(/{([^}]*)}/)[1];
+            s = s.replace(value,eval(v))
+        })
+    }
+    return s;
+}
+
 // Introduced in Javascript 1.8.5
 _JS185Extend = function (target, propNane, value) {
     Object.defineProperty(target, propNane, {

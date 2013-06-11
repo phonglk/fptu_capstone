@@ -135,4 +135,152 @@
 
         return options
     }
+
+    $.hik.jtable.prototype._getDisplayTextForDateTimeRecordField = function (field, fieldValue) {
+        if (!fieldValue) {
+            return '';
+        }
+
+        var displayFormat = field.displayFormat || this.options.defaultDateFormat;
+        var date = this._parseDate(fieldValue);
+        return $.format.date(new Date(), field.displayFormat)
+        //return $.datepicker.formatDate(displayFormat, date);
+    }
+
+    $.hik.jtable.prototype._getDisplayTextForRecordField = function (record, fieldName) {
+        var field = this.options.fields[fieldName];
+        var fieldValue = record[fieldName];
+
+        //if this is a custom field, call display function
+        if (field.display) {
+            return field.display({ record: record });
+        }
+
+        if (field.type == 'date') {
+            return this._getDisplayTextForDateRecordField(field, fieldValue);
+        } else if (field.type == 'datetime') {
+            return this._getDisplayTextForDateTimeRecordField(field, fieldValue);
+        } else if (field.type == 'checkbox') {
+            return this._getCheckBoxTextForFieldByValue(fieldName, fieldValue);
+        } else if (field.options) { //combobox or radio button list since there are options.
+            var options = this._getOptionsForField(fieldName, {
+                record: record,
+                value: fieldValue,
+                source: 'list',
+                dependedValues: this._createDependedValuesUsingRecord(record, field.dependsOn)
+            });
+            return this._findOptionByValue(options, fieldValue).DisplayText;
+        } else { //other types
+            return fieldValue;
+        }
+    }
+
+    $.hik.jtable.prototype._createDateTimeInputForField= function (field, fieldName, value) {
+        var $input = $('<input class="' + field.inputClass + '" id="Edit-' + fieldName + '" type="text" name="' + fieldName + '"></input>');
+        if(value != undefined) {
+            $input.val(value);
+        }
+            
+        var displayFormat = field.displayFormat || this.options.defaultDateFormat;
+        $input.datetimepicker();
+        return $('<div />')
+            .addClass('jtable-input jtable-date-input')
+            .append($input);
+    }
+
+    $.hik.jtable.prototype._createInputForRecordField = function (funcParams) {
+        var fieldName = funcParams.fieldName,
+            value = funcParams.value,
+            record = funcParams.record,
+            formType = funcParams.formType,
+            form = funcParams.form;
+
+        //Get the field
+        var field = this.options.fields[fieldName];
+
+        //If value if not supplied, use defaultValue of the field
+        if (value == undefined || value == null) {
+            value = field.defaultValue;
+        }
+
+        //Use custom function if supplied
+        if (field.input) {
+            var $input = $(field.input({
+                value: value,
+                record: record,
+                formType: formType,
+                form: form
+            }));
+
+            //Add id attribute if does not exists
+            if (!$input.attr('id')) {
+                $input.attr('id', 'Edit-' + fieldName);
+            }
+
+            //Wrap input element with div
+            return $('<div />')
+                .addClass('jtable-input jtable-custom-input')
+                .append($input);
+        }
+
+        //Create input according to field type
+        if (field.type == 'date') {
+            return this._createDateInputForField(field, fieldName, value);
+        }else if (field.type == 'datetime') {
+                return this._createDateTimeInputForField(field, fieldName, value);
+        } else if (field.type == 'textarea') {
+            return this._createTextAreaForField(field, fieldName, value);
+        } else if (field.type == 'password') {
+            return this._createPasswordInputForField(field, fieldName, value);
+        } else if (field.type == 'checkbox') {
+            return this._createCheckboxForField(field, fieldName, value);
+        } else if (field.options) {
+            if (field.type == 'radiobutton') {
+                return this._createRadioButtonListForField(field, fieldName, value, record, formType);
+            } else {
+                return this._createDropDownListForField(field, fieldName, value, record, formType, form);
+            }
+        } else {
+            return this._createTextInputForField(field, fieldName, value);
+        }
+    }
+
+    $.hik.jtable.prototype._fillDropDownListWithOptions = function ($select, options, value) {
+        $select.empty();
+        for (var i = 0; i < options.length; i++) {
+            //create optgroups for selects that are hierarchical in nature
+            if (options[i].Children == null || (options[i].Children && options[i].Children.length == 0))//fix if has [] children
+                $select.append('<option value="' + options[i].Value + '"' + (options[i].Value == value ? ' selected="selected"' : '') + '>' + options[i].DisplayText + '</option>');
+            else {
+                var optgroup = $("<optgroup>");
+                optgroup.prop('label', options[i].DisplayText);
+                //$select.append('<optgroup label="' + options[i].DisplayText + '>');
+                for(var j = 0; j < options[i].Children.length; j++)
+                {
+                    //$select.append('<option value="' + options[i].Children[j].Value + '"' + (options[i].Children[j].Value == value ? ' selected="selected"' : '') + '>' + options[i].Children[j].DisplayText + '</option>');    
+                    optgroup.append('<option value="' + options[i].Children[j].Value + '"' + (options[i].Children[j].Value == value ? ' selected="selected"' : '') + '>' + options[i].Children[j].DisplayText + '</option>');    
+                }
+                $select.append(optgroup);
+            }
+
+        }
+    }
+
+    $.hik.jtable.prototype._findOptionByValue = function (options, value) {
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].Value == value) {
+                return options[i];
+            }
+            if (options[i].Children != null) {
+                for ( var j = 0; j < options[i].Children.length; j++)
+                {
+                    if (options[i].Children[j].Value == value) {
+                        return options[i].Children[j];
+                    }
+                }
+            }
+        }
+        return {}; //no option found
+    }
+
 })(jQuery)

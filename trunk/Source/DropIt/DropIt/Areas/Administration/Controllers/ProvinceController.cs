@@ -14,9 +14,14 @@ namespace DropIt.Areas.Administration.Controllers
     public class ProvinceController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-
+        private GenericRepository<Province> Repository;
         //
         // GET: /Venue/
+
+        public ProvinceController()
+        {
+            Repository = unitOfWork.ProvinceRepository;
+        }
 
         public ActionResult Index()
         {
@@ -30,16 +35,16 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
 
-                var provinces = this.unitOfWork.ProvinceRepository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
 
-                var Records = provinces.Select(e => new
+                var Records = records.Select(e => new
                 {
                     ProvinceId = e.ProvinceId,
                     ProvinceName = e.ProvinceName
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = this.unitOfWork.ProvinceRepository.Count
+                    TotalRecordCount = Repository.Count
                 });
             }
             catch (Exception e)
@@ -58,9 +63,9 @@ namespace DropIt.Areas.Administration.Controllers
                     return Json(new JSONResult("Form is not valid"));
                 }
 
-                var addedVenue = unitOfWork.ProvinceRepository.AddOrUpdate(province);
+                var addedRecord = Repository.AddOrUpdate(province);
                 unitOfWork.Save();
-                return Json(new JSONResult(addedVenue, "Record"));
+                return Json(new JSONResult(addedRecord, "Record"));
 
             }
             catch (Exception e)
@@ -80,7 +85,7 @@ namespace DropIt.Areas.Administration.Controllers
                     return Json(new JSONResult("Form is invalid"));
                 }
 
-                unitOfWork.ProvinceRepository.AddOrUpdate(province);
+                Repository.AddOrUpdate(province);
                 unitOfWork.Save();
                 return Json(new JSONResult());
             }
@@ -94,8 +99,8 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                this.unitOfWork.ProvinceRepository.Delete(ProvinceId);
-                this.unitOfWork.ProvinceRepository.Save();
+                Repository.Delete(ProvinceId);
+                unitOfWork.Save();
 
                 return Json(new JSONResult());
             }
@@ -106,59 +111,10 @@ namespace DropIt.Areas.Administration.Controllers
 
         }
 
-        public class veResult{
-            public string id;
-            public Boolean status;
-        }
-
-        public ActionResult CheckUnique(string fieldId, string ProvinceName)
-        {
-            var province = unitOfWork.ProvinceRepository.Get(x => x.ProvinceName == ProvinceName).FirstOrDefault();
-            if (province == null)
-            {
-                return Content(JsonConvert.SerializeObject(new ArrayList
-                {
-                    fieldId,
-                    true
-                }));
-            }
-            else
-            {
-                return Content(JsonConvert.SerializeObject(new ArrayList
-                {
-                    fieldId,
-                    false,
-                    "Đã có tỉnh(thành phó) "+ProvinceName
-                }));
-            }
-
-        }
-
-        //[HttpPost]
-        //public JsonResult GetProvinceOptions()
-        //{
-        //    try
-        //    {
-        //        var provinces = unitOfWork.ProvinceRepository.GetAll().Select(
-        //            p => new { DisplayText = p.ProvinceName, Value = p.ProvinceId });
-
-        //        return Json(new JSONResult(provinces, "Options"));
-
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        return Json(new JSONResult(e));
-        //    }
-        //}
-
-
-
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }
