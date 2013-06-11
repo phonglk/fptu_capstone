@@ -11,15 +11,7 @@
     </div>
     <div class="row-fluid filter-block">
         <div class="pull-right">
-            <div class="ui-select">
-                <select>
-                    <option>Filter events</option>
-                    <option>abc</option>
-                    <option>xyz</option>
-                </select>
-            </div>
-            <input type="text" class="search">
-            <a class="btn-flat success new-event" href="Create">+ Add Venue</a>
+            
         </div>
     </div>
     <div id="pad-wrapper">
@@ -112,101 +104,6 @@
     $(document).ready(function () {
         
         $('#ProvinceTable').jtable(dropit.jtInit(jtable_config));
-
-        
-
-
-
-        //$('#ProvinceTable').jtable({
-        //    title: 'Danh sách Tỉnh/Thành phố',
-        //    paging: true,
-        //    pageSize: 5,
-        //    sorting: true,
-        //    /*selecting: true,
-        //    multiselect: true,
-        //    selectingCheckboxes:true,*/
-        //    actions: {
-        //        listAction: Url({ Action: "List" }),
-        //        deleteAction: Url({ Action: "Delete" }),
-        //        updateAction: Url({ Action: "Update" }),
-        //        createAction: Url({ Action: "Create" })
-        //    },
-        //    fields: {
-        //        ProvinceId: {
-        //            key: true,
-        //            create: false,
-        //            edit: false,
-        //            list: false
-        //        },
-        //        ProvinceName: {
-        //            title: 'Tên Tỉnh/ Thành phố',
-        //            inputClass: "validate[required] customClass"
-        //        },
-        //        Venues: {
-        //            title: "",
-        //            width: "3%",
-        //            sorting: false,
-        //            edit: false,
-        //            create: false,
-        //            display: function (provinceData) {
-        //                var $img = $("<i class='icon-hospital' style='font-size:20px;text-align:center'></i>")
-
-        //                $img.click(function () {
-        //                    $("#ProvinceTable").jtable("openChildTable",
-        //                        $img.closest('tr'), {
-        //                            title: "Địa điểm ở " + provinceData.record.ProvinceName,
-        //                            actions: {
-        //                                listAction: Url({ Controller: "Venue", Action: "List", Data: { ProvinceId: provinceData.record.ProvinceId } }),
-        //                                deleteAction: Url({ Controller: "Venue", Action: "Delete" }),
-        //                                updateAction: Url({ Controller: "Venue", Action: "Update" }),
-        //                                createAction: Url({ Controller: "Venue", Action: "Create" })
-        //                            },
-        //                            fields: {
-        //                                VenueId: {
-        //                                    key: true,
-        //                                    create: false,
-        //                                    edit: false,
-        //                                    list: false
-        //                                },
-        //                                VenueName: {
-        //                                    title: 'Tên địa điểm',
-        //                                    width: '15%'
-        //                                },
-        //                                Address: {
-        //                                    title: 'Địa chỉ',
-        //                                    list: false,
-        //                                    type: "textarea"
-        //                                },
-        //                                ProvinceId: {
-        //                                    type: "hidden",
-        //                                    defaultValue: provinceData.record.ProvinceId
-        //                                },
-        //                                Description: {
-        //                                    title: 'Chú thích',
-        //                                    list: false
-        //                                }
-        //                            }
-        //                        }, function (data) {
-        //                            data.childTable.jtable('load');
-        //                        })
-        //                })
-
-        //                return $img;
-        //            }
-        //        }
-        //    },
-        //    formCreated: function (event, data) {
-        //        data.form.validationEngine({ promptPosition: "topLeft" });
-        //    },
-        //    formSubmitting: function (event, data) {
-        //        return data.form.validationEngine('validate');
-        //    },
-        //    formClosed: function (event, data) {
-        //        data.form.validationEngine('hide');
-        //        data.form.validationEngine('detach');
-        //    }
-        //});
-
         $('#ProvinceTable').jtable('load');
     });
 </script>

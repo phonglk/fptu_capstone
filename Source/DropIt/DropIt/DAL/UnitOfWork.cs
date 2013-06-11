@@ -9,19 +9,19 @@ namespace DropIt.DAL
     public class UnitOfWork : IDisposable
     {
         private DropItContext context = new DropItContext();
-        private GenericRepository<Event> eventRepository;
+        private EventRepository eventRepository;
         private GenericRepository<Category> categoryRepository;
         private GenericRepository<Venue> venueRepository;
         private GenericRepository<Province> provinceRepository;
 
-        public GenericRepository<Event> EventRepository
+        public EventRepository EventRepository
         {
             get
             {
 
                 if (this.eventRepository == null)
                 {
-                    this.eventRepository = new GenericRepository<Event>(context);
+                    this.eventRepository = new EventRepository(context);
                 }
                 return eventRepository;
             }

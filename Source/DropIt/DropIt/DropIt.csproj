@@ -200,6 +200,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Administration\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administration\Controllers\EventController.cs" />
     <Compile Include="Areas\Administration\Controllers\ProvinceController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -455,6 +457,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\jquery-ui-timepicker-addon.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Admin\css\bootstrap\Descr.WD3" />
@@ -477,12 +480,7 @@
     <Content Include="Content\Admin\css\lib\font-awesome\less\path.less" />
     <Content Include="Content\Admin\css\lib\font-awesome\less\variables.less" />
     <Content Include="Areas\Administration\Views\Web.config" />
-    <Content Include="Areas\Administration\Views\Event\Create.cshtml" />
-    <Content Include="Areas\Administration\Views\Event\Delete.cshtml" />
-    <Content Include="Areas\Administration\Views\Event\Details.cshtml" />
-    <Content Include="Areas\Administration\Views\Event\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Event\Index.cshtml" />
-    <Content Include="Areas\Administration\Views\Event\List.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Administration\Views\Dashboard\Index.cshtml" />
     <Content Include="Content\Admin\admin.less" />
@@ -542,6 +540,10 @@
     <Content Include="Scripts\Admin\ViewModels\AdminEvent.coffee" />
     <Content Include="Scripts\bootstrap-modal.js" />
     <Content Include="Scripts\bootstrap-modalmanager.js" />
+    <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.css" />
+    <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\class.js" />
     <Content Include="Scripts\Common\custom-binding.js">
       <DependentUpon>custom-binding.coffee</DependentUpon>
@@ -549,6 +551,7 @@
     <Content Include="Scripts\Common\custom-binding.min.js">
       <DependentUpon>custom-binding.coffee</DependentUpon>
     </Content>
+    <Content Include="Scripts\Common\default.js" />
     <Content Include="Scripts\Common\GenericEntity.js">
       <DependentUpon>GenericEntity.coffee</DependentUpon>
     </Content>
@@ -565,6 +568,9 @@
     <Content Include="Scripts\Common\custom-binding.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.coffee" />
     <Content Include="Scripts\Common\GenericEntity.coffee" />
+    <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
+      <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Admin\AdminMenu.js">
       <DependentUpon>AdminMenu.coffee</DependentUpon>
@@ -599,8 +605,10 @@
     <Content Include="Scripts\Common\utils.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\html5.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery.format.date.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
@@ -734,6 +742,44 @@
     <Content Include="Scripts\mootools-core-1.4.5-full-nocompat-yc.js" />
     <Content Include="Scripts\mootools-core-1.4.5-full-nocompat.js" />
     <Content Include="Scripts\morris.min.js" />
+    <Content Include="Scripts\select2\select2-spinner.gif" />
+    <Content Include="Scripts\select2\select2.css" />
+    <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\select2\select2.min.js" />
+    <Content Include="Scripts\select2\select2.png" />
+    <Content Include="Scripts\select2\select2x2.png" />
+    <Content Include="Scripts\select2\select2_locale_ca.js" />
+    <Content Include="Scripts\select2\select2_locale_cs.js" />
+    <Content Include="Scripts\select2\select2_locale_da.js" />
+    <Content Include="Scripts\select2\select2_locale_de.js" />
+    <Content Include="Scripts\select2\select2_locale_es.js" />
+    <Content Include="Scripts\select2\select2_locale_et.js" />
+    <Content Include="Scripts\select2\select2_locale_eu.js" />
+    <Content Include="Scripts\select2\select2_locale_fr.js" />
+    <Content Include="Scripts\select2\select2_locale_gl.js" />
+    <Content Include="Scripts\select2\select2_locale_he.js" />
+    <Content Include="Scripts\select2\select2_locale_hr.js" />
+    <Content Include="Scripts\select2\select2_locale_hu.js" />
+    <Content Include="Scripts\select2\select2_locale_is.js" />
+    <Content Include="Scripts\select2\select2_locale_it.js" />
+    <Content Include="Scripts\select2\select2_locale_ja.js" />
+    <Content Include="Scripts\select2\select2_locale_lt.js" />
+    <Content Include="Scripts\select2\select2_locale_lv.js" />
+    <Content Include="Scripts\select2\select2_locale_mk.js" />
+    <Content Include="Scripts\select2\select2_locale_nl.js" />
+    <Content Include="Scripts\select2\select2_locale_no.js" />
+    <Content Include="Scripts\select2\select2_locale_pl.js" />
+    <Content Include="Scripts\select2\select2_locale_pt-BR.js" />
+    <Content Include="Scripts\select2\select2_locale_pt-PT.js" />
+    <Content Include="Scripts\select2\select2_locale_ro.js" />
+    <Content Include="Scripts\select2\select2_locale_ru.js" />
+    <Content Include="Scripts\select2\select2_locale_sk.js" />
+    <Content Include="Scripts\select2\select2_locale_sv.js" />
+    <Content Include="Scripts\select2\select2_locale_tr.js" />
+    <Content Include="Scripts\select2\select2_locale_ua.js" />
+    <Content Include="Scripts\select2\select2_locale_vi.js" />
+    <Content Include="Scripts\select2\select2_locale_zh-CN.js" />
+    <Content Include="Scripts\select2\select2_locale_zh-TW.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\ValidationEngine\jquery.validationEngine-dropit.js" />
     <Content Include="Scripts\ValidationEngine\jquery.validationEngine-en.js" />
@@ -828,6 +874,12 @@
     <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Scripts\jtable\jtable.dropit.js" />
+    <Content Include="Scripts\select2\component.json" />
+    <Content Include="Scripts\select2\LICENSE" />
+    <Content Include="Scripts\select2\README.md" />
+    <Content Include="Scripts\select2\release.sh" />
+    <Content Include="Scripts\select2\select2.jquery.json" />
+    <Content Include="Scripts\select2\select2_locale_en.js.template" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
