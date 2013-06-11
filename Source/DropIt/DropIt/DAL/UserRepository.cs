@@ -16,14 +16,14 @@ namespace DropIt.DAL
             
         }
         
-        public void UpdateUserInfo(User user)
-        {
-            var u = context.Users.Where(m => m.UserId == user.UserId).AsNoTracking().FirstOrDefault();
-            user.Address = u.Address;
-            user.Email = u.Email;
-            user.ProvinceId = u.ProvinceId;
-            user.Phone = u.Phone;
-            context.Entry(user).State=EntityState.Modified;
-        }
+        //public void UpdateUserInfo(User user)
+        //{
+        //    var u = context.Users.Where(m => m.UserId == user.UserId).AsNoTracking().FirstOrDefault();
+        //    user.Address = u.Address;
+        //    user.Email = u.Email;
+        //    user.ProvinceId = u.ProvinceId;
+        //    user.Phone = u.Phone;
+        //    context.Entry(user).State=EntityState.Modified;
+        //}
     }
 }
