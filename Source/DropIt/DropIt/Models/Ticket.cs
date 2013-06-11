@@ -14,6 +14,11 @@ namespace DropIt.Models
     
     public partial class Ticket
     {
+        public Ticket()
+        {
+            this.TicketResponses = new HashSet<TicketResponse>();
+        }
+    
         public int TicketId { get; set; }
         public double SellPrice { get; set; }
         public double ReceiveMoney { get; set; }
@@ -33,6 +38,7 @@ namespace DropIt.Models
         public Nullable<System.DateTime> TranModifiedDate { get; set; }
     
         public virtual Event Event { get; set; }
+        public virtual ICollection<TicketResponse> TicketResponses { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
     }
