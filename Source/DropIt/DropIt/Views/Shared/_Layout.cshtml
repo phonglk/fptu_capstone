@@ -14,14 +14,17 @@
         <header class="upper-header">
             <div class="container">
                 <div class="icon">
-                    <img src="images/icon.png">
+                    <img src="/images/icon.png">
                 </div>
                 <p>Chúng tôi đã bán <span>1,770</span> vé cho <span>607</span> sự kiện! và nhiều hơn nữa</p>
 
                 <div id="user">
-                    <ul class="inline">
-                        <li class><i class="icon-user"></i>Chào bạn Admin</li>
-                    </ul>
+                      <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                   @* <ul class="inline">
+                        <li><i class="icon-user"></i>Chào bạn Admin</li>
+                    </ul>*@
                 </div>
             </div>
 
