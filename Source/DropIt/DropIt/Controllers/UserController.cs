@@ -35,6 +35,8 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user)
         {
+            user.UserName = User.Identity.Name;
+            user.CreatedDate = unitOfWork.UserRepository.GetById(WebSecurity.GetUserId(user.UserName)).CreatedDate;
             if(ModelState.IsValid)
             {
                 this.unitOfWork.UserRepository.AddOrUpdate(user);
