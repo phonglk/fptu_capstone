@@ -7,6 +7,8 @@ using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Data;
 using DropIt.Common;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace DropIt.DAL
 {
@@ -144,7 +146,23 @@ namespace DropIt.DAL
                 {
                     lastModifiedBy.SetValue(entity, (currentUser != null) ? currentUser.UserId : 1, null);
                 }
-                context.Entry(entity).State = EntityState.Modified;
+
+                var entry = context.Entry(entity);
+                if (entry.State == EntityState.Detached)
+                {
+                    var set = context.Set<TEntity>();
+                    TEntity attachedEntity = set.Find(entityId);
+                    if (attachedEntity != null)
+                    {
+                        var attachedEntry = context.Entry(attachedEntity);
+                        attachedEntry.CurrentValues.SetValues(entity);
+                    }
+                    else
+                    {
+                        entry.State = EntityState.Modified;
+                    }
+                }
+                
             }
 
             return null;
@@ -164,7 +182,24 @@ namespace DropIt.DAL
 
         public void Save()
         {
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
         }
 
     }

@@ -214,10 +214,12 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,12 +260,7 @@
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Transaction.cs">
-      <DependentUpon>DropItContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TransactionDetail.cs">
-      <DependentUpon>DropItContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\TicketResponse.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
