@@ -6,24 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+using DropIt.Filters;
+using WebMatrix.WebData;
 
 namespace DropIt.DAL
 {
+    [InitializeSimpleMembership]
     public class UserRepository : GenericRepository<User>
     {
         public UserRepository(DropItContext context) : base(context)
         {
             
-        }
-        
-        //public void UpdateUserInfo(User user)
-        //{
-        //    var u = context.Users.Where(m => m.UserId == user.UserId).AsNoTracking().FirstOrDefault();
-        //    user.Address = u.Address;
-        //    user.Email = u.Email;
-        //    user.ProvinceId = u.ProvinceId;
-        //    user.Phone = u.Phone;
-        //    context.Entry(user).State=EntityState.Modified;
-        //}
+        }        
     }
 }
