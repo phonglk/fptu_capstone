@@ -38,7 +38,7 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
 
-                var Records = records.Select(e => new
+                var Records = records.Where(e=> e.UserName != "admin").Select(e => new
                 {
                     UserId = e.UserId,
                     UserName = e.UserName,
