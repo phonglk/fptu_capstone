@@ -1,31 +1,32 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Filters;
 using DropIt.Models;
-using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    public class ProvinceController : Controller
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
+    public class UserController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        private GenericRepository<Province> Repository;
+        private UserRepository Repository;
         //
-        // GET: /Venue/
+        // GET: /Administration/User/
 
-        public ProvinceController()
+        public UserController()
         {
-            Repository = unitOfWork.ProvinceRepository;
+            Repository = unitOfWork.UserRepository;
         }
 
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -39,8 +40,14 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var Records = records.Select(e => new
                 {
-                    ProvinceId = e.ProvinceId,
-                    ProvinceName = e.ProvinceName
+                    UserId = e.UserId,
+                    UserName = e.UserName,
+                    Email = e.Email,
+                    Address = e.Address,
+                    Phone = e.Phone,
+                    Active = e.Active,
+                    Sellable = e.Sellable,
+                    ProvinceId = e.ProvinceId                    
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -52,9 +59,10 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new JSONResult(e));
             }
         }
+        // Create
 
         [HttpPost]
-        public JsonResult Create(Province province)
+        public JsonResult Create(User user)
         {
             try
             {
@@ -63,7 +71,7 @@ namespace DropIt.Areas.Administration.Controllers
                     return Json(new JSONResult("Form is not valid"));
                 }
 
-                var addedRecord = Repository.AddOrUpdate(province);
+                var addedRecord = Repository.AddOrUpdate(user);
                 unitOfWork.Save();
                 return Json(new JSONResult(addedRecord, "Record"));
 
@@ -75,8 +83,9 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
+        // Update
         [HttpPost]
-        public JsonResult Update(Province province)
+        public JsonResult Update(User user)
         {
             try
             {
@@ -84,8 +93,9 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-
-                Repository.AddOrUpdate(province);
+                user.UserName = User.Identity.Name;
+                user.CreatedDate = unitOfWork.UserRepository.GetById(WebSecurity.GetUserId(user.UserName)).CreatedDate;
+                Repository.AddOrUpdate(user);
                 unitOfWork.Save();
                 return Json(new JSONResult());
             }
@@ -95,11 +105,12 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        public JsonResult Delete(int ProvinceId)
+        //Delete
+        public JsonResult Delete(int UserId)
         {
             try
             {
-                Repository.Delete(ProvinceId);
+                Repository.Delete(UserId);
                 unitOfWork.Save();
 
                 return Json(new JSONResult());
@@ -110,24 +121,7 @@ namespace DropIt.Areas.Administration.Controllers
             }
 
         }
-
-        [HttpPost]
-        public JsonResult GetProvinceOptions()
-        {
-            try
-            {
-                var provinces = unitOfWork.ProvinceRepository.GetAll().Select(
-                    p => new { DisplayText = p.ProvinceName, Value = p.ProvinceId });
-
-                return Json(new JSONResult(provinces, "Options"));
-
-            }
-            catch (Exception e)
-            {
-
-                return Json(new JSONResult(e));
-            }
-        }
+        
 
         protected override void Dispose(bool disposing)
         {
