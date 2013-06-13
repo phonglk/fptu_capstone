@@ -16,6 +16,7 @@ body {
 
 #content {
     background: #ffffff;
+    margin-top: 20px;
 }
 
 .upper-header {
@@ -179,6 +180,9 @@ body {
     border-bottom-color: transparent;
 }
 
+.user-tab {
+    margin-bottom: -20px;
+}
 .nav-tabs > li > a {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -329,4 +333,73 @@ hr {
 
 #role-tab {
     padding-top: 10px;
+}
+/*Register*/
+.register h3 {
+    text-align: center;
+    font-weight: lighter;
+    position: relative;
+}
+.register input{
+background: #fff;
+border-top: 0 none;
+border-left: 0 none;
+border-right: 0 none;
+border-bottom: 1px solid #391147;
+border-radius: 0;
+box-shadow: none;
+width: 280px;
+}
+.register label {
+    text-align: left !important;
+}
+.control-group {
+    margin-left: 200px;
+}
+.controls {
+margin-left: 0;
+}
+#province {
+    float: right;
+margin-top: -50px;
+margin-right: 55px;
+}
+.help-block {
+    text-align: center;
+}
+.condition {
+    background: #6a4c74;
+}
+.register .checkbox input[type="checkbox"] {
+float: left;
+margin-left: 300px;
+width:20px;
+}
+.btn-register {
+    position: relative;
+    left: 40%;
+}
+.register input:focus {
+border-color: none;
+outline: 0;
+outline: none;
+-webkit-box-shadow: none;
+-moz-box-shadow:none;
+box-shadow:none;
+}
+.login p {
+    position: relative;
+    left: 40%;
+}
+.login h3 {
+    text-align: center;
+    font-weight: lighter;
+    position: relative;
+}
+.login .check-remember {
+ position: relative;
+    left: 40%;
+}
+.login .check-remember label {
+    margin-top: -15px;
 }

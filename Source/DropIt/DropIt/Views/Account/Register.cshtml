@@ -1,64 +1,45 @@
 ﻿@model DropIt.Models.RegisterModel
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
 @{
     ViewBag.Title = "Register";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
-</hgroup>
+<div class="container" id="content">
+    <div class="register">
+        @using (Html.HorizontalForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()   
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+            <h3>Đăng Ký</h3>
 
-    <fieldset>
-        <legend>Registration Form</legend>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(m => m.UserName)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Password)
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(m => m.Password)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.ConfirmPassword)
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(m => m.ConfirmPassword)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(m => m.Email)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Phone)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(m => m.Phone)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(m => m.Address)
-        </div>
-        <div class="editor-field">
-            <div class="input-append">
-                @Html.EditorFor(m => m.Address)
-                @Html.DropDownList("ProvinceId",String.Empty)
+            @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
+            @Html.LabelAndControl("Mật Khẩu", Html.TextBox("Password"))
+            @Html.LabelAndControl("Nhập lại Mật khẩu", Html.TextBox("ConfirmPassword"))
+            @Html.LabelAndControl("Email", Html.TextBox("Email"))
+            @Html.LabelAndControl("Số điện thoại", Html.TextBox("Phone"))
+            @Html.LabelAndControl("Địa chỉ", Html.TextBox("Address"))
+            <div id="province">
+                @Html.DropDownList("ProvinceId", String.Empty)
             </div>
-        </div>
-
-        <input type="submit" value="Register" />
-    </fieldset>
-}
-
+                <div>
+            <label class="checkbox">
+                <span class="help-block">Điều Khoản Sử Dụng</span>
+                      <span class="condition"></span>  
+                <input type="checkbox">
+                Tôi Đồng ý với tất cả các điều kiện trên.
+            </label>
+                </div>
+            <button type="submit" class="btn btn-register btn-success" value="Register">Đăng Ký</button>
+            <button type="submit" class="btn btn-register btn-inverse" value="Reset">Nhập lại</button>
+       
+        }
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
