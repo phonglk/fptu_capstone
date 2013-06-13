@@ -180,8 +180,7 @@ SET @xmlData = N'
   <user UserId="5" UserName="user5" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="0" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
   <user UserId="6" UserName="user6" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="2"/>
   <user UserId="7" UserName="user7" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="3"/>
-  <user UserId="8" UserName="user8" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>
-  <user UserId="9" UserName="admin" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="1"/>
+  <user UserId="8" UserName="user8" Email="user@gmail.com" Phone="0909999999" Address="242 Tô ký"  Active="1" Sellable="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013" ProvinceId="4"/>  
 </users>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
