@@ -21,8 +21,9 @@
     </div>
     <!-- end events table -->
 </div>
-<script>
+<script> 
     $(document).ready(function () {
+        
         var jtable_config = {
             title: 'Danh sách người dùng',
             paging: true,
@@ -33,7 +34,7 @@
             selectingCheckboxes:true,*/
             actions: {
                 base: {}
-            },
+            },            
             fields: {
                 UserId: {
                     key: true,
@@ -41,13 +42,18 @@
                     edit: false,
                     list: false
                 },
-                UserName: {
+                UserName: {                    
+                    list: true,
                     edit: false,
+                    //type: 'hidden',
                     title: 'Tên người dùng',
                     validation: [
                         "required"
                     ]
-                },
+                    //input: function (data) {
+                    //    return '<input type="text" name="Name" style="width:200px" value="' + data.record.UserName + '" />';
+                    //}
+                },                
                 Email: {
                     list: false,
                     title: 'Email',
@@ -62,13 +68,13 @@
                     validation: ["required"]                    
                 },
                 Active: {                    
-                    title: "Action",
+                    title: "Trạng thái tài khoản",
                     type: "checkbox",
                     values: { "false": "Passive", "true": "Active" },
                     defaultValues: "true"
                 },
                 Sellable: {
-                    title: "Sellable",
+                    title: "Trạng thái bán",
                     type: "checkbox",
                     values: { "false": "Passive", "true": "Active" },
                     defaultValues: "true"
@@ -82,6 +88,6 @@
         }
 
         $('#UserTable').jtable(dropit.jtInit(jtable_config));
-        $('#UserTable').jtable('load');
+        $('#UserTable').jtable('load');        
     });
 </script>
