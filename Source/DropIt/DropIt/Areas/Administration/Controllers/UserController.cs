@@ -38,7 +38,7 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
 
-                var Records = records.Where(e=> e.UserName != "admin").Select(e => new
+                var Records = records.Select(e => new
                 {
                     UserId = e.UserId,
                     UserName = e.UserName,
@@ -89,12 +89,14 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
+                user.UserName = unitOfWork.UserRepository.GetById(user.UserId).UserName;
+                user.CreatedDate = unitOfWork.UserRepository.GetById(user.UserId).CreatedDate;
                 if (!ModelState.IsValid)
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-                user.UserName = User.Identity.Name;
-                user.CreatedDate = unitOfWork.UserRepository.GetById(WebSecurity.GetUserId(user.UserName)).CreatedDate;
+                
+                
                 Repository.AddOrUpdate(user);
                 unitOfWork.Save();
                 return Json(new JSONResult());
