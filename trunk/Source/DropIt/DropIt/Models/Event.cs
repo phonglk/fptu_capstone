@@ -23,6 +23,7 @@ namespace DropIt.Models
     
         public int EventId { get; set; }
         public string EventName { get; set; }
+        public string EventImage { get; set; }
         public string Artist { get; set; }
         public System.DateTime HoldDate { get; set; }
         public string Description { get; set; }
