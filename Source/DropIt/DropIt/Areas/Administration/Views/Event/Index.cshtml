@@ -28,6 +28,7 @@
             paging: true,
             pageSize: 5,
             sorting: true,
+            fileUpload:true,
             /*selecting: true,
             multiselect: true,
             selectingCheckboxes:true,*/
@@ -46,6 +47,17 @@
                     validation: [
                         "required"
                     ]
+                },
+                EventImage: {
+                    title: "Hình minh họa",
+                    list: false,
+                    input: function (data) {
+                        if (data.record) {
+                            return $("<img src='"+Url(data.record.EventImage)+"' style='width:200px;margin: 0 auto;display:block'/><input type='file' name='EventImage'/>")
+                        } else {
+                            return $("<input type='file' name='EventImage'/>")
+                        }
+                    }
                 },
                 Artist: {
                     title: 'Nghệ sĩ',
@@ -77,9 +89,8 @@
                     options: Url({ Controller: "Venue", Action: "GetOptions" })
                 }
             },
-            formCreated: function () {
+            formCreated: function (event,form) {
                 $("#HoldDatePicker").datetimepicker({ pickSeconds: false, maskInput: false });
-                
             }
         }
 

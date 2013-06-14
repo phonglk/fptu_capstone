@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DropItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="DropItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DropItModelStoreContainer">
           <EntitySet Name="Category" EntityType="DropItModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Event" EntityType="DropItModel.Store.Event" store:Type="Tables" Schema="dbo" />
@@ -88,6 +88,7 @@
           </Key>
           <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="EventName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EventImage" Type="nvarchar(max)" />
           <Property Name="Artist" Type="nvarchar" MaxLength="50" />
           <Property Name="HoldDate" Type="datetime" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
@@ -371,8 +372,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DropItModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -475,6 +475,7 @@
           <NavigationProperty Name="Requests" Relationship="DropItModel.FK_Request_Event" FromRole="Event" ToRole="Request" />
           <NavigationProperty Name="Tickets" Relationship="DropItModel.FK_Ticket_Event" FromRole="Event" ToRole="Ticket" />
           <NavigationProperty Name="UserFollowEvents" Relationship="DropItModel.FK_UserFollowEvent_Event" FromRole="Event" ToRole="UserFollowEvent" />
+          <Property Type="String" Name="EventImage" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Province">
           <Key>
@@ -790,6 +791,7 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="DropItModel.Event">
               <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventImage" ColumnName="EventImage" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="Artist" ColumnName="Artist" />

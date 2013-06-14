@@ -109,30 +109,38 @@ window.bootstrap = {
     }
 };
 
-window.Url = function (_arg) {
-    var Action, Area, Controller, newRouting, url;
-    Area = _arg.Area, Controller = _arg.Controller, Action = _arg.Action;
-    var Data = _arg.Data;
-    newRouting = $.extend({}, Routing, {
-        Area: Area,
-        Controller: Controller,
-        Action: Action,
-        Data : Data
-    });
-    url = "";
-    if ((newRouting.Area != null) !== "") {
-        url += "/" + newRouting.Area;
+window.Url = function (_arg,defaultUrl) {
+    if (!_arg || _arg == null) {
+        return defaultUrl || "";
     }
-    url += "/" + newRouting.Controller + "/";
-    if ((newRouting.Action != null) !== "" || (newRouting.Action != null) !== "Index") {
-        url += "" + newRouting.Action;
-    }
+    if (typeof _arg == "object") {
 
-    if (newRouting.Data && newRouting.Data != "") {
-        url +="?" + toFormData(newRouting.Data)
-    }
+        var Action, Area, Controller, newRouting, url;
+        Area = _arg.Area, Controller = _arg.Controller, Action = _arg.Action;
+        var Data = _arg.Data;
+        newRouting = $.extend({}, Routing, {
+            Area: Area,
+            Controller: Controller,
+            Action: Action,
+            Data: Data
+        });
+        url = "";
+        if ((newRouting.Area != null) !== "") {
+            url += "/" + newRouting.Area;
+        }
+        url += "/" + newRouting.Controller + "/";
+        if ((newRouting.Action != null) !== "" || (newRouting.Action != null) !== "Index") {
+            url += "" + newRouting.Action;
+        }
 
-    return url;
+        if (newRouting.Data && newRouting.Data != "") {
+            url += "?" + toFormData(newRouting.Data)
+        }
+
+        return url;
+    } else if (typeof _arg == "string") {
+        return _arg.replace("~/", "/");
+    }
 };
 
 window.loading = function (show) {

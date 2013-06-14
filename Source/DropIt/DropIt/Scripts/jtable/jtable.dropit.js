@@ -331,7 +331,6 @@
                     record[fieldName] = undefined; //TODO: undefined, null or empty string?
                 }
             } else if (field.type == "datetime") {
-                debugger;
                 var dateVal = $inputElement.val();
                 if (dateVal) {
                     try {
@@ -360,4 +359,103 @@
         }
     }
 
+    //Custom for image uploading
+    $.hik.jtable.prototype._submitFormWithUploadUsingAjax= function (url, formData, success, error) {
+        this._ajax({
+            url: url,
+            data: formData,
+            success: success,
+            processData: false,
+            contentType: false,
+            error: error
+        });
+    }
+
+    $.hik.jtable.prototype._saveAddRecordForm= function ($addRecordForm, $saveButton) {
+        var self = this;
+
+        //Make an Ajax call to update record
+        $addRecordForm.data('submitting', true);
+
+        var formData = $addRecordForm.serialize();
+        var ajaxCall = "_submitFormUsingAjax";
+
+        if (self.options.fileUpload && self.options.fileUpload == true) {
+            formData = new FormData($addRecordForm[0]);
+            ajaxCall = "_submitFormWithUploadUsingAjax"
+        }
+
+        self[ajaxCall](
+            $addRecordForm.attr('action'),
+            formData,
+            function (data) {
+                    
+                if (data.Result != 'OK') {
+                    self._showError(data.Message);
+                    self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
+                    return;
+                }
+                    
+                if (!data.Record) {
+                    self._logError('Server must return the created Record object.');
+                    self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
+                    return;
+                }
+
+                self._onRecordAdded(data);
+                self._addRow(
+                    self._createRowFromRecord(data.Record), {
+                        isNewRow: true
+                    });
+                self._$addRecordDiv.dialog("close");
+            },
+            function () {
+                self._showError(self.options.messages.serverCommunicationError);
+                self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
+            });
+    }
+
+    $.hik.jtable.prototype._saveEditForm= function ($editForm, $saveButton) {
+        var self = this;
+
+        var formData = $editForm.serialize();
+        var ajaxCall = "_submitFormUsingAjax";
+
+        if (self.options.fileUpload && self.options.fileUpload == true) {
+            formData = new FormData($editForm[0]);
+            ajaxCall = "_submitFormWithUploadUsingAjax"
+        }
+
+        self[ajaxCall](
+            $editForm.attr('action'),
+            formData,
+            function (data) {
+                //Check for errors
+                if (data.Result != 'OK') {
+                    self._showError(data.Message);
+                    self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
+                    return;
+                }
+
+                var record = self._$editingRow.data('record');
+
+                self._updateRecordValuesFromForm(record, $editForm);
+                self._updateRecordValuesFromServerResponse(record, data);
+                self._updateRowTexts(self._$editingRow);
+
+                self._$editingRow.attr('data-record-key', self._getKeyValueOfRecord(record));
+
+                self._onRecordUpdated(self._$editingRow, data);
+
+                if (self.options.animationsEnabled) {
+                    self._showUpdateAnimationForRow(self._$editingRow);
+                }
+
+                self._$editDiv.dialog("close");
+            },
+            function () {
+                self._showError(self.options.messages.serverCommunicationError);
+                self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
+            });
+    }
 })(jQuery)

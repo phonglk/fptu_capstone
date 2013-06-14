@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using DropIt.Models;
 using DropIt.DAL;
 using DropIt.Common;
+using System.Diagnostics;
 
 namespace DropIt.Areas.Administration.Controllers
 {
@@ -41,6 +42,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     EventId = e.EventId,
                     EventName = e.EventName,
+                    EventImage = e.EventImage,
                     Artist = e.Artist,
                     HoldDate = e.HoldDate,
                     Description = e.Description,
@@ -60,8 +62,22 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(Event Event)
+        public JsonResult Create(Event Event,HttpPostedFileBase EventImage)
         {
+
+            if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
+            {
+                Event.EventImage = Uploader.Upload(EventImage, this).ToString();
+            }
+            else
+            {
+                return Json(new JSONResult()
+                {
+                    Result = "ERROR",
+                    Message = "Phải là hình ảnh và kích thước < 5MB"
+                });
+            }
+
             try
             {
                 if (!ModelState.IsValid)
@@ -82,8 +98,21 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Update(Event Event)
+        public JsonResult Update(Event Event, HttpPostedFileBase EventImage)
         {
+            if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
+            {
+                Event.EventImage = Uploader.Upload(EventImage, this).ToString();
+            }
+            else
+            {
+                return Json(new JSONResult()
+                {
+                    Result = "ERROR",
+                    Message = "Phải là hình ảnh và kích thước < 5MB"
+                });
+            }
+
             try
             {
                 if (!ModelState.IsValid)
