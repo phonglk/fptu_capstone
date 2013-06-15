@@ -206,8 +206,7 @@ SET @xmlData = N'
   <request UserId="5" EventId="5" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
   <request UserId="6" EventId="6" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
   <request UserId="7" EventId="7" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="8" EventId="8" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="9" EventId="9" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <request UserId="8" EventId="8" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
 </requests>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
@@ -259,7 +258,6 @@ SET @xmlData = N'
   <ticket TicketId="6" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="2"  Status="1" UserId="6" EventId="6" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
   <ticket TicketId="7" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="3"  Status="1" UserId="7" EventId="7" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
   <ticket TicketId="8" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="4"  Status="1" UserId="8" EventId="8" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="9" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="1"  Status="0" UserId="9" EventId="9" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/> 
 </tickets>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
