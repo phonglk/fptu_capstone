@@ -4,6 +4,7 @@ using DropIt.Models;
 using DropIt.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -43,22 +44,6 @@ namespace DropIt.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(Ticket ticket)
-        //{
-        //    ticket.Status = "1";
-        //    ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
-        //    if (ModelState.IsValid)
-        //    {
-        //        this.unitOfWork.TicketRepository.AddOrUpdate(ticket);
-        //        this.unitOfWork.Save();
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
-        //                                     ticket.EventId);
-        //    return View(ticket);
-        //}
 
         //[HttpPost]
         //public JsonResult getEventInfo(int EventId)
@@ -88,51 +73,62 @@ namespace DropIt.Controllers
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             if (ModelState.IsValid)
             {
-                // add new venue 
-                Venue venue = new Venue()
-                                  {
-                                      VenueName = ticket.VenueName,
-                                      Address = ticket.Address,
-                                      ProvinceId = ticket.ProvinceId,
-                                      Status = 1                                      
-                                  };
-                this.unitOfWork.VenueRepository.AddOrUpdate(venue);
-                this.unitOfWork.Save();
-               
-                // add new event
-                Event newEvent = new Event()
-                                     {
-                                         EventName = ticket.EventName,
-                                         Status = 0,
-                                         HoldDate = ticket.HoldDate,
-                                         CategoryId = ticket.CategoryId,
-                                         VenueId = venue.VenueId
-                                     };
+                if(ticket.EventId==null)
+                {
+                    // add new venue 
+                    Venue venue = new Venue()
+                    {
+                        VenueName = ticket.VenueName,
+                        Address = ticket.Address,
+                        ProvinceId = ticket.ProvinceId,
+                        Status = 1
+                    };
+                    this.unitOfWork.VenueRepository.AddOrUpdate(venue);
+                    this.unitOfWork.Save();
 
-                this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
-                this.unitOfWork.Save();
-                // add new ticket with EventName was created in db
-                Ticket NewTicket = new Ticket()
-                                       {
-                                           EventId = newEvent.EventId,
-                                           SellPrice = ticket.SellPrice,
-                                           ReceiveMoney = ticket.ReceiveMoney,
-                                           Seat = ticket.Seat,
-                                           Description = ticket.Description,
-                                           Status = 1,
-                                           UserId = ticket.UserId
-                                       };
-                this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
-                this.unitOfWork.Save();
+                    // add new event
+                    Event newEvent = new Event()
+                    {
+                        EventName = ticket.EventName,
+                        Status = 0,
+                        HoldDate = ticket.HoldDate,
+                        CategoryId = ticket.CategoryId,
+                        VenueId = venue.VenueId
+                    };
 
+                    this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
+                    this.unitOfWork.Save();
 
-                string eventname = ticket.EventName;
-                string venuename = ticket.VenueName;
-                string address = ticket.Address;
-                int provinceid = ticket.ProvinceId;
-                System.DateTime holedate = ticket.HoldDate;
-
-
+                    // add new ticket with EventName was created in db
+                    Ticket NewTicket = new Ticket()
+                    {
+                        EventId = newEvent.EventId,
+                        SellPrice = ticket.SellPrice,
+                        ReceiveMoney = ticket.ReceiveMoney,
+                        Seat = ticket.Seat,
+                        Description = ticket.Description,
+                        Status = 1,
+                        UserId = ticket.UserId
+                    };
+                    this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
+                    this.unitOfWork.Save();
+                    Debug.WriteLine("12345");
+                }
+                else
+                {
+                    Ticket NewTicket = new Ticket()
+                    {
+                        EventId = (int)ticket.EventId,
+                        SellPrice = ticket.SellPrice,
+                        ReceiveMoney = ticket.ReceiveMoney,
+                        Seat = ticket.Seat,
+                        Description = ticket.Description,
+                        Status = 1,
+                        UserId = ticket.UserId
+                    };
+                    this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
+                    this.unitOfWork.Save();
+                }
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
