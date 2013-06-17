@@ -4,7 +4,7 @@
     [ReceiveMoney]     FLOAT (53)     NOT NULL,
     [Seat]             NVARCHAR (MAX) NULL,
     [Description]      NVARCHAR (MAX) NULL,
-    [Status]           NVARCHAR (50)  NOT NULL,
+    [Status]           INT            NOT NULL,
     [UserId]           INT            NOT NULL,
     [EventId]          INT            NOT NULL,
     [CreatedDate]      DATETIME       NULL,
@@ -21,6 +21,8 @@
     CONSTRAINT [FK_Ticket_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Ticket_User1] FOREIGN KEY ([TranUserId]) REFERENCES [dbo].[User] ([UserId])
 );
+
+
 
 
 
