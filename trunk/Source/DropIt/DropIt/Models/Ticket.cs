@@ -24,7 +24,7 @@ namespace DropIt.Models
         public double ReceiveMoney { get; set; }
         public string Seat { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
+        public int Status { get; set; }
         public int UserId { get; set; }
         public int EventId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
