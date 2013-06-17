@@ -14,9 +14,8 @@ namespace DropIt.ViewModels
             this.ModifiedDate = DateTime.Now;
         }
         public int TicketId { get; set; }
-
-        [Required]
-        public int EventId { get; set; }
+        
+        public int? EventId { get; set; }
 
         [Required]
         public double SellPrice { get; set; }
@@ -44,8 +43,11 @@ namespace DropIt.ViewModels
         [Required]
         public int ProvinceId { get; set; }
 
-        
-        public System.DateTime HoldDate { get; set; }
+        public int CategoryId { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime HoldDate { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
