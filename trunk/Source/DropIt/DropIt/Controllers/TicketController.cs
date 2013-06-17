@@ -37,9 +37,8 @@ namespace DropIt.Controllers
         public ActionResult Create()
         {
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName");
-
-            // them moi vao test provinceid
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
             ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
             return View();
         }
@@ -75,44 +74,77 @@ namespace DropIt.Controllers
             {
                 if(ticket.EventId==null)
                 {
-                    // add new venue 
-                    Venue venue = new Venue()
+                    if (ticket.VenueId == null)
                     {
-                        VenueName = ticket.VenueName,
-                        Address = ticket.Address,
-                        ProvinceId = ticket.ProvinceId,
-                        Status = 1
-                    };
-                    this.unitOfWork.VenueRepository.AddOrUpdate(venue);
-                    this.unitOfWork.Save();
+                        // add new venue 
+                        Venue venue = new Venue()
+                        {
+                            VenueName = ticket.VenueName,
+                            Address = ticket.Address,
+                            ProvinceId = (int)ticket.ProvinceId,
+                            Status = 1
+                        };
+                        this.unitOfWork.VenueRepository.AddOrUpdate(venue);
+                        this.unitOfWork.Save();
 
-                    // add new event
-                    Event newEvent = new Event()
+                        // add new event
+                        Event newEvent = new Event()
+                        {
+                            EventName = ticket.EventName,
+                            Status = 0,
+                            HoldDate = (DateTime)ticket.HoldDate,
+                            CategoryId = (int)ticket.CategoryId,
+                            VenueId = venue.VenueId
+                        };
+
+                        this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
+                        this.unitOfWork.Save();
+
+                        // add new ticket
+                        Ticket NewTicket = new Ticket()
+                        {
+                            EventId = newEvent.EventId,
+                            SellPrice = ticket.SellPrice,
+                            ReceiveMoney = ticket.ReceiveMoney,
+                            Seat = ticket.Seat,
+                            Description = ticket.Description,
+                            Status = 1,
+                            UserId = ticket.UserId
+                        };
+                        this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
+                        this.unitOfWork.Save();
+                        Debug.WriteLine("khong co venueid");
+                    }
+
+                    else //if(ticket.EventId!=null)
                     {
-                        EventName = ticket.EventName,
-                        Status = 0,
-                        HoldDate = ticket.HoldDate,
-                        CategoryId = ticket.CategoryId,
-                        VenueId = venue.VenueId
-                    };
+                        // add new event
+                        Event newEvent = new Event()
+                        {
+                            EventName = ticket.EventName,
+                            Status = 0,
+                            HoldDate = (DateTime)ticket.HoldDate,
+                            CategoryId = (int)ticket.CategoryId,
+                            VenueId = (int)ticket.VenueId
+                        };
+                        this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
+                        this.unitOfWork.Save();
 
-                    this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
-                    this.unitOfWork.Save();
-
-                    // add new ticket with EventName was created in db
-                    Ticket NewTicket = new Ticket()
-                    {
-                        EventId = newEvent.EventId,
-                        SellPrice = ticket.SellPrice,
-                        ReceiveMoney = ticket.ReceiveMoney,
-                        Seat = ticket.Seat,
-                        Description = ticket.Description,
-                        Status = 1,
-                        UserId = ticket.UserId
-                    };
-                    this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
-                    this.unitOfWork.Save();
-                    Debug.WriteLine("12345");
+                        // add new ticket with EventName was created in db
+                        Ticket NewTicket = new Ticket()
+                        {
+                            EventId = newEvent.EventId,
+                            SellPrice = ticket.SellPrice,
+                            ReceiveMoney = ticket.ReceiveMoney,
+                            Seat = ticket.Seat,
+                            Description = ticket.Description,
+                            Status = 1,
+                            UserId = ticket.UserId
+                        };
+                        this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
+                        this.unitOfWork.Save();
+                        Debug.WriteLine("12345");
+                    }
                 }
                 else
                 {
@@ -136,6 +168,7 @@ namespace DropIt.Controllers
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
                                              ticket.EventId);
             ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", ticket.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
             return View(ticket);
         }
     }
