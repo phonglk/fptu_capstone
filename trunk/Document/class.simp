@@ -86,7 +86,89 @@
         <version />
       </meta>
       <tagged-values />
-      <abstract-items />
+      <abstract-items>
+        <item id="di133384949350709756" cid="C004" type="class" name="Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:47">
+          <stereotypes />
+          <tagged-values />
+          <documentation>
+            <text>
+              <content>
+                <paragraph line-spacing="1">
+                  <p index="0">
+                    <t />
+                    <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                      <text>
+                        <solid-brush color="#FF000000" />
+                      </text>
+                    </style>
+                  </p>
+                </paragraph>
+              </content>
+            </text>
+          </documentation>
+          <cooperation>
+            <participants />
+            <comments />
+          </cooperation>
+          <associated-diagrams />
+          <owned-items />
+          <style class="default" />
+          <attributes>
+            <attribute id="ae9bbcc17461f42bab59c94c8ad763dac63" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="ab45a1ce1cbde4741a24949b62dfd67b1411" name="CategoryName" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a3a9ca31cc1d24ec4a985128bc9403899363" name="ParentCategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="ab35fde0a76b0465fb546f925937b7055252" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="ab251cbd6a88e4f889c524166fb9ffeb6434" name="Description" type="nvachar(MAX)" type-id="nvachar(MAX)" visibility="public" abstract="false" virtual="false" />
+          </attributes>
+          <operations />
+          <template-parameters>
+            <source-codes />
+          </template-parameters>
+        </item>
+        <item id="di820304116113459660" cid="C005" type="class" name="Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:59">
+          <stereotypes />
+          <tagged-values />
+          <documentation>
+            <text>
+              <content>
+                <paragraph line-spacing="1">
+                  <p index="0">
+                    <t />
+                    <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                      <text>
+                        <solid-brush color="#FF000000" />
+                      </text>
+                    </style>
+                  </p>
+                </paragraph>
+              </content>
+            </text>
+          </documentation>
+          <cooperation>
+            <participants />
+            <comments />
+          </cooperation>
+          <associated-diagrams />
+          <owned-items />
+          <style class="default" />
+          <attributes>
+            <attribute id="ac75d89d42b124757b86b86709ed3fcf3455" name="EventID" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a16f8cc2f33434b728d620bbb0fd50003609" name="EventName" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a95708b1472aa44028c15b98a142660a9472" name="Artist" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a20d70e59eb53456592c9143751a56edb481" name="Holdate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a493d42e2466f4a4f91c8afcb099069c7854" name="Description" type="nvachar(MAX)" type-id="nvachar(MAX)" visibility="public" abstract="false" virtual="false" />
+            <attribute id="aeaebff00f14642d9aacf0fbc795cd6fc906" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="adbaa8e53434e40e495aee93827d89e09162" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a9c0f72fcae1543f78ec80202583229cf717" name="VenueId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a3c477f7d609742afaeef51c91e107d1d195" name="CreatedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
+            <attribute id="a41c43e3877e74de8a9c8448bfbe96bf0960" name="ModifiedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
+          </attributes>
+          <operations />
+          <template-parameters>
+            <source-codes />
+          </template-parameters>
+        </item>
+      </abstract-items>
       <sub-models />
       <diagram type="uml-class" id="p612079612823565304" name="ClassDiagram1" order-index="1" show-nullability="false">
         <style>
@@ -189,87 +271,6 @@
               <attribute id="a391a044bdc7d4a9a806b909cdd8b7995469" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
               <attribute id="a1ff6975d3f734edcaae21a3c2307db62672" name="CreateDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
               <attribute id="a4cd68fb78b5c4e629c0b57a004622955377" name="modifiedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
-            </attributes>
-            <operations />
-            <template-parameters>
-              <source-codes />
-            </template-parameters>
-          </item>
-          <item id="di133384949350709756" cid="C004" type="class" name="Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:47">
-            <stereotypes />
-            <tagged-values />
-            <documentation>
-              <text>
-                <content>
-                  <paragraph line-spacing="1">
-                    <p index="0">
-                      <t />
-                      <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
-                        <text>
-                          <solid-brush color="#FF000000" />
-                        </text>
-                      </style>
-                    </p>
-                  </paragraph>
-                </content>
-              </text>
-            </documentation>
-            <cooperation>
-              <participants />
-              <comments />
-            </cooperation>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <attributes>
-              <attribute id="ae9bbcc17461f42bab59c94c8ad763dac63" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="ab45a1ce1cbde4741a24949b62dfd67b1411" name="CategoryName" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a3a9ca31cc1d24ec4a985128bc9403899363" name="ParentCategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="ab35fde0a76b0465fb546f925937b7055252" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="ab251cbd6a88e4f889c524166fb9ffeb6434" name="Description" type="nvachar(MAX)" type-id="nvachar(MAX)" visibility="public" abstract="false" virtual="false" />
-            </attributes>
-            <operations />
-            <template-parameters>
-              <source-codes />
-            </template-parameters>
-          </item>
-          <item id="di820304116113459660" cid="C005" type="class" name="Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:59">
-            <stereotypes />
-            <tagged-values />
-            <documentation>
-              <text>
-                <content>
-                  <paragraph line-spacing="1">
-                    <p index="0">
-                      <t />
-                      <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
-                        <text>
-                          <solid-brush color="#FF000000" />
-                        </text>
-                      </style>
-                    </p>
-                  </paragraph>
-                </content>
-              </text>
-            </documentation>
-            <cooperation>
-              <participants />
-              <comments />
-            </cooperation>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <attributes>
-              <attribute id="ac75d89d42b124757b86b86709ed3fcf3455" name="EventID" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a16f8cc2f33434b728d620bbb0fd50003609" name="EventName" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a95708b1472aa44028c15b98a142660a9472" name="Artist" type="nvachar(50)" type-id="nvachar(50)" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a20d70e59eb53456592c9143751a56edb481" name="Holdate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a493d42e2466f4a4f91c8afcb099069c7854" name="Description" type="nvachar(MAX)" type-id="nvachar(MAX)" visibility="public" abstract="false" virtual="false" />
-              <attribute id="aeaebff00f14642d9aacf0fbc795cd6fc906" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="adbaa8e53434e40e495aee93827d89e09162" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a9c0f72fcae1543f78ec80202583229cf717" name="VenueId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a3c477f7d609742afaeef51c91e107d1d195" name="CreatedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
-              <attribute id="a41c43e3877e74de8a9c8448bfbe96bf0960" name="ModifiedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
             </attributes>
             <operations />
             <template-parameters>
@@ -775,6 +776,81 @@
               </points>
             </layout>
             <relation from="di522683038986988130" from-iid="1aab3440525d42d7ab0ddd151c830775" to="di282636733675920328" to-iid="a62eec6a83b74e1da0a9a09a3ee0705b" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-class" id="p206607502354057274" name="create category" order-index="2" show-nullability="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>06/18/2013 00:31:22</creation-date>
+          <change-date>06/18/2013 00:33:14</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <tagged-values />
+        <abstract-items>
+          <item id="di701645696877079839" cid="REL004" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/18/2013 00:33:06">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di133384949350709756" to="di133384949350709756">
+              <start-role id="" name="" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di304426780850547228" cid="REL005" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/18/2013 00:33:14">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di133384949350709756" to="di820304116113459660">
+              <start-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di133384949350709756" iid="d159792626124e7a91bfa01f55d5d5d3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/18/2013 00:31:43" order-index="0" type="entity">
+            <layout ax="158" ay="152" awidth="203" aheight="242" x="158" y="152" width="203" height="242" angle="0" />
+            <class />
+          </item>
+          <item id="di820304116113459660" iid="3e5ae3959881419ab4ddd4209b0cab43" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/18/2013 00:32:02" order-index="0" type="entity">
+            <layout ax="490" ay="152" awidth="195" aheight="386" x="490" y="152" width="195" height="386" angle="0" />
+            <class />
+          </item>
+          <item id="di701645696877079839" iid="cf885d79414640ffb1619e4e96bc5090" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/18/2013 00:33:06" order-index="1" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="193" y1="152" x2="158" y2="346" start-border-pos="0.05" end-border-pos="0.8">
+              <points>
+                <point x="193" y="152" />
+                <point x="193" y="102" />
+                <point x="108" y="102" />
+                <point x="108" y="346" />
+                <point x="158" y="346" />
+              </points>
+            </layout>
+            <relation from="di133384949350709756" from-iid="d159792626124e7a91bfa01f55d5d5d3" to="di133384949350709756" to-iid="d159792626124e7a91bfa01f55d5d5d3" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+          <item id="di304426780850547228" iid="568ea60fff7c463da657150cbcda6365" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/18/2013 00:33:14" order-index="2" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="361" y1="295" x2="490" y2="295" start-border-pos="0.397903663067778" end-border-pos="0.907407407407407">
+              <points>
+                <point x="361" y="295" />
+                <point x="490" y="295" />
+              </points>
+            </layout>
+            <relation from="di133384949350709756" from-iid="d159792626124e7a91bfa01f55d5d5d3" to="di820304116113459660" to-iid="3e5ae3959881419ab4ddd4209b0cab43" />
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
         </layer>
