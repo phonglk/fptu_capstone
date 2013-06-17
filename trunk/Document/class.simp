@@ -69,9 +69,7 @@
       </attributes>
       <operations />
       <template-parameters>
-        <source-codes>
-          <source-code language="ActionScript" />
-        </source-codes>
+        <source-codes />
       </template-parameters>
     </item>
   </items>
@@ -155,9 +153,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di736431396665397062" cid="C003" type="class" name="Request" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:31">
@@ -196,9 +192,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di133384949350709756" cid="C004" type="class" name="Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:47">
@@ -236,9 +230,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di820304116113459660" cid="C005" type="class" name="Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:59">
@@ -281,9 +273,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di282636733675920328" cid="C006" type="class" name="Ticket" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:30:09">
@@ -330,9 +320,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di522683038986988130" cid="C007" type="class" name="TicketResponse" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:30:36">
@@ -370,9 +358,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di739153852704217233" cid="C009" type="class" name="User" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:32:00">
@@ -416,9 +402,7 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
           <item id="di532842901422316387" cid="REL003" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P744f9911041c4f998232a8a2b54a302d" creation-date="06/15/2013 02:58:37">
@@ -498,7 +482,7 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di603952025443576196" cid="REL004" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:23:26">
+          <item id="di603952025443576196" cid="REL004" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:23:26">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -509,7 +493,7 @@
               <end-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di240978932264814889" cid="REL006" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:31:49">
+          <item id="di240978932264814889" cid="REL006" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:31:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -520,7 +504,7 @@
               <end-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di232950622283165263" cid="REL005" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:31:40">
+          <item id="di232950622283165263" cid="REL005" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:31:40">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -564,12 +548,10 @@
             </attributes>
             <operations />
             <template-parameters>
-              <source-codes>
-                <source-code language="ActionScript" />
-              </source-codes>
+              <source-codes />
             </template-parameters>
           </item>
-          <item id="di317884803762481056" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:14:20">
+          <item id="di317884803762481056" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:14:20">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -580,7 +562,7 @@
               <end-role id="" name="" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di380374272273645610" cid="REL002" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:17:01">
+          <item id="di380374272273645610" cid="REL002" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:17:01">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -591,7 +573,7 @@
               <end-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di946428885127946376" cid="REL003" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:17:04">
+          <item id="di946428885127946376" cid="REL003" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/17/2013 11:17:04">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -647,9 +629,9 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di532842901422316387" iid="367c234739334c4b8a3c3258cf4f69de" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 02:58:37" order-index="10" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="353" y1="451" x2="487" y2="436" start-border-pos="0.381411486332959" end-border-pos="0.903601694915254">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" name-position="10,-10" x1="353" y1="437" x2="487" y2="436" start-border-pos="0.363861386138614" end-border-pos="0.903601694915254">
               <points>
-                <point x="353" y="451" />
+                <point x="353" y="437" />
                 <point x="487" y="436" />
               </points>
             </layout>
@@ -682,7 +664,7 @@
             <layout line-style="oblique" lock-start-point="true" lock-end-point="true" name-position="10,-10" x1="690" y1="447" x2="823" y2="797" start-border-pos="0.358050847457627" end-border-pos="0.947819314641745">
               <points>
                 <point x="690" y="447" />
-                <point x="769" y="456" />
+                <point x="764" y="448" />
                 <point x="767" y="797" />
                 <point x="823" y="797" />
               </points>
@@ -704,13 +686,13 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="23.00005,-15.01002" end-multiplicity="24.99998,15" />
           </item>
           <item id="di488043996957159864" iid="2d2e792020674d718b652ed40a5ef410" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 03:08:51" order-index="18" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="188" y1="342" x2="147" y2="470" start-border-pos="0.05" end-border-pos="0.8">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="188" y1="345" x2="147" y2="507" start-border-pos="0.05" end-border-pos="0.8">
               <points>
-                <point x="188" y="342" />
+                <point x="188" y="345" />
                 <point x="188" y="292" />
                 <point x="97" y="292" />
-                <point x="97" y="470" />
-                <point x="147" y="470" />
+                <point x="99" y="505" />
+                <point x="147" y="507" />
               </points>
             </layout>
             <relation from="di133384949350709756" from-iid="8c18cc27c6d54189a8d29a36df340f77" to="di133384949350709756" to-iid="8c18cc27c6d54189a8d29a36df340f77" />
