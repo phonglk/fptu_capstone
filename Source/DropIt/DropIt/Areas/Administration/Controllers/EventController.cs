@@ -100,17 +100,25 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult Update(Event Event, HttpPostedFileBase EventImage)
         {
-            if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
+            if (EventImage != null)
             {
-                Event.EventImage = Uploader.Upload(EventImage, this).ToString();
+                if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
+                {
+                    Event.EventImage = Uploader.Upload(EventImage, this).ToString();
+                }
+                else
+                {
+                    return Json(new JSONResult()
+                    {
+                        Result = "ERROR",
+                        Message = "Phải là hình ảnh và kích thước < 5MB"
+                    });
+                }
             }
             else
             {
-                return Json(new JSONResult()
-                {
-                    Result = "ERROR",
-                    Message = "Phải là hình ảnh và kích thước < 5MB"
-                });
+                // NoUpload use old data
+                Event.EventImage = Repository.Get(evt => evt.EventId == Event.EventId).FirstOrDefault().EventImage;
             }
 
             try

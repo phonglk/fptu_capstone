@@ -458,4 +458,23 @@
                 self._setEnabledOfDialogButton($saveButton, true, self.options.messages.save);
             });
     }
+
+    previewUpload = function () {
+        var inputs = $("input.previewUpload");
+        if (inputs.attr("previewHanlder") != "true") {
+            inputs.css("visibility", "hidden");
+            $("img.previewUpload").css("cursor", "pointer");
+            $("img.previewUpload").click(function(){
+                inputs.trigger("click");
+            })
+            inputs.change(function () {
+                var reader = new FileReader();
+                reader.readAsDataURL(inputs[0].files[0]);
+                reader.onload = function (readerEvent) {
+                    $("img.previewUpload").attr("src", readerEvent.target.result);
+                }
+            })
+            inputs.attr("previewHanlder", "true");
+        }
+    }
 })(jQuery)

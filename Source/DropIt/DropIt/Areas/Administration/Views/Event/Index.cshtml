@@ -21,6 +21,19 @@
     </div>
     <!-- end events table -->
 </div>
+<style>
+    .jtable-input-field-container {
+        width:250px;
+        float:left;
+        margin-left:30px;
+        border-bottom:none !important;
+    }
+    .ui-dialog .ui-dialog-content form {
+        width: 600px;
+        overflow: hidden;
+    }
+    
+</style>
 <script>
     $(document).ready(function () {
         var jtable_config = {
@@ -48,14 +61,21 @@
                         "required"
                     ]
                 },
+                TmpEventImage :{
+                    type : "hidden"
+                },
                 EventImage: {
                     title: "Hình minh họa",
                     list: false,
                     input: function (data) {
                         if (data.record) {
-                            return $("<img src='"+Url(data.record.EventImage)+"' style='width:200px;margin: 0 auto;display:block'/><input type='file' name='EventImage'/>")
+                            var imgSrc = data.record.TmpEventImage || Url(data.record.EventImage)
+                            if (imgSrc == "") {
+                                imgSrc = Url("~/Content/Images/no_image.jpg");
+                            }
+                            return $("<img src='" + imgSrc + "' class='previewUpload img-polaroid'/><input type='file' name='EventImage' class='previewUpload'/>")
                         } else {
-                            return $("<input type='file' name='EventImage'/>")
+                            return $("<img class='previewUpload img-polaroid' src='" + Url("~/Content/Images/no_image.jpg") + "' /><input type='file' name='EventImage' class='previewUpload'/>")
                         }
                     }
                 },
@@ -91,6 +111,10 @@
             },
             formCreated: function (event,form) {
                 $("#HoldDatePicker").datetimepicker({ pickSeconds: false, maskInput: false });
+                previewUpload();
+            },
+            rowUpdated: function (event, data) {
+                data.record.TmpEventImage = $("img.previewUpload").attr("src");
             }
         }
 
