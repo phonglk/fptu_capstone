@@ -18,16 +18,15 @@
             <h3>Đăng vé</h3>
             
             @Html.LabelAndControl("Tên Sự kiện:", @Html.DropDownList("EventId", String.Empty))  
-            <div id="textbox">
-                @Html.TextBox("EventName")
-            </div>
+            @Html.LabelAndControl("Tên Sự kiện 2:", @Html.TextBox("EventName"))  
             <label>
                 <input type="checkbox" id="newevent" onchange="doClick()">Tạo mới
             </label>             
             @Html.LabelAndControl("Nơi tổ chức:", Html.TextBox("VenueName"))
             @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
             @Html.LabelAndControl("Tỉnh thành:", Html.DropDownList("ProvinceId", String.Empty))
-            // @Html.LabelAndControl("Thời gian:", Html.TextBox("HoldDate"))
+            @Html.LabelAndControl("Thời gian:", Html.TextBox("HoldDate"))
+            @Html.LabelAndControl("Thể loại:", Html.DropDownList("CategoryId", string.Empty))
             @Html.LabelAndControl("Miêu tả vé:", Html.EditorFor(model=>model.Seat))
             @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.EditorFor(model=>model.Description))
             @Html.LabelAndControl("Giá muốn bán (*):", Html.EditorFor(model=>model.SellPrice))
@@ -73,5 +72,5 @@
 </script>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+   
 }
