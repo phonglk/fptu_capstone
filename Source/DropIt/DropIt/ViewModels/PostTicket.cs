@@ -39,15 +39,16 @@ namespace DropIt.ViewModels
 
         
         public string Address { get; set; }
+        
+        public int? ProvinceId { get; set; }
 
-        [Required]
-        public int ProvinceId { get; set; }
+        public int? CategoryId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? VenueId { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime HoldDate { get; set; }
+        public DateTime? HoldDate { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
