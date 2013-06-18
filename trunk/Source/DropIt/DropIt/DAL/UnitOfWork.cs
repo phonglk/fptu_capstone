@@ -16,7 +16,8 @@ namespace DropIt.DAL
         private GenericRepository<Venue> venueRepository;
         private GenericRepository<Province> provinceRepository;
         private UserRepository userRepository;
-        private TicketRepository ticketRepository; 
+        private TicketRepository ticketRepository;
+        private RequestRepository requestRepository;
 
 
         public EventRepository EventRepository
@@ -84,6 +85,7 @@ namespace DropIt.DAL
             }
         }
 
+        //Ticket
         public TicketRepository TicketRepository
         {
             get
@@ -94,6 +96,20 @@ namespace DropIt.DAL
                     this.ticketRepository = new TicketRepository(context);
                 }
                 return ticketRepository;
+            }
+        }
+
+        // RequestTicket
+        public RequestRepository RequestRepository
+        {
+            get
+            {
+
+                if (this.requestRepository == null)
+                {
+                    this.requestRepository = new RequestRepository(context);
+                }
+                return requestRepository;
             }
         }
 
