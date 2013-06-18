@@ -23,16 +23,23 @@
 </div>
 <style>
     .jtable-input-field-container {
-        width:250px;
+        width:280px;
         float:left;
         margin-left:30px;
         border-bottom:none !important;
     }
     .ui-dialog .ui-dialog-content form {
-        width: 600px;
+        width: 620px;
         overflow: hidden;
+        padding-bottom: 20px;
+        margin-bottom:10px;
     }
-    
+    textarea,input[type='text'],select {
+        width:250px !important;
+    }
+    .input-append input[type='text'] {
+        width:216px !important;
+    }
 </style>
 <script>
     $(document).ready(function () {
@@ -79,6 +86,11 @@
                         }
                     }
                 },
+                Description:{
+                    title: "Chú thích",
+                    type:"textarea",
+                    list:false
+                },
                 Artist: {
                     title: 'Nghệ sĩ',
                     validation: ["required"]
@@ -112,6 +124,7 @@
             formCreated: function (event,form) {
                 $("#HoldDatePicker").datetimepicker({ pickSeconds: false, maskInput: false });
                 previewUpload();
+                $(".jtable-dialog-form > div.jtable-input-field-container").eq(1).css({ float: "right" });
             },
             rowUpdated: function (event, data) {
                 data.record.TmpEventImage = $("img.previewUpload").attr("src");

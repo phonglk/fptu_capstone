@@ -340,15 +340,21 @@ hr {
     font-weight: lighter;
     position: relative;
 }
-.register input{
-background: #fff;
-border-top: 0 none;
-border-left: 0 none;
-border-right: 0 none;
-border-bottom: 1px solid #391147;
-border-radius: 0;
-box-shadow: none;
-width: 280px;
+.register input[type='text'],
+.register input[type='password'],
+.register input[type='select'],
+.register input[type='email'],
+.register input[type='text']{
+    background: #fff;
+    border-top: 0 none;
+    border-left: 0 none;
+    border-right: 0 none;
+    border-bottom: 1px solid #391147;
+    border-radius: 0;
+    box-shadow: none;
+}
+.register input[type='text'], select {
+    width: 280px;
 }
 .register label {
     text-align: left !important;
@@ -402,4 +408,10 @@ box-shadow:none;
 }
 .login .check-remember label {
     margin-top: -15px;
+}
+.add-on label{
+    display: inline;
+}
+.add-on input[type='checkbox']{
+	margin-top: 0;
 }
