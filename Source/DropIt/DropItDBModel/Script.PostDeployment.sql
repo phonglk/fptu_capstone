@@ -199,14 +199,14 @@ WHEN NOT MATCHED BY TARGET THEN
 -----------Request------------------
 SET @xmlData = N'
 <requests>
-  <request UserId="1" EventId="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="2" EventId="2" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="3" EventId="3" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="4" EventId="4" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="5" EventId="5" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="6" EventId="6" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="7" EventId="7" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="8" EventId="8" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <request UserId="1" EventId="1" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="2" EventId="2" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="3" EventId="3" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="4" EventId="4" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="5" EventId="5" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="6" EventId="6" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="7" EventId="7" Status="0" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
+  <request UserId="8" EventId="8" Status="0" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
 </requests>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
