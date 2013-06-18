@@ -21,9 +21,10 @@ namespace DropIt.Models
     
         public int UserId { get; set; }
         public int EventId { get; set; }
+        public int Status { get; set; }
         public string Description { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual Event Event { get; set; }
         public virtual User User { get; set; }
