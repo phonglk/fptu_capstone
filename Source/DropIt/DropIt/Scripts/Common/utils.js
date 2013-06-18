@@ -121,15 +121,15 @@ window.Url = function (_arg,defaultUrl) {
         newRouting = $.extend({}, Routing, {
             Area: Area,
             Controller: Controller,
-            Action: Action,
-            Data: Data
+            Action: Action?Action:"",
+            Data: Data?Data:""
         });
         url = "";
-        if ((newRouting.Area != null) !== "") {
+        if (newRouting.Area && (newRouting.Area != null) !== "") {
             url += "/" + newRouting.Area;
         }
         url += "/" + newRouting.Controller + "/";
-        if ((newRouting.Action != null) !== "" || (newRouting.Action != null) !== "Index") {
+        if (newRouting.Action && (newRouting.Action != null) !== "" || (newRouting.Action != null) !== "Index") {
             url += "" + newRouting.Action;
         }
 

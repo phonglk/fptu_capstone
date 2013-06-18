@@ -12,7 +12,12 @@ namespace DropIt.ViewModels
         {
             this.CreatedDate = DateTime.Now;
             this.ModifiedDate = DateTime.Now;
+            this.CreateEvent = null;
+            this.CreateVenue = null;
         }
+
+        
+
         public int TicketId { get; set; }
         
         public int? EventId { get; set; }
@@ -42,7 +47,8 @@ namespace DropIt.ViewModels
         
         public int? ProvinceId { get; set; }
 
-        public int? CategoryId { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
 
         public int? VenueId { get; set; }
 
@@ -52,5 +58,8 @@ namespace DropIt.ViewModels
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        public String CreateEvent;
+        public String CreateVenue;
     }
 }

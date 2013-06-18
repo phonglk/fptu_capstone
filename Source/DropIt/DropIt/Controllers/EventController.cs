@@ -13,12 +13,13 @@ namespace DropIt.Controllers
     public class EventController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
+        private EventRepository Repository;
         //
         // GET: /Event/
 
         public EventController()
         {
-            
+            Repository = unitOfWork.EventRepository;
         }
 
         public ActionResult List()
@@ -119,6 +120,38 @@ namespace DropIt.Controllers
                 return HttpNotFound();
             }
             return View(evt);
+        }
+
+        [HttpPost]
+        public JsonResult getInfo(int EventId)
+        {
+            
+            var Event = Repository.Get(e =>  e.EventId == EventId);
+
+            if (Event != null)
+            {
+                return Json(new
+                {
+                    Result = "OK",
+                    Records = Event.Select(e => new {
+                        e.Venue.VenueName,
+                        e.Venue.VenueId,
+                        e.Venue.Address,
+                        e.Venue.Province.ProvinceId,
+                        e.Venue.Province.ProvinceName,
+                        e.HoldDate
+                    })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = "Event not found"
+                });
+            }
+
         }
 
         //

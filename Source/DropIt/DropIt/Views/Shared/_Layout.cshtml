@@ -6,8 +6,19 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/DropIt")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/ko")
+    @Scripts.Render("~/bundles/utils")
+    @Scripts.Render("~/bundles/DropIt")
 
+    @Styles.Render("~/Content/DropIt")
+    <script>
+        var Routing = {
+            Area: "@ViewContext.RouteData.DataTokens["area"]",
+            Controller: "@ViewContext.RouteData.Values["controller"]",
+            Action: "@ViewContext.RouteData.Values["action"]"
+        }
+    </script>
 </head>
 <body>
     <div id="page">
@@ -114,8 +125,7 @@
     <!--Area: Footer.END-->
     </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/DropIt")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

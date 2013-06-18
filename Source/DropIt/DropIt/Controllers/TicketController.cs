@@ -44,26 +44,6 @@ namespace DropIt.Controllers
         }
 
 
-        //[HttpPost]
-        //public JsonResult getEventInfo(int EventId)
-        //{
-
-        //    var temp = from tk in db.Tickets
-        //               join ev in db.Events on tk.EventId equals ev.EventId
-        //               join vn in db.Venues on ev.VenueId equals vn.VenueId
-        //               where EventId == ev.VenueId
-        //               select new
-        //                          {                                      
-        //                              vn.VenueName,
-        //                              vn.Address,
-        //                              vn.ProvinceId,
-        //                              ev.HoldDate
-        //                          };
-
-        //    return Json(temp, JsonRequestBehavior.AllowGet);
-
-        //}
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -72,9 +52,9 @@ namespace DropIt.Controllers
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             if (ModelState.IsValid)
             {
-                if(ticket.EventId==null)
+                if(ticket.CreateEvent != null) // create new event
                 {
-                    if (ticket.VenueId == null)
+                    if (ticket.CreateVenue != null) // create new venue
                     {
                         // add new venue 
                         Venue venue = new Venue()
@@ -94,7 +74,9 @@ namespace DropIt.Controllers
                             Status = 0,
                             HoldDate = (DateTime)ticket.HoldDate,
                             CategoryId = (int)ticket.CategoryId,
-                            VenueId = venue.VenueId
+                            VenueId = venue.VenueId,
+                            CreatedDate = null,
+                            ModifiedDate = null
                         };
 
                         this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
