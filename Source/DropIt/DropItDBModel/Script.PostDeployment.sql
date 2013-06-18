@@ -212,15 +212,15 @@ SET @xmlData = N'
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
 MERGE Request AS target USING (
-    SELECT s.UserId, s.EventId, s.Description, s.CreatedDate, s.ModifiedDate
+    SELECT s.UserId, s.EventId, s.Status, s.Description, s.CreatedDate, s.ModifiedDate
     FROM OPENXML(@xml, '/requests/request', 1)
-    WITH (UserId int, EventId int, Description nvarchar(MAX), CreatedDate datetime, ModifiedDate datetime) as s) 
-	AS source (UserId, EventId, Description, CreatedDate, ModifiedDate)
+    WITH (UserId int, EventId int, Status int, Description nvarchar(MAX), CreatedDate datetime, ModifiedDate datetime) as s) 
+	AS source (UserId, EventId, Status, Description, CreatedDate, ModifiedDate)
 ON (source.UserId = target.UserId and source.EventId = target.EventId)
 --WHEN MATCHED THEN
 --    UPDATE SET ProvinceName = source.ProvinceName
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (UserId, EventId, Description, CreatedDate, ModifiedDate) values (source.UserId, source.EventId, source.Description, source.CreatedDate, source.ModifiedDate)
+    INSERT (UserId, EventId, Status, Description, CreatedDate, ModifiedDate) values (source.UserId, source.EventId, source.Status, source.Description, source.CreatedDate, source.ModifiedDate)
 ;
 
 -----------UserFollowEvent------------------
