@@ -112,9 +112,10 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -494,11 +495,12 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Event" Relationship="DropItModel.FK_Request_Event" FromRole="Request" ToRole="Event" />
           <NavigationProperty Name="User" Relationship="DropItModel.FK_Request_User" FromRole="Request" ToRole="User" />
           <NavigationProperty Name="TicketResponses" Relationship="DropItModel.FK_RespondRequest_Request" FromRole="Request" ToRole="TicketResponse" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -816,6 +818,7 @@
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="DropItModel.Request">
               <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
