@@ -548,12 +548,7 @@
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.css" />
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\class.js" />
-    <Content Include="Scripts\Common\custom-binding.js">
-      <DependentUpon>custom-binding.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\custom-binding.min.js">
-      <DependentUpon>custom-binding.coffee</DependentUpon>
-    </Content>
+    <Content Include="Scripts\Common\custom-binding.js" />
     <Content Include="Scripts\Common\default.js" />
     <Content Include="Scripts\Common\GenericEntity.js">
       <DependentUpon>GenericEntity.coffee</DependentUpon>
@@ -568,7 +563,6 @@
       <DependentUpon>GenericViewModels.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\Common\GenericViewModels.coffee" />
-    <Content Include="Scripts\Common\custom-binding.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.coffee" />
     <Content Include="Scripts\Common\GenericEntity.coffee" />
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
@@ -606,10 +600,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common\utilClasses.js" />
     <Content Include="Scripts\Common\utils.js" />
-    <Content Include="Scripts\DropIt\bootstrap.js" />
-    <Content Include="Scripts\DropIt\bootstrap.min.js" />
-    <Content Include="Scripts\DropIt\jquery-2.0.0.js" />
-    <Content Include="Scripts\DropIt\jquery.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
@@ -903,6 +893,7 @@
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
+    <Folder Include="Scripts\DropIt\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

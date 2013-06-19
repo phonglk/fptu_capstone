@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container" id="content">
-    <div class="register">
+    <div class="form1">
         @using (Html.HorizontalForm())
         {
             @Html.AntiForgeryToken()
@@ -21,8 +21,10 @@
                 <label class="control-label" for="EventId">Tên Sự kiện:</label>
                 <div class="controls">
                     <div class="input-append">
-                    @Html.DropDownList("EventId", (SelectList)ViewBag.EventId , new { data_bind = "visible: isCreateEvent() == false,value : EventId, event :{ change : selectVenueChange}" })
-                    @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
+                        <span data-bind="visible: isCreateEvent() == false">
+                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId , new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{allowClear:false}" })
+                        </span>
+                        @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                         <span class="add-on">
                             <input type="checkbox" id="createEvent" data-bind="checked: isCreateEvent" name ="CreateEvent">
                             <label for="createEvent">Tạo mới</label>
@@ -32,10 +34,17 @@
             </div>
             
             <div class="control-group">
-                <label class="control-label" for="VenueId">Thời gian:</label>
+                <label class="control-label" for="HoldDate">Thời gian:</label>
                 <div class="controls">
                     <div class="input-append">
-                        @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent()" })
+                        @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate" ,data_format="dd/MM/yyyy  hh:mm:ss"})
+                        
+                            <button class="btn" type="button" data-bind="visible: isCreateEvent()">
+                                <div class="add-on">
+                                    <i class='icon-calendar'></i>
+                                </div>
+                            </button>
+                        
                     </div>
                 </div>
             </div>
@@ -44,8 +53,11 @@
                 <label class="control-label" for="VenueId">Nơi tổ chức</label>
                 <div class="controls">
                     <div class="input-append">
-                        @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId ,new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == false" })
-                        @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == false || isCreateVenue() == true , enable: isCreateEvent() == true || isCreateVenue() == true" })
+                        <span data-bind="visible: isCreateEvent() == true && isCreateVenue() == false">
+                            @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId ,new { data_bind = "select2:{}" })
+                        </span>
+                        <input type="text" data-bind="value: VenueName,visible: isCreateEvent() == false" disabled />
+                        @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                         <span class="add-on" data-bind="visible: isCreateEvent">
                             <input type="checkbox" id="createVenue" data-bind="checked: isCreateVenue"  name ="CreateVenue">
                             <label for="createVenue">Tạo mới</label>
@@ -57,66 +69,63 @@
             <div class="control-group">
                 <label class="control-label" for="VenueId">Địa chỉ:</label>
                 <div class="controls">
-                    @Html.TextBox("Address", String.Empty, new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true" })
+                    @Html.TextBox("Address", String.Empty, new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true, value: VenueAddress" })
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label" for="ProvinceId">Tỉnh thành:</label>
                 <div class="controls">
-                    @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId ,new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true" })
+                    @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId ,new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true,value: ProvinceId,select2:{}" })
                 </div>
             </div>
             
-            @Html.LabelAndControl("Thể loại:", Html.DropDownList("CategoryId", String.Empty))
+            <div class="control-group">
+                <label class="control-label" for="CategoryId">Thể loại:</label>
+                <div class="controls">
+                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId ,new { data_bind = "select2: {allowClear:false}" })
+                </div>
+            </div>
+            
 
-            @Html.LabelAndControl("Miêu tả vé:", Html.EditorFor(model => model.Seat))
-            @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.EditorFor(model => model.Description))
-            @Html.LabelAndControl("Giá muốn bán (*):", Html.EditorFor(model => model.SellPrice))
+            @Html.LabelAndControl("Chỗ ngồi:", Html.EditorFor(model => model.Seat))
+            @Html.LabelAndControl("Miêu tả:", Html.EditorFor(model => model.Description))
 
             <div class="control-group">
-                <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (7%):</label>
+                <label class="control-label" for="SellPrice">Giá muốn bán (*):</label>
                 <div class="controls">
-                    @Html.TextBox("ReceiveMoney", String.Empty, new { disabled="true" })
+                    @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice" })
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate*100).toFixed(0)"></span>%):</label>
+                <div class="controls">
+                    @Html.TextBox("ReceiveMoney", String.Empty, new { disabled="true" , data_bind="value:RecievePrice"})
                 </div>
             </div>
             
             
             
-            <div>
+            <div class="control-group">
                 <label class="checkbox">
-                    <span class="help-block">Điều Khoản Sử Dụng</span>
-                    <span class="condition"></span>
-                    <input type="checkbox">
-                    Tôi Đồng ý với tất cả các điều kiện trên.
+                    <input type="checkbox"/>
+                    Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                 </label>
             </div>
-            <button type="submit" class="btn btn-register btn-success">Đăng Ký</button>
-            <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>        
+            <button type="submit" class="btn btn-register btn-primary">Đăng vé</button>      
         }
     </div>
 </div>
 
 
 <script type="text/javascript">
-    function doClick() {
-        if ($("newevent").attr("checked")) {
-            document.getElementById("EventName").style.display = 'block'; //show textbox            
-            //document.getElementById("EventId").style.display = 'none'; //hide other options
-            //document.getElementById("EventName").style.display = 'block'; //show textbox            
-        }
-        else {
-            document.getElementById("EventId").style.display = "none";
-            //document.getElementById("EventName").style.display = 'none'; //hide textbox
-            // document.getElementById("EventId").style.display = 'block'; //show other options
-        }
-    }
 
-    $('body').on('change', '#SellPrice', function () {
-        var selectedValue = $(this).val();
-        document.getElementById("ReceiveMoney").value = (selectedValue * 0.93).toFixed(2);
-        //Url({ Controller: "Ticket", Action: "getEventInfo" });        
-    });
+    //$('body').on('change', '#SellPrice', function () {
+    //    var selectedValue = $(this).val();
+    //    document.getElementById("ReceiveMoney").value = (selectedValue * 0.93).toFixed(2);
+    //    //Url({ Controller: "Ticket", Action: "getEventInfo" });        
+    //});
 
     function CreateTicketViewModel() {
         var self = this;
@@ -129,6 +138,11 @@
         self.VenueName = ko.observable();
         self.VenueAddress = ko.observable();
         self.ProvinceId = ko.observable();
+        self.SellPrice = ko.observable();
+        self.ServiceRate = 0.07;
+        self.RecievePrice = ko.computed(function(){
+            return parsePrice(self.SellPrice()) * (1 - self.ServiceRate);
+        })
 
         self.selectVenueChange = function () {
             $.ajax({
@@ -136,8 +150,12 @@
                 type:"POST",
                 data: "EventId=" + self.EventId(),
                 success: function (data) {
-                    if (data.Result == "OK") {
-                        self.
+                    if (data.Result && data.Result == "OK" && data.Records) {
+                        var record = data.Records[0]
+                        self.HoldDate(record.HoldDate)
+                        self.VenueName(record.VenueName)
+                        self.VenueAddress(record.Address)
+                        self.ProvinceId(record.ProvinceId)
                     }
                 }
             })
@@ -145,9 +163,9 @@
     }
 
     $(function () {
-        var ctvm = new CreateTicketViewModel();
-
-        ko.applyBindings(ctvm)
+        ctvm = new CreateTicketViewModel();
+        ko.applyBindings(ctvm);
+        $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
     })
 </script>
 
