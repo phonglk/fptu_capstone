@@ -28,7 +28,14 @@ String.prototype.eval = function () {
     }
     return s;
 }
-
+//Convert 1 to 001 or 01
+Number.prototype.toLength = function (l) {
+    var n = this.toString();
+    if (n.length >= l) return n;
+    var prefix = "0";
+    for (var i = 0; i < l - n.length - 1; i++) prefix += "0";
+    return prefix + n;
+}
 // Introduced in Javascript 1.8.5
 _JS185Extend = function (target, propNane, value) {
     Object.defineProperty(target, propNane, {
@@ -48,6 +55,14 @@ Object.extend("eachOwnProperties", function (func) {
         }
     }
 });
+
+parsePrice = function (s) {
+    try{
+        return parseFloat(s.replace(/,/g, ""));
+    } catch (e) {
+        return 0;
+    }
+}
 
 window.toFormData = function (obj) {
     var key, str, value;

@@ -52,9 +52,9 @@ namespace DropIt.Controllers
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             if (ModelState.IsValid)
             {
-                if(ticket.CreateEvent != null) // create new event
+                if (Request.Form["CreateEvent"] != null) // create new event
                 {
-                    if (ticket.CreateVenue != null) // create new venue
+                    if (Request.Form["CreateVenue"] != null) // create new venue
                     {
                         // add new venue 
                         Venue venue = new Venue()

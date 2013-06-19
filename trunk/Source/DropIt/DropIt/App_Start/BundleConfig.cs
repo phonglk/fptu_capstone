@@ -62,11 +62,13 @@ namespace DropIt
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/DropIt")
-                .Include("~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
-                            "~/Content/Admin/font/OpenSans.css")
-                        .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
-                    "~/Content/DropIt/css/bootstrap-fix.css",
-                    "~/Content/DropIt/css/new.css"));
+                .Include("~/Content/Admin/css/bootstrap/bootstrap.css", 
+                            "~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
+                            "~/Content/Admin/font/OpenSans.css",
+                            "~/Scripts/bootstrap/datetimepicker/bootstrap-datetimepicker.css",
+                            "~/Scripts/select2/select2.css",
+                            "~/Content/DropIt/css/bootstrap-fix.css",
+                            "~/Content/DropIt/css/new.css"));
 
             bundles.Add(new StyleBundle("~/Content/css")
                 .Include("~/Content/site.css"));
