@@ -15,6 +15,12 @@ namespace DropIt.Models
 
             //var date = value.ConvertTo(typeof(DateTime), CultureInfo.CurrentCulture);
             String dateString = HttpUtility.UrlDecode((String)value.ConvertTo(typeof(String)));
+
+            while (dateString.IndexOf("  ") > -1)
+            {
+                dateString = dateString.Replace("  ", " ");
+            }
+
             string[] dateElement = dateString.Split('/', ':', ' ');
             DateTime date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
                 Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
@@ -29,6 +35,12 @@ namespace DropIt.Models
 
             //var date = value.ConvertTo(typeof(DateTime), CultureInfo.CurrentCulture);
             String dateString = HttpUtility.UrlDecode((String)value.ConvertTo(typeof(String)));
+
+            while (dateString.IndexOf("  ") > -1)
+            {
+                dateString = dateString.Replace("  ", " ");
+            }
+
             string[] dateElement = dateString.Split('/', ':', ' ');
             DateTime date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
                 Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
