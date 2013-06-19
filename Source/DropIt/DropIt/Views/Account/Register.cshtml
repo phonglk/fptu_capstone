@@ -13,16 +13,23 @@
         @using (Html.HorizontalForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary()   
-
-            <h3>Đăng Ký</h3>
+            @Html.ValidationSummary("", new { @class = "alert alert-error" })   
+            <h2>Đăng Ký</h2>
 
             @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
-            @Html.LabelAndControl("Mật Khẩu", Html.TextBox("Password"))
-            @Html.LabelAndControl("Nhập lại Mật khẩu", Html.TextBox("ConfirmPassword"))
+            <div class="controls validate">
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            @Html.LabelAndControl("Mật Khẩu", Html.Password("Password"))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Password)</div>
+            @Html.LabelAndControl("Nhập lại Mật khẩu", Html.Password("ConfirmPassword"))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.ConfirmPassword)</div>
             @Html.LabelAndControl("Email", Html.TextBox("Email"))
+             <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
             @Html.LabelAndControl("Số điện thoại", Html.TextBox("Phone"))
+             <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
             @Html.LabelAndControl("Địa chỉ", Html.TextBox("Address"))
+             <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
             <div id="province">
                 @Html.DropDownList("ProvinceId", String.Empty)
             </div>
@@ -35,7 +42,6 @@
             </label>
                 </div>
             <button type="submit" class="btn btn-register btn-success" value="Register">Đăng Ký</button>
-            <button type="submit" class="btn btn-register btn-inverse" value="Reset">Nhập lại</button>
        
         }
     </div>

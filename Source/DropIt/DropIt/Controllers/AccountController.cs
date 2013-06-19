@@ -42,7 +42,7 @@ namespace DropIt.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
             return View(model);
         }
 
@@ -130,8 +130,8 @@ namespace DropIt.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "Mật khẩu của bạn đã được đổi."
+                : message == ManageMessageId.SetPasswordSuccess ? "Mật khẩu đã được đặt."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
@@ -170,7 +170,7 @@ namespace DropIt.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                        ModelState.AddModelError("", "Mật khẩu hiện tại không đúng hoặc mật khẩu mới không chính xác.");
                     }
                 }
             }
@@ -281,7 +281,7 @@ namespace DropIt.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                        ModelState.AddModelError("UserName", "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.");
                     }
                 
             }

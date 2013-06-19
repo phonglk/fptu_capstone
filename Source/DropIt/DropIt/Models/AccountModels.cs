@@ -45,14 +45,14 @@ namespace DropIt.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "Mật Khẩu Xác Nhận Không Trùng Với Mật Khẩu.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -67,38 +67,38 @@ namespace DropIt.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Ghi nhớ Tài khoản?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật Khẩu")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Mật Khẩu Xác Nhận Không Trùng Với Mật Khẩu.")]
         public string ConfirmPassword { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Email.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Số Điện Thoại.")]
         public string Phone { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Địa chỉ.")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn Tỉnh/Thành Phố.")]
         public int ProvinceId { get; set; }
 
     }

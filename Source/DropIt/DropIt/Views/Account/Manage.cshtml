@@ -1,15 +1,16 @@
 ﻿@model DropIt.Models.LocalPasswordModel
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
 @{
-    ViewBag.Title = "Thay đổi mật khẩu";
+    ViewBag.Title = "Quản lí Tài Khoản";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
+<div class="container" id="content">
 
 <p class="message-success">@ViewBag.StatusMessage</p>
-
-<p>Tài khoản của bạn <strong>@User.Identity.Name</strong>.</p>
 
 @if (ViewBag.HasLocalPassword)
 {
@@ -20,13 +21,7 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
-
-    <h3>Add an external login</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
