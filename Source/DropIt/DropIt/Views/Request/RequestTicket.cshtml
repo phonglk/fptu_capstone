@@ -1,0 +1,48 @@
+﻿@model DropIt.ViewModels.RequestTicket
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+
+@{
+    ViewBag.Title = "RequestTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="content">
+    <div class="register">
+        @using (Html.HorizontalForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <h3>Mua vé</h3>
+            
+            @Html.LabelAndControl("Tên Sự kiện:", @Html.DropDownList("EventId", String.Empty))  
+            @Html.LabelAndControl("Tên Sự kiện 2:", @Html.TextBox("EventName"))  
+            <label>
+                <input type="checkbox" id="newevent" onchange="doClick()">Tạo mới sự kiện
+            </label>             
+            @Html.LabelAndControl("Nơi tổ chức [not check]:", @Html.DropDownList("VenueId", String.Empty)) // khi chua tick vao chon new venue
+            <div><input type="checkbox"/>Tạo mới nơi tổ chức</div>                                                                                              
+            @Html.LabelAndControl("Nơi tổ chức [checked]:", Html.TextBox("VenueName")) // khi tick vao new venue
+            @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
+            @Html.LabelAndControl("Tỉnh thành:", Html.DropDownList("ProvinceId", String.Empty))
+            @Html.LabelAndControl("Thời gian:", Html.TextBox("HoldDate"))
+            @Html.LabelAndControl("Thể loại:", Html.DropDownList("CategoryId", String.Empty))
+            @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.EditorFor(model=>model.Description))            
+                                    
+            <div>
+                <label class="checkbox">
+                    <span class="help-block">Điều Khoản Sử Dụng</span>
+                    <span class="condition"></span>
+                    <input type="checkbox">
+                    Tôi Đồng ý với tất cả các điều kiện trên.
+                </label>
+            </div>
+            <button type="submit" class="btn btn-register btn-success">Đăng Ký</button>
+            <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>        
+        }
+    </div>
+</div>
