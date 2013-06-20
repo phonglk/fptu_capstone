@@ -19,11 +19,11 @@
                 @Html.ValidationSummary(true)
       
                 @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
-                <div class="controls">@Html.ValidationMessageFor(m => m.UserName)</div>
+                <div class="controls validate">@Html.ValidationMessageFor(m => m.UserName)</div>
           
                 @Html.LabelAndControl("Mật Khẩu", Html.Password("Password"))
                 
-                    <div class="controls">@Html.ValidationMessageFor(m => m.Password)</div>
+                    <div class="controls validate">@Html.ValidationMessageFor(m => m.Password)</div>
         
             <div class="check-remember">
                 @Html.CheckBoxFor(m => m.RememberMe)

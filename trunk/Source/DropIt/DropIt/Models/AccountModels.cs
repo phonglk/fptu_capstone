@@ -58,11 +58,11 @@ namespace DropIt.Models
 
     public class LoginModel
     {
-        [Required]
+         [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+         [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
