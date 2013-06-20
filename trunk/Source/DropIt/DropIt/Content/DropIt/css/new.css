@@ -361,7 +361,7 @@ hr {
 }
 
 .control-group {
-    margin-left: 200px;
+    margin-left: 180px;
 }
 
 .controls {
@@ -370,7 +370,7 @@ hr {
 
 #province {
     float: right;
-    margin-top: -50px;
+    margin-top: -36px;
     margin-right: 55px;
 }
 
@@ -540,10 +540,10 @@ select.select2 {
 }
 
 .form1 input[type='text'], select {
-    width: 280px;
+    width: 240px;
 }
 .form1 select{
-    width: 294px;
+    width: 240px;
 }
 
 .input-append .btn{
