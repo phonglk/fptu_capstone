@@ -73,7 +73,7 @@ namespace DropIt.Controllers
                             EventName = ticket.EventName,
                             Status = 0,
                             HoldDate = (DateTime)ticket.HoldDate,
-                            CategoryId = (int)ticket.CategoryId,
+                            CategoryId = ticket.CategoryId,
                             VenueId = venue.VenueId,
                             CreatedDate = null,
                             ModifiedDate = null
