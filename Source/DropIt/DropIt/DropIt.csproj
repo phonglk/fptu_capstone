@@ -570,6 +570,7 @@
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
       <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Admin\fullcalendar.min.js.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Admin\AdminMenu.js">
       <DependentUpon>AdminMenu.coffee</DependentUpon>
@@ -609,6 +610,8 @@
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery.format.date.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map" />
+    <Content Include="Scripts\jquery-1.8.2.min.js.map" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />

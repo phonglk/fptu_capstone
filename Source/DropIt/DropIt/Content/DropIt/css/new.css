@@ -569,8 +569,8 @@ select.select2 {
 
 .manage-link {
     position: relative;
-    left: 39%;
-    padding-bottom: 5px;
+    left: 40%;
+    padding-bottom: 8px;
     margin-top: -5px;
 }
 /* styles for validation helpers */
@@ -600,7 +600,15 @@ input[type="checkbox"].input-validation-error {
 .register input.input-validation-error {
     border-bottom: 1px solid #e80c4d;
 }
+.login input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
 .validate {
     margin-left: 40% !important;
     margin-top: -15px;
+}
+
+.form-horizontal .controls input {
+    width: 265px;
 }
