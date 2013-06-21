@@ -12,6 +12,8 @@ namespace DropIt.ViewModels
         {
             this.CreatedDate = DateTime.Now;
             this.ModifiedDate = DateTime.Now;
+            this.CreateEvent = null;
+            this.CreateVenue = null;
         }
 
         public int UserId { get; set; }
@@ -40,5 +42,8 @@ namespace DropIt.ViewModels
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        public String CreateEvent;
+        public String CreateVenue;
     }
 }
