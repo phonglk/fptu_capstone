@@ -16,11 +16,8 @@ namespace DropIt.Controllers
     [InitializeSimpleMembership]
     public class TicketController : Controller
     {
-        DropItContext db = new DropItContext();
         private UnitOfWork unitOfWork = new UnitOfWork();
         private TicketRepository Repository;
-        private EventRepository eventRepository;
-        private GenericRepository<Province> provinceRepository;
         //
         // GET: /Ticket/
 
@@ -42,8 +39,6 @@ namespace DropIt.Controllers
             ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
             return View();
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,9 +69,7 @@ namespace DropIt.Controllers
                             Status = 0,
                             HoldDate = (DateTime)ticket.HoldDate,
                             CategoryId = ticket.CategoryId,
-                            VenueId = venue.VenueId,
-                            CreatedDate = null,
-                            ModifiedDate = null
+                            VenueId = venue.VenueId        
                         };
 
                         this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
@@ -87,7 +80,7 @@ namespace DropIt.Controllers
                         {
                             EventId = newEvent.EventId,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = ticket.ReceiveMoney,
+                            ReceiveMoney = (int)ticket.SellPrice*0.97,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = 1,
