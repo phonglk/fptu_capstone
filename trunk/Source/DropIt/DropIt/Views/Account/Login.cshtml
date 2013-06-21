@@ -12,11 +12,13 @@
 <div class="container" id="content">
     <div class="login">
         <section id="loginForm">
+            @using (Html.HorizontalForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+                
              @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "alert alert-error" })
             <h3>Đăng Nhập</h3>
-            @using (Html.HorizontalForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-            {
+            
                
       
                 @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
