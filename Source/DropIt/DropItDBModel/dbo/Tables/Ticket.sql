@@ -9,6 +9,8 @@
     [EventId]          INT            NOT NULL,
     [CreatedDate]      DATETIME       NULL,
     [ModifiedDate]     DATETIME       NULL,
+    [TranFullName]     NVARCHAR (50)  NULL,
+    [TranType]         BIT            NULL,
     [TranShipDate]     DATETIME       NULL,
     [TranDescription]  NVARCHAR (MAX) NULL,
     [TranAddress]      NVARCHAR (MAX) NULL,
@@ -21,6 +23,8 @@
     CONSTRAINT [FK_Ticket_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Ticket_User1] FOREIGN KEY ([TranUserId]) REFERENCES [dbo].[User] ([UserId])
 );
+
+
 
 
 
