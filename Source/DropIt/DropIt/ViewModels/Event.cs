@@ -23,7 +23,7 @@ namespace DropIt.ViewModels
         public System.DateTime HoldDate { get; set; }
 
         public string Description { get; set; }
-        
+
         [Required]
         public int Status { get; set; }
 

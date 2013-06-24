@@ -537,9 +537,11 @@ select.select2 {
     .form1 .controls textarea {
         width: 265px;
     }
-    .form1 .controls input[type='checkbox']{
+
+    .form1 .controls input[type='checkbox'] {
         width: auto;
     }
+
     .form1 select {
         width: 279px !important;
     }
@@ -547,9 +549,8 @@ select.select2 {
 .input-append .btn {
     padding: 0;
 }
-.form1 select{
-    width: 240px;
-}
+
+
 .input-append button > .add-on {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -611,4 +612,75 @@ input[type="checkbox"].input-validation-error {
 
 .form-horizontal .controls input {
     width: 265px;
+}
+
+.event-des .control-group {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.event-des .control-label {
+    margin-left: 0;
+    width: 100px;
+}
+
+.event-des .controls {
+    margin-top: 5px;
+    margin-left: 120px;
+}
+
+.event-image {
+    border: 1px solid #eee;
+    height: 160px;
+}
+
+.display-des {
+    padding-top: 10px;
+}
+
+table.event-detail .header {
+    font-weight: bold;
+    font-size: larger;
+    background-color: #6a4c74;
+}
+
+table.event-detail th.action .btn {
+    width: 60px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+table.event-detail th {
+    text-align: center;
+}
+
+table.event-detail td {
+    text-align: center;
+}
+
+td.action .btn {
+    width: 60px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+table.event-detail tr.info > td {
+    background-color: #EEEEEE;
+    text-align: left;
+}
+
+table.event-detail td.first {
+    width: 60px;
+}
+
+table.event-detail td.descript {
+    width: 300px;
+}
+
+table.event-detail td.user {
+    width: 100px;
+}
+
+table.event-detail td.price {
+    width: 105px;
 }
