@@ -147,5 +147,48 @@ namespace DropIt.Controllers
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
             return View(ticket);
         }
+
+        //Get: /
+        public ActionResult BuyTicket(int Id)
+        {
+            ViewBag.TicketId = Id;
+            //ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
+            //ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuyTicket(BuyTicket buyTicket)
+        {
+            buyTicket.UserId = WebSecurity.GetUserId(User.Identity.Name);
+            Ticket ticket = unitOfWork.TicketRepository.Get(u => u.TicketId == buyTicket.TicketId).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                Ticket newticket = new Ticket()
+                {
+                    TicketId = buyTicket.TicketId,
+                    TranUserId = buyTicket.UserId,
+                    TranFullName = buyTicket.TranFullName,
+                    TranAddress = buyTicket.TranAddress,
+                    TranType = 1,
+                    TranStatus = (int)Statuses.BuyTicket.Unpaid,
+                    EventId = ticket.EventId,
+                    UserId = ticket.UserId,
+                    Seat = ticket.Seat,
+                    Status = ticket.Status,
+                    Description = ticket.Description,
+                    CreatedDate = ticket.CreatedDate,
+                    TranCreatedDate = DateTime.Now,
+                    TranModifiedDate = DateTime.Now,
+                    TranDescription = buyTicket.TranDescription
+                };
+                this.unitOfWork.TicketRepository.AddOrUpdate(newticket);
+                this.unitOfWork.Save();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(buyTicket);
+        }
     }
 }
