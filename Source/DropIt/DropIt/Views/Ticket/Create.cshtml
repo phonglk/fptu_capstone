@@ -89,8 +89,14 @@
             
 
             @Html.LabelAndControl("Chỗ ngồi:", Html.EditorFor(model => model.Seat))
-            @Html.LabelAndControl("Miêu tả:", Html.EditorFor(model => model.Description))
 
+            <div class="control-group">
+                <label class="control-label" for="Description">Miêu tả:</label>
+                <div class="controls">
+                    @Html.TextArea("Description", String.Empty)
+                </div>
+            </div>
+            
             <div class="control-group">
                 <label class="control-label" for="SellPrice">Giá muốn bán (*):</label>
                 <div class="controls">

@@ -1,4 +1,5 @@
-﻿using DropIt.DAL;
+﻿using DropIt.Common;
+using DropIt.DAL;
 using DropIt.Filters;
 using DropIt.Models;
 using DropIt.ViewModels;
@@ -57,7 +58,7 @@ namespace DropIt.Controllers
                             VenueName = ticket.VenueName,
                             Address = ticket.Address,
                             ProvinceId = (int)ticket.ProvinceId,
-                            Status = 1
+                            Status = (int)Statuses.Venue.Disapprove
                         };
                         this.unitOfWork.VenueRepository.AddOrUpdate(venue);
                         this.unitOfWork.Save();
@@ -66,7 +67,7 @@ namespace DropIt.Controllers
                         Event newEvent = new Event()
                         {
                             EventName = ticket.EventName,
-                            Status = 0,
+                            Status = (int)Statuses.Event.Disapprove,
                             HoldDate = (DateTime)ticket.HoldDate,
                             CategoryId = ticket.CategoryId,
                             VenueId = venue.VenueId        
@@ -83,7 +84,7 @@ namespace DropIt.Controllers
                             ReceiveMoney = (int)ticket.SellPrice*0.97,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
-                            Status = 1,
+                            Status = (int)Statuses.Ticket.Disapprove,
                             UserId = ticket.UserId
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
@@ -97,7 +98,7 @@ namespace DropIt.Controllers
                         Event newEvent = new Event()
                         {
                             EventName = ticket.EventName,
-                            Status = 0,
+                            Status = (int)Statuses.Event.Disapprove,
                             HoldDate = (DateTime)ticket.HoldDate,
                             CategoryId = (int)ticket.CategoryId,
                             VenueId = (int)ticket.VenueId
@@ -113,7 +114,7 @@ namespace DropIt.Controllers
                             ReceiveMoney = ticket.ReceiveMoney,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
-                            Status = 1,
+                            Status = (int)Statuses.Ticket.Disapprove,
                             UserId = ticket.UserId
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
@@ -130,7 +131,7 @@ namespace DropIt.Controllers
                         ReceiveMoney = ticket.ReceiveMoney,
                         Seat = ticket.Seat,
                         Description = ticket.Description,
-                        Status = 1,
+                        Status = (int)Statuses.Ticket.Approve,
                         UserId = ticket.UserId
                     };
                     this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
