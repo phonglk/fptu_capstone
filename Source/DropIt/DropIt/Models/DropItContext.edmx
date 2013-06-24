@@ -132,7 +132,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="TranFullName" Type="nvarchar" MaxLength="50" />
-          <Property Name="TranType" Type="bit" />
+          <Property Name="TranType" Type="int" />
           <Property Name="TranShipDate" Type="datetime" />
           <Property Name="TranDescription" Type="nvarchar(max)" />
           <Property Name="TranAddress" Type="nvarchar(max)" />
@@ -530,7 +530,7 @@
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="Ticket" ToRole="User" />
           <Property Type="String" Name="TranFullName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="TranType" />
+          <Property Type="Int32" Name="TranType" Nullable="true" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>

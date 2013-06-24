@@ -28,7 +28,7 @@ namespace DropIt.Models
         public int UserId { get; set; }
         public int EventId { get; set; }
         public string TranFullName { get; set; }
-        public bool TranType { get; set; }
+        public int? TranType { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<System.DateTime> TranShipDate { get; set; }
