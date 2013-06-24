@@ -1,5 +1,9 @@
 ﻿@model DropIt.Models.Event
-
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,58 +29,89 @@
                         <li class="nav-header">Mua Vé</li>
                         <li><a href="#">Đăng rao mua</a></li>
                         <li class=""><a href="#">Ca nhạc</a></li>
-                        <li class=""><a href="">TV Show</a></li>
+                        <li class=""><a href="#">TV Show</a></li>
                         <li><a href="#">Thể thao</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-<fieldset>
-    <legend>Event Details</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EventName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EventName)
-    </div>
+        <div class="display-field">
+            <h2>@Html.DisplayFor(model => model.EventName)</h2>
+            <hr />
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoldDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoldDate)
-    </div>
+        <div class="event-des">
+            <div class="event-image span3">
+                <div class="display-field">
+                    <img src="@Url.Content(Model.EventImage)" />
+                </div>
+            </div>
+            <div class="span6">
+                @using (Html.HorizontalForm())
+                {
+                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
+                    @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
+                    @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
+                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
+                }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
+            </div>
+            <div class="display-des span9">
+                @Html.DisplayFor(model => model.Description)
+        <br />
+        <br />
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Status)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Status)
-    </div>
+            </div>
+        </div>
+        <div class="row span9">
+            <div class="ticket-list">
+                <table class="table table-condensed table-bordered event-detail">
+                    <thead>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category.CategoryName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Category.CategoryName)
-    </div>
+                        <tr class="info">
+                            <td colspan="5">
+                                <i class="icon-calendar"></i>  @Html.DisplayFor(model => model.HoldDate)
+                            </td>
+                        </tr>
+                        <tr class="header warning">
+                            <th class="">Mã Vé</th>
+                            <th class="">Người bán</th>
+                            <th class="">Miêu tả</th>
+                            <th class="">Giá vé(VNĐ)</th>
+                            <th class="">Đặt vé</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                                <!-- row -->
+                                @foreach (var item in Model.Tickets)
+                                {
+                                    <tr>
+                                        <td class="first">
+                                            @Html.DisplayFor(modelItem => item.TicketId)
+                                        </td>
+                                        <td class="user">
+                                            @Html.DisplayFor(modelItem => item.User.UserName)
+                                        </td>
+                                        
+                                    <td class="descript">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                        <td class="price">
+                                            @Html.DisplayFor(modelItem => item.SellPrice)
+                                        </td>
+                                        <td class="action">
+                        <a href="#" class="btn btn-primary btn-small">Đặt vé</a>
+                        <a href="#" class="btn btn-warning btn-small">Theo dõi</a>
+                    </td>
+                                    </tr>
+                                }
+                </table>
+            </div>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Venue.VenueName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Venue.VenueName)
-    </div>
 
-    <div class="display-label">
+@*<div class="display-label">
          @Html.DisplayNameFor(model => model.CreatedDate)
     </div>
     <div class="display-field">
@@ -88,9 +123,5 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.ModifiedDate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.EventId }) |
-    @Html.ActionLink("Back to List", "List")
-</p>
+    </div>*@
+

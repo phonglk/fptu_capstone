@@ -570,7 +570,12 @@
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
       <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\Admin\fullcalendar.min.js.map" />
+    <Content Include="Scripts\Admin\fullcalendar.min.js.map">
+      <DependentUpon>fullcalendar.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\bootstrap\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Admin\AdminMenu.js">
       <DependentUpon>AdminMenu.coffee</DependentUpon>
@@ -609,9 +614,15 @@
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery.format.date.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map" />
-    <Content Include="Scripts\jquery-1.8.2.min.js.map" />
-    <Content Include="Scripts\jquery-ui-1.8.24.min.js.map" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map">
+      <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-1.8.2.min.js.map">
+      <DependentUpon>jquery-1.8.2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js.map">
+      <DependentUpon>jquery-ui-1.8.24.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
@@ -894,8 +905,21 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Ticket\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Scripts\jquery.validate.min.js.map" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map" />
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js.map">
+      <DependentUpon>jquery.jtable.aspnetpagemethods.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jtable\external\json2.min.js.map">
+      <DependentUpon>json2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\select2\select2.min.js.map">
+      <DependentUpon>select2.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
