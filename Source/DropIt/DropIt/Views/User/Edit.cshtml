@@ -1,4 +1,4 @@
-﻿@model DropIt.Models.User
+﻿@model DropIt.ViewModels.UserViewModel
 @using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
@@ -15,7 +15,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-         <h3>Thông Tin Tài Khoản</h3>
+         <h2>Thông Tin Tài Khoản</h2>
   
         
 @*<div class="editor-label">
@@ -26,11 +26,11 @@
             @Html.ValidationMessageFor(model => model.UserName)
         </div>*@
             @Html.LabelAndControl("Email:", Html.TextBox("Email"))
-                <div class="controls">@Html.ValidationMessageFor(m => m.Email)</div>
+                <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
             @Html.LabelAndControl("Số Điện thoại:", Html.TextBox("Phone"))
-                <div class="controls">@Html.ValidationMessageFor(m => m.Phone)</div>
-         @Html.LabelAndControl("Số Điện thoại:", Html.TextBox("Address"))
-                <div class="controls">@Html.ValidationMessageFor(m => m.Address)</div>
+                <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
+         @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
+                <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
         
 
 @*<div class="editor-label">
@@ -65,7 +65,7 @@
             @Html.ValidationMessageFor(model => model.ModifiedDate)
         </div>*@
         @Html.LabelAndControl("Tỉnh/Thành Phố:", Html.DropDownList("ProvinceId", String.Empty))
-                <div class="controls">@Html.ValidationMessageFor(m => m.ProvinceId)</div>
+                <div class="controls validate">@Html.ValidationMessageFor(m => m.ProvinceId)</div>
         <div class="manage-link">
             @Html.ActionLink("Thay đổi mật khẩu", "Manage", "Account")
         </div>
