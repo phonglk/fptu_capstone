@@ -13,7 +13,10 @@ body {
     margin-left: auto;
     width: 960px;
 }
-
+h1, h2, h3, h4 {
+    color: #431f59;
+    font-weight: normal;
+}  
 #content {
     background: #ffffff;
     margin-top: 20px;
@@ -207,6 +210,7 @@ body {
 
 #footer {
     background-color: #fff;
+   
 }
 
 .logo-footer {
@@ -341,6 +345,18 @@ hr {
     font-weight: lighter;
     position: relative;
 }
+.login h2 {
+    text-align: center;
+    font-weight: lighter;
+    position: relative;
+}
+
+
+.manage h2 {
+    text-align: center;
+    font-weight: lighter;
+    position: relative;
+}
 
 .register input[type='text'],
 .register input[type='password'],
@@ -367,7 +383,6 @@ hr {
 .controls {
     margin-left: 0;
 }
-
 #province {
     float: right;
     margin-top: -36px;
@@ -606,8 +621,9 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validate {
-    margin-left: 40% !important;
+    margin-left: 38% !important;
     margin-top: -15px;
+    margin-bottom: 4px;
 }
 
 .form-horizontal .controls input {
@@ -618,7 +634,10 @@ input[type="checkbox"].input-validation-error {
     margin-left: 0;
     margin-bottom: 0;
 }
-
+.event-name {
+    color: #431f59;
+    font-weight: normal;
+}
 .event-des .control-label {
     margin-left: 0;
     width: 100px;
@@ -639,10 +658,10 @@ input[type="checkbox"].input-validation-error {
 }
 
 table.event-detail .header {
-    font-weight: bold;
-    font-size: larger;
-    background-color: #6a4c74;
+    color: #c2afc2;
+    border-bottom: 3px solid;
 }
+
 
 table.event-detail th.action .btn {
     width: 60px;
@@ -652,16 +671,19 @@ table.event-detail th.action .btn {
 
 table.event-detail th {
     text-align: center;
+    font-weight: normal;
 }
 
 table.event-detail td {
     text-align: center;
+    vertical-align: middle;
 }
 
 td.action .btn {
     width: 60px;
     display: block;
     margin-bottom: 5px;
+    border-radius: 0;
 }
 
 table.event-detail tr.info > td {
@@ -683,4 +705,17 @@ table.event-detail td.user {
 
 table.event-detail td.price {
     width: 105px;
+}
+.btn-buy {
+    background: #5e4071;
+}
+.btn-sub {
+    background: #c3afc1;
+}
+
+.btn-sub:hover {
+    background: #666666;
+}
+.btn-buy:hover {
+    background: #666666;
 }

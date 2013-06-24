@@ -28,11 +28,9 @@ namespace DropIt.Models
 
         public string Artist { get; set; }
 
-        [Display(Name = "Ngày tổ chức: ")]
         public System.DateTime HoldDate { get; set; }
         public string Description { get; set; }
 
-        [Display(Name = "Trạng thái: ")]
         public int Status { get; set; }
 
         public int CategoryId { get; set; }
