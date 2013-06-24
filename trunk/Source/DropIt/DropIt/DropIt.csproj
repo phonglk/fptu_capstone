@@ -208,6 +208,7 @@
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Common\OrderByHelper.cs" />
+    <Compile Include="Common\Statuses.cs" />
     <Compile Include="Common\Uploader.cs" />
     <Compile Include="Contants\Contants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -216,11 +217,13 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\RequestRepository.cs" />
     <Compile Include="DAL\TicketRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DAL\UserRepository.cs" />
@@ -262,6 +265,7 @@
     <Compile Include="Models\RespondRequest.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
@@ -279,6 +283,7 @@
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\Event.cs" />
     <Compile Include="ViewModels\PostTicket.cs" />
+    <Compile Include="ViewModels\RequestTicket.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\admin.css">
@@ -385,6 +390,12 @@
     <Content Include="Content\bootstrap-modal.css" />
     <Content Include="Content\bootstrap-modal\css\bootstrap-modal.css" />
     <Content Include="Content\bootstrap-modal\img\ajax-loader.gif" />
+    <Content Include="Content\default.css">
+      <DependentUpon>default.less</DependentUpon>
+    </Content>
+    <Content Include="Content\default.min.css">
+      <DependentUpon>default.less</DependentUpon>
+    </Content>
     <Content Include="Content\DropIt\css\bootstrap-fix.css" />
     <Content Include="Content\DropIt\css\new.css" />
     <Content Include="Content\Images\no_image.jpg" />
@@ -523,6 +534,7 @@
       <DependentUpon>DropItContext.edmx</DependentUpon>
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\default.less" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">
@@ -920,6 +932,7 @@
     <Content Include="Scripts\select2\select2.min.js.map">
       <DependentUpon>select2.js</DependentUpon>
     </Content>
+    <Content Include="Views\Request\RequestTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,6 +68,7 @@ namespace DropIt
                             "~/Scripts/bootstrap/datetimepicker/bootstrap-datetimepicker.css",
                             "~/Scripts/select2/select2.css",
                             "~/Content/DropIt/css/bootstrap-fix.css",
+                            "~/Content/default.css",
                             "~/Content/DropIt/css/new.css"));
 
             bundles.Add(new StyleBundle("~/Content/css")
