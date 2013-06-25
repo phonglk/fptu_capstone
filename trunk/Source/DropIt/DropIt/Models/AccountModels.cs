@@ -73,7 +73,8 @@ namespace DropIt.Models
     public class RegisterModel
     {
         [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
-        [Display(Name = "User name")]
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
+        [Display(Name = "Tên Tài Khoản")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]

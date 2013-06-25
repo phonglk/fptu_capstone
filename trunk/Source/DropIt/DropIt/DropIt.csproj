@@ -217,7 +217,6 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
-    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
@@ -280,6 +279,7 @@
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BuyTicket.cs" />
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\Event.cs" />
     <Compile Include="ViewModels\PostTicket.cs" />
@@ -934,6 +934,7 @@
       <DependentUpon>select2.js</DependentUpon>
     </Content>
     <Content Include="Views\Request\RequestTicket.cshtml" />
+    <Content Include="Views\Ticket\BuyTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
