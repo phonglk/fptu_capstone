@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace DropIt.DAL
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class    GenericRepository<TEntity> where TEntity : class
     {
         protected DropItContext context;
         protected DbSet<TEntity> dbSet;

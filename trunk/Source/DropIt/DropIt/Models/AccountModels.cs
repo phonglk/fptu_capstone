@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
-
 namespace DropIt.Models
 {
     //public class UsersContext : DbContext
@@ -39,26 +38,26 @@ namespace DropIt.Models
 
     public class LocalPasswordModel
     {
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Mật Khẩu Hiện Tại: ")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu mới.")]
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Mật Khẩu Mới: ")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "Mật Khẩu Xác Nhận Không Trùng Với Mật Khẩu.")]
+        [Display(Name = "Xác Nhận Mật Khảu Mới")]
+        [Compare("NewPassword", ErrorMessage = "Mật Khẩu Xác Nhận Không Trùng Với Mật Khẩu Mới.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
-         [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
+        [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
@@ -90,6 +89,7 @@ namespace DropIt.Models
 
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Bạn phải nhập Email.")]
+        [RegularExpression(@"^[a-zA-Z0-9\.-]*@[a-zA-Z0-9\.]*\.[a-zA-Z\.]{2,6}$", ErrorMessage = "Email Không Chính xác.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập Số Điện Thoại.")]

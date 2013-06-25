@@ -284,6 +284,7 @@
     <Compile Include="ViewModels\Event.cs" />
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\admin.css">
