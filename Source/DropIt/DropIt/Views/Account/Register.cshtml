@@ -31,7 +31,7 @@
             @Html.LabelAndControl("Địa chỉ", Html.TextBox("Address"))
              <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
             <div id="province">
-                @Html.DropDownList("ProvinceId", String.Empty)
+                @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId)
             </div>
                 <div>
             <label class="checkbox">
