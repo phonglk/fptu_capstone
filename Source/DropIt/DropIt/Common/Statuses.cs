@@ -13,5 +13,7 @@ namespace DropIt.Common
         public enum Ticket { Disapprove,Approve,Delete };
         public enum Event { Disapprove, Approve, Delete };
         public enum Venue { Disapprove, Approve, Delete };
+        public enum BuyTicket { Unpaid, Paid, Delivered, Recieved, Cancel};
+        public enum TranType { InstantPayment, HoldPayment};
     }
 }
