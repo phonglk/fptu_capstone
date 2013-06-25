@@ -123,7 +123,23 @@ namespace DropIt.Areas.Administration.Controllers
             }
 
         }
-        
+        [HttpPost]
+        public JsonResult GetUserOptions()
+        {
+            try
+            {
+                var usernames = unitOfWork.UserRepository.GetAll().Select(
+                    p => new { DisplayText = p.UserName, Value = p.UserId });
+
+                return Json(new JSONResult(usernames, "Options"));
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new JSONResult(e));
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -204,6 +204,7 @@
     <Compile Include="Areas\Administration\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administration\Controllers\EventController.cs" />
     <Compile Include="Areas\Administration\Controllers\ProvinceController.cs" />
+    <Compile Include="Areas\Administration\Controllers\RequestController.cs" />
     <Compile Include="Areas\Administration\Controllers\UserController.cs" />
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Common\JSONResult.cs" />
@@ -503,6 +504,8 @@
     <Content Include="Areas\Administration\Views\Venue\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Province\Index.cshtml" />
     <Content Include="Areas\Administration\Views\User\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Request\Index.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
