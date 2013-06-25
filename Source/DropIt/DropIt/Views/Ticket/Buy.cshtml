@@ -4,6 +4,7 @@
 @using BootstrapExtensions.Base.Form
 @using BootstrapExtensions.Base.Form.Label
 @using BootstrapExtensions.Components.Alert
+@using DropIt.Common
 
 @{
     ViewBag.Title = "BuyTicket";
@@ -18,10 +19,31 @@
             @Html.ValidationSummary()
 
              <h3>Mua vé</h3> 
-             @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
-             @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
-             @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
-             @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
+            @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
+            @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
+            @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
+            @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true)
+            <p>5 ngày</p>
+            @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment)
+            <p>ngay và luôn</p>@*
+            @*
+            @Html.RadioButton("InstantPayment", "InstantPayment") <p>ngay và luôn</p>*@
+            @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
+
+            //captcha
+                <div class="captchacontainer">
+                    <div>
+                        @Html.Syncfusion().CaptchaControl("mycaptcha").EnableRefreshImage(true).RequestMapper("RefreshCaptcha")
+                    </div>
+                    <br />
+                    <div>
+                        @Html.TextBox("WordVerification")
+                    </div>
+                </div>
+                @Html.ValidationMessage("mycaptcha")
+       
+            // end captcha
+            
             <button type="submit" class="btn btn-register btn-success">Xác nhận</button>
         <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>
         }
