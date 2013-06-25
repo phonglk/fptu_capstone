@@ -161,6 +161,14 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Buy(BuyTicket buyTicket)
         {
+            if (buyTicket.TranType==1)
+            {
+                buyTicket.TranType = (int)Statuses.TranType.HoldPayment;
+            }
+            else
+            {
+                buyTicket.TranType = (int) Statuses.TranType.InstantPayment;
+            }
             buyTicket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             Ticket ticket = unitOfWork.TicketRepository.Get(u => u.TicketId == buyTicket.TicketId).FirstOrDefault();
             if (ModelState.IsValid)
@@ -171,7 +179,7 @@ namespace DropIt.Controllers
                     TranUserId = buyTicket.UserId,
                     TranFullName = buyTicket.TranFullName,
                     TranAddress = buyTicket.TranAddress,
-                    TranType = 1,
+                    TranType = buyTicket.TranType,
                     TranStatus = (int)Statuses.BuyTicket.Unpaid,
                     EventId = ticket.EventId,
                     UserId = ticket.UserId,
