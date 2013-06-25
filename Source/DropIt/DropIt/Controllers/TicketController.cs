@@ -149,7 +149,7 @@ namespace DropIt.Controllers
         }
 
         //Get: /
-        public ActionResult BuyTicket(int Id)
+        public ActionResult Buy(int Id)
         {
             ViewBag.TicketId = Id;
             //ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
@@ -159,7 +159,7 @@ namespace DropIt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult BuyTicket(BuyTicket buyTicket)
+        public ActionResult Buy(BuyTicket buyTicket)
         {
             buyTicket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             Ticket ticket = unitOfWork.TicketRepository.Get(u => u.TicketId == buyTicket.TicketId).FirstOrDefault();
@@ -189,8 +189,112 @@ namespace DropIt.Controllers
                 this.unitOfWork.Save();
                 return RedirectToAction("Index", "Home");
             }
-
             return View(buyTicket);
+        }
+
+        //Get: /ResquestTicket
+        [ActionName("Request")]
+        public ActionResult RequestTicket()
+        {
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName");
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Request")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestTicket(RequestTicket ticket)
+        {
+            ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                if (Request.Form["CreateEvent"] != null)
+                {
+                    if (Request.Form["CreateVenue"] != null)
+                    {
+                        //add new venue
+                        Venue newVenue = new Venue()
+                        {
+                            VenueName = ticket.VenueName,
+                            Address = ticket.Address,
+                            ProvinceId = (int)ticket.ProvinceId,
+                            Status = 1
+                        };
+                        this.unitOfWork.VenueRepository.AddOrUpdate(newVenue);
+                        this.unitOfWork.Save();
+
+                        // add new event
+                        Event newEvent = new Event()
+                        {
+                            EventName = ticket.EventName,
+                            Status = 0,
+                            HoldDate = (DateTime)ticket.HoldDate,
+                            CategoryId = ticket.CategoryId,
+                            VenueId = newVenue.VenueId
+                        };
+                        this.unitOfWork.EventRepository.AddOrUpdate(newEvent);
+                        this.unitOfWork.Save();
+
+                        // add new request
+                        Request newrequest = new Request()
+                        {
+                            UserId = ticket.UserId,
+                            EventId = newEvent.EventId,
+                            Status = 1,
+                            Description = ticket.Description
+                        };
+                        this.unitOfWork.RequestRepository.AddOrUpdate(newrequest);
+                        this.unitOfWork.Save();
+                    }
+                    else
+                    {
+                        // add new Event
+                        Event newevent = new Event()
+                        {
+                            EventName = ticket.EventName,
+                            Status = 0,
+                            HoldDate = (DateTime)ticket.HoldDate,
+                            CategoryId = ticket.CategoryId,
+                            VenueId = (int)ticket.VenueId
+                        };
+                        this.unitOfWork.EventRepository.AddOrUpdate(newevent);
+                        this.unitOfWork.Save();
+
+                        // add new Request
+                        Request newRequest = new Request()
+                        {
+                            UserId = ticket.UserId,
+                            EventId = newevent.EventId,
+                            Description = ticket.Description,
+                            Status = 1
+                        };
+                    }
+                }
+                else
+                {
+                    // add to request
+                    Request request = new Request()
+                    {
+                        UserId = ticket.UserId,
+                        EventId = (int)ticket.EventId,
+                        Status = 1,
+                        Description = ticket.Description
+                    };
+                    this.unitOfWork.RequestRepository.AddOrUpdate(request);
+                    this.unitOfWork.Save();
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+                                             ticket.EventId);
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
+                                             ticket.ProvinceId);
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", ticket.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
+            return View();
         }
     }
 }
