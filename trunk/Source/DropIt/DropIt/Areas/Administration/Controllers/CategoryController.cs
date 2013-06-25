@@ -38,7 +38,10 @@ namespace DropIt.Areas.Administration.Controllers
                 var Records = records.Select(e => new
                 {
                     CategoryId = e.CategoryId,
-                    CategoryName = e.CategoryName
+                    CategoryName = e.CategoryName,
+                    ParentCategoryId = e.ParentCategoryId,
+                    Status = e.Status,
+                    Description = e.Description
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -110,7 +113,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetOptions()
+        public JsonResult GetCategoryOptions()
         {
             try
             {
