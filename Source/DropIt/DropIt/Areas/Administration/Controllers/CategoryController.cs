@@ -113,7 +113,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetCategoryOptions()
+        public JsonResult GetOptions()
         {
             try
             {
