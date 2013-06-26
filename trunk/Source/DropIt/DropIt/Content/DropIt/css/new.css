@@ -270,6 +270,11 @@ hr {
     margin-left: 1px;
     margin-bottom: 1px;
 }
+.image-item {
+    height: 150px;
+    background-size:cover;
+    
+}
 
     .item:hover {
         background-color: #592e51;
@@ -320,7 +325,9 @@ hr {
     opacity: 0.4;
     display: inline-block;
 }
-
+.detail .name-event {
+    min-height: 40px;
+}
 #ticket-show {
     margin-left: 0;
 }
@@ -650,7 +657,6 @@ input[type="checkbox"].input-validation-error {
 
 .event-image {
     border: 1px solid #eee;
-    height: 160px;
 }
 
 .display-des {

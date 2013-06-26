@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IEnumerable<DropIt.Models.Event>
+
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div id="role-tab" class="container">
     <div class="user-tab">
@@ -51,7 +54,34 @@
                 </ul>
             </div>
             <div id="ticket-show" class="span9">
-                <a href="">
+
+
+                 @foreach(var item in Model)
+                      { 
+                    
+                      <a href="@Url.Action("Details", "Event",new { id = item.EventId })">
+                    <div class="item span3">
+                        <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage ==null? "/Content/Images/no_image.jpg":item.EventImage ))')";>
+                            </div>
+                        <div class="item-event-date">
+                            <div class="item-date">@Html.DisplayFor(modelItem => item.HoldDate.Day)</div>
+                            <div class="item-time">
+                                <div class="item-month">@Html.DisplayFor(modelItem => item.HoldDate.Month)</div>
+                                <div class="item-year">@Html.DisplayFor(modelItem => item.HoldDate.Year)</div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <h5 class="name-event">@Html.DisplayFor(modelItem => item.EventName)</h5>
+
+                            <p>Số Vé: @Html.DisplayFor(modelItem => item.Tickets.Count)</p>
+
+                            <p>Địa Điểm: @Html.DisplayFor(modelItem => item.Venue.VenueName)</p>
+
+                        </div>
+                    </div>
+                </a>
+                                }            
+                @*<a href="">
                     <div class="item span3">
                         <img src="images/event.png" alt="image">
                         <div class="item-event-date">
@@ -170,7 +200,7 @@
 
                         </div>
                     </div>
-                </a>
+                </a>*@
 
 
             </div>

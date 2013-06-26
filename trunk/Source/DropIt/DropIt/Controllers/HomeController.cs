@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DropIt.Common;
+using DropIt.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,13 +10,20 @@ namespace DropIt.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+        private UnitOfWork unitOfWork = new UnitOfWork();
+        private EventRepository Repository;
 
-            return View();
+          public HomeController()
+        {
+            Repository = unitOfWork.EventRepository;
         }
 
+        public ActionResult Index()
+        {
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t=>t.Tickets.Count).Take(9).Where(p=>p.Status==1);
+            return View(events.ToList());          
+        }
+      
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
