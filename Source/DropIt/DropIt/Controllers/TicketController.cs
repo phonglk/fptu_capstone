@@ -119,7 +119,6 @@ namespace DropIt.Controllers
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
                         this.unitOfWork.Save();
-                        Debug.WriteLine("12345");
                     }
                 }
                 else

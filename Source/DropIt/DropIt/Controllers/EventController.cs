@@ -28,12 +28,6 @@ namespace DropIt.Controllers
             return View(events.ToList());          
         }
 
-        public ActionResult Admin_List()
-        {
-            var events = this.unitOfWork.EventRepository.Get();
-            return View(events.ToList());
-        }
-
         //
         // GET: /Event/Details/5
 
@@ -139,6 +133,7 @@ namespace DropIt.Controllers
                         e.Venue.Address,
                         e.Venue.Province.ProvinceId,
                         e.Venue.Province.ProvinceName,
+                        e.CategoryId,
                         e.HoldDate
                     })
                 });

@@ -209,6 +209,7 @@
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Common\OrderByHelper.cs" />
+    <Compile Include="Common\RequiredIfAttribute.cs" />
     <Compile Include="Common\Statuses.cs" />
     <Compile Include="Common\Uploader.cs" />
     <Compile Include="Contants\Contants.cs" />
@@ -937,7 +938,9 @@
       <DependentUpon>select2.js</DependentUpon>
     </Content>
     <Content Include="Views\Request\RequestTicket.cshtml" />
-    <Content Include="Views\Ticket\BuyTicket.cshtml" />
+    <Content Include="Views\Ticket\Buy.cshtml" />
+    <Content Include="Views\Ticket\Request.cshtml" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.zaddons.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
