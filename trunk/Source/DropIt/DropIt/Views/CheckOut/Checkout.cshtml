@@ -1,0 +1,26 @@
+﻿@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+@using DropIt.Common
+
+@{
+    ViewBag.Title = "BuyTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="content">
+    <div class="form1">
+        @using (Html.HorizontalForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <h3>Thanh toán</h3> 
+            @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
+       
+            <button type="submit" class="btn btn-register btn-success">Thanh toán</button>        
+        }
+    </div>
+</div>                
