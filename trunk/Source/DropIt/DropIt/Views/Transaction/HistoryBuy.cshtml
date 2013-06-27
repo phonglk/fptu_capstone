@@ -1,0 +1,87 @@
+﻿@model IEnumerable<DropIt.Models.Ticket>
+@{
+    ViewBag.Title = "HistoryBuy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+
+<div class="row">
+    <div class="span3">
+        <div class="sidebar-nav">
+            <div>
+                <ul id="left-nav" class="nav nav-list">
+                    <li class="nav-header">Cá Nhân</li>
+                    <li><a href="#">Thông tin tài khoản</a></li>
+                    <li><a href="#">Giao dịch đang thực hiên <span
+                                                                 class="badge badge-info">4</span></a></li>
+                    <li><a href="#">Lịch sử giao dịch</a></li>
+                    <li class=""><a href="#">Danh sách theo dõi</a></li>
+                    <li><a href="#">Quản lí rao mua</a></li>
+                    <li class="nav-header">Mua Vé</li>
+                    <li><a href="#">Đăng rao mua</a></li>
+                    <li class=""><a href="#">Ca nhạc</a></li>
+                    <li class=""><a href="#">TV Show</a></li>
+                    <li><a href="#">Thể thao</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="span9">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <span class="line"></span>Thời gian tổ chức
+                    </th>
+                    <th>
+                        <span class="line"></span>Sự kiện
+                    </th>
+                    <th>
+                        <span class="line"></span>Miêu tả ghế
+                    </th>
+                    <th>
+                        <span class="line"></span>Tiền mua
+                    </th>
+                    <th>
+                        <span class="line"></span>Người bán
+                    </th>
+                    <th>
+                        <span class="line"></span>Tình trạng
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                @foreach (var item in Model)
+                {
+                    <tr class="first">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.HoldDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.EventName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Seat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SellPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TranStatus)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
