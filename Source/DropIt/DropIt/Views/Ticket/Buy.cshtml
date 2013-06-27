@@ -31,16 +31,7 @@
             @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
 
             //captcha
-                <div class="captchacontainer">
-                    <div>
-                        @Html.Syncfusion().CaptchaControl("mycaptcha").EnableRefreshImage(true).RequestMapper("RefreshCaptcha")
-                    </div>
-                    <br />
-                    <div>
-                        @Html.TextBox("WordVerification")
-                    </div>
-                </div>
-                @Html.ValidationMessage("mycaptcha")
+                
        
             // end captcha
             
