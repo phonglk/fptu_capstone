@@ -23,9 +23,9 @@
             @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
             @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
             @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true)
-            <p>5 ngày</p>
+            <p>Thanh toán tạm giữ 5 ngày</p>
             @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment)
-            <p>ngay và luôn</p>@*
+            <p>Thanh toán ngay</p>@*
             @*
             @Html.RadioButton("InstantPayment", "InstantPayment") <p>ngay và luôn</p>*@
             @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
