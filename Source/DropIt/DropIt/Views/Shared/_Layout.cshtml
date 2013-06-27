@@ -27,7 +27,7 @@
         <header class="upper-header">
             <div class="container">
                 <div class="icon">
-                    <img src="/images/icon.png">
+                <a href="@Url.Action("Index","Home",null,"http")"><img src="/images/icon.png"></a>
                 </div>
                 <p>Chúng tôi đã bán <span>1,770</span> vé cho <span>607</span> sự kiện! và nhiều hơn nữa</p>
 
@@ -35,10 +35,7 @@
                       <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
-                   @* <ul class="inline">
-                        <li><i class="icon-user"></i>Chào bạn Admin</li>
-                    </ul>*@
-                </div>
+                                  </div>
             </div>
 
         </header>
@@ -53,7 +50,7 @@
                 </div>
                 <div id="home-nav" class="navbar span7 pull-right">
                     <ul class="nav">
-                        <li><a href="#">TRANG CHỦ</a></li>
+                        <li><a href="@Url.Action("Index","Home",null,"http")">TRANG CHỦ</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">SỰ KIỆN </a>
                             <ul class="dropdown-menu">
@@ -68,8 +65,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#">DÀNH CHO NGƯỜI MỚI</a></li>
-                        <li><a href="#">VỀ CHÚNG TÔI</a></li>
+                        <li><a href="@Url.Action("Contact","Home",null,"http")">DÀNH CHO NGƯỜI MỚI</a></li>
+                        <li><a href="@Url.Action("About","Home",null,"http")">VỀ CHÚNG TÔI</a></li>
                     </ul>
                 </div>
             </div>
@@ -77,25 +74,7 @@
             <!--Area: Page Header-->
         </div>
 
-        @* <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>*@
+       
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
