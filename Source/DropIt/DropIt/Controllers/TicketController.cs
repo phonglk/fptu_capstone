@@ -194,7 +194,7 @@ namespace DropIt.Controllers
                 };
                 this.unitOfWork.TicketRepository.AddOrUpdate(newticket);
                 this.unitOfWork.Save();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Checkout", "CheckOut");
             }
             return View(buyTicket);
         }
