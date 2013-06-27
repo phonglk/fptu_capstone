@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DropIt.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace DropIt.ViewModels
         
         public int? EventId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Phải quy định giá vé")]
         public double SellPrice { get; set; }
         
         [Required]
@@ -36,13 +37,14 @@ namespace DropIt.ViewModels
 
         public int UserId { get; set; }
 
-        
+        [RequiredIf("CreateEvent","checked",ErrorMessage="Tên sự kiện phải có khi tạo sự kiện mới")]
         public string EventName { get; set; }
 
-
+        [RequiredIf("CreateVenue", "checked", ErrorMessage = "Tên địa điểm phải có khi tạo địa điểm mới")]
         public string VenueName { get; set; }
 
-        
+
+        [RequiredIf("CreateVenue", "checked", ErrorMessage = "Địa chỉ nơi tổ chức phải có khi tạo địa điểm mới")]
         public string Address { get; set; }
         
         public int? ProvinceId { get; set; }
@@ -52,8 +54,9 @@ namespace DropIt.ViewModels
 
         public int? VenueId { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        //[DataType(DataType.Date),DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
+        [DataType(DataType.Text)]
+        [RequiredIf("CreateEvent", "checked", ErrorMessage = "Ngày tổ chức phải có khi tạo sự kiện mới")]
         public DateTime? HoldDate { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -61,5 +64,8 @@ namespace DropIt.ViewModels
 
         public String CreateEvent;
         public String CreateVenue;
+
+        [Required(ErrorMessage="Bạn phải đồng ý với điều khoản sử dụng")]
+        public String AgreeTerm;
     }
 }

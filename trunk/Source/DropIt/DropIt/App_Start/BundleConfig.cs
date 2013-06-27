@@ -19,6 +19,10 @@ namespace DropIt
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery.validate").Include(
+                        
+                        "~/Scripts/jquery.validate.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jtable").Include(
                         "~/Scripts/jtable/jquery.jtable.js",
                         "~/Scripts/jtable/localization/jquery.jtable.vi.js",

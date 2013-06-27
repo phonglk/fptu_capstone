@@ -8,6 +8,12 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .form1 .error {
+        font-size: 12px;
+        color: red;
+    }
+</style>
 <div class="container" id="content">
     <div class="form1">
         @using (Html.HorizontalForm())
@@ -26,10 +32,17 @@
                         </span>
                         @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                         <span class="add-on">
-                            <input type="checkbox" id="createEvent" data-bind="checked: isCreateEvent" name ="CreateEvent">
-                            <label for="createEvent">Tạo mới</label>
+                            <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name ="CreateEvent">
+                            <label for="CreateEvent">Tạo mới</label>
                         </span>
                     </div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" for="CategoryId">Thể loại:</label>
+                <div class="controls">
+                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId ,new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}" })
                 </div>
             </div>
             
@@ -59,8 +72,8 @@
                         <input type="text" data-bind="value: VenueName,visible: isCreateEvent() == false" disabled />
                         @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                         <span class="add-on" data-bind="visible: isCreateEvent">
-                            <input type="checkbox" id="createVenue" data-bind="checked: isCreateVenue"  name ="CreateVenue">
-                            <label for="createVenue">Tạo mới</label>
+                            <input type="checkbox" id="CreateVenue" data-bind="checked: isCreateVenue"  name ="CreateVenue">
+                            <label for="CreateVenue">Tạo mới</label>
                         </span>
                     </div>
                 </div>
@@ -79,14 +92,7 @@
                     @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId ,new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true,value: ProvinceId,select2:{}" })
                 </div>
             </div>
-            
-            <div class="control-group">
-                <label class="control-label" for="CategoryId">Thể loại:</label>
-                <div class="controls">
-                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId ,new { data_bind = "select2: {allowClear:false}" })
-                </div>
-            </div>
-            
+                        
 
             @Html.LabelAndControl("Chỗ ngồi:", Html.EditorFor(model => model.Seat))
 
@@ -100,7 +106,7 @@
             <div class="control-group">
                 <label class="control-label" for="SellPrice">Giá muốn bán (*):</label>
                 <div class="controls">
-                    @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice" })
+                    @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice" ,required="required"})
                 </div>
             </div>
             
@@ -115,7 +121,7 @@
             
             <div class="control-group">
                 <label class="checkbox">
-                    <input type="checkbox"/>
+                    <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng"/>
                     Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                 </label>
             </div>
@@ -144,10 +150,11 @@
         self.VenueName = ko.observable();
         self.VenueAddress = ko.observable();
         self.ProvinceId = ko.observable();
+        self.CategoryId = ko.observable();
         self.SellPrice = ko.observable();
         self.ServiceRate = 0.07;
         self.RecievePrice = ko.computed(function(){
-            return parsePrice(self.SellPrice()) * (1 - self.ServiceRate);
+            return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0,".",",");
         })
 
         self.selectVenueChange = function () {
@@ -162,19 +169,41 @@
                         self.VenueName(record.VenueName)
                         self.VenueAddress(record.Address)
                         self.ProvinceId(record.ProvinceId)
+                        self.CategoryId(record.CategoryId)
                     }
                 }
             })
         }
     }
 
+    validateOptions = {
+        //debug:true,
+        rules: {
+            SellPrice: {
+                required: true
+            },
+            EventName: {
+                depends: function (element) {
+                    return $("#createEvent:checked");
+                }
+            }
+        },
+        messages:{
+            SellPrice: "Cần phải điền giá bán",
+            EventName: "Cần phải điền tên sự kiện khi tạo mới"
+        }
+        //,
+        //errorLabelContainer:$('.validation-summary-errors')
+    }
+
     $(function () {
         ctvm = new CreateTicketViewModel();
         ko.applyBindings(ctvm);
         $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
+        //$(".form1 form").validate(validateOptions);
     })
+    
+
 </script>
 
-@section Scripts {
-
-}
+@Scripts.Render("~/bundles/jqueryval")

@@ -37,14 +37,14 @@
         </div>
 
         <div class="display-field">
-            <h2 class="event-name">@Html.DisplayFor(model => model.EventName)</h2>
+            <h2 class="event-name">@Model.EventName</h2>
             <hr />
         </div>
 
         <div class="event-des">
             <div class="event-image span3">
                 <div class="display-field">
-                    <img src="@Url.Content(Model.EventImage)" />
+                    <img src="@Url.Content(Model.EventImage ==null? "/Content/Images/no_image.jpg":Model.EventImage )" />
                 </div>
             </div>
             <div class="span6">
