@@ -29,5 +29,7 @@ namespace DropIt.Models
         public virtual Event Event { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<TicketResponse> TicketResponses { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
