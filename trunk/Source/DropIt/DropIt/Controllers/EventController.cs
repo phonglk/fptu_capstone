@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
 using DropIt.DAL;
+using WebMatrix.WebData;
 
 namespace DropIt.Controllers
 {
@@ -39,6 +40,14 @@ namespace DropIt.Controllers
                 return HttpNotFound();
             }
             return View(evt);
+        }
+        public ActionResult FollowEvent()
+        {
+            int id = WebSecurity.GetUserId(User.Identity.Name);
+            var follow = this.unitOfWork.UserRepository.Get(u => u.UserId == id).FirstOrDefault().UserFollowEvents;
+            return View(follow.ToList());         
+
+
         }
 
         //

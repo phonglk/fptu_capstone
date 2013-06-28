@@ -65,18 +65,18 @@
                         <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage ==null? "/Content/Images/no_image.jpg":item.EventImage ))')";>
                             </div>
                         <div class="item-event-date">
-                            <div class="item-date">@Html.DisplayFor(modelItem => item.HoldDate.Day)</div>
+                            <div class="item-date">@item.HoldDate.Day</div>
                             <div class="item-time">
-                                <div class="item-month">@Html.DisplayFor(modelItem => item.HoldDate.Month)</div>
-                                <div class="item-year">@Html.DisplayFor(modelItem => item.HoldDate.Year)</div>
+                                <div class="item-month">@item.HoldDate.Month</div>
+                                <div class="item-year">@item.HoldDate.Year</div>
                             </div>
                         </div>
                         <div class="detail">
-                            <h5 class="name-event">@Html.DisplayFor(modelItem => item.EventName)</h5>
+                            <h5 class="name-event">@item.EventName</h5>
 
-                            <p>Số Vé: @Html.DisplayFor(modelItem => item.Tickets.Count)</p>
+                            <p>Số Vé: @item.Tickets.Count</p>
 
-                            <p>Địa Điểm: @Html.DisplayFor(modelItem => item.Venue.VenueName)</p>
+                            <p>Địa Điểm: @item.Venue.VenueName</p>
 
                         </div>
                     </div>

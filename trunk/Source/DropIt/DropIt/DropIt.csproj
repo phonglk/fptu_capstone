@@ -216,6 +216,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
@@ -941,6 +942,8 @@
     <Content Include="Views\Ticket\Buy.cshtml" />
     <Content Include="Views\Ticket\Request.cshtml" />
     <Content Include="Scripts\jquery.validate.unobtrusive.zaddons.js" />
+    <Content Include="Views\CheckOut\Checkout.cshtml" />
+    <Content Include="Views\Event\FollowEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
