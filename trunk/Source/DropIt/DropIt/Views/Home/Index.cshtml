@@ -48,164 +48,37 @@
         <div class="span9">
             <div id="main-nav" class="navbar span9">
                 <ul class="nav">
-                    <li class="active"><a href="@Url.Action("Index","Home",null,"http")">Top Các Sự Kiện</a></li>
+                    <li class="active"><a href="@Url.Action("Index", "Home", null, "http")">Top Các Sự Kiện</a></li>
                     <li><a href="">Sự Kiện Mới</a></li>
                     <li><a href="">Âm Nhạc</a></li>
                     <li><a href="">Thể Thao</a></li>
                 </ul>
             </div>
             <div id="ticket-show" class="span9">
-
-
-                 @foreach(var item in Model)
-                      { 
-                    
-                      <a href="@Url.Action("Details", "Event",new { id = item.EventId })">
-                    <div class="item span3">
-                        <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage ==null? "/Content/Images/no_image.jpg":item.EventImage ))')";>
+                @foreach (var item in Model)
+                { 
+                    <a href="@Url.Action("Details", "Event", new { id = item.EventId })">
+                        <div class="item span3">
+                            <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage == null ? "/Content/Images/no_image.jpg" : item.EventImage))')";>
                             </div>
-                        <div class="item-event-date">
-                            <div class="item-date">@item.HoldDate.Day</div>
-                            <div class="item-time">
-                                <div class="item-month">@item.HoldDate.Month</div>
-                                <div class="item-year">@item.HoldDate.Year</div>
+                            <div class="item-event-date">
+                                <div class="item-date">@item.HoldDate.Day</div>
+                                <div class="item-time">
+                                    <div class="item-month">@item.HoldDate.Month</div>
+                                    <div class="item-year">@item.HoldDate.Year</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="detail">
-                            <h5 class="name-event">@item.EventName</h5>
+                            <div class="detail">
+                                <h5 class="name-event">@item.EventName</h5>
 
-                            <p>Số Vé: @item.Tickets.Count</p>
+                                <p>Số Vé: @item.Tickets.Count</p>
 
-                            <p>Địa Điểm: @item.Venue.VenueName</p>
-
-                        </div>
-                    </div>
-                </a>
-                                }            
-                @*<a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
+                                <p>Địa Điểm: @item.Venue.VenueName</p>
                             </div>
                         </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="item span3">
-                        <img src="images/event.png" alt="image">
-                        <div class="item-event-date">
-                            <div class="item-date">17</div>
-                            <div class="item-time">
-                                <div class="item-month">09</div>
-                                <div class="item-year">2013</div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <h5>Âm nhạc và những người bạn - Live Show 2013</h5>
-
-                            <p>Số vé đã bán: 666</p>
-
-                            <p>Số vé còn lại: 33</p>
-
-                        </div>
-                    </div>
-                </a>*@
-
-
+                    </a>
+                }
             </div>
-
         </div>
     </div>
 </div>
