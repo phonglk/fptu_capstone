@@ -32,6 +32,18 @@
     </div>
 
     <div class="span9">
+        @using (Html.BeginForm()){     
+            <p>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#">Paid</a>
+                    </li>
+                    <li><a href="#">Unpaid</a></li>
+                    <li><a href="#">Deliverd</a></li>
+                    <li><a href="#">Recieved</a></li>
+                </ul>
+            </p> 
+        } 
         <table class="table table-hover">
             <thead>
                 <tr>
