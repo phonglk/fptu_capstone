@@ -137,6 +137,26 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult GetParentOptions()
+        {
+            try
+            {
+                var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
+                    p => new
+                    {
+                        DisplayText = p.CategoryName,
+                        Value = p.CategoryId
+                    });
+                return Json(new JSONResult(Records, "Options"));
+
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

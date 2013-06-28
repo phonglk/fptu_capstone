@@ -125,6 +125,7 @@ namespace DropIt.Controllers
             return View(evt);
         }
 
+
         [HttpPost]
         public JsonResult getInfo(int EventId)
         {

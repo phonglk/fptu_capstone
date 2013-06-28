@@ -37,5 +37,10 @@ namespace DropIt.Controllers
 
             return View();
         }
+
+        public ActionResult GuideForNew()
+        {
+            return View();
+        }
     }
 }
