@@ -51,9 +51,25 @@ namespace DropIt.Controllers
             return View(requests.ToList());
         }
 
-        public ActionResult Close(int id = 0)
+        public ActionResult Close(int UserId, int EventId)
         {
-            return View();
+            Request rqt = this.unitOfWork.RequestRepository.GetById(UserId, EventId);
+            if (rqt == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                if (rqt.Status == 0)
+                {
+                    //rqt.Status == 0;
+                }
+                else
+                {
+
+                }
+            }
+            return null;
         }
 
         public ActionResult Details(int UserId, int EventId)

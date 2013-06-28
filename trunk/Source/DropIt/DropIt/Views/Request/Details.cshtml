@@ -44,6 +44,11 @@
         </div>
 
         <div class="event-des">
+            <div class="event-image span3">
+                <div class="display-field">
+                    <img src="@Url.Content(Model.Event.EventImage == null ? "/Content/Images/no_image.jpg" : Model.Event.EventImage)" />
+                </div>
+            </div>
             <div class="span6">
                 @using (Html.HorizontalForm())
                 {
@@ -51,9 +56,12 @@
                     @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
                     @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
                     @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
-                    @Html.LabelAndControl("Miêu tả: ",Html.Value("Description"))
+                    @Html.LabelAndControl("Miêu tả: ", Html.Value("Description"))
                 }
-
+            </div>
+            <div class="span9">
+                <hr />
+                <a href="@Url.Action("Index", "Request")">Trở về trang Danh sách các loại vé đang được rao mua</a>
             </div>
             @*<div class="display-des span9">
              
