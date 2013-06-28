@@ -37,7 +37,17 @@
         </div>
 
         <div class="display-field">
-            <h2 class="event-name">@Model.EventName</h2>
+            <h2 class="event-name">@Model.EventName
+                 @{
+                                        if (Model.UserFollowEvents.Where(t => t.UserId== WebSecurity.GetUserId(User.Identity.Name)).Where(p=>p.EventId == Model.EventId).FirstOrDefault() != null){
+                                            <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Bỏ theo dõi</a>
+                                        }
+                                        else {
+                                             <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Theo dõi</a>
+                                        }
+                                    }
+            </h2>
+            
             <hr />
         </div>
 
@@ -102,8 +112,7 @@
                                 </td>
                                 <td class="action">
                                     <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                    <a href="#" class="btn btn-inverse btn-sub btn-small">Theo dõi</a>
-
+                                   
                                 </td>
                             </tr>
                         }
@@ -113,4 +122,28 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var eventId = @(Model.EventId);
+    $(".btn-follow").live("click", function (e) {
+        e.preventDefault();
+        var seft = this;
+        $.ajax({
+            type: "POST",
+            url: "/Event/Follow",
+            data: { EventId: eventId },
+            cache: false,
+            dataType: "json",
+            success: function  (dataresponse) {
+                if (dataresponse == "Follow") {
+                    $(seft).text("Bỏ theo dõi")
+                }
+                else {
+                    $(seft).text("Theo dõi")
+                }
+               
+            }
+        });
+
+    });
+</script>
 

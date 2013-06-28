@@ -13,10 +13,12 @@ body {
     margin-left: auto;
     width: 960px;
 }
+
 h1, h2, h3, h4 {
     color: #431f59;
     font-weight: normal;
-}  
+}
+
 #content {
     background: #ffffff;
     margin-top: 20px;
@@ -210,7 +212,6 @@ h1, h2, h3, h4 {
 
 #footer {
     background-color: #fff;
-   
 }
 
 .logo-footer {
@@ -270,15 +271,15 @@ hr {
     margin-left: 1px;
     margin-bottom: 1px;
 }
+
 .image-item {
     height: 150px;
-    background-size:cover;
-    
+    background-size: cover;
 }
 
-    .item:hover {
-        background-color: #592e51;
-    }
+.item:hover {
+    background-color: #592e51;
+}
 
 .item-event-date {
     color: #fff;
@@ -327,9 +328,11 @@ hr {
     opacity: 0.4;
     display: inline-block;
 }
+
 .detail .name-event {
     min-height: 40px;
 }
+
 #ticket-show {
     margin-left: 0;
 }
@@ -354,6 +357,7 @@ hr {
     font-weight: lighter;
     position: relative;
 }
+
 .login h2 {
     text-align: center;
     font-weight: lighter;
@@ -392,6 +396,7 @@ hr {
 .controls {
     margin-left: 0;
 }
+
 #province {
     float: right;
     margin-top: -36px;
@@ -643,10 +648,12 @@ input[type="checkbox"].input-validation-error {
     margin-left: 0;
     margin-bottom: 0;
 }
+
 .event-name {
     color: #431f59;
     font-weight: normal;
 }
+
 .event-des .control-label {
     margin-left: 0;
     width: 100px;
@@ -714,16 +721,21 @@ table.event-detail td.user {
 table.event-detail td.price {
     width: 105px;
 }
+
 .btn-buy {
     background: #5e4071;
 }
+
 .btn-sub {
-    background: #c3afc1;
+    background: #5e4071;
+    margin-right: 40px;
+    margin-top: 8px;
 }
 
-.btn-sub:hover {
-    background: #666666;
-}
+    .btn-sub:hover {
+        background: #666666;
+    }
+
 .btn-buy:hover {
     background: #666666;
 }

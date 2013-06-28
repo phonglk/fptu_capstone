@@ -26,7 +26,7 @@ namespace DropIt.Controllers
         public ActionResult List()
         {
             var events = this.unitOfWork.EventRepository.Get();
-            return View(events.ToList());          
+            return View(events.ToList());
         }
 
         //
@@ -45,7 +45,7 @@ namespace DropIt.Controllers
         {
             int id = WebSecurity.GetUserId(User.Identity.Name);
             var follow = this.unitOfWork.UserRepository.Get(u => u.UserId == id).FirstOrDefault().UserFollowEvents;
-            return View(follow.ToList());         
+            return View(follow.ToList());
 
 
         }
@@ -63,7 +63,7 @@ namespace DropIt.Controllers
         //
         // POST: /Event/Create
 
-        [HttpPost]  
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Event evt)
         {
@@ -78,7 +78,29 @@ namespace DropIt.Controllers
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", evt.VenueId);
             return View(evt);
         }
-
+        [HttpPost]
+        public JsonResult Follow(int EventId = 0)
+        {
+            DropItContext ctx = new DropItContext();
+            string result = "Un-Follow";
+            int id = WebSecurity.GetUserId(User.Identity.Name);
+            UserFollowEvent ufe = ctx.Set<UserFollowEvent>().Where(t => t.EventId == EventId).Where(p => p.UserId == id).FirstOrDefault();
+            if (ufe != null)
+            {
+                ctx.Set<UserFollowEvent>().Remove(ufe);
+            }
+            else
+            {
+                ctx.Set<UserFollowEvent>().Add(new UserFollowEvent
+                {
+                    EventId = EventId,
+                    UserId = WebSecurity.GetUserId(User.Identity.Name)
+                });
+                result = "Follow";
+            }
+            ctx.SaveChanges();
+            return Json(result);
+        }
         //
         // GET: /Event/Edit/5
 
@@ -129,15 +151,16 @@ namespace DropIt.Controllers
         [HttpPost]
         public JsonResult getInfo(int EventId)
         {
-            
-            var Event = Repository.Get(e =>  e.EventId == EventId);
+
+            var Event = Repository.Get(e => e.EventId == EventId);
 
             if (Event != null)
             {
                 return Json(new
                 {
                     Result = "OK",
-                    Records = Event.Select(e => new {
+                    Records = Event.Select(e => new
+                    {
                         e.Venue.VenueName,
                         e.Venue.VenueId,
                         e.Venue.Address,
