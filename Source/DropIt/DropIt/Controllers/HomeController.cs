@@ -20,6 +20,15 @@ namespace DropIt.Controllers
 
         public ActionResult Index()
         {
+            if (Request["Role"] != null)
+            {
+                Session["Role"] = Request["Role"];
+                return RedirectToAction("Index");
+            }
+            else if (Session["Role"] == null)
+            {
+                Session["Role"] = "Buy";
+            }
             var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t=>t.Tickets.Count).Take(9).Where(p=>p.Status==1);
             return View(events.ToList());          
         }

@@ -38,6 +38,7 @@ namespace DropIt.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                Session["Role"] = "Buy";
                 return RedirectToLocal(returnUrl);
             }
 

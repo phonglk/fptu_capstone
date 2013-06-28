@@ -11,7 +11,12 @@
     if (type == "category") {
         getData("/Category/getAll", function (data) {
             if (data.Records && data.Records.length > 0) {
-                console.log(data.Records);
+                var html_lis = ""
+                for (var i = 0; i < data.Records.length; i++) {
+                    var cat = data.Records[i];
+                    html_lis += "<li><a href='/Event/?CategoryId="+ cat.CategoryId + "'>" + cat.CategoryName + "</a></li>";
+                }
+                target.append(html_lis);
             }
         })
     }
