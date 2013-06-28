@@ -44,7 +44,7 @@
         <div class="event-des">
             <div class="event-image span3">
                 <div class="display-field">
-                    <img src="@Url.Content(Model.EventImage ==null? "/Content/Images/no_image.jpg":Model.EventImage )" />
+                    <img src="@Url.Content(Model.EventImage == null ? "/Content/Images/no_image.jpg" : Model.EventImage)" />
                 </div>
             </div>
             <div class="span6">
@@ -109,14 +109,6 @@
                         }
                     </tbody>
                 </table>
-                     @foreach (var item in Model.UserFollowEvents)
-                        {
-                            @item.FollowEventId
-                                    
-                            @item.Event.EventName
-                                      
-                            @item.User.UserName
-                        }
             </div>
         </div>
     </div>
