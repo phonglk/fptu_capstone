@@ -11,7 +11,7 @@ using WebMatrix.WebData;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     [InitializeSimpleMembership]
     public class UserController : Controller
     {
