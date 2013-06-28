@@ -1,0 +1,65 @@
+﻿@model DropIt.Models.Request
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Area: Page Header & Navigation & Search.END-->
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                <div>
+                    <ul id="left-nav" class="nav nav-list">
+                        <li class="nav-header">Cá Nhân</li>
+                        <li><a href="#">Thông tin tài khoản</a></li>
+                        <li><a href="#">Giao dịch đang thực hiên <span
+                            class="badge badge-info">4</span></a></li>
+                        <li><a href="#">Lịch sử giao dịch</a></li>
+                        <li class=""><a href="#">Danh sách theo dõi</a></li>
+                        <li><a href="#">Quản lí rao mua</a></li>
+                        <li class="nav-header">Mua Vé</li>
+                        <li><a href="#">Đăng rao mua</a></li>
+                        <li class=""><a href="#">Ca nhạc</a></li>
+                        <li class=""><a href="#">TV Show</a></li>
+                        <li><a href="#">Thể thao</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-field">
+            <h2 class="event-name">@Html.DisplayFor(model => model.Event.EventName)</h2>
+            <hr />
+        </div>
+
+        <div class="event-des">
+            <div class="span6">
+                @using (Html.HorizontalForm())
+                {
+                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
+                    @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
+                    @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
+                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
+                    @Html.LabelAndControl("Miêu tả: ",Html.Value("Request.Description"))
+                }
+
+            </div>
+            <div class="display-des span9">
+                @Html.DisplayFor(model => model.Description)
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

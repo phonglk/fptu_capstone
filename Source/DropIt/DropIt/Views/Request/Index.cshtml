@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DropIt.Models.Request>
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Area: Page Header & Navigation & Search.END-->
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                <div>
+                    <ul id="left-nav" class="nav nav-list">
+                        <li class="nav-header">Cá Nhân</li>
+                        <li><a href="#">Thông tin tài khoản</a></li>
+                        <li><a href="#">Giao dịch đang thực hiên <span
+                            class="badge badge-info">4</span></a></li>
+                        <li><a href="#">Lịch sử giao dịch</a></li>
+                        <li class=""><a href="#">Danh sách theo dõi</a></li>
+                        <li><a href="#">Quản lí rao mua</a></li>
+                        <li class="nav-header">Mua Vé</li>
+                        <li><a href="#">Đăng rao mua</a></li>
+                        <li class=""><a href="#">Ca nhạc</a></li>
+                        <li class=""><a href="#">TV Show</a></li>
+                        <li><a href="#">Thể thao</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h3>Danh sách các loại vé đang được rao mua </h3>
+        <blockquote>Click vào "Chi tiết" để xem chi tiết các trả lời</blockquote>
+        <div class="row span9">
+            <div class="ticket-list">
+                <table class="table table-condensed event-detail">
+                    <thead>
+                        <tr class="header warning">
+                            <th class="">Thời gian</th>
+                            <th class="">Tên sự kiện</th>
+                            <th class="">Nơi diễn ra sự kiện</th>
+                            <th class="">Trạng thái</th>
+                            <th class="">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- row -->
+                        @foreach (var item in Model)
+                        {
+                            <a href="@Url.Action("Index", "Request", new { id = item.UserId })">
+                                <tr class="first">
+                                    <td>@Html.DisplayFor(modelItem => item.Event.HoldDate)</td>
+                                    <td>@Html.DisplayFor(modelItme => item.Event.EventName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Event.Venue.VenueName)</td>
+                                    <td>@(item.Event.Status == 1 ? "Đang giao dịch" : "đã đóng")</td>
+                                    <td class="action">
+                                        <a href="#" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
+                                        <a href="#" class="btn btn-inverse btn-sub btn-small">Đóng</a>
+                                    </td>
+                                </tr>
+                            </a>    
+                        }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
