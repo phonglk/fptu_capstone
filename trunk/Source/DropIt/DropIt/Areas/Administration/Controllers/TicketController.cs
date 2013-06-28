@@ -44,6 +44,34 @@ namespace DropIt.Areas.Administration.Controllers
             return View(ticket);
         }
 
+        
+        public ActionResult Delete(int id)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            this.unitOfWork.TicketRepository.Delete(id);
+            this.unitOfWork.TicketRepository.Save();
+            return RedirectToAction("List");
+        }
 
+        //
+        // POST: /Event/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    this.unitOfWork.TicketRepository.Delete(id);
+        //    this.unitOfWork.TicketRepository.Save();
+        //    return RedirectToAction("List");
+        //}
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
