@@ -1,14 +1,14 @@
-﻿@model DropIt.Models.Event
+﻿@model IEnumerable<DropIt.Models.UserFollowEvent>
 @using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
 @using BootstrapExtensions.Base.Form.Label
 @using BootstrapExtensions.Components.Alert
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Follow";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!--Area: Page Header & Navigation & Search.END-->
+
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
@@ -36,69 +36,30 @@
             </div>
         </div>
 
-        <div class="display-field">
-            <h2 class="event-name">@Model.EventName</h2>
-            <hr />
-        </div>
-
-        <div class="event-des">
-            <div class="event-image span3">
-                <div class="display-field">
-                    <img src="@Url.Content(Model.EventImage ==null? "/Content/Images/no_image.jpg":Model.EventImage )" />
-                </div>
-            </div>
-            <div class="span6">
-                @using (Html.HorizontalForm())
-                {
-                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
-                    @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
-                    @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
-                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
-                }
-
-            </div>
-            <div class="display-des span9">
-                @Html.DisplayFor(model => model.Description)
-                <br />
-                <br />
-
-            </div>
-        </div>
         <div class="row span9">
             <div class="ticket-list">
                 <table class="table table-condensed event-detail">
                     <thead>
-
-                        <tr class="info">
-                            <td colspan="5">
-                                <i class="icon-calendar"></i>@Html.DisplayFor(model => model.HoldDate)
-                            </td>
-                        </tr>
                         <tr class="header warning">
-                            <th class="">Mã Vé</th>
-                            <th class="">Người bán</th>
-                            <th class="">Miêu tả</th>
-                            <th class="">Giá vé(VNĐ)</th>
-                            <th class="">Đặt vé</th>
+                            <th class="span3">Sự Kiện</th>
+                            <th class="">Thời gian</th>
+                            <th class="span3">Địa điểm</th>
+                            <th class="">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- row -->
-                        @foreach (var item in Model.Tickets)
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td class="first">
-                                    @item.TicketId
+                                    @item.Event.EventName
                                 </td>
-                                <td class="user">
-                                    @item.User.UserName
-                                </td>
-
                                 <td class="descript">
-                                    @item.Description
+                                    @item.Event.HoldDate
                                 </td>
                                 <td class="price">
-                                    @item.SellPrice
+                                    @item.Event.Venue.VenueName
                                 </td>
                                 <td class="action">
                                     <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
@@ -109,16 +70,6 @@
                         }
                     </tbody>
                 </table>
-                     @foreach (var item in Model.UserFollowEvents)
-                        {
-                            @item.FollowEventId
-                                    
-                            @item.Event.EventName
-                                      
-                            @item.User.UserName
-                        }
             </div>
         </div>
-    </div>
-</div>
-
+        </div>
