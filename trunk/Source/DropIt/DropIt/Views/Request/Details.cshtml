@@ -47,19 +47,19 @@
             <div class="span6">
                 @using (Html.HorizontalForm())
                 {
-                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
+                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("Event.HoldDate"))
                     @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
-                    @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
-                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
-                    @Html.LabelAndControl("Miêu tả: ",Html.Value("Request.Description"))
+                    @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
+                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
+                    @Html.LabelAndControl("Miêu tả: ",Html.Value("Description"))
                 }
 
             </div>
-            <div class="display-des span9">
-                @Html.DisplayFor(model => model.Description)
+            @*<div class="display-des span9">
+             
                 <br />
                 <br />
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
