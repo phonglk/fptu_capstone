@@ -1,0 +1,16 @@
+﻿@if (User.Identity.IsAuthenticated){
+    
+<div id="role-tab" class="container">
+    <div class="user-tab">
+        <ul class="nav nav-tabs">
+            <li class="@((Session["Role"]==null||Session["Role"].Equals("Buy"))?"active":"")">
+                <a href="/Home/?Role=Buy">Mua Vé</a>
+            </li>
+            <li class="@(Session["Role"].Equals("Sell")?"active":"")">
+                <a href="/Home/?Role=Sell">Bán Vé</a>
+            </li>
+        </ul>
+    </div>
+</div>
+    
+}

@@ -220,6 +220,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -978,6 +979,11 @@
     <Content Include="Views\CheckOut\Checkout.cshtml" />
     <Content Include="Views\Shared\Partials\MenuBar.cshtml" />
     <Content Include="Views\Shared\Partials\Footer.cshtml" />
+    <Content Include="Views\Shared\Partials\SideBar.cshtml" />
+    <Content Include="Views\Shared\Partials\SideBar_Buy.cshtml" />
+    <Content Include="Views\Shared\Partials\SideBar_Sell.cshtml" />
+    <Content Include="Views\Shared\Partials\RoleTab.cshtml" />
+    <Content Include="Views\Shared\Partials\SideBar_User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

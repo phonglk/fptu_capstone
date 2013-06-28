@@ -6,3 +6,6 @@ input[type='text'].input-height-large {
 .add-on-input {
   height: 30px !important;
 }
+.nav-tabs > li > a:hover{
+    border-color:#C2AFC2;
+}
