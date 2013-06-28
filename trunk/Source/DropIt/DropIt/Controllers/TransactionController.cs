@@ -32,7 +32,7 @@ namespace DropIt.Controllers
         {
             
             
-            ViewBag.status = new SelectList(StatusList);
+            //ViewBag.status = new SelectList(StatusList);
             var UserId = WebSecurity.GetUserId(User.Identity.Name);
             var historyTransaction = this.unitOfWork.TicketRepository.Get(u => u.TranUserId == UserId && u.TranStatus == (int)Statuses.BuyTicket.Paid);
             return View(historyTransaction.ToList());
