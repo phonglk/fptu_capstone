@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DropIt.Models.Ticket>
+@{
+    ViewBag.Title = "ListTicket";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="table-wrapper events-table section">
+    <div class="row-fluid head">
+        <div class="span12">
+            <h4>Tickets</h4>
+        </div>
+    </div>
+   @* <div class="row-fluid filter-block">
+        <div class="pull-right">
+            <div class="ui-select">
+                <select>
+                    <option>Filter events</option>
+                    <option>abc</option>
+                    <option>xyz</option>
+                </select>
+            </div>
+            <input type="text" class="search">
+            <a class="btn-flat success new-event" href="Create">+ Add event</a>
+        </div>
+    </div>*@
+    <div id="pad-wrapper">
+        <div class="row-fluid">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="span3">
+                            <span class="line"></span>Sự kiện
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Thời gian tổ chức
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Miêu tả ghế
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>Trạng thái vé
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    @foreach (var item in Model)
+                    {
+                        <tr class="first">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Event.EventName)
+                            </td>
+                            <td class="">
+                                @Html.DisplayFor(modelItem => item.Event.HoldDate)
+                            </td>
+                            <td class="place">
+                                @Html.DisplayFor(modelItem => item.Seat)
+                            </td>
+                            <td class="description">
+                                @Html.DisplayFor(modelItem => item.Description)
+                                @*<ul class="actions">
+                                                <li><a href="#">Edit</a></li>
+                                                <li class="last"><a href="#">Delete</a></li>
+                                            </ul>*@
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.TicketId }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end events table -->
+</div>
+
+
