@@ -61,13 +61,13 @@
                                     <td>@Html.DisplayFor(modelItem => item.Event.HoldDate)</td>
                                     <td>@Html.DisplayFor(modelItme => item.Event.EventName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Event.Venue.VenueName)</td>
-                                    <td>@(item.Event.Status == 1 ? "Đang giao dịch" : "đã đóng")</td>
+                                    <td>@(item.Status == 1 ? "Đang giao dịch" : "Đã đóng giao dịch")</td>
                                     <td class="action">
                                         <a href="@Url.Action("Details", "Request", new { UserId = item.UserId, EventId = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
                                         <a href="@Url.Action("Close", "Request", new { UserId = item.UserId, EventId = item.EventId })" class="btn btn-inverse btn-sub btn-small">Đóng</a>
                                     </td>
                                 </tr>
-                            </a>    
+                            </a>
                         }
                 </table>
             </div>
