@@ -151,6 +151,18 @@ namespace DropIt.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public JsonResult getAll()
+        {
+            var Categories = this.unitOfWork.CategoryRepository.GetAll().Select( c => new {
+                c.CategoryId,
+                c.CategoryName
+            });
+            return Json(new {
+                Records = Categories
+            });
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

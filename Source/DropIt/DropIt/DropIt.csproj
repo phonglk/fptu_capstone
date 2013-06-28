@@ -542,6 +542,32 @@
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
     <Content Include="Content\default.less" />
+    <Content Include="Content\Fonts\FRABK.TTF" />
+    <Content Include="Content\Fonts\FRABKIT.TTF" />
+    <Content Include="Content\Fonts\FRADM.TTF" />
+    <Content Include="Content\Fonts\FRADMCN.TTF" />
+    <Content Include="Content\Fonts\FRADMIT.TTF" />
+    <Content Include="Content\Fonts\FRAHV.TTF" />
+    <Content Include="Content\Fonts\FRAHVIT.TTF" />
+    <Content Include="Content\Fonts\framd.ttf" />
+    <Content Include="Content\Fonts\FRAMDCN.TTF" />
+    <Content Include="Content\Fonts\framdit.ttf" />
+    <Content Include="Content\Fonts\GeosansLight-Oblique.ttf" />
+    <Content Include="Content\Fonts\GeosansLight.ttf" />
+    <Content Include="Content\Fonts\GILBI___.TTF" />
+    <Content Include="Content\Fonts\GILB____.TTF" />
+    <Content Include="Content\Fonts\GILC____.TTF" />
+    <Content Include="Content\Fonts\GILI____.TTF" />
+    <Content Include="Content\Fonts\GillSans_for_Oriflame_Bold_0.ttf" />
+    <Content Include="Content\Fonts\GillSans_for_Oriflame_Italic_0.ttf" />
+    <Content Include="Content\Fonts\GillSans_for_Oriflame_Light_0.ttf" />
+    <Content Include="Content\Fonts\GillSans_for_Oriflame_Regular_0.ttf" />
+    <Content Include="Content\Fonts\GILLUBCD.TTF" />
+    <Content Include="Content\Fonts\GILSANUB.TTF" />
+    <Content Include="Content\Fonts\GIL_____.TTF" />
+    <Content Include="Content\Fonts\GLSNECB.TTF" />
+    <Content Include="Content\Fonts\HEADOH_.TTF" />
+    <Content Include="Content\Fonts\HEADTH_.TTF" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">
@@ -943,15 +969,22 @@
     <Content Include="Views\Ticket\Buy.cshtml" />
     <Content Include="Views\Ticket\Request.cshtml" />
     <Content Include="Scripts\jquery.validate.unobtrusive.zaddons.js" />
+    <Content Include="Views\Home\GuideForNew.cshtml" />
+    <Content Include="Views\Shared\_LayoutInfo.cshtml" />
+    <Content Include="Views\Shared\Partials\LogoAndTagLine.cshtml" />
     <Content Include="Views\CheckOut\Checkout.cshtml" />
     <Content Include="Views\Event\FollowEvent.cshtml" />
     <Content Include="Views\Transaction\HistoryBuy.cshtml" />
+    <Content Include="Views\CheckOut\Checkout.cshtml" />
+    <Content Include="Views\Shared\Partials\MenuBar.cshtml" />
+    <Content Include="Views\Shared\Partials\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
+    <Folder Include="obj\" />
     <Folder Include="Scripts\DropIt\" />
   </ItemGroup>
   <ItemGroup>

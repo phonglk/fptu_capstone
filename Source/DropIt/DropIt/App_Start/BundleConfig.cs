@@ -49,8 +49,7 @@ namespace DropIt
                 "~/Scripts/jquery.format.date.js",
                 "~/Scripts/Common/utils.js",
                 "~/Scripts/Common/utilClasses.js",
-                "~/Scripts/Common/GenericEntity.js",
-                "~/Scripts/Common/GenericViewModels.js"));
+                "~/Scripts/Common/default.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/ve").Include(
                 "~/Scripts/ValidationEngine/jquery.validationEngine-dropit.js",
