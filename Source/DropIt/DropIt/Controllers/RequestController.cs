@@ -56,15 +56,15 @@ namespace DropIt.Controllers
             return View();
         }
 
-        //public ActionResult Details(int UserId, int EventId)
-        //{
-        //    Request rqt = this.unitOfWork.RequestRepository.Fin;
-        //    if (rqt == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(rqt);
-        //}
+        public ActionResult Details(int UserId, int EventId)
+        {
+            Request rqt = this.unitOfWork.RequestRepository.GetById(UserId, EventId);
+            if (rqt == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rqt);
+        }
 
         //
         // POST: /Request/Edit/
