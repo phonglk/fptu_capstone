@@ -48,5 +48,18 @@ namespace DropIt.DAL
             
             return request;
         }
+
+        public Request GetById(int UserId, int EventId)
+        {
+            var findRequest = context.Requests.Find(UserId, EventId);
+            if (findRequest == null)
+            {
+                return null;
+            }
+            else
+            {
+                return findRequest;
+            }
+        }
     }
 }
