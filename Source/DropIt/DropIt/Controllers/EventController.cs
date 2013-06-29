@@ -49,7 +49,22 @@ namespace DropIt.Controllers
 
 
         }
-
+        [HttpPost]
+        public ActionResult FollowEvent(int EventId = 0)
+        {
+            //int id = WebSecurity.GetUserId(User.Identity.Name);
+            //var follow = this.unitOfWork.UserRepository.Get(u => u.UserId == id).FirstOrDefault().UserFollowEvents;
+            //var ufe = this.unitOfWork.UserRepository.Get(u => u.UserId == id).FirstOrDefault().UserFollowEvents.Where(t => t.EventId == EventId).FirstOrDefault();
+            //follow.Remove(ufe);
+            //this.unitOfWork.Save();
+            //return View(follow.ToList());
+            DropItContext ctx = new DropItContext();
+            int id = WebSecurity.GetUserId(User.Identity.Name);
+            UserFollowEvent ufe = ctx.Set<UserFollowEvent>().Where(t => t.EventId == EventId).Where(p => p.UserId == id).FirstOrDefault();
+            ctx.Set<UserFollowEvent>().Remove(ufe);
+            ctx.SaveChanges();
+            return View(ctx.Set<UserFollowEvent>().Where(t => t.UserId == id).ToList());
+        }
         //
         // GET: /Event/Create
 

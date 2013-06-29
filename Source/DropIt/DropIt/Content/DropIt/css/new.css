@@ -679,7 +679,6 @@ table.event-detail .header {
 
 
 table.event-detail th.action .btn {
-    width: 60px;
     display: block;
     margin-bottom: 5px;
 }
@@ -695,7 +694,7 @@ table.event-detail td {
 }
 
 td.action .btn {
-    width: 60px;
+    width: 70px;
     display: block;
     margin-bottom: 5px;
     border-radius: 0;
@@ -728,8 +727,8 @@ table.event-detail td.price {
 
 .btn-sub {
     background: #5e4071;
-    margin-right: 40px;
-    margin-top: 8px;
+    margin-right: 60px;
+    margin-top: 25px;
 }
 
     .btn-sub:hover {

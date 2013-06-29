@@ -5,7 +5,7 @@
 @using BootstrapExtensions.Base.Form.Label
 @using BootstrapExtensions.Components.Alert
 @{
-    ViewBag.Title = "Follow";
+    ViewBag.Title = "Manage Follow";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -50,7 +50,7 @@
                             <th class="span3">Sự Kiện</th>
                             <th class="">Thời gian</th>
                             <th class="span3">Địa điểm</th>
-                            <th class="">Thao tác</th>
+                            <th class="span2">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +69,10 @@
                                 </td>
                                 <td class="action">
                                     <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                    <a href="#" class="btn btn-inverse btn-sub btn-small">Theo dõi</a>
+                                    @using (Html.BeginForm("FollowEvent", "Event", FormMethod.Post,null)) {
+                                        @Html.Button("Bỏ theo dõi",new { type = "submit" });
+                                     @Html.Hidden("EventId", item.EventId);
+                                    }
                                 </td>
                             </tr>
                         }
