@@ -37,27 +37,29 @@
         </div>
 
         <div class="display-field">
-            <h2 class="event-name">@Model.EventName
-                 @{
-                                        if (Model.UserFollowEvents.Where(t => t.UserId== WebSecurity.GetUserId(User.Identity.Name)).Where(p=>p.EventId == Model.EventId).FirstOrDefault() != null){
-                                            <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Bỏ theo dõi</a>
-                                        }
-                                        else {
-                                             <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Theo dõi</a>
-                                        }
-                                    }
-            </h2>
-            
-            <hr />
+            <div class="row span7" style="margin-bottom:-10px">
+            <h2 class="event-name ">@Model.EventName</h2>
+            </div>
+            @{
+                if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
+                {
+                <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Bỏ theo dõi</a>
+                }
+                else
+                {
+                <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Theo dõi</a>
+                }
+            }
         </div>
 
-        <div class="event-des">
+        <div class="event-des span9">
+            <hr />
             <div class="event-image span3">
-                <div class="display-field">
+                <div class="display-field" style="padding: 1px">
                     <img src="@Url.Content(Model.EventImage == null ? "/Content/Images/no_image.jpg" : Model.EventImage)" />
                 </div>
             </div>
-            <div class="span6">
+            <div class="span5">
                 @using (Html.HorizontalForm())
                 {
                     @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
@@ -68,10 +70,10 @@
 
             </div>
             <div class="display-des span9">
-                @Html.DisplayFor(model => model.Description)
+                <div class="row">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
                 <br />
-                <br />
-
             </div>
         </div>
         <div class="row span9">
@@ -112,7 +114,6 @@
                                 </td>
                                 <td class="action">
                                     <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                   
                                 </td>
                             </tr>
                         }

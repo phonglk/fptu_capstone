@@ -19,7 +19,6 @@ namespace DropIt.DAL
         private TicketRepository ticketRepository;
         private RequestRepository requestRepository;
 
-
         public EventRepository EventRepository
         {
             get
