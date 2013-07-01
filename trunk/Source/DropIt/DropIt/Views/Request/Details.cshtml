@@ -19,22 +19,15 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                <div>
-                    <ul id="left-nav" class="nav nav-list">
-                        <li class="nav-header">Cá Nhân</li>
-                        <li><a href="#">Thông tin tài khoản</a></li>
-                        <li><a href="#">Giao dịch đang thực hiên <span
-                            class="badge badge-info">4</span></a></li>
-                        <li><a href="#">Lịch sử giao dịch</a></li>
-                        <li class=""><a href="#">Danh sách theo dõi</a></li>
-                        <li><a href="#">Quản lí rao mua</a></li>
-                        <li class="nav-header">Mua Vé</li>
-                        <li><a href="#">Đăng rao mua</a></li>
-                        <li class=""><a href="#">Ca nhạc</a></li>
-                        <li class=""><a href="#">TV Show</a></li>
-                        <li><a href="#">Thể thao</a></li>
-                    </ul>
-                </div>
+                @if(!User.Identity.IsAuthenticated){
+                    @Html.Partial("Partials/SideBar")
+                }else{
+                    if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
+                        @Html.Partial("Partials/SideBar_Sell")
+                    }else{
+                        @Html.Partial("Partials/SideBar_Buy");
+                    }
+                }
             </div>
         </div>
 
@@ -50,14 +43,46 @@
                 </div>
             </div>
             <div class="span6">
-                @using (Html.HorizontalForm())
+                @*@using (Html.HorizontalForm())
                 {
-                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("Event.HoldDate"))
+                    @Html.LabelAndControl("Thời gian: ", Html.Value("Event.HoldDate"))
                     @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
                     @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
                     @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
                     @Html.LabelAndControl("Miêu tả: ", Html.Value("Description"))
+                }*@
+
+                @using (Html.HorizontalForm())
+                {
+                    @Html.LabelAndControl("Thời gian: ", Html.Value("Event.HoldDate"))
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Status, new { @class = "control-label" })
+                        <div class="controls">
+                            
+                            @{
+                            var status = Model.Status;
+                            if (status == 0)
+                            {
+                                        <p>Đã đóng giao dịch</p>
+                            }
+                            else if (status == 1)
+                            {
+                                        <p>Đang giao dịch</p>                    
+                            }
+                            else
+                            {
+                                        <p>Đã xóa</p>                    
+                            }
+                            }
+                        </div>
+                    </div>
+                    @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
+                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
+                    @Html.LabelAndControl("Miêu tả: ", Html.Value("Description"))
                 }
+
+            </div>
+            <div>
             </div>
             <div class="span9">
                 <hr />
