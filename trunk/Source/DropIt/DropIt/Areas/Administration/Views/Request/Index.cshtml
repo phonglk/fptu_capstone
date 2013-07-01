@@ -39,19 +39,19 @@
                 UserId: {
                     title: 'Tên người dùng',
                     key: true,
-                    create: true,
                     edit: false,
                     list: true,
                     options: Url({ Controller: "User", Action: "GetUserOptions" })
                 },
                 EventId: {                    
                     list: true,
-                    edit: false,
+                    edit: true,
                     //type: 'hidden',
                     title: 'Tên sự kiện',
                     validation: [
                         "required"
-                    ]
+                    ],
+                    options: Url({ Controller: "Event", Action: "GetEventOption" })
                     //input: function (data) {
                     //    return '<input type="text" name="Name" style="width:200px" value="' + data.record.UserName + '" />';
                     //}

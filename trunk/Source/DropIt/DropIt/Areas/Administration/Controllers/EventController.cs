@@ -153,6 +153,20 @@ namespace DropIt.Areas.Administration.Controllers
             }
 
         }
+        [HttpPost]
+        public JsonResult GetEventOption()
+        {
+            try
+            {
+                var eventnames = unitOfWork.EventRepository.GetAll().Select(
+                    p => new { DisplayText = p.EventName, Value = p.EventId });
+                return Json(new JSONResult(eventnames, "Options"));
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
