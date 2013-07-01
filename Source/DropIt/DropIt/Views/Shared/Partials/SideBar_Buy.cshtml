@@ -2,7 +2,8 @@
     <ul id="left-nav" class="nav nav-list" data-gen="category" data-gen-behavior="append">
         @Html.Partial("Partials/SideBar_User")
         <li class="nav-header">Mua Vé</li>
-        <li><a href="#">Đăng rao mua</a></li>
+        <li><a href="@Url.Action("Request","Ticket")">Đăng rao mua</a></li>
+        <li><a href="@Url.Action("Index","Request")">Quản lí rao mua</a></li>
         <li><a href="@Url.Action("Index","Request",null,"http")">Quản lý rao mua</a></li>
     </ul>
 </div>
