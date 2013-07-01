@@ -174,6 +174,26 @@ namespace DropIt.Controllers
 
         }
 
+        [HttpPost]
+        public JsonResult Count()
+        {
+            try
+            {
+                return Json(new
+                {
+                    Result = "OK",
+                    Count = Repository.Count
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Count = 0
+                });
+            }
+        }
         //
         // POST: /Event/Delete/5
 
