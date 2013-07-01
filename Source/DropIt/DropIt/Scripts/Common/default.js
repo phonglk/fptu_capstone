@@ -1,7 +1,7 @@
 ﻿$(function () {
     $("[data-toggle=datetimepicker]").datetimepicker();
     $("[data-toggle=tooltip]").tooltip();
-
+    getTotalTransaction();
     generateDataTracker();
 })
 
@@ -86,4 +86,20 @@ function follow_init(){
             }
         });
     });
+}
+
+function getTotalTransaction() {
+    var $j = $(".count-transaction");
+    $.ajax({
+        type:"POST",
+        url: Url({ Controller: "Transaction", Action: "Count", Data: { id: -1, extra: "ontransaction"} }),
+        success: function (rs) {
+            if (rs.Result && rs.Result == "OK") {
+                $j.text(rs.Count)
+            } else {
+                $j.text(0)
+            }
+
+        }
+    })
 }

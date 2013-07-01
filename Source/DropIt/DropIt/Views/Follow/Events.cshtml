@@ -29,9 +29,9 @@
             </div>
         </div>
         <div class="display-field span9">
-            <h2 class="event-name">Những Sự Kiện dang được theo dõi</h2>
+            <h2 class="event-name">Những sự kiện đang được theo dõi</h2>
             <blockquote>
-                Bạn đang theo dõi <span class="badge badge-important">2 show ca nhạc</span> , <span class="badge badge-important">2 tv show</span> và <span class="badge badge-important">1 trận đấu</span>
+                Bạn đang theo dõi <span class="badge badge-important">@Model.Count()</span> sự kiện
             </blockquote>
         </div>
         <div class="row span9">
@@ -52,17 +52,27 @@
                         {
                             <tr>
                                 <td class="first">
-                                    @item.Event.EventName
+                                    <a href="@Url.Action("Details","Event",new {Id = item.EventId})"
+                                        data-toggle="tooltip"
+                                        title="Đi đến sự kiện @item.Event.EventName">
+                                        @item.Event.EventName
+                                    </a>
                                 </td>
-                                <td class="descript">
-                                    @item.Event.HoldDate
+                                <td class="date">
+                                    <a href="@Url.Action("Date","Event",new {Date = item.Event.HoldDate.ToString("dd/MM/yyyy")})"
+                                        data-toggle="tooltip"
+                                        title="Xem các sự kiện trong ngày @item.Event.HoldDate.ToString("dd/MM/yyyy")">
+                                        @item.Event.HoldDate
+                                    </a>
                                 </td>
-                                <td class="price">
+                                <td class="venue">
+                                    <a href="@Url.Action("Venue","Event",new {Id = item.Event.VenueId})"
+                                        data-toggle="tooltip"
+                                        title="Xem các sự kiện tổ chức ở @item.Event.Venue.VenueName">
                                     @item.Event.Venue.VenueName
                                 </td>
                                 <td class="action">
-                                    <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-
+                                    
                                     @*@using (Html.BeginForm("FollowEvent", "Event", FormMethod.Post,null)) {
                                         @Html.Button("Bỏ theo dõi",new { type = "submit" });
                                      @Html.Hidden("EventId", item.EventId);
