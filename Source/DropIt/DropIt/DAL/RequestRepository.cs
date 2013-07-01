@@ -61,5 +61,24 @@ namespace DropIt.DAL
                 return findRequest;
             }
         }
+
+        new public void Delete(int userid, int eventid) 
+        {
+            Request request = new Request();
+            //var findRequest = context.Requests.Find(request.UserId, request.EventId);
+            var find = dbSet.Find(request.UserId, request.EventId);
+            Delete(request);
+        }
+
+        new public void Delete(Request request)
+        {
+            if (context.Entry(request).State == EntityState.Detached)
+            {
+                dbSet.Attach(request);
+            }
+            dbSet.Remove(request);
+        }
+
+
     }
 }

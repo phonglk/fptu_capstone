@@ -54,7 +54,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new JSONResult(e));
             }
         }
-        
+
         [HttpPost]
         public JsonResult Create(Request request)
         {
@@ -97,21 +97,21 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        //public JsonResult Delete(int UserId )
-        //{
-        //    try
-        //    {
-        //        Repository.Delete(VenueId);
-        //        unitOfWork.Save();
+        public JsonResult Delete(int UserId, int EventId)
+        {
+            try
+            {
+                Repository.Delete(UserId, EventId);
+                unitOfWork.Save();
 
-        //        return Json(new JSONResult());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Json(new JSONResult(e));
-        //    }
+                return Json(new JSONResult());
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
 
-        //}
+        }
 
 
 
