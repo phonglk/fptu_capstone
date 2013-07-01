@@ -1,5 +1,6 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DropIt.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
         private EventRepository Repository;
 
-          public HomeController()
+        public HomeController()
         {
             Repository = unitOfWork.EventRepository;
         }
@@ -29,8 +30,8 @@ namespace DropIt.Controllers
             {
                 Session["Role"] = "Buy";
             }
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t=>t.Tickets.Count).Take(9).Where(p=>p.Status==1);
-            return View(events.ToList());          
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Take(9).Where(p => p.Status == 1);
+            return View(events.ToList());
         }
 
         public ActionResult Search(string eventnameofsearch)
@@ -38,16 +39,34 @@ namespace DropIt.Controllers
             var events = this.unitOfWork.EventRepository.Get();
             if (!String.IsNullOrEmpty(eventnameofsearch))
             {
-                //events = events.Where(t => t.EventName.Contains(eventname));
                 events = (from t in events
                           where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
                           orderby t.EventName
                           select t).ToList();
             }
+
             return View(events);
 
         }
-      
+        [HttpPost]
+        [ActionName("SearchAjax")]
+        public JsonResult SearchAjax(string eventnameofsearch)
+        {
+            var events = this.unitOfWork.EventRepository.Get();
+            List<String> listeventname = new List<string>();
+            if (!String.IsNullOrEmpty(eventnameofsearch))
+            {
+                foreach (Event evt in events.ToList())
+                {
+                    if (evt.EventName.ToLower().Contains(eventnameofsearch.ToLower()))
+                    {
+                        listeventname.Add(evt.EventName);
+                    }
+                }
+
+            }
+            return Json(listeventname, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
