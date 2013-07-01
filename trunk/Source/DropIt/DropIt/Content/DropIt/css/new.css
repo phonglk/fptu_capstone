@@ -582,6 +582,33 @@ select.select2 {
         width: 279px !important;
     }
 
+    .form1 fieldset {
+        width: 600px;
+        margin-left: 180px;
+        background: #e5e5e5;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+        .form1 fieldset .control-group {
+            margin-left: 0;
+        }
+
+            .form1 fieldset .control-group:last-child {
+                margin-bottom: 0px;
+            }
+
+        .form1 fieldset legend {
+            background: #c2afc2;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .form1 fieldset .select2-container {
+            background: white;
+        }
+
 .input-append .btn {
     padding: 0;
 }
@@ -742,7 +769,7 @@ table.event-detail td.price {
         background: #666666;
     }
 
-.btn-follow{
+.btn-follow {
     background: #5e4071;
 }
 
