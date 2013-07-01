@@ -33,14 +33,14 @@ namespace DropIt.Controllers
             return View(events.ToList());          
         }
 
-        public ActionResult Search(string eventname)
+        public ActionResult Search(string eventnameofsearch)
         {
             var events = this.unitOfWork.EventRepository.Get();
-            if (!String.IsNullOrEmpty(eventname))
+            if (!String.IsNullOrEmpty(eventnameofsearch))
             {
                 //events = events.Where(t => t.EventName.Contains(eventname));
                 events = (from t in events
-                          where t.EventName.ToLower().Contains(eventname.ToLower())
+                          where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
                           orderby t.EventName
                           select t).ToList();
             }
