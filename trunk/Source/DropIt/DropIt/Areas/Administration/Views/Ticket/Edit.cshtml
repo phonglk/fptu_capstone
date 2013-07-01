@@ -1,0 +1,60 @@
+﻿@model DropIt.Models.Ticket
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Sửa thông tin vé</legend>
+
+        @Html.HiddenFor(model => model.TicketId)
+        @*@Html.HiddenFor(m=>m.EventId)*@
+        @Html.HiddenFor(m=>m.UserId)
+
+        <div class="control-group">
+            @Html.Label("Miêu tả ghế ngồi")
+        </div>
+        <div class="control-group">
+            @Html.EditorFor(model => model.Seat)
+            @Html.ValidationMessageFor(model => model.Seat)
+        </div>
+
+        <div class="control-group">
+            @Html.Label("Ghi chú (tùy chọn)")
+        </div>
+        <div class="control-group">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="control-group">
+            @Html.Label("Trạng thái")
+        </div>
+        <div class="control-group">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="control-group">
+            @Html.Label("Tên sự kiện")
+        </div>
+        <div class="control-group">
+            @Html.DropDownList("EventId", String.Empty)
+            
+            @Html.ValidationMessageFor(model => model.EventId)
+        </div>
+       
+        <p>
+            <input type="submit" value="Lưu lại" />
+            
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
