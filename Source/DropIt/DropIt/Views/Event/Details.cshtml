@@ -17,22 +17,15 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                <div>
-                    <ul id="left-nav" class="nav nav-list">
-                        <li class="nav-header">Cá Nhân</li>
-                        <li><a href="#">Thông tin tài khoản</a></li>
-                        <li><a href="#">Giao dịch đang thực hiên <span
-                            class="badge badge-info">4</span></a></li>
-                        <li><a href="#">Lịch sử giao dịch</a></li>
-                        <li class=""><a href="#">Danh sách theo dõi</a></li>
-                        <li><a href="#">Quản lí rao mua</a></li>
-                        <li class="nav-header">Mua Vé</li>
-                        <li><a href="#">Đăng rao mua</a></li>
-                        <li class=""><a href="#">Ca nhạc</a></li>
-                        <li class=""><a href="#">TV Show</a></li>
-                        <li><a href="#">Thể thao</a></li>
-                    </ul>
-                </div>
+                @if(!User.Identity.IsAuthenticated){
+                    @Html.Partial("Partials/SideBar")
+                }else{
+                    if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
+                        @Html.Partial("Partials/SideBar_Sell")
+                    }else{
+                        @Html.Partial("Partials/SideBar_Buy");
+                    }
+                }
             </div>
         </div>
 
@@ -40,16 +33,27 @@
             <div class="row span7" style="margin-bottom:-10px">
             <h2 class="event-name ">@Model.EventName</h2>
             </div>
+            
             @{
-                if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
-                {
-                <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Bỏ theo dõi</a>
-                }
-                else
-                {
-                <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right">Theo dõi</a>
+                var follow = false;
+                
+                if(WebSecurity.IsAuthenticated){
+                    if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
+                    {
+                        follow = true;   
+                    }
+                }else{
+                    
+                    <script>
+                        isLogin = false;
+                    </script>
+                    
                 }
             }
+            <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right" data-follow="@follow" data-eventId="@Model.EventId"
+                data-toggle="tooltip"
+                title="Theo dõi để nhận được thông báo khi có sự kiện này có vé mới"
+                >Theo dõi</a>
         </div>
 
         <div class="event-des span9">
@@ -124,27 +128,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    var eventId = @(Model.EventId);
-    $(".btn-follow").live("click", function (e) {
-        e.preventDefault();
-        var seft = this;
-        $.ajax({
-            type: "POST",
-            url: "/Event/Follow",
-            data: { EventId: eventId },
-            cache: false,
-            dataType: "json",
-            success: function  (dataresponse) {
-                if (dataresponse == "Follow") {
-                    $(seft).text("Bỏ theo dõi")
-                }
-                else {
-                    $(seft).text("Theo dõi")
-                }
-               
-            }
-        });
-
-    });
+    follow_init();
 </script>
 

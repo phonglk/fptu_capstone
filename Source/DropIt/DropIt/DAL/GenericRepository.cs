@@ -96,7 +96,7 @@ namespace DropIt.DAL
             dbSet.Remove(entityToDelete);
         }
 
-        public TEntity AddOrUpdate(TEntity entity)
+        public virtual TEntity AddOrUpdate(TEntity entity)
         {
             DateTime now = DateTime.Now;
             var currentUser = GetCurrentUser();

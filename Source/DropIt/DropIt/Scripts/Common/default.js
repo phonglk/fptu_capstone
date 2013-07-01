@@ -1,4 +1,11 @@
-﻿function generateData(type, target) {
+﻿$(function () {
+    $("[data-toggle=datetimepicker]").datetimepicker();
+    $("[data-toggle=tooltip]").tooltip();
+
+    generateDataTracker();
+})
+
+function generateData(type, target) {
     function getData(url, callback) {
         $.ajax({
             url: url,
@@ -27,7 +34,56 @@ function generateDataTracker() {
         generateData($this.attr("data-gen"), $this);
     })
 }
-$(function () {
-    $("[data-toggle=datetimepicker]").datetimepicker();
-    generateDataTracker();
-})
+
+function requireLogin() {
+    if (typeof isLogin != "undefined" && isLogin == false) {
+        alert("Bạn cần đăng nhập để thực hiện hành động này");
+
+        window.location = "/Account/Login?ReturnUrl=" + location.pathname;
+        return false;
+
+    } else {
+        return true;
+    }
+}
+function follow_btn_text($j) {
+    var isFollow = $j.attr("data-follow") == "True" || $j.attr("data-follow") == "true";
+
+    if (isFollow) {
+        $j.text("Bỏ theo dõi")
+    } else {
+        $j.text("Theo dõi")
+    }
+}
+function follow_init(){
+    $(".btn-follow").each(function () {
+        var $this = $(this);
+        var eventId = $this.attr("data-eventId");
+
+        follow_btn_text($this);
+
+        $this.live("click", function (e) {
+            if ($this.hasClass("disabled"))
+                return;
+            if (requireLogin()) {
+                $this.addClass("disabled");
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Follow/Event/" + eventId,
+                    cache: false,
+                    dataType: "json",
+                    success: function (rs) {
+                        if (rs.Result == "OK") {
+                            $this.attr("data-follow", rs.IsFollow);
+                            follow_btn_text($this);
+                        } else {
+                            alert("Error:" + rs.Message)
+                        }
+                        $this.removeClass("disabled");
+                    }
+                });
+            }
+        });
+    });
+}
