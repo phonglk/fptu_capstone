@@ -13,7 +13,22 @@ namespace DropIt.Common
         public enum Ticket { Disapprove,Approve,Delete };
         public enum Event { Disapprove, Approve, Delete };
         public enum Venue { Disapprove, Approve, Delete };
-        public enum BuyTicket { Unpaid, Paid, Delivered, Recieved, Cancel};
+        public enum BuyTicket { Unpaid, Paid, Delivered, Recieved, Canceled};
+        public static String[] BuyTicketStrings = new string[] { "Chưa thanh toán", "Đã Mua","Đã giao","Đã nhận","Đã hủy" };
         public enum TranType { InstantPayment, HoldPayment};
+
+        public static string getText(String EnumName, int Value)
+        {
+            try
+            {
+                String[] StatusText = (String[])typeof(Statuses).GetField(EnumName).GetValue(null);
+                return StatusText[Value];
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
     }
+
 }

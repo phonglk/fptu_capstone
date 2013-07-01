@@ -100,8 +100,11 @@
                     </thead>
                     <tbody>
                         <!-- row -->
-                        @foreach (var item in Model.Tickets)
-                        {
+                        @foreach (var item in Model.Tickets){
+                            if ( (item.TranStatus!=null && (int)item.TranStatus == (int)DropIt.Common.Statuses.BuyTicket.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Disapprove)
+                            {
+                                continue;
+                            }
                             <tr>
                                 <td class="first">
                                     @item.TicketId
@@ -117,7 +120,14 @@
                                     @item.SellPrice
                                 </td>
                                 <td class="action">
-                                    <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
+                                    @if(item.TranStatus != null){
+                                        <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width:85px"
+                                            data-toggle="tooltip"
+                                            title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch"
+                                            >Đang giao dịch</a>
+                                    }else{
+                                        <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
+                                    }
                                 </td>
                             </tr>
                         }
