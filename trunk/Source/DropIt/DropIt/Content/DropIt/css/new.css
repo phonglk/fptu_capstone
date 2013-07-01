@@ -735,6 +735,10 @@ table.event-detail td.price {
         background: #666666;
     }
 
+.btn-follow{
+    background: #5e4071;
+}
+
 .btn-buy:hover {
     background: #666666;
 }

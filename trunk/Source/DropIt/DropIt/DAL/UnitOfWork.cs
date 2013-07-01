@@ -18,6 +18,7 @@ namespace DropIt.DAL
         private UserRepository userRepository;
         private TicketRepository ticketRepository;
         private RequestRepository requestRepository;
+        private FollowEventRepository followEventRepository;
 
         public EventRepository EventRepository
         {
@@ -109,6 +110,19 @@ namespace DropIt.DAL
                     this.requestRepository = new RequestRepository(context);
                 }
                 return requestRepository;
+            }
+        }
+
+        public FollowEventRepository FollowEventRepository
+        {
+            get
+            {
+
+                if (this.followEventRepository == null)
+                {
+                    this.followEventRepository = new FollowEventRepository(context);
+                }
+                return followEventRepository;
             }
         }
 

@@ -17,22 +17,15 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                <div>
-                    <ul id="left-nav" class="nav nav-list">
-                        <li class="nav-header">Cá Nhân</li>
-                        <li><a href="#">Thông tin tài khoản</a></li>
-                        <li><a href="#">Giao dịch đang thực hiên <span
-                            class="badge badge-info">4</span></a></li>
-                        <li><a href="#">Lịch sử giao dịch</a></li>
-                        <li class=""><a href="#">Danh sách theo dõi</a></li>
-                        <li><a href="#">Quản lí rao mua</a></li>
-                        <li class="nav-header">Mua Vé</li>
-                        <li><a href="#">Đăng rao mua</a></li>
-                        <li class=""><a href="#">Ca nhạc</a></li>
-                        <li class=""><a href="#">TV Show</a></li>
-                        <li><a href="#">Thể thao</a></li>
-                    </ul>
-                </div>
+                @if(!User.Identity.IsAuthenticated){
+                    @Html.Partial("Partials/SideBar")
+                }else{
+                    if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
+                        @Html.Partial("Partials/SideBar_Sell")
+                    }else{
+                        @Html.Partial("Partials/SideBar_Buy");
+                    }
+                }
             </div>
         </div>
         <div class="display-field span9">
@@ -69,10 +62,12 @@
                                 </td>
                                 <td class="action">
                                     <a href="#" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                    @using (Html.BeginForm("FollowEvent", "Event", FormMethod.Post,null)) {
+
+                                    @*@using (Html.BeginForm("FollowEvent", "Event", FormMethod.Post,null)) {
                                         @Html.Button("Bỏ theo dõi",new { type = "submit" });
                                      @Html.Hidden("EventId", item.EventId);
-                                    }
+                                    }*@
+                                    <a href="#" class="btn-follow btn btn-inverse" data-follow="true" data-eventId="@item.EventId">Theo dõi</a>
                                 </td>
                             </tr>
                         }
@@ -81,3 +76,8 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function(){
+            follow_init();
+        })
+    </script>

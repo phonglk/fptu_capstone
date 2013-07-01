@@ -41,10 +41,12 @@ namespace DropIt.Controllers
             }
             return View(evt);
         }
+
+        
         public ActionResult FollowEvent()
         {
-            int id = WebSecurity.GetUserId(User.Identity.Name);
-            var follow = this.unitOfWork.UserRepository.Get(u => u.UserId == id).FirstOrDefault().UserFollowEvents;
+            int UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var follow = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
             return View(follow.ToList());
 
 
@@ -58,12 +60,12 @@ namespace DropIt.Controllers
             //follow.Remove(ufe);
             //this.unitOfWork.Save();
             //return View(follow.ToList());
-            DropItContext ctx = new DropItContext();
-            int id = WebSecurity.GetUserId(User.Identity.Name);
-            UserFollowEvent ufe = ctx.Set<UserFollowEvent>().Where(t => t.EventId == EventId).Where(p => p.UserId == id).FirstOrDefault();
-            ctx.Set<UserFollowEvent>().Remove(ufe);
-            ctx.SaveChanges();
-            return View(ctx.Set<UserFollowEvent>().Where(t => t.UserId == id).ToList());
+            
+            int UserId = WebSecurity.GetUserId(User.Identity.Name);
+            UserFollowEvent follow = this.unitOfWork.FollowEventRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
+            this.unitOfWork.FollowEventRepository.Delete(follow);
+            var follows = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
+            return View(follows.ToList());
         }
         //
         // GET: /Event/Create
@@ -93,31 +95,6 @@ namespace DropIt.Controllers
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", evt.VenueId);
             return View(evt);
         }
-        [HttpPost]
-        public JsonResult Follow(int EventId = 0)
-        {
-            DropItContext ctx = new DropItContext();
-            string result = "Un-Follow";
-            int id = WebSecurity.GetUserId(User.Identity.Name);
-            UserFollowEvent ufe = ctx.Set<UserFollowEvent>().Where(t => t.EventId == EventId).Where(p => p.UserId == id).FirstOrDefault();
-            if (ufe != null)
-            {
-                ctx.Set<UserFollowEvent>().Remove(ufe);
-            }
-            else
-            {
-                ctx.Set<UserFollowEvent>().Add(new UserFollowEvent
-                {
-                    EventId = EventId,
-                    UserId = WebSecurity.GetUserId(User.Identity.Name)
-                });
-                result = "Follow";
-            }
-            ctx.SaveChanges();
-            return Json(result);
-        }
-        //
-        // GET: /Event/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
