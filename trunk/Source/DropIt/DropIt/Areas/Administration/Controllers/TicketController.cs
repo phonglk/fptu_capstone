@@ -75,30 +75,31 @@ namespace DropIt.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Ticket ticket)
         {
+            Ticket getTicket = unitOfWork.TicketRepository.Get(u => u.TicketId == ticket.TicketId).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 
                 Ticket editTicket = new Ticket()
                                         {
-                                            TicketId = ticket.TicketId,
-                                            TranUserId = ticket.UserId,
-                                            TranFullName = ticket.TranFullName,
-                                            TranAddress = ticket.TranAddress,
-                                            TranType = ticket.TranType,
-                                            TranStatus = ticket.Status,
+                                            TicketId = ticket.TicketId,  // co TicketId de tim kiem 
+                                            TranUserId = getTicket.UserId,
+                                            TranFullName = getTicket.TranFullName,
+                                            TranAddress = getTicket.TranAddress,
+                                            TranType = getTicket.TranType,
+                                            TranStatus = getTicket.Status,
                                             EventId = ticket.EventId,
-                                            UserId = ticket.UserId,
-                                            SellPrice = ticket.SellPrice,
-                                            ReceiveMoney = ticket.ReceiveMoney,
+                                            UserId = getTicket.UserId,
+                                            SellPrice = getTicket.SellPrice,
+                                            ReceiveMoney = getTicket.ReceiveMoney,
                                             Seat = ticket.Seat,
                                             Status = ticket.Status,
                                             Description = ticket.Description,
-                                            CreatedDate = ticket.CreatedDate,
-                                            TranCreatedDate = ticket.TranCreatedDate,
-                                            TranModifiedDate = ticket.TranModifiedDate,
-                                            TranDescription = ticket.TranDescription
+                                            CreatedDate = getTicket.CreatedDate,
+                                            TranCreatedDate = getTicket.TranCreatedDate,
+                                            TranModifiedDate = getTicket.TranModifiedDate,
+                                            TranDescription = getTicket.TranDescription
                                         };
-                this.unitOfWork.TicketRepository.AddOrUpdate(ticket);
+                this.unitOfWork.TicketRepository.AddOrUpdate(editTicket);
                 this.unitOfWork.TicketRepository.Save();
                 return RedirectToAction("List");
             }
