@@ -32,6 +32,21 @@ namespace DropIt.Controllers
             var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t=>t.Tickets.Count).Take(9).Where(p=>p.Status==1);
             return View(events.ToList());          
         }
+
+        public ActionResult Search(string eventname)
+        {
+            var events = this.unitOfWork.EventRepository.Get();
+            if (!String.IsNullOrEmpty(eventname))
+            {
+                //events = events.Where(t => t.EventName.Contains(eventname));
+                events = (from t in events
+                          where t.EventName.ToLower().Contains(eventname.ToLower())
+                          orderby t.EventName
+                          select t).ToList();
+            }
+            return View(events);
+
+        }
       
         public ActionResult About()
         {

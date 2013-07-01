@@ -291,6 +291,7 @@
     <Compile Include="ViewModels\Event.cs" />
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
+    <Compile Include="ViewModels\RequestViewModels.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -986,6 +987,9 @@
     <Content Include="Views\Shared\Partials\SideBar_Sell.cshtml" />
     <Content Include="Views\Shared\Partials\RoleTab.cshtml" />
     <Content Include="Views\Shared\Partials\SideBar_User.cshtml" />
+    <Content Include="Views\Request\Details.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
