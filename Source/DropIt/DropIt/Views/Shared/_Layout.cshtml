@@ -11,8 +11,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/utils")
     @Scripts.Render("~/bundles/DropIt")
-       
-    
+
+
     @Styles.Render("~/Content/DropIt")
     <script>
         var Routing = {
@@ -29,17 +29,17 @@
                 @Html.Partial("Partials/LogoAndTagLine")
 
                 <div id="user">
-                      <section id="login">
+                    <section id="login">
                         @Html.Partial("_LoginPartial")
                     </section>
-                                  </div>
+                </div>
             </div>
 
         </header>
 
         @Html.Partial("Partials/MenuBar")
 
-       
+
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
@@ -67,10 +67,10 @@
                     </ul>
                 </div>
             </div>
-    <!--Area: Footer.END-->
-    </footer>
+            <!--Area: Footer.END-->
+        </footer>
 
-    
+    </div>
     @RenderSection("scripts", required: false)
 </body>
 </html>

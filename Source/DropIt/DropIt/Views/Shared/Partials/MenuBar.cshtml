@@ -1,10 +1,14 @@
 ﻿<div class="middle-header">
     <div class="container">
         <div class="search">
-            <div class="input-prepend">
+                     @using (Html.BeginForm("Search","Home", FormMethod.Get))
+            { 
+             <div class="input-prepend">
                 <span class="add-on"><i class="icon-search"></i>|</span>
-                <input class="span4" id="prependedInput" type="text" placeholder="Search">
+                   @Html.TextBox("eventname")
+                <input class="search-bar span4" id="prependedInput" type="submit"  value="search">
             </div>
+            }
         </div>
         <div id="home-nav" class="navbar span7 pull-right">
             <ul class="nav">
