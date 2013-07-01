@@ -58,15 +58,55 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         //
-        // POST: /Event/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    this.unitOfWork.TicketRepository.Delete(id);
-        //    this.unitOfWork.TicketRepository.Save();
-        //    return RedirectToAction("List");
-        //}
+        // GET: /Event/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            if (ticket==null)
+            {
+                HttpNotFound();
+            }
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName", ticket.EventId);
+            return View(ticket);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                Ticket editTicket = new Ticket()
+                                        {
+                                            TicketId = ticket.TicketId,
+                                            TranUserId = ticket.UserId,
+                                            TranFullName = ticket.TranFullName,
+                                            TranAddress = ticket.TranAddress,
+                                            TranType = ticket.TranType,
+                                            TranStatus = ticket.Status,
+                                            EventId = ticket.EventId,
+                                            UserId = ticket.UserId,
+                                            SellPrice = ticket.SellPrice,
+                                            ReceiveMoney = ticket.ReceiveMoney,
+                                            Seat = ticket.Seat,
+                                            Status = ticket.Status,
+                                            Description = ticket.Description,
+                                            CreatedDate = ticket.CreatedDate,
+                                            TranCreatedDate = ticket.TranCreatedDate,
+                                            TranModifiedDate = ticket.TranModifiedDate,
+                                            TranDescription = ticket.TranDescription
+                                        };
+                this.unitOfWork.TicketRepository.AddOrUpdate(ticket);
+                this.unitOfWork.TicketRepository.Save();
+                return RedirectToAction("List");
+            }
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+                                             ticket.EventId);
+            return View(ticket);
+
+        }
 
         protected override void Dispose(bool disposing)
         {
