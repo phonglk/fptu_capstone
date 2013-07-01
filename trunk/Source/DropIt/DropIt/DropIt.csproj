@@ -547,32 +547,9 @@
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
     <Content Include="Content\default.less" />
-    <Content Include="Content\Fonts\FRABK.TTF" />
-    <Content Include="Content\Fonts\FRABKIT.TTF" />
-    <Content Include="Content\Fonts\FRADM.TTF" />
-    <Content Include="Content\Fonts\FRADMCN.TTF" />
-    <Content Include="Content\Fonts\FRADMIT.TTF" />
-    <Content Include="Content\Fonts\FRAHV.TTF" />
-    <Content Include="Content\Fonts\FRAHVIT.TTF" />
-    <Content Include="Content\Fonts\framd.ttf" />
-    <Content Include="Content\Fonts\FRAMDCN.TTF" />
-    <Content Include="Content\Fonts\framdit.ttf" />
-    <Content Include="Content\Fonts\GeosansLight-Oblique.ttf" />
-    <Content Include="Content\Fonts\GeosansLight.ttf" />
-    <Content Include="Content\Fonts\GILBI___.TTF" />
-    <Content Include="Content\Fonts\GILB____.TTF" />
-    <Content Include="Content\Fonts\GILC____.TTF" />
-    <Content Include="Content\Fonts\GILI____.TTF" />
-    <Content Include="Content\Fonts\GillSans_for_Oriflame_Bold_0.ttf" />
-    <Content Include="Content\Fonts\GillSans_for_Oriflame_Italic_0.ttf" />
-    <Content Include="Content\Fonts\GillSans_for_Oriflame_Light_0.ttf" />
-    <Content Include="Content\Fonts\GillSans_for_Oriflame_Regular_0.ttf" />
-    <Content Include="Content\Fonts\GILLUBCD.TTF" />
-    <Content Include="Content\Fonts\GILSANUB.TTF" />
-    <Content Include="Content\Fonts\GIL_____.TTF" />
-    <Content Include="Content\Fonts\GLSNECB.TTF" />
-    <Content Include="Content\Fonts\HEADOH_.TTF" />
-    <Content Include="Content\Fonts\HEADTH_.TTF" />
+    <Content Include="Content\Fonts\architep.ttf" />
+    <Content Include="Content\Fonts\UVNBaiSau_R.TTF" />
+    <Content Include="Content\Fonts\UVNBenXuan_R.TTF" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">
@@ -947,11 +924,6 @@
     <Content Include="Scripts\jtable\jquery.jtable.min.js.map">
       <DependentUpon>jquery.jtable.js</DependentUpon>
     </Content>
-    <Content Include="Views\Ticket\Index.cshtml" />
-    <Content Include="Views\Ticket\Details.cshtml" />
-    <Content Include="Views\Ticket\Post.cshtml" />
-    <Content Include="Views\Ticket\Edit.cshtml" />
-    <Content Include="Views\Ticket\Delete.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Ticket\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
