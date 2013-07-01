@@ -303,5 +303,26 @@ namespace DropIt.Controllers
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
             return View();
         }
+
+        [HttpPost]
+        public JsonResult Count()
+        {
+            try
+            {
+                return Json(new
+                {
+                    Result = "OK",
+                    Count = Repository.Count
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Count = 0
+                });
+            }
+        }
     }
 }

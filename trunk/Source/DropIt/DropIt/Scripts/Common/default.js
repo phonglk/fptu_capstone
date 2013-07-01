@@ -2,6 +2,8 @@
     $("[data-toggle=datetimepicker]").datetimepicker();
     $("[data-toggle=tooltip]").tooltip();
     getTotalTransaction();
+    getTotalTicket();
+    getTotalEvent();
     generateDataTracker();
 })
 
@@ -93,6 +95,36 @@ function getTotalTransaction() {
     $.ajax({
         type:"POST",
         url: Url({ Controller: "Transaction", Action: "Count", Data: { id: -1, extra: "ontransaction"} }),
+        success: function (rs) {
+            if (rs.Result && rs.Result == "OK") {
+                $j.text(rs.Count)
+            } else {
+                $j.text(0)
+            }
+
+        }
+    })
+}
+function getTotalEvent() {
+    var $j = $(".total-event");
+    $.ajax({
+        type: "POST",
+        url: Url({ Controller: "Event", Action: "Count" }),
+        success: function (rs) {
+            if (rs.Result && rs.Result == "OK") {
+                $j.text(rs.Count)
+            } else {
+                $j.text(0)
+            }
+
+        }
+    })
+}
+function getTotalTicket() {
+    var $j = $(".total-ticket");
+    $.ajax({
+        type: "POST",
+        url: Url({ Controller: "Ticket", Action: "Count"}),
         success: function (rs) {
             if (rs.Result && rs.Result == "OK") {
                 $j.text(rs.Count)
