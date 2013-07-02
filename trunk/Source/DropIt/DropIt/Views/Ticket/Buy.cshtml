@@ -18,25 +18,36 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
 
-             <h3>Mua vé</h3> 
+            <h3>Mua vé</h3> 
             @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
             @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
             @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
-            @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true)
-            <p>Thanh toán tạm giữ 5 ngày</p>
-            @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment)
-            <p>Thanh toán ngay</p>@*
+
+            <div class="control-group">
+                <label class="control-label">Hình thức thanh toán: </label>
+                <div class="controls radio-check">
+                    @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true)
+                    <p>Thanh toán tạm giữ 5 ngày </p>
+                </div>
+                   <div class="controls radio-check">
+                    @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment)
+                    <p>Thanh toán ngay</p>
+                </div>
+            </div>
+            
+          
+@*
             @*
             @Html.RadioButton("InstantPayment", "InstantPayment") <p>ngay và luôn</p>*@
             @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
 
             //captcha
-                
-       
+
+
             // end captcha
             
             <button type="submit" class="btn btn-register btn-success">Xác nhận</button>
-        <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>
+            <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>
         }
     </div>
-</div>                
+</div>

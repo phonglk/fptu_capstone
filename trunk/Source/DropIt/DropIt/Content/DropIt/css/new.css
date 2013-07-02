@@ -233,6 +233,7 @@ h1, h2, h3, h4 {
 #footer {
     background-color: #fff;
 }
+
     #footer p {
         font-size: 12px;
         padding-left: 10px;
@@ -243,10 +244,11 @@ h1, h2, h3, h4 {
     #footer .navbar {
         margin-bottom: 5px;
     }
-    #footer li a{
+
+    #footer li a {
         font-family: UVNBaiSau;
-	
     }
+
 .logo-footer {
     float: left;
     padding-right: 10px;
@@ -366,9 +368,11 @@ hr {
 #ticket-show {
     margin-left: 0;
 }
-.ticket-list{
+
+.ticket-list {
     margin-right: 10px;
 }
+
 #bord {
     background: url("../../../Images/boder1.png") repeat-x;
 }
@@ -806,4 +810,17 @@ table.event-detail td.price {
 
 .btn-buy:hover {
     background: #666666;
+}
+
+.radio-check > input {
+    width: auto !important;
+     margin-top: -3px;
+}
+
+.radio-check > p {
+    display: inline-block;
+    margin-bottom: 0;
+}
+.radio-check {
+    margin-top: 5px;
 }
