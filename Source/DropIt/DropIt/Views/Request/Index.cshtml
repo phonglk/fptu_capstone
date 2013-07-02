@@ -9,6 +9,32 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script type="text/javascript">
+    var eventId = @(Model)
+    $(".btn-close").live("click", function (e) {
+        e.preventDefault();
+        var seft = this;
+        $.ajax({
+            type: "POST",
+            url: "/Request/Close",
+            data: { EventId: eventId },
+            cache: false,
+            dataType: "json",
+            success: function (dataresponse) {
+                if (dataresponse == "Close") {
+                    $(seft).text("Đóng")
+                }
+                else {
+                    $(seft).text("Mở")
+                }
+
+            }
+        });
+
+    });
+</script>
+
 <!--Area: Page Header & Navigation & Search.END-->
 <div class="container" id="content">
     <div id="bord">
@@ -25,20 +51,18 @@
                 {
                     if (Session["Role"] != null && Session["Role"].Equals("Sell"))
                     {
-                        @Html.Partial("Partials/SideBar_Sell")
                     }
                     else
                     {
-                        @Html.Partial("Partials/SideBar_Buy");
                     }
                 }
             </div>
         </div>
         <div class="span9">
             <h3>Danh sách các loại vé đang được rao mua </h3>
-        <blockquote>Click vào "Chi tiết" để xem chi tiết các trả lời</blockquote>
+            <blockquote>Click vào "Chi tiết" để xem chi tiết các trả lời</blockquote>
         </div>
-        
+
         <div class="row span9">
             <div class="ticket-list">
                 <table class="table table-condensed event-detail">
@@ -63,12 +87,13 @@
                                     <td>@(item.Status == 1 ? "Đang giao dịch" : "Đã đóng giao dịch")</td>
                                     <td class="action">
                                         <a href="@Url.Action("Details", "Request", new { UserId = item.UserId, EventId = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
-                                        <a href="@Url.Action("Close", "Request", new { UserId = item.UserId, EventId = item.EventId })" class="btn btn-inverse btn-sub btn-small">Đóng</a>
+                                        @*@Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })*@
+                                        @Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })
                                     </td>
                                 </tr>
                             </a>
                         }
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
