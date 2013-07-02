@@ -366,7 +366,9 @@ hr {
 #ticket-show {
     margin-left: 0;
 }
-
+.ticket-list{
+    margin-right: 10px;
+}
 #bord {
     background: url("../../../Images/boder1.png") repeat-x;
 }
@@ -798,6 +800,8 @@ table.event-detail td.price {
 
 .btn-follow {
     background: #5e4071;
+    position: absolute;
+    top: 125px;
 }
 
 .btn-buy:hover {
