@@ -17,124 +17,138 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                @if(!User.Identity.IsAuthenticated){
+                @if (!User.Identity.IsAuthenticated)
+                {
                     @Html.Partial("Partials/SideBar")
-                }else{
-                    if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
-                        @Html.Partial("Partials/SideBar_Sell")
-                    }else{
-                        @Html.Partial("Partials/SideBar_Buy");
+                }
+                else
+                {
+                    if (Session["Role"] != null && Session["Role"].Equals("Sell"))
+                    {
+                    @Html.Partial("Partials/SideBar_Sell")
+                    }
+                    else
+                    {
+                    @Html.Partial("Partials/SideBar_Buy");
                     }
                 }
             </div>
         </div>
+        <div class="span9">
+            <div class="display-field">
+                <div class="row span7" style="margin-bottom: -10px">
+                    <h2 class="event-name ">@Model.EventName</h2>
+                </div>
 
-        <div class="display-field">
-            <div class="row span7" style="margin-bottom:-10px">
-            <h2 class="event-name ">@Model.EventName</h2>
-            </div>
-            
-            @{
-                var follow = false;
-                
-                if(WebSecurity.IsAuthenticated){
-                    if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
+                @{
+                    var follow = false;
+
+                    if (WebSecurity.IsAuthenticated)
                     {
-                        follow = true;   
+                        if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
+                        {
+                            follow = true;
+                        }
                     }
-                }else{
+                    else
+                    {
                     
                     <script>
                         isLogin = false;
                     </script>
                     
+                    }
                 }
-            }
-            <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right" data-follow="@follow" data-eventId="@Model.EventId"
+                <a href="#" class="btn-follow btn btn-inverse btn-sub pull-right" data-follow="@follow" data-eventId="@Model.EventId"
                 data-toggle="tooltip"
                 title="Theo dõi để nhận được thông báo khi có sự kiện này có vé mới"
                 >Theo dõi</a>
-        </div>
+            </div>
 
-        <div class="event-des span9">
-            <hr />
-            <div class="event-image span3">
-                <div class="display-field" style="padding: 1px">
-                    <img src="@Url.Content(Model.EventImage == null ? "/Content/Images/no_image.jpg" : Model.EventImage)" />
+            <div class="event-des span9">
+                <hr />
+                <div class="event-image span3">
+                    <div class="display-field" style="padding: 1px">
+                        <img src="@Url.Content(Model.EventImage == null ? "/Content/Images/no_image.jpg" : Model.EventImage)" />
+                    </div>
+                </div>
+                <div class="span5">
+                    @using (Html.HorizontalForm())
+                    {
+                        @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
+                        @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
+                        @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
+                        @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
+                    }
+
+                </div>
+                <div class="display-des span9">
+                    <div class="row">
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                    <br />
                 </div>
             </div>
-            <div class="span5">
-                @using (Html.HorizontalForm())
-                {
-                    @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
-                    @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
-                    @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
-                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
-                }
+            <div class="row span9">
+                <div class="ticket-list">
+                    <table class="table table-condensed event-detail">
+                        <thead>
 
-            </div>
-            <div class="display-des span9">
-                <div class="row">
-                    @Html.DisplayFor(model => model.Description)
-                </div>
-                <br />
-            </div>
-        </div>
-        <div class="row span9">
-            <div class="ticket-list">
-                <table class="table table-condensed event-detail">
-                    <thead>
-
-                        <tr class="info">
-                            <td colspan="5">
-                                <i class="icon-calendar"></i>@Html.DisplayFor(model => model.HoldDate)
-                            </td>
-                        </tr>
-                        <tr class="header warning">
-                            <th class="">Mã Vé</th>
-                            <th class="">Người bán</th>
-                            <th class="">Miêu tả</th>
-                            <th class="">Giá vé(VNĐ)</th>
-                            <th class="">Đặt vé</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- row -->
-                        @foreach (var item in Model.Tickets){
-                            if ( (item.TranStatus!=null && (int)item.TranStatus == (int)DropIt.Common.Statuses.BuyTicket.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Disapprove)
-                            {
-                                continue;
-                            }
-                            <tr>
-                                <td class="first">
-                                    @item.TicketId
-                                </td>
-                                <td class="user">
-                                    @item.User.UserName
-                                </td>
-
-                                <td class="descript">
-                                    @item.Description
-                                </td>
-                                <td class="price">
-                                    @item.SellPrice
-                                </td>
-                                <td class="action">
-                                    @if(item.TranStatus != null){
-                                        <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width:85px"
-                                            data-toggle="tooltip"
-                                            title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch"
-                                            >Đang giao dịch</a>
-                                    }else{
-                                        <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                    }
+                            <tr class="info">
+                                <td colspan="5">
+                                    <i class="icon-calendar"></i>@Html.DisplayFor(model => model.HoldDate)
                                 </td>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                            <tr class="header warning">
+                                <th class="">Mã Vé</th>
+                                <th class="">Người bán</th>
+                                <th class="">Miêu tả</th>
+                                <th class="">Giá vé(VNĐ)</th>
+                                <th class="">Đặt vé</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- row -->
+                            @foreach (var item in Model.Tickets)
+                            {
+                                if ((item.TranStatus != null && (int)item.TranStatus == (int)DropIt.Common.Statuses.BuyTicket.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Disapprove)
+                                {
+                                    continue;
+                                }
+                                <tr>
+                                    <td class="first">
+                                        @item.TicketId
+                                    </td>
+                                    <td class="user">
+                                        @item.User.UserName
+                                    </td>
+
+                                    <td class="descript">
+                                        @item.Description
+                                    </td>
+                                    <td class="price">
+                                        @item.SellPrice
+                                    </td>
+                                    <td class="action">
+                                        @if (item.TranStatus != null)
+                                        {
+                                            <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
+                                                data-toggle="tooltip"
+                                                title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 <script type="text/javascript">

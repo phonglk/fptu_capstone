@@ -963,6 +963,8 @@
     <Content Include="Views\Request\Details.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Event\FollowEvent.cshtml" />
+    <Content Include="Views\Venue\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
