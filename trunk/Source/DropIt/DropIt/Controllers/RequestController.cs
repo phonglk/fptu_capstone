@@ -34,6 +34,17 @@ namespace DropIt.Controllers
             return View(rqt.ToList());
         }
 
+        public ActionResult Details(int EventId)
+        {
+            var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
+            Request rqt = this.unitOfWork.RequestRepository.Get(u => u.UserId == CurUserId && u.EventId == EventId).FirstOrDefault();
+            if (rqt == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rqt);
+        }
+
         public JsonResult Close(Request Request, int UserId, int EventId)
         {
             try
@@ -53,40 +64,20 @@ namespace DropIt.Controllers
             }
         }
 
-        public ActionResult Details(int EventId)
-        {
-            var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
-            Request rqt = this.unitOfWork.RequestRepository.Get(u=>u.UserId == CurUserId && u.EventId == EventId).FirstOrDefault();
-            if (rqt == null)
-            {
-                return HttpNotFound();
-            }
-            return View(rqt);
-        }
-
-        public ActionResult CloseRequest()
-        {
-            int UserId = WebSecurity.GetUserId(User.Identity.Name);
-            var close = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
-            return View(close.ToList());
-        }
-
-        [HttpPost]
-        public JsonResult CloseRequest(int EventId = 0)
-        {
-            int UserId = WebSecurity.GetUserId(User.Identity.Name);
-            Request open = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
-            this.unitOfWork.RequestRepository.Delete(open);
-            return Json(open);
-        }
-
-        //
-        // POST: /Request/Edit/
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(RequestViewModels request)
+        //public ActionResult CloseRequest()
         //{
+        //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
+        //    var close = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
+        //    return View(close.ToList());
+        //}
 
+        //[HttpPost]
+        //public JsonResult CloseRequest(int EventId = 0)
+        //{
+        //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
+        //    Request open = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
+        //    this.unitOfWork.RequestRepository.Delete(open);
+        //    return Json(open);
         //}
     }
 }
