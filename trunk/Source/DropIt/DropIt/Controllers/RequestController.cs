@@ -26,60 +26,58 @@ namespace DropIt.Controllers
             Repository = unitOfWork.RequestRepository;
         }
 
-        //public ActionResult Index()
-        //{
-        //    int id = WebSecurity.GetUserId(User.Identity.Name);
-        //    Request request = this.unitOfWork.RequestRepository.GetById(id);
-        //    RequestViewModels newRequest = new RequestViewModels
-        //    {
-        //        UserId = request.UserId,
-        //        EventId = request.EventId,
-        //        Status = request.Status,
-        //        Description = request.Description
-        //    };
-        //    if (request == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(newRequest);
-        //}
-
         public ActionResult Index()
         {
-            var requests = this.unitOfWork.RequestRepository.GetAll();
-            return View(requests.ToList());
+            var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
+            var rqt = this.unitOfWork.RequestRepository.Get(u => u.UserId == CurUserId);
+
+            return View(rqt.ToList());
         }
 
-        public ActionResult Close(int UserId, int EventId)
+        public JsonResult Close(Request Request, int UserId, int EventId)
         {
-            Request rqt = this.unitOfWork.RequestRepository.GetById(UserId, EventId);
-            if (rqt == null)
+            try
             {
-                return HttpNotFound();
-            }
-            else
-            {
-                if (rqt.Status == 0)
+                if (!ModelState.IsValid)
                 {
-                    //rqt.Status == 0;
+                    return Json(new JSONResult("Form is invalid"));
                 }
-                else
-                {
 
-                }
+                Repository.AddOrUpdate(Request);
+                unitOfWork.Save();
+                return Json(new JSONResult());
             }
-            return null;
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
         }
 
-        public ActionResult Details(int UserId, int EventId)
+        public ActionResult Details(int EventId)
         {
-            Request rqt = this.unitOfWork.RequestRepository.GetById(UserId, EventId);
+            var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
+            Request rqt = this.unitOfWork.RequestRepository.Get(u=>u.UserId == CurUserId && u.EventId == EventId).FirstOrDefault();
             if (rqt == null)
             {
                 return HttpNotFound();
             }
             return View(rqt);
+        }
+
+        public ActionResult CloseRequest()
+        {
+            int UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var close = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
+            return View(close.ToList());
+        }
+
+        [HttpPost]
+        public JsonResult CloseRequest(int EventId = 0)
+        {
+            int UserId = WebSecurity.GetUserId(User.Identity.Name);
+            Request open = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
+            this.unitOfWork.RequestRepository.Delete(open);
+            return Json(open);
         }
 
         //
