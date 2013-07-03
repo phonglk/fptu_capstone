@@ -35,75 +35,146 @@ namespace DropIt.Areas.Administration.Controllers
             var status = Request["status"];
             if (status == null) status = "1";
             int CurrentStatus = Int32.Parse(status);
-
-            var ticketList = unitOfWork.TicketRepository.Get();
+            ViewBag.CurrentStatus = CurrentStatus;
+            var ticketList = unitOfWork.TicketRepository.Get(u => u.Status == CurrentStatus);
             return View(ticketList.ToList());
         }
 
-        //[HttpPost]
+        [HttpPost]
 
-        //public JsonResult Count(int id)
-        //{
-        //    int status = id;
-            
-        //    int count = 0;
+        public JsonResult Count(int id)
+        {
+            int status = id;
 
-        //    if (Request["extra"] != null && Request["extra"] == "ontransaction")
-        //    {
-        //        count = Repository.Get(r=>(r.Status == (int)Statuses.Ticket.Approve || r.Status == (int)Statuses.Ticket.Disapprove)).Count();
-        //        return Json(new
-        //        {
-        //            Result = "OK",
-        //            Count = count
-        //        });
-        //    }
+            int count = 0;
 
-        //    if (id == -1)
-        //    {
-        //        count = Repository.Get(r => r.Status != null).Count();
-        //    }
-        //    else
-        //    {
-        //        count = Repository.Get(r => r.Status == status).Count();
-        //    }
+            if (Request["extra"] != null && Request["extra"] == "ontransaction")
+            {
+                count = Repository.Get(r => (r.Status == (int)Statuses.Ticket.Approve || r.Status == (int)Statuses.Ticket.Disapprove)).Count();
+                return Json(new
+                {
+                    Result = "OK",
+                    Count = count
+                });
+            }
 
-        //    return Json(new
-        //    {
-        //        Result = "OK",
-        //        Count = count
-        //    });
-        //}
+            if (id == -1)
+            {
+                count = Repository.Get(r => r.Status != null).Count();
+            }
+            else
+            {
+                count = Repository.Get(r => r.Status == status).Count();
+            }
+
+            return Json(new
+            {
+                Result = "OK",
+                Count = count
+            });
+        }
 
         public ActionResult Details(int id = 0)
         {
             Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-            if (ticket==null)
+
+            if (ticket == null)
             {
                 return HttpNotFound();
             }
             return View(ticket);
         }
 
-        
+
         public ActionResult Delete(int id)
         {
             Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            int sttToRedirect = 0;
             if (ticket == null)
             {
-                return HttpNotFound();
-            }
-            this.unitOfWork.TicketRepository.Delete(id);
+                HttpNotFound();
+            }           
+                ticket.Status = (int)Statuses.Ticket.Delete;
+                sttToRedirect = (int)Statuses.Ticket.Disapprove;           
+
+            Ticket change = new Ticket()
+            {
+                TicketId = ticket.TicketId,  // co TicketId de tim kiem 
+                TranUserId = ticket.UserId,
+                TranFullName = ticket.TranFullName,
+                TranAddress = ticket.TranAddress,
+                TranType = ticket.TranType,
+                TranStatus = ticket.Status,
+                EventId = ticket.EventId,
+                UserId = ticket.UserId,
+                SellPrice = ticket.SellPrice,
+                ReceiveMoney = ticket.ReceiveMoney,
+                Seat = ticket.Seat,
+                Status = ticket.Status,
+                Description = ticket.Description,
+                CreatedDate = ticket.CreatedDate,
+                TranCreatedDate = ticket.TranCreatedDate,
+                TranModifiedDate = ticket.TranModifiedDate,
+                TranDescription = ticket.TranDescription
+            };
+            this.unitOfWork.TicketRepository.AddOrUpdate(change);
             this.unitOfWork.TicketRepository.Save();
-            return RedirectToAction("List");
+            return RedirectToAction("List", new { status = sttToRedirect });
         }
 
+
+        // GET: Change status
+
+        public ActionResult ChangeStatus(int id)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            int sttToRedirect = 0;
+            if (ticket == null)
+            {
+                HttpNotFound();
+            }
+            else if (ticket.Status == 0)
+            {
+                ticket.Status = (int)Statuses.Ticket.Approve;
+                sttToRedirect = (int)Statuses.Ticket.Disapprove;
+            }
+            else if (ticket.Status == 1)
+            {
+                ticket.Status = (int)Statuses.Ticket.Disapprove;
+                sttToRedirect = (int)Statuses.Ticket.Approve;
+            }
+
+            Ticket change = new Ticket()
+                                {
+                                    TicketId = ticket.TicketId,  // co TicketId de tim kiem 
+                                    TranUserId = ticket.UserId,
+                                    TranFullName = ticket.TranFullName,
+                                    TranAddress = ticket.TranAddress,
+                                    TranType = ticket.TranType,
+                                    TranStatus = ticket.Status,
+                                    EventId = ticket.EventId,
+                                    UserId = ticket.UserId,
+                                    SellPrice = ticket.SellPrice,
+                                    ReceiveMoney = ticket.ReceiveMoney,
+                                    Seat = ticket.Seat,
+                                    Status = ticket.Status,
+                                    Description = ticket.Description,
+                                    CreatedDate = ticket.CreatedDate,
+                                    TranCreatedDate = ticket.TranCreatedDate,
+                                    TranModifiedDate = ticket.TranModifiedDate,
+                                    TranDescription = ticket.TranDescription
+                                };
+            this.unitOfWork.TicketRepository.AddOrUpdate(change);
+            this.unitOfWork.TicketRepository.Save();
+            return RedirectToAction("List", new { status = sttToRedirect });
+        }
         //
         // GET: /Event/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
             Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-            if (ticket==null)
+            if (ticket == null)
             {
                 HttpNotFound();
             }
@@ -118,7 +189,7 @@ namespace DropIt.Areas.Administration.Controllers
             Ticket getTicket = unitOfWork.TicketRepository.Get(u => u.TicketId == ticket.TicketId).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                
+
                 Ticket editTicket = new Ticket()
                                         {
                                             TicketId = ticket.TicketId,  // co TicketId de tim kiem 
