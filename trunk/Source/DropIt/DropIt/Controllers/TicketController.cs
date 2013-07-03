@@ -186,6 +186,7 @@ namespace DropIt.Controllers
                     ReceiveMoney = ticket.ReceiveMoney,
                     Seat = ticket.Seat,
                     Status = ticket.Status,
+                    AdminModifiedDate = ticket.AdminModifiedDate,
                     Description = ticket.Description,
                     CreatedDate = ticket.CreatedDate,
                     TranCreatedDate = DateTime.Now,
