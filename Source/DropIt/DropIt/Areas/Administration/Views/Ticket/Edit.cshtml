@@ -14,6 +14,15 @@
         @Html.HiddenFor(model => model.TicketId)
         @*@Html.HiddenFor(m=>m.EventId)*@
         @Html.HiddenFor(m=>m.UserId)
+        
+        <div class="control-group">
+            @Html.Label("Tên sự kiện")
+        </div>
+        <div class="control-group">
+            @Html.DropDownList("EventId", String.Empty)
+            
+            @Html.ValidationMessageFor(model => model.EventId)
+        </div>
 
         <div class="control-group">
             @Html.Label("Miêu tả ghế ngồi")
@@ -31,23 +40,14 @@
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 
-        <div class="control-group">
+        @*<div class="control-group">
             @Html.Label("Trạng thái")
         </div>
         <div class="control-group">
             @Html.EditorFor(model => model.Status)
             @Html.ValidationMessageFor(model => model.Status)
-        </div>
+        </div>*@
 
-        <div class="control-group">
-            @Html.Label("Tên sự kiện")
-        </div>
-        <div class="control-group">
-            @Html.DropDownList("EventId", String.Empty)
-            
-            @Html.ValidationMessageFor(model => model.EventId)
-        </div>
-       
         <p>
             <input type="submit" value="Lưu lại" />
             
