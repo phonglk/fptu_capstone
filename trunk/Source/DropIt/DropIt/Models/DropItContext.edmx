@@ -129,6 +129,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="AdminModifiedDate" Type="datetime" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="TranFullName" Type="nvarchar" MaxLength="50" />
@@ -531,6 +532,7 @@
           <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="Ticket" ToRole="User" />
           <Property Type="String" Name="TranFullName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="TranType" Nullable="true" />
+          <Property Type="DateTime" Name="AdminModifiedDate" Precision="3" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -834,6 +836,7 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="Drop_ItModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="AdminModifiedDate" ColumnName="AdminModifiedDate" />
                 <ScalarProperty Name="TranType" ColumnName="TranType" />
                 <ScalarProperty Name="TranFullName" ColumnName="TranFullName" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
