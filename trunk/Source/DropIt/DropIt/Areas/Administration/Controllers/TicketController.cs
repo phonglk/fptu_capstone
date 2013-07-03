@@ -111,6 +111,7 @@ namespace DropIt.Areas.Administration.Controllers
                 ReceiveMoney = ticket.ReceiveMoney,
                 Seat = ticket.Seat,
                 Status = ticket.Status,
+                AdminModifiedDate = DateTime.Now,
                 Description = ticket.Description,
                 CreatedDate = ticket.CreatedDate,
                 TranCreatedDate = ticket.TranCreatedDate,
@@ -158,6 +159,7 @@ namespace DropIt.Areas.Administration.Controllers
                                     ReceiveMoney = ticket.ReceiveMoney,
                                     Seat = ticket.Seat,
                                     Status = ticket.Status,
+                                    AdminModifiedDate = DateTime.Now,
                                     Description = ticket.Description,
                                     CreatedDate = ticket.CreatedDate,
                                     TranCreatedDate = ticket.TranCreatedDate,
@@ -198,13 +200,14 @@ namespace DropIt.Areas.Administration.Controllers
                                             TranAddress = getTicket.TranAddress,
                                             TranType = getTicket.TranType,
                                             TranStatus = getTicket.Status,
-                                            EventId = ticket.EventId,
+                                            EventId = ticket.EventId,  // sua Event lai
                                             UserId = getTicket.UserId,
                                             SellPrice = getTicket.SellPrice,
                                             ReceiveMoney = getTicket.ReceiveMoney,
-                                            Seat = ticket.Seat,
-                                            Status = ticket.Status,
-                                            Description = ticket.Description,
+                                            Seat = ticket.Seat,   // sua thong tin ghe ngoi
+                                            Status = (int)Statuses.Ticket.Disapprove,  // sua trang thai chuyen ve disapprove a gui den user 
+                                            AdminModifiedDate = DateTime.Now,  // cap nhat ngay sua
+                                            Description = ticket.Description,  // sua lai phan ghi chu
                                             CreatedDate = getTicket.CreatedDate,
                                             TranCreatedDate = getTicket.TranCreatedDate,
                                             TranModifiedDate = getTicket.TranModifiedDate,
@@ -212,6 +215,7 @@ namespace DropIt.Areas.Administration.Controllers
                                         };
                 this.unitOfWork.TicketRepository.AddOrUpdate(editTicket);
                 this.unitOfWork.TicketRepository.Save();
+
                 return RedirectToAction("List");
             }
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
