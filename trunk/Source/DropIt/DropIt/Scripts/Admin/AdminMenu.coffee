@@ -45,9 +45,9 @@ window.menuAdmins = [
         Name : "User"
         Controller : "User"
     new MenuAdmin 
-        Name : "Ticket"
+        Name : "Vé"
         Controller : "Ticket"
-        Action : "AdminList"
+        Action : "List"
     new MenuAdmin 
         Name : "Danh mục"
         Controller : "Category"
