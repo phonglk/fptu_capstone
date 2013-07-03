@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DropIt.Common;
 using DropIt.DAL;
 using DropIt.Filters;
 using DropIt.Models;
+using WebMatrix.WebData;
 
 namespace DropIt.Areas.Administration.Controllers
 {
@@ -30,9 +32,47 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult List()
         {
+            var status = Request["status"];
+            if (status == null) status = "1";
+            int CurrentStatus = Int32.Parse(status);
+
             var ticketList = unitOfWork.TicketRepository.Get();
             return View(ticketList.ToList());
         }
+
+        //[HttpPost]
+
+        //public JsonResult Count(int id)
+        //{
+        //    int status = id;
+            
+        //    int count = 0;
+
+        //    if (Request["extra"] != null && Request["extra"] == "ontransaction")
+        //    {
+        //        count = Repository.Get(r=>(r.Status == (int)Statuses.Ticket.Approve || r.Status == (int)Statuses.Ticket.Disapprove)).Count();
+        //        return Json(new
+        //        {
+        //            Result = "OK",
+        //            Count = count
+        //        });
+        //    }
+
+        //    if (id == -1)
+        //    {
+        //        count = Repository.Get(r => r.Status != null).Count();
+        //    }
+        //    else
+        //    {
+        //        count = Repository.Get(r => r.Status == status).Count();
+        //    }
+
+        //    return Json(new
+        //    {
+        //        Result = "OK",
+        //        Count = count
+        //    });
+        //}
 
         public ActionResult Details(int id = 0)
         {
