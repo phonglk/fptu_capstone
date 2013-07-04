@@ -11,7 +11,7 @@
 }
 <div class="container" id="content">
     <div class="form1">
-        @using (Html.BeginForm())
+        @using (Html.HorizontalForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
@@ -21,14 +21,23 @@
 
                 @Html.HiddenFor(model => model.TicketId)
 
-                <div class="editor-label">
+                <div class="">
                     @Html.Label("Tên sự kiện:")
                 </div>
-                <div class="editor-field">
+                <div class="">
                     @Html.DropDownList("EventId", (SelectList)ViewBag.EventId)
                     @Html.ValidationMessageFor(model => model.EventId)
                 </div>
-
+                
+                @*@Html.LabelAndControl("Tên sự kiện:", Html.DropDownList("EventId"))
+                
+                @Html.LabelAndControl("Ghê ngồi:", Html.TextBox("Seat"))
+                
+                @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.TextBox("Description"))
+                
+                @Html.LabelAndControl("Giá bán:", Html.TextBox("SellPrice"))
+                
+                @Html.LabelAndControl("Tiền nhận được:", Html.TextBox("ReceiveMoney"))*@
                 <div class="editor-label">
                     @Html.Label("Ghê ngồi:")
                 </div>
