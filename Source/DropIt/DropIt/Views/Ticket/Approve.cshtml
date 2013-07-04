@@ -1,0 +1,73 @@
+﻿@model DropIt.Models.Ticket
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+@using DropIt.Common
+@{
+    ViewBag.Title = "Approve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="content">
+    <div class="form1">
+        @using (Html.HorizontalForm()){
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <h2 class="control-group">Thông tin sửa chữa</h2>
+            @Html.HiddenFor(model => model.TicketId)
+            <div class="control-group">
+                <label class="control-label">Tên sự kiện:</label>
+                <div class="controls">
+                    @Model.Event.EventName
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Nơi tổ chức:</label>
+                <div class="controls">
+                    @Model.Event.Venue.VenueName
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Miêu tả ghế:</label>
+                <div class="controls">
+                    @Model.Seat
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Ghi chú:</label>
+                <div class="controls">
+                    @Model.Description
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Giá bán:</label>
+                <div class="controls">
+                    @Model.SellPrice
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Tiền nhận:</label>
+                <div class="controls">
+                    @Model.ReceiveMoney
+                </div>
+            </div>
+
+            <p class="control-group">
+                Bạn có chấp nhận thông tin sửa chữa theo gợi ý của hệ thống?
+            </p>
+            <div class="control-group">
+                <button type="submit" class="btn btn-register btn-success">Chấp nhận</button>
+                <a href="#" class="btn btn-register btn-danger">Sửa thông tin</a>
+                @*<button type="submit" class="btn btn-register btn-danger">Chỉnh sửa lại</button>*@        
+            </div>
+        }
+    </div>
+</div>
+
