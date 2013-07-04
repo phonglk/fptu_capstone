@@ -4,12 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="Drop_ItModelStoreContainer">
           <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Province" EntityType="Drop_ItModel.Store.Province" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Request" EntityType="Drop_ItModel.Store.Request" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Setting" EntityType="Drop_ItModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Ticket" EntityType="Drop_ItModel.Store.Ticket" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TicketResponse" EntityType="Drop_ItModel.Store.TicketResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="Drop_ItModel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -116,6 +117,14 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SettingName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -376,7 +385,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Drop_ItModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -385,6 +395,7 @@
           <EntitySet Name="Events" EntityType="Drop_ItModel.Event" />
           <EntitySet Name="Provinces" EntityType="Drop_ItModel.Province" />
           <EntitySet Name="Requests" EntityType="Drop_ItModel.Request" />
+          <EntitySet Name="Settings" EntityType="Drop_ItModel.Setting" />
           <EntitySet Name="Tickets" EntityType="Drop_ItModel.Ticket" />
           <EntitySet Name="TicketResponses" EntityType="Drop_ItModel.TicketResponse" />
           <EntitySet Name="Users" EntityType="Drop_ItModel.User" />
@@ -505,6 +516,14 @@
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Request_User" FromRole="Request" ToRole="User" />
           <NavigationProperty Name="TicketResponses" Relationship="Drop_ItModel.FK_RespondRequest_Request" FromRole="Request" ToRole="TicketResponse" />
         </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SettingName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="TicketId" />
@@ -517,8 +536,11 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="AdminModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="TranFullName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TranType" Type="Int32" />
           <Property Name="TranShipDate" Type="DateTime" Precision="3" />
           <Property Name="TranDescription" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="TranAddress" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -530,9 +552,6 @@
           <NavigationProperty Name="TicketResponses" Relationship="Drop_ItModel.FK_RespondRequest_Ticket" FromRole="Ticket" ToRole="TicketResponse" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="Ticket" ToRole="User" />
-          <Property Type="String" Name="TranFullName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="TranType" Nullable="true" />
-          <Property Type="DateTime" Name="AdminModifiedDate" Precision="3" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -833,12 +852,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="Drop_ItModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="Drop_ItModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
-                <ScalarProperty Name="AdminModifiedDate" ColumnName="AdminModifiedDate" />
-                <ScalarProperty Name="TranType" ColumnName="TranType" />
-                <ScalarProperty Name="TranFullName" ColumnName="TranFullName" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
                 <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
                 <ScalarProperty Name="ReceiveMoney" ColumnName="ReceiveMoney" />
@@ -847,8 +872,11 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="AdminModifiedDate" ColumnName="AdminModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="TranFullName" ColumnName="TranFullName" />
+                <ScalarProperty Name="TranType" ColumnName="TranType" />
                 <ScalarProperty Name="TranShipDate" ColumnName="TranShipDate" />
                 <ScalarProperty Name="TranDescription" ColumnName="TranDescription" />
                 <ScalarProperty Name="TranAddress" ColumnName="TranAddress" />

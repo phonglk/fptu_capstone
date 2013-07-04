@@ -26,12 +26,12 @@ namespace DropIt.Models
         public string Description { get; set; }
         public int Status { get; set; }
         public int UserId { get; set; }
-        public Nullable<System.DateTime> AdminModifiedDate { get; set; }
         public int EventId { get; set; }
-        public string TranFullName { get; set; }
-        public int? TranType { get; set; }
+        public Nullable<System.DateTime> AdminModifiedDate { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string TranFullName { get; set; }
+        public Nullable<int> TranType { get; set; }
         public Nullable<System.DateTime> TranShipDate { get; set; }
         public string TranDescription { get; set; }
         public string TranAddress { get; set; }

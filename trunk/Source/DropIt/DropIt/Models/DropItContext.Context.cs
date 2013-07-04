@@ -29,6 +29,7 @@ namespace DropIt.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<Setting> Settings { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketResponse> TicketResponses { get; set; }
         public DbSet<User> Users { get; set; }

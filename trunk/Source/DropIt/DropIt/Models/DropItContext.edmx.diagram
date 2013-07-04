@@ -4,16 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="65cd5817f67949f39f94747f9e9029d1" Name="Diagram1" ZoomLevel="94">
-        <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+      <Diagram DiagramId="a6a15ea6c96540498de09d9b997ad342" Name="Diagram1">
+        <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Setting" Width="1.5" PointX="2.375" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Ticket" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.TicketResponse" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.TicketResponse" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.UserFollowEvent" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Venue" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Venue" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <AssociationConnector Association="Drop_ItModel.FK_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Event_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Event_Venue" ManuallyRouted="false" />

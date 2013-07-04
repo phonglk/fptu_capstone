@@ -12,14 +12,10 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RespondRequest
+    public partial class Setting
     {
-        public int UserId { get; set; }
-        public int EventId { get; set; }
-        public int TicketId { get; set; }
-        public string Description { get; set; }
-    
-        public virtual Request Request { get; set; }
-        public virtual Ticket Ticket { get; set; }
+        public int Id { get; set; }
+        public string SettingName { get; set; }
+        public string Value { get; set; }
     }
 }
