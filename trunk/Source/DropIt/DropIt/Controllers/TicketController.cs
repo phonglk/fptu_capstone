@@ -84,7 +84,7 @@ namespace DropIt.Controllers
                             ReceiveMoney = (int)ticket.SellPrice*0.97,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
-                            Status = (int)Statuses.Ticket.Disapprove,
+                            Status = (int)Statuses.Ticket.Pending,
                             UserId = ticket.UserId
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
@@ -114,7 +114,7 @@ namespace DropIt.Controllers
                             ReceiveMoney = ticket.ReceiveMoney,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
-                            Status = (int)Statuses.Ticket.Disapprove,
+                            Status = (int)Statuses.Ticket.Pending,
                             UserId = ticket.UserId
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
@@ -130,7 +130,7 @@ namespace DropIt.Controllers
                         ReceiveMoney = ticket.ReceiveMoney,
                         Seat = ticket.Seat,
                         Description = ticket.Description,
-                        Status = (int)Statuses.Ticket.Approve,
+                        Status = (int)Statuses.Ticket.Ready,
                         UserId = ticket.UserId
                     };
                     this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
@@ -353,7 +353,7 @@ namespace DropIt.Controllers
                                            SellPrice = getTicket.SellPrice,
                                            ReceiveMoney = getTicket.ReceiveMoney,
                                            Seat = getTicket.Seat,
-                                           Status = (int)Statuses.Ticket.Approve,
+                                           Status = (int)Statuses.Ticket.Ready,
                                            AdminModifiedDate = getTicket.AdminModifiedDate,
                                            Description = getTicket.Description,
                                            CreatedDate = getTicket.CreatedDate,
