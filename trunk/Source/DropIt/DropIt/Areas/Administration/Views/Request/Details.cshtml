@@ -1,0 +1,62 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using BootstrapExtensions.Base.Form.Label
+@using DropIt.Common
+@model DropIt.Models.Request
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form id="form-detailrequest" class="form-horizontal row">
+    <div class="control-group">
+        <label class="control-label">người đăng:</label>
+        <div class="controls">
+            @Model.User.UserName
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">sự kiện:</label>
+        <div class="controls">
+            @Model.Event.EventName
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">miêu tả yêu cầu:</label>
+        <div class="controls">
+            @Model.Description
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Trạng thái yêu cầu:</label>
+        <div class="controls">
+            @*@Model.Status*@
+            @{
+                if (@Model.Status==0)
+                {
+                    <p>Không chấp nhận</p>
+                }
+                else 
+                {
+                    <p>Chấp nhận</p>                    
+                }
+               
+            }
+        </div>
+    </div>    
+    <div class="control-group">
+        <label class="control-label">Ngày đăng yêu cầu:</label>
+        <div class="controls">
+            @Model.CreatedDate
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Cập nhật cuối:</label>
+        <div class="controls">
+            @Model.ModifiedDate
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Quay về", "List")
+    </div>
+
+</form>

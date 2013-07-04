@@ -1,5 +1,6 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Filters;
 using DropIt.Models;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,11 @@ using System.Web.Mvc;
 
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class RequestController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-
         private RequestRepository Repository;
 
         public RequestController()
@@ -27,93 +29,101 @@ namespace DropIt.Areas.Administration.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        public ActionResult List()
         {
-            try
-            {
-
-                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-
-                var Records = records.Select(e => new
-                {
-                    UserId = e.UserId,
-                    EventId = e.EventId,
-                    Status = e.Status,
-                    Description = e.Description,
-                    CreatedDate = e.CreatedDate,
-                    ModifiedDate = e.ModifiedDate
-                });
-                return Json(new JSONResult(Records)
-                {
-                    TotalRecordCount = Repository.Count
-                });
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
+            var requestList = unitOfWork.RequestRepository.Get();
+            return View(requestList.ToList());
         }
 
-        [HttpPost]
-        public JsonResult Create(Request request)
+        public ActionResult Details(int userid=0, int id = 0)
         {
-            try
+            Request request = this.unitOfWork.RequestRepository.GetById(userid, id);
+            if (request == null)
             {
-                if (!ModelState.IsValid)
-                {
-                    return Json(new JSONResult("Form is not valid"));
-                }
-
-                var addedRecord = Repository.AddOrUpdate(request);
-                unitOfWork.Save();
-                return Json(new JSONResult(addedRecord, "Record"));
-
+                return HttpNotFound();
             }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-                throw;
-            }
+            return View(request);
         }
 
-        [HttpPost]
-        public JsonResult Update(Request request)
+        public ActionResult Delete(int userid, int id)
         {
-            try
+            Request request = this.unitOfWork.RequestRepository.GetById(userid, id);
+            if (request == null)
             {
-                if (!ModelState.IsValid)
-                {
-                    return Json(new JSONResult("Form is invalid"));
-                }
-
-                Repository.AddOrUpdate(request);
-                unitOfWork.Save();
-                return Json(new JSONResult());
+                return HttpNotFound();
             }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
+            this.unitOfWork.RequestRepository.Delete(userid, id);
+            this.unitOfWork.RequestRepository.Save();
+            return RedirectToAction("List");
         }
+        //public ActionResult Delete(int id)
+        //{
+        //    Request request = this.unitOfWork.RequestRepository.GetById(id);
+        //    if (request == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    this.unitOfWork.RequestRepository.Delete(id);
+        //    this.unitOfWork.RequestRepository.Save();
+        //    return RedirectToAction("List");
+        //}
 
-        public JsonResult Delete(int UserId, int EventId)
+        ////
+        //// GET: /Event/Edit/5
+
+        //public ActionResult Edit(int id = 0)
+        //{
+        //    Request request = this.unitOfWork.RequestRepository.GetById(id);
+        //    if (request == null)
+        //    {
+        //        HttpNotFound();
+        //    }
+        //    ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName", ticket.EventId);
+        //    return View(request);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(Request request)
+        //{
+        //    Request getRequest = unitOfWork.RequestRepository.Get(u => u.RequestId == ticket.TicketId).FirstOrDefault();
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        Ticket editTicket = new Ticket()
+        //        {
+        //            TicketId = ticket.TicketId,  // co TicketId de tim kiem 
+        //            TranUserId = getTicket.UserId,
+        //            TranFullName = getTicket.TranFullName,
+        //            TranAddress = getTicket.TranAddress,
+        //            TranType = getTicket.TranType,
+        //            TranStatus = getTicket.Status,
+        //            EventId = ticket.EventId,
+        //            UserId = getTicket.UserId,
+        //            SellPrice = getTicket.SellPrice,
+        //            ReceiveMoney = getTicket.ReceiveMoney,
+        //            Seat = ticket.Seat,
+        //            Status = ticket.Status,
+        //            Description = ticket.Description,
+        //            CreatedDate = getTicket.CreatedDate,
+        //            TranCreatedDate = getTicket.TranCreatedDate,
+        //            TranModifiedDate = getTicket.TranModifiedDate,
+        //            TranDescription = getTicket.TranDescription
+        //        };
+        //        this.unitOfWork.TicketRepository.AddOrUpdate(editTicket);
+        //        this.unitOfWork.TicketRepository.Save();
+        //        return RedirectToAction("List");
+        //    }
+        //    ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+        //                                     ticket.EventId);
+        //    return View(ticket);
+
+        //}
+
+        protected override void Dispose(bool disposing)
         {
-            try
-            {
-                Repository.Delete(UserId, EventId);
-                unitOfWork.Save();
-
-                return Json(new JSONResult());
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
-
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
-
-
-
     }
 }
