@@ -48,25 +48,26 @@ namespace DropIt.Controllers
             return View(events);
 
         }
-        [HttpPost]
+
         [ActionName("SearchAjax")]
-        public JsonResult SearchAjax(string eventnameofsearch)
+        public JsonResult SearchAjax(string query)
         {
             var events = this.unitOfWork.EventRepository.Get();
             List<String> listeventname = new List<string>();
-            if (!String.IsNullOrEmpty(eventnameofsearch))
+            if (!String.IsNullOrEmpty(query))
             {
                 foreach (Event evt in events.ToList())
                 {
-                    if (evt.EventName.ToLower().Contains(eventnameofsearch.ToLower()))
+                    if (evt.EventName.ToLower().Contains(query.ToLower()))
                     {
                         listeventname.Add(evt.EventName);
                     }
                 }
 
             }
-            return Json(listeventname, JsonRequestBehavior.AllowGet);
+            return Json(new { query = query, suggestions = listeventname, data = listeventname }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

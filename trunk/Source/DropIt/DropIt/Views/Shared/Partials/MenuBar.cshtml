@@ -27,19 +27,28 @@
         </div>
     </div>
 </div>
-   <script type="text/javascript">
-       $('#eventnameofsearch').on("keyup", function () {
-           var self = $(this);
-           $.ajax({
-               type: "POST",
-               url: "/Home/SearchAjax",
-               data: {
-                   eventnameofsearch: self.val()
-               },
-               dataType: "json"
-           }).done(function (data) {
-               console.log(data)
-           });
-       });
-       
-   </script>
+<script type="text/javascript">
+    //$('#eventnameofsearch').on("keyup", function () {
+    //    var self = $(this);
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Home/SearchAjax",
+    //        data: {
+    //            eventnameofsearch: self.val()
+    //        },
+    //        dataType: "json"
+    //    }).done(function (data) {
+    //        console.log(data)
+    //    });
+
+    //});
+    var options;
+    jQuery(function () {
+        options = {
+            serviceUrl: '/Home/SearchAjax',
+            minChars: 2,
+            onSelect: function (value, data) { $(".search>form").submit(); },
+        };
+        $('#eventnameofsearch').autocomplete(options);
+    });
+</script>

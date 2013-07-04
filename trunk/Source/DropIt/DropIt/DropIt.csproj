@@ -963,6 +963,7 @@
     <Content Include="Scripts\Common\utilClasses.js" />
     <Content Include="Scripts\Common\utils.js" />
     <Content Include="Scripts\Admin\default.js" />
+    <Content Include="Scripts\DropIt\jquery.autocomplete.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
@@ -1301,7 +1302,6 @@
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="obj\" />
-    <Folder Include="Scripts\DropIt\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
