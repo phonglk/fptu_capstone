@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Setting" Width="1.5" PointX="2.375" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Ticket" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.TicketResponse" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
@@ -29,6 +28,7 @@
         <AssociationConnector Association="Drop_ItModel.FK_Ticket_User" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Ticket_User1" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_UserFollowEvent_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Drop_ItModel.Setting" Width="1.5" PointX="11.503579521320564" PointY="29.826896666468539" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

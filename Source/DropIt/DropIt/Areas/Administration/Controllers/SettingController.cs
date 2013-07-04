@@ -44,7 +44,7 @@ namespace DropIt.Areas.Administration.Controllers
             if (ModelState.IsValid)
             {
                 this.unitOfWork.SettingRepository.AddOrUpdate(setting);
-                this.unitOfWork.Save();
+                this.unitOfWork.SettingRepository.Save();
                 return RedirectToAction("List");
             }
             return View(setting);
