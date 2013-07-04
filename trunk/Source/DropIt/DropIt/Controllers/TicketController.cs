@@ -325,5 +325,46 @@ namespace DropIt.Controllers
                 });
             }
         }
+
+        public ActionResult Approve(int id = 0)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            return View(ticket);
+        }
+
+        [HttpPost]
+        public ActionResult Approve(Ticket ticket)
+        {
+            Ticket getTicket = this.unitOfWork.TicketRepository.Get(u => u.TicketId == ticket.TicketId).FirstOrDefault();
+            //Ticket getTicket2 = this.unitOfWork.TicketRepository.GetById(ticket.TicketId);  tuong tu nhu cau lenh o tren 
+            if (ModelState.IsValid)
+            {
+                Ticket newTicket = new Ticket()
+                                       {
+                                           TicketId = getTicket.TicketId,
+                                           TranUserId = getTicket.UserId,
+                                           TranFullName = getTicket.TranFullName,
+                                           TranAddress = getTicket.TranAddress,
+                                           TranType = getTicket.TranType,
+                                           TranStatus = getTicket.TranStatus,
+                                           EventId = getTicket.EventId,
+                                           UserId = getTicket.UserId,
+                                           SellPrice = getTicket.SellPrice,
+                                           ReceiveMoney = getTicket.ReceiveMoney,
+                                           Seat = getTicket.Seat,
+                                           Status = (int)Statuses.Ticket.Approve,
+                                           AdminModifiedDate = getTicket.AdminModifiedDate,
+                                           Description = getTicket.Description,
+                                           CreatedDate = getTicket.CreatedDate,
+                                           TranCreatedDate = getTicket.TranCreatedDate,
+                                           TranModifiedDate = getTicket.TranModifiedDate,
+                                           TranDescription = getTicket.TranDescription
+                                       };
+                this.unitOfWork.TicketRepository.AddOrUpdate(newTicket);
+                this.unitOfWork.TicketRepository.Save();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(ticket);
+        }
     }
 }
