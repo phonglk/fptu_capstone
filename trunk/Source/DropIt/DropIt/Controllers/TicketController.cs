@@ -330,14 +330,68 @@ namespace DropIt.Controllers
         public ActionResult Approve(int id = 0)
         {
             Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            if (ticket==null)
+            {
+                HttpNotFound();
+            }
             return View(ticket);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Approve(Ticket ticket)
         {
             Ticket getTicket = this.unitOfWork.TicketRepository.Get(u => u.TicketId == ticket.TicketId).FirstOrDefault();
             //Ticket getTicket2 = this.unitOfWork.TicketRepository.GetById(ticket.TicketId);  tuong tu nhu cau lenh o tren 
+            if (ModelState.IsValid)
+            {
+                Ticket newTicket = new Ticket()
+                                       {
+                                           TicketId = getTicket.TicketId,
+                                           TranUserId = getTicket.UserId,
+                                           TranFullName = getTicket.TranFullName,
+                                           TranAddress = getTicket.TranAddress,
+                                           TranType = getTicket.TranType,
+                                           TranStatus = getTicket.TranStatus,
+                                           EventId = ticket.EventId,  // thay doi
+                                           UserId = getTicket.UserId,
+                                           SellPrice = getTicket.SellPrice,
+                                           ReceiveMoney = getTicket.ReceiveMoney,
+                                           Seat = ticket.Seat,    // thay doi
+                                           Status = (int)Statuses.Ticket.Ready,  // chuyen ve trang thai Ready
+                                           AdminModifiedDate = getTicket.AdminModifiedDate,
+                                           Description = ticket.Description,   // thay doi
+                                           CreatedDate = getTicket.CreatedDate,
+                                           TranCreatedDate = getTicket.TranCreatedDate,
+                                           TranModifiedDate = getTicket.TranModifiedDate,
+                                           TranDescription = getTicket.TranDescription
+                                       };
+                this.unitOfWork.TicketRepository.AddOrUpdate(newTicket);
+                this.unitOfWork.TicketRepository.Save();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(ticket);
+        }
+
+        //Get: edit info ticket
+        // user co the edit lai thong tin ve va dang ve lai
+        public ActionResult Edit(int id=0)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            if (ticket==null)
+            {
+                HttpNotFound();
+            }
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+                                             ticket.EventId);
+            return View(ticket);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Ticket ticket)
+        {
+            Ticket getTicket = this.unitOfWork.TicketRepository.GetById(ticket.TicketId);
             if (ModelState.IsValid)
             {
                 Ticket newTicket = new Ticket()
@@ -365,6 +419,8 @@ namespace DropIt.Controllers
                 this.unitOfWork.TicketRepository.Save();
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+                                             ticket.EventId);
             return View(ticket);
         }
     }

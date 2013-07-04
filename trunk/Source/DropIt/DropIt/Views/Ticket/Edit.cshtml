@@ -1,0 +1,72 @@
+﻿@model DropIt.Models.Ticket
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+@using DropIt.Common
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" id="content">
+    <div class="form1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <h2>Thông tin của vé</h2>
+
+                @Html.HiddenFor(model => model.TicketId)
+
+                <div class="editor-label">
+                    @Html.Label("Tên sự kiện:")
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("EventId", (SelectList)ViewBag.EventId)
+                    @Html.ValidationMessageFor(model => model.EventId)
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Ghê ngồi:")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Seat)
+                    @Html.ValidationMessageFor(model => model.Seat)
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Ghi chú (tùy chọn):")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Giá bán:")
+                </div>
+                <div class="editor-field">
+                    @Model.SellPrice
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Tiền nhận được:")
+                </div>
+                <div class="editor-field">
+                    @Model.ReceiveMoney
+                </div>
+                <p>
+                    <input type="submit" value="Đăng vé" />
+                </p>
+            </fieldset>
+        }
+
+    </div>
+</div>
+
+<script>
+    $("#EventId").select2();
+</script>
