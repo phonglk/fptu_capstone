@@ -514,6 +514,11 @@
     <Content Include="Areas\Administration\Views\User\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Category\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Request\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Request\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
