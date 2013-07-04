@@ -205,7 +205,7 @@ namespace DropIt.Areas.Administration.Controllers
                                             SellPrice = getTicket.SellPrice,
                                             ReceiveMoney = getTicket.ReceiveMoney,
                                             Seat = ticket.Seat,   // sua thong tin ghe ngoi
-                                            Status = (int)Statuses.Ticket.UserApprove,  // sua trang thai chuyen ve disapprove a gui den user 
+                                            Status = (int)Statuses.Ticket.UserApprove,  // sua trang thai chuyen ve userapprove gui den user 
                                             AdminModifiedDate = DateTime.Now,  // cap nhat ngay sua
                                             Description = ticket.Description,  // sua lai phan ghi chu
                                             CreatedDate = getTicket.CreatedDate,
