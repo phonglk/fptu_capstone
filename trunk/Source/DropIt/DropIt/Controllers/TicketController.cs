@@ -306,6 +306,7 @@ namespace DropIt.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public JsonResult Count()
         {
             try

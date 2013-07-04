@@ -19,7 +19,13 @@ String.prototype.eval = function () {
                     var reg = new RegExp(value.replace("{", "\\{").replace("}", "\\}"), "g");
                     s = s.replace(reg, args[parseInt(v)])
                 } else {
-                    s = s.replace(value, eval(v))
+                    if (typeof args[0] == "object") {
+                        if (args[0][v]) {
+                            s = s.replace(value, args[0][v])
+                        }
+                    } else {
+                        s = s.replace(value, eval(v))
+                    }
                 }
             } catch (e) {
                 console.error("Failed to eval string")
@@ -159,7 +165,17 @@ window.Url = function (_arg,defaultUrl) {
         }
 
         if (newRouting.Data && newRouting.Data != "") {
-            url += "?" + toFormData(newRouting.Data)
+            if (typeof newRouting.Data.Id!="undefined" || 
+                typeof newRouting.Data.id != "undefined" || 
+                typeof newRouting.Data.ID != "undefined") {
+                var id = 0;
+                if (typeof newRouting.Data.Id != "undefined") id = newRouting.Data.Id;
+                if (typeof newRouting.Data.id != "undefined") id = newRouting.Data.id;
+                if (typeof newRouting.Data.ID != "undefined") id = newRouting.Data.ID;
+                url += "/" + id;
+            }else{
+                url += "?" + toFormData(newRouting.Data)
+            }
         }
 
         return url;
@@ -196,6 +212,25 @@ window.modalFactory = function (options) {
     return $modal;
 };
 
-$(function () {
-    return bootstrap.active();
-});
+function Loading(loading,modal) {
+    if(typeof modal=="undefined")modal = false;
+    var back = $(".loading-back");
+    var loadui = $(".loading-ui");
+    if (loadui.length == 0) {
+        loadui = $("<div class='loading-ui'>Loading...</div>")
+        $(document.body).append(loadui);
+    }
+    if (back.length == 0) {
+        back = $("<div class='loading-back'></div>")
+        $(document.body).append(back);
+    }
+    if (loading == true) {
+        loadui.addClass("show")
+        if (modal == true) {
+            back.addClass("show")
+        }
+    } else {
+        loadui.removeClass("show");
+        back.removeClass("show");
+    }
+}

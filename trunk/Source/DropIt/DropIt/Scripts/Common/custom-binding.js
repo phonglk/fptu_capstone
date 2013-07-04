@@ -82,5 +82,4 @@
             $(element).trigger('change');
         }
     };
-
-}).call(this);
+});

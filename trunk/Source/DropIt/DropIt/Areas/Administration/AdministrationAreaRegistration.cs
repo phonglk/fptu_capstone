@@ -20,6 +20,12 @@ namespace DropIt.Areas.Administration
                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
                namespaces: new[] { "DropIt.Areas.Administration.Controllers" }
                );
+            context.MapRoute(
+               name: "Administration_Event",
+               url: "Administration/Event/Index/{EventStatus}",
+               defaults: new { controller = "Event", action = "Index", EventStatus = -1 },
+               namespaces: new[] { "DropIt.Areas.Administration.Controllers" }
+               );
         }
     }
 }

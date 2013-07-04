@@ -48,4 +48,3 @@ FilterHelper = (function () {
     return FilterHelper;
 
 }).call(this);
-

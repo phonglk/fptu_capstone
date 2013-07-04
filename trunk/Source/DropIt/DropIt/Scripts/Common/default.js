@@ -1,6 +1,4 @@
 ﻿$(function () {
-    $("[data-toggle=datetimepicker]").datetimepicker();
-    $("[data-toggle=tooltip]").tooltip();
     getTotalTransaction();
     getTotalTicket();
     getTotalEvent();

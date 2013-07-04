@@ -49,6 +49,23 @@ namespace DropIt.DAL
             return query.ToList();
         }
 
+        public virtual IEnumerable<TEntity> JTGetExp(Expression<Func<TEntity, bool>> filter = null,int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            var query = Get(filter);
+
+            if (jtSorting != null)
+            {
+                query = query.OrderBy(jtSorting);
+            }
+
+            if (jtPageSize != 0)
+            {
+                query = query.Skip(jtStartIndex).Take(jtPageSize);
+            }
+
+            return query.ToList();
+        }
+
         public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
