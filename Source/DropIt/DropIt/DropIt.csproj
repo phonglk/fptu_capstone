@@ -202,6 +202,7 @@
     <Compile Include="Areas\Administration\Controllers\EventController.cs" />
     <Compile Include="Areas\Administration\Controllers\ProvinceController.cs" />
     <Compile Include="Areas\Administration\Controllers\RequestController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SettingController.cs" />
     <Compile Include="Areas\Administration\Controllers\TicketController.cs" />
     <Compile Include="Areas\Administration\Controllers\UserController.cs" />
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\RequestRepository.cs" />
+    <Compile Include="DAL\SettingRepository.cs" />
     <Compile Include="DAL\TicketRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DAL\UserRepository.cs" />
@@ -268,14 +270,16 @@
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Require.cs" />
-    <Compile Include="Models\RespondRequest.cs">
+    <Compile Include="Models\Setting.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TicketResponse.cs" />
+    <Compile Include="Models\TicketResponse.cs">
+      <DependentUpon>DropItContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
@@ -292,6 +296,7 @@
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
     <Compile Include="ViewModels\RequestViewModels.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -818,6 +823,10 @@
     <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Setting\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Setting\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Request\List.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
@@ -833,10 +842,6 @@
     <Content Include="Content\Admin\img\jquery-ui\Descr.WD3" />
     <Content Include="Content\Admin\img\select2\Descr.WD3" />
     <Content Include="Content\Admin\img\uniform\Descr.WD3" />
-    <EntityDeploy Include="Models\DropItContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Images\boder1.png" />
     <Content Include="Images\event.png" />
     <Content Include="Images\footerlogo.png" />
@@ -845,6 +850,20 @@
     <Content Include="Images\middle.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\upper.png" />
+    <Content Include="Content\default.less" />
+    <Content Include="Content\Fonts\architep.ttf" />
+    <Content Include="Content\Fonts\UVNBaiSau_R.TTF" />
+    <Content Include="Content\Fonts\UVNBenXuan_R.TTF" />
+    <Content Include="Content\themes\plastique\font\fontawesome-webfont.eot" />
+    <Content Include="Content\themes\plastique\font\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\plastique\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\themes\plastique\font\fontawesome-webfont.woff" />
+    <Content Include="Content\themes\plastique\javascripts\chosen\chosen.jquery" />
+    <Content Include="Content\shared.less" />
+    <EntityDeploy Include="Models\DropItContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <Content Include="Models\DropItContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DropItContext.edmx</DependentUpon>
@@ -858,16 +877,6 @@
       <DependentUpon>DropItContext.edmx</DependentUpon>
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\default.less" />
-    <Content Include="Content\Fonts\architep.ttf" />
-    <Content Include="Content\Fonts\UVNBaiSau_R.TTF" />
-    <Content Include="Content\Fonts\UVNBenXuan_R.TTF" />
-    <Content Include="Content\themes\plastique\font\fontawesome-webfont.eot" />
-    <Content Include="Content\themes\plastique\font\fontawesome-webfont.svg" />
-    <Content Include="Content\themes\plastique\font\fontawesome-webfont.ttf" />
-    <Content Include="Content\themes\plastique\font\fontawesome-webfont.woff" />
-    <Content Include="Content\themes\plastique\javascripts\chosen\chosen.jquery" />
-    <Content Include="Content\shared.less" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">
