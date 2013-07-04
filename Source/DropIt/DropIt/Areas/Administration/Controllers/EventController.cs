@@ -24,20 +24,27 @@ namespace DropIt.Areas.Administration.Controllers
             Repository = unitOfWork.EventRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int EventStatus = 0)
         {
-
+            ViewBag.EventStatus = EventStatus;
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null,int EventStatus = -1)
         {
             try
             {
+                IEnumerable<DropIt.Models.Event> records = null;
 
-                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-
+                if (EventStatus == -1)
+                {
+                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                }
+                else
+                {
+                    records = Repository.JTGetExp(e=> e.Status == EventStatus,jtStartIndex, jtPageSize, jtSorting);
+                }
                 var Records = records.Select(e => new
                 {
                     EventId = e.EventId,
@@ -47,18 +54,37 @@ namespace DropIt.Areas.Administration.Controllers
                     HoldDate = e.HoldDate,
                     Description = e.Description,
                     Status = e.Status,
-                    CategoryId = e.CategoryId,
-                    VenueId = e.VenueId
+                    Category = new
+                    {
+                        e.CategoryId,
+                        e.Category.CategoryName
+                    },
+                    Venue = new
+                    {
+                        e.VenueId,
+                        e.Venue.VenueName,
+                        e.Venue.Address,
+                        Province = new
+                        {
+                            e.Venue.Province.ProvinceId,
+                            e.Venue.Province.ProvinceName
+                        }
+                    }
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = Repository.Count
+                    TotalRecordCount = (EventStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == EventStatus).Count()
                 });
             }
             catch (Exception e)
             {
                 return Json(new JSONResult(e));
             }
+        }
+
+        public ActionResult Create()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -138,21 +164,21 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        public JsonResult Delete(int EventId)
-        {
-            try
-            {
-                Repository.Delete(EventId);
-                unitOfWork.Save();
+        //public JsonResult Delete(int EventId)
+        //{
+        //    try
+        //    {
+        //        Repository.Delete(EventId);
+        //        unitOfWork.Save();
 
-                return Json(new JSONResult());
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
+        //        return Json(new JSONResult());
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return Json(new JSONResult(e));
+        //    }
 
-        }
+        //}
         [HttpPost]
         public JsonResult GetEventOption()
         {
@@ -167,6 +193,88 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new JSONResult(e));
             }
         }
+
+        [HttpPost]
+        public JsonResult Approve(int Id)
+        {
+            try
+            {
+                Event delete = Repository.Get(e => e.EventId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Event.Approve;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.EventId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Disapprove(int Id)
+        {
+            try
+            {
+                Event delete = Repository.Get(e => e.EventId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Event.Disapprove;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.EventId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int Id)
+        {
+            try
+            {
+                Event delete = Repository.Get(e => e.EventId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Event.Delete;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.EventId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {

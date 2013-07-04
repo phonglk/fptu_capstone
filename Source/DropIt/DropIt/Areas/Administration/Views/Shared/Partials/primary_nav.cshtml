@@ -1,0 +1,61 @@
+﻿<nav id="primary" class="main-nav">
+  <ul>
+    </li>
+
+      @foreach (DropIt.Common.AdminMainMenu menu in DropIt.Common.AdminMenu.adminMenuList){
+        var classes="";
+        if(ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals(menu.Controller.ToLower())){
+            classes = "active";
+        }
+          
+        <li class="@classes">
+            @Html.Raw(menu.TagA())
+        </li>
+        
+      }
+
+
+    @*<li class="">
+      <a href="#">
+        <i class="icon-list-alt"></i> Forms
+      </a>
+    </li>
+
+    <li class="">
+      <a href="#">
+          <i class="icon-beaker"></i> UI Lab
+      </a>
+    </li>
+
+    <li class="">
+      <a href="#">
+          <i class="icon-plus-sign"></i> Widgets
+      </a>
+    </li>
+
+    <li class="">
+      <a href="#">
+          <i class="icon-bar-chart"></i> Charts
+      </a>
+    </li>
+
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-share-alt"></i>More <span class="caret"></span></a>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">
+              <i class="icon-warning-sign"></i> Error 404
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a href="#">
+              <i class="icon-off"></i> Log out (login page)
+          </a>
+        </li>
+      </ul>
+    </li>*@
+
+  </ul>
+</nav>

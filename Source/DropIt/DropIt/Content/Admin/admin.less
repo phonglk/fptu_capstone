@@ -28,3 +28,29 @@ a i{
 img.previewUpload{
     width:200px;margin: 0 auto;display:block
 }
+
+
+
+table{
+    thead{
+        tr{
+            th{
+                
+                &.sortable{
+                    background-position: center right;
+                    cursor: pointer;
+                    background-repeat: no-repeat;
+                    background-image: url(../Images/column-sortable.png);
+	                &.asc{
+                        background-image: url(../Images/column-asc.png);
+	                }
+                    &.desc{
+                        background-image: url(../Images/column-desc.png);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@import "../shared.less";

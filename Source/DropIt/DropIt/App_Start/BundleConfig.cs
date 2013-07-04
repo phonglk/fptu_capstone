@@ -42,7 +42,10 @@ namespace DropIt
                         "~/Scripts/Common/custom-binding.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Admin")
-                .IncludeDirectory("~/Scripts/Admin", "*.js"));
+                .Include(
+                "~/Content/dialog2/lib/jquery.dialog2.js",
+                "~/Content/dialog2/lib/jquery.dialog2.helpers.js",
+                "~/Scripts/Admin/default.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/utils")
                 .Include(
@@ -51,18 +54,31 @@ namespace DropIt
                 "~/Scripts/Common/utilClasses.js",
                 "~/Scripts/Common/default.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/utils-admin")
+                .Include(
+                "~/Scripts/jquery.format.date.js",
+                "~/Scripts/Common/utils.js",
+                "~/Scripts/Common/utilClasses.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/ve").Include(
                 "~/Scripts/ValidationEngine/jquery.validationEngine-dropit.js",
                 "~/Scripts/ValidationEngine/jquery.validationEngine.js"
                 ));
 
+            // script admin
+            bundles.Add(new ScriptBundle("~/bundles/Themes/Plastique").Include(
+                "~/Content/themes/plastique/javascripts/application.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/bundles/DropIt")
                .IncludeDirectory("~/Scripts/DropIt", "*.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            //style admin
+            bundles.Add(new StyleBundle("~/Content/Themes/Plastique")
+                .Include("~/Content/themes/plastique/stylesheets/application.css"));
 
             bundles.Add(new StyleBundle("~/Content/DropIt")
                 .Include("~/Content/Admin/css/bootstrap/bootstrap.css", 
@@ -107,16 +123,9 @@ namespace DropIt
                             ));
 
             bundles.Add(new StyleBundle("~/Content/Admin")
-                .Include("~/Content/Admin/css/bootstrap/bootstrap.css",
-                            "~/Content/Admin/css/bootstrap/bootstrap-responsive.css",
-                            "~/Content/Admin/css/bootstrap/bootstrap-overrides.css")
-                .Include("~/Content/Admin/css/lib/font-awesome/css/font-awesome.css",
-                            "~/Content/Admin/css/compiled/layout.css",
-                            "~/Content/Admin/css/elements.css",
-                            "~/Content/Admin/css/icons.css",
-                            "~/Content/Admin/font/OpenSans.css",
-                            "~/Content/Admin/font/Lato.css",
-                            "~/Content/Admin/admin.css"));
+                .Include(
+                "~/Content/dialog2/css/jquery-dialog2/jquery.dialog2.css",
+                "~/Content/Admin/admin.css"));
 
             bundles.Add(new StyleBundle("~/Content/ve")
                     .Include("~/Scripts/ValidationEngine/validationEngine.jquery.css"));

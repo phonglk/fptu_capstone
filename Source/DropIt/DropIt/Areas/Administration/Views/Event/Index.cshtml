@@ -1,143 +1,306 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
-
-<div class="table-wrapper venues-table section">
-    <div class="row-fluid head">
-        <div class="span12">
-            <h4>Events</h4>
-        </div>
-    </div>
-    <div class="row-fluid filter-block">
-        <div class="pull-right">
-            
-        </div>
-    </div>
-    <div id="pad-wrapper">
-        <div class="row-fluid">
-            <div id="ProvinceTable" style="width: 100%; margin: auto;"></div>
-        </div>
-    </div>
-    <!-- end events table -->
-</div>
+<script>
+    var EventStatus = @ViewBag.EventStatus
+</script>
 <style>
-    .jtable-input-field-container {
-        width:280px;
-        float:left;
-        margin-left:30px;
-        border-bottom:none !important;
+    table th:nth-child(1) {
+        width: 22%;
+        min-width: 200px;
     }
-    .ui-dialog .ui-dialog-content form {
-        width: 620px;
-        overflow: hidden;
-        padding-bottom: 20px;
-        margin-bottom:10px;
+
+    table th:nth-child(2) {
+        width: 200px;
     }
-    textarea,input[type='text'],select {
-        width:250px !important;
+
+    table th:nth-child(3) {
+        width: 130px;
     }
-    .input-append input[type='text'] {
-        width:216px !important;
+
+    table th:nth-child(4) {
+    }
+
+    table th:nth-child(5) {
+        width: 120px;
+    }
+
+    table th:nth-child(6) {
+    }
+
+    .popover {
+        max-width: 600px;
+        width: auto;
     }
 </style>
+<div class="row-fluid">
+    <div class="span8 status-filter">
+        @*        <a href="@Url.Action("Index", new { EventStatus = -1 })" class="button large">
+            <i class="icon-th"></i>
+            <span>Tất cả</span>
+        </a>*@
+        <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Disapprove })" class="button large">
+            <i class="icon-bullhorn"></i>
+            <span>Chưa duyệt</span>
+        </a>
+        <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="button large">
+            <i class="icon-ok"></i>
+            <span>Đã duyệt</span>
+        </a>
+    </div>
+    <div class="span4">
+        <div class="pull-right" style="">
+            <a href="@Url.Action("Create")" class="button large blue">
+                <i class="icon-plus"></i>
+                <span>Tạo sự kiện</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered box">
+    <thead>
+        <tr>
+            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Tên sự kiện</th>
+            @*<th>Nghệ sĩ</th>*@
+            <th class="sortable" data-bind="click: function (data, event) { sort('HoldDate', data, event) }">Ngày tổ chức</th>
+            @*<th>Danh mục</th>*@
+            <th>Địa điểm</th>
+            <th>Chú thích</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: data">
+        <tr>
+            <td data-bind="">
+                <a href="" data-bind="
+    text: EventName,
+    attr: {
+        href: Url({ Action: 'Detail', Data: { Id: EventId } }),
+        title: EventName,
+        'data-content':EventDetail
+    }
+                    "
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+            </td>
+            @*<td data-bind="text: Artist"></td>*@
+            <td>
+                <span data-bind="
+    text: HoldDate.toLocaleDateString('vn'),
+    attr:{
+        title: HoldDate.toLocaleString('vn')
+    }
+    "
+                    data-toggle="tooltip"></span>
+            </td>
+            @*<td data-bind="text: Category.CategoryName"></td>*@
+            <td>
+                <a data-bind="
+    text: Venue.VenueName,
+    attr: {
+        title: Venue.VenueName,
+        'data-content':VenueDetail
+    }"
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+            </td>
+            <td data-bind="text: Description"></td>
+            <td>
+                <a href="javascript:;"
+                    class="button green"
+                    data-bind="click:$root.Approve,visible:Status==0">Duyệt
+                </a>
+                <a href="javascript:;"
+                    class="button red"
+                    data-bind="click:$root.Delete,visible:Status==0">Xóa
+                </a>
+
+                <a href="javascript:;"
+                    class="button black"
+                    data-bind="click:$root.Disapprove,visible:Status==1">Bỏ duyệt
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="pagination pull-right" data-bind="visible: pageCount() > 0">
+    <ul data-bind="foreach: new Array(pageCount())">
+        <li data-bind="css: {active: $index()+1 == $root.currentPage()}">
+            <a href="javascript:;" data-bind="click: function (data,event) { $root.changePage($index(),data,event)}">
+                <span data-bind="text: ($index()+1)"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<style>
+
+</style>
 <script>
-    $(document).ready(function () {
-        var jtable_config = {
-            title: 'Danh sách Sự kiện',
-            paging: true,
-            pageSize: 5,
-            sorting: true,
-            fileUpload:true,
-            /*selecting: true,
-            multiselect: true,
-            selectingCheckboxes:true,*/
-            actions: {
-                base: {}
-            },
-            fields: {
-                EventId: {
-                    key: true,
-                    create: false,
-                    edit: false,
-                    list: false
-                },
-                EventName: {
-                    title: 'Tên sự kiện',
-                    validation: [
-                        "required"
-                    ]
-                },
-                TmpEventImage :{
-                    type : "hidden"
-                },
-                EventImage: {
-                    title: "Hình minh họa",
-                    list: false,
-                    input: function (data) {
-                        if (data.record) {
-                            var imgSrc = data.record.TmpEventImage || Url(data.record.EventImage)
-                            if (imgSrc == "") {
-                                imgSrc = Url("~/Content/Images/no_image.jpg");
-                            }
-                            return $("<img src='" + imgSrc + "' class='previewUpload img-polaroid'/><input type='file' name='EventImage' class='previewUpload'/>")
-                        } else {
-                            return $("<img class='previewUpload img-polaroid' src='" + Url("~/Content/Images/no_image.jpg") + "' /><input type='file' name='EventImage' class='previewUpload'/>")
-                        }
-                    }
-                },
-                Description:{
-                    title: "Chú thích",
-                    type:"textarea",
-                    list:false
-                },
-                Status: {
-                    list: false,
-                    type: "checkbox",
-                    values: { '0': 'Không cho phép', '1': 'Cho phép' }
-                },
-                Artist: {
-                    title: 'Nghệ sĩ',
-                    validation: ["required"]
-                },
-                HoldDate: {
-                    title: "Ngày tổ chức",
-                    validation: ["required"],
-                    type: "datetime",
-                    displayFormat: "dd/MM/yyyy hh:mm:ss"/*,
-                    input: function (data) {
-                        var html = "";
-                        if (data.record) {
-                            html += "<div class='input-append' id='HoldDatePicker'><input value='" + $.format.date($.hik.jtable.prototype._parseDate(data.value), "dd-MM-yyyy hh:mm") + "' class='validate[required]' data-format='dd-MM-yyyy hh:mm' type='text' name='HoldDate' data-toggle='datetimepicker'/><span class='add-on'><i class='icon-calendar'></i></span></div>"
-                        } else {
-                            html += "<div class='input-append' id='HoldDatePicker'><input class='validate[required]' data-format='dd-MM-yyyy hh:mm' type='text' name='HoldDate' data-toggle='datetimepicker'/><span class='add-on'><i class='icon-calendar'></i></span></div>"
-                        }
-                        return html;
-                    }*/
-                },
-                
-                CategoryId: {
-                    title: "Danh mục",
-                    validation: ["required"],
-                    options: Url({ Controller: "Category", Action: "GetOptions" })
-                },
-                VenueId: {
-                    title: "Địa điểm",
-                    validation: ["required"],
-                    options: Url({ Controller: "Venue", Action: "GetOptions" })
-                }
-            },
-            formCreated: function (event,form) {
-                $("#HoldDatePicker").datetimepicker({ pickSeconds: false, maskInput: false });
-                previewUpload();
-                $(".jtable-dialog-form > div.jtable-input-field-container").eq(1).css({ float: "right" });
-            },
-            rowUpdated: function (event, data) {
-                data.record.TmpEventImage = $("img.previewUpload").attr("src");
-            }
+    function EventList() {
+        var self = this;
+
+        self.data = ko.observableArray([])
+        self.EventStatus = EventStatus;
+        self.changeStatus = function(stt){
+            self.EventStatus = stt;
+            self.getList();
         }
 
-        $('#ProvinceTable').jtable(dropit.jtInit(jtable_config));
-        $('#ProvinceTable').jtable('load');
+        self.pageSize = 5;
+        self.currentPage = ko.observable(1);
+        self.startIndex = 0;
+        self.sorting = "";
+        self.recordCount = ko.observable(0);
+        self.pageCount = ko.computed(function(){
+            return Math.ceil(self.recordCount() / self.pageSize);
+        })
+
+        self.changePage = function (index) {
+            var page = index + 1;
+            if (self.currentPage == page) return;
+            self.currentPage(page);
+            self.startIndex = (page - 1) * self.pageSize;
+            self.getList();
+        }
+        self.sort = function (column,data,event) {
+            if (typeof self._sort == "undefined") {
+                self._sort = [];
+            }
+            if (typeof self._sort[column] == "undefined") {
+                self._sort[column] = "DESC"
+            } else {
+                if (self._sort[column] == "ASC") {
+                    self._sort[column] = "DESC"
+                } else {
+                    self._sort[column] = "ASC"
+                }
+            }
+
+            var $th = $(event.target);
+            $th.removeClass("asc").removeClass("desc").addClass(self._sort[column].toLowerCase());
+
+            self.sorting = column + " " + self._sort[column];
+            self.getList();
+        }
+
+        self.getList = function (callback) {
+            Loading(true);
+            $.ajax({
+                url: Url({ Action: "List", Controller: "Event", Data: {jtPageSize:self.pageSize,jtStartIndex:self.startIndex,jtSorting:self.sorting,EventStatus:self.EventStatus}}),
+                type: "POST",
+                success: function (rs) {
+                    Loading(false);
+                    if (rs.Result && rs.Result == "OK") {
+                        self.data.removeAll();
+                        $.each(rs.Records,function(i,v){
+                            self.data.push(new Event(v));
+                        })
+                        self.recordCount(rs.TotalRecordCount);
+                    }
+                    setTimeout(function () {
+                        bootstrap.active();
+                    }, 100);
+                    if (callback) {
+                        callback.call();
+                    }
+                }
+            })
+        }
+
+        self.Approve = function(event){
+            Loading(true,true);
+            $.ajax({
+                url:Url({Action:"Approve",Data:{Id:event.EventId}}),
+                type:"POST",
+                success:function(rs){
+                    Loading(false);
+                    if(rs.Result && rs.Result == "OK"){
+                        self.getList();
+                        Notifications.push({
+                            imagePath: Url(event.EventImage),
+                            fillImage:true,
+                            text:"Sự kiện \"#{EventName}\" đã được duyệt !".eval(event),
+                            autoDismiss:5
+                        })
+                        //self.events.remove(event);
+                    }else{
+                        alert("Error has occured!");
+                    }
+                }
+            })
+        }
+        self.Disapprove = function(event){
+            Loading(true,true);
+            $.ajax({
+                url:Url({Action:"Disapprove",Data:{Id:event.EventId}}),
+                type:"POST",
+                success:function(rs){
+                    Loading(false);
+                    if(rs.Result && rs.Result == "OK"){
+                        self.getList();
+                        Notifications.push({
+                            imagePath: Url(event.EventImage),
+                            fillImage:true,
+                            text:"Sự kiện \"#{EventName}\" đã được bỏ duyệt !".eval(event),
+                            autoDismiss:5
+                        })
+                        //self.events.remove(event);
+                    }else{
+                        alert("Error has occured!");
+                    }
+                }
+            })
+        }
+        self.Delete = function(event){
+            $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa sự kiện \""+event.EventName+"\" ?",
+                {
+                    confirm:function(){
+                        Loading(true,true);
+                        $.ajax({
+                            url:Url({Action:"Delete",Data:{Id:event.EventId}}),
+                            type:"POST",
+                            success:function(rs){
+                                Loading(false);
+                                if(rs.Result && rs.Result == "OK"){
+                                    self.getList();
+                                    Notifications.push({
+                                        imagePath: Url(event.EventImage),
+                                        fillImage:true,
+                                        text:"Sự kiện \"#{EventName}\" đã được xóa !".eval(event),
+                                        autoDismiss:5
+                                    })
+                                    //self.events.remove(event);
+                                }else{
+                                    alert("Error has occured!");
+                                }
+                            }
+                        })
+                    }
+                })
+        }
+    }
+
+    var list = new EventList();
+
+    list.getList(function () {
+        ko.applyBindings(list);
     });
+
+    $(".status-filter > a").eq(0).attr("href","javascript:;").click(function(e){
+        list.changeStatus(0);
+        e.preventDefault();
+        return false;
+    })
+
+    $(".status-filter > a").eq(1).attr("href","javascript:;").click(function(e){
+        list.changeStatus(1);
+        e.preventDefault();
+        return false;
+    })
+    
 </script>

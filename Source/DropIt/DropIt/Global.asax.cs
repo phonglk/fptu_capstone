@@ -27,6 +27,8 @@ namespace DropIt
 
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new NullableDateTimeBinder());
+
+            DropIt.Common.AdminMenu.Init();
         }
     }
 }
