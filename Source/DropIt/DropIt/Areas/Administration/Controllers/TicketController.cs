@@ -33,7 +33,7 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult List()
         {
             var status = Request["status"];
-            if (status == null) status = "1";
+            if (status == null) status = "0";
             int CurrentStatus = Int32.Parse(status);
             ViewBag.CurrentStatus = CurrentStatus;
             var ticketList = unitOfWork.TicketRepository.Get(u => u.Status == CurrentStatus);
@@ -50,7 +50,7 @@ namespace DropIt.Areas.Administration.Controllers
 
             if (Request["extra"] != null && Request["extra"] == "ontransaction")
             {
-                count = Repository.Get(r => (r.Status == (int)Statuses.Ticket.Approve || r.Status == (int)Statuses.Ticket.Disapprove)).Count();
+                count = Repository.Get(r => (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending)).Count();
                 return Json(new
                 {
                     Result = "OK",
@@ -95,7 +95,7 @@ namespace DropIt.Areas.Administration.Controllers
                 HttpNotFound();
             }           
                 ticket.Status = (int)Statuses.Ticket.Delete;
-                sttToRedirect = (int)Statuses.Ticket.Disapprove;           
+                sttToRedirect = (int)Statuses.Ticket.Pending;           
 
             Ticket change = new Ticket()
             {
@@ -136,13 +136,13 @@ namespace DropIt.Areas.Administration.Controllers
             }
             else if (ticket.Status == 0)
             {
-                ticket.Status = (int)Statuses.Ticket.Approve;
-                sttToRedirect = (int)Statuses.Ticket.Disapprove;
+                ticket.Status = (int)Statuses.Ticket.Ready;
+                sttToRedirect = (int)Statuses.Ticket.Pending;
             }
             else if (ticket.Status == 1)
             {
-                ticket.Status = (int)Statuses.Ticket.Disapprove;
-                sttToRedirect = (int)Statuses.Ticket.Approve;
+                ticket.Status = (int)Statuses.Ticket.Pending;
+                sttToRedirect = (int)Statuses.Ticket.Ready;
             }
 
             Ticket change = new Ticket()
