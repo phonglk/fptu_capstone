@@ -815,6 +815,9 @@
     <Content Include="Areas\Administration\Views\Shared\Partials\top_nav.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\Partials\footer.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\Partials\notification_templates.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\List.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
@@ -834,6 +837,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\boder1.png" />
+    <Content Include="Images\event.png" />
+    <Content Include="Images\footerlogo.png" />
+    <Content Include="Images\hr.png" />
+    <Content Include="Images\icon.png" />
+    <Content Include="Images\middle.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\upper.png" />
     <Content Include="Models\DropItContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DropItContext.edmx</DependentUpon>
@@ -1272,6 +1283,8 @@
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Ticket\Approve.cshtml" />
+    <Content Include="Views\Ticket\Edit.cshtml" />
+    <Content Include="Views\Venue\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

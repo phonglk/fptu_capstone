@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using DropIt.Models;
 
 namespace DropIt.ViewModels
 {
@@ -67,5 +68,7 @@ namespace DropIt.ViewModels
 
         [Required(ErrorMessage="Bạn phải đồng ý với điều khoản sử dụng")]
         public String AgreeTerm;
+
+        public virtual Venue Venue { get; set; }
     }
 }
