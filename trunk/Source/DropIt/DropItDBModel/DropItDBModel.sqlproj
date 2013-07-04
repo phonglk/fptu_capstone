@@ -71,6 +71,7 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\UserFollowEvent.sql" />
     <Build Include="dbo\Tables\TicketResponse.sql" />
+    <Build Include="dbo\Tables\Setting.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
