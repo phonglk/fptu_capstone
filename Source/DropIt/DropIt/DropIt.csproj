@@ -827,6 +827,7 @@
     <Content Include="Areas\Administration\Views\Setting\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Request\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Setting\Edit.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />

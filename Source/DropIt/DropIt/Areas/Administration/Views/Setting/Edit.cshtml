@@ -1,0 +1,44 @@
+﻿@model DropIt.Models.Setting
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+    <fieldset>
+        <legend>Sửa thông tin vé</legend>
+        @Html.HiddenFor(model=>model.Id)
+        
+        <div class="control-group">
+            @Html.Label("Tên Setting:")
+        </div>
+        <div class="control-group">
+            @Html.EditorFor(model => model.SettingName)
+            @Html.ValidationMessageFor(model => model.SettingName)
+        </div>
+        
+        <div class="control-group">
+            @Html.Label("Giá trị:")
+        </div>
+        <div class="control-group">
+            @Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+        <p>
+            <input type="submit" value="Lưu" />
+        </p>
+    </fieldset>
+}
+
+<div class="control-group">
+    @Html.ActionLink("Quay về", "List")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

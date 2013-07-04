@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using DropIt.DAL;
 using DropIt.Models;
+using DropIt.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class SettingController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -23,7 +25,7 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult Index()
         {
             return View();
-        }
+        }   
 
         public ActionResult List()
         {
@@ -39,12 +41,48 @@ namespace DropIt.Areas.Administration.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Setting setting)
+        public ActionResult Create(SettingViewModel setting)
         {
             if (ModelState.IsValid)
             {
-                this.unitOfWork.SettingRepository.AddOrUpdate(setting);
-                this.unitOfWork.SettingRepository.Save();
+                Setting newSetting = new Setting()
+                                         {
+                                             Id = setting.Id,
+                                             SettingName = setting.SettingName,
+                                             Value = setting.Value
+                                         };
+                this.unitOfWork.SettingRepository.AddOrUpdate(newSetting);
+                this.unitOfWork.Save();
+                return RedirectToAction("List");
+            }
+            return View(setting);
+        }
+
+        //Get: Edit
+        public ActionResult Edit(int id = 0)
+        {
+            Setting setting = this.unitOfWork.SettingRepository.GetById(id);
+            if (setting == null)
+            {
+                HttpNotFound();
+            }
+            return View(setting);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SettingViewModel setting)
+        {
+            Setting getSetting = this.unitOfWork.SettingRepository.GetById(setting.Id);
+            if (ModelState.IsValid)
+            {
+                Setting newSetting = new Setting()
+                                         {
+                                             Id = getSetting.Id,
+                                             SettingName = setting.SettingName,
+                                             Value = setting.Value
+                                         };
+                this.unitOfWork.SettingRepository.AddOrUpdate(newSetting);
+                this.unitOfWork.Save();
                 return RedirectToAction("List");
             }
             return View(setting);
