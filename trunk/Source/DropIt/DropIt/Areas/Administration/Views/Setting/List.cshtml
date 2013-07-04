@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DropIt.Models.Setting>
+@{
+    ViewBag.Title = "Danh sách";
+    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="table-wrapper events-table section">
+    <div class="row-fluid head">
+        <div class="span9">
+            <h4>Quản lý Setting</h4>
+             @Html.ActionLink("Tạo mới", "Create")
+        </div>
+    </div>
+
+</div>
+<div class="row-fluid">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="span3">
+                    <span class="line"></span>SettingName
+                </th>
+                <th class="span3">
+                    <span class="line"></span>Value
+                </th>
+                <th class="span3">
+                    <span class="line"></span>Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- row -->
+            @foreach (var item in Model)
+            {
+                <tr class="first">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SettingName)
+                    </td>
+                    <td class="place">
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EventId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EventId })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
