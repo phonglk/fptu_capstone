@@ -12,6 +12,7 @@ namespace DropIt.Common
         public enum UserSellable { True,False };
         public enum Ticket { Pending,Ready,Delete, UserApprove };
         public static String[] TicketStrings = new string[] {"Chưa được phép", "Được phép", "",""};
+        public static String[] TicketString2 = new string[] { "Chưa được phép", "Được phép", "", "Đang đợi chấp nhận" };
         public enum Event { Disapprove, Approve, Delete };
         public enum Venue { Disapprove, Approve, Delete };
         public enum BuyTicket { Unpaid, Paid, Delivered, Recieved, Canceled};

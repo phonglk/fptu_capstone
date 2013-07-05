@@ -17,6 +17,7 @@ namespace DropIt.Controllers
     [InitializeSimpleMembership]
     public class TicketController : Controller
     {
+        double service = Double.Parse(Settings.get("ServiceFee"));
         private UnitOfWork unitOfWork = new UnitOfWork();
         private TicketRepository Repository;
         //
@@ -46,7 +47,7 @@ namespace DropIt.Controllers
         public ActionResult Create(PostTicket ticket)
         {            
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
-            double service = Double.Parse(Settings.get("ServiceFee"));
+            
             if (ModelState.IsValid)
             {
                 if (Request.Form["CreateEvent"] != null) // create new event
@@ -354,14 +355,14 @@ namespace DropIt.Controllers
                                            TranAddress = getTicket.TranAddress,
                                            TranType = getTicket.TranType,
                                            TranStatus = getTicket.TranStatus,
-                                           EventId = ticket.EventId,  // thay doi
+                                           EventId = getTicket.EventId,  
                                            UserId = getTicket.UserId,
                                            SellPrice = getTicket.SellPrice,
                                            ReceiveMoney = getTicket.ReceiveMoney,
-                                           Seat = ticket.Seat,    // thay doi
+                                           Seat = getTicket.Seat,    
                                            Status = (int)Statuses.Ticket.Ready,  // chuyen ve trang thai Ready
                                            AdminModifiedDate = getTicket.AdminModifiedDate,
-                                           Description = ticket.Description,   // thay doi
+                                           Description = getTicket.Description,   
                                            CreatedDate = getTicket.CreatedDate,
                                            TranCreatedDate = getTicket.TranCreatedDate,
                                            TranModifiedDate = getTicket.TranModifiedDate,
@@ -369,7 +370,7 @@ namespace DropIt.Controllers
                                        };
                 this.unitOfWork.TicketRepository.AddOrUpdate(newTicket);
                 this.unitOfWork.TicketRepository.Save();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Manage");
             }
             return View(ticket);
         }
@@ -403,14 +404,14 @@ namespace DropIt.Controllers
                                            TranAddress = getTicket.TranAddress,
                                            TranType = getTicket.TranType,
                                            TranStatus = getTicket.TranStatus,
-                                           EventId = getTicket.EventId,
+                                           EventId = ticket.EventId,  // thay doi
                                            UserId = getTicket.UserId,
-                                           SellPrice = getTicket.SellPrice,
-                                           ReceiveMoney = getTicket.ReceiveMoney,
-                                           Seat = getTicket.Seat,
-                                           Status = (int)Statuses.Ticket.Ready,
+                                           SellPrice = ticket.SellPrice,  // thay doi
+                                           ReceiveMoney = ticket.SellPrice*(1-service),  // thay doi
+                                           Seat = ticket.Seat,  // thay doi
+                                           Status = (int)Statuses.Ticket.Ready,  // dua ve trang thai ready
                                            AdminModifiedDate = getTicket.AdminModifiedDate,
-                                           Description = getTicket.Description,
+                                           Description = ticket.Description,  // thay doi
                                            CreatedDate = getTicket.CreatedDate,
                                            TranCreatedDate = getTicket.TranCreatedDate,
                                            TranModifiedDate = getTicket.TranModifiedDate,
@@ -418,11 +419,67 @@ namespace DropIt.Controllers
                                        };
                 this.unitOfWork.TicketRepository.AddOrUpdate(newTicket);
                 this.unitOfWork.TicketRepository.Save();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Manage");
             }
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
                                              ticket.EventId);
             return View(ticket);
         }
+
+        public ActionResult Manage()
+        {
+            var status = Request["status"];
+            if (status == null) status = "0";
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            int CurrentStatus = Int32.Parse(status);
+            ViewBag.CurrentStatus = CurrentStatus;
+            var ticketList = unitOfWork.TicketRepository.Get(u => u.UserId == UserId && u.Status == CurrentStatus && u.TranStatus == null);
+            return View(ticketList.ToList());
+        }
+
+        [HttpPost]
+        public JsonResult Count(int id)
+        {
+            int status = id;
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            int count = 0;
+
+            if (Request["extra"] != null && Request["extra"] == "ontransaction")
+            {
+                count = Repository.Get(r => r.UserId == UserId && r.TranStatus==null && (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending) || r.Status ==(int)Statuses.Ticket.UserApprove).Count();
+                return Json(new
+                {
+                    Result = "OK",
+                    Count = count
+                });
+            }
+
+            if (id == -1)
+            {
+                count = Repository.Get(r => r.UserId== UserId && r.TranStatus==null && r.Status != null).Count();
+            }
+            else
+            {
+                count = Repository.Get(r => r.UserId == UserId && r.TranStatus == null && r.Status == status).Count();
+            }
+
+            return Json(new
+            {
+                Result = "OK",
+                Count = count
+            });
+        }
+
+        public ActionResult Details (int id=0)
+        {
+            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
+            if (ticket==null)
+            {
+                HttpNotFound();
+            }
+            return View(ticket);
+
+        }
+
     }
 }
