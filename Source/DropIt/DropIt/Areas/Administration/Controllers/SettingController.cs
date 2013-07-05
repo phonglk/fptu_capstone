@@ -62,11 +62,17 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult Edit(int id = 0)
         {
             Setting setting = this.unitOfWork.SettingRepository.GetById(id);
-            if (setting == null)
+            SettingViewModel stt = new SettingViewModel()
+                                       {
+                                           Id = setting.Id,
+                                           SettingName = setting.SettingName,
+                                           Value = setting.Value
+                                       };
+            if (stt == null)
             {
                 HttpNotFound();
             }
-            return View(setting);
+            return View(stt);
         }
 
         [HttpPost]
