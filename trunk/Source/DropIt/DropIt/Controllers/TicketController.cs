@@ -46,6 +46,7 @@ namespace DropIt.Controllers
         public ActionResult Create(PostTicket ticket)
         {            
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
+            double service = Double.Parse(Settings.get("ServiceFee"));
             if (ModelState.IsValid)
             {
                 if (Request.Form["CreateEvent"] != null) // create new event
@@ -81,7 +82,7 @@ namespace DropIt.Controllers
                         {
                             EventId = newEvent.EventId,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = (int)ticket.SellPrice*0.97,
+                            ReceiveMoney = (int)ticket.SellPrice*(1-service),
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -111,7 +112,7 @@ namespace DropIt.Controllers
                         {
                             EventId = newEvent.EventId,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = ticket.ReceiveMoney,
+                            ReceiveMoney = (int)ticket.SellPrice * (1-service),
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -127,7 +128,7 @@ namespace DropIt.Controllers
                     {
                         EventId = (int)ticket.EventId,
                         SellPrice = ticket.SellPrice,
-                        ReceiveMoney = ticket.ReceiveMoney,
+                        ReceiveMoney = ticket.SellPrice*(1-service),
                         Seat = ticket.Seat,
                         Description = ticket.Description,
                         Status = (int)Statuses.Ticket.Ready,
