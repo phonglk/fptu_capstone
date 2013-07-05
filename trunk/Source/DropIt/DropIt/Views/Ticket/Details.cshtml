@@ -1,0 +1,90 @@
+﻿@model DropIt.Models.Ticket
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("Partials/RoleTab")
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    @Html.Partial("Partials/SideBar")
+                }
+                else
+                {
+                    if (Session["Role"] != null && Session["Role"].Equals("Sell"))
+                    {
+                    @Html.Partial("Partials/SideBar_Sell")
+                    }
+                    else
+                    {
+                    @Html.Partial("Partials/SideBar_Buy");
+                    }
+                }
+            </div>
+        </div>
+        <div class="span9">
+            <form id="form-detailrequest" class="form-horizontal row">
+                <div class="control-group">
+                    <label class="control-label">Tên sự kiện:</label>
+                    <div class="controls">
+                        @Model.Event.EventName
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Ngày tổ chức:</label>
+                    <div class="controls">
+                        @Model.Event.HoldDate
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Giá bán:</label>
+                    <div class="controls">
+                        @Model.SellPrice
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Tiền nhận:</label>
+                    <div class="controls">
+                        @Model.ReceiveMoney
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Miêu tả ghế:</label>
+                    <div class="controls">
+                        @Model.Seat
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Ghi chú:</label>
+                    <div class="controls">
+                        @Model.Description
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.ActionLink("Quay về", "Manage")
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

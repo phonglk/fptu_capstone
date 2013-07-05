@@ -58,17 +58,20 @@
                     @Html.Label("Giá bán:")
                 </div>
                 <div class="editor-field">
-                    @Model.SellPrice
+                    @Html.EditorFor(model => model.SellPrice)
+                    @Html.ValidationMessageFor(model => model.SellPrice)
                 </div>
 
                 <div class="editor-label">
                     @Html.Label("Tiền nhận được:")
                 </div>
                 <div class="editor-field">
-                    @Model.ReceiveMoney
+                    @Html.EditorFor(model => model.ReceiveMoney)
+                    @Html.ValidationMessageFor(model => model.ReceiveMoney)
                 </div>
                 <p>
                     <input type="submit" value="Đăng vé" />
+                    @Html.ActionLink("Quay về", "Manage")
                 </p>
             </fieldset>
         }

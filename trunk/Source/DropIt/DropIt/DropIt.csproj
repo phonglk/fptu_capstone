@@ -1297,6 +1297,8 @@
     <Content Include="Views\Ticket\Approve.cshtml" />
     <Content Include="Views\Ticket\Edit.cshtml" />
     <Content Include="Views\Venue\List.cshtml" />
+    <Content Include="Views\Ticket\Manage.cshtml" />
+    <Content Include="Views\Ticket\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
