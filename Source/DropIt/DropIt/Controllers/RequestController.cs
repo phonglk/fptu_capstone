@@ -64,6 +64,38 @@ namespace DropIt.Controllers
             }
         }
 
+        public ActionResult CloseorOpen(int EventId)
+        {
+            int UserId = WebSecurity.GetUserId(User.Identity.Name);
+            Request request = this.unitOfWork.RequestRepository.GetById(UserId, EventId);
+            if (request == null)
+            {
+                HttpNotFound();
+            }
+            else if (request.Status == 0)
+            {
+                request.Status = 1;
+            }
+            else if (request.Status == 1)
+            {
+                request.Status = 0;
+            }
+
+            if (ModelState.IsValid)
+            {
+                Request newRequest = new Request()
+                {
+                    UserId = request.UserId,
+                    EventId = request.EventId,
+                    Status = request.Status
+                };
+                this.unitOfWork.RequestRepository.AddOrUpdate(newRequest);
+                this.unitOfWork.RequestRepository.Save();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         //public ActionResult CloseRequest()
         //{
         //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
@@ -72,12 +104,13 @@ namespace DropIt.Controllers
         //}
 
         //[HttpPost]
-        //public JsonResult CloseRequest(int EventId = 0)
+        //public ActionResult CloseRequest(int EventId = 0)
         //{
         //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
-        //    Request open = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
-        //    this.unitOfWork.RequestRepository.Delete(open);
-        //    return Json(open);
+        //    Request close = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
+        //    this.unitOfWork.RequestRepository.Delete(close);
+        //    var closes = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
+        //    return View(closes.ToList());
         //}
     }
 }
