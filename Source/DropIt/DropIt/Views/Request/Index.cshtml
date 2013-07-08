@@ -128,12 +128,12 @@
                                         @{
                                             if (item.Status == 0)
                                             {
-                                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })" 
+                                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
                                                                     class="btn btn-inverse btn-buy btn-small">Mở</a>
                                             }
                                             else if (item.Status == 1)
                                             {
-                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })" 
+                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
                                                     class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
                                             }
                                         }
