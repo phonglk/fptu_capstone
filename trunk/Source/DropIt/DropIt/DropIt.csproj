@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="gfoidl.StringSearching, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\gfoidl.StringSearching.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SecurityGuard">
       <HintPath>..\packages\SecurityGuard.MVC4.1.0.10\lib\net40\SecurityGuard.dll</HintPath>
@@ -866,6 +870,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Libs\gfoidl.StringSearching.dll" />
     <Content Include="Models\DropItContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DropItContext.edmx</DependentUpon>

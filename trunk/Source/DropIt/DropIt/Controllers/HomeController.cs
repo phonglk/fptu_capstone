@@ -1,6 +1,7 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
 using DropIt.Models;
+using gfoidl.StringSearching;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,22 +31,38 @@ namespace DropIt.Controllers
             {
                 Session["Role"] = "Buy";
             }
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Take(9).Where(p => p.Status == 1);
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status == 1).Take(9);
             return View(events.ToList());
         }
 
         public ActionResult Search(string eventnameofsearch)
         {
             var events = this.unitOfWork.EventRepository.Get();
+            List<Event> foundEvent = new List<Event>();
             if (!String.IsNullOrEmpty(eventnameofsearch))
             {
-                events = (from t in events
-                          where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
-                          orderby t.EventName
-                          select t).ToList();
+                //events = (from t in events
+                //          where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
+
+                //            || t.Artist.ToLower().Contains(eventnameofsearch.ToLower())
+                //            || t.Description.ToLower().Contains(eventnameofsearch.ToLower())
+                //          select t).ToList();
+                foreach (Event evt in events)
+                {
+                    List<string> listwords = new List<string>();
+                    listwords.Add(evt.EventName.ToLower());
+                    listwords.Add(evt.Artist == null ? "" : evt.Artist.ToLower());
+                    listwords.Add(evt.Description == null ? "" : evt.Description.ToLower());
+
+                    List<string> found = FuzzySearch.Search(eventnameofsearch.ToLower(), listwords, 0.40);
+                    if (found.Count > 0)
+                    {
+                        foundEvent.Add(evt);
+                    }
+                }
             }
 
-            return View(events);
+            return View(foundEvent);
 
         }
 
@@ -58,15 +75,24 @@ namespace DropIt.Controllers
             {
                 foreach (Event evt in events.ToList())
                 {
-                    if (evt.EventName.ToLower().Contains(query.ToLower()))
+                    if (ConvertVN(evt.EventName).ToLower().Contains(ConvertVN(query).ToLower()))
                     {
                         listeventname.Add(evt.EventName);
+                    }
+                    else if (ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(ConvertVN(query).ToLower()))
+                    {
+                        if (!listeventname.Contains(evt.Artist))
+                        { 
+                            listeventname.Add(evt.Artist); 
+                        }
+
                     }
                 }
 
             }
             return Json(new { query = query, suggestions = listeventname, data = listeventname }, JsonRequestBehavior.AllowGet);
         }
+
 
         public ActionResult About()
         {
@@ -85,6 +111,20 @@ namespace DropIt.Controllers
         public ActionResult GuideForNew()
         {
             return View();
+        }
+
+        private string ConvertVN(string utf8text)
+        {
+            const string FindText = "áàảãạâấầẩẫậăắằẳẵặđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶĐÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ";
+            const string ReplText = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAADEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY";
+            int index = -1;
+            char[] arrChar = FindText.ToCharArray();
+            while ((index = utf8text.IndexOfAny(arrChar)) != -1)
+            {
+                int index2 = FindText.IndexOf(utf8text[index]);
+                utf8text = utf8text.Replace(utf8text[index], ReplText[index2]);
+            }
+            return utf8text;
         }
     }
 }
