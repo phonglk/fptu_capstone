@@ -71,7 +71,7 @@ namespace DropIt.Areas.Administration.Controllers
                             e.Venue.Province.ProvinceName
                         }
                     },
-                    haveTicketTran = e.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.BuyTicket.Canceled ).Count() > 0
+                    haveTicketTran = e.Tickets.Where(t => t.TranStatus != null && t.TranStatus != (int)Statuses.BuyTicket.Canceled ).Count() > 0
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -165,7 +165,7 @@ namespace DropIt.Areas.Administration.Controllers
                 HoldDate = e.HoldDate,
                 Status = e.Status,
                 VenueId = e.VenueId,
-                haveTicketTran = e.Tickets.Select(t => (t.TranStatus != null && t.TranStatus != (int)Statuses.BuyTicket.Canceled)).Count() > 0
+                haveTicketTran = e.Tickets.Where(t => t.TranStatus!=null && t.TranStatus != (int)Statuses.BuyTicket.Canceled).Count() > 0    // t.TranStatus != null
             };
 
             ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
