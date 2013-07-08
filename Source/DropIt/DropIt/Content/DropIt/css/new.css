@@ -293,18 +293,21 @@ hr {
 }
 
 .item {
-    height: 240px;
+    width: 48%;
+    height: 440px;
     float: left;
     position: relative;
     overflow: hidden;
     background-color: #320a45;
     margin-left: 1px;
     margin-bottom: 1px;
+    border: 1px solid #582e53;
 }
 
 .image-item {
-    height: 150px;
+    height: 330px;
     background-size: cover;
+    background-position:center;
 }
 
 .item:hover {
@@ -319,54 +322,58 @@ hr {
 
 .item-date {
     position: absolute;
-    top: 115px;
-    left: 3px;
-    font-size: 32px;
+    top: 280px;
+    left: 12px;
+    font-size: 56px;
+    letter-spacing: -8px;
+    line-height: 25px;
 }
 
 .item-time {
     position: absolute;
-    top: 113px;
-    left: 44px;
+    top: 275px; 
+    left: 74px;
 }
 
 .item-month {
-    font-size: 14px;
-    line-height: 14px;
+    font-size: 36px;
+    line-height: 20px;
     font-weight: bold;
+    padding-bottom: 3px;
 }
 
 .item-year {
-    line-height: 13px;
-    opacity: 0.9;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: lighter;
 }
 
 .detail h5 {
-    font-size: 14px;
     color: #fff;
-    margin-left: 7px;
-    margin-right: 7px;
+    margin-left: 20px;
+    margin-right: 20px;
     font-weight: normal;
 }
 
 .detail p {
-    font-size: 12px;
+    font-size: 16px;    
     color: #fff;
-    margin-left: 7px;
-    margin-right: 7px;
-    opacity: 0.4;
+    margin-left: 20px;
+    margin-right: 20px;
+    opacity: 0.6;
     display: inline-block;
     font-family: Tahoma;
 }
 
 .detail .name-event {
-    min-height: 40px;
+    min-height: 50px;
     font-family: "Tahoma";
-    font-size: 16px;
+    font-size: 22px;
+    line-height: 25px;
 }
 
 #ticket-show {
-    margin-left: 0;
+    margin-left: 45px;
 }
 
 .ticket-list {
@@ -794,8 +801,6 @@ table.event-detail td.price {
 
 .btn-sub {
     background: #5e4071;
-    margin-right: 60px;
-    margin-top: 25px;
 }
 
     .btn-sub:hover {
@@ -805,7 +810,7 @@ table.event-detail td.price {
 .btn-follow {
     background: #5e4071;
     position: absolute;
-    top: 125px;
+    top: 150px;
 }
 
 .btn-buy:hover {
@@ -840,3 +845,5 @@ table.event-detail td.price {
 .display-des> .row {
     padding-right: 30px;
 }
+
+

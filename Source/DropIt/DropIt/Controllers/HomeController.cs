@@ -31,7 +31,7 @@ namespace DropIt.Controllers
             {
                 Session["Role"] = "Buy";
             }
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status == 1).Take(9);
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status == 1).Take(10);
             return View(events.ToList());
         }
 
