@@ -26,5 +26,7 @@ namespace DropIt.Areas.Administration.ViewModels
 
         [Required(ErrorMessage = "Bạn cần điền địa điểm")]
         public int VenueId { get; set; }
+
+        public bool haveTicketTran { get; set; }
     }
 }
