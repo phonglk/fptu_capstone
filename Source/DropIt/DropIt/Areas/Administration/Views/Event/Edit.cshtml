@@ -18,12 +18,32 @@
         margin-top: 15px;
     }
 </style>
+@if (Model.haveTicketTran == true)
+            {
+                
+                    
+                        <div class="alert">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                          <strong>Cảnh báo!</strong> Sự kiện này đã có vé đã hoặc đang giao dịch, không thể sửa thông tin
+                        </div>
+                    
+                
+                <div class="cf"></div>
+                <script>
+                    $(function(){
+                        $("#createEvent input,#createEvent textarea").addClass("disabled").attr("disabled","disabled");
+                        $("#createEvent select").select2("enable",false);
+                    })
+                </script>
+            }
 <div class="box" style="clear:both">
     <div class="tab-header">
         Chỉnh sửa sự kiện
     </div>
+
     <form class="fill-up" id="createEvent" method="post" enctype="multipart/form-data">
         <div class="row-fluid">
+            
             <div class="span6">
                 <div class="padded">
                     <input type="hidden" name="EventId" value="@Model.EventId" />

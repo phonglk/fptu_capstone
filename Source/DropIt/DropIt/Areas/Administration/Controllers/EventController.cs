@@ -70,7 +70,8 @@ namespace DropIt.Areas.Administration.Controllers
                             e.Venue.Province.ProvinceId,
                             e.Venue.Province.ProvinceName
                         }
-                    }
+                    },
+                    haveTicketTran = e.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.BuyTicket.Canceled ).Count() > 0
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -163,7 +164,8 @@ namespace DropIt.Areas.Administration.Controllers
                 EventImage = e.EventImage,
                 HoldDate = e.HoldDate,
                 Status = e.Status,
-                VenueId = e.VenueId
+                VenueId = e.VenueId,
+                haveTicketTran = e.Tickets.Select(t => (t.TranStatus != null && t.TranStatus != (int)Statuses.BuyTicket.Canceled)).Count() > 0
             };
 
             ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
@@ -189,6 +191,17 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult Edit(Event Event, HttpPostedFileBase EventImage)
         {
+            Event oldEvent = Repository.GetById(Event.EventId);
+            bool haveTicketTran = oldEvent.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.BuyTicket.Canceled).Count() > 0;
+            if (haveTicketTran == true)
+            {
+                return Json(new JSONResult()
+                    {
+                        Result = "ERROR",
+                        Message = "Sự kiện này đã có vé đã hoặc đang giao dịch nên không thể sửa thông tin"
+                    });
+            }
+
             if (EventImage != null)
             {
                 if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)

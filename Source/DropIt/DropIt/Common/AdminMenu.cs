@@ -96,10 +96,12 @@ namespace DropIt.Common
             {
                 Controller = "Dashboard",
                 Title = "Dashboard"
+                
             };
                 Dashboard.AddChild(new AdminSubMenu(){
                             Action = "Index",
-                            Title = "Trang chủ"
+                            Title = "Trang chủ",
+                            Icon = "icon-camera-retro"
                         });
                 Dashboard.AddChild(new AdminSubMenu(){
                             Action = "Statictist",
@@ -143,17 +145,20 @@ namespace DropIt.Common
             AdminMainMenu Event = new AdminMainMenu()
             {
                 Controller = "Event",
-                Title = "Sự kiện"
+                Title = "Sự kiện",
+                Icon = "camera-retro"
             };
                 Event.AddChild(new AdminSubMenu()
                 {
                     Action = "Index",
-                    Title = "Danh sách sự kiện"
+                    Title = "Danh sách sự kiện",
+                    Icon = "camera-retro"
                 });
                 Event.AddChild(new AdminSubMenu()
                 {
                     Action = "Create",
-                    Title = "Thêm mới"
+                    Title = "Thêm mới",
+                    Icon = "plus-sign"
                 });
 
             adminMenuList.Add(Event);

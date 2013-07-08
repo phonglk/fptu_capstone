@@ -4,7 +4,11 @@
 }
 @Scripts.Render("~/Bundles/jquery.validate")
 <script>
-    var EventStatus = @ViewBag.EventStatus
+    var EventStatus = @ViewBag.EventStatus;
+    var Statuses = {
+        Approve : @((int)DropIt.Common.Statuses.Event.Approve),
+        Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove)
+    }
 </script>
 <style>
     table th:nth-child(1) {
@@ -115,16 +119,16 @@
             <td>
                 <a href="javascript:;"
                     class="button green"
-                    data-bind="click:$root.Approve,visible:Status==0">Duyệt
+                    data-bind="click:$root.Approve,visible:Status==Statuses.Disapprove">Duyệt
                 </a>
                 <a href="javascript:;"
                     class="button red"
-                    data-bind="click:$root.Delete,visible:Status==0">Xóa
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Disapprove">Xóa
                 </a>
 
                 <a href="javascript:;"
                     class="button black"
-                    data-bind="click:$root.Disapprove,visible:Status==1">Bỏ duyệt
+                    data-bind="click:$root.Disapprove,visible:Status==Statuses.Approve && haveTicketTran == false">Bỏ duyệt
                 </a>
             </td>
         </tr>
