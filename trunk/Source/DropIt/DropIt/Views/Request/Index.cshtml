@@ -10,14 +10,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script type="text/javascript">
-    var eventId = @(Model)
-    $(".btn-close").live("click", function (e) {
+@*$(document).ready(function(){
+    $("input[type='button']").click(function(){
+        var selected = $(this).attr("eventId");
+        var val = prompt("Enter new value",0);
+                    $.ajax({
+                    url:'~/Request/Index.html',
+                    data:{toupdate:selected, updatewith:val},
+                    type:'GET',
+                    dataType:'json',
+                    success:function(json){
+                        $(this).val(json.update);
+                    },
+                    error:function(xhr, status){
+                        alert("Problem");
+                    },
+                    complete:function(xhr, status){
+                    }
+                });
+        });
+});*@
+
+@*<script type="text/javascript">
+    var eventId = Model.$.EventId
+    $(".btnClose").live("click", function (e) {
         e.preventDefault();
         var seft = this;
         $.ajax({
             type: "POST",
-            url: "/Request/Close",
+            url: "/Request/Index",
             data: { EventId: eventId },
             cache: false,
             dataType: "json",
@@ -28,12 +49,10 @@
                 else {
                     $(seft).text("Mở")
                 }
-
             }
         });
-
     });
-</script>
+</script>*@
 
 <!--Area: Page Header & Navigation & Search.END-->
 <div class="container" id="content">
@@ -51,9 +70,11 @@
                 {
                     if (Session["Role"] != null && Session["Role"].Equals("Sell"))
                     {
+                    @Html.Partial("Partials/SideBar_Sell")
                     }
                     else
                     {
+                    @Html.Partial("Partials/SideBar_Buy");
                     }
                 }
             </div>
@@ -62,6 +83,22 @@
             <h3>Danh sách các loại vé đang được rao mua </h3>
             <blockquote>Click vào "Chi tiết" để xem chi tiết các trả lời</blockquote>
         </div>
+
+        @*@{
+                var close = true;
+                
+                if (WebSecurity.IsAuthenticated)
+                {
+                    if (Model.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId = Model.EventId).FirstOrDefault() = null)
+                 {
+                     close = false;   
+                 }
+                }
+                else
+                {
+                    
+                }
+            }*@
 
         <div class="row span9">
             <div class="ticket-list">
@@ -82,13 +119,27 @@
                             <a href="@Url.Action("Index", "Request", new { id = item.UserId })">
                                 <tr class="first">
                                     <td>@Html.DisplayFor(modelItem => item.Event.HoldDate)</td>
-                                    <td>@Html.DisplayFor(modelItme => item.Event.EventName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Event.EventName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Event.Venue.VenueName)</td>
                                     <td>@(item.Status == 1 ? "Đang giao dịch" : "Đã đóng giao dịch")</td>
                                     <td class="action">
-                                        <a href="@Url.Action("Details", "Request", new { UserId = item.UserId, EventId = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
-                                        @*@Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })*@
-                                        @Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })
+                                        <a href="@Url.Action("Details", "Request", new { UserId = item.UserId, EventId = item.EventId })"
+                                            class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
+                                        @{
+                                            if (item.Status == 0)
+                                            {
+                                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })" 
+                                                                    class="btn btn-inverse btn-buy btn-small">Mở</a>
+                                            }
+                                            else if (item.Status == 1)
+                                            {
+                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })" 
+                                                    class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
+                                            }
+                                        }
+                                        @*<a href="@Url.Action("CloseorOpen","Request",new { UserId = item.UserId, EventId = item.EventId})" class="btnClose" data-close="#" data-toggle="tooltip" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');">Đóng</a>*@
+                                        @*@Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })
+                                        @Html.ActionLink("Đóng", "#", new { UserId = item.UserId, EventId = item.EventId }, new { onclick = "return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');" })*@
                                     </td>
                                 </tr>
                             </a>
