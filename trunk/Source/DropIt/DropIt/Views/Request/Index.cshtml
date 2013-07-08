@@ -15,7 +15,7 @@
         var selected = $(this).attr("eventId");
         var val = prompt("Enter new value",0);
                     $.ajax({
-                    url:'~/Request/Index.html',
+                    url:"/Request/Index",
                     data:{toupdate:selected, updatewith:val},
                     type:'GET',
                     dataType:'json',
@@ -128,13 +128,13 @@
                                         @{
                                             if (item.Status == 0)
                                             {
-                                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
-                                                                    class="btn btn-inverse btn-buy btn-small">Mở</a>
+                                                <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
+                                                        class="btn btn-inverse btn-buy btn-small">Mở</a>
                                             }
                                             else if (item.Status == 1)
                                             {
-                                            <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
-                                                    class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
+                                                <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
+                                                        class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
                                             }
                                         }
                                         @*<a href="@Url.Action("CloseorOpen","Request",new { UserId = item.UserId, EventId = item.EventId})" class="btnClose" data-close="#" data-toggle="tooltip" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');">Đóng</a>*@
