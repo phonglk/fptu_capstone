@@ -50,8 +50,8 @@
                         </span>
                         @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                         <span class="add-on">
-                            <input type="checkbox" id="createEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
-                            <label for="createEvent">Tạo mới</label>
+                            <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
+                            <label for="CreateEvent">Tạo mới</label>
                         </span>
                     </div>
                 </div>
@@ -91,8 +91,8 @@
                             <input type="text" data-bind="value: VenueName, visible: isCreateEvent() == false" disabled />
                             @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                             <span class="add-on" data-bind="visible: isCreateEvent">
-                                <input type="checkbox" id="createVenue" data-bind="checked: isCreateVenue" name="CreateVenue">
-                                <label for="createVenue">Tạo mới</label>
+                                <input type="checkbox" id="CreateVenue" data-bind="checked: isCreateVenue" name="CreateVenue">
+                                <label for="CreateVenue">Tạo mới</label>
                             </span>
                         </div>
                     </div>
