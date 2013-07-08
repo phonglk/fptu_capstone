@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="span3">
-            <div class="sidebar-nav">
+                <div class="sidebar-nav">
                 @if (!User.Identity.IsAuthenticated)
                 {
                     @Html.Partial("Partials/SideBar")
@@ -30,44 +30,48 @@
                 }
             </div>
         </div>
-        <div class="display-field span9">
-            <h2 class="event-name">Kết quả tìm kiếm của bạn: </h2>
-            <blockquote>
-                Những Sự kiện liên quan....
-            </blockquote>
-        </div>
-        <div class="row span9">
-            <div class="ticket-list">
-                <table class="table table-condensed event-detail">
-                    <thead>
-                        <tr class="header warning">
-                            <th class="span3">Tên sự kiện</th>
-                            <th class="">Thời gian</th>
-                            <th class="span2">Địa điểm</th>
-                            <th class="span2">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EventName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.HoldDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Venue.VenueName)
-                                </td>
-                                <td class="action">
-                                    <a href="@Url.Action("Details", "Event", new { id = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
-                                </td>
+        <div class="span9">
+            <div class="display-field">
+                <h2 class="event-name">Kết quả tìm kiếm của bạn: </h2>
+                <blockquote>
+                    Những Sự kiện liên quan....
+                </blockquote>
+            </div>
+            <div class="row">
+                <div class="ticket-list">
+                    <table class="table table-condensed event-detail">
+                        <thead>
+                            <tr class="header warning">
+                                <th class="span3">Tên sự kiện</th>
+                                <th class="">Thời gian</th>
+                                <th class="span2">Địa điểm</th>
+                                <th class="span2">Thao tác</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EventName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoldDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Venue.VenueName)
+                                    </td>
+                                    <td class="action">
+                                        <a href="@Url.Action("Details", "Event", new { id = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+
     </div>

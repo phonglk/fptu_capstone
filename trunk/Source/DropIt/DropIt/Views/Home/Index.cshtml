@@ -14,33 +14,39 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                @if(!User.Identity.IsAuthenticated){
-                    @Html.Partial("Partials/SideBar")
-                }else{
-                    if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
-                        @Html.Partial("Partials/SideBar_Sell")
-                    }else{
-                        @Html.Partial("Partials/SideBar_Buy");
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (Session["Role"] != null)
+                    {
+                        if (Session["Role"] != null && Session["Role"].Equals("Sell"))
+                        {
+                    @Html.Partial("Partials/SideBar_Sell")
+                        }
+                        else if (Session["Role"] != null && Session["Role"].Equals("Buy"))
+                        {
+                    @Html.Partial("Partials/SideBar_Buy");
+                        }
+                        else {}
                     }
                 }
             </div>
         </div>
-        <div class="span9">
-            <div id="main-nav" class="navbar span9">
+        <div class="span12">
+            <div id="main-nav" class="navbar span12">
                 <ul class="nav">
                     <li class="active"><a href="@Url.Action("Index", "Home", null, "http")">Top Các Sự Kiện</a></li>
-                    <li><a href="">Sự Kiện Mới</a></li>
+                    <li><a href="#">Sự Kiện Mới</a></li>
                 </ul>
             </div>
-            <div id="ticket-show" class="span9">
+            <div id="ticket-show" class="row">
                 @foreach (var item in Model)
                 { 
                     <a href="@Url.Action("Details", "Event", new { id = item.EventId })">
-                        <div class="item span3">
+                        <div class="item">
                             <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage == null ? "/Content/Images/no_image.jpg" : item.EventImage))')";>
                             </div>
                             <div class="item-event-date">
-                                <div class="item-date">@item.HoldDate.Day</div>
+                                <div class="item-date">@item.HoldDate.Day&nbsp;</div>
                                 <div class="item-time">
                                     <div class="item-month">@item.HoldDate.Month</div>
                                     <div class="item-year">@item.HoldDate.Year</div>
@@ -49,9 +55,15 @@
                             <div class="detail">
                                 <h5 class="name-event">@item.EventName</h5>
 
-                                <p>Số Vé: @item.Tickets.Count</p>
+                                <p>Số Lượng Vé: @item.Tickets.Count</p>
 
-                                <p>Địa Điểm: @item.Venue.VenueName</p>
+                                <p>
+                                    Địa Điểm: @{if (@item.Venue.VenueName.Length > 18)
+                                                {@item.Venue.VenueName.Substring(0, 18)<span>...</span> }
+                                                else
+                                                { @item.Venue.VenueName }
+                                    }
+                                </p>
                             </div>
                         </div>
                     </a>
