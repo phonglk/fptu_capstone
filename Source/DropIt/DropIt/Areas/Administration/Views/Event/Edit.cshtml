@@ -112,7 +112,11 @@
     }
 
     $("#createEvent").validate(validateOptions);
-    $("#holdDate").val(new Date().toDateTimeInputString());
+    try{
+        $("#holdDate").val(new Date().toDateTimeInputString());
+    }catch(e){
+
+    }
     previewUpload();
     generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
     $("select").select2();
