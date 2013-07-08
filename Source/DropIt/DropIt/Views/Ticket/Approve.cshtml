@@ -55,7 +55,7 @@
             <div class="control-group">
                 <label class="control-label">Tiền nhận:</label>
                 <div class="controls">
-                    @Model.ReceiveMoney
+                    @Html.TextBox("ReceiveMoney", @Model.ReceiveMoney, new { disabled="true" , data_bind="value:RecievePrice"})
                 </div>
             </div>
 
@@ -72,3 +72,12 @@
     </div>
 </div>
 
+<script>
+    function CreateTicketViewModel(parameters) {
+  
+    }
+    
+    $(function () {
+        ctvm = new CreateTicketViewModel();
+    })
+</script>
