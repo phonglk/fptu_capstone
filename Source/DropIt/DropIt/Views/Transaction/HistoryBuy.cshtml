@@ -28,7 +28,6 @@
         @using (Html.BeginForm()){     
             <p>
             
-            
             <ul class="nav nav-tabs">
             @{                
                 var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.BuyTicket)).Cast<Int32>().ToList();
