@@ -25,6 +25,7 @@
             self = ko.bindingHandlers.date;
             date = ko.utils.unwrapObservable(valueAccessor());
             if (element.tagName.toLowerCase() === "input") {
+                debugger;
                 $(element).val(self.formattedDate(date));
             } else {
                 $(element).text(self.formattedDate(date));

@@ -9,6 +9,7 @@ using DropIt.Models;
 using DropIt.DAL;
 using DropIt.Common;
 using System.Diagnostics;
+using DropIt.Areas.Administration.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
@@ -84,47 +85,109 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            });
+
+            ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.Get(v => v.Status == (int)Statuses.Venue.Approve),"VenueId","VenueName");
             return View();
         }
 
         [HttpPost]
         public JsonResult Create(Event Event,HttpPostedFileBase EventImage)
         {
+            String Error = "";
 
-            if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
+            if (EventImage != null)
             {
-                Event.EventImage = Uploader.Upload(EventImage, this).ToString();
-            }
-            else
-            {
-                return Json(new JSONResult()
+                if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
                 {
-                    Result = "ERROR",
-                    Message = "Phải là hình ảnh và kích thước < 5MB"
-                });
+                    Event.EventImage = Uploader.Upload(EventImage, this).ToString();
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message = "Hình sự kiện phải ở định dạng hình ảnh và bé hơn 5MB"
+                    });
+                }
             }
 
             try
             {
+                Event.Status = (int)Statuses.Event.Approve;
+
                 if (!ModelState.IsValid)
                 {
-                    return Json(new JSONResult("Form is not valid"));
+                    TempData["Error"] = "Dữ liệu không hợp lệ";
                 }
 
                 var addedRecord = Repository.AddOrUpdate(Event);
                 unitOfWork.Save();
-                return Json(new JSONResult(addedRecord, "Record"));
 
+                TempData["Message"] = "Đã tạo mới thành công sự kiện " + Event.EventName;
+                return Json(new
+                {
+                    Result = "OK"
+                });
             }
             catch (Exception e)
             {
-                return Json(new JSONResult(e));
-                throw;
+                Error = "Có lỗi xảy ra";
             }
+
+            return Json(new {
+                Result = "ERROR",
+                Message = Error
+            });
         }
 
+        public ActionResult Edit(int Id)
+        {
+            Event e = Repository.GetById(Id);
+            EventViewModel evm = new EventViewModel()
+            {
+                EventId = e.EventId,
+                EventName = e.EventName,
+                Artist = e.Artist,
+                CategoryId = e.CategoryId,
+                Description = e.Description,
+                EventImage = e.EventImage,
+                HoldDate = e.HoldDate,
+                Status = e.Status,
+                VenueId = e.VenueId
+            };
+
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new
+                {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            });
+
+            ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.Get(v => v.Status == (int)Statuses.Venue.Approve), "VenueId", "VenueName");
+
+
+            return View(evm);
+        }
+
+
+
         [HttpPost]
-        public JsonResult Update(Event Event, HttpPostedFileBase EventImage)
+        public JsonResult Edit(Event Event, HttpPostedFileBase EventImage)
         {
             if (EventImage != null)
             {

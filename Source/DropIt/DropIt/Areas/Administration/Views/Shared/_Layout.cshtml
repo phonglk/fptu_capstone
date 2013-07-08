@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
 
     @Styles.Render("~/Content/Themes/Plastique")
+    @Styles.Render("~/Content/select2")
     @Styles.Render("~/Content/Admin")
 
     <script>
@@ -20,11 +21,31 @@
     </script>
 
     @Scripts.Render("~/bundles/Themes/Plastique")
+    @Scripts.Render("~/bundles/select2")
     @Scripts.Render("~/bundles/ko")
     @Scripts.Render("~/bundles/utils-admin")
     @Scripts.Render("~/bundles/Admin")
 
-    
+    @if (TempData["Error"] != null && TempData["Error"]!="")
+    {
+        <script>
+            Notifications.push({
+                imagePath: "",
+                text: "Lỗi @TempData["Error"]",
+                autoDismiss: 5
+            })
+        </script>
+    }
+    @if (TempData["Message"] != null && TempData["Message"] !="")
+    {
+        <script>
+            Notifications.push({
+                imagePath:"",
+                text: "Thông báo @TempData["Message"]",
+                autoDismiss: 5
+            })
+        </script>
+    }
 </head>
 <body>
 
