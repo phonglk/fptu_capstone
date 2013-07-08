@@ -437,38 +437,38 @@ namespace DropIt.Controllers
             return View(ticketList.ToList());
         }
 
-        [HttpPost]
-        public JsonResult Count(int id)
-        {
-            int status = id;
-            var UserId = WebSecurity.GetUserId(User.Identity.Name);
-            int count = 0;
+        //[HttpPost]
+        //public JsonResult Count(int id)
+        //{
+        //    int status = id;
+        //    var UserId = WebSecurity.GetUserId(User.Identity.Name);
+        //    int count = 0;
 
-            if (Request["extra"] != null && Request["extra"] == "ontransaction")
-            {
-                count = Repository.Get(r => r.UserId == UserId && r.TranStatus==null && (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending) || r.Status ==(int)Statuses.Ticket.UserApprove).Count();
-                return Json(new
-                {
-                    Result = "OK",
-                    Count = count
-                });
-            }
+        //    if (Request["extra"] != null && Request["extra"] == "ontransaction")
+        //    {
+        //        count = Repository.Get(r => r.UserId == UserId && r.TranStatus==null && (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending) || r.Status ==(int)Statuses.Ticket.UserApprove).Count();
+        //        return Json(new
+        //        {
+        //            Result = "OK",
+        //            Count = count
+        //        });
+        //    }
 
-            if (id == -1)
-            {
-                count = Repository.Get(r => r.UserId== UserId && r.TranStatus==null && r.Status != null).Count();
-            }
-            else
-            {
-                count = Repository.Get(r => r.UserId == UserId && r.TranStatus == null && r.Status == status).Count();
-            }
+        //    if (id == -1)
+        //    {
+        //        count = Repository.Get(r => r.UserId== UserId && r.TranStatus==null && r.Status != null).Count();
+        //    }
+        //    else
+        //    {
+        //        count = Repository.Get(r => r.UserId == UserId && r.TranStatus == null && r.Status == status).Count();
+        //    }
 
-            return Json(new
-            {
-                Result = "OK",
-                Count = count
-            });
-        }
+        //    return Json(new
+        //    {
+        //        Result = "OK",
+        //        Count = count
+        //    });
+        //}
 
         public ActionResult Details (int id=0)
         {

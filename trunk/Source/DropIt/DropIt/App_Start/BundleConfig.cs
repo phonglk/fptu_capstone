@@ -36,6 +36,9 @@ namespace DropIt
                         "~/Scripts/bootstrap/datetimepicker/bootstrap-datetimepicker.js",
                         "~/Scripts/select2/select2.js"
                         ));
+            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
+                        "~/Scripts/select2/select2.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/ko")
                 .Include("~/Scripts/knockout-{version}.js",
@@ -89,6 +92,10 @@ namespace DropIt
                             "~/Content/DropIt/css/bootstrap-fix.css",
                             "~/Content/default.css",
                             "~/Content/DropIt/css/new.css"));
+
+            bundles.Add(new StyleBundle("~/Content/select2")
+                .Include(
+                            "~/Scripts/select2/select2.css"));
 
             bundles.Add(new StyleBundle("~/Content/css")
                 .Include("~/Content/site.css"));

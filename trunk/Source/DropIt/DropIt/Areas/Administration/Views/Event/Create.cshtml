@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/Bundles/jquery.validate")
+<script>
+    var categories = @Html.Raw(Json.Encode(ViewBag.CategoryId))
+</script>
+<style>
+    label {
+        font-weight:bold;
+    }
+    .input {
+        margin-top: 15px;
+    }
+</style>
+<div class="box" style="clear:both">
+    <div class="tab-header">
+        Tạo mới sự kiện
+    </div>
+    <form class="fill-up" id="createEvent" method="post" enctype="multipart/form-data">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="padded">
+                    <div class="input">
+                        <label for="eventName">Tên sự kiện</label>
+                        <input id="eventName" name="EventName" type="text"/>
+                    </div>
+                    <div class="input">
+                        <label for="category">Danh mục</label>
+                        
+                        <select id="category" name="CategoryId" style="width:100%">
+
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="holdDate">Ngày diễn ra</label>
+                        <input id="holdDate" type="datetime-local" class="" name="HoldDate"/>
+                    </div>
+                    <div class="input">
+                        <label for="artist">Nghệ sĩ tham gia</label>
+                        <input id="artist" type="text" class="" name="Artist"/>
+                    </div>
+                    <div class="input">
+                        <label for="venue">Địa điểm</label>
+                        @Html.DropDownList("VenueId",(SelectList)ViewBag.VenueId, new { id="venue",name="VenueId",style="width:100%" })
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="padded">
+                    <div class="input">
+                        <label for="eventImage">Hình đại diện cho sự kiện</label>
+                        <input type="file" id="eventImage" name="EventImage" class="previewUpload"/>
+                        <img src="@Url.Content("~/Content/Images/no_image.jpg")" class="previewUpload"/>
+                    </div>
+                    <div class="input">
+                        <label for="description">Chú thích</label>
+                        <textarea name="Description" id="description" style="width:100%;height:100px;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="button blue">Tạo mới</button>
+            <a href="@Url.Action("Index")" class="button">Hủy</a>
+            @*<div class="pull-right">
+                <span class="checky-label-left">
+                  Đăng sự kiện
+                </span>
+                <input type="checkbox" name="isApprove" id="approve" checked="checked" class="checky">
+                <label for="approve" class="checky"><span></span></label>
+              </div>*@
+        </div>
+    </form>
+</div>
+<script>
+    validateOptions = {
+        rules: {
+            EventName: {
+                required: true
+            },
+            CategoryId: {
+                required: true
+            },
+            HoldDate: {
+                required: true
+            },
+            VenueId: {
+                required: true
+            }
+        },
+        messages: {
+            EventName: "Cần phải điền tên sự kiện",
+            CategoryId: "Phải chọn danh mục",
+            HoldDate: "Phải chọn ngày giờ diễn ra",
+            VenueId: "Phải chọn địa điểm diễn ra sự kiện"
+        }
+        //,
+        //errorLabelContainer:$('.validation-summary-errors')
+        , errorElement: "span",
+        errorClass: "error",
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent().find("label"));
+        },
+        ignore:".select2-focusser,.select2-input"
+    }
+
+    $("#createEvent").validate(validateOptions);
+    $("#holdDate").val(new Date().toDateTimeInputString());
+    previewUpload();
+    generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
+    $("select").select2();
+
+    function submit(){
+        Loading(true,true);
+        var formData = new FormData($("#createEvent")[0]);
+        function success(rs){
+            Loading(false);
+            if(rs.Result && rs.Result == "OK"){
+                location = Url({Action:"Index"})
+            }else{
+                $.fn.dialog2.helpers.alert("Lỗi: "+rs.Message);
+            }
+        }
+        $.ajax({
+            url: Url({Action:"Create"}),
+            type:"POST",
+            data: formData,
+            success: success,
+            processData: false,
+            contentType: false,
+        });
+        
+    }
+    $("#createEvent").submit(function(e){
+        if($("#createEvent").valid()){
+            submit();
+            return false;
+        }
+    })
+</script>

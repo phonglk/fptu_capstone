@@ -38,6 +38,11 @@ table thead tr th.sortable.asc {
 table thead tr th.sortable.desc {
   background-image: url(../Images/column-desc.png);
 }
+span.error {
+  float: right;
+  color: red;
+  margin-top: -20px;
+}
 .loading-ui {
   width: 100px;
   height: 30px;

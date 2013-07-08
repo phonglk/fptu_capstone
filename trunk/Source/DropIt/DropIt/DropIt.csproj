@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
     <IncludeIisSettings>true</IncludeIisSettings>
     <PublishDatabases>false</PublishDatabases>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -210,7 +211,9 @@
     <Compile Include="Areas\Administration\Controllers\TicketController.cs" />
     <Compile Include="Areas\Administration\Controllers\UserController.cs" />
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Event.cs" />
     <Compile Include="Common\AdminMenu.cs" />
+    <Compile Include="Common\DropDownGroupList.cs" />
     <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Common\OrderByHelper.cs" />
     <Compile Include="Common\RequiredIfAttribute.cs" />
@@ -825,6 +828,7 @@
     <Content Include="Areas\Administration\Views\Shared\Partials\top_nav.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\Partials\footer.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\Partials\notification_templates.cshtml" />
+    <Content Include="Areas\Administration\Views\Event\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\List.cshtml" />
@@ -833,6 +837,7 @@
     <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Request\List.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Event\Edit.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />

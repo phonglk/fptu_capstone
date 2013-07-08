@@ -20,10 +20,19 @@ namespace DropIt.Models
             {
                 dateString = dateString.Replace("  ", " ");
             }
+            
+            dateString = dateString.Trim();
 
-            string[] dateElement = dateString.Split('/', ':', ' ');
-            DateTime date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
+            string[] dateElement = dateString.Split('/', ':', ' ','-','T');
+            DateTime date = DateTime.Now;
+            if (dateString.IndexOf('T') > -1)
+            {
+                date = new DateTime(Int32.Parse(dateElement[0]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[2]),
                 Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
+            }else{
+                date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
+                Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
+            }
             return date;
         }
     }
@@ -41,9 +50,20 @@ namespace DropIt.Models
                 dateString = dateString.Replace("  ", " ");
             }
 
-            string[] dateElement = dateString.Split('/', ':', ' ');
-            DateTime date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
+            dateString = dateString.Trim();
+
+            string[] dateElement = dateString.Split('/', ':', ' ', '-', 'T');
+            DateTime date = DateTime.Now;
+            if (dateString.IndexOf('T') > -1)
+            {
+                date = new DateTime(Int32.Parse(dateElement[0]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[2]),
                 Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
+            }
+            else
+            {
+                date = new DateTime(Int32.Parse(dateElement[2]), Int32.Parse(dateElement[1]), Int32.Parse(dateElement[0]),
+                Int32.Parse(dateElement[3]), Int32.Parse(dateElement[4]), Int32.Parse(dateElement[5]));
+            }
             return date;
         }
     }

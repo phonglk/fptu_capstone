@@ -2,6 +2,20 @@
 Date.fromRawJSON = function (string) {
     return new Date(parseInt(string.match(/\d+/)));
 };
+Date.prototype.toDateString=function(){
+    return ("#{0}/#{1}/#{2}").eval(this.getDate().toLength(2), this.getMonth().toLength(2), this.getFullYear());
+}
+Date.prototype.toDateTimeInputString = function () {
+    var date = {
+        year: this.getFullYear(),
+        month: (this.getMonth()+1).toLength(2),
+        date: this.getDate().toLength(2),
+        hours: this.getHours().toLength(2),
+        minutes: "00",
+        seconds : "00"
+    }
+    return ("#{year}-#{month}-#{date}T#{hours}:#{minutes}:#{seconds}").eval(date);
+}
 
 String.prototype.makeExcerpt = function (length) {
     return "" + (this.substr(0, length)) + "...";
@@ -232,5 +246,22 @@ function Loading(loading,modal) {
     } else {
         loadui.removeClass("show");
         back.removeClass("show");
+    }
+}
+
+function generateGroupDropDownList(data, $target, valueField, textField) {
+    for (var i = 0; i < data.length; i++) {
+        var r = data[i];
+        if (r.Childs && r.Childs.length > 0) {
+            var $parent = $("<optgroup label='#{0}' value=#{1}></optgroup>".eval(r[textField]), r[valueField]);
+            $target.append($parent);
+            $parent.append("<option value=#{0}>#{1}</option>".eval(r[valueField], r[textField]))
+            for (var j = 0; j < r.Childs.length; j++) {
+                var r2 = r.Childs[j];
+                $parent.append("<option value=#{0}>#{1}</option>".eval(r2[valueField], r2[textField]))
+            }
+        } else {
+            $target.append("<option value=#{0}>#{1}</option>".eval(r[valueField], r[textField]))
+        }
     }
 }
