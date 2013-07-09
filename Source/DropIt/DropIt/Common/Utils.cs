@@ -13,6 +13,20 @@ namespace DropIt.Common
             var body = (MemberExpression)expr.Body;
 
             return body.Member.Name;
+        
+        }
+        public static string ConvertVN(string utf8text)
+        {
+            const string FindText = "áàảãạâấầẩẫậăắằẳẵặđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶĐÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ";
+            const string ReplText = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAADEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY";
+            int index = -1;
+            char[] arrChar = FindText.ToCharArray();
+            while ((index = utf8text.IndexOfAny(arrChar)) != -1)
+            {
+                int index2 = FindText.IndexOf(utf8text[index]);
+                utf8text = utf8text.Replace(utf8text[index], ReplText[index2]);
+            }
+            return utf8text;
         }
     }
 }

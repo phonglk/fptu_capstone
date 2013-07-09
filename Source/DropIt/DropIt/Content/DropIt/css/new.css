@@ -300,7 +300,7 @@ hr {
     overflow: hidden;
     background-color: #320a45;
     margin-left: 1px;
-    margin-bottom: 1px;
+    /*margin-bottom: 1px;*/
     border: 1px solid #582e53;
 }
 

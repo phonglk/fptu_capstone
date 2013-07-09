@@ -304,6 +304,7 @@
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
     <Compile Include="ViewModels\RequestViewModels.cs" />
+    <Compile Include="ViewModels\Search.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
