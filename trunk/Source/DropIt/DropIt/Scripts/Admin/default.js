@@ -71,12 +71,8 @@ function DataList() {
     var self = this;
 
     self.data = ko.observableArray([])
-    self.EventStatus = EventStatus;
-    self.changeStatus = function (stt) {
-        self.EventStatus = stt;
-        self.currentPage(1);
-        self.getList();
-    }
+    self.extraData = {};
+    
 
     self.url_getList = { Controller: "", Action: "" };
 
@@ -120,7 +116,9 @@ function DataList() {
 
     self.getList = function (callback) {
         Loading(true);
-        var urlData = { Action: "List", Controller: "Event", Data: { jtPageSize: self.pageSize, jtStartIndex: self.startIndex(), jtSorting: self.sorting, EventStatus: self.EventStatus } };
+        var data = { jtPageSize: self.pageSize, jtStartIndex: self.startIndex(), jtSorting: self.sorting, EventStatus: self.EventStatus };
+        $.extend(data, self.extraData);
+        var urlData = { Action: "List", Controller: "Event", Data: data };
         $.extend(urlData, self.url_getList);
         $.ajax({
             url: Url(urlData),
