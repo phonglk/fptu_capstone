@@ -324,7 +324,7 @@ hr {
     position: absolute;
     top: 280px;
     left: 12px;
-    font-size: 56px;
+    font-size: 55px;
     letter-spacing: -8px;
     line-height: 25px;
     text-align: right;
@@ -333,20 +333,19 @@ hr {
 .item-time {
     position: absolute;
     top: 275px; 
-    left: 74px;
+    left: 75px;
 }
 
 .item-month {
-    font-size: 36px;
+    font-size: 32px;
     line-height: 20px;
-    font-weight: bold;
     padding-bottom: 3px;
     text-align: right;
 }
 
 .item-year {
     line-height: 20px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     text-align: right;
 }
