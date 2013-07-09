@@ -327,6 +327,7 @@ hr {
     font-size: 56px;
     letter-spacing: -8px;
     line-height: 25px;
+    text-align: right;
 }
 
 .item-time {
@@ -340,12 +341,14 @@ hr {
     line-height: 20px;
     font-weight: bold;
     padding-bottom: 3px;
+    text-align: right;
 }
 
 .item-year {
     line-height: 20px;
-    font-size: 16px;
-    font-weight: lighter;
+    font-size: 18px;
+    font-weight: normal;
+    text-align: right;
 }
 
 .detail h5 {
@@ -359,7 +362,7 @@ hr {
     font-size: 16px;    
     color: #fff;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 15px;
     opacity: 0.6;
     display: inline-block;
     font-family: Tahoma;

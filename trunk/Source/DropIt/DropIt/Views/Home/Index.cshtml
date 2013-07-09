@@ -26,7 +26,7 @@
                         {
                     @Html.Partial("Partials/SideBar_Buy");
                         }
-                        else {}
+                        else { }
                     }
                 }
             </div>
@@ -36,6 +36,8 @@
                 <ul class="nav">
                     <li class="active"><a href="@Url.Action("Index", "Home", null, "http")">Top Các Sự Kiện</a></li>
                     <li><a href="#">Sự Kiện Mới</a></li>
+                    <li><a href="#">Đăng Rao Mua</a></li>
+                    <li><a href="#">Đăng Bán Vé</a></li>
                 </ul>
             </div>
             <div id="ticket-show" class="row">
@@ -46,9 +48,26 @@
                             <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage == null ? "/Content/Images/no_image.jpg" : item.EventImage))')";>
                             </div>
                             <div class="item-event-date">
-                                <div class="item-date">@item.HoldDate.Day&nbsp;</div>
+                                <div class="item-date">
+                                    @{if (@item.HoldDate.Day < 10)
+                                      {<span>0 </span> @item.HoldDate.Day }
+                                      else
+                                      {
+                                        @item.HoldDate.Day
+                                      }                               
+                                    }
+                                    &nbsp;
+                                </div>
                                 <div class="item-time">
-                                    <div class="item-month">@item.HoldDate.Month</div>
+                                    <div class="item-month">
+                                        @{if (@item.HoldDate.Month < 10)
+                                          {<span>0</span>@item.HoldDate.Month }
+                                          else
+                                          {
+                                            @item.HoldDate.Month
+                                          }                               
+                                        }
+                                    </div>
                                     <div class="item-year">@item.HoldDate.Year</div>
                                 </div>
                             </div>
