@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DropIt.Models.Event>
+﻿@model DropIt.ViewModels.SearchResultViewModel
 
 @{
     ViewBag.Title = "Search Result";
@@ -37,41 +37,93 @@
                     Những Sự kiện liên quan....
                 </blockquote>
             </div>
+            <style>
+                ul.search-result {
+                    list-style:none;
+                }
+                ul.search-result li {
+                    position:relative;
+                    background-repeat:no-repeat;
+                    height:100px;
+                    border:1px solid #431f59;
+                    margin:10px;
+                    background-position:top right;
+                    background-size:auto 100px;
+                    -webkit-transition: all 0.5s;
+                }
+                    ul.search-result li:hover {
+                        box-shadow:0 0 20px rgba(0,0,0,.3);
+                        -webkit-transform:scale(1.1);
+                    }
+                    ul.search-result li a {
+                        text-decoration:none;
+                        width:100%;
+                        height:100%;
+                        color:black;
+                        padding:10px;
+                        
+                        box-sizing:border-box;
+                        display:block;
+                    }
+            </style>
             <div class="row">
-                <div class="ticket-list">
-                    <table class="table table-condensed event-detail">
-                        <thead>
-                            <tr class="header warning">
-                                <th class="span3">Tên sự kiện</th>
-                                <th class="">Thời gian</th>
-                                <th class="span2">Địa điểm</th>
-                                <th class="span2">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EventName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HoldDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Venue.VenueName)
-                                    </td>
-                                    <td class="action">
-                                        <a href="@Url.Action("Details", "Event", new { id = item.EventId })" class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                <ul class="ticket-list search-result">
+                    @foreach (var item in Model.Result)
+                    {    
+                        
+                            <li @{if(item.EventImage != null){<text>style="background-image:url(@Url.Content(item.EventImage))"</text>}} >
+                            <a href="@Url.Action("Details", "Event", new { Id = item.EventId })" target="_blank">
+                            <strong>Sự kiện :</strong> <span 
+                                class="event-name"
+                                data-matches ="@foreach(string matched in item.EventName.Matches)
+                                               {
+                                                   @(matched+",")
+                                               }"
+                                
+                                >@item.EventName.Value</span>
+                            <br />
+                            <strong>Địa điểm: </strong>@item.VenueName
+                            <br />
+                            <strong>Nghệ sĩ : </strong><span 
+                                class="artist"
+                                data-matches ="@foreach(string matched in item.Artist.Matches)
+                                               {
+                                                   @(matched+",")
+                                               }"
+                                
+                                >@item.Artist.Value</span>
+                            <br />
+                            <strong>Ngày diễn ra :</strong> @item.HoldDate.ToLongDateString()
+                            </a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
 
 
     </div>
+    <script>
+        function highlightResult($span) {
+            try{
+                var matches = $span.attr("data-matches").split(",");
+                var html = $span.html();
+                for (var i = 0; i < matches.length; i++) {
+                    var search = matches[i];
+                    if (search == "") continue;
+                    html = html.replace(search, "<strong>#{0}</strong>".eval(search));
+                }
+                $span.html(html);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+        $(function(){
+            $(".search-result .event-name").each(function(){
+                highlightResult($(this));
+            })
+            $(".search-result .artist").each(function () {
+                highlightResult($(this));
+            })
+        })
+    </script>

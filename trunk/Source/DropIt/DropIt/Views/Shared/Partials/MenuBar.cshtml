@@ -5,7 +5,7 @@
             { 
              <div class="input-prepend">
                 <span class="add-on"><i class="icon-search"></i>|</span>
-                   @Html.TextBox("eventnameofsearch")
+                   @Html.TextBox("query")
                 <input class="search-bar span4" id="prependedInput" type="submit"  value="search">
             </div>
             }
@@ -49,6 +49,6 @@
             minChars: 2,
             onSelect: function (value, data) { $(".search>form").submit(); },
         };
-        $('#eventnameofsearch').autocomplete(options);
+        $('#query').autocomplete(options);
     });
 </script>

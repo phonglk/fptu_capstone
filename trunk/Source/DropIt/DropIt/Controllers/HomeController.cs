@@ -1,8 +1,10 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
 using DropIt.Models;
+using DropIt.ViewModels;
 using gfoidl.StringSearching;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -35,11 +37,44 @@ namespace DropIt.Controllers
             return View(events.ToList());
         }
 
-        public ActionResult Search(string eventnameofsearch)
+        private List<string> ReduceRedundancy(List<string> strings)
+        {
+            List<string> result = new List<string>();
+
+            foreach (string str in strings)
+            {
+                var str_c1 = str.ToLower().Trim();
+                bool IsSame = false;
+                foreach (string str2 in result)
+                {
+                    var str_c2 = str2.ToLower().Trim();
+                    if (str_c1.Equals(str_c2))
+                    {
+                        IsSame = true;
+                    }
+                    if (str_c1.IndexOf(str_c2) > -1)
+                    {
+                        IsSame = true;
+                    }
+                    if (str_c2.IndexOf(str_c1) > -1)
+                    {
+                        IsSame = true;
+                    }
+                }
+                if (IsSame == false)
+                {
+                    result.Add(str);
+                }
+            }
+
+            return result;
+        }
+
+        public ActionResult Search(string query)
         {
             var events = this.unitOfWork.EventRepository.Get();
-            List<Event> foundEvent = new List<Event>();
-            if (!String.IsNullOrEmpty(eventnameofsearch))
+            SearchResultViewModel foundEvent = new SearchResultViewModel();
+            if (!String.IsNullOrEmpty(query))
             {
                 //events = (from t in events
                 //          where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
@@ -49,15 +84,36 @@ namespace DropIt.Controllers
                 //          select t).ToList();
                 foreach (Event evt in events)
                 {
-                    List<string> listwords = new List<string>();
-                    listwords.Add(evt.EventName.ToLower());
-                    listwords.Add(evt.Artist == null ? "" : evt.Artist.ToLower());
-                    listwords.Add(evt.Description == null ? "" : evt.Description.ToLower());
-
-                    List<string> found = FuzzySearch.Search(eventnameofsearch.ToLower(), listwords, 0.40);
-                    if (found.Count > 0)
+                    List<String> splittedEvent = new List<String>();
+                    String eventName = evt.EventName;
+                    for (var i = 0; i <= eventName.Length - query.Length; i++)
                     {
-                        foundEvent.Add(evt);
+                        splittedEvent.Add(eventName.Substring(i, query.Length));
+                    }
+
+                    List<string> foundbyTitle = FuzzySearch.Search(query.ToLower(), splittedEvent, 0.50);
+
+                    List<String> splittedArtist = new List<String>();
+
+                    List<string> foundbyArtist = new List<string>();
+                    if (evt.Artist != null)
+                    {
+                        String Artist = evt.Artist;
+                        for (var i = 0; i <= Artist.Length - query.Length; i++)
+                        {
+                            splittedArtist.Add(Utils.ConvertVN(Artist.Substring(i, query.Length)));
+                        }
+
+                        foundbyArtist = FuzzySearch.Search(query.ToLower(), splittedArtist, 0.5);
+                    }
+
+                    if (foundbyTitle.Count > 0 || foundbyArtist.Count > 0)
+                    {
+                        ResultEvent Event = new ResultEvent(evt);
+                        Event.EventName.Matches = ReduceRedundancy(foundbyTitle);
+                        Event.Artist.Matches = ReduceRedundancy(foundbyArtist);
+
+                        foundEvent.Result.Add(Event);
                     }
                 }
             }
@@ -75,11 +131,11 @@ namespace DropIt.Controllers
             {
                 foreach (Event evt in events.ToList())
                 {
-                    if (ConvertVN(evt.EventName).ToLower().Contains(ConvertVN(query).ToLower()))
+                    if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(query).ToLower()))
                     {
                         listeventname.Add(evt.EventName);
                     }
-                    else if (ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(ConvertVN(query).ToLower()))
+                    else if (Utils.ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(Utils.ConvertVN(query).ToLower()))
                     {
                         if (!listeventname.Contains(evt.Artist))
                         { 
@@ -111,20 +167,6 @@ namespace DropIt.Controllers
         public ActionResult GuideForNew()
         {
             return View();
-        }
-
-        private string ConvertVN(string utf8text)
-        {
-            const string FindText = "áàảãạâấầẩẫậăắằẳẵặđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶĐÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ";
-            const string ReplText = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAADEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY";
-            int index = -1;
-            char[] arrChar = FindText.ToCharArray();
-            while ((index = utf8text.IndexOfAny(arrChar)) != -1)
-            {
-                int index2 = FindText.IndexOf(utf8text[index]);
-                utf8text = utf8text.Replace(utf8text[index], ReplText[index2]);
-            }
-            return utf8text;
         }
     }
 }
