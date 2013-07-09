@@ -118,14 +118,14 @@ namespace DropIt.Common
             {
                 Controller = "User",
                 Title = "Người dùng",
-                Childs = new List<AdminSubMenu>()
-                {
-                    new AdminSubMenu(){
-                        Action = "Index",
-                        Title = "Trang chủ"
-                    }
-                }
+                Icon = "user"
             };
+                User.AddChild(new AdminSubMenu()
+                {
+                    Action = "Index",
+                    Title = "Danh sách",
+                    Icon = "list"
+                });
             adminMenuList.Add(User);
 
             AdminMainMenu Ticket = new AdminMainMenu()

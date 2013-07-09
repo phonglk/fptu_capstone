@@ -47,14 +47,16 @@
             <i class="icon-th"></i>
             <span>Tất cả</span>
         </a>*@
-        <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Disapprove })" class="button large">
-            <i class="icon-bullhorn"></i>
-            <span>Chưa duyệt</span>
-        </a>
-        <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="button large">
-            <i class="icon-ok"></i>
-            <span>Đã duyệt</span>
-        </a>
+        <div class="btn-group">
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Disapprove })" class="btn btn-large active">
+                <i class="icon-bullhorn"></i>
+                <span>Chưa duyệt</span>
+            </a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="btn btn-large">
+                <i class="icon-ok"></i>
+                <span>Đã duyệt</span>
+            </a>
+        </div>
     </div>
     <div class="span4">
         <div class="pull-right" style="">
@@ -151,8 +153,18 @@
 <script>
     
     var list = new DataList();
-    
     list.url_getList = {Controller:"Event",Action:"List"};
+    list.extraData = {
+        EventStatus:EventStatus
+    }
+    list.changeStatus = function (stt) {
+        $(".status-filter > div > a").removeClass("active");
+        $(".status-filter > div > a").eq(stt).addClass("active");
+        list.extraData.EventStatus = stt;
+        list.currentPage(1);
+        list.getList();
+    }
+
     list.Disapprove = function(item){
         list.AjaxAction({
             item:item,
@@ -206,13 +218,13 @@
         ko.applyBindings(list);
     });
 
-    $(".status-filter > a").eq(0).attr("href","javascript:;").click(function(e){
+    $(".status-filter > div > a").eq(0).attr("href","javascript:;").click(function(e){
         list.changeStatus(0);
         e.preventDefault();
         return false;
     })
 
-    $(".status-filter > a").eq(1).attr("href","javascript:;").click(function(e){
+    $(".status-filter > div > a").eq(1).attr("href","javascript:;").click(function(e){
         list.changeStatus(1);
         e.preventDefault();
         return false;
