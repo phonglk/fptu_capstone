@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DropIt.Areas.Administration.ViewModels
 {
@@ -18,6 +19,7 @@ namespace DropIt.Areas.Administration.ViewModels
         [Required(ErrorMessage="Bạn cần điền ngày tổ chức")]
         public System.DateTime HoldDate { get; set; }
 
+        [AllowHtml]
         public string Description { get; set; }
         public int Status { get; set; }
 

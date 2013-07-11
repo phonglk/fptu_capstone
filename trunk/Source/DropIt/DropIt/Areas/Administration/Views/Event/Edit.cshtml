@@ -6,6 +6,8 @@
 }
 
 @Scripts.Render("~/Bundles/jquery.validate")
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+
 <script>
     var categories = @Html.Raw(Json.Encode(ViewBag.CategoryId)),
         Model = @Html.Raw(Json.Encode(Model));
@@ -79,9 +81,14 @@
                         <input type="file" id="eventImage" name="EventImage" class="previewUpload"/>
                         <img src="@(Model.EventImage==null?Url.Content("~/Content/Images/no_image.jpg"):Model.EventImage)" class="previewUpload"/>
                     </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="span11">
+                <div class="padded">
                     <div class="input">
                         <label for="description">Chú thích</label>
-                        <textarea name="Description" id="description" style="width:100%;height:100px;">@Model.Description</textarea>
+                        <textarea name="Description" id="description" style="width: 100%; height: 100px;" class="">@Server.UrlDecode(Model.Description)</textarea>
                     </div>
                 </div>
             </div>
@@ -100,6 +107,20 @@
     </form>
 </div>
 <script>
+    CKEDITOR.replace( 'description',{
+        toolbar : [
+		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+		{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
+		{ name: 'insert', items : [ 'Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'
+		] },
+                '/',
+		{ name: 'styles', items : [ 'Styles','Format' ] },
+		{ name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] },
+		{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+		{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+		{ name: 'tools', items : [ 'Maximize','-','About' ] }
+        ]
+    })
     validateOptions = {
         rules: {
             EventName: {
@@ -147,6 +168,8 @@
     function submit(){
         Loading(true,true);
         var formData = new FormData($("#createEvent")[0]);
+        formData.append("Description", escape(CKEDITOR.instances.description.getData()))
+
         function success(rs){
             Loading(false);
             if(rs.Result && rs.Result == "OK"){
@@ -162,6 +185,10 @@
             success: success,
             processData: false,
             contentType: false,
+            error:function(){
+                Loading(false);
+                $.fn.dialog2.helpers.alert("Có lỗi xảy ra khi gửi dữ liệu lên server");
+            }
         });
     }
     $("#createEvent").submit(function(e){

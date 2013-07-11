@@ -101,7 +101,7 @@ namespace DropIt.Areas.Administration.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost,ValidateInput(false)]
         public JsonResult Create(Event Event,HttpPostedFileBase EventImage)
         {
             String Error = "";
