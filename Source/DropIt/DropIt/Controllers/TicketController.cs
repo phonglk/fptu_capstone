@@ -153,8 +153,9 @@ namespace DropIt.Controllers
         public ActionResult Buy(int Id)
         {
             ViewBag.TicketId = Id;
-            //ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName");
-            //ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName");
+            User CurrentUser = unitOfWork.UserRepository.GetById(WebSecurity.CurrentUserId);
+            ViewBag.TranFullName = CurrentUser.UserName;
+            ViewBag.TranAddress = CurrentUser.Address;
             return View();
         }
 

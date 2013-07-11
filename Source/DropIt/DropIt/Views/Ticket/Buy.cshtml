@@ -1,4 +1,5 @@
 ﻿@model DropIt.ViewModels.BuyTicket
+
 @using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
@@ -26,19 +27,14 @@
             <div class="control-group">
                 <label class="control-label">Hình thức thanh toán: </label>
                 <div class="controls radio-check">
-                    @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true)
-                    <p>Thanh toán tạm giữ 5 ngày </p>
+                    @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true, new { id = "trantype_5d" })
+                    <label for="trantype_5d" style="display:inline">Thanh toán tạm giữ 5 ngày </label>
                 </div>
                    <div class="controls radio-check">
-                    @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment)
-                    <p>Thanh toán ngay</p>
+                    @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment, new { id = "trantype_instant" })
+                    <label for="trantype_instant" style="display:inline">Thanh toán ngay</label>
                 </div>
             </div>
-            
-          
-@*
-            @*
-            @Html.RadioButton("InstantPayment", "InstantPayment") <p>ngay và luôn</p>*@
             @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
 
             //captcha

@@ -24,17 +24,23 @@ namespace DropIt.Controllers
 
         public ActionResult Index()
         {
-            if (Request["Role"] != null)
-            {
-                Session["Role"] = Request["Role"];
-                return RedirectToAction("Index");
-            }
-            else if (Session["Role"] == null)
-            {
-                Session["Role"] = "Buy";
-            }
+            Session["Role"] = "Event";
             var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status == 1).Take(10);
             return View(events.ToList());
+        }
+
+        [ActionName("Buy")]
+        public ActionResult BuyIndex()
+        {
+            Session["Role"] = "Buy";
+            return View();
+        }
+
+        [ActionName("Sell")]
+        public ActionResult SellIndex()
+        {
+            Session["Role"] = "Sell";
+            return View();
         }
 
         private List<string> ReduceRedundancy(List<string> strings)

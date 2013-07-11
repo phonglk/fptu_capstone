@@ -3,18 +3,21 @@
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/Bundles/jquery.validate")
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+
 <script>
     var categories = @Html.Raw(Json.Encode(ViewBag.CategoryId))
 </script>
 <style>
     label {
-        font-weight:bold;
+        font-weight: bold;
     }
+
     .input {
         margin-top: 15px;
     }
 </style>
-<div class="box" style="clear:both">
+<div class="box" style="clear: both">
     <div class="tab-header">
         Tạo mới sự kiện
     </div>
@@ -24,27 +27,26 @@
                 <div class="padded">
                     <div class="input">
                         <label for="eventName">Tên sự kiện</label>
-                        <input id="eventName" name="EventName" type="text"/>
+                        <input id="eventName" name="EventName" type="text" />
                     </div>
                     <div class="input">
                         <label for="category">Danh mục</label>
-                        
-                        <select id="category" name="CategoryId" style="width:100%">
 
+                        <select id="category" name="CategoryId" style="width: 100%">
                         </select>
                     </div>
                     <div class="input">
                         <label for="holdDate">Ngày diễn ra</label>
-                        <input id="holdDate" type="datetime-local" class="" name="HoldDate"/>
+                        <input id="holdDate" type="datetime-local" class="" name="HoldDate" />
                     </div>
                     <div class="input">
                         <label for="artist">Nghệ sĩ tham gia</label>
-                        <input id="artist" type="text" class="" name="Artist"/>
+                        <input id="artist" type="text" class="" name="Artist" />
                     </div>
                     <div class="input">
                         <label for="venue">Địa điểm</label>
-                        @Html.DropDownList("VenueId",(SelectList)ViewBag.VenueId, new { id="venue",name="VenueId",style="width:100%" })
-                        
+                        @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId, new { id = "venue", name = "VenueId", style = "width:100%" })
+
                     </div>
                 </div>
             </div>
@@ -52,12 +54,19 @@
                 <div class="padded">
                     <div class="input">
                         <label for="eventImage">Hình đại diện cho sự kiện</label>
-                        <input type="file" id="eventImage" name="EventImage" class="previewUpload"/>
+                        <input type="file" id="eventImage" name="EventImage" class="previewUpload" />
                         <img src="@Url.Content("~/Content/Images/no_image.jpg")" class="previewUpload"/>
                     </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="span11">
+                <div class="padded">
                     <div class="input">
                         <label for="description">Chú thích</label>
-                        <textarea name="Description" id="description" style="width:100%;height:100px;"></textarea>
+                        <textarea name="Description" id="description" style="width: 100%; height: 100px;" class="">
+
+                        </textarea>
                     </div>
                 </div>
             </div>
@@ -76,6 +85,22 @@
     </form>
 </div>
 <script>
+    CKEDITOR.replace( 'description',{
+        toolbar : [
+		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+		{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
+		{ name: 'insert', items : [ 'Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'
+		] },
+                '/',
+		{ name: 'styles', items : [ 'Styles','Format' ] },
+		{ name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] },
+		{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
+		{ name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+		{ name: 'tools', items : [ 'Maximize','-','About' ] }
+        ]
+    })
+    
+
     validateOptions = {
         rules: {
             EventName: {

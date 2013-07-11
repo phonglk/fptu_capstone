@@ -12,25 +12,6 @@
     </div>
 
     <div class="row">
-        <div class="span3">
-            <div class="sidebar-nav">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    if (Session["Role"] != null)
-                    {
-                        if (Session["Role"] != null && Session["Role"].Equals("Sell"))
-                        {
-                    @Html.Partial("Partials/SideBar_Sell")
-                        }
-                        else if (Session["Role"] != null && Session["Role"].Equals("Buy"))
-                        {
-                    @Html.Partial("Partials/SideBar_Buy");
-                        }
-                        else { }
-                    }
-                }
-            </div>
-        </div>
         <div class="span12">
             <div id="main-nav" class="navbar span12">
                 <ul class="nav">

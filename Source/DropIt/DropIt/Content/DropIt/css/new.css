@@ -302,6 +302,7 @@ hr {
     margin-left: 1px;
     /*margin-bottom: 1px;*/
     border: 1px solid #582e53;
+    -webkit-transition: all 0.3s;
 }
 
 .image-item {
@@ -317,7 +318,7 @@ hr {
 .item-event-date {
     color: #fff;
     font-size: 10px;
-    text-shadow: -1px 0 black, 0 1px black,1px 0 black, 0 -1px black;
+    text-shadow: -2px 0 black, 0 2px black,2px 0 black, 0 -2px black;
 }
 
 .item-date {
