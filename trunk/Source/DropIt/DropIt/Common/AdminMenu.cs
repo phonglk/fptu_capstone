@@ -162,6 +162,26 @@ namespace DropIt.Common
                 });
 
             adminMenuList.Add(Event);
+
+            AdminMainMenu Category = new AdminMainMenu()
+            {
+                Controller = "Category",
+                Title = "Danh Mục",
+                Icon = ""
+            };
+            Category.AddChild(new AdminSubMenu()
+                {
+                    Action = "Index",
+                    Title = "Danh sách danh mục",
+                    Icon = ""
+                });
+            Category.AddChild(new AdminSubMenu()
+                {
+                    Action = "Create",
+                    Title = "Thêm mới",
+                    Icon = ""
+                });
+            adminMenuList.Add(Category);
             // category,event,province,venue
         }
     }
