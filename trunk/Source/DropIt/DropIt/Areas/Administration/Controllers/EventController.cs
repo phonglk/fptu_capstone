@@ -71,7 +71,7 @@ namespace DropIt.Areas.Administration.Controllers
                             e.Venue.Province.ProvinceName
                         }
                     },
-                    haveTicketTran = e.Tickets.Where(t => t.TranStatus != null && t.TranStatus != (int)Statuses.BuyTicket.Canceled ).Count() > 0
+                    haveTicketTran = e.Tickets.Where(t => t.TranStatus != null && t.TranStatus != (int)Statuses.Transaction.Canceled ).Count() > 0
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -101,7 +101,8 @@ namespace DropIt.Areas.Administration.Controllers
             return View();
         }
 
-        [HttpPost,ValidateInput(false)]
+        [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Create(Event Event,HttpPostedFileBase EventImage)
         {
             String Error = "";
@@ -151,6 +152,7 @@ namespace DropIt.Areas.Administration.Controllers
             });
         }
 
+
         public ActionResult Edit(int Id)
         {
             Event e = Repository.GetById(Id);
@@ -165,7 +167,7 @@ namespace DropIt.Areas.Administration.Controllers
                 HoldDate = e.HoldDate,
                 Status = e.Status,
                 VenueId = e.VenueId,
-                haveTicketTran = e.Tickets.Where(t => t.TranStatus!=null && t.TranStatus != (int)Statuses.BuyTicket.Canceled).Count() > 0    // t.TranStatus != null
+                haveTicketTran = e.Tickets.Where(t => t.TranStatus!=null && t.TranStatus != (int)Statuses.Transaction.Canceled).Count() > 0    // t.TranStatus != null
             };
 
             ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
@@ -181,18 +183,17 @@ namespace DropIt.Areas.Administration.Controllers
             });
 
             ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.Get(v => v.Status == (int)Statuses.Venue.Approve), "VenueId", "VenueName");
-
-
             return View(evm);
         }
 
 
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Edit(Event Event, HttpPostedFileBase EventImage)
         {
             Event oldEvent = Repository.GetById(Event.EventId);
-            bool haveTicketTran = oldEvent.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.BuyTicket.Canceled).Count() > 0;
+            bool haveTicketTran = oldEvent.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.Transaction.Canceled).Count() > 0;
             if (haveTicketTran == true)
             {
                 return Json(new JSONResult()
@@ -229,7 +230,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-
+                Event.Status = oldEvent.Status;
                 Repository.AddOrUpdate(Event);
                 unitOfWork.Save();
                 return Json(new JSONResult());

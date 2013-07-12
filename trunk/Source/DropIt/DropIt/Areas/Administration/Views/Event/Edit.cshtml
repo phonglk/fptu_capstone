@@ -22,8 +22,6 @@
 </style>
 @if (Model.haveTicketTran == true)
             {
-                
-                    
                         <div class="alert">
                           <button type="button" class="close" data-dismiss="alert">&times;</button>
                           <strong>Cảnh báo!</strong> Sự kiện này đã có vé đã hoặc đang giao dịch, không thể sửa thông tin
@@ -88,7 +86,7 @@
                 <div class="padded">
                     <div class="input">
                         <label for="description">Chú thích</label>
-                        <textarea name="Description" id="description" style="width: 100%; height: 100px;" class="">@Server.UrlDecode(Model.Description)</textarea>
+                        <textarea name="Description" id="description" style="width: 100%; height: 100px;" class="">@Model.Description</textarea>
                     </div>
                 </div>
             </div>
@@ -167,8 +165,8 @@
 
     function submit(){
         Loading(true,true);
+        $("#description").val(CKEDITOR.instances.description.getData());
         var formData = new FormData($("#createEvent")[0]);
-        formData.append("Description", escape(CKEDITOR.instances.description.getData()))
 
         function success(rs){
             Loading(false);

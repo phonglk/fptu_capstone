@@ -40,7 +40,7 @@ namespace DropIt.Controllers
                                           TranFullName = getTicket.TranFullName,
                                           TranAddress = getTicket.TranAddress,
                                           TranType = getTicket.TranType,
-                                          TranStatus = (int)Statuses.BuyTicket.Paid,
+                                          TranStatus = (int)Statuses.Transaction.Paid,
                                           EventId = getTicket.EventId,
                                           UserId = getTicket.UserId,
                                           SellPrice = getTicket.SellPrice,

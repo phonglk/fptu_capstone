@@ -52,7 +52,7 @@ namespace DropIt.Controllers
 
             if (Request["extra"] != null && Request["extra"] == "ontransaction")
             {
-                count = Repository.Get(r => r.TranUserId == UserId && (r.TranStatus == (int)Statuses.BuyTicket.Paid || r.TranStatus == (int)Statuses.BuyTicket.Delivered)).Count();
+                count = Repository.Get(r => r.TranUserId == UserId && (r.TranStatus == (int)Statuses.Transaction.Paid || r.TranStatus == (int)Statuses.Transaction.Delivered)).Count();
                 return Json(new
                 {
                     Result = "OK",
