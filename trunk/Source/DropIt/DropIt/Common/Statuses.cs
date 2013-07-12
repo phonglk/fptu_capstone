@@ -19,6 +19,7 @@ namespace DropIt.Common
         public static String[] BuyTicketStrings = new string[] { "Chưa thanh toán", "Đã Mua","Đã giao","Đã nhận","Đã hủy" };
         public enum TranType { InstantPayment, HoldPayment};
         public enum Request { Open, Close};
+        public enum CategoryActive { Deactive, Active, Delete };
 
         public static string getText(String EnumName, int Value)
         {
