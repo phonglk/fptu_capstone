@@ -1162,11 +1162,21 @@
     <Content Include="Content\themes\plastique\font\fontawesome-webfont.woff" />
     <Content Include="Content\themes\plastique\javascripts\chosen\chosen.jquery" />
     <Content Include="Content\shared.less" />
+    <Content Include="Libs\gfoidl.StringSearching.dll" />
+    <Content Include="Content\Fonts\VNF-Oswald Regular.ttf" />
+    <Content Include="Content\ckeditor\CHANGES.md" />
+    <Content Include="Content\ckeditor\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\ckeditor\README.md" />
+    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <EntityDeploy Include="Models\DropItContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Libs\gfoidl.StringSearching.dll" />
     <Content Include="Models\DropItContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DropItContext.edmx</DependentUpon>
@@ -1180,16 +1190,6 @@
       <DependentUpon>DropItContext.edmx</DependentUpon>
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\Fonts\VNF-Oswald Regular.ttf" />
-    <Content Include="Content\ckeditor\CHANGES.md" />
-    <Content Include="Content\ckeditor\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\scayt\README.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\LICENSE.md" />
-    <Content Include="Content\ckeditor\plugins\wsc\README.md" />
-    <Content Include="Content\ckeditor\README.md" />
-    <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">

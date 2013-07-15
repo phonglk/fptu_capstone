@@ -10,70 +10,39 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="container" id="content">
-<div class="login">
-    @using (Html.HorizontalForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-         <h3>Thông Tin Tài Khoản</h3>
+    <div class="login">
+        @using (Html.HorizontalForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <h3>Thông Tin Tài Khoản</h3>
   
-        
-@*<div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>*@
+            @Html.LabelAndControl("Tên đầy đủ", Html.TextBox("FullName"))      
             @Html.LabelAndControl("Email:", Html.TextBox("Email"))
-                <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
             @Html.LabelAndControl("Số Điện thoại:", Html.TextBox("Phone"))
-                <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
-         @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
-                <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
+            @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
+            @Html.LabelAndControl("Tên ngân hàng", Html.TextBox("BankName"))
+            
+            @Html.LabelAndControl("Tài khoản ngân hàng", Html.TextBox("BankAccount"))
+            
+            @Html.LabelAndControl("Số CMND", Html.TextBox("CMND"))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.CMND)</div>        
         
-
-@*<div class="editor-label">
-            @Html.LabelFor(model => model.Active)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Active)
-            @Html.ValidationMessageFor(model => model.Active)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Sellable)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Sellable)
-            @Html.ValidationMessageFor(model => model.Sellable)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreatedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreatedDate)
-            @Html.ValidationMessageFor(model => model.CreatedDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ModifiedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ModifiedDate)
-            @Html.ValidationMessageFor(model => model.ModifiedDate)
-        </div>*@
-        @Html.LabelAndControl("Tỉnh/Thành Phố:", Html.DropDownList("ProvinceId", String.Empty))
-                <div class="controls validate">@Html.ValidationMessageFor(m => m.ProvinceId)</div>
-        <div class="manage-link">
-            @Html.ActionLink("Thay đổi mật khẩu", "Manage", "Account")
-        </div>
-        <p>
-             <button type="submit" class="btn btn-success" value="Save">Xác Nhận</button>
-        </p>
-    }
+            @Html.LabelAndControl("Tỉnh/Thành Phố:", Html.DropDownList("ProvinceId", String.Empty))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.ProvinceId)</div>
+            <div class="manage-link">
+                @Html.ActionLink("Thay đổi mật khẩu", "Manage", "Account")
+            </div>
+            <p>
+                <button type="submit" class="btn btn-success" value="Save">Xác Nhận</button>
+            </p>
+        }
     
-   
-</div>
     </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

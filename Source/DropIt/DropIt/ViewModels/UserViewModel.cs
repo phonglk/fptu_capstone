@@ -11,17 +11,13 @@ namespace DropIt.ViewModels
     {
          public UserViewModel()
         {
-            this.Requests = new HashSet<Request>();
-            this.Tickets = new HashSet<Ticket>();
-            this.Tickets1 = new HashSet<Ticket>();
-            this.UserFollowEvents = new HashSet<UserFollowEvent>();
+            this.CreatedDate = DateTime.Now;
+            this.ModifiedDate = DateTime.Now;
         }
     
         public int UserId { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập Tên Tài Khoản.")]
-        public string UserName { get; set; }
-
+        public string UserName { get;set; }
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Bạn phải nhập Email.")]
         [RegularExpression(@"^[a-zA-Z0-9\.-]*@[a-zA-Z0-9\.]*\.[a-zA-Z\.]{2,6}$", ErrorMessage = "Email Không Chính xác.")]
@@ -32,17 +28,26 @@ namespace DropIt.ViewModels
 
         [Required(ErrorMessage = "Bạn phải nhập Địa chỉ.")]
         public string Address { get; set; }
+
         public bool Active { get; set; }
         public bool Sellable { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+
         [Required(ErrorMessage = "Bạn phải chọn Tỉnh/Thành Phố.")]
-        public int ProvinceId { get; set; }
+        public int? ProvinceId { get; set; }
+
+        public string FullName { get; set; }
+
+        public string BankAccount { get; set; }
+
+        public string BankName { get; set; }
+
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 9)]
+        [Display(Name = "Số CMND")]
+        public string CMND { get; set; }
     
         public virtual Province Province { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<Ticket> Tickets1 { get; set; }
-        public virtual ICollection<UserFollowEvent> UserFollowEvents { get; set; }
     }
     }

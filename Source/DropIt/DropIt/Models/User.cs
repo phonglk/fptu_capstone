@@ -24,13 +24,18 @@ namespace DropIt.Models
     
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public bool Active { get; set; }
+        public bool IsVerified { get; set; }
+        public string BankName { get; set; }
+        public string BankAccount { get; set; }
+        public string CMND { get; set; }
         public bool Sellable { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public int ProvinceId { get; set; }
     
         public virtual Province Province { get; set; }
