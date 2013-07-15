@@ -8,7 +8,8 @@ using DropIt.Common;
 
 namespace DropIt.Common
 {
-    public class Menu{
+    public class Menu
+    {
         public string Title { get; set; }
         public string Area { get; set; }
         public string Controller { get; set; }
@@ -19,7 +20,7 @@ namespace DropIt.Common
 
         public Menu()
         {
-            
+
         }
 
         public string TagA()
@@ -33,10 +34,10 @@ namespace DropIt.Common
             {
                 if (Area != null) href += "/" + Area;
                 href += "/" + Controller;
-                if (Action != null || Action != "Index") href += "/"+Action;
+                if (Action != null || Action != "Index") href += "/" + Action;
                 if (Data != null) href += Data;
             }
-            return "<a href='" + href + "'><i class='icon-"+Icon+"'></i>" + Title + "</a>";
+            return "<a href='" + href + "'><i class='icon-" + Icon + "'></i>" + Title + "</a>";
         }
     }
 
@@ -64,7 +65,7 @@ namespace DropIt.Common
 
     public class AdminMenuList : IEnumerable
     {
-        public Dictionary<String,AdminMainMenu> AdminMenu = new Dictionary<string,AdminMainMenu>();
+        public Dictionary<String, AdminMainMenu> AdminMenu = new Dictionary<string, AdminMainMenu>();
         public void Add(AdminMainMenu menu)
         {
             string name = menu.Controller.ToLower();
@@ -96,21 +97,24 @@ namespace DropIt.Common
             {
                 Controller = "Dashboard",
                 Title = "Dashboard"
-                
+
             };
-                Dashboard.AddChild(new AdminSubMenu(){
-                            Action = "Index",
-                            Title = "Trang chủ",
-                            Icon = "icon-camera-retro"
-                        });
-                Dashboard.AddChild(new AdminSubMenu(){
-                            Action = "Statictist",
-                            Title = "Thống kê"
-                        });
-                Dashboard.AddChild(new AdminSubMenu(){
-                            Action = "Article",
-                            Title = "Bài viết"
-                        });
+            Dashboard.AddChild(new AdminSubMenu()
+            {
+                Action = "Index",
+                Title = "Trang chủ",
+                Icon = "icon-camera-retro"
+            });
+            Dashboard.AddChild(new AdminSubMenu()
+            {
+                Action = "Statictist",
+                Title = "Thống kê"
+            });
+            Dashboard.AddChild(new AdminSubMenu()
+            {
+                Action = "Article",
+                Title = "Bài viết"
+            });
 
             adminMenuList.Add(Dashboard);
 
@@ -120,12 +124,12 @@ namespace DropIt.Common
                 Title = "Người dùng",
                 Icon = "user"
             };
-                User.AddChild(new AdminSubMenu()
-                {
-                    Action = "Index",
-                    Title = "Danh sách",
-                    Icon = "list"
-                });
+            User.AddChild(new AdminSubMenu()
+            {
+                Action = "Index",
+                Title = "Danh sách",
+                Icon = "list"
+            });
             adminMenuList.Add(User);
 
             AdminMainMenu Ticket = new AdminMainMenu()
@@ -148,41 +152,41 @@ namespace DropIt.Common
                 Title = "Sự kiện",
                 Icon = "camera-retro"
             };
-                Event.AddChild(new AdminSubMenu()
-                {
-                    Action = "Index",
-                    Title = "Danh sách sự kiện",
-                    Icon = "camera-retro"
-                });
-                Event.AddChild(new AdminSubMenu()
-                {
-                    Action = "Create",
-                    Title = "Thêm mới",
-                    Icon = "plus-sign"
-                });
+            Event.AddChild(new AdminSubMenu()
+            {
+                Action = "Index",
+                Title = "Danh sách sự kiện",
+                Icon = "camera-retro"
+            });
+            Event.AddChild(new AdminSubMenu()
+            {
+                Action = "Create",
+                Title = "Thêm mới",
+                Icon = "plus-sign"
+            });
 
             adminMenuList.Add(Event);
-
-            AdminMainMenu Category = new AdminMainMenu()
-            {
-                Controller = "Category",
-                Title = "Danh Mục",
-                Icon = ""
-            };
-            Category.AddChild(new AdminSubMenu()
+            // category,event,province,venue
+            AdminMainMenu Venue = new AdminMainMenu()
+              {
+                  Controller = "Venue",
+                  Title = "Địa điểm",
+                  Icon = "camera-retro"
+              };
+            Venue.AddChild(new AdminSubMenu()
                 {
                     Action = "Index",
-                    Title = "Danh sách danh mục",
-                    Icon = ""
+                    Title = "Danh sách địa điểm",
+                    Icon = "camera-retro"
                 });
-            Category.AddChild(new AdminSubMenu()
-                {
-                    Action = "Create",
-                    Title = "Thêm mới",
-                    Icon = ""
-                });
-            adminMenuList.Add(Category);
-            // category,event,province,venue
+            Venue.AddChild(new AdminSubMenu()
+            {
+                Action = "Create",
+                Title = "Thêm mới",
+                Icon = "plus-sign"
+            });
+
+            adminMenuList.Add(Venue);
         }
     }
 }

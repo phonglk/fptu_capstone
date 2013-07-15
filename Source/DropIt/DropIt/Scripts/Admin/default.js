@@ -16,14 +16,22 @@ function Venue(obj) {
     this.VenueName = "";
     this.Address = "";
     this.Province = null;
+    this.Description = "";
 
     $.extend(self, obj);
-
+    if (self.Description == null) self.Description = "";
     if (obj.Province) {
         self.Province = new Province(obj.Province);
     }
+
+    html = "<strong>Địa chỉ</strong>: " + self.Address;
+    html += "<br/><strong>Tỉnh/Thành phố</strong>: " + self.Province.ProvinceName;
+    html += "<br/><strong>Chú thích</strong>: " + self.Description;
+
+    self.VenueDetail = html.eval(self);
 }
 function Province(obj) {
+    
     var self = this;
 
     this.ProvinceId = -1;
