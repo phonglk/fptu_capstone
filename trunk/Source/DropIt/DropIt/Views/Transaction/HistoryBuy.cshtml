@@ -30,11 +30,11 @@
             
             <ul class="nav nav-tabs">
             @{                
-                var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.BuyTicket)).Cast<Int32>().ToList();
+                var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Transaction)).Cast<Int32>().ToList();
                 
                 foreach (int statusValue in statuses)
                 {
-                    if (statusValue == (int)DropIt.Common.Statuses.BuyTicket.Canceled)
+                    if (statusValue == (int)DropIt.Common.Statuses.Transaction.Canceled)
                     {
                         continue;
                     }
