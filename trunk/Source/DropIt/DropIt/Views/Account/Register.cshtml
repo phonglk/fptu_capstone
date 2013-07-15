@@ -18,22 +18,40 @@
 
             @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
             <div class="controls validate">
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </div>
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            
+            @Html.LabelAndControl("Tên đầy đủ", Html.TextBox("FullName"))            
+            
             @Html.LabelAndControl("Mật Khẩu", Html.Password("Password"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.Password)</div>
+            
             @Html.LabelAndControl("Nhập lại Mật khẩu", Html.Password("ConfirmPassword"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.ConfirmPassword)</div>
+            
             @Html.LabelAndControl("Email", Html.TextBox("Email"))
-             <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
+            
             @Html.LabelAndControl("Số điện thoại", Html.TextBox("Phone"))
-             <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Phone)</div>
+            
             @Html.LabelAndControl("Địa chỉ", Html.TextBox("Address"))
-             <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
+            
             <div id="province">
                 @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId)
             </div>
-                <div>
+            
+            @Html.LabelAndControl("Tên ngân hàng", Html.TextBox("BankName"))
+            
+            @Html.LabelAndControl("Tài khoản ngân hàng", Html.TextBox("BankAccount"))
+            
+            @Html.LabelAndControl("Số CMND", Html.TextBox("CMND"))
+            <div class="controls validate">
+                @Html.ValidationMessageFor(m => m.CMND)
+            </div>
+            
+            <div>
             <label class="checkbox">
                 <span class="help-block">Điều Khoản Sử Dụng</span>
                       <span class="condition"></span>  

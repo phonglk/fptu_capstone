@@ -76,6 +76,20 @@ namespace DropIt.Models
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
         [Display(Name = "Tên Tài Khoản")]
         public string UserName { get; set; }
+        
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]
+        [Display(Name = "Tên đầy đủ")]
+        public string FullName { get; set; }
+        
+        [Display(Name = "Tên ngân hàng")]
+        public string BankName { get; set; }
+        
+        [Display(Name = "Tài khoản ngân hàng")]
+        public string BankAccount { get; set; }
+
+        [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 9)]
+        [Display(Name = "Số CMND")]
+        public string CMND { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]

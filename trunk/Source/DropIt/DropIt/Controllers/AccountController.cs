@@ -82,7 +82,19 @@ namespace DropIt.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email = model.Email, Phone = model.Phone, Address = model.Address, ProvinceId = model.ProvinceId, Sellable = false, Active = false, CreatedDate= DateTime.Now, ModifiedDate = DateTime.Now}, false);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
+                        Email = model.Email, 
+                        FullName = model.FullName,
+                        BankName = model.BankName,
+                        BankAccount = model.BankAccount,
+                        CMND = model.CMND,
+                        Phone = model.Phone, 
+                        Address = model.Address, 
+                        ProvinceId = model.ProvinceId, 
+                        Sellable = false, 
+                        Active = true, 
+                        CreatedDate= DateTime.Now, 
+                        ModifiedDate = DateTime.Now}, false);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
