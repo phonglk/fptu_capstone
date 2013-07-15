@@ -111,7 +111,7 @@
                             <!-- row -->
                             @foreach (var item in Model.Tickets)
                             {
-                                if ((item.TranStatus != null && (int)item.TranStatus == (int)DropIt.Common.Statuses.BuyTicket.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Pending)
+                                if ((item.TranStatus != null && (int)item.TranStatus == (int)DropIt.Common.Statuses.Transaction.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Pending)
                                 {
                                     continue;
                                 }
