@@ -154,7 +154,7 @@ namespace DropIt.Controllers
         {
             ViewBag.TicketId = Id;
             User CurrentUser = unitOfWork.UserRepository.GetById(WebSecurity.CurrentUserId);
-            ViewBag.TranFullName = CurrentUser.UserName;
+            ViewBag.TranFullName = CurrentUser.FullName;
             ViewBag.TranAddress = CurrentUser.Address;
             return View();
         }
