@@ -199,26 +199,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
             }
         }
-        //[HttpPost]
-        //public JsonResult Update(Venue Venue)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            return Json(new JSONResult("Form is invalid"));
-        //        }
-
-        //        Repository.AddOrUpdate(Venue);
-        //        unitOfWork.Save();
-        //        return Json(new JSONResult());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Json(new JSONResult(e));
-        //    }
-        //}
-
+       
         public JsonResult Delete(int Id)
         {
             try

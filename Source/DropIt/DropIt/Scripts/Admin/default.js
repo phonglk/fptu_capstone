@@ -9,6 +9,25 @@ function Category(obj) {
     $.extend(self, obj);
 }
 
+function Ticket(obj) {
+    var self = this;
+
+    this.TicketId = -1;
+    this.SellPrice = "";
+    this.ReceiveMoney = "";
+    this.Seat = "";
+    this.Description = "";
+
+    $.extend(self, obj);
+    if (self.Description == null) self.Description = "";
+
+    //html = "<strong></strong>: " + self.Address;
+    //html += "<br/><strong>Tỉnh/Thành phố</strong>: " + self.Province.ProvinceName;
+    //html += "<br/><strong>Chú thích</strong>: " + self.Description;
+
+    //self.TicketDetail = html.eval(self);
+}
+
 function Venue(obj) {
     var self = this;
 

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DropIt.Common;
-using DropIt.DAL;
-using DropIt.Filters;
 using DropIt.Models;
-using WebMatrix.WebData;
+using DropIt.DAL;
+using DropIt.Common;
+using System.Diagnostics;
+using DropIt.Areas.Administration.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    [InitializeSimpleMembership]
     public class TicketController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -25,19 +25,15 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Administration/Ticket/
 
-        public ActionResult Index()
+        public ActionResult Index(int TicketStatus = 0)
         {
+            ViewBag.TicketStatus = TicketStatus;
             return View();
         }
 
         public ActionResult List()
         {
-            var status = Request["status"];
-            if (status == null) status = "0";
-            int CurrentStatus = Int32.Parse(status);
-            ViewBag.CurrentStatus = CurrentStatus;
-            var ticketList = unitOfWork.TicketRepository.Get(u => u.Status == CurrentStatus);
-            return View(ticketList.ToList());
+            return View();
         }
 
         [HttpPost]
