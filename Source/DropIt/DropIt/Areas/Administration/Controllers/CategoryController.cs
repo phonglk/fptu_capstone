@@ -14,44 +14,90 @@ namespace DropIt.Areas.Administration.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
         private GenericRepository<Category> Repository;
         //
-        // GET: /Venue/
+        // GET: /Category/
 
         public CategoryController()
         {
             Repository = unitOfWork.CategoryRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int CategoryStatus = 0)
         {
-
+            ViewBag.CategoryStatus = CategoryStatus;
             return View();
         }
 
+        //[HttpPost]
+        //public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        //{
+        //    try
+        //    {
+
+        //        var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+
+        //        var Records = records.Select(e => new
+        //        {
+        //            CategoryId = e.CategoryId,
+        //            CategoryName = e.CategoryName,
+        //            ParentCategoryId = e.ParentCategoryId,
+        //            Status = e.Status,
+        //            Description = e.Description
+        //        });
+        //        return Json(new JSONResult(Records)
+        //        {
+        //            TotalRecordCount = Repository.Count
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return Json(new JSONResult(e));
+        //    }
+        //}
+
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int CategoryStatus = -1)
         {
             try
             {
+                IEnumerable<DropIt.Models.Category> records = null;
 
-                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-
+                if (CategoryStatus == -1)
+                {
+                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                }
+                else
+                {
+                    records = Repository.JTGetExp(e => e.Status == CategoryStatus, jtStartIndex, jtPageSize, jtSorting);
+                }
                 var Records = records.Select(e => new
                 {
                     CategoryId = e.CategoryId,
                     CategoryName = e.CategoryName,
                     ParentCategoryId = e.ParentCategoryId,
                     Status = e.Status,
-                    Description = e.Description
+                    Description = e.Description,
+                    Category = new
+                    {
+                        e.CategoryId,
+                        e.CategoryName,
+                        e.ParentCategoryId
+                    }
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = Repository.Count
+                    TotalRecordCount = (CategoryStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == CategoryStatus).Count()
                 });
             }
             catch (Exception e)
             {
                 return Json(new JSONResult(e));
             }
+        }
+
+        public ActionResult Create()
+        {
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAll(), "CategoryId", "CategoryName");
+            return View();
         }
 
         [HttpPost]
@@ -79,57 +125,152 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult Update(Category Category)
         {
+            String Error = "";
             try
             {
+                Category.Status = (int)Statuses.CategoryActive.Active;
+
                 if (!ModelState.IsValid)
                 {
-                    return Json(new JSONResult("Form is invalid"));
+                    TempData["Error"] = "Dữ liệu không hợp lệ";
                 }
 
-                Repository.AddOrUpdate(Category);
+                var addedRecord = Repository.AddOrUpdate(Category);
                 unitOfWork.Save();
-                return Json(new JSONResult());
+                return Json(new
+                    {
+                        Result = "OK"
+                    });
             }
             catch (Exception e)
             {
-                return Json(new JSONResult(e));
+                Error = "Có lỗi xảy ra";
             }
+
+            return Json(new
+            {
+                Result = "ERROR",
+                Message = Error
+            });
         }
 
-        public JsonResult Delete(int CategoryId)
+        [HttpPost]
+        public JsonResult Active(int Id)
         {
             try
             {
-                Repository.Delete(CategoryId);
-                unitOfWork.Save();
+                Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.CategoryActive.Active;
 
-                return Json(new JSONResult());
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    CategoryId = delete.CategoryId
+                });
             }
             catch (Exception e)
             {
-                return Json(new JSONResult(e));
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
             }
+        }
 
+        [HttpPost]
+        public JsonResult Deactive(int Id)
+        {
+            try
+            {
+                Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.CategoryActive.Deactive;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    CategoryId = delete.CategoryId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        public JsonResult Delete(int Id)
+        {
+            try
+            {
+                Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.CategoryActive.Delete;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    CategoryId = delete.CategoryId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
         }
 
         [HttpPost]
         public JsonResult GetOptions()
         {
+            //try
+            //{
+            //    var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
+            //        p => new
+            //        {
+            //            DisplayText = p.CategoryName,
+            //            Value = p.CategoryId,
+            //            Children = Repository.Get(x => x.ParentCategoryId == p.CategoryId).Select(c => new
+            //            {
+            //                DisplayText = c.CategoryName,
+            //                Value = c.CategoryId
+            //            })
+            //        });
+            //    return Json(new JSONResult(Records, "Options"));
+
+            //}
+            //catch (Exception e)
+            //{
+            //    return Json(new JSONResult(e));
+            //}
             try
             {
-                var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
+                var Records = unitOfWork.CategoryRepository.GetAll().Select(
                     p => new
                     {
                         DisplayText = p.CategoryName,
                         Value = p.CategoryId,
-                        Children = Repository.Get(x => x.ParentCategoryId == p.CategoryId).Select(c => new
+                        Children = unitOfWork.CategoryRepository.Get(x => x.ParentCategoryId == p.CategoryId).Select(c => new
                         {
                             DisplayText = c.CategoryName,
                             Value = c.CategoryId
                         })
                     });
-                return Json(new JSONResult(Records, "Options"));
-
+                return Json(new JSONResult(Records, "Opptions"));
             }
             catch (Exception e)
             {
@@ -140,16 +281,32 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult GetParentOptions()
         {
+            //try
+            //{
+            //    var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
+            //        p => new
+            //        {
+            //            DisplayText = p.CategoryName,
+            //            Value = p.CategoryId
+            //        });
+            //    return Json(new JSONResult(Records, "Options"));
+
+            //}
             try
             {
-                var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
+                var Records = unitOfWork.CategoryRepository.GetAll().Select(
                     p => new
                     {
                         DisplayText = p.CategoryName,
-                        Value = p.CategoryId
+                        Value = p.CategoryId,
+                        Parent = unitOfWork.CategoryRepository.Get(x => x.ParentCategoryId == null).Select(
+                        t => new
+                        {
+                            DisplayText = t.CategoryName,
+                            Value = t.CategoryId
+                        })
                     });
                 return Json(new JSONResult(Records, "Options"));
-
             }
             catch (Exception e)
             {
@@ -162,6 +319,5 @@ namespace DropIt.Areas.Administration.Controllers
             unitOfWork.Dispose();
             base.Dispose(disposing);
         }
-
     }
 }
