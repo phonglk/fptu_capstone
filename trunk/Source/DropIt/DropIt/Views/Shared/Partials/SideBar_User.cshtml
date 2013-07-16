@@ -1,5 +1,5 @@
 ﻿<li class="nav-header">Cá Nhân</li>
-<li><a href="@Url.Action("Edit","User")">Thông tin tài khoản</a></li>
+
 
 @if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
     
@@ -15,5 +15,6 @@
     <li><a href="@Url.Action("HistoryBuy", "Transaction", new { status = 3 })">Lịch sử giao dịch</a></li>
     <li class=""><a href="@Url.Action("Events","Follow",null,"http")">Danh sách theo dõi</a></li>
 }
+<li><a href="@Url.Action("Edit","User")">Thông tin tài khoản</a></li>
     
 
