@@ -153,10 +153,22 @@ namespace DropIt.Controllers
         public ActionResult Buy(int Id)
         {
             ViewBag.TicketId = Id;
-            User CurrentUser = unitOfWork.UserRepository.GetById(WebSecurity.CurrentUserId);
+            Ticket getTicket = unitOfWork.TicketRepository.GetById(Id);
+            User CurrentUser = unitOfWork.UserRepository.GetById(WebSecurity.CurrentUserId);            
+            BuyTicket buyTicket = new BuyTicket()
+                                      {
+                                          TicketId = getTicket.TicketId,
+                                          SellPrice = getTicket.SellPrice,
+                                          ReceiveMoney = getTicket.ReceiveMoney,
+                                          Seat = getTicket.Seat,
+                                          Description = getTicket.Description,
+                                          EventName = getTicket.Event.EventName,
+                                          HoldDate = getTicket.Event.HoldDate,
+                                          VenueName = getTicket.Event.Venue.VenueName
+                                      };
             ViewBag.TranFullName = CurrentUser.FullName;
             ViewBag.TranAddress = CurrentUser.Address;
-            return View();
+            return View(buyTicket);
         }
 
         [HttpPost]

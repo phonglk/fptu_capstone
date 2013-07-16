@@ -20,6 +20,51 @@
             @Html.ValidationSummary()
 
             <h3>Mua vé</h3> 
+            
+            <div class="ticket-list">
+                <table class="table table-condensed event-detail">
+                    <thead>
+
+                        <tr class="header warning">
+                            <th class="">Tên sự kiện</th>
+                            <th class="">Thời gian</th>
+                            <th class="">Địa điểm</th>
+                            <th class="">Giá bán</th>
+                            <th class="">Thông tin ghế ngồi</th>
+                                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="first">
+                                @Model.EventName
+                            </td>
+                            <td class="user">
+                                @Model.HoldDate
+                            </td>
+                            <td class="user">
+                                @Model.VenueName
+                            </td>
+                            <td class="descript">
+                                @Model.SellPrice
+                            </td>
+                            <td class="price">
+                                @Model.Seat
+                            </td>
+                                
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="header warning">
+                                        <div class="">Miêu tả</div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            @Model.Description
+                                        </div>
+                                    </div>
+                </div>
+            
             @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
             @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
             @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
