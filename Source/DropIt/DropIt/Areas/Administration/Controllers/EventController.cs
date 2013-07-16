@@ -71,7 +71,7 @@ namespace DropIt.Areas.Administration.Controllers
                             e.Venue.Province.ProvinceName
                         }
                     },
-                    haveTicketTran = e.Tickets.Where(t => t.TranStatus != null && t.TranStatus != (int)Statuses.Transaction.Canceled ).Count() > 0
+                    haveTicketTran = e.Status == (int)Statuses.Event.Trading
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -167,7 +167,7 @@ namespace DropIt.Areas.Administration.Controllers
                 HoldDate = e.HoldDate,
                 Status = e.Status,
                 VenueId = e.VenueId,
-                haveTicketTran = e.Tickets.Where(t => t.TranStatus!=null && t.TranStatus != (int)Statuses.Transaction.Canceled).Count() > 0    // t.TranStatus != null
+                haveTicketTran = e.Status == (int)Statuses.Event.Trading
             };
 
             ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
@@ -193,8 +193,7 @@ namespace DropIt.Areas.Administration.Controllers
         public JsonResult Edit(Event Event, HttpPostedFileBase EventImage)
         {
             Event oldEvent = Repository.GetById(Event.EventId);
-            bool haveTicketTran = oldEvent.Tickets.Select(t => t.TranStatus != null || t.TranStatus != (int)Statuses.Transaction.Canceled).Count() > 0;
-            if (haveTicketTran == true)
+            if (oldEvent.Status== (int)Statuses.Event.Trading)
             {
                 return Json(new JSONResult()
                     {

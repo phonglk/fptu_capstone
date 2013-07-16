@@ -7,7 +7,26 @@
 @{
     ViewBag.Title = "Register";
 }
+<style>
 
+    #province {
+        margin-right: 100px;
+    }
+
+    .controls .control-group {
+        margin-left:0;
+    }
+
+    h4 {
+        margin:20px 0;
+        margin-bottom:10px;
+        margin-left:180px;
+        cursor:pointer;
+        width:460px;
+        font-weight:bold;
+        font-family:Oswald;
+    }
+</style>
 <div class="container" id="content">
     <div class="register">
         @using (Html.HorizontalForm())
@@ -42,15 +61,23 @@
                 @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId)
             </div>
             
+            
+            <h4 class="extra-info">Thông tin thêm [+]</h4>
+            
+            <fieldset class="controls">
+                
+            
             @Html.LabelAndControl("Tên ngân hàng", Html.TextBox("BankName"))
+            <div class="controls validate"></div>
             
             @Html.LabelAndControl("Tài khoản ngân hàng", Html.TextBox("BankAccount"))
+            <div class="controls validate"></div>
             
             @Html.LabelAndControl("Số CMND", Html.TextBox("CMND"))
-            <div class="controls validate">
-                @Html.ValidationMessageFor(m => m.CMND)
-            </div>
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.CMND)</div>
             
+            </fieldset>
+
             <div>
             <label class="checkbox">
                 <span class="help-block">Điều Khoản Sử Dụng</span>
@@ -64,6 +91,12 @@
         }
     </div>
 </div>
+<script>
+    $(".extra-info").click(function () {
+        $("fieldset.controls").toggle();
+    });
+    $("fieldset.controls").toggle();
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

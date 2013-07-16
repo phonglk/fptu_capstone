@@ -7,7 +7,9 @@
     var EventStatus = @ViewBag.EventStatus;
     var Statuses = {
         Approve : @((int)DropIt.Common.Statuses.Event.Approve),
-        Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove)
+        Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove),
+        Trading:@((int)DropIt.Common.Statuses.Event.Trading),
+        Outdate:@((int)DropIt.Common.Statuses.Event.Outdate)
     }
 </script>
 <style>
@@ -56,13 +58,14 @@
                 <i class="icon-ok"></i>
                 <span>Đã duyệt</span>
             </a>
-            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="btn btn-large">
-                <i class="icon-ok"></i>
+            <a style="display:none"></a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Trading })" class="btn btn-large">
+                <i class="icon-road"></i>
                 <span>Đang giao dịch</span>
             </a>
-            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="btn btn-large">
-                <i class="icon-ok"></i>
-                <span>Đang giao dịch</span>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Outdate })" class="btn btn-large">
+                <i class="icon-time"></i>
+                <span>Quá ngày</span>
             </a>
         </div>
     </div>
@@ -139,6 +142,10 @@
                 <a href="javascript:;"
                     class="button black"
                     data-bind="click:$root.Disapprove,visible:Status==Statuses.Approve && haveTicketTran == false">Bỏ duyệt
+                </a>
+                <a href="javascript:;"
+                    class="button red"
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Outdate">Xóa
                 </a>
             </td>
         </tr>
@@ -237,6 +244,19 @@
         e.preventDefault();
         return false;
     })
+    
+    $(".status-filter > div > a").eq(3).attr("href","javascript:;").click(function(e){
+        list.changeStatus(3);
+        e.preventDefault();
+        return false;
+    })
+
+    $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
+        list.changeStatus(4);
+        e.preventDefault();
+        return false;
+    })
+
     
     
     
