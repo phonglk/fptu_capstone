@@ -213,6 +213,7 @@
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Areas\Administration\ViewModels\Category.cs" />
     <Compile Include="Areas\Administration\ViewModels\Event.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Ticket.cs" />
     <Compile Include="Areas\Administration\ViewModels\Venue.cs" />
     <Compile Include="Common\AdminMenu.cs" />
     <Compile Include="Common\DropDownGroupList.cs" />
@@ -1125,7 +1126,7 @@
     <Content Include="Areas\Administration\Views\Event\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
-    <Content Include="Areas\Administration\Views\Ticket\List.cshtml" />
+    <Content Include="Areas\Administration\Views\Ticket\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\List.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
@@ -1616,7 +1617,6 @@
     <Content Include="Views\Ticket\Manage.cshtml" />
     <Content Include="Views\Ticket\Details.cshtml" />
     <Content Include="Views\Shared\Partials\BuyerHomePage.cshtml" />
-    <Content Include="Views\Shared\Partials\SellerHomePage.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Home\Sell.cshtml" />
   </ItemGroup>

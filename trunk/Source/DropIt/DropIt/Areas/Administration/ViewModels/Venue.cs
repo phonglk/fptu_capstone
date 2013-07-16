@@ -17,6 +17,7 @@ namespace DropIt.Areas.Administration.ViewModels
         [Required(ErrorMessage = "Bạn cần chọn tỉnh/thành phố")]
         public int ProvinceId { get; set; }
         public int Status { get; set; }
+        [AllowHtml]
         public string Description { get; set; }
         public int EventId { get; set; }
 

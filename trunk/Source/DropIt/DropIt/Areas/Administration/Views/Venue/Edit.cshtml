@@ -13,6 +13,9 @@
         margin-top: 15px;
     }
 </style>
+<script>
+    var Model = @Html.Raw(Json.Encode(Model));
+</script>
 <div class="box" style="clear:both">
     <div class="tab-header">
         Chỉnh sửa địa điểm
@@ -40,7 +43,7 @@
             <div class="span6">
                 <div class="padded">
                     <div class="input">
-                        <label for="description">Chú thích</label>
+                        <label for="Description">Chú thích</label>
                         <textarea name="Description" id="Description" style="width:100%;height:100px;">@Model.Description</textarea>
                     </div>
                 </div>
@@ -106,9 +109,11 @@
     }
 
     $("#createEvent").validate(validateOptions);
-
+    $("select").select2();
+    $("#province").select2("val", Model.ProvinceId);
     function submit() {
         Loading(true, true);
+        $("#Description").val(CKEDITOR.instances.Description.getData());
         var formData = new FormData($("#createEvent")[0]);
         function success(rs) {
             Loading(false);
