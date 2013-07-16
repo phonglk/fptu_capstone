@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using DropIt.Models;
 
 namespace DropIt.ViewModels
 {
@@ -16,8 +17,13 @@ namespace DropIt.ViewModels
 
         public int UserId { get; set; }
 
+        public double SellPrice { get; set; }
+
         public double ReceiveMoney { get; set; }
 
+        public string Seat { get; set; }
+
+        public string Description { get; set; }
         public int TicketId { get; set; }
 
         [DataType(DataType.Date)]
@@ -32,5 +38,9 @@ namespace DropIt.ViewModels
         public int TranStatus { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        
+        public string EventName { get; set; }
+        public DateTime HoldDate { get; set; }
+        public string VenueName { get; set; }
     }
 }
