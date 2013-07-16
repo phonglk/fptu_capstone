@@ -1,29 +1,169 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/Bundles/jquery.validate")
+<script>
+    var EventStatus = @ViewBag.CategoryStatus;
+    var Statuses = {
+        Active : @((int)DropIt.Common.Statuses.CategoryActive.Active),
+        Deactive: @((int)DropIt.Common.Statuses.CategoryActive.Deactive)
+        }
+</script>
 
-<div class="table-wrapper venues-table section">
-    <div class="row-fluid head">
-        <div class="span12">
-            <h4>Danh Mục</h4>
+<div class="row-fluid">
+    <div class="span8 status-filter">
+        @*<div class="btn-group">
+            <a href="@Url.Action("Index", new { CategoryStatus = (int)DropIt.Common.Statuses.CategoryActive.Deactive })" class="btn btn-large active">
+                <span>Ẩn</span>
+            </a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.CategoryActive.Active })" class="btn">
+                <i class="icon-ok"></i>
+                <span>Hiện</span>
+            </a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="btn btn-large">
+                <i class="icon-ok"></i>
+                <span>Đang giao dịch</span>
+            </a>
+        </div>*@
+    </div>
+    <div class="span4">
+        <div class="pull-right" style="">
+            <a href="@Url.Action("Create")" class="button large blue">
+                <i class="icon-plus"></i>
+                <span>Tạo danh mục</span>
+            </a>
         </div>
     </div>
-    <div class="row-fluid filter-block">
-        <div class="pull-right">
-        </div>
-    </div>
-    <div id="pad-wrapper">
-        <div class="row-fluid">
-            <div id="CategoryTable" style="width: 100%; margin: auto;"></div>
-        </div>
-    </div>
-    <!-- end category table -->
+</div>
+
+<table class="table table-bordered box">
+    <thead>
+        <tr>
+            <th class="sortable" data-bind="click: function (data, event) { sort('CategoryName', data, category) }">Tên danh mục</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('CategoryParentName', data, category) }">Tên danh mục cha</th>
+            <th>Trạng thái</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: data">
+        <tr>
+            <td data-bind="">
+                <a href="" data-bind="
+    text: CategoryName,
+    attr: {
+        href: Url({ Action: 'Edit', Data: { Id: CategoryId } }),
+        title: CategoryName,
+        'data-content':CategoryDetail
+    }
+                    "
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+            </td>
+            <td data-bind="text: Category.CategoryParentName"></td>
+            <td></td>
+            <td>
+                <a href="javascript:;"
+                    class="button black"
+                    data-bind="click:$root.Active,visible:Status==Statuses.Deactive">Ẩn
+                </a>
+                <a href="javascript:;"
+                    class="button green"
+                    data-bind="click:$root.Deactive,visible:Status==Statuses.Active">Hiện
+                </a>
+                <a href="javascript:;"
+                    class="button red"
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Deactive">Xóa
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="pagination pull-right" data-bind="visible: pageCount() > 0">
+    <ul data-bind="foreach: new Array(pageCount())">
+        <li data-bind="css: {active: $index()+1 == $root.currentPage()}">
+            <a href="javascript:;" data-bind="click: function (data,category) { $root.changePage($index(),data,category)}">
+                <span data-bind="text: ($index()+1)"></span>
+            </a>
+        </li>
+    </ul>
 </div>
 <style>
    
 </style>
 <script>
+    var list = new Datalist();
+    list.url_getlist = {Controller:"Category", Action:"List"};
+    list.extraData = {
+        CategoryStatus:CategoryStatus
+    }
+    list.changeStatus = function (stt) {
+        $(".status-filter > div > a").removeClass("active");
+        $(".status-filter > div > a").eq(stt).addClass("active");
+        list.extraData.EventStatus = stt;
+        list.currentPage(1);
+        list.getList();
+    }
+    list.Deactive = function(item){
+        list.AjaxAction({
+            item:item,
+            urlData:{Action:"Deactive",Data:{Id:item.CategoryId}},
+            callback:function(category){
+                Notifications.push({
+                    text:"Danh mục \"#{CategoryName}\" đã được ẩn !".eval(category),
+                    autoDismiss:5
+                })
+            }
+        })
+    }
+    //list.Active = function(item){
+    //    list.AjaxAction({
+    //        item:item,
+    //        urlData:{Action:"Active",Data:{Id:item.CategoryId}},
+    //        callback:function(category){
+    //            Notifications.push({
+    //                text:"Danh mục \"#{CategoryName}\" đã được hiện !".eval(category),
+    //                autoDismiss:5
+    //            })
+    //        }
+    //    })
+    //}
+    list.Delete = function(item){
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa danh mục \""+item.CategoryName+"\" ?",
+            {
+                confirm:function(){
+                    list.AjaxAction({
+                        item:item,
+                        urlData:{Action:"Active",Data:{Id:item.EventId}},
+                        callback:function(category){
+                            Notifications.push({
+                                text:"Danh mục \"#{CategoryName}\" đã được xóa !".eval(category),
+                                autoDismiss:5
+                            })
+                        }
+                    })
+                }
+            }
+        )
+    }
+    list.getList(function () {
+        ko.applyBindings(list);
+    });
+
+    $(".status-filter > div > a").eq(0).attr("href","javascript:;").click(function(e){
+        list.changeStatus(0);
+        e.preventDefault();
+        return false;
+    })
+
+    $(".status-filter > div > a").eq(1).attr("href","javascript:;").click(function(e){
+        list.changeStatus(1);
+        e.preventDefault();
+        return false;
+    })
+</script>
+@*<script>
     $(document).ready(function () {
         var jtable_config = {
             title: 'Danh Sách Danh Mục',
@@ -68,4 +208,4 @@
         $('#CategoryTable').jtable(dropit.jtInit(jtable_config));
         $('#CategoryTable').jtable('load');
     });
-</script>
+</script>*@
