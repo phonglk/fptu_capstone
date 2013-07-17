@@ -1,4 +1,83 @@
-﻿
+﻿function OptionRadio(arg) {
+    var self = this;
+
+    this.value;
+    this.text;
+
+    $.extend(self, arg);
+
+    this.default = (typeof arg.default != "undefined");
+    self.eid = "e_" + self.value + "_" + self.parent.uid
+
+    this.html = function () {
+        var html = '<div class="input"><input type="radio" id="#{eid}"  class="normal-radio" name="#{parent_uid}" value="#{value}" #{selectedMarkup}>'
+        html += '<label for="#{eid}">#{text}</label></div>'
+        html = $(html.eval({
+            eid: self.eid,
+            parent_uid: self.parent.uid,
+            value: self.value,
+            text: self.text,
+            selectedMarkup: self.default == true ? " checked='checked'" : ""
+        }))
+
+
+
+        html.find("input").change(function () {
+            self.parent.optionChange(self);
+        });
+
+        return html;
+    }
+}
+function OptionRadioGroup(options) {
+    var self = this;
+    self.options = [];
+    self.uid = "org_" + (OptionRadioGroup._i++) + "_" + new Date().getTime();
+    $.each(options, function (i, e) {
+        e.parent = self;
+        self.options.push(new OptionRadio(e));
+    })
+
+    self.change = function (value) {
+
+    }
+
+    self.findByEid = function (eid) {
+        var rs = null;
+        $.each(self.options, function (i, e) {
+            if (e.eid == eid) {
+                rs = e;
+                return;
+            }
+        });
+
+        return rs;
+    }
+
+    self.bind = function (jSelector) {
+        var tar = $(jSelector);
+        $.each(self.options, function (i, e) {
+            tar.append(e.html());
+        })
+    }
+    self.value = function () {
+        var $checked = $("[name='#{uid}']:checked".eval(self));
+        var eid = $checked.attr("id");
+        var option = self.findByEid(eid);
+        if (option != null) {
+            return option.value
+        }
+        return null;
+    };
+    self.optionChange = function (option) {
+        self._change();
+    }
+    self._change = function () {
+        self.change.call(self, self.value());
+    }
+
+}
+OptionRadioGroup._i = 0;
 
 function Category(obj) {
     var self = this;
@@ -103,15 +182,65 @@ function User(obj) {
     var self = this;
     self.UserId = -1;
     self.UserName = "";
+    self.FullName = "";
     self.Email = "";
     self.Address = "";
     self.Province = null;
     self.Phone = "";
     self.Active = true;
     self.Sellable = false;
+    self.CreatedDate;
+    self.ModifiedDate;
 
     $.extend(self, obj);
-    self.Category = new Category(obj.Category);
+
+    try{
+        self.Category = new Category(obj.Category);
+        self.Active = ko.observable(obj.Active);
+        self.Sellable = ko.observable(obj.Sellable);
+        self.CreatedDate = Date.fromRawJSON(obj.CreatedDate);
+        self.ModifiedDate = Date.fromRawJSON(obj.ModifiedDate);
+
+        self.Active.subscribe(function(newValue){
+            list.AjaxUpdate({
+                item: self,
+                urlData : {Action:"UpdateActive", Data : { UserId : self.UserId, Active: newValue }},
+                callback:function(user){
+                    var text = "Người dùng <strong>#{UserName}</strong> đã được ".eval(user);
+                    if(newValue){
+                        text += "kích hoạt"
+                    }else{
+                        text += "hủy kích hoạt"
+                    }
+                    Notifications.push({
+                        text: text,
+                        autoDismiss: 2
+                    })
+                }
+            });
+        },self)
+
+        self.Sellable.subscribe(function (newValue) {
+            list.AjaxUpdate({
+                item: self,
+                urlData : {Action:"UpdateActive", Data : { UserId : self.UserId, Active: newValue }},
+                callback:function(user){
+                    var text = "Người dùng <strong>#{UserName}</strong> đã ".eval(user);
+                    if(newValue){
+                        text += "được phép bán vé"
+                    }else{
+                        text += "không được bán vé"
+                    }
+                    Notifications.push({
+                        text: text,
+                        autoDismiss: 2
+                    })
+                }
+            });
+        })
+    } catch (e) {
+
+    }
 }
 
 function DataList() {
@@ -119,6 +248,7 @@ function DataList() {
 
     self.data = ko.observableArray([])
     self.extraData = {};
+    self.dataClass = Event;
     
 
     self.url_getList = { Controller: "", Action: "" };
@@ -163,7 +293,7 @@ function DataList() {
 
     self.getList = function (callback) {
         Loading(true);
-        var data = { jtPageSize: self.pageSize, jtStartIndex: self.startIndex(), jtSorting: self.sorting, EventStatus: self.EventStatus };
+        var data = { jtPageSize: self.pageSize, jtStartIndex: self.startIndex(), jtSorting: self.sorting };
         $.extend(data, self.extraData);
         var urlData = { Action: "List", Controller: "Event", Data: data };
         $.extend(urlData, self.url_getList);
@@ -175,7 +305,7 @@ function DataList() {
                 if (rs.Result && rs.Result == "OK") {
                     self.data.removeAll();
                     $.each(rs.Records, function (i, v) {
-                        self.data.push(new Event(v));
+                        self.data.push(new self.dataClass(v));
                     })
                     self.recordCount(rs.TotalRecordCount);
                 }
@@ -201,6 +331,27 @@ function DataList() {
                     self.getList();
                     if (obj.callback) {
                         obj.callback.call(this,obj.item)
+                    }
+                } else {
+                    if (obj.callbackOnFail) {
+                        obj.callbackOnFail.call();
+                    }
+                }
+            }
+        })
+    }
+     
+    // just use for update, no prevent action and no reload
+    self.AjaxUpdate = function (obj) {
+        Loading(true);
+        $.ajax({
+            url: Url(obj.urlData),
+            type: "POST",
+            success: function (rs) {
+                Loading(false);
+                if (rs.Result && rs.Result == "OK") {
+                    if (obj.callback) {
+                        obj.callback.call(this, obj.item)
                     }
                 } else {
                     if (obj.callbackOnFail) {
