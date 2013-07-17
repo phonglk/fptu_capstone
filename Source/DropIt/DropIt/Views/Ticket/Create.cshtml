@@ -29,7 +29,7 @@
                 <div class="controls">
                     <div class="input-append">
                         <span data-bind="visible: isCreateEvent() == false">
-                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId , new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{allowClear:false}" })
+                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId , new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}" })
                         </span>
                         @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                         <span class="add-on">

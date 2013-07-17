@@ -47,7 +47,7 @@ namespace DropIt.Areas.Administration.Controllers
                     Phone = e.Phone,
                     Active = e.Active,
                     Sellable = e.Sellable,
-                    ProvinceId = e.ProvinceId                    
+                    ProvinceId = e.ProvinceId 
                 });
                 return Json(new JSONResult(Records)
                 {
