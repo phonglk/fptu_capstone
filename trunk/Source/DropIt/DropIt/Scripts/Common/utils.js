@@ -3,7 +3,7 @@ Date.fromRawJSON = function (string) {
     return new Date(parseInt(string.match(/\d+/)));
 };
 Date.prototype.toDateString=function(){
-    return ("#{0}/#{1}/#{2}").eval(this.getDate().toLength(2), this.getMonth().toLength(2), this.getFullYear());
+    return ("#{0}/#{1}/#{2}").eval(this.getDate().toLength(2), (this.getMonth()+1).toLength(2), this.getFullYear());
 }
 Date.prototype.toDateTimeInputString = function () {
     var date = {

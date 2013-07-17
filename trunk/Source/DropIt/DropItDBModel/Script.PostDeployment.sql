@@ -298,6 +298,11 @@ WHEN NOT MATCHED BY TARGET THEN
 ;
 
 GO
+
+INSERT INTO Setting(SettingName,Value) values('ServiceFee','0.07')
+
+GO
+
 CREATE TRIGGER Update_Event_When_Transaction
 	ON [dbo].[Ticket]
 	After UPDATE

@@ -11,7 +11,12 @@
     ViewBag.Title = "BuyTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    th{
+        font-weight:bold !important;
+        color:#431f59!important;
+    }
+</style>
 <div class="container" id="content">
     <div class="form1">
         @using (Html.HorizontalForm())
@@ -21,10 +26,16 @@
 
             <h3>Mua vé</h3> 
             
+            
+            
             <div class="ticket-list">
-                <table class="table table-condensed event-detail">
+                <table class="table table-condensed table-bordered event-detail" style="margin-left:5px;">
                     <thead>
-
+                        <tr>
+                            <th colspan="5">
+                                Thông tin vé : @Model.EventName
+                            </th>
+                        </tr>
                         <tr class="header warning">
                             <th class="">Tên sự kiện</th>
                             <th class="">Thời gian</th>
@@ -40,7 +51,7 @@
                                 @Model.EventName
                             </td>
                             <td class="user">
-                                @Model.HoldDate
+                                @Json.Encode(Model.HoldDate)
                             </td>
                             <td class="user">
                                 @Model.VenueName
@@ -53,16 +64,20 @@
                             </td>
                                 
                         </tr>
+                        <tr>
+                            <td colspan="5">
+                                <br />
+                                <br />
+                                <strong>Thông tin chi tiết</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align:left">
+                                @Model.Description
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <div class="header warning">
-                                        <div class="">Miêu tả</div>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            @Model.Description
-                                        </div>
-                                    </div>
                 </div>
             
             @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
