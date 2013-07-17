@@ -45,10 +45,37 @@
 </style>
 <div class="row-fluid">
     <div class="span8 status-filter">
-        Filter
+        @*        <a href="@Url.Action("Index", new { EventStatus = -1 })" class="button large">
+            <i class="icon-th"></i>
+            <span>Tất cả</span>
+        </a>*@
+        <div class="btn-group">
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Disapprove })" class="btn btn-large active">
+                <i class="icon-bullhorn"></i>
+                <span>Chưa duyệt</span>
+            </a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Approve })" class="btn btn-large">
+                <i class="icon-ok"></i>
+                <span>Đã duyệt</span>
+            </a>
+            <a style="display:none"></a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Trading })" class="btn btn-large">
+                <i class="icon-road"></i>
+                <span>Đang giao dịch</span>
+            </a>
+            <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Outdate })" class="btn btn-large">
+                <i class="icon-time"></i>
+                <span>Quá ngày</span>
+            </a>
+        </div>
     </div>
     <div class="span4">
-        
+        <div class="pull-right" style="">
+            <a href="@Url.Action("Create")" class="button large blue">
+                <i class="icon-plus"></i>
+                <span>Tạo sự kiện</span>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -56,11 +83,11 @@
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Username</th>
-            <th>Tên đầy đủ</th>
-            <th>Địa chỉ</th>
-            <th>Kích hoạt</th>
-            <th>Được bán</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Tên sự kiện</th>
+            <th>Danh mục</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('HoldDate', data, event) }">Ngày tổ chức</th>
+            @*<th>Danh mục</th>*@
+            <th>Địa điểm</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -68,9 +95,9 @@
         <tr>
             <td data-bind="">
                 <a href="" data-bind="
-    text: Username,
+    text: EventName,
     attr: {
-        href: Url({ Action: 'Edit', Data: { Id: UserId } }),
+        href: Url({ Action: 'Edit', Data: { Id: EventId } }),
         title: EventName,
         'data-content':EventDetail
     }
