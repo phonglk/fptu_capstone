@@ -57,3 +57,6 @@ Bổ sung tính năng auto closed request sau khi sự kiện đã diễn ra.
 Thêm Manage auto 
 Config Request, Event
 
+July 17
+Bỏ TranShipDate trong table Ticket
+
