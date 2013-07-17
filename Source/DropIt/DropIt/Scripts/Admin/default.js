@@ -71,29 +71,49 @@ function Event(obj) {
     self.Venue = null;
 
     $.extend(self, obj);
-    self.Category = new Category(obj.Category);
-    self.Venue = new Venue(obj.Venue);
-    self.HoldDate = Date.fromRawJSON(self.HoldDate);
-    if (self.Description == null) self.Description = "";
+    try{
+        self.Category = new Category(obj.Category);
+        self.Venue = new Venue(obj.Venue);
+        self.HoldDate = Date.fromRawJSON(self.HoldDate);
+        if (self.Description == null) self.Description = "";
 
-    var html = "<div class='event-detail' style='width:500px'>";
-    if (self.EventImage != null) {
-        html += ("<img width=150 src='" + Url(self.EventImage) + "' style='float:left;display:block'/>")
+        var html = "<div class='event-detail' style='width:500px'>";
+        if (self.EventImage != null) {
+            html += ("<img width=150 src='" + Url(self.EventImage) + "' style='float:left;display:block'/>")
+        }
+        html += ("<div style='float:left;padding-left:10px'><div><strong>Thuộc danh mục</strong>: #{CategoryName} </div>".eval(self.Category))
+        html += ("<div><strong>Ngày giờ diễn ra</strong>: " + self.HoldDate.toLocaleString("vn") + "</div>")
+        html += ("<div><strong>Nghệ sĩ tham gia</strong>: #{Artist} </div>")
+        html += ("<div><strong>Địa điểm</strong>: #{VenueName} </div>".eval(self.Venue))
+        html += ("</div><div style='clear:both'> " + self.Description + " </div></div>")
+
+        self.EventDetail = html;
+        self.EventDetail = self.EventDetail.eval(self);
+
+        html = "<strong>Địa chỉ</strong>: " + self.Venue.Address;
+        html += "<br/><strong>Tỉnh/Thành phố</strong>: " + self.Venue.Province.ProvinceName;
+
+        self.VenueDetail = html.eval(self);
+    } catch (e) {
+        console.info(e.message);
     }
-    html += ("<div style='float:left;padding-left:10px'><div><strong>Thuộc danh mục</strong>: #{CategoryName} </div>".eval(self.Category))
-    html += ("<div><strong>Ngày giờ diễn ra</strong>: " + self.HoldDate.toLocaleString("vn") + "</div>")
-    html += ("<div><strong>Nghệ sĩ tham gia</strong>: #{Artist} </div>")
-    html += ("<div><strong>Địa điểm</strong>: #{VenueName} </div>".eval(self.Venue))
-    html += ("</div><div style='clear:both'> " + self.Description + " </div></div>")
-
-    self.EventDetail = html;
-    self.EventDetail = self.EventDetail.eval(self);
-
-    html = "<strong>Địa chỉ</strong>: " + self.Venue.Address;
-    html += "<br/><strong>Tỉnh/Thành phố</strong>: " + self.Venue.Province.ProvinceName;
-
-    self.VenueDetail = html.eval(self);
 }
+
+function User(obj) {
+    var self = this;
+    self.UserId = -1;
+    self.UserName = "";
+    self.Email = "";
+    self.Address = "";
+    self.Province = null;
+    self.Phone = "";
+    self.Active = true;
+    self.Sellable = false;
+
+    $.extend(self, obj);
+    self.Category = new Category(obj.Category);
+}
+
 function DataList() {
     var self = this;
 

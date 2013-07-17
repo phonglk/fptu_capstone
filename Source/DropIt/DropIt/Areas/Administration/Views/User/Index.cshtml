@@ -4,91 +4,132 @@
 }
 @Scripts.Render("~/Bundles/jquery.validate")
 
-<div class="table-wrapper venues-table section">
-    <div class="row-fluid head">
-        <div class="span12">
-            <h4>Quản Lý Người Dùng</h4>
-        </div>
+<div class="row-fluid">
+    <div class="span8 status-filter">
+        Filter
     </div>
-    <div class="row-fluid filter-block">
-        <div class="pull-right">
-            
-        </div>
-    </div>
-    <div id="pad-wrapper">
-        <div class="row-fluid">
-            <div id="UserTable" style="width: 100%; margin: auto;"></div>
-        </div>
-    </div>
-    <!-- end events table -->
-</div>
-<script> 
-    $(document).ready(function () {
+    <div class="span4">
         
-        var jtable_config = {
-            title: 'Danh sách người dùng',
-            paging: true,
-            pageSize: 5,
-            sorting: true,
-            /*selecting: true,
-            multiselect: true,
-            selectingCheckboxes:true,*/
-            actions: {
-                base: {}
-            },            
-            fields: {
-                UserId: {
-                    key: true,
-                    create: false,
-                    edit: false,
-                    list: false
-                },
-                UserName: {                    
-                    list: true,
-                    edit: false,
-                    //type: 'hidden',
-                    title: 'Tên người dùng',
-                    validation: [
-                        "required"
-                    ]
-                    //input: function (data) {
-                    //    return '<input type="text" name="Name" style="width:200px" value="' + data.record.UserName + '" />';
-                    //}
-                },                
-                Email: {
-                    list: false,
-                    title: 'Email',
-                    validation: ["required"]
-                },
-                Phone: {
-                    title: "Điện Thoại"
-                },
-                Address: {
-                    list: true,
-                    title: "Địa chỉ",
-                    validation: ["required"]                    
-                },
-                Active: {                    
-                    title: "Trạng thái tài khoản",
-                    type: "checkbox",
-                    values: { "false": "Passive", "true": "Active" },
-                    defaultValues: "true"
-                },
-                Sellable: {
-                    title: "Trạng thái bán",
-                    type: "checkbox",
-                    values: { "false": "Passive", "true": "Active" },
-                    defaultValues: "true"
-                },
-                ProvinceId: {
-                    title: "Tỉnh/Thành",
-                    validation: ["required"],
-                    options: Url({ Controller: "Province", Action: "GetProvinceOptions" })
-                }                
-            }            
-        }
+    </div>
+</div>
 
-        $('#UserTable').jtable(dropit.jtInit(jtable_config));
-        $('#UserTable').jtable('load');        
+
+<table class="table table-bordered box">
+    <thead>
+        <tr>
+            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Username</th>
+            <th>Tên đầy đủ</th>
+            <th>Địa chỉ</th>
+            <th>Kích hoạt</th>
+            <th>Được bán</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: data">
+        <tr>
+            <td data-bind="">
+                <a href="" data-bind="
+    text: Username,
+    attr: {
+        href: Url({ Action: 'Edit', Data: { Id: UserId } }),
+        title: EventName,
+        'data-content':EventDetail
+    }
+                    "
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+            </td>
+            <td data-bind="text: Category.CategoryName"></td>
+            <td>
+                <span data-bind="
+    text: HoldDate.toDateString(),
+    attr:{
+        title: HoldDate.toLocaleString('vn')
+    }
+    "
+                    data-toggle="tooltip"></span>
+            </td>
+            @*<td data-bind="text: Category.CategoryName"></td>*@
+            <td>
+                <a data-bind="
+    text: Venue.VenueName,
+    attr: {
+        title: Venue.VenueName,
+        'data-content':VenueDetail
+    }"
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+            </td>
+            
+            <td>
+                <a href="javascript:;"
+                    class="button green"
+                    data-bind="click:$root.Approve,visible:Status==Statuses.Disapprove">Duyệt
+                </a>
+                <a href="javascript:;"
+                    class="button red"
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Disapprove">Xóa
+                </a>
+
+                <a href="javascript:;"
+                    class="button black"
+                    data-bind="click:$root.Disapprove,visible:Status==Statuses.Approve && haveTicketTran == false">Bỏ duyệt
+                </a>
+                <a href="javascript:;"
+                    class="button red"
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Outdate">Xóa
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="pagination pull-right" data-bind="visible: pageCount() > 0">
+    <ul data-bind="foreach: new Array(pageCount())">
+        <li data-bind="css: {active: $index()+1 == $root.currentPage()}">
+            <a href="javascript:;" data-bind="click: function (data,event) { $root.changePage($index(),data,event)}">
+                <span data-bind="text: ($index()+1)"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+
+    var list = new DataList();
+    list.url_getList = { Controller: "User", Action: "List" };
+    list.extraData = {
+        
+    }
+    list.changeStatus = function (stt) {
+        $(".status-filter > div > a").removeClass("active");
+        $(".status-filter > div > a").eq(stt).addClass("active");
+        list.extraData.EventStatus = stt;
+        list.currentPage(1);
+        list.getList();
+    }
+    list.Delete = function (item) {
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa sự kiện \"" + item.EventName + "\" ?",
+            {
+                confirm: function () {
+                    list.AjaxAction({
+                        item: item,
+                        urlData: { Action: "Approve", Data: { Id: item.EventId } },
+                        callback: function (event) {
+                            Notifications.push({
+                                imagePath: Url(event.EventImage),
+                                fillImage: true,
+                                text: "Sự kiện \"#{EventName}\" đã được xóa !".eval(event),
+                                autoDismiss: 5
+                            })
+                        }
+                    })
+                }
+            }
+        )
+    }
+
+    list.getList(function () {
+        ko.applyBindings(list);
     });
 </script>

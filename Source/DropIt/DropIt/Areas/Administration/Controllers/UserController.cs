@@ -44,10 +44,13 @@ namespace DropIt.Areas.Administration.Controllers
                     UserName = e.UserName,
                     Email = e.Email,
                     Address = e.Address,
+                    Province = new {
+                        e.Province.ProvinceId,
+                        e.Province.ProvinceName
+                    },
                     Phone = e.Phone,
                     Active = e.Active,
-                    Sellable = e.Sellable,
-                    ProvinceId = e.ProvinceId 
+                    Sellable = e.Sellable
                 });
                 return Json(new JSONResult(Records)
                 {
