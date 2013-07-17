@@ -130,6 +130,50 @@
         <end-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
       </relation>
     </item>
+    <item id="di442119212689882555" cid="C005" type="class" name="Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:59">
+      <stereotypes />
+      <tagged-values />
+      <documentation>
+        <text>
+          <content>
+            <paragraph line-spacing="1">
+              <p index="0">
+                <t />
+                <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                  <text>
+                    <solid-brush color="#FF000000" />
+                  </text>
+                </style>
+              </p>
+            </paragraph>
+          </content>
+        </text>
+      </documentation>
+      <cooperation>
+        <participants />
+        <comments />
+      </cooperation>
+      <associated-diagrams />
+      <owned-items />
+      <style class="default" />
+      <attributes>
+        <attribute id="ac75d89d42b124757b86b86709ed3fcf3455" name="EventID" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a16f8cc2f33434b728d620bbb0fd50003609" name="EventName" type="nvarchar(50)" type-id="nvarchar(50)" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a27a154a5226b434796cdd4db9f4beb1e743" name="EventImage" type="nvachar(MAX)" type-id="nvachar(MAX)" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a95708b1472aa44028c15b98a142660a9472" name="Artist" type="nvarchar(50)" type-id="nvarchar(50)" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a20d70e59eb53456592c9143751a56edb481" name="Holdate" type="datetime" type-id="datetime" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a493d42e2466f4a4f91c8afcb099069c7854" name="Description" type="nvarchar(MAX)" type-id="nvarchar(MAX)" visibility="public" abstract="false" virtual="false" />
+        <attribute id="aeaebff00f14642d9aacf0fbc795cd6fc906" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+        <attribute id="aa91beefb2e7f4527ba2feb174474bace945" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+        <attribute id="af7a5ae94243f4ae588e52cd30b6d6e5d951" name="VenueId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a3c477f7d609742afaeef51c91e107d1d195" name="CreatedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
+        <attribute id="a41c43e3877e74de8a9c8448bfbe96bf0960" name="ModifiedDate" type="DateTime" type-id="Uml.DateTime" visibility="public" abstract="false" virtual="false" />
+      </attributes>
+      <operations />
+      <template-parameters>
+        <source-codes />
+      </template-parameters>
+    </item>
   </items>
   <models>
     <model id="p914207723566648390" name="Model 1" type="model" namespace="" order-index="1">
@@ -788,6 +832,119 @@
             </layout>
             <relation from="di522683038986988130" from-iid="1aab3440525d42d7ab0ddd151c830775" to="di282636733675920328" to-iid="a62eec6a83b74e1da0a9a09a3ee0705b" />
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-class" id="p690899897518471426" name="ClassDiagram2" order-index="2" show-nullability="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>07/17/2013 14:24:22</creation-date>
+          <change-date>07/17/2013 14:24:37</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <tagged-values />
+        <abstract-items>
+          <item id="di128824722660815455" cid="REL003" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P744f9911041c4f998232a8a2b54a302d" creation-date="06/15/2013 02:58:37">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di133384949350709756" to="di820304116113459660">
+              <start-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di925259865268439987" cid="C004" type="class" name="Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/15/2013 02:29:47">
+            <stereotypes />
+            <tagged-values />
+            <documentation>
+              <text>
+                <content>
+                  <paragraph line-spacing="1">
+                    <p index="0">
+                      <t />
+                      <style font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                        <text>
+                          <solid-brush color="#FF000000" />
+                        </text>
+                      </style>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <attributes>
+              <attribute id="ae9bbcc17461f42bab59c94c8ad763dac63" name="CategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+              <attribute id="ab45a1ce1cbde4741a24949b62dfd67b1411" name="CategoryName" type="nvarchar(50)" type-id="nvarchar(50)" visibility="public" abstract="false" virtual="false" />
+              <attribute id="ab251cbd6a88e4f889c524166fb9ffeb6434" name="ParentCategoryId" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+              <attribute id="a14d843ab56504437917701c78812cc43305" name="Status" type="Integer" type-id="Uml.Integer" visibility="public" abstract="false" virtual="false" />
+              <attribute id="a64f74d3a134c4ba5830dd0832e95dded571" name="Description" type="nvarchar(MAX)" type-id="nvarchar(MAX)" visibility="public" abstract="false" virtual="false" />
+            </attributes>
+            <operations />
+            <template-parameters>
+              <source-codes />
+            </template-parameters>
+          </item>
+          <item id="di887843854501691163" cid="REL017" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P744f9911041c4f998232a8a2b54a302d" creation-date="06/15/2013 03:08:51">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di133384949350709756" to="di133384949350709756">
+              <start-role id="" name="" multiplicity="1" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di925259865268439987" iid="96d1e62877864fa3ba6251c1e8194481" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 02:29:47" order-index="3" type="entity">
+            <layout ax="150" ay="500" awidth="210" aheight="160" x="150" y="500" width="210" height="160" angle="0" />
+            <class />
+          </item>
+          <item id="di128824722660815455" iid="404f5e7b622d41a49c91a57b2f0d2df4" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 02:58:37" order-index="10" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="360" y1="593" x2="487" y2="593" start-border-pos="0.394707202911377" end-border-pos="0.903601694915254">
+              <points>
+                <point x="360" y="593" />
+                <point x="487" y="593" />
+              </points>
+            </layout>
+            <relation from="di925259865268439987" from-iid="96d1e62877864fa3ba6251c1e8194481" to="di442119212689882555" to-iid="c5741a292b974dceb6c219494df1f116" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+          <item id="di887843854501691163" iid="40215e15ee7043079db5c1946c85c46d" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 03:08:51" order-index="18" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" name-position="10,-10" x1="180" y1="500" x2="150" y2="630" start-border-pos="0.0357142857142857" end-border-pos="0.796875">
+              <points>
+                <point x="180" y="500" />
+                <point x="180" y="450" />
+                <point x="100" y="450" />
+                <point x="100" y="630" />
+                <point x="150" y="630" />
+              </points>
+            </layout>
+            <relation from="di925259865268439987" from-iid="96d1e62877864fa3ba6251c1e8194481" to="di925259865268439987" to-iid="96d1e62877864fa3ba6251c1e8194481" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+          <item id="di442119212689882555" iid="c5741a292b974dceb6c219494df1f116" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="06/15/2013 02:29:59" order-index="4" type="entity">
+            <layout ax="487" ay="502" awidth="203" aheight="236" x="487" y="502" width="203" height="236" angle="0" />
+            <class />
           </item>
         </layer>
       </diagram>
