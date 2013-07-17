@@ -3,7 +3,7 @@
  <ul class="inline">
      
         <li class="welcome"><i class="icon-user"></i> Chào bạn @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>
-        @if (User.IsInRole("Administrator"))
+        @if (WebSecurity.Initialized && User.IsInRole("Administrator"))
         {
             <li class=""><i class="icon-dashboard"></i> @Html.ActionLink("Quản trị", "Index", "Dashboard", new { area="Administration" }, htmlAttributes: new { @class = "username", title = "Vào trang admin" })</li>
         }

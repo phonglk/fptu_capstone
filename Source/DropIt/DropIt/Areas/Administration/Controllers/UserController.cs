@@ -31,17 +31,28 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null,int isActive = -1,int isSellable =-1)
         {
             try
             {
+                var records = Repository.GetAll();
+                if (isActive != -1)
+                {
+                    records = records.Where(u => u.Active == (isActive == 1));
+                }
 
-                var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                if (isSellable != -1)
+                {
+                    records = records.Where(u => u.Sellable == (isSellable == 1));
+                }
+
+                records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
 
                 var Records = records.Select(e => new
                 {
                     UserId = e.UserId,
                     UserName = e.UserName,
+                    FullName = e.FullName,
                     Email = e.Email,
                     Address = e.Address,
                     Province = new {
@@ -50,7 +61,9 @@ namespace DropIt.Areas.Administration.Controllers
                     },
                     Phone = e.Phone,
                     Active = e.Active,
-                    Sellable = e.Sellable
+                    Sellable = e.Sellable,
+                    e.CreatedDate,
+                    e.ModifiedDate
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -63,6 +76,76 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
         // Create
+
+        [HttpPost]
+        public JsonResult UpdateActive(int UserId, bool Active)
+        {
+            try
+            {
+                User user = Repository.GetById(UserId);
+                if (user != null)
+                {
+                    user.Active = Active;
+                    Repository.AddOrUpdate(user);
+                    Repository.Save();
+                    return Json(new
+                    {
+                        Result = "OK"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message = "User not found"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = ex.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSellable(int UserId, bool Sellable)
+        {
+            try
+            {
+                User user = Repository.GetById(UserId);
+                if (user != null)
+                {
+                    user.Sellable = Sellable;
+                    Repository.AddOrUpdate(user);
+                    Repository.Save();
+                    return Json(new
+                    {
+                        Result = "OK"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message = "User not found"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = ex.Message
+                });
+            }
+        }
 
         [HttpPost]
         public JsonResult Create(User user)

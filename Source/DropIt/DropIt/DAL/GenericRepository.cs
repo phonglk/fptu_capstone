@@ -32,6 +32,21 @@ namespace DropIt.DAL
             get { return dbSet.Count();}
         }
 
+        public virtual IEnumerable<TEntity> JT(IEnumerable<TEntity> records,int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            if (jtSorting != null)
+            {
+                records = records.OrderBy(jtSorting);
+            }
+
+            if (jtPageSize != 0)
+            {
+                records = records.Skip(jtStartIndex).Take(jtPageSize);
+            }
+
+            return records.ToList();
+        }
+
         public virtual IEnumerable<TEntity> JTGet(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             var query = GetAll();

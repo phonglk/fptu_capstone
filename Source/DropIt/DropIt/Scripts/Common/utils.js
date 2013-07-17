@@ -5,6 +5,9 @@ Date.fromRawJSON = function (string) {
 Date.prototype.toDateString=function(){
     return ("#{0}/#{1}/#{2}").eval(this.getDate().toLength(2), (this.getMonth()+1).toLength(2), this.getFullYear());
 }
+Date.prototype.toDateTimeString = function () {
+    return ("#{3}:#{4}:#{5} #{0}/#{1}/#{2}").eval(this.getDate().toLength(2), (this.getMonth() + 1).toLength(2), this.getFullYear(), this.getHours().toLength(2), this.getMinutes().toLength(2), this.getSeconds().toLength(2));
+}
 Date.prototype.toDateTimeInputString = function () {
     var date = {
         year: this.getFullYear(),
