@@ -197,7 +197,14 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-                Ticket.Status = oldTicket.Status;
+                if (oldTicket.Status == 0) 
+                {
+                    Ticket.Status = 1;
+                }
+                else if (oldTicket.Status == 1) {
+                    Ticket.Status = 3;
+                }
+
                 Repository.AddOrUpdate(Ticket);
                 unitOfWork.Save();
                 return Json(new JSONResult());

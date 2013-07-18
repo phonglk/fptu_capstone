@@ -21,5 +21,6 @@ namespace DropIt.Areas.Administration.ViewModels
         public string Description { get; set; }
         public int EventId { get; set; }
 
+        public bool AllowEdit { get; set; }
     }
 }
