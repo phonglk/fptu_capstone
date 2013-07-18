@@ -1,60 +1,179 @@
-﻿@model DropIt.Models.Ticket
+﻿@model DropIt.Areas.Administration.ViewModels.TicketViewModel
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Areas/Administration/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Sửa thông tin vé</legend>
-
-        @Html.HiddenFor(model => model.TicketId)
-        @*@Html.HiddenFor(m=>m.EventId)*@
-        @Html.HiddenFor(m=>m.UserId)
-        
-        <div class="control-group">
-            @Html.Label("Tên sự kiện")
+@Scripts.Render("~/Bundles/jquery.validate")
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+<style>
+    label {
+        font-weight:bold;
+    }
+    .input {
+        margin-top: 15px;
+    }
+</style>
+<script>
+    var Model = @Html.Raw(Json.Encode(Model));
+</script>
+@if (Model.Status == 4)
+            {
+               
+                        <div class="alert">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                          <strong>Cảnh báo!</strong> Sự kiện này đã có vé đã hoặc đang giao dịch, không thể sửa thông tin
+                        </div>
+                <div class="cf"></div>
+                <script>
+                    $(function(){
+                        $("#createEvent input,#createEvent textarea").addClass("disabled").attr("disabled","disabled");
+                        $("#createEvent select").select2("enable",false);
+                    })
+                </script>
+            }
+<div class="box" style="clear:both">
+    <div class="tab-header">
+        Chỉnh sửa địa điểm
+    </div>
+    <form class="fill-up" id="createEvent" method="post" enctype="multipart/form-data">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="padded">
+                       @*<input type="hidden" name="VenueId" value="@Model.VenueId" />*@
+                    @Html.HiddenFor(t=> t.TicketId)
+                    <div class="input">
+                        <label for="price">Giá bán</label>
+                        <input id="price" type="text" class="" name="Price" value="@Model.SellPrice"/>
+                    </div>
+                    <div class="input">
+                        <label for="seat">Ghế ngồi</label>
+                        <input id="seat" type="text" class="" name="Seat" value="@Model.Seat"/>
+                    </div>
+                    <div class="input">
+                        <label for="event">Sự kiện</label>
+                        @Html.DropDownList("EventId",(SelectList)ViewBag.EventId, new { id="event",name="EventId",style="width:100%" } )
+                    </div>
+                        <div class="input">
+                        <label for="holdDate">Ngày diễn ra</label>
+                        @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate" ,data_format="dd/MM/yyyy  hh:mm:ss"})
+                    </div>
+                   <div class="input">
+                        <label for="venue">Địa điểm</label>
+                             @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId ,new { data_bind = "select2:{}", style = "width:100%" })
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="padded">
+                    <div class="input">
+                        <label for="Description">Chú thích</label>
+                        <textarea name="Description" id="Description" style="width:100%;height:100px;">@Model.Description</textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="control-group">
-            @Html.DropDownList("EventId", String.Empty)
-            
-            @Html.ValidationMessageFor(model => model.EventId)
+        <div class="form-actions">
+              @if (Model.Status != 4){
+                <button type="submit" class="button blue">Cập nhật</button>
+            }
+            <a href="@Url.Action("Index")" class="button">Hủy</a>
         </div>
-
-        <div class="control-group">
-            @Html.Label("Miêu tả ghế ngồi")
-        </div>
-        <div class="control-group">
-            @Html.EditorFor(model => model.Seat)
-            @Html.ValidationMessageFor(model => model.Seat)
-        </div>
-
-        <div class="control-group">
-            @Html.Label("Ghi chú (tùy chọn)")
-        </div>
-        <div class="control-group">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-
-        @*<div class="control-group">
-            @Html.Label("Trạng thái")
-        </div>
-        <div class="control-group">
-            @Html.EditorFor(model => model.Status)
-            @Html.ValidationMessageFor(model => model.Status)
-        </div>*@
-
-        <p>
-            <input type="submit" value="Lưu lại" />
-            
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Quay về", "List")
+    </form>
 </div>
+<script>
+    CKEDITOR.replace('Description', {
+        toolbar: [
+		{ name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+		{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
+		{
+		    name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'
+		    ]
+		},
+                '/',
+		{ name: 'styles', items: ['Styles', 'Format'] },
+		{ name: 'basicstyles', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] },
+		{ name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+		{ name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+		{ name: 'tools', items: ['Maximize', '-', 'About'] }
+        ]
+    })
+
+
+    validateOptions = {
+        rules: {
+            SellPrice: {
+                required: true
+            },
+            EventId: {
+                required: true
+            }
+        },
+        messages: {
+            SellPrice: "Cần phải điền giá vé",
+            EventId: "Phải chọn Sự kiện",
+        }
+        //,
+        //errorLabelContainer:$('.validation-summary-errors')
+        , errorElement: "span",
+        errorClass: "error",
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent().find("label"));
+        },
+        ignore: ".select2-focusser,.select2-input"
+    }
+
+    $("#createEvent").validate(validateOptions);
+    $("select").select2();
+    $("#event").select2("val", Model.EventId);
+    $("#venue").select2("val", Model.VenueId);
+    function submit() {
+        Loading(true, true);
+        $("#Description").val(CKEDITOR.instances.Description.getData());
+        var formData = new FormData($("#createEvent")[0]);
+        function success(rs) {
+            Loading(false);
+            if (rs.Result && rs.Result == "OK") {
+                location = Url({ Action: "Index" })
+            } else {
+                $.fn.dialog2.helpers.alert("Lỗi: " + rs.Message);
+            }
+        }
+        $.ajax({
+            url: Url({ Action: "Edit" }),
+            type: "POST",
+            data: formData,
+            success: success,
+            processData: false,
+            contentType: false,
+            error: function () {
+                Loading(false);
+                $.fn.dialog2.helpers.alert("Có lỗi xảy ra khi gửi dữ liệu lên server");
+            }
+        });
+
+    }
+    $("#createEvent").submit(function (e) {
+        if ($("#createEvent").valid()) {
+            submit();
+            return false;
+        }
+    })
+
+    self.selectVenueChange = function () {
+        $.ajax({
+            url: Url({ Controller: "Event", Action: "getInfo" }),
+            type:"POST",
+            data: "EventId=" + self.EventId(),
+            success: function (data) {
+                if (data.Result && data.Result == "OK" && data.Records) {
+                    var record = data.Records[0]
+                    self.HoldDate(record.HoldDate)
+                    self.VenueName(record.VenueName)
+                    self.VenueAddress(record.Address)
+                    self.ProvinceId(record.ProvinceId)
+                    self.CategoryId(record.CategoryId)
+                }
+            }
+        })
+    }
+</script>

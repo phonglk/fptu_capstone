@@ -240,6 +240,39 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult getInfo(int EventId)
+        {
+
+            var Event = Repository.Get(e => e.EventId == EventId);
+
+            if (Event != null)
+            {
+                return Json(new
+                {
+                    Result = "OK",
+                    Records = Event.Select(e => new
+                    {
+                        e.Venue.VenueName,
+                        e.Venue.VenueId,
+                        e.Venue.Address,
+                        e.Venue.Province.ProvinceId,
+                        e.Venue.Province.ProvinceName,
+                        e.CategoryId,
+                        e.HoldDate
+                    })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = "Event not found"
+                });
+            }
+
+        }
         //public JsonResult Delete(int EventId)
         //{
         //    try
