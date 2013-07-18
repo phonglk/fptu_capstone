@@ -194,7 +194,7 @@ namespace DropIt.Controllers
                     TranFullName = buyTicket.TranFullName,
                     TranAddress = buyTicket.TranAddress,
                     TranType = buyTicket.TranType,
-                    TranStatus = (int)Statuses.Transaction.Unpaid,
+//                    TranStatus = (int)Statuses.Transaction.Unpaid,
                     EventId = ticket.EventId,
                     UserId = ticket.UserId,
                     SellPrice = ticket.SellPrice,
