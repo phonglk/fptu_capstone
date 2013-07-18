@@ -149,7 +149,7 @@
             urlData:{Action:"Disapprove",Data:{Id:item.VenueId}},
             callback:function(event){
                 Notifications.push({
-                    text:"Sự kiện \"#{VenueName}\" đã được bỏ duyệt !".eval(event),
+                    text:"Địa điểm \"#{VenueName}\" đã được bỏ duyệt !".eval(event),
                     autoDismiss:5
                 })
             }
@@ -161,7 +161,7 @@
             urlData:{Action:"Approve",Data:{Id:item.VenueId}},
             callback:function(event){
                 Notifications.push({
-                    text:"Sự kiện \"#{VenueName}\" đã được duyệt !".eval(event),
+                    text:"Địa điểm \"#{VenueName}\" đã được duyệt !".eval(event),
                     autoDismiss:5
                 })
             }
@@ -176,7 +176,7 @@
                         urlData:{Action:"Delete",Data:{Id:item.VenueId}},
                         callback:function(event){
                             Notifications.push({
-                                text:"Sự kiện \"#{VenueName}\" đã được xóa !".eval(event),
+                                text:"Địa điểm \"#{VenueName}\" đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
                         }

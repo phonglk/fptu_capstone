@@ -31,195 +31,184 @@ namespace DropIt.Areas.Administration.Controllers
             return View();
         }
 
-        public ActionResult List()
+        [HttpPost]
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TicketStatus = -1)
         {
-            return View();
+            try
+            {
+                IEnumerable<DropIt.Models.Ticket> records = null;
+                if (TicketStatus == -1)
+                {
+                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+
+                }
+                else
+                {
+                    records = Repository.JTGetExp(e => e.Status == TicketStatus, jtStartIndex, jtPageSize, jtSorting);
+                }
+                var Records = records.Select(e => new
+                {
+                    TicketId = e.TicketId,
+                    User = new {
+                    e.UserId,
+                    e.User.UserName
+                    },
+                    Event = new
+                    {
+                        e.EventId,
+                        e.Event.EventName,
+                        e.Event.HoldDate
+                    },
+                    SellPrice = e.SellPrice,
+                    ReceiveMoney = e.ReceiveMoney,
+                    Seat = e.Seat,
+                    Description = e.Description,
+                    Status = e.Status
+                });
+                return Json(new JSONResult(Records)
+                {
+                    TotalRecordCount = (TicketStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == TicketStatus).Count()
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
         }
 
         [HttpPost]
-
-        public JsonResult Count(int id)
+        public JsonResult Approve(int Id)
         {
-            int status = id;
-
-            int count = 0;
-
-            if (Request["extra"] != null && Request["extra"] == "ontransaction")
+            try
             {
-                count = Repository.Get(r => (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending)).Count();
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Ticket.Ready;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    Count = count
+                    EventId = delete.TicketId
                 });
             }
-
-            if (id == -1)
+            catch (Exception e)
             {
-                count = Repository.Get(r => r.Status != null).Count();
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
             }
-            else
-            {
-                count = Repository.Get(r => r.Status == status).Count();
-            }
-
-            return Json(new
-            {
-                Result = "OK",
-                Count = count
-            });
-        }
-
-        public ActionResult Details(int id = 0)
-        {
-            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-
-            if (ticket == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ticket);
-        }
-
-
-        public ActionResult Delete(int id)
-        {
-            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-            int sttToRedirect = 0;
-            if (ticket == null)
-            {
-                HttpNotFound();
-            }           
-                ticket.Status = (int)Statuses.Ticket.Delete;
-                sttToRedirect = (int)Statuses.Ticket.Pending;           
-
-            Ticket change = new Ticket()
-            {
-                TicketId = ticket.TicketId,  // co TicketId de tim kiem 
-                TranUserId = ticket.UserId,
-                TranFullName = ticket.TranFullName,
-                TranAddress = ticket.TranAddress,
-                TranType = ticket.TranType,
-                TranStatus = ticket.Status,
-                EventId = ticket.EventId,
-                UserId = ticket.UserId,
-                SellPrice = ticket.SellPrice,
-                ReceiveMoney = ticket.ReceiveMoney,
-                Seat = ticket.Seat,
-                Status = ticket.Status,
-                AdminModifiedDate = DateTime.Now,
-                Description = ticket.Description,
-                CreatedDate = ticket.CreatedDate,
-                TranCreatedDate = ticket.TranCreatedDate,
-                TranModifiedDate = ticket.TranModifiedDate,
-                TranDescription = ticket.TranDescription
-            };
-            this.unitOfWork.TicketRepository.AddOrUpdate(change);
-            this.unitOfWork.TicketRepository.Save();
-            return RedirectToAction("List", new { status = sttToRedirect });
-        }
-
-
-        // GET: Change status
-
-        public ActionResult ChangeStatus(int id)
-        {
-            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-            int sttToRedirect = 0;
-            if (ticket == null)
-            {
-                HttpNotFound();
-            }
-            else if (ticket.Status == 0)
-            {
-                ticket.Status = (int)Statuses.Ticket.Ready;
-                sttToRedirect = (int)Statuses.Ticket.Pending;
-            }
-            else if (ticket.Status == 1)
-            {
-                ticket.Status = (int)Statuses.Ticket.Pending;
-                sttToRedirect = (int)Statuses.Ticket.Ready;
-            }
-
-            Ticket change = new Ticket()
-                                {
-                                    TicketId = ticket.TicketId,  // co TicketId de tim kiem 
-                                    TranUserId = ticket.UserId,
-                                    TranFullName = ticket.TranFullName,
-                                    TranAddress = ticket.TranAddress,
-                                    TranType = ticket.TranType,
-                                    TranStatus = ticket.Status,
-                                    EventId = ticket.EventId,
-                                    UserId = ticket.UserId,
-                                    SellPrice = ticket.SellPrice,
-                                    ReceiveMoney = ticket.ReceiveMoney,
-                                    Seat = ticket.Seat,
-                                    Status = ticket.Status,
-                                    AdminModifiedDate = DateTime.Now,
-                                    Description = ticket.Description,
-                                    CreatedDate = ticket.CreatedDate,
-                                    TranCreatedDate = ticket.TranCreatedDate,
-                                    TranModifiedDate = ticket.TranModifiedDate,
-                                    TranDescription = ticket.TranDescription
-                                };
-            this.unitOfWork.TicketRepository.AddOrUpdate(change);
-            this.unitOfWork.TicketRepository.Save();
-            return RedirectToAction("List", new { status = sttToRedirect });
-        }
-        //
-        // GET: /Event/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            Ticket ticket = this.unitOfWork.TicketRepository.GetById(id);
-            if (ticket == null)
-            {
-                HttpNotFound();
-            }
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName", ticket.EventId);
-            return View(ticket);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Ticket ticket)
+        public JsonResult Disapprove(int Id)
         {
-            Ticket getTicket = unitOfWork.TicketRepository.Get(u => u.TicketId == ticket.TicketId).FirstOrDefault();
-            if (ModelState.IsValid)
+            try
             {
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Ticket.Pending;
 
-                Ticket editTicket = new Ticket()
-                                        {
-                                            TicketId = ticket.TicketId,  // co TicketId de tim kiem 
-                                            TranUserId = getTicket.UserId,
-                                            TranFullName = getTicket.TranFullName,
-                                            TranAddress = getTicket.TranAddress,
-                                            TranType = getTicket.TranType,
-                                            TranStatus = getTicket.Status,
-                                            EventId = ticket.EventId,  // sua Event lai
-                                            UserId = getTicket.UserId,
-                                            SellPrice = getTicket.SellPrice,
-                                            ReceiveMoney = getTicket.ReceiveMoney,
-                                            Seat = ticket.Seat,   // sua thong tin ghe ngoi
-                                            Status = (int)Statuses.Ticket.UserApprove,  // sua trang thai chuyen ve userapprove gui den user 
-                                            AdminModifiedDate = DateTime.Now,  // cap nhat ngay sua
-                                            Description = ticket.Description,  // sua lai phan ghi chu
-                                            CreatedDate = getTicket.CreatedDate,
-                                            TranCreatedDate = getTicket.TranCreatedDate,
-                                            TranModifiedDate = getTicket.TranModifiedDate,
-                                            TranDescription = getTicket.TranDescription
-                                        };
-                this.unitOfWork.TicketRepository.AddOrUpdate(editTicket);
-                this.unitOfWork.TicketRepository.Save();
-
-                return RedirectToAction("List");
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.TicketId
+                });
             }
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
-                                             ticket.EventId);
-            return View(ticket);
-
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
         }
 
+        public JsonResult Delete(int Id)
+        {
+            try
+            {
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.Status = (int)Statuses.Ticket.Delete;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    VenueId = delete.TicketId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+
+        }
+      
+        //
+        // GET: /Event/Edit/5
+
+        public ActionResult Edit(int Id)
+        {
+            Ticket e = Repository.GetById(Id);
+            TicketViewModel tvm = new TicketViewModel()
+            {
+                TicketId = e.TicketId,
+                EventId = e.EventId,
+                UserId = e.UserId,
+                SellPrice = (float) e.SellPrice,
+                Seat = e.Seat,
+                Description = e.Description,
+                Status = e.Status
+            };
+            ViewBag.EventId = new SelectList(unitOfWork.EventRepository.GetAll(), "EventId", "EventName", e.EventId);
+            ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.GetAll(), "VenueId", "VenueName", e.Event.VenueId);
+            return View(tvm);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult Edit(Ticket Ticket)
+        {
+            Ticket oldTicket = Repository.GetById(Ticket.TicketId);
+            if (oldTicket.Status == (int)Statuses.Ticket.OnTransaction)
+            {
+                return Json(new JSONResult()
+                {
+                    Result = "ERROR",
+                    Message = "Vé này đang giao dịch nên không thể sửa thông tin"
+                });
+            }
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new JSONResult("Form is invalid"));
+                }
+                Ticket.Status = oldTicket.Status;
+                Repository.AddOrUpdate(Ticket);
+                unitOfWork.Save();
+                return Json(new JSONResult());
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            };
+        }
+
+    
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

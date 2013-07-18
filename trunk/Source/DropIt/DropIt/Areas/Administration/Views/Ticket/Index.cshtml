@@ -10,30 +10,31 @@
         Pending : @((int)DropIt.Common.Statuses.Ticket.Pending),
         UserApprove : @((int)DropIt.Common.Statuses.Ticket.UserApprove),
         OnTransaction : @((int)DropIt.Common.Statuses.Ticket.OnTransaction)
-    }
+        }
 </script>
 <style>
     table th:nth-child(1) {
-        width: 22%;
-        min-width: 200px;
+        min-width: 100px;
     }
 
     table th:nth-child(2) {
+        width: 22%;
         width: 200px;
     }
 
     table th:nth-child(3) {
-        width: 130px;
+        width: 200px;
     }
 
     table th:nth-child(4) {
+        width: 180px;
     }
 
     table th:nth-child(5) {
-        width: 120px;
     }
 
     table th:nth-child(6) {
+        width: 280px;
     }
 
     .popover {
@@ -46,29 +47,33 @@
         <div class="btn-group">
             <a href="@Url.Action("Index", new { TicketStatus = (int)DropIt.Common.Statuses.Ticket.Pending })" class="btn btn-large active">
                 <i class="icon-bullhorn"></i>
-                <span>Chưa duyệt</span>
+                <span>Tạm hoãn</span>
             </a>
             <a href="@Url.Action("Index", new { TicketStatus = (int)DropIt.Common.Statuses.Ticket.Ready })" class="btn btn-large">
                 <i class="icon-ok"></i>
-                <span>Đã duyệt</span>
+                <span>Sẵn sàng</span>
             </a>
+            <a></a>
             <a href="@Url.Action("Index", new { TicketStatus = (int)DropIt.Common.Statuses.Ticket.UserApprove })" class="btn btn-large">
-                <i class="icon-ok"></i>
-                <span>Đang giao dịch</span>
+                <i class="icon-user"></i>
+                <span>Người dùng duyệt</span>
             </a>
             <a href="@Url.Action("Index", new { TicketStatus = (int)DropIt.Common.Statuses.Ticket.OnTransaction })" class="btn btn-large">
-                <i class="icon-ok"></i>
+                <i class="icon-road"></i>
                 <span>Đang giao dịch</span>
             </a>
         </div>
+        <br />
+        <br />
     </div>
+
     <div class="span4">
-        <div class="pull-right" style="">
+        @*   <div class="pull-right" style="">
             <a href="@Url.Action("Create")" class="button large blue">
                 <i class="icon-plus"></i>
-                <span>Tạo sự kiện</span>
+                <span>Tạo Vé mới</span>
             </a>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -76,7 +81,9 @@
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Tên sự kiện</th>
+            <th>Mã số vé</th>
+            <th>Người đăng</th>
+            <th>Tên sự kiện</th>
             <th>Gía vé</th>
             <th>Số tiền nhận được</th>
             <th>Số ghế</th>
@@ -85,55 +92,31 @@
     </thead>
     <tbody data-bind="foreach: data">
         <tr>
-            <td data-bind="">
+            <td data-bind=" text: TicketId"></td>
+            <td data-bind=" text: User.UserName"></td>
+            <td data-bind=" text: Event.EventName"></td>
+            <td data-bind="text: SellPrice"></td>
+            <td data-bind="text:ReceiveMoney"></td>
+            <td data-bind="text:Seat"></td>
+            <td>
                 <a href="" data-bind="
-    text: EventName,
     attr: {
-        href: Url({ Action: 'Edit', Data: { Id: EventId } }),
-        title: EventName,
-        //'data-content':EventDetail
+        href: Url({ Action: 'Edit', Data: { Id: TicketId } }),
     }
-                    "
-                    data-toggle="popover"
-                    data-trigger="hover"
-                    data-html="true"></a>
-            </td>
-            <td data-bind="text: Category.CategoryName"></td>
-            <td>
-                <span data-bind="
-    text: HoldDate.toDateString(),
-    attr:{
-        title: HoldDate.toLocaleString('vn')
-    }
-    "
-                    data-toggle="tooltip"></span>
-            </td>
-            @*<td data-bind="text: Category.CategoryName"></td>*@
-            <td>
-                <a data-bind="
-    text: Venue.VenueName,
-    attr: {
-        title: Venue.VenueName,
-        'data-content':VenueDetail
-    }"
-                    data-toggle="popover"
-                    data-trigger="hover"
-                    data-html="true"></a>
-            </td>
-
-            <td>
+                    " class="button blue">Chi tiết
+                </a>
                 <a href="javascript:;"
                     class="button green"
-                    data-bind="click:$root.Approve,visible:Status==Statuses.Disapprove">Duyệt
+                    data-bind="click:$root.Approve,visible:Status==Statuses.Pending">Duyệt
                 </a>
                 <a href="javascript:;"
                     class="button red"
-                    data-bind="click:$root.Delete,visible:Status==Statuses.Disapprove">Xóa
+                    data-bind="click:$root.Delete,visible:Status==Statuses.Pending">Xóa
                 </a>
 
                 <a href="javascript:;"
                     class="button black"
-                    data-bind="click:$root.Disapprove,visible:Status==Statuses.Approve && haveTicketTran == false">Bỏ duyệt
+                    data-bind="click:$root.Disapprove,visible:Status==Statuses.Ready">Bỏ duyệt
                 </a>
             </td>
         </tr>
@@ -156,14 +139,14 @@
 <script>
     
     var list = new DataList();
-    list.url_getList = {Controller:"Event",Action:"List"};
+    list.url_getList = {Controller:"Ticket",Action:"List"};
     list.extraData = {
-        EventStatus:EventStatus
+        TicketStatus:TicketStatus
     }
     list.changeStatus = function (stt) {
         $(".status-filter > div > a").removeClass("active");
         $(".status-filter > div > a").eq(stt).addClass("active");
-        list.extraData.EventStatus = stt;
+        list.extraData.TicketStatus = stt;
         list.currentPage(1);
         list.getList();
     }
@@ -171,12 +154,10 @@
     list.Disapprove = function(item){
         list.AjaxAction({
             item:item,
-            urlData:{Action:"Disapprove",Data:{Id:item.EventId}},
+            urlData:{Action:"Disapprove",Data:{Id:item.TicketId}},
             callback:function(event){
                 Notifications.push({
-                    imagePath: Url(event.EventImage),
-                    fillImage:true,
-                    text:"Sự kiện \"#{EventName}\" đã được bỏ duyệt !".eval(event),
+                    text:"Vé có mã số \"#{TicketId}\" đã được bỏ duyệt !".eval(event),
                     autoDismiss:5
                 })
             }
@@ -185,29 +166,25 @@
     list.Approve = function(item){
         list.AjaxAction({
             item:item,
-            urlData:{Action:"Approve",Data:{Id:item.EventId}},
+            urlData:{Action:"Approve",Data:{Id:item.TicketId}},
             callback:function(event){
                 Notifications.push({
-                    imagePath: Url(event.EventImage),
-                    fillImage:true,
-                    text:"Sự kiện \"#{EventName}\" đã được duyệt !".eval(event),
+                    text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
                     autoDismiss:5
                 })
             }
         })
     }
     list.Delete = function(item){
-        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa sự kiện \""+item.EventName+"\" ?",
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa vé có mã số \""+item.TicketId+"\" ?",
             {
                 confirm:function(){
                     list.AjaxAction({
                         item:item,
-                        urlData:{Action:"Approve",Data:{Id:item.EventId}},
+                        urlData:{Action:"Delete",Data:{Id:item.TicketId}},
                         callback:function(event){
                             Notifications.push({
-                                imagePath: Url(event.EventImage),
-                                fillImage:true,
-                                text:"Sự kiện \"#{EventName}\" đã được xóa !".eval(event),
+                                text:"Vé có mã số \"#{TicketId}\" đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
                         }
@@ -215,6 +192,33 @@
                 }
             }
         )
+    }
+    list.getList = function (callback) {
+        Loading(true);
+        var data = { jtPageSize: list.pageSize, jtStartIndex: list.startIndex(), jtSorting: list.sorting, TicketStatus: list.TichetStatus };
+        $.extend(data, list.extraData);
+        var urlData = { Action: "List", Controller: "Ticket", Data: data };
+        $.extend(urlData, self.url_getList);
+        $.ajax({
+            url: Url(urlData),
+            type: "POST",
+            success: function (rs) {
+                Loading(false);
+                if (rs.Result && rs.Result == "OK") {
+                    list.data.removeAll();
+                    $.each(rs.Records, function (i, v) {
+                        list.data.push(new Ticket(v));
+                    })
+                    list.recordCount(rs.TotalRecordCount);
+                }
+                setTimeout(function () {
+                    bootstrap.active();
+                }, 100);
+                if (callback) {
+                    callback.call();
+                }
+            }
+        })
     }
 
     list.getList(function () {
@@ -229,6 +233,16 @@
 
     $(".status-filter > div > a").eq(1).attr("href","javascript:;").click(function(e){
         list.changeStatus(1);
+        e.preventDefault();
+        return false;
+    })
+    $(".status-filter > div > a").eq(3).attr("href","javascript:;").click(function(e){
+        list.changeStatus(3);
+        e.preventDefault();
+        return false;
+    })
+    $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
+        list.changeStatus(4);
         e.preventDefault();
         return false;
     })
