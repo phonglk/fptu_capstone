@@ -32,7 +32,7 @@ namespace DropIt.Models
         public bool IsVerified { get; set; }
         public string BankName { get; set; }
         public string BankAccount { get; set; }
-        public string CMND { get; set; }
+        public string IdentityCard { get; set; }
         public bool Sellable { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

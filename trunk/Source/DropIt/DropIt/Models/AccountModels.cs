@@ -89,7 +89,7 @@ namespace DropIt.Models
 
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 9)]
         [Display(Name = "Số CMND")]
-        public string CMND { get; set; }
+        public string IdentityCard { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập Mật Khẩu.")]
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 6)]

@@ -28,8 +28,8 @@
             
             @Html.LabelAndControl("Tài khoản ngân hàng", Html.TextBox("BankAccount"))
             
-            @Html.LabelAndControl("Số CMND", Html.TextBox("CMND"))
-            <div class="controls validate">@Html.ValidationMessageFor(m => m.CMND)</div>        
+            @Html.LabelAndControl("Số CMND", Html.TextBox("IdentityCard"))
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.IdentityCard)</div>        
         
             @Html.LabelAndControl("Tỉnh/Thành Phố:", Html.DropDownList("ProvinceId", String.Empty))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.ProvinceId)</div>
