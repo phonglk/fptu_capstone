@@ -20,6 +20,7 @@ namespace DropIt.Models
         }
     
         public int TicketId { get; set; }
+        public string SeriesNumber { get; set; }
         public double SellPrice { get; set; }
         public double ReceiveMoney { get; set; }
         public string Seat { get; set; }
