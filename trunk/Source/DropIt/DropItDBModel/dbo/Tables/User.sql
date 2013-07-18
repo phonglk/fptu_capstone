@@ -9,7 +9,7 @@
     [IsVerified]   BIT            CONSTRAINT [DF_User_IsVerified] DEFAULT ((0)) NOT NULL,
     [BankName]     NVARCHAR (50)  NULL,
     [BankAccount]  NVARCHAR (50)  NULL,
-    [CMND]         NVARCHAR (10)  NULL,
+    [IdentityCard] NVARCHAR (10)  NULL,
     [Sellable]     BIT            CONSTRAINT [DF_User_Sellable] DEFAULT ((0)) NOT NULL,
     [CreatedDate]  DATETIME       NULL,
     [ModifiedDate] DATETIME       NULL,
@@ -17,6 +17,8 @@
     CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserId] ASC),
     CONSTRAINT [FK_User_Province] FOREIGN KEY ([ProvinceId]) REFERENCES [dbo].[Province] ([ProvinceId])
 );
+
+
 
 
 
