@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="Drop_ItModelStoreContainer">
           <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" store:Type="Tables" Schema="dbo" />
@@ -178,7 +178,7 @@
           <Property Name="IsVerified" Type="bit" Nullable="false" />
           <Property Name="BankName" Type="nvarchar" MaxLength="50" />
           <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
-          <Property Name="CMND" Type="nvarchar" MaxLength="10" />
+          <Property Name="IdentityCard" Type="nvarchar" MaxLength="10" />
           <Property Name="Sellable" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -391,7 +391,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Drop_ItModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -534,6 +535,7 @@
             <PropertyRef Name="TicketId" />
           </Key>
           <Property Name="TicketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeriesNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="SellPrice" Type="Double" Nullable="false" />
           <Property Name="ReceiveMoney" Type="Double" Nullable="false" />
           <Property Name="Seat" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
@@ -557,7 +559,6 @@
           <NavigationProperty Name="TicketResponses" Relationship="Drop_ItModel.FK_RespondRequest_Ticket" FromRole="Ticket" ToRole="TicketResponse" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="Ticket" ToRole="User" />
-          <Property Type="String" Name="SeriesNumber" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -587,7 +588,7 @@
           <Property Name="IsVerified" Type="Boolean" Nullable="false" />
           <Property Name="BankName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="BankAccount" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="CMND" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="IdentityCard" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="Sellable" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
@@ -875,8 +876,8 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="Drop_ItModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
-                <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
                 <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
                 <ScalarProperty Name="ReceiveMoney" ColumnName="ReceiveMoney" />
                 <ScalarProperty Name="Seat" ColumnName="Seat" />
@@ -923,7 +924,7 @@
                 <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
                 <ScalarProperty Name="Sellable" ColumnName="Sellable" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />

@@ -46,7 +46,7 @@ namespace DropIt.ViewModels
 
         [StringLength(100, ErrorMessage = "{0} phải dài ít nhất {2} kí tự.", MinimumLength = 9)]
         [Display(Name = "Số CMND")]
-        public string CMND { get; set; }
+        public string IdentityCard { get; set; }
     
         public virtual Province Province { get; set; }
     }

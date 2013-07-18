@@ -87,7 +87,7 @@ namespace DropIt.Controllers
                         FullName = model.FullName,
                         BankName = model.BankName,
                         BankAccount = model.BankAccount,
-                        CMND = model.CMND,
+                        CMND = model.IdentityCard,
                         Phone = model.Phone, 
                         Address = model.Address, 
                         ProvinceId = model.ProvinceId, 

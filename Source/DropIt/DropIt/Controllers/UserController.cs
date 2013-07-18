@@ -31,7 +31,7 @@ namespace DropIt.Controllers
                                             Address = user.Address,
                                             BankName = user.BankName,
                                             BankAccount = user.BankAccount,
-                                            CMND = user.CMND                                            
+                                            IdentityCard = user.IdentityCard                                            
                                         };            
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
                                                 user.ProvinceId);
@@ -58,7 +58,7 @@ namespace DropIt.Controllers
                                                 Address = user.Address,
                                                 BankAccount = user.BankAccount,
                                                 BankName = user.BankName,
-                                                CMND = user.CMND,
+                                                IdentityCard = user.IdentityCard,
                                                 ProvinceId = (int)user.ProvinceId,
                                                 CreatedDate = user.CreatedDate
                                             };
