@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[Ticket] (
     [TicketId]          INT            IDENTITY (1, 1) NOT NULL,
+    [SeriesNumber]      NVARCHAR (50)  NULL,
     [SellPrice]         FLOAT (53)     NOT NULL,
     [ReceiveMoney]      FLOAT (53)     NOT NULL,
     [Seat]              NVARCHAR (MAX) NULL,
@@ -24,6 +25,8 @@
     CONSTRAINT [FK_Ticket_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Ticket_User1] FOREIGN KEY ([TranUserId]) REFERENCES [dbo].[User] ([UserId])
 );
+
+
 
 
 

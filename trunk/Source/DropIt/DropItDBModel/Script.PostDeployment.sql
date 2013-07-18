@@ -250,28 +250,28 @@ WHEN NOT MATCHED BY TARGET THEN
 
 SET @xmlData = N'
 <tickets>
-  <ticket TicketId="1" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="1"  Status="1" UserId="1" EventId="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="2" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="2"  Status="1" UserId="2" EventId="2" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="1" SeriesNumber="123456789" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="1"  Status="1" UserId="1" EventId="1" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="2" SeriesNumber="123456700" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="2"  Status="1" UserId="2" EventId="2" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
   <ticket TicketId="3" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="3"  Status="1" UserId="3" EventId="3" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
   <ticket TicketId="4" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="4"  Status="1" UserId="4" EventId="4" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="5" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="1"  Status="1" UserId="5" EventId="5" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="6" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="2"  Status="1" UserId="6" EventId="6" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="7" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="3"  Status="1" UserId="7" EventId="7" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-  <ticket TicketId="8" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="4"  Status="1" UserId="8" EventId="8" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="5" SeriesNumber="1234566" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="1"  Status="1" UserId="5" EventId="5" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="6" SeriesNumber="12345612" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="2"  Status="1" UserId="6" EventId="6" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="7" SeriesNumber="EOS345678" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="3"  Status="1" UserId="7" EventId="7" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
+  <ticket TicketId="8" SeriesNumber="RTON6789" SellPrice="10" ReceiveMoney="9.7" Seat="ghe ngoi 2A dãy M" Description="Bán gấp cần tiền" CategoryId="4"  Status="1" UserId="8" EventId="8" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
 </tickets>
 '
 EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
 MERGE Ticket AS target USING (
-    SELECT s.TicketId, s.SellPrice, s.ReceiveMoney, s.Seat, s.Description, s.Status, s.UserId, s.EventId, s.CreatedDate, s.ModifiedDate, s.TranShipDate, s.TranDescription, s.TranAddress, s.TranStatus, s.TranUserId, s.TranCreatedDate, s.TranModifiedDate
+    SELECT s.TicketId, s.SeriesNumber, s.SellPrice, s.ReceiveMoney, s.Seat, s.Description, s.Status, s.UserId, s.EventId, s.CreatedDate, s.ModifiedDate, s.TranShipDate, s.TranDescription, s.TranAddress, s.TranStatus, s.TranUserId, s.TranCreatedDate, s.TranModifiedDate
     FROM OPENXML(@xml, '/tickets/ticket', 1)
-    WITH (TicketId int, SellPrice float, ReceiveMoney float, Seat nvarchar(MAX), Description nvarchar(MAX), Status int, UserId int, EventId int, CreatedDate datetime, ModifiedDate datetime, TranShipDate datetime, TranDescription nvarchar(MAX), TranAddress nvarchar(MAX), TranStatus int, TranUserId int, TranCreatedDate datetime, TranModifiedDate datetime) as s) 
-	AS source (TicketId, SellPrice, ReceiveMoney, Seat, Description, Status, UserId, EventId, CreatedDate, ModifiedDate, TranShipDate, TranDescription, TranAddress, TranStatus, TranUserId, TranCreatedDate, TranModifiedDate)
+    WITH (TicketId int, SeriesNumber nvarchar(50),SellPrice float, ReceiveMoney float, Seat nvarchar(MAX), Description nvarchar(MAX), Status int, UserId int, EventId int, CreatedDate datetime, ModifiedDate datetime, TranShipDate datetime, TranDescription nvarchar(MAX), TranAddress nvarchar(MAX), TranStatus int, TranUserId int, TranCreatedDate datetime, TranModifiedDate datetime) as s) 
+	AS source (TicketId, SeriesNumber, SellPrice, ReceiveMoney, Seat, Description, Status, UserId, EventId, CreatedDate, ModifiedDate, TranShipDate, TranDescription, TranAddress, TranStatus, TranUserId, TranCreatedDate, TranModifiedDate)
 ON (source.TicketId = target.TicketId)
 --WHEN MATCHED THEN
 --    UPDATE SET ProvinceName = source.ProvinceName
 WHEN NOT MATCHED BY TARGET THEN
-    INSERT (SellPrice, ReceiveMoney, Seat, Description, Status, UserId, EventId, CreatedDate, ModifiedDate, TranShipDate, TranDescription, TranAddress, TranStatus, TranUserId, TranCreatedDate, TranModifiedDate) values (source.SellPrice, source.ReceiveMoney, source.Seat, source.Description, source.Status, source.UserId, source.EventId, source.CreatedDate, source.ModifiedDate, source.TranShipDate, source.TranDescription, source.TranAddress, source.TranStatus, source.TranUserId, source.TranCreatedDate, source.TranModifiedDate)
+    INSERT (SeriesNumber, SellPrice, ReceiveMoney, Seat, Description, Status, UserId, EventId, CreatedDate, ModifiedDate, TranShipDate, TranDescription, TranAddress, TranStatus, TranUserId, TranCreatedDate, TranModifiedDate) values (source.SeriesNumber, source.SellPrice, source.ReceiveMoney, source.Seat, source.Description, source.Status, source.UserId, source.EventId, source.CreatedDate, source.ModifiedDate, source.TranShipDate, source.TranDescription, source.TranAddress, source.TranStatus, source.TranUserId, source.TranCreatedDate, source.TranModifiedDate)
 ;
 
 -----------TicketResponse------------------
