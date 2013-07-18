@@ -5,10 +5,12 @@
 }
 @Scripts.Render("~/Bundles/jquery.validate")
 @Scripts.Render("~/Content/ckeditor/ckeditor.js")
+@Scripts.Render("~/bundles/jqueryval")
 <style>
     label {
-        font-weight:bold;
+        font-weight: bold;
     }
+
     .input {
         margin-top: 15px;
     }
@@ -16,22 +18,22 @@
 <script>
     var Model = @Html.Raw(Json.Encode(Model));
 </script>
-@if (Model.Status == 4)
-            {
+@if (Model.Status == (int)DropIt.Common.Statuses.Ticket.OnTransaction)
+{
                
-                        <div class="alert">
-                          <button type="button" class="close" data-dismiss="alert">&times;</button>
-                          <strong>Cảnh báo!</strong> Sự kiện này đã có vé đã hoặc đang giao dịch, không thể sửa thông tin
-                        </div>
-                <div class="cf"></div>
-                <script>
-                    $(function(){
-                        $("#createEvent input,#createEvent textarea").addClass("disabled").attr("disabled","disabled");
-                        $("#createEvent select").select2("enable",false);
-                    })
-                </script>
-            }
-<div class="box" style="clear:both">
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Cảnh báo!</strong> Mã vé này đang giao dịch không thể sửa thông tin
+    </div>
+    <div class="cf"></div>
+    <script>
+        $(function(){
+            $("#createEvent input,#createEvent textarea").addClass("disabled").attr("disabled","disabled");
+            $("#createEvent select").select2("enable",false);
+        })
+    </script>
+}
+<div class="box" style="clear: both">
     <div class="tab-header">
         Chỉnh sửa địa điểm
     </div>
@@ -39,8 +41,9 @@
         <div class="row-fluid">
             <div class="span6">
                 <div class="padded">
-                       @*<input type="hidden" name="VenueId" value="@Model.VenueId" />*@
-                    @Html.HiddenFor(t=> t.TicketId)
+                    @*<input type="hidden" name="VenueId" value="@Model.VenueId" />*@
+                    @Html.HiddenFor(t => t.TicketId)
+                    @Html.HiddenFor(t => t.UserId)
                     <div class="input">
                         <label for="price">Giá bán</label>
                         <input id="price" type="text" class="" name="Price" value="@Model.SellPrice"/>
@@ -51,15 +54,16 @@
                     </div>
                     <div class="input">
                         <label for="event">Sự kiện</label>
-                        @Html.DropDownList("EventId",(SelectList)ViewBag.EventId, new { id="event",name="EventId",style="width:100%" } )
+                        @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style = "width:100%" })
                     </div>
-                        <div class="input">
+                    <div class="input">
                         <label for="holdDate">Ngày diễn ra</label>
-                        @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate" ,data_format="dd/MM/yyyy  hh:mm:ss"})
+                        @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate", data_format = "dd/MM/yyyy  hh:mm:ss" })
                     </div>
-                   <div class="input">
+                    <div class="input">
                         <label for="venue">Địa điểm</label>
-                             @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId ,new { data_bind = "select2:{}", style = "width:100%" })
+                        <input type="text" data-bind="value: VenueName,visible: isCreateEvent() == false" disabled />
+                        @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                     </div>
                 </div>
             </div>
@@ -67,13 +71,14 @@
                 <div class="padded">
                     <div class="input">
                         <label for="Description">Chú thích</label>
-                        <textarea name="Description" id="Description" style="width:100%;height:100px;">@Model.Description</textarea>
+                        <textarea name="Description" id="Description" style="width: 100%; height: 100px;">@Model.Description</textarea>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-actions">
-              @if (Model.Status != 4){
+            @if (Model.Status != (int)DropIt.Common.Statuses.Ticket.OnTransaction)
+            {
                 <button type="submit" class="button blue">Cập nhật</button>
             }
             <a href="@Url.Action("Index")" class="button">Hủy</a>
@@ -159,21 +164,38 @@
         }
     })
 
-    self.selectVenueChange = function () {
-        $.ajax({
-            url: Url({ Controller: "Event", Action: "getInfo" }),
-            type:"POST",
-            data: "EventId=" + self.EventId(),
-            success: function (data) {
-                if (data.Result && data.Result == "OK" && data.Records) {
-                    var record = data.Records[0]
-                    self.HoldDate(record.HoldDate)
-                    self.VenueName(record.VenueName)
-                    self.VenueAddress(record.Address)
-                    self.ProvinceId(record.ProvinceId)
-                    self.CategoryId(record.CategoryId)
+    function TiketViewModel() {
+        var self = this;
+
+        self.isCreateEvent = ko.observable(false);
+        self.isCreateVenue = ko.observable(false);
+
+        self.EventId = ko.observable();
+        self.HoldDate = ko.observable();
+        self.VenueName = ko.observable();
+        self.VenueAddress = ko.observable();
+        
+        self.selectVenueChange = function() {
+            $.ajax({
+                url: Url({ Controller: "Event", Action: "getInfo" }),
+                type: "POST",
+                data: "EventId=" + self.EventId(),
+                success: function(data) {
+                    if (data.Result && data.Result == "OK" && data.Records) {
+                        var record = data.Records[0]
+                        self.HoldDate(record.HoldDate)
+                        self.VenueName(record.VenueName)
+                        self.VenueAddress(record.Address)
+                    }
                 }
-            }
-        })
+            })
+        }
     }
+
+    $(function() {
+        ctvm = new TiketViewModel();
+        ko.applyBindings(ctvm);
+        $("#HoldDate").datetimepicker({ pickSeconds: false, maskInput: false });
+        //$(".form1 form").validate(validateOptions);
+    })    
 </script>

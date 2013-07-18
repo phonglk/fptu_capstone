@@ -146,7 +146,8 @@ namespace DropIt.Areas.Administration.Controllers
               Address = e.Address,
               ProvinceId = e.ProvinceId,
               Description = e.Description,
-              Status = e.Status
+              Status = e.Status,
+              AllowEdit = e.Events.FirstOrDefault(t=> t.Status == (int)Statuses.Event.Trading) == null
           };
             ViewBag.ProvinceId = new SelectList(unitOfWork.ProvinceRepository.GetAll(), "ProvinceId", "ProvinceName", e.ProvinceId);
             return View(vvm);

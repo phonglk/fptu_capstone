@@ -7,8 +7,9 @@
 @Scripts.Render("~/Content/ckeditor/ckeditor.js")
 <style>
     label {
-        font-weight:bold;
+        font-weight: bold;
     }
+
     .input {
         margin-top: 15px;
     }
@@ -16,7 +17,23 @@
 <script>
     var Model = @Html.Raw(Json.Encode(Model));
 </script>
-<div class="box" style="clear:both">
+@if (Model.AllowEdit != true)
+{
+               
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Cảnh báo!</strong> Địa điểm này đang có sự kiện đang giao dịch, không thể sửa thông tin
+    </div>
+    <div class="cf"></div>
+    <script>
+        $(function(){
+            $("#createEvent input,#createEvent textarea").addClass("disabled").attr("disabled","disabled");
+            $("#createEvent select").select2("enable",false);
+        })
+    </script>
+}
+
+<div class="box" style="clear: both">
     <div class="tab-header">
         Chỉnh sửa địa điểm
     </div>
@@ -24,8 +41,7 @@
         <div class="row-fluid">
             <div class="span6">
                 <div class="padded">
-                       @*<input type="hidden" name="VenueId" value="@Model.VenueId" />*@
-                    @Html.HiddenFor(t=> t.VenueId)
+                    @Html.HiddenFor(t => t.VenueId)
                     <div class="input">
                         <label for="venueName">Tên địa điểm</label>
                         <input id="venueName" name="VenueName" value="@Model.VenueName" type="text"/>
@@ -36,7 +52,7 @@
                     </div>
                     <div class="input">
                         <label for="venue">Tỉnh/Thành Phố</label>
-                        @Html.DropDownList("ProvinceId",(SelectList)ViewBag.ProvinceId, new { id="province",name="ProvinceId",style="width:100%" } )
+                        @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId, new { id = "province", name = "ProvinceId", style = "width:100%" })
                     </div>
                 </div>
             </div>
@@ -44,21 +60,17 @@
                 <div class="padded">
                     <div class="input">
                         <label for="Description">Chú thích</label>
-                        <textarea name="Description" id="Description" style="width:100%;height:100px;">@Model.Description</textarea>
+                        <textarea name="Description" id="Description" style="width: 100%; height: 100px;">@Model.Description</textarea>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-actions">
-            <button type="submit" class="button blue">Cập nhật</button>
+            @if (Model.AllowEdit == true)
+            {
+                <button type="submit" class="button blue">Cập nhật</button>
+            }
             <a href="@Url.Action("Index")" class="button">Hủy</a>
-            @*<div class="pull-right">
-                <span class="checky-label-left">
-                  Đăng sự kiện
-                </span>
-                <input type="checkbox" name="isApprove" id="approve" checked="checked" class="checky">
-                <label for="approve" class="checky"><span></span></label>
-              </div>*@
         </div>
     </form>
 </div>

@@ -20,7 +20,7 @@
         margin-top: 15px;
     }
 </style>
-@if (Model.haveTicketTran == true || Model.Status == 4)
+@if (Model.haveTicketTran == true || Model.Status == (int)DropIt.Common.Statuses.Event.Outdate)
             {
                 if(Model.haveTicketTran == true){
                         <div class="alert">
@@ -98,7 +98,8 @@
             </div>
         </div>
         <div class="form-actions">
-            @if (Model.haveTicketTran != true && Model.Status != 4){
+            @if (Model.haveTicketTran != true && Model.Status != (int)DropIt.Common.Statuses.Event.Outdate)
+            {
                 <button type="submit" class="button blue">Cập nhật</button>
             }
             <a href="@Url.Action("Index")" class="button">Hủy</a>
