@@ -116,9 +116,19 @@
                                     continue;
                                 }
                                 <tr>
-                                    <td class="first">
-                                        @item.TicketId
-                                    </td>
+                                    @if (@item.SeriesNumber==null)
+                                    {
+                                        <td class="first">
+                                            Không có
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="first">
+                                            @item.SeriesNumber
+                                        </td>
+                                    }
+                                    
                                     <td class="user">
                                         @item.User.UserName
                                     </td>
@@ -133,8 +143,8 @@
                                         @if (item.TranStatus != null)
                                         {
                                             <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
-                                                data-toggle="tooltip"
-                                                title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                                               data-toggle="tooltip"
+                                               title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
                                         }
                                         else
                                         {
