@@ -12,8 +12,9 @@ namespace DropIt.Areas.Administration.ViewModels
         public int TicketId { get; set; }
         [Required(ErrorMessage = "Bạn cần điền giá vé")]
         public float SellPrice { get; set; }
-        public float ReceiveMoney { get; set; }
         public string Seat { get; set; }
+        public float ReceiveMoney { get; set; }
+        public string SeriesNumber { get; set; }
         [AllowHtml]
         public string Description { get; set; }
         public int Status { get; set; }

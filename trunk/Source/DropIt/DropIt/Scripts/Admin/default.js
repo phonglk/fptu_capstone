@@ -93,6 +93,7 @@ function Ticket(obj) {
 
     this.TicketId = -1;
     this.SellPrice = "";
+    this.SeriesNumber = "";
     this.ReceiveMoney = "";
     this.Seat = "";
     this.Description = "";

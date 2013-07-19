@@ -45,9 +45,14 @@
                     @Html.HiddenFor(t => t.TicketId)
                     @Html.HiddenFor(t => t.UserId)
                     <div class="input">
-                        <label for="price">Giá bán</label>
-                        <input id="price" type="text" class="" name="Price" value="@Model.SellPrice"/>
+                        <label for="series">Mã số Vé</label>
+                        <input id="series" type="text" class="" name="SeriesNumber" value="@Model.SeriesNumber"/>
                     </div>
+                    <div class="input">
+                        <label for="price">Giá bán</label>
+                        <input id="price" type="number" class="" name="SellPrice" value="@Model.SellPrice"/>
+                    </div>
+
                     <div class="input">
                         <label for="seat">Ghế ngồi</label>
                         <input id="seat" type="text" class="" name="Seat" value="@Model.Seat"/>
@@ -126,7 +131,8 @@
         },
         ignore: ".select2-focusser,.select2-input"
     }
-
+   
+    
     $("#createEvent").validate(validateOptions);
     $("select").select2();
     $("#event").select2("val", Model.EventId);

@@ -209,11 +209,13 @@
     <Compile Include="Areas\Administration\Controllers\RequestController.cs" />
     <Compile Include="Areas\Administration\Controllers\SettingController.cs" />
     <Compile Include="Areas\Administration\Controllers\TicketController.cs" />
+    <Compile Include="Areas\Administration\Controllers\TransactionController.cs" />
     <Compile Include="Areas\Administration\Controllers\UserController.cs" />
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Areas\Administration\ViewModels\Category.cs" />
     <Compile Include="Areas\Administration\ViewModels\Event.cs" />
     <Compile Include="Areas\Administration\ViewModels\Ticket.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Transaction.cs" />
     <Compile Include="Areas\Administration\ViewModels\Venue.cs" />
     <Compile Include="Common\AdminMenu.cs" />
     <Compile Include="Common\DropDownGroupList.cs" />
@@ -238,6 +240,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\FollowEventRepository.cs" />
     <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
@@ -1622,6 +1625,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\Views\Transaction\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="obj\" />

@@ -78,6 +78,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Create(Venue Venue)
         {
             String Error = "";

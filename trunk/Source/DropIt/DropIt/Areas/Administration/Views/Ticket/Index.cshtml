@@ -26,9 +26,8 @@
     }
 
     table th:nth-child(4) {
-        width: 180px;
+        width: 150px;
     }
-
     table th:nth-child(5) {
     }
 
@@ -91,7 +90,7 @@
     </thead>
     <tbody data-bind="foreach: data">
         <tr>
-            <td data-bind=" text: TicketId"></td>
+            <td data-bind=" text: SeriesNumber"></td>
             <td data-bind=" text: User.UserName"></td>
             <td data-bind=" text: Event.EventName"></td>
             <td data-bind="text: SellPrice"></td>

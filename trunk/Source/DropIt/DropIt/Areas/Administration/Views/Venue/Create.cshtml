@@ -46,13 +46,6 @@
         <div class="form-actions">
             <button type="submit" class="button blue">Tạo mới</button>
             <a href="@Url.Action("Index")" class="button">Hủy</a>
-            @*<div class="pull-right">
-                <span class="checky-label-left">
-                  Đăng sự kiện
-                </span>
-                <input type="checkbox" name="isApprove" id="approve" checked="checked" class="checky">
-                <label for="approve" class="checky"><span></span></label>
-              </div>*@
         </div>
     </form>
 </div>
@@ -103,9 +96,10 @@
     }
 
     $("#createEvent").validate(validateOptions);
-
+    $("select").select2();
     function submit() {
         Loading(true, true);
+        $("#description").val(CKEDITOR.instances.description.getData());
         var formData = new FormData($("#createEvent")[0]);
         function success(rs) {
             Loading(false);
