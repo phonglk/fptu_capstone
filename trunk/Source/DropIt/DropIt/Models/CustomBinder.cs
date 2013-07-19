@@ -20,15 +20,11 @@ namespace DropIt.Models
             {
                 dateString = dateString.Replace("  ", " ");
             }
-            
-            dateString = dateString.Trim();
+
+            dateString = dateString.Trim() + ":00";
 
             string[] dateElement = dateString.Split('/', ':', ' ','-','T');
 
-            if (dateElement.Length == 5)
-            {
-                dateElement[5] = "00";
-            }
 
             DateTime date = DateTime.Now;
             if (dateString.IndexOf('T') > -1)
@@ -56,12 +52,12 @@ namespace DropIt.Models
                 dateString = dateString.Replace("  ", " ");
             }
 
-            dateString = dateString.Trim();
+            dateString = dateString.Trim() + ":00";
 
             string[] dateElement = dateString.Split('/', ':', ' ', '-', 'T');
             if (dateElement.Length == 5)
             {
-                dateElement[5] = "00";
+                
             }
             DateTime date = DateTime.Now;
             if (dateString.IndexOf('T') > -1)
