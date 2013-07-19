@@ -60,6 +60,13 @@
                             <h4>Quyền đăng bán</h4>
                             <div id="sellableFilter"></div>
                         </div>
+                        <div class="span3">
+                            <h4>Kiếm người dùng</h4>
+                            <div class="input">
+                                <input type="text" class="" placeholder="Username" id="UserNameSearch"/>
+                                <button class="button" data-bind="click:SearchUser">Tìm kiếm</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -86,17 +93,15 @@
                                         <th>Kích hoạt</th>
                                         <th>Được bán</th>
                                         <th class="sortable" data-bind="click: function (data, event) { sort('CreatedDate', data, event) }">Ngày tạo</th>
-                                        <th>Action</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: data">
                                     <tr>
                                         <td data-bind="">
-                                            <a href="" data-bind="
+                                            <a href="javascript:;" data-bind="
     text: UserName,
-    attr: {
-        href: Url({ Action: 'Edit', Data: { Id: UserId } })
-    }
+    click:$root.showInfo
                     "></a>
                                         </td>
                                         <td data-bind="text: FullName"></td>
@@ -128,12 +133,6 @@
                                         <td>
                                             <span data-bind="text:CreatedDate.toDateTimeString()"></span>
                                         </td>
-                                        <td>
-                                            <a href="javascript:;"
-                                                class="button green"
-                                                data-bind="">Duyệt
-                                            </a>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -154,7 +153,10 @@
     </div>
 </div>
 <script>
-
+    $(".filter form").submit(function(e){
+        e.preventDefault();
+        return;
+    })
 
 
 
@@ -163,27 +165,57 @@
     list.dataClass = User;
     list.extraData = {
         isActive: -1,
-        isSellable : -1
+        isSellable: -1,
+        UserName:""
     }
-    list.Delete = function (item) {
-        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa sự kiện \"" + item.EventName + "\" ?",
-            {
-                confirm: function () {
-                    list.AjaxAction({
-                        item: item,
-                        urlData: { Action: "Approve", Data: { Id: item.EventId } },
-                        callback: function (event) {
-                            Notifications.push({
-                                imagePath: Url(event.EventImage),
-                                fillImage: true,
-                                text: "Sự kiện \"#{EventName}\" đã được xóa !".eval(event),
-                                autoDismiss: 5
-                            })
-                        }
-                    })
-                }
-            }
-        )
+
+    list.showInfo = function (item) {
+        console.log(item);
+        var html = "<strong>UserId:</strong> #{UserId}<br/>"
+        html += "<strong>UserName:</strong> #{UserName}<br/>";
+        html += "<strong>Tên đầy đủ:</strong> #{FullName}<br/>";
+        html += "<strong>Địa chỉ:</strong> #{Address},#{ProvinceName}<br/>";
+        html += "<strong>Email:</strong> #{Email}<br/>";
+        html += "<strong>Phone:</strong> #{Phone}<br/>";
+        html += "<strong>CMND:</strong> #{CMND}<br/>";
+        html += "<strong>Tài khoản NH:</strong> #{BankAccount} , #{BankName}<br/>";
+        html += "<strong>Ngày tạo:</strong> #{CreatedDate}<br/>";
+        html += "<strong>Ngày sửa:</strong> #{ModifiedDate}<br/>";
+
+        html=html.eval($.extend({}, item, {
+            ProvinceName: item.Province.ProvinceName,
+            CreatedDate: item.CreatedDate.toDateTimeString(),
+            ModifiedDate: item.ModifiedDate.toDateTimeString(),
+            FullName: item.FullName == null ? "<i>Không có</i>" : item.FullName,
+            CMND: item.CMND == null ? "<i>Không có</i>" : item.CMND,
+            BankAccount: item.BankAccount == null ? "<i>Không có</i>" : item.BankAccount,
+            BankName: item.BankName == null ? "<i>Không có</i>" : item.BankName,
+        }))
+
+        $.fn.dialog2.helpers.alert(html, {title:"Chi tiết người dùng ["+item.UserName+"]"})
+    }
+    //list.Delete = function (item) {
+    //    $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa người dùng \"" + item.UserName + "\" ?",
+    //        {
+    //            confirm: function () {
+    //                list.AjaxAction({
+    //                    item: item,
+    //                    urlData: { Action: "Delete", Data: { Id: item.UserId } },
+    //                    callback: function (item) {
+    //                        Notifications.push({
+    //                            text: "Người dùng \"#{UserName}\" đã được xóa !".eval(item),
+    //                            autoDismiss: 2
+    //                        })
+    //                    }
+    //                })
+    //            }
+    //        }
+    //    )
+    //}
+
+    list.SearchUser = function (item) {
+        list.extraData.UserName = $("#UserNameSearch").val().trim();
+        list.getList();
     }
 
     list.getList(function () {

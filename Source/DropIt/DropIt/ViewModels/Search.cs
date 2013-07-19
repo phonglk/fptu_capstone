@@ -11,7 +11,7 @@ namespace DropIt.ViewModels
         public List<ResultEvent> Result = new List<ResultEvent>();
     }
 
-    public class ResultEvent{
+    public class ResultEvent :IComparable<ResultEvent>{
         public int EventId { get; set; }
 
         public SearchResultTextField EventName = new SearchResultTextField();
@@ -44,6 +44,66 @@ namespace DropIt.ViewModels
             VenueName = Event.Venue.VenueName;
             CreatedDate = Event.CreatedDate;
             ModifiedDate = Event.ModifiedDate;
+        }
+
+        public int CompareTo(ResultEvent other)
+        {
+            if (this.EventName.Matches.Count < other.EventName.Matches.Count)
+            {
+                return 1;
+            }
+            else if (this.EventName.Matches.Count > other.EventName.Matches.Count)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int CompareTo(ResultEvent other,ResultEventComparer.ComparisonType comparisonMethod)
+        {
+            switch (comparisonMethod)
+            {
+                case ResultEventComparer.ComparisonType.Relevant :
+                    return this.CompareTo(other);
+                    break;
+                case ResultEventComparer.ComparisonType.HoldDate :
+                    if (this.HoldDate < other.HoldDate)
+                    {
+                        return 1;
+                    }
+                    else if (this.HoldDate > other.HoldDate)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                    break;
+                default:
+                    return this.CompareTo(other);
+            }
+        }
+
+    }
+
+    public class ResultEventComparer : IComparer<ResultEvent>
+    {
+        public enum ComparisonType
+        {
+            Relevant = 1,
+            HoldDate = 2
+        }
+
+        public ComparisonType ComparisonMethod;
+
+
+        public int Compare(ResultEvent x, ResultEvent y)
+        {
+            return x.CompareTo(y,ComparisonMethod);
         }
     }
 

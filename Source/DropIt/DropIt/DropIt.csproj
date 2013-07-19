@@ -216,6 +216,7 @@
     <Compile Include="Areas\Administration\ViewModels\Event.cs" />
     <Compile Include="Areas\Administration\ViewModels\Ticket.cs" />
     <Compile Include="Areas\Administration\ViewModels\Transaction.cs" />
+    <Compile Include="Areas\Administration\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Venue.cs" />
     <Compile Include="Common\AdminMenu.cs" />
     <Compile Include="Common\DropDownGroupList.cs" />
@@ -1138,6 +1139,7 @@
     <Content Include="Areas\Administration\Views\Event\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Venue\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Venue\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\User\Edit.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />

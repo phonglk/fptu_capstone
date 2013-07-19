@@ -76,9 +76,9 @@ namespace DropIt.Controllers
             return result;
         }
 
-        public ActionResult Search(string query)
+        public ActionResult Search(string query, string sortBy = "relevant")
         {
-            var events = this.unitOfWork.EventRepository.Get();
+            var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
             if (!String.IsNullOrEmpty(query))
             {
@@ -122,6 +122,21 @@ namespace DropIt.Controllers
                         foundEvent.Result.Add(Event);
                     }
                 }
+
+
+                ResultEventComparer comparer = new ResultEventComparer();
+
+                if (sortBy == "relevant")
+                {
+                    comparer.ComparisonMethod = ResultEventComparer.ComparisonType.Relevant;
+                    foundEvent.Result.Sort(comparer);
+                }
+                else if (sortBy == "HoldDate")
+                {
+                    comparer.ComparisonMethod = ResultEventComparer.ComparisonType.HoldDate;
+                    foundEvent.Result.Sort(comparer);
+                }
+
             }
 
             return View(foundEvent);

@@ -3,6 +3,7 @@
     getTotalTicket();
     getTotalEvent();
     generateDataTracker();
+    rawDateDisplay();
 })
 
 function generateData(type, target) {
@@ -33,6 +34,22 @@ function generateDataTracker() {
         var $this = $(this);
         generateData($this.attr("data-gen"), $this);
     })
+}
+
+function rawDateDisplay() {
+    $("[data-rawdate]").each(function () {
+        var $this = $(this);
+        var type = $this.attr("data-rawdate") || "full";
+        var text = $this.text();
+        text = text.replace(/"/g, "");
+        var date = Date.fromRawJSON(text);
+        switch (type) {
+            default:
+                text = date.toDateTimeString();
+        }
+        $this.text(text);
+    })
+    
 }
 
 function requireLogin() {

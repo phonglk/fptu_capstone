@@ -67,12 +67,33 @@
                     }
             </style>
             <div class="row">
+                <form>
+                <input type="hidden" value="@Request["query"]" name="query" />
+                <div class="pull-right">
+                    Sắp xếp: 
+                    <div class="btn-group">
+                        <button class="btn" name="sortBy" value="relevant" 
+                            @if(Request["sortBy"]==null || Request["sortBy"] == "relevant"){
+                                @:disabled
+                            }
+                            >Gần giống</button>
+                        <button class="btn" name="sortBy" value="HoldDate"
+                            @if(Request["sortBy"] == "HoldDate"){
+                                @:disabled
+                            }
+                            >Ngày diễn ra</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="row">
+                
                 <ul class="ticket-list search-result">
                     @foreach (var item in Model.Result)
                     {    
                         
                             <li @{if(item.EventImage != null){<text>style="background-image:url(@Url.Content(item.EventImage))"</text>}} >
-                            <a href="@Url.Action("Details", "Event", new { Id = item.EventId })" target="_blank">
+                            <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
                             <strong>Sự kiện :</strong> <span 
                                 class="event-name"
                                 data-matches ="@foreach(string matched in item.EventName.Matches)
@@ -93,7 +114,7 @@
                                 
                                 >@item.Artist.Value</span>
                             <br />
-                            <strong>Ngày diễn ra :</strong> @item.HoldDate.ToLongDateString()
+                            <strong>Ngày diễn ra :</strong> <span data-rawdate="full">@Html.Raw(Json.Encode(item.HoldDate))</span>
                             </a>
                         </li>
                     }
