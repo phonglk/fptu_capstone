@@ -39,6 +39,14 @@
                 
                 @Html.LabelAndControl("Tiền nhận được:", Html.TextBox("ReceiveMoney"))*@
                 <div class="editor-label">
+                    @Html.Label("Mã vé:")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SeriesNumber)
+                    @Html.ValidationMessageFor(model => model.SeriesNumber)
+                </div>
+
+                <div class="editor-label">
                     @Html.Label("Ghê ngồi:")
                 </div>
                 <div class="editor-field">

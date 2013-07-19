@@ -82,6 +82,7 @@ namespace DropIt.Controllers
                         Ticket NewTicket = new Ticket()
                         {
                             EventId = newEvent.EventId,
+                            SeriesNumber = ticket.SeriesNumber,
                             SellPrice = ticket.SellPrice,
                             ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
                             Seat = ticket.Seat,
@@ -112,6 +113,7 @@ namespace DropIt.Controllers
                         Ticket NewTicket = new Ticket()
                         {
                             EventId = newEvent.EventId,
+                            SeriesNumber = ticket.SeriesNumber,
                             SellPrice = ticket.SellPrice,
                             ReceiveMoney = (int)(ticket.SellPrice * (1-service)),
                             Seat = ticket.Seat,
@@ -128,6 +130,7 @@ namespace DropIt.Controllers
                     Ticket NewTicket = new Ticket()
                     {
                         EventId = (int)ticket.EventId,
+                        SeriesNumber = ticket.SeriesNumber,
                         SellPrice = ticket.SellPrice,
                         ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
                         Seat = ticket.Seat,
@@ -158,6 +161,7 @@ namespace DropIt.Controllers
             BuyTicket buyTicket = new BuyTicket()
                                       {
                                           TicketId = getTicket.TicketId,
+                                          SeriesNumber = getTicket.SeriesNumber,
                                           SellPrice = getTicket.SellPrice,
                                           ReceiveMoney = getTicket.ReceiveMoney,
                                           Seat = getTicket.Seat,
@@ -197,6 +201,7 @@ namespace DropIt.Controllers
 //                    TranStatus = (int)Statuses.Transaction.Unpaid,
                     EventId = ticket.EventId,
                     UserId = ticket.UserId,
+                    SeriesNumber = ticket.SeriesNumber,
                     SellPrice = ticket.SellPrice,
                     ReceiveMoney = ticket.ReceiveMoney,
                     Seat = ticket.Seat,
@@ -370,6 +375,7 @@ namespace DropIt.Controllers
                                            TranStatus = getTicket.TranStatus,
                                            EventId = getTicket.EventId,  
                                            UserId = getTicket.UserId,
+                                           SeriesNumber = getTicket.SeriesNumber,
                                            SellPrice = getTicket.SellPrice,
                                            ReceiveMoney = getTicket.ReceiveMoney,
                                            Seat = getTicket.Seat,    
@@ -419,6 +425,7 @@ namespace DropIt.Controllers
                                            TranStatus = getTicket.TranStatus,
                                            EventId = ticket.EventId,  // thay doi
                                            UserId = getTicket.UserId,
+                                           SeriesNumber = ticket.SeriesNumber, // thay doi
                                            SellPrice = ticket.SellPrice,  // thay doi
                                            ReceiveMoney = ticket.SellPrice*(1-service),  // thay doi
                                            Seat = ticket.Seat,  // thay doi

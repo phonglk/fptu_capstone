@@ -112,6 +112,8 @@ else
                         </div>
                     </div>
                 </fieldset>
+                
+                @Html.LabelAndControl("Mã vé:", Html.EditorFor(model => model.SeriesNumber))
 
                 @Html.LabelAndControl("Chỗ ngồi:", Html.EditorFor(model => model.Seat))
 

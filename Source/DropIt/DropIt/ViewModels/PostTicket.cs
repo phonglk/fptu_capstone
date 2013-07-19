@@ -38,6 +38,8 @@ namespace DropIt.ViewModels
 
         public int UserId { get; set; }
 
+        public string SeriesNumber { get; set; }
+
         [RequiredIf("CreateEvent","checked",ErrorMessage="Tên sự kiện phải có khi tạo sự kiện mới")]
         public string EventName { get; set; }
 

@@ -25,7 +25,7 @@ namespace DropIt.ViewModels
 
         public string Description { get; set; }
         public int TicketId { get; set; }
-
+        public string SeriesNumber { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? TranShipDate { get; set; }
