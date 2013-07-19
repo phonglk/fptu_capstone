@@ -208,6 +208,14 @@ namespace DropIt.Common
             });
 
             adminMenuList.Add(Venue);
+
+            AdminMainMenu Setting = new AdminMainMenu()
+            {
+                Controller = "Setting",
+                Title = "Tùy chỉnh",
+                Icon = "globe"
+            };
+            adminMenuList.Add(Setting);
         }
     }
 }
