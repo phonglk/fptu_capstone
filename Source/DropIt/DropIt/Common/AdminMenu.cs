@@ -166,18 +166,39 @@ namespace DropIt.Common
             });
 
             adminMenuList.Add(Event);
+
+            AdminMainMenu Transaction = new AdminMainMenu()
+            {
+                Controller = "Transaction",
+                Title = "Giao dịch",
+                Icon = "ticket"
+            };
+            Transaction.AddChild(new AdminSubMenu()
+            {
+                Action = "Index",
+                Title = "Danh sách giao dịch",
+                Icon = "ticket"
+            });
+            Transaction.AddChild(new AdminSubMenu()
+            {
+                Action = "Create",
+                Title = "Thêm mới",
+                Icon = "plus-sign"
+            });
+
+            adminMenuList.Add(Transaction);
             // category,event,province,venue
             AdminMainMenu Venue = new AdminMainMenu()
               {
                   Controller = "Venue",
                   Title = "Địa điểm",
-                  Icon = "camera-retro"
+                  Icon = "globe"
               };
             Venue.AddChild(new AdminSubMenu()
                 {
                     Action = "Index",
                     Title = "Danh sách địa điểm",
-                    Icon = "camera-retro"
+                    Icon = "globe"
                 });
             Venue.AddChild(new AdminSubMenu()
             {
