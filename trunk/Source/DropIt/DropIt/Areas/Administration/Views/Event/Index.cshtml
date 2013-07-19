@@ -214,7 +214,7 @@
                 confirm:function(){
                     list.AjaxAction({
                         item:item,
-                        urlData:{Action:"Approve",Data:{Id:item.EventId}},
+                        urlData:{Action:"Delete",Data:{Id:item.EventId}},
                         callback:function(event){
                             Notifications.push({
                                 imagePath: Url(event.EventImage),
