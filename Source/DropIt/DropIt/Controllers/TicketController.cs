@@ -83,7 +83,7 @@ namespace DropIt.Controllers
                         {
                             EventId = newEvent.EventId,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = (int)ticket.SellPrice*(1-service),
+                            ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -113,7 +113,7 @@ namespace DropIt.Controllers
                         {
                             EventId = newEvent.EventId,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = (int)ticket.SellPrice * (1-service),
+                            ReceiveMoney = (int)(ticket.SellPrice * (1-service)),
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -129,7 +129,7 @@ namespace DropIt.Controllers
                     {
                         EventId = (int)ticket.EventId,
                         SellPrice = ticket.SellPrice,
-                        ReceiveMoney = ticket.SellPrice*(1-service),
+                        ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
                         Seat = ticket.Seat,
                         Description = ticket.Description,
                         Status = (int)Statuses.Ticket.Ready,
