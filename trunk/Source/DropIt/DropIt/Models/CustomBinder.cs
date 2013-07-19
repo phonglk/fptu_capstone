@@ -24,6 +24,12 @@ namespace DropIt.Models
             dateString = dateString.Trim();
 
             string[] dateElement = dateString.Split('/', ':', ' ','-','T');
+
+            if (dateElement.Length == 5)
+            {
+                dateElement[5] = "00";
+            }
+
             DateTime date = DateTime.Now;
             if (dateString.IndexOf('T') > -1)
             {
@@ -53,6 +59,10 @@ namespace DropIt.Models
             dateString = dateString.Trim();
 
             string[] dateElement = dateString.Split('/', ':', ' ', '-', 'T');
+            if (dateElement.Length == 5)
+            {
+                dateElement[5] = "00";
+            }
             DateTime date = DateTime.Now;
             if (dateString.IndexOf('T') > -1)
             {
