@@ -31,7 +31,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null,int isActive = -1,int isSellable =-1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null,int isActive = -1,int isSellable =-1,String UserName = "")
         {
             try
             {
@@ -44,6 +44,11 @@ namespace DropIt.Areas.Administration.Controllers
                 if (isSellable != -1)
                 {
                     records = records.Where(u => u.Sellable == (isSellable == 1));
+                }
+
+                if (UserName.Trim().Equals("") == false)
+                {
+                    records = records.Where(u => u.UserName.Contains(UserName));
                 }
 
                 records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
@@ -59,6 +64,9 @@ namespace DropIt.Areas.Administration.Controllers
                         e.Province.ProvinceId,
                         e.Province.ProvinceName
                     },
+                    e.IdentityCard,
+                    e.BankAccount,
+                    e.BankName,
                     Phone = e.Phone,
                     Active = e.Active,
                     Sellable = e.Sellable,
@@ -191,23 +199,6 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new JSONResult(e));
             }
-        }
-
-        //Delete
-        public JsonResult Delete(int UserId)
-        {
-            try
-            {
-                Repository.Delete(UserId);
-                unitOfWork.Save();
-
-                return Json(new JSONResult());
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
-
         }
         [HttpPost]
         public JsonResult GetUserOptions()
