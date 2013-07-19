@@ -13,14 +13,14 @@ using DropIt.Areas.Administration.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    public class TicketController : Controller
+    public class TransactionController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        private TicketRepository Repository;
+        private TransactionRepository Repository;
 
-        public TicketController()
+        public TransactionController()
         {
-            Repository = unitOfWork.TicketRepository;
+            Repository = unitOfWork.TransactionRepository;
         }
         //
         // GET: /Administration/Ticket/
@@ -60,7 +60,6 @@ namespace DropIt.Areas.Administration.Controllers
                         e.Event.HoldDate
                     },
                     SellPrice = e.SellPrice,
-                    SeriesNumber = e.SeriesNumber,
                     ReceiveMoney = e.ReceiveMoney,
                     Seat = e.Seat,
                     Description = e.Description,
@@ -169,7 +168,6 @@ namespace DropIt.Areas.Administration.Controllers
                 TicketId = e.TicketId,
                 EventId = e.EventId,
                 UserId = e.UserId,
-                SeriesNumber = e.SeriesNumber,
                 SellPrice = (float) e.SellPrice,
                 Seat = e.Seat,
                 Description = e.Description,
