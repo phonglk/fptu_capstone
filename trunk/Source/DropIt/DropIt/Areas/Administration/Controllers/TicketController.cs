@@ -206,6 +206,10 @@ namespace DropIt.Areas.Administration.Controllers
                 else if (oldTicket.Status == 1) {
                     Ticket.Status = 3;
                 }
+                else if (oldTicket.Status == 3)
+                {
+                    Ticket.Status = 3;
+                }
 
                 Repository.AddOrUpdate(Ticket);
                 unitOfWork.Save();

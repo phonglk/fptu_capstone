@@ -1128,7 +1128,6 @@
     <Content Include="Areas\Administration\Views\Shared\Partials\footer.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\Partials\notification_templates.cshtml" />
     <Content Include="Areas\Administration\Views\Event\Create.cshtml" />
-    <Content Include="Areas\Administration\Views\Ticket\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Ticket\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\List.cshtml" />
