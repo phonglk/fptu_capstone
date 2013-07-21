@@ -33,9 +33,15 @@
         })
     </script>
 }
+  <script>
+      $(function(){
+          $("input.disable").attr("disabled","disabled");
+         
+      })
+    </script>
 <div class="box" style="clear: both">
     <div class="tab-header">
-        Chỉnh sửa địa điểm
+        Chỉnh sửa Vé
     </div>
     <form class="fill-up" id="createEvent" method="post" enctype="multipart/form-data">
         <div class="row-fluid">
@@ -46,20 +52,23 @@
                     @Html.HiddenFor(t => t.UserId)
                     <div class="input">
                         <label for="series">Mã số Vé</label>
-                        <input id="series" type="text" class="" name="SeriesNumber" value="@Model.SeriesNumber"/>
+                        @Html.HiddenFor(t => t.SeriesNumber)
+                        <input id="series" type="text" class="disable" name="" value="@Model.SeriesNumber"/>
                     </div>
                     <div class="input">
                         <label for="price">Giá bán</label>
-                        <input id="price" type="number" class="" name="SellPrice" value="@Model.SellPrice"/>
+                        @Html.HiddenFor(t => t.SellPrice)
+                        <input id="price" type="number" class="disable" name="" value="@Model.SellPrice"/>
                     </div>
 
                     <div class="input">
                         <label for="seat">Ghế ngồi</label>
-                        <input id="seat" type="text" class="" name="Seat" value="@Model.Seat"/>
+                        @Html.HiddenFor(t => t.Seat)
+                        <input id="seat" type="text" class="disable" name="" value="@Model.Seat"/>
                     </div>
                     <div class="input">
                         <label for="event">Sự kiện</label>
-                        @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style = "width:100%" })
+                        @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style = "width:100%", id="event" })
                     </div>
                     <div class="input">
                         <label for="holdDate">Ngày diễn ra</label>
@@ -133,10 +142,8 @@
     }
    
     
-    $("#createEvent").validate(validateOptions);
-    $("select").select2();
-    $("#event").select2("val", Model.EventId);
-    $("#venue").select2("val", Model.VenueId);
+  
+   
     function submit() {
         Loading(true, true);
         $("#Description").val(CKEDITOR.instances.Description.getData());
@@ -201,7 +208,7 @@
     $(function() {
         ctvm = new TiketViewModel();
         ko.applyBindings(ctvm);
-        $("#HoldDate").datetimepicker({ pickSeconds: false, maskInput: false });
-        //$(".form1 form").validate(validateOptions);
+        $("#createEvent").validate(validateOptions);
+        $("#event").select2("val", "@Model.EventId");
     })    
 </script>

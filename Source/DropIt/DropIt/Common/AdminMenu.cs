@@ -171,13 +171,13 @@ namespace DropIt.Common
             {
                 Controller = "Transaction",
                 Title = "Giao dịch",
-                Icon = "ticket"
+                Icon = "tags"
             };
             Transaction.AddChild(new AdminSubMenu()
             {
                 Action = "Index",
                 Title = "Danh sách giao dịch",
-                Icon = "ticket"
+                Icon = "tags"
             });
             Transaction.AddChild(new AdminSubMenu()
             {
