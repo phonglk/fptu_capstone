@@ -51,6 +51,8 @@ namespace DropIt.Areas.Administration.Controllers
                     records = records.Where(u => u.UserName.Contains(UserName));
                 }
 
+                int totalFilterRecord = records.Count();
+
                 records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
 
                 var Records = records.Select(e => new
@@ -75,7 +77,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = Repository.Count
+                    TotalRecordCount = totalFilterRecord
                 });
             }
             catch (Exception e)

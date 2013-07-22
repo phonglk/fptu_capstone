@@ -9,7 +9,7 @@
         Delivered : @((int)DropIt.Common.Statuses.Transaction.Delivered),
         Canceled : @((int)DropIt.Common.Statuses.Transaction.Canceled),
         Paid : @((int)DropIt.Common.Statuses.Transaction.Paid),
-        Recieved : @((int)DropIt.Common.Statuses.Transaction.Received),
+        Received : @((int)DropIt.Common.Statuses.Transaction.Received),
         Unpaid : @((int)DropIt.Common.Statuses.Transaction.Unpaid)
         }
 </script>
@@ -82,7 +82,9 @@
         <tr>
             <th class="sortable" data-bind="click: function (data, event) { sort('TranFullName', data, event) }">Tên giao dịch</th>
             <th>Giá vé</th>
+            <!-- ko if: list.TranStatus() == Statuses.Received -->
             <th>Ngày giao dịch</th>
+            <!-- /ko -->
             <th>Người mua</th>
             <th>Hình thức thanh toán</th>
             <th>Action</th>
@@ -104,9 +106,11 @@
                     data-html="true"></a>
             </td>
             <td data-bind="text: SellPrice"></td>
-            <td >
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received -->
+            <td>
                 <span data-bind="text: TranShipDate.toDateTimeString()"></span>
             </td>
+            <!-- /ko -->
             <td data-bind="text: TranUser.UserName"></td>
             <td data-bind="text: TranType"></td>
             <td>
@@ -152,6 +156,7 @@
     list.extraData = {
         TranStatus:TranStatus
     }
+    list.TranStatus = ko.observable(TranStatus);
     list.changeStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
         $(".status-filter > div > a").eq(transtt).addClass("active");
@@ -256,30 +261,35 @@
 
     $(".status-filter > div > a").eq(0).attr("href","javascript:;").click(function(e){
         list.changeStatus(0);
+        list.TranStatus(0);
         e.preventDefault();
         return false;
     })
 
     $(".status-filter > div > a").eq(1).attr("href","javascript:;").click(function(e){
         list.changeStatus(1);
+        list.TranStatus(1);
         e.preventDefault();
         return false;
     })
 
     $(".status-filter > div > a").eq(2).attr("href","javascript:;").click(function(e){
         list.changeStatus(2);
+        list.TranStatus(2);
         e.preventDefault();
         return false;
     })
 
     $(".status-filter > div > a").eq(3).attr("href","javascript:;").click(function(e){
         list.changeStatus(3);
+        list.TranStatus(3);
         e.preventDefault();
         return false;
     })
 
     $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
         list.changeStatus(4);
+        list.TranStatus(4);
         e.preventDefault();
         return false;
     })

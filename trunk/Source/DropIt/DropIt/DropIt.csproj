@@ -1141,6 +1141,8 @@
     <Content Include="Areas\Administration\Views\Venue\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\User\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Transaction\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Transaction\Index.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />
@@ -1630,7 +1632,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Areas\Administration\Views\Transaction\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="obj\" />
