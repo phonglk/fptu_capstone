@@ -1,4 +1,5 @@
-﻿@using BootstrapExtensions.Base
+﻿@model DropIt.Common.PDTHolder
+@using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
 @using BootstrapExtensions.Base.Form.Label
@@ -9,18 +10,41 @@
     ViewBag.Title = "BuyTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@**@
+@*<div class="container" id="content">*@
+@*    <div class="form1">*@
+@*        @using (Html.HorizontalForm())*@
+@*        {*@
+@*            @Html.AntiForgeryToken()*@
+@*            @Html.ValidationSummary()*@
+@**@
+@*            <h3>Thanh toán</h3> *@
+@*            @Html.Hidden("TicketId", (object)ViewBag.TicketId) *@
+@*       *@
+@*            <button type="submit" class="btn btn-register btn-success">Thanh toán</button>        *@
+            
+            
+@*        }*@
+@*    </div>*@
+@*</div>                *@
 
-<div class="container" id="content">
-    <div class="form1">
-        @using (Html.HorizontalForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
 
-            <h3>Thanh toán</h3> 
-            @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
-       
-            <button type="submit" class="btn btn-register btn-success">Thanh toán</button>        
-        }
-    </div>
-</div>                
+<form id="frm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick" />
+    <input type="hidden" name="business" value="capstoneteam888@gmail.com" />
+    <input type="hidden" name="item_name" value="@Model.item_name"/>
+    <input type="hidden" name="amount" value="@Model.amount" />
+    <input type="hidden" name="shipping" value="@Model.shipping"/>
+    <input type="hidden" name="return" value="http://localhost:2065/CheckOut/Success" />
+    <input type="hidden" name="custom" value="@Model.custom" />    
+</form>
+
+<div style="text-align: center">
+    Đang kết nối trang Paypal... 
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("form").submit();
+    });
+</script>
