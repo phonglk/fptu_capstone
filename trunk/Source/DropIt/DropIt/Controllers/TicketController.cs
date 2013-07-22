@@ -18,8 +18,7 @@ namespace DropIt.Controllers
     public class TicketController : Controller
     {
         double service = Double.Parse(Settings.get("ServiceFee"));
-        double shippingcost = Double.Parse(Settings.get("ShippingCost"));
-        double DeliveryServiceCost = Double.Parse(Settings.get("TranDeliveryServiceCost"));
+        double shippingcost = Double.Parse(Settings.get("ShippingCost"));        
         private UnitOfWork unitOfWork = new UnitOfWork();
         private TicketRepository Repository;
         //
@@ -207,8 +206,7 @@ namespace DropIt.Controllers
                     SeriesNumber = ticket.SeriesNumber,
                     SellPrice = ticket.SellPrice,
                     ReceiveMoney = ticket.ReceiveMoney,
-                    ShippingCost = shippingcost,  // tien ship minh thu
-                    TranDeliveryServiceCost = DeliveryServiceCost,   // tien ship ben giao hang nhanh
+                    ShippingCost = shippingcost,  // tien ship minh thu                    
                     Seat = ticket.Seat,
                     Status = ticket.Status,
                     AdminModifiedDate = ticket.AdminModifiedDate,
