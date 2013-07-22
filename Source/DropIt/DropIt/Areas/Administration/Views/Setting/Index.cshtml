@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/Bundles/jquery.validate")
+<script>
+    var EventStatus = @ViewBag.EventStatus;
+    var Statuses = {
+        Approve : @((int)DropIt.Common.Statuses.Event.Approve),
+        Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove),
+        Trading:@((int)DropIt.Common.Statuses.Event.Trading),
+        Outdate:@((int)DropIt.Common.Statuses.Event.Outdate)
+    }
+</script>
+<style>
+    table th:nth-child(1) {
+        
+        min-width: 200px;
+    }
+
+    table th:nth-child(2) {
+        
+    }
+
+    table th:nth-child(3) {
+        width: 120px;
+    }
+
+    table th:nth-child(4) {
+    }
+
+    table th:nth-child(5) {
+        width: 120px;
+    }
+
+    table th:nth-child(6) {
+    }
+
+    
+</style>
+
+
+
+<table class="table table-bordered box">
+    <thead>
+        <tr>
+            <th class="sortable" data-bind="click: function (data, event) { sort('SettingName', data, event) }">Tên thiết lập</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('HoldDate', data, event) }">Giá trị</th>
+            <th class="">Action</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: data">
+        <tr>
+            <td>
+                <input data-bind="value: SettingName,disable:isEditing()==false,attr:{Id: 'setting_name_'+Id}" type="text" class="editable fill-up"/>
+            </td>
+            <td>
+                <input data-bind="value: Value,disable:isEditing()==false,attr:{Id: 'setting_value_'+Id}" type="text" class="editable fill-up"/>
+            </td>
+            <td>
+                <center>
+                    <a href="javascript:;"
+                        class="button blue"
+                        data-bind="click:$root.Edit,visible:isEditing()==false">Sửa
+                    </a>
+                    <a href="javascript:;"
+                        class="button green"
+                        data-bind="click:$root.Save,visible:isEditing()==true">Lưu
+                    </a>
+                    <a href="javascript:;"
+                        class="button red"
+                        data-bind="click:$root.Delete">Xóa
+                    </a>
+                </center>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <form id="addnew">
+            <td>
+                <input type="text" placeholder="Tên thiết lập" id="SettingName" class="fill-up" required/>
+            </td>
+            <td>
+                <input type="text" placeholder="Giá trị" id="SettingValue" class="fill-up" required/>
+            </td>
+            <td>
+                <center>
+                    <input type="submit" style="visibility:hidden;position:absolute" />
+                <a href="javascript:;"
+                        class="button green"
+                        data-bind="click:$root.Add"
+                    id ="addButton">Thêm
+                    </a>
+                    </center>
+            </td>
+            </form>
+        </tr>
+    </tfoot>
+</table>
+<div class="pagination pull-right" data-bind="visible: pageCount() > 0">
+    <ul data-bind="foreach: new Array(pageCount())">
+        <li data-bind="css: {active: $index()+1 == $root.currentPage()}">
+            <a href="javascript:;" data-bind="click: function (data,event) { $root.changePage($index(),data,event)}">
+                <span data-bind="text: ($index()+1)"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<style>
+    td input {
+        margin-top:7px;
+    }
+    td .button {
+        margin-top:10px;
+    }
+    tbody input {
+        background:none !important;
+        border:none !important;
+        border-bottom: 2px dashed black !important;
+    }
+        tbody input[disabled] {
+            border:none !important;
+        }
+</style>
+<script>
+    function Setting(obj){
+        var self = this;
+        self.SettingName = "";
+        self.Value = "";
+        self.isEditing = ko.observable(false);
+
+        $.extend(self, obj);
+        self.SettingName = ko.observable(self.SettingName);
+        self.Value = ko.observable(self.Value);
+    }
+    var list = new DataList();
+    list.url_getList = {Controller:"Setting",Action:"List"};
+    list.dataClass = Setting;
+    
+    list.Edit = function(item){
+        item.isEditing(true)
+        $("#setting_name_"+item.Id).focus();
+    }
+
+    list.Save = function(item){
+        
+        list.AjaxAction({
+            item:item,
+            urlData:{Action:"Edit",Data:{Id:item.Id,SettingName:item.SettingName(),Value:item.Value()}},
+            callback:function(event){
+                item.isEditing(false)
+            }
+        })
+    }
+
+    list.Add = function(item){
+            list.AjaxAction({
+                item:item,
+                urlData:{Action:"Create",Data:{SettingName:$("#SettingName").val(),Value:$("#SettingValue").val()}},
+                callback:function(event){
+                    $("#SettingName").val("");
+                    $("#SettingValue").val("");
+                    $("#SettingName").focus();
+                }
+            })
+    }
+
+    list.Delete = function(item){
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa thiết lập \""+item.SettingName+"\" ?",
+            {
+                confirm:function(){
+                    list.AjaxAction({
+                        item:item,
+                        urlData:{Action:"Delete",Data:{Id:item.Id}},
+                        callback:function(event){
+                        }
+                    })
+                }
+            }
+        )
+    }
+
+    list.getList(function () {
+        ko.applyBindings(list);
+    });
+    
+    $("#addnew").submit(function(e){
+        $("#addButton").trigger("click");
+        e.preventDefault();
+        return false;
+    })
+
+</script>

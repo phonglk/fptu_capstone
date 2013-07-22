@@ -181,15 +181,15 @@ window.Url = function (_arg,defaultUrl) {
             url += "" + newRouting.Action;
         }
 
-        if (newRouting.Data && newRouting.Data != "") {
-            if (typeof newRouting.Data.Id!="undefined" || 
+        if (newRouting.Data && newRouting.Data != ""){
+            if ((typeof newRouting.Data.Id!="undefined" || 
                 typeof newRouting.Data.id != "undefined" || 
-                typeof newRouting.Data.ID != "undefined") {
+                typeof newRouting.Data.ID != "undefined")&&(true)) {
                 var id = 0;
                 if (typeof newRouting.Data.Id != "undefined") id = newRouting.Data.Id;
                 if (typeof newRouting.Data.id != "undefined") id = newRouting.Data.id;
                 if (typeof newRouting.Data.ID != "undefined") id = newRouting.Data.ID;
-                url += "/" + id;
+                url += "/" + id + "?" + toFormData(newRouting.Data);
             }else{
                 url += "?" + toFormData(newRouting.Data)
             }
