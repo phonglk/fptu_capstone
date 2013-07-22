@@ -134,6 +134,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Received;
+                delete.TranShipDate = DateTime.Now;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();

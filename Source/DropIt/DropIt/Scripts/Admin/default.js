@@ -113,7 +113,9 @@ function Transaction(obj) {
     this.TranAddress = "";
     this.TranUserId = "";
     $.extend(self, obj);
-    this.TranShipDate = Date.fromRawJSON(self.TranShipDate);
+    if (self.TranShipDate != null) {
+        this.TranShipDate = Date.fromRawJSON(self.TranShipDate);
+    }
     if (self.TranDescription == null) self.TranDescription = "";
 }
 
