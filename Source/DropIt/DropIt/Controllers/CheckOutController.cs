@@ -30,11 +30,20 @@ namespace DropIt.Controllers
             double dollarRate = double.Parse(Settings.get("DollarRate"));
             ViewBag.TicketId = Id;
             Ticket ticket = unitOfWork.TicketRepository.GetById(Id);
+            double shippingCost;
+            if (ticket.ShippingCost==null)
+            {
+                 shippingCost = double.Parse(Settings.get("ShippingCost"));
+            }
+            else
+            {
+                 shippingCost = (double)ticket.ShippingCost;
+            }
             PDTHolder pp = new PDTHolder()
                             {
                                 item_name = ticket.Event.EventName,
                                 amount = System.Math.Round((ticket.SellPrice / dollarRate),2),
-                                shipping = System.Math.Round((ticket.ShippingCost / dollarRate), 2),
+                                shipping = System.Math.Round((shippingCost / dollarRate), 2),
                                 custom = ticket.TicketId,
                             };
             return View(pp);
@@ -150,7 +159,7 @@ namespace DropIt.Controllers
                 }
                 else
                 {
-                    ViewBag.Text = "Oooops, something went wrong...";
+                    ViewBag.Text = "Cố lỗi xảy ra";
                 }
 
             }
