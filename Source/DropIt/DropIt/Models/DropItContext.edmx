@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="Drop_ItModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="Drop_ItModelStoreContainer">
           <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" store:Type="Tables" Schema="dbo" />
@@ -134,6 +134,7 @@
           <Property Name="SeriesNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="SellPrice" Type="float" Nullable="false" />
           <Property Name="ReceiveMoney" Type="float" Nullable="false" />
+          <Property Name="ShippingCost" Type="float" Nullable="false" />
           <Property Name="Seat" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
@@ -151,6 +152,7 @@
           <Property Name="TranUserId" Type="int" />
           <Property Name="TranCreatedDate" Type="datetime" />
           <Property Name="TranModifiedDate" Type="datetime" />
+          <Property Name="TranDeliveryServiceCost" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -391,8 +393,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Drop_ItModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -559,6 +560,8 @@
           <NavigationProperty Name="TicketResponses" Relationship="Drop_ItModel.FK_RespondRequest_Ticket" FromRole="Ticket" ToRole="TicketResponse" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="Ticket" ToRole="User" />
+          <Property Type="Double" Name="ShippingCost" Nullable="false" />
+          <Property Type="Double" Name="TranDeliveryServiceCost" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -876,6 +879,8 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="Drop_ItModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="TranDeliveryServiceCost" ColumnName="TranDeliveryServiceCost" />
+                <ScalarProperty Name="ShippingCost" ColumnName="ShippingCost" />
                 <ScalarProperty Name="TicketId" ColumnName="TicketId" />
                 <ScalarProperty Name="SeriesNumber" ColumnName="SeriesNumber" />
                 <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />

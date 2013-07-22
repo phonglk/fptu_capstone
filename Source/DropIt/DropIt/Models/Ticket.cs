@@ -23,6 +23,8 @@ namespace DropIt.Models
         public string SeriesNumber { get; set; }
         public double SellPrice { get; set; }
         public double ReceiveMoney { get; set; }
+        public double ShippingCost { get; set; }
+        public double TranDeliveryServiceCost { get; set; }
         public string Seat { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }

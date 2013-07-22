@@ -222,6 +222,7 @@
     <Compile Include="Common\DropDownGroupList.cs" />
     <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Common\OrderByHelper.cs" />
+    <Compile Include="Common\Paypal.cs" />
     <Compile Include="Common\RequiredIfAttribute.cs" />
     <Compile Include="Common\Setting.cs" />
     <Compile Include="Common\Statuses.cs" />
@@ -1622,6 +1623,8 @@
     <Content Include="Views\Shared\Partials\BuyerHomePage.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Home\Sell.cshtml" />
+    <Content Include="Views\Request\ManageRequestSeller.cshtml" />
+    <Content Include="Views\CheckOut\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
