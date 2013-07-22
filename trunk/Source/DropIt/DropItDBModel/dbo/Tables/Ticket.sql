@@ -22,11 +22,14 @@
     [TranCreatedDate]         DATETIME       NULL,
     [TranModifiedDate]        DATETIME       NULL,
     [TranDeliveryServiceCost] FLOAT (53)     NULL,
+    [TranShipCost]            NVARCHAR (50)  NULL,
     CONSTRAINT [PK_Ticket] PRIMARY KEY CLUSTERED ([TicketId] ASC),
     CONSTRAINT [FK_Ticket_Event] FOREIGN KEY ([EventId]) REFERENCES [dbo].[Event] ([EventId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Ticket_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Ticket_User1] FOREIGN KEY ([TranUserId]) REFERENCES [dbo].[User] ([UserId])
 );
+
+
 
 
 
