@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using DropIt.DAL;
 using DropIt.Models;
 using DropIt.ViewModels;
+using DropIt.Common;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class SettingController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -33,65 +34,120 @@ namespace DropIt.Areas.Administration.Controllers
             return View(setting.ToList());
         }
 
+        [HttpPost]
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
+        {
+            IEnumerable<Setting> records = null;
+
+            try
+            {
+                records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+
+                return Json(new JSONResult(records)
+                {
+                    TotalRecordCount = Repository.Count
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            }
+        }
+
+
         //Get: Create
-        public ActionResult Create()
+
+        [HttpPost]
+        public JsonResult Create(SettingViewModel setting)
         {
-            return View();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Setting newSetting = new Setting()
+                                             {
+                                                 SettingName = setting.SettingName,
+                                                 Value = setting.Value
+                                             };
+                    this.unitOfWork.SettingRepository.AddOrUpdate(newSetting);
+                    this.unitOfWork.Save();
+                    return Json(new
+                    {
+                        Result = "OK"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Result = "Error",
+                        Message = "Dữ liệu truyền lên không hợp lệ"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "Error",
+                    Message = e.Message
+                });
+            }
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(SettingViewModel setting)
+        public JsonResult Delete(int Id)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Setting newSetting = new Setting()
-                                         {
-                                             Id = setting.Id,
-                                             SettingName = setting.SettingName,
-                                             Value = setting.Value
-                                         };
-                this.unitOfWork.SettingRepository.AddOrUpdate(newSetting);
+                this.unitOfWork.SettingRepository.Delete(Id);
                 this.unitOfWork.Save();
-                return RedirectToAction("List");
+                return Json(new
+                {
+                    Result = "OK"
+                });
             }
-            return View(setting);
-        }
-
-        //Get: Edit
-        public ActionResult Edit(int id = 0)
-        {
-            Setting setting = this.unitOfWork.SettingRepository.GetById(id);
-            SettingViewModel stt = new SettingViewModel()
-                                       {
-                                           Id = setting.Id,
-                                           SettingName = setting.SettingName,
-                                           Value = setting.Value
-                                       };
-            if (stt == null)
+            catch (Exception e)
             {
-                HttpNotFound();
+                return Json(new
+                {
+                    Result = "Error",
+                    Message = e.Message
+                });
             }
-            return View(stt);
         }
 
         [HttpPost]
-        public ActionResult Edit(SettingViewModel setting)
+        public JsonResult Edit(Setting setting)
         {
-            Setting getSetting = this.unitOfWork.SettingRepository.GetById(setting.Id);
-            if (ModelState.IsValid)
+            try
             {
-                Setting newSetting = new Setting()
-                                         {
-                                             Id = getSetting.Id,
-                                             SettingName = setting.SettingName,
-                                             Value = setting.Value
-                                         };
-                this.unitOfWork.SettingRepository.AddOrUpdate(newSetting);
-                this.unitOfWork.Save();
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    this.unitOfWork.SettingRepository.AddOrUpdate(setting);
+                    this.unitOfWork.Save();
+                    return Json(new
+                    {
+                        Result = "OK"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Result = "Error",
+                        Message = "Dữ liệu truyền lên không hợp lệ"
+                    });
+                }
             }
-            return View(setting);
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "Error",
+                    Message = e.Message
+                });
+            }
         }
     }
 }
