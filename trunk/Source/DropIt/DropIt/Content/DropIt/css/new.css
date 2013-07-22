@@ -308,7 +308,7 @@ hr {
 .image-item {
     height: 330px;
     background-size: cover;
-    background-position:center;
+    /*background-position:center;*/
 }
 
 .item:hover {
