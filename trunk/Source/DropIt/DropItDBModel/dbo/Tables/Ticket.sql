@@ -3,7 +3,7 @@
     [SeriesNumber]            NVARCHAR (50)  NULL,
     [SellPrice]               FLOAT (53)     NOT NULL,
     [ReceiveMoney]            FLOAT (53)     NOT NULL,
-    [ShippingCost]            FLOAT (53)     NOT NULL,
+    [ShippingCost]            FLOAT (53)     NULL,
     [Seat]                    NVARCHAR (MAX) NULL,
     [Description]             NVARCHAR (MAX) NULL,
     [Status]                  INT            NOT NULL,
