@@ -15,7 +15,7 @@ namespace DropIt.Common
         public static String[] TicketString2 = new string[] { "Chưa được phép", "Được phép", "", "Đang đợi chấp nhận" };
         public enum Event { Disapprove, Approve, Delete, Trading , Outdate };
         public enum Venue { Disapprove, Approve, Delete };
-        public enum Transaction { Unpaid, Paid, Delivered, Recieved, Canceled};
+        public enum Transaction { Unpaid, Paid, Delivered, Received, Canceled};
         public static String[] BuyTicketStrings = new string[] { "Chưa thanh toán", "Đã Mua","Đã giao","Đã nhận","Đã hủy" };
         public enum TranType { InstantPayment, HoldPayment};
         public enum Request { Open, Close};

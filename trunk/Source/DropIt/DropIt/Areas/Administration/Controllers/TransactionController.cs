@@ -25,49 +25,46 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Administration/Ticket/
 
-        public ActionResult Index(int TicketStatus = 0)
+        public ActionResult Index(int TranStatus = 0)
         {
-            ViewBag.TicketStatus = TicketStatus;
+            ViewBag.TranStatus = TranStatus;
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TicketStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TranStatus = -1)
         {
             try
             {
                 IEnumerable<DropIt.Models.Ticket> records = null;
-                if (TicketStatus == -1)
+                if (TranStatus == -1)
                 {
                     records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
 
                 }
                 else
                 {
-                    records = Repository.JTGetExp(e => e.Status == TicketStatus, jtStartIndex, jtPageSize, jtSorting);
+                    records = Repository.JTGetExp(e => e.TranStatus == TranStatus, jtStartIndex, jtPageSize, jtSorting);
                 }
                 var Records = records.Select(e => new
                 {
                     TicketId = e.TicketId,
-                    User = new {
-                    e.UserId,
+                    SellPrice = e.SellPrice,
+                    TranFullName = e.TranFullName,
+                    TranType = e.TranType,
+                    TranAddress = e.TranAddress,
+                    TranShipDate = e.TranShipDate,
+                    TranUser = new {
+                    e.TranUserId,
                     e.User.UserName
                     },
-                    Event = new
-                    {
-                        e.EventId,
-                        e.Event.EventName,
-                        e.Event.HoldDate
-                    },
-                    SellPrice = e.SellPrice,
-                    ReceiveMoney = e.ReceiveMoney,
-                    Seat = e.Seat,
-                    Description = e.Description,
-                    Status = e.Status
+                    TranDescription = e.TranDescription,
+                    TranStatus = e.TranStatus
+
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = (TicketStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == TicketStatus).Count()
+                    TotalRecordCount = (TranStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == TranStatus).Count()
                 });
             }
             catch (Exception e)
@@ -77,12 +74,12 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Approve(int Id)
+        public JsonResult Delivered(int Id)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Ready;
+                delete.TranStatus = (int)Statuses.Transaction.Delivered;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -104,12 +101,12 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Disapprove(int Id)
+        public JsonResult Paid(int Id)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Pending;
+                delete.TranStatus = (int)Statuses.Transaction.Paid;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -130,12 +127,66 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        public JsonResult Delete(int Id)
+        [HttpPost]
+        public JsonResult Received(int Id)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Delete;
+                delete.TranStatus = (int)Statuses.Transaction.Received;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.TicketId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Unpaid(int Id)
+        {
+            try
+            {
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.TranStatus = (int)Statuses.Transaction.Unpaid;
+
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.TicketId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        public JsonResult Canceled(int Id)
+        {
+            try
+            {
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.TranStatus = (int)Statuses.Transaction.Canceled;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();

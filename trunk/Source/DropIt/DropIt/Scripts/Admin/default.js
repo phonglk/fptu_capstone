@@ -101,11 +101,20 @@ function Ticket(obj) {
     $.extend(self, obj);
     if (self.Description == null) self.Description = "";
 
-    //html = "<strong></strong>: " + self.Address;
-    //html += "<br/><strong>Tỉnh/Thành phố</strong>: " + self.Province.ProvinceName;
-    //html += "<br/><strong>Chú thích</strong>: " + self.Description;
+}
 
-    //self.TicketDetail = html.eval(self);
+function Transaction(obj) {
+    var self = this;
+
+    this.TicketId = -1;
+    this.SellPrice = "";
+    this.TranFullName = "";
+    this.TranType = "";
+    this.TranAddress = "";
+    this.TranUserId = "";
+    $.extend(self, obj);
+    this.TranShipDate = Date.fromRawJSON(self.TranShipDate);
+    if (self.TranDescription == null) self.TranDescription = "";
 }
 
 function Venue(obj) {
