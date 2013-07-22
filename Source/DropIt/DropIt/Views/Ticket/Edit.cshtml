@@ -16,72 +16,74 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-            <fieldset>
-                <h2>Thông tin của vé</h2>
+            <h2>Thông tin của vé</h2>
 
-                @Html.HiddenFor(model => model.TicketId)
+            @Html.HiddenFor(model => model.TicketId)
 
-                <div class="">
-                    @Html.Label("Tên sự kiện:")
-                </div>
-                <div class="">
-                    @Html.DropDownList("EventId", (SelectList)ViewBag.EventId)
+            <div class="control-group">
+                <label class="control-label" for="EventId">Tên Sự kiện:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <span data-bind="visible: isCreateEvent() == false">
+                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style="width: 278.193182px;" })
+                        </span>
+                    </div>
                     @Html.ValidationMessageFor(model => model.EventId)
                 </div>
-                
-                @*@Html.LabelAndControl("Tên sự kiện:", Html.DropDownList("EventId"))
-                
-                @Html.LabelAndControl("Ghê ngồi:", Html.TextBox("Seat"))
-                
-                @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.TextBox("Description"))
-                
-                @Html.LabelAndControl("Giá bán:", Html.TextBox("SellPrice"))
-                
-                @Html.LabelAndControl("Tiền nhận được:", Html.TextBox("ReceiveMoney"))*@
-                <div class="editor-label">
-                    @Html.Label("Mã vé:")
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.SeriesNumber)
+            </div>
+        
+            <div class="control-group">
+                <label class="control-label">Mã vé:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        @Html.EditorFor(model => model.SeriesNumber)
+                    </div>
                     @Html.ValidationMessageFor(model => model.SeriesNumber)
                 </div>
-
-                <div class="editor-label">
-                    @Html.Label("Ghê ngồi:")
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Seat)
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Ghế ngồi:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        @Html.EditorFor(model => model.Seat)
+                    </div>
                     @Html.ValidationMessageFor(model => model.Seat)
                 </div>
-
-                <div class="editor-label">
-                    @Html.Label("Ghi chú (tùy chọn):")
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Description)
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Ghi chú (tùy chọn):</label>
+                <div class="controls">
+                    <div class="input-append">
+                        @Html.EditorFor(model => model.Description)
+                    </div>
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
-
-                <div class="editor-label">
-                    @Html.Label("Giá bán:")
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.SellPrice)
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="EventId">Giá bán:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        @Html.EditorFor(model => model.SellPrice)
+                    </div>
                     @Html.ValidationMessageFor(model => model.SellPrice)
                 </div>
-
-                <div class="editor-label">
-                    @Html.Label("Tiền nhận được:")
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.ReceiveMoney)
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="EventId">Tiền nhận được:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        @Html.EditorFor(model => model.ReceiveMoney)
+                    </div>
                     @Html.ValidationMessageFor(model => model.ReceiveMoney)
                 </div>
-                <p>
-                    <input type="submit" value="Đăng vé" />
-                    @Html.ActionLink("Quay về", "Manage")
-                </p>
-            </fieldset>
+            </div>
+            <div class="edit-group">
+                 <button type="submit" class="btn btn-inverse btn-buy btn-small">Đăng vé</button>
+              <a href="@Url.Action("Manage", "Ticket")" class="btn btn-inverse btn-buy btn-small">Quay về</a>
+            </div>
+                    
         }
 
     </div>
