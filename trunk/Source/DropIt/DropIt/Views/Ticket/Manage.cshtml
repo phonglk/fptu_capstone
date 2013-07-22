@@ -34,121 +34,112 @@
                 }
             </div>
         </div>
-        <div class="span9">
-        @using (Html.BeginForm())
-        {     
-            <p>
+        <div class="manage span9">
+            @using (Html.BeginForm())
+            {     
 
                 <ul class="nav nav-tabs">
                     @{                
-            var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
-            foreach (int statusValue in statuses)
-            {
-                if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction)
+                var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
+                foreach (int statusValue in statuses)
                 {
-                    continue;
-                }
-                var classes = "";
-                if ((int)ViewBag.CurrentStatus == statusValue)
-                {
-                    classes = "active";
-                }
+                    if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction)
+                    {
+                        continue;
+                    }
+                    var classes = "";
+                    if ((int)ViewBag.CurrentStatus == statusValue)
+                    {
+                        classes = "active";
+                    }
                         
                         <li class="@classes">
                             <a href="@Url.Action("Manage", new { status = statusValue })">
                                 @DropIt.Common.Statuses.getText("TicketString2", statusValue)
                             </a>
                         </li>
-            }
+                }
                     }
                 </ul>
-            </p> 
-        }
+            }
 
-        @if (Model.Count() == 0)
-        {
-            <center>
+            @if (Model.Count() == 0)
+            {
+                <center>
             <p>Không có giao dịch nào @DropIt.Common.Statuses.getText("TicketString2", (int)ViewBag.CurrentStatus)</p>
         </center>
-        }
-        else
-        {
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            <span class="line"></span>Sự kiện
-                        </th>
-                        <th>
-                            <span class="line"></span>Miêu tả ghế
-                        </th>
-                        <th>
-                            <span class="line"></span>Ghi chú
-                        </th>
-                        <th>
-                            <span class="line"></span>Giá bán
-                        </th>
-                        <th>
-                            <span class="line"></span>Tiền nhận được
-                        </th>
-                        <th>
-                        @*                        <span class="line"></span>Tình trạng
-                    </th>*@
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- row -->
-                    @foreach (var item in Model)
-                    {
-                        <tr class="first">
-                            <td>
-                                @item.Event.EventName
-                            </td>                            
-                            <td>
-                                @item.Seat
-                            </td>
-                            <td>
-                                @item.Description
-                            </td>
-                            <td>
-                                @item.SellPrice
-                            </td>
-                            <td>
-                                @item.ReceiveMoney
-                            </td>
-                         
-                            @{
-                        var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
-                        if (ViewBag.CurrentStatus == 0)
-                        {
-                                <td>
-                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.TicketId }) |
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.TicketId }) |
-                                        @Html.ActionLink("Xóa", "Delete", "Ticket", new { id = item.TicketId }, new { onclick = "return confirm('Bạn có chắc chắn muốn xóa vé này?');" })
-                                </td>
-                        }
-                        else if(ViewBag.CurrentStatus == 1)
-                        {
-                                <td>
-                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.TicketId }) |
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.TicketId })
-                                </td>
-  
-                        }
-                        else if(ViewBag.CurrentStatus==3)
-                        {
-                            <td>
-                                @Html.ActionLink("Xem chi tiết", "Approve", new { id = item.TicketId })
-                            </td>
-                        }
-                            
-                            }
+            }
+            else
+            {
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="first">
+                                <span class="line"></span>Sự kiện
+                            </th>
+                            <th class="second">
+                                <span class="line"></span>Ghế ngồi
+                            </th>
+                            <th>
+                                <span class="line"></span>Giá bán
+                            </th>
+                            <th>
+                                <span class="line"></span>Tiền nhận được
+                            </th>
+                            <th class="last">Thao tác
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-            </div>
+                    </thead>
+                    <tbody>
+                        <!-- row -->
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Event.EventName
+                                </td>
+                                <td>
+                                    @item.Seat
+                                </td>
+                                <td>
+                                    @item.SellPrice
+                                </td>
+                                <td>
+                                    @item.ReceiveMoney
+                                </td>
+
+                                @{
+                            var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
+                            if (ViewBag.CurrentStatus == 0)
+                            {
+                                    <td>
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.TicketId }, new { @class= "btn btn-inverse btn-buy btn-small"})
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.TicketId }, new { @class= "btn btn-inverse btn-buy btn-small"})
+                                        @Html.ActionLink("Xóa", "Delete", "Ticket", new { id = item.TicketId }, new { @class= "btn btn-inverse btn-buy btn-small"})
+                                    </td>
+                            }
+                            else if (ViewBag.CurrentStatus == 1)
+                            {
+                                    <td>
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.TicketId }, new { @class= "btn btn-inverse btn-buy btn-small"})
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.TicketId }, new { @class= "btn btn-inverse btn-buy btn-small"})
+                                    </td>
+  
+                            }
+                            else if (ViewBag.CurrentStatus == 3)
+                            {
+                                    <td>
+                                        @Html.ActionLink("Xem chi tiết", "Approve", new { id = item.TicketId })
+                                    </td>
+                            }
+                            
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
     </div>
 </div>
 

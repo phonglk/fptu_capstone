@@ -849,4 +849,24 @@ table.event-detail td.price {
     padding-right: 30px;
 }
 
-
+.edit-group {
+    padding-left: 38%;
+}
+.manage form {
+    margin-bottom: 5px !important;
+}
+.manage table th {
+    text-align: center;
+}
+.manage table td {
+    text-align: center;
+}
+.manage table th.first {
+    width: 180px;
+}
+.manage table th.second {
+    width: 150px;
+}
+.manage table th.last {
+    width: 180px;
+}
