@@ -25,7 +25,7 @@ namespace DropIt.Controllers
         public ActionResult Index()
         {
             Session["Role"] = "Event";
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status == 1).Take(10);
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => p.Status != 2 || p.Status!=4).Take(10);
             return View(events.ToList());
         }
 
