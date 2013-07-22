@@ -10,7 +10,6 @@ namespace DropIt.Areas.Administration.ViewModels
     public class TicketViewModel
     {
         public int TicketId { get; set; }
-        [Required(ErrorMessage = "Bạn cần điền giá vé")]
         public float SellPrice { get; set; }
         public string Seat { get; set; }
         public float ReceiveMoney { get; set; }

@@ -16,7 +16,7 @@ namespace DropIt.Common
         public string Action { get; set; }
         public string Data { get; set; }
         public string CustomHref { get; set; }
-        public string Icon = "dashboard";
+        public string Icon = "home";
 
         public Menu()
         {
@@ -136,13 +136,7 @@ namespace DropIt.Common
             {
                 Controller = "Ticket",
                 Title = "Vé",
-                Childs = new List<AdminSubMenu>()
-                {
-                    new AdminSubMenu(){
-                        Action = "Index",
-                        Title = "Trang chủ"
-                    }
-                }
+                Icon = "tags"
             };
             adminMenuList.Add(Ticket);
 
@@ -150,20 +144,8 @@ namespace DropIt.Common
             {
                 Controller = "Event",
                 Title = "Sự kiện",
-                Icon = "camera-retro"
+                Icon = "tasks"
             };
-            Event.AddChild(new AdminSubMenu()
-            {
-                Action = "Index",
-                Title = "Danh sách sự kiện",
-                Icon = "camera-retro"
-            });
-            Event.AddChild(new AdminSubMenu()
-            {
-                Action = "Create",
-                Title = "Thêm mới",
-                Icon = "plus-sign"
-            });
 
             adminMenuList.Add(Event);
 
@@ -171,20 +153,8 @@ namespace DropIt.Common
             {
                 Controller = "Transaction",
                 Title = "Giao dịch",
-                Icon = "tags"
+                Icon = "shopping-cart"
             };
-            Transaction.AddChild(new AdminSubMenu()
-            {
-                Action = "Index",
-                Title = "Danh sách giao dịch",
-                Icon = "tags"
-            });
-            Transaction.AddChild(new AdminSubMenu()
-            {
-                Action = "Create",
-                Title = "Thêm mới",
-                Icon = "plus-sign"
-            });
 
             adminMenuList.Add(Transaction);
             // category,event,province,venue
@@ -194,26 +164,13 @@ namespace DropIt.Common
                   Title = "Địa điểm",
                   Icon = "globe"
               };
-            Venue.AddChild(new AdminSubMenu()
-                {
-                    Action = "Index",
-                    Title = "Danh sách địa điểm",
-                    Icon = "globe"
-                });
-            Venue.AddChild(new AdminSubMenu()
-            {
-                Action = "Create",
-                Title = "Thêm mới",
-                Icon = "plus-sign"
-            });
-
             adminMenuList.Add(Venue);
 
             AdminMainMenu Setting = new AdminMainMenu()
             {
                 Controller = "Setting",
                 Title = "Tùy chỉnh",
-                Icon = "globe"
+                Icon = "wrench"
             };
             adminMenuList.Add(Setting);
         }
