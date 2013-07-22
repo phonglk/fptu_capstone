@@ -48,7 +48,7 @@ namespace DropIt.Controllers
         public ActionResult Create(PostTicket ticket)
         {            
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
-            
+            double receivemoney = (int) (ticket.SellPrice*(1 - service));
             if (ModelState.IsValid)
             {
                 if (Request.Form["CreateEvent"] != null) // create new event
@@ -85,7 +85,7 @@ namespace DropIt.Controllers
                             EventId = newEvent.EventId,
                             SeriesNumber = ticket.SeriesNumber,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
+                            ReceiveMoney = (System.Math.Floor(receivemoney/500))*500,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -116,7 +116,7 @@ namespace DropIt.Controllers
                             EventId = newEvent.EventId,
                             SeriesNumber = ticket.SeriesNumber,
                             SellPrice = ticket.SellPrice,
-                            ReceiveMoney = (int)(ticket.SellPrice * (1-service)),
+                            ReceiveMoney = (System.Math.Floor(receivemoney / 500)) * 500,
                             Seat = ticket.Seat,
                             Description = ticket.Description,
                             Status = (int)Statuses.Ticket.Pending,
@@ -133,7 +133,7 @@ namespace DropIt.Controllers
                         EventId = (int)ticket.EventId,
                         SeriesNumber = ticket.SeriesNumber,
                         SellPrice = ticket.SellPrice,
-                        ReceiveMoney = (int)(ticket.SellPrice*(1-service)),
+                        ReceiveMoney = (System.Math.Floor(receivemoney / 500)) * 500,
                         Seat = ticket.Seat,
                         Description = ticket.Description,
                         Status = (int)Statuses.Ticket.Ready,
@@ -416,6 +416,7 @@ namespace DropIt.Controllers
         public ActionResult Edit(Ticket ticket)
         {
             Ticket getTicket = this.unitOfWork.TicketRepository.GetById(ticket.TicketId);
+            double receivemoney = (int)(ticket.SellPrice * (1 - service));
             if (ModelState.IsValid)
             {
                 Ticket newTicket = new Ticket()
@@ -430,7 +431,7 @@ namespace DropIt.Controllers
                                            UserId = getTicket.UserId,
                                            SeriesNumber = ticket.SeriesNumber, // thay doi
                                            SellPrice = ticket.SellPrice,  // thay doi
-                                           ReceiveMoney = ticket.SellPrice*(1-service),  // thay doi
+                                           ReceiveMoney = (System.Math.Floor(receivemoney / 500)) * 500,  // thay doi
                                            Seat = ticket.Seat,  // thay doi
                                            Status = (int)Statuses.Ticket.Ready,  // dua ve trang thai ready
                                            AdminModifiedDate = getTicket.AdminModifiedDate,
