@@ -536,8 +536,12 @@ SET IDENTITY_INSERT [dbo].[Ticket] OFF
 
 -----------TicketResponse------------------
 
+GO
 
-
-INSERT INTO Setting(SettingName,Value) values('ServiceFee','0.07')
+SET IDENTITY_INSERT [dbo].[Setting] ON
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (1, N'ServiceFee', N'0.07')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (2, N'ShippingCost', N'15000')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'DollarRate', N'21233')
+SET IDENTITY_INSERT [dbo].[Setting] OFF
 
 GO
