@@ -10,115 +10,86 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-Declare @xml int
-
-Declare @xmlData xml = N'
-<categories>
-	<category CategoryId="1" CategoryName="Giải Trí" Status="1" Description="Test"/>
-	<category CategoryId="2" CategoryName="Ca nhạc" Status="1" Description="Test"/>
-	<category CategoryId="3" CategoryName="Ca nhạc trong nước" Status="1" Description="Test"/>
-	<category CategoryId="4" CategoryName="Ca nhạc nước ngoài" Status="1" Description="Test"/>
-	<category CategoryId="5" CategoryName="Thể Thao" Status="1" Description="Test"/>
-</categories>
-'
-
-EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
-
-MERGE Category AS target Using (
-	Select s.CategoryId, s.CategoryName, s.ParentCategoryId, s.Status, s.Description
-	From OPENXML (@xml, '/categories/category', 1)
-	With (CategoryId int, CategoryName nvarchar(50), ParentCategoryId int, Status int, Description nvarchar(MAX)) as s
-) AS source (CategoryId, CategoryName, ParentCategoryId, Status, Description)
-ON (source.CategoryId = target.CategoryId)
-WHEN NOT MATCHED BY TARGET THEN
-	Insert (CategoryName, ParentCategoryId, Status, Description) values (source.CategoryName, source.ParentCategoryId, source.Status, source.Description);
+ --- Category
+SET IDENTITY_INSERT [dbo].[Category] ON
+INSERT INTO [dbo].[Category] ([CategoryId], [CategoryName], [ParentCategoryId], [Status], [Description]) VALUES (1, N'Giải Trí', NULL, 1, N'Test')
+INSERT INTO [dbo].[Category] ([CategoryId], [CategoryName], [ParentCategoryId], [Status], [Description]) VALUES (2, N'Ca nhạc', NULL, 1, N'Test')
+INSERT INTO [dbo].[Category] ([CategoryId], [CategoryName], [ParentCategoryId], [Status], [Description]) VALUES (3, N'Ca nhạc trong nước', NULL, 1, N'Test')
+INSERT INTO [dbo].[Category] ([CategoryId], [CategoryName], [ParentCategoryId], [Status], [Description]) VALUES (4, N'Ca nhạc nước ngoài', NULL, 1, N'Test')
+INSERT INTO [dbo].[Category] ([CategoryId], [CategoryName], [ParentCategoryId], [Status], [Description]) VALUES (5, N'Thể Thao', NULL, 1, N'Test')
+SET IDENTITY_INSERT [dbo].[Category] OFF
 
 
 --------------Province-----------------------
 
-SET @xmlData = N'
-<provinces>
-	<province ProvinceId="1" ProvinceName="An Giang"/>
-	<province ProvinceId="1" ProvinceName="Bà Rịa - Vũng Tàu"/>
-	<province ProvinceId="1" ProvinceName="Bắc Giang"/>
-	<province ProvinceId="1" ProvinceName="Bắc Kạn"/>
-	<province ProvinceId="1" ProvinceName="Bạc Liêu"/>
-	<province ProvinceId="1" ProvinceName="Bắc Ninh"/>
-	<province ProvinceId="1" ProvinceName="Bến Tre"/>
-	<province ProvinceId="1" ProvinceName="Bình Định"/>
-	<province ProvinceId="1" ProvinceName="Bình Dương"/>
-	<province ProvinceId="1" ProvinceName="Bình Phước"/>
-	<province ProvinceId="1" ProvinceName="Bình Thuận"/>
-	<province ProvinceId="1" ProvinceName="Cà Mau"/>
-	<province ProvinceId="1" ProvinceName="Cao Bằng"/>
-	<province ProvinceId="1" ProvinceName="Đắk Lắk"/>
-	<province ProvinceId="1" ProvinceName="Đắk Nông"/>
-	<province ProvinceId="1" ProvinceName="Điện Biên"/>
-	<province ProvinceId="1" ProvinceName="Đồng Nai"/>
-	<province ProvinceId="1" ProvinceName="Đồng Tháp"/>
-	<province ProvinceId="1" ProvinceName="Gia Lai"/>
-	<province ProvinceId="1" ProvinceName="Hà Giang"/>
-	<province ProvinceId="1" ProvinceName="Hà Nam"/>
-	<province ProvinceId="1" ProvinceName="Hà Tĩnh"/>
-	<province ProvinceId="1" ProvinceName="Hải Dương"/>
-	<province ProvinceId="1" ProvinceName="Hậu Giang"/>
-	<province ProvinceId="1" ProvinceName="Hòa Bình"/>
-	<province ProvinceId="1" ProvinceName="Hưng Yên"/>
-	<province ProvinceId="1" ProvinceName="Khánh Hòa"/>
-	<province ProvinceId="1" ProvinceName="Kiên Giang"/>
-	<province ProvinceId="1" ProvinceName="Kon Tum"/>
-	<province ProvinceId="1" ProvinceName="Lai Châu"/>
-	<province ProvinceId="1" ProvinceName="Lâm Đồng"/>
-	<province ProvinceId="1" ProvinceName="Lạng Sơn"/>
-	<province ProvinceId="1" ProvinceName="Lào Cai"/>
-	<province ProvinceId="1" ProvinceName="Long An"/>
-	<province ProvinceId="1" ProvinceName="Nam Định"/>
-	<province ProvinceId="1" ProvinceName="Nghệ An"/>
-	<province ProvinceId="1" ProvinceName="Ninh Bình"/>
-	<province ProvinceId="1" ProvinceName="Ninh Thuận"/>
-	<province ProvinceId="1" ProvinceName="Phú Thọ"/>
-	<province ProvinceId="1" ProvinceName="Quảng Bình"/>
-	<province ProvinceId="1" ProvinceName="Quảng Nam"/>
-	<province ProvinceId="1" ProvinceName="Quảng Ngãi"/>
-	<province ProvinceId="1" ProvinceName="Quảng Ninh"/>
-	<province ProvinceId="1" ProvinceName="Quảng Trị"/>
-	<province ProvinceId="1" ProvinceName="Sóc Trăng"/>
-	<province ProvinceId="1" ProvinceName="Sơn La"/>
-	<province ProvinceId="1" ProvinceName="Tây Ninh"/>
-	<province ProvinceId="1" ProvinceName="Thái Bình"/>
-	<province ProvinceId="1" ProvinceName="Thái Nguyên"/>
-	<province ProvinceId="1" ProvinceName="Thanh Hóa"/>
-	<province ProvinceId="1" ProvinceName="Thừa Thiên Huế"/>
-	<province ProvinceId="1" ProvinceName="Tiền Giang"/>
-	<province ProvinceId="1" ProvinceName="Trà Vinh"/>
-	<province ProvinceId="1" ProvinceName="Tuyên Quang"/>
-	<province ProvinceId="1" ProvinceName="Vĩnh Long"/>
-	<province ProvinceId="1" ProvinceName="Vĩnh Phúc"/>
-	<province ProvinceId="1" ProvinceName="Yên Bái"/>
-	<province ProvinceId="1" ProvinceName="Phú Yên"/>
-	<province ProvinceId="1" ProvinceName="Cần Thơ"/>
-	<province ProvinceId="1" ProvinceName="Đà Nẵng"/>
-	<province ProvinceId="1" ProvinceName="Hải Phòng"/>
-	<province ProvinceId="1" ProvinceName="Hà Nội"/>
-	<province ProvinceId="1" ProvinceName="TP HCM"/> 
-</provinces>
-'
-EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
-
-MERGE Province AS target USING (
-    SELECT s.ProvinceId, s.ProvinceName
-    FROM OPENXML(@xml, '/provinces/province', 1)
-    WITH (ProvinceId int, ProvinceName nvarchar(50)) as s) 
-	AS source (ProvinceId, ProvinceName)
-ON (source.ProvinceId = target.ProvinceId)
---WHEN MATCHED THEN
---    UPDATE SET ProvinceName = source.ProvinceName
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (ProvinceName) values (source.ProvinceName)
-;
+SET IDENTITY_INSERT [dbo].[Province] ON
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (1, N'An Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (2, N'Bà Rịa - Vũng Tàu')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (3, N'Bắc Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (4, N'Bắc Kạn')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (5, N'Bạc Liêu')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (6, N'Bắc Ninh')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (7, N'Bến Tre')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (8, N'Bình Định')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (9, N'Bình Dương')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (10, N'Bình Phước')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (11, N'Bình Thuận')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (12, N'Cà Mau')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (13, N'Cao Bằng')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (14, N'Đắk Lắk')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (15, N'Đắk Nông')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (16, N'Điện Biên')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (17, N'Đồng Nai')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (18, N'Đồng Tháp')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (19, N'Gia Lai')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (20, N'Hà Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (21, N'Hà Nam')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (22, N'Hà Tĩnh')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (23, N'Hải Dương')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (24, N'Hậu Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (25, N'Hòa Bình')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (26, N'Hưng Yên')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (27, N'Khánh Hòa')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (28, N'Kiên Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (29, N'Kon Tum')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (30, N'Lai Châu')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (31, N'Lâm Đồng')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (32, N'Lạng Sơn')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (33, N'Lào Cai')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (34, N'Long An')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (35, N'Nam Định')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (36, N'Nghệ An')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (37, N'Ninh Bình')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (38, N'Ninh Thuận')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (39, N'Phú Thọ')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (40, N'Quảng Bình')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (41, N'Quảng Nam')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (42, N'Quảng Ngãi')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (43, N'Quảng Ninh')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (44, N'Quảng Trị')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (45, N'Sóc Trăng')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (46, N'Sơn La')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (47, N'Tây Ninh')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (48, N'Thái Bình')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (49, N'Thái Nguyên')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (50, N'Thanh Hóa')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (51, N'Thừa Thiên Huế')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (52, N'Tiền Giang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (53, N'Trà Vinh')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (54, N'Tuyên Quang')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (55, N'Vĩnh Long')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (56, N'Vĩnh Phúc')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (57, N'Yên Bái')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (58, N'Phú Yên')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (59, N'Cần Thơ')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (60, N'Đà Nẵng')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (61, N'Hải Phòng')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (62, N'Hà Nội')
+INSERT INTO [dbo].[Province] ([ProvinceId], [ProvinceName]) VALUES (63, N'TP HCM')
+SET IDENTITY_INSERT [dbo].[Province] OFF
 
 
-	-------------Venue--------------
+-------------Venue--------------
 SET IDENTITY_INSERT [dbo].[Venue] ON
 INSERT INTO [dbo].[Venue] ([VenueId], [VenueName], [Address], [ProvinceId], [Status], [Description]) VALUES (1, N'Bằng Lăng Tím', N'123', 1, 2, N'Có bãi gửi xe')
 INSERT INTO [dbo].[Venue] ([VenueId], [VenueName], [Address], [ProvinceId], [Status], [Description]) VALUES (2, N'Bò cạp vàng', N'123', 2, 2, N'Có bãi gửi xe')
@@ -456,67 +427,83 @@ INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [A
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (7, N'user7', NULL, N'user@gmail.com', N'0909999999', N'242 Tô ký', 1, 0, NULL, NULL, NULL, 1, N'2013-02-15 00:00:00', N'2013-02-15 00:00:00', 3)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (8, N'user8', NULL, N'user@gmail.com', N'0909999999', N'242 Tô ký', 1, 0, NULL, NULL, NULL, 1, N'2013-02-15 00:00:00', N'2013-02-15 00:00:00', 4)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (9, N'admin', NULL, N'admin@gmail.com', N'0909777777', N'123 To Ky', 0, 0, NULL, NULL, NULL, 0, N'2013-07-19 11:50:02', N'2013-07-19 11:50:02', 1)
-INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (10, N'Tuan bui', N'Tuanbui', N'tuanbui12@yahoo.com', N'0934889877', N'65 Quang Trung', 1, 0, N'Dong A Bank', N'2425676891', N'241099867', 0, N'2013-07-19 15:11:17', N'2013-07-19 15:11:17', 63)
+INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (10, N'Tuanbui', N'Tuan bui', N'tuanbui12@yahoo.com', N'0934889877', N'65 Quang Trung', 1, 0, N'Dong A Bank', N'2425676891', N'241099867', 0, N'2013-07-19 15:11:17', N'2013-07-19 15:11:17', 63)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (11, N'hieutran', N'Trần Hiếu', N'hieuhieu@yahoo.com', N'0914005007', N'go vap', 1, 0, NULL, NULL, NULL, 0, N'2013-07-19 15:31:28', N'2013-07-19 15:31:28', 63)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (12, N'huytuan', N'Huy Tuấn', N'tuanhuy123@yahoo.com', N'0942153264', N'Bình thạnh', 1, 0, NULL, NULL, NULL, 0, N'2013-07-19 15:41:12', N'2013-07-19 15:41:12', 63)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (13, N'thanhhoang', N'Thanh Hoàng', N'hoangthanh@yahoo.com', N'094521687', N'quận 12', 1, 0, NULL, NULL, NULL, 0, N'2013-07-19 15:45:49', N'2013-07-19 15:45:49', 63)
 INSERT INTO [dbo].[User] ([UserId], [UserName], [FullName], [Email], [Phone], [Address], [Active], [IsVerified], [BankName], [BankAccount], [IdentityCard], [Sellable], [CreatedDate], [ModifiedDate], [ProvinceId]) VALUES (14, N'vuviet', N'Vũ Quốc Viêt', N'quocviet15@yahoo.com', N'0986145253', N'Hồ Văn Huê', 1, 0, NULL, NULL, NULL, 0, N'2013-07-19 15:51:09', N'2013-07-19 15:51:09', 63)
 SET IDENTITY_INSERT [dbo].[User] OFF
------------Request------------------
-SET @xmlData = N'
-<requests>
-  <request UserId="1" EventId="1" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="2" EventId="2" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="3" EventId="3" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="4" EventId="4" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="5" EventId="5" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="6" EventId="6" Status="1" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="7" EventId="7" Status="0" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>  
-  <request UserId="8" EventId="8" Status="0" Description="Mua vé gấp" CreatedDate="02/15/2013" ModifiedDate="02/15/2013"/>
-</requests>
-'
-EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
-MERGE Request AS target USING (
-    SELECT s.UserId, s.EventId, s.Status, s.Description, s.CreatedDate, s.ModifiedDate
-    FROM OPENXML(@xml, '/requests/request', 1)
-    WITH (UserId int, EventId int, Status int, Description nvarchar(MAX), CreatedDate datetime, ModifiedDate datetime) as s) 
-	AS source (UserId, EventId, Status, Description, CreatedDate, ModifiedDate)
-ON (source.UserId = target.UserId and source.EventId = target.EventId)
---WHEN MATCHED THEN
---    UPDATE SET ProvinceName = source.ProvinceName
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (UserId, EventId, Status, Description, CreatedDate, ModifiedDate) values (source.UserId, source.EventId, source.Status, source.Description, source.CreatedDate, source.ModifiedDate)
-;
+--
+
+CREATE TABLE [dbo].[webpages_Membership] (
+    [UserId]                                  INT            NOT NULL,
+    [CreateDate]                              DATETIME       NULL,
+    [ConfirmationToken]                       NVARCHAR (128) NULL,
+    [IsConfirmed]                             BIT            DEFAULT ((0)) NULL,
+    [LastPasswordFailureDate]                 DATETIME       NULL,
+    [PasswordFailuresSinceLastSuccess]        INT            DEFAULT ((0)) NOT NULL,
+    [Password]                                NVARCHAR (128) NOT NULL,
+    [PasswordChangedDate]                     DATETIME       NULL,
+    [PasswordSalt]                            NVARCHAR (128) NOT NULL,
+    [PasswordVerificationToken]               NVARCHAR (128) NULL,
+    [PasswordVerificationTokenExpirationDate] DATETIME       NULL,
+    PRIMARY KEY CLUSTERED ([UserId] ASC)
+);
+
+CREATE TABLE [dbo].[webpages_OAuthMembership] (
+    [Provider]       NVARCHAR (30)  NOT NULL,
+    [ProviderUserId] NVARCHAR (100) NOT NULL,
+    [UserId]         INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([Provider] ASC, [ProviderUserId] ASC)
+);
+
+CREATE TABLE [dbo].[webpages_Roles] (
+    [RoleId]   INT            IDENTITY (1, 1) NOT NULL,
+    [RoleName] NVARCHAR (256) NOT NULL,
+    PRIMARY KEY CLUSTERED ([RoleId] ASC),
+    UNIQUE NONCLUSTERED ([RoleName] ASC)
+);
+
+
+CREATE TABLE [dbo].[webpages_UsersInRoles] (
+    [UserId] INT NOT NULL,
+    [RoleId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([UserId] ASC, [RoleId] ASC),
+    CONSTRAINT [fk_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]),
+    CONSTRAINT [fk_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[webpages_Roles] ([RoleId])
+);
+
+
+
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (9, N'2013-07-19 04:50:02', NULL, 1, NULL, 0, N'ANG24drn6WmLAtm5ucdsGAOAmWrpGtbuKrlhnrh8qAxliGh06tCTFM6zJcXvD/ZRCQ==', N'2013-07-19 04:50:02', N'', NULL, NULL)
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (10, N'2013-07-19 08:11:18', NULL, 1, NULL, 0, N'ACLMbeFXlCQzWqNCCgwW3TbcuFkBt/dzD/A1eWySCeNKyq1YTfirl+gu4/I7CitROQ==', N'2013-07-19 08:11:18', N'', NULL, NULL)
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (11, N'2013-07-19 08:31:29', NULL, 1, NULL, 0, N'AAt6O9JUlFClx1531UeoA36+J4n+TgIbDp8ykW14ixzBICDJmQHWhO6aKLtUN6pdNA==', N'2013-07-19 08:31:29', N'', NULL, NULL)
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (12, N'2013-07-19 08:41:12', NULL, 1, NULL, 0, N'AAFCxKRGeLloH4aZHA7TjxYlhckhHWvO418+uoOgOnFfpCiGD3PNfZ4VlVNATSKqJg==', N'2013-07-19 08:41:12', N'', NULL, NULL)
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (13, N'2013-07-19 08:45:49', NULL, 1, NULL, 0, N'AJyF+R5Iiik0xTStgPt0l/NkK3E43xiDx6FAvkS6Te8dujs3lSQR+TBdLiE3++Fq4A==', N'2013-07-19 08:45:49', N'', NULL, NULL)
+INSERT INTO [dbo].[webpages_Membership] ([UserId], [CreateDate], [ConfirmationToken], [IsConfirmed], [LastPasswordFailureDate], [PasswordFailuresSinceLastSuccess], [Password], [PasswordChangedDate], [PasswordSalt], [PasswordVerificationToken], [PasswordVerificationTokenExpirationDate]) VALUES (14, N'2013-07-19 08:51:09', NULL, 1, NULL, 0, N'ALUONvO4XcZasQwBNUA3DRMKgSeLJGzE7dncbQkTA9p2WEEwkHXsn2K3fTLo0wGZ3w==', N'2013-07-19 08:51:09', N'', NULL, NULL)
+
+GO
+
+SET IDENTITY_INSERT [dbo].[webpages_Roles] ON
+INSERT INTO [dbo].[webpages_Roles] ([RoleId], [RoleName]) VALUES (1, N'Administrator')
+SET IDENTITY_INSERT [dbo].[webpages_Roles] OFF
+
+GO
+
+INSERT INTO [dbo].[webpages_UsersInRoles] ([UserId], [RoleId]) VALUES (9, 1)
+
+
+-----------Request------------------
+
 
 -----------UserFollowEvent------------------
-SET @xmlData = N'
-<userevents>
-  <userevent FollowEventId="1" UserId="1" EventId="1"/>      
-  <userevent FollowEventId="2" UserId="2" EventId="2"/>
-  <userevent FollowEventId="3" UserId="3" EventId="3"/>
-  <userevent FollowEventId="4" UserId="4" EventId="4"/>
-</userevents>
-'
-EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
-MERGE UserFollowEvent AS target USING (
-    SELECT s.FollowEventId, s.UserId, s.EventId
-    FROM OPENXML(@xml, '/userevents/userevent', 1)
-    WITH (FollowEventId int, UserId int, EventId int) as s) 
-	AS source (FollowEventId, UserId, EventId)
-ON (source.FollowEventId = target.FollowEventId)
---WHEN MATCHED THEN
---    UPDATE SET ProvinceName = source.ProvinceName
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (UserId, EventId) values (source.UserId, source.EventId)
-;
 
 -----Ticket--------------
 
 SET IDENTITY_INSERT [dbo].[Ticket] ON
-INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMoney], [Seat], [Description], [Status], [UserId], [EventId], [AdminModifiedDate], [CreatedDate], [ModifiedDate], [TranFullName], [TranType], [TranShipDate], [TranDescription], [TranAddress], [TranStatus], [TranUserId], [TranCreatedDate], [TranModifiedDate]) VALUES (1, N'123456789', 10, 0, N'ghe ngoi 2A dãy M', N'<p>B&aacute;n gấp cần tiền</p>
-', 3, 1, 2, NULL, NULL, N'2013-07-19 14:39:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMoney], [Seat], [Description], [Status], [UserId], [EventId], [AdminModifiedDate], [CreatedDate], [ModifiedDate], [TranFullName], [TranType], [TranShipDate], [TranDescription], [TranAddress], [TranStatus], [TranUserId], [TranCreatedDate], [TranModifiedDate]) VALUES (1, N'123456789', 10, 0, N'ghe ngoi 2A dãy M', N'<p>B&aacute;n gấp cần tiền</p>', 3, 1, 2, NULL, NULL, N'2013-07-19 14:39:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMoney], [Seat], [Description], [Status], [UserId], [EventId], [AdminModifiedDate], [CreatedDate], [ModifiedDate], [TranFullName], [TranType], [TranShipDate], [TranDescription], [TranAddress], [TranStatus], [TranUserId], [TranCreatedDate], [TranModifiedDate]) VALUES (2, N'123456700', 10, 9.7, N'ghe ngoi 2A dãy M', N'Bán gấp cần tiền', 1, 2, 2, NULL, N'2013-02-15 00:00:00', N'2013-02-15 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMoney], [Seat], [Description], [Status], [UserId], [EventId], [AdminModifiedDate], [CreatedDate], [ModifiedDate], [TranFullName], [TranType], [TranShipDate], [TranDescription], [TranAddress], [TranStatus], [TranUserId], [TranCreatedDate], [TranModifiedDate]) VALUES (3, NULL, 10, 9.7, N'ghe ngoi 2A dãy M', N'Bán gấp cần tiền', 1, 3, 3, NULL, N'2013-02-15 00:00:00', N'2013-02-15 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMoney], [Seat], [Description], [Status], [UserId], [EventId], [AdminModifiedDate], [CreatedDate], [ModifiedDate], [TranFullName], [TranType], [TranShipDate], [TranDescription], [TranAddress], [TranStatus], [TranUserId], [TranCreatedDate], [TranModifiedDate]) VALUES (4, NULL, 10, 9.7, N'ghe ngoi 2A dãy M', N'Bán gấp cần tiền', 1, 4, 4, NULL, N'2013-02-15 00:00:00', N'2013-02-15 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
@@ -548,29 +535,8 @@ INSERT INTO [dbo].[Ticket] ([TicketId], [SeriesNumber], [SellPrice], [ReceiveMon
 SET IDENTITY_INSERT [dbo].[Ticket] OFF
 
 -----------TicketResponse------------------
-SET @xmlData = N'
-<ticketresponses>
-  <ticketresponse UserId="1" EventId="1" TicketId="1" Status="1" Description="Bán nhanh"/>    
-  <ticketresponse UserId="2" EventId="2" TicketId="2" Status="1" Description="Bán nhanh"/>      
-  <ticketresponse UserId="3" EventId="3" TicketId="3" Status="1" Description="Bán nhanh"/>    
-  <ticketresponse UserId="4" EventId="4" TicketId="4" Status="0" Description="Bán nhanh"/>      
-</ticketresponses>
-'
-EXEC sp_xml_preparedocument @xml OUTPUT, @xmlData
 
-MERGE TicketResponse AS target USING (
-    SELECT s.UserId, s.EventId, s.TicketId, s.Status, s.Description
-    FROM OPENXML(@xml, '/ticketresponses/ticketresponse', 1)
-    WITH (UserId int, EventId int, TicketId int, Status int, Description nvarchar(MAX)) as s) 
-	AS source (UserId, EventId, TicketId, Status, Description)
-ON (source.UserId = target.UserId and source.EventId = target.EventId and source.TicketId = target.TicketId)
---WHEN MATCHED THEN
---    UPDATE SET ProvinceName = source.ProvinceName
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (UserId, EventId, TicketId, Status, Description) values (source.UserId, source.EventId, source.TicketId, source.Status, source.Description)
-;
 
-GO
 
 INSERT INTO Setting(SettingName,Value) values('ServiceFee','0.07')
 
