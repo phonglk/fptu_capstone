@@ -539,6 +539,7 @@ SET IDENTITY_INSERT [dbo].[Setting] ON
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (1, N'ServiceFee', N'0.07')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (2, N'ShippingCost', N'15000')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'DollarRate', N'21233')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (4, N'DefaultEventImage', N'/Content/Images/no_image.jpg')
 SET IDENTITY_INSERT [dbo].[Setting] OFF
 
 GO
