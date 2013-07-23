@@ -11,109 +11,126 @@
     ViewBag.Title = "BuyTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    th{
-        font-weight:bold !important;
-        color:#431f59!important;
-    }
-</style>
-<div class="container" id="content">
-    <div class="form1">
-        @using (Html.HorizontalForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
+@if (User.IsInRole("Administrator"))
+{
+    <div class="container"> 
+        <div>
+            <p></p>
+        </div>
+        <center>Xin lỗi admin không thể thực hiện giao dịch</center>
+        <center>
+            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+        </center>
 
-            <h3>Thông tin vé</h3> 
-            
-            <div class="ticket-list">
-                <table class="table table-condensed table-bordered event-detail" style="margin-left:5px;">
-                    <thead>
-                        <tr>
-                            <th colspan="5">
-                                Tên sự kiện : @Model.EventName
-                            </th>
-                        </tr>
-                        <tr class="header warning">
-                            <th class="">Tên sự kiện</th>
-                            <th class="">Thời gian</th>
-                            <th class="">Địa điểm</th>
-                            <th class="">Giá bán</th>
-                            <th class="">Thông tin ghế ngồi</th>
-                                
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="first">
-                                @Model.EventName
-                            </td>
-                            <td class="user">
-                                @Json.Encode(Model.HoldDate)
-                            </td>
-                            <td class="user">
-                                @Model.VenueName
-                            </td>
-                            <td class="descript">
-                                @Model.SellPrice
-                            </td>
-                            <td class="price">
-                                @Model.Seat
-                            </td>
-                                
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <br />
-                                <br />
-                                <strong>Thông tin chi tiết</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            @if(@Model.Description==null)
-                            {
-                                <td colspan="5" style="text-align:left">
-                                    Không có thông tin thêm!
-                                </td>
-                            }
-                            else
-                            {
-                                <td colspan="5" style="text-align:left">
-                                    @Model.Description
-                                </td>
-                            }
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-            <h3>Thông tin người mua</h3>
-            @Html.Hidden("TicketId", (object)ViewBag.TicketId) 
-            @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
-            @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
-
-            <div class="control-group">
-                <label class="control-label">Hình thức thanh toán: </label>
-                <div class="controls radio-check">
-                    @Html.RadioButton("TranType", (int)Statuses.TranType.HoldPayment, true, new { id = "trantype_5d" })
-                    <label for="trantype_5d" style="display:inline">Thanh toán tạm giữ 5 ngày </label>
-                </div>
-                <div class="controls radio-check">
-                    @Html.RadioButton("TranType", (int)Statuses.TranType.InstantPayment, new { id = "trantype_instant" })
-                    <label for="trantype_instant" style="display:inline">Thanh toán ngay</label>
-                </div>
-            </div>
-            @Html.LabelAndControl("Giá vé:", Html.TextBox("SellPrice", @Model.SellPrice, new {@readonly="readonly"})) 
-            @Html.LabelAndControl("Tiền Ship hàng:", Html.TextBox("ShippingCost", @Model.ShippingCost, new {@readonly="readonly"})) 
-            @Html.LabelAndControl("Tổng cộng:", Html.TextBox("Tong", @Model.SellPrice+@Model.ShippingCost, new {@readonly="readonly"}))
-            @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
-
-            //captcha
-
-
-            // end captcha
-            
-            <button type="submit" class="btn btn-register btn-success">Xác nhận</button>
-            <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>
-        }
     </div>
-</div>
+    
+}
+else
+{
+    <style>
+        th {
+            font-weight: bold !important;
+            color: #431f59!important;
+        }
+    </style>
+    <div class="container" id="content">
+        <div class="form1">
+            @using (Html.HorizontalForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <h3>Thông tin vé</h3>
+
+                <div class="ticket-list">
+                    <table class="table table-condensed table-bordered event-detail" style="margin-left: 5px;">
+                        <thead>
+                            <tr>
+                                <th colspan="5">
+                                    Tên sự kiện : @Model.EventName
+                                </th>
+                            </tr>
+                            <tr class="header warning">
+                                <th class="">Tên sự kiện</th>
+                                <th class="">Thời gian</th>
+                                <th class="">Địa điểm</th>
+                                <th class="">Giá bán</th>
+                                <th class="">Thông tin ghế ngồi</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">
+                                    @Model.EventName
+                                </td>
+                                <td class="user">
+                                    @Json.Encode(Model.HoldDate)
+                                </td>
+                                <td class="user">
+                                    @Model.VenueName
+                                </td>
+                                <td class="descript">
+                                    @Model.SellPrice
+                                </td>
+                                <td class="price">
+                                    @Model.Seat
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <br />
+                                    <br />
+                                    <strong>Thông tin chi tiết</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                @if (@Model.Description == null)
+                                {
+                                    <td colspan="5" style="text-align: left">
+                                        Không có thông tin thêm!
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td colspan="5" style="text-align: left">
+                                        @Model.Description
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>Thông tin người mua</h3>
+                @Html.Hidden("TicketId", (object) ViewBag.TicketId)
+                @Html.LabelAndControl("Người nhận:", Html.TextBox("TranFullName"))
+                @Html.LabelAndControl("Địa chỉ nhận:", Html.TextBox("TranAddress"))
+
+                <div class="control-group">
+                    <label class="control-label">Hình thức thanh toán: </label>
+                    <div class="controls radio-check">
+                        @Html.RadioButton("TranType", (int) Statuses.TranType.HoldPayment, true, new {id = "trantype_5d"})
+                        <label for="trantype_5d" style="display: inline">Thanh toán tạm giữ 5 ngày </label>
+                    </div>
+                    <div class="controls radio-check">
+                        @Html.RadioButton("TranType", (int) Statuses.TranType.InstantPayment, new {id = "trantype_instant"})
+                        <label for="trantype_instant" style="display: inline">Thanh toán ngay</label>
+                    </div>
+                </div>
+                @Html.LabelAndControl("Giá vé:", Html.TextBox("SellPrice", @Model.SellPrice, new {@readonly = "readonly"}))
+                @Html.LabelAndControl("Tiền Ship hàng:", Html.TextBox("ShippingCost", @Model.ShippingCost, new {@readonly = "readonly"}))
+                @Html.LabelAndControl("Tổng cộng:", Html.TextBox("Tong", @Model.SellPrice + @Model.ShippingCost, new {@readonly = "readonly"}))
+                @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
+
+                //captcha
+
+
+                // end captcha
+
+                <button type="submit" class="btn btn-register btn-success">Xác nhận</button>
+                <button type="reset" class="btn btn-register btn-inverse">Nhập lại</button>
+            }
+        </div>
+    </div>
+}

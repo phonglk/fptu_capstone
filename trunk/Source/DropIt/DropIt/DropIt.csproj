@@ -1523,7 +1523,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
@@ -1628,6 +1630,7 @@
     <Content Include="Views\Home\Sell.cshtml" />
     <Content Include="Views\Request\ManageRequestSeller.cshtml" />
     <Content Include="Views\CheckOut\Success.cshtml" />
+    <Content Include="Views\Home\NearEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
