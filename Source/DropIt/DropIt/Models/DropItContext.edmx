@@ -152,8 +152,8 @@
           <Property Name="TranUserId" Type="int" />
           <Property Name="TranCreatedDate" Type="datetime" />
           <Property Name="TranModifiedDate" Type="datetime" />
-          <Property Name="TranDeliveryServiceCost" Type="float" />
           <Property Name="TranShipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranPaymentStatus" Type="int" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -559,8 +559,8 @@
           <Property Name="TranUserId" Type="Int32" />
           <Property Name="TranCreatedDate" Type="DateTime" Precision="3" />
           <Property Name="TranModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="TranDeliveryServiceCost" Type="Double" />
           <Property Name="TranShipCode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TranPaymentStatus" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Drop_ItModel.FK_Ticket_Event" FromRole="Ticket" ToRole="Event" />
           <NavigationProperty Name="TicketResponses" Relationship="Drop_ItModel.FK_RespondRequest_Ticket" FromRole="Ticket" ToRole="TicketResponse" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="Ticket" ToRole="User" />
@@ -904,8 +904,8 @@
                 <ScalarProperty Name="TranUserId" ColumnName="TranUserId" />
                 <ScalarProperty Name="TranCreatedDate" ColumnName="TranCreatedDate" />
                 <ScalarProperty Name="TranModifiedDate" ColumnName="TranModifiedDate" />
-                <ScalarProperty Name="TranDeliveryServiceCost" ColumnName="TranDeliveryServiceCost" />
                 <ScalarProperty Name="TranShipCode" ColumnName="TranShipCode" />
+                <ScalarProperty Name="TranPaymentStatus" ColumnName="TranPaymentStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

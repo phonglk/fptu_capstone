@@ -39,9 +39,10 @@ namespace DropIt.Controllers
             {
                  shippingCost = (double)ticket.ShippingCost;
             }
+            string eventname = Utils.ConvertVN(ticket.Event.EventName);
             PDTHolder pp = new PDTHolder()
                             {
-                                item_name = ticket.Event.EventName,
+                                item_name = eventname,
                                 amount = System.Math.Round((ticket.SellPrice / dollarRate),2),
                                 shipping = System.Math.Round((shippingCost / dollarRate), 2),
                                 custom = ticket.TicketId,
@@ -144,7 +145,6 @@ namespace DropIt.Controllers
                             SellPrice = ticket.SellPrice,
                             ReceiveMoney = ticket.ReceiveMoney,
                             ShippingCost = ticket.ShippingCost,
-                            TranDeliveryServiceCost = ticket.TranDeliveryServiceCost,
                             Seat = ticket.Seat,
                             Status = ticket.Status,
                             Description = ticket.Description,
