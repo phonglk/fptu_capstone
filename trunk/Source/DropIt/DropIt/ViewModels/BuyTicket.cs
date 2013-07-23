@@ -22,7 +22,7 @@ namespace DropIt.ViewModels
         public double ReceiveMoney { get; set; }
 
         public double ShippingCost { get; set; }
-        public double TranDeliveryServiceCost { get; set; }
+        
         public string Seat { get; set; }
 
         public string Description { get; set; }

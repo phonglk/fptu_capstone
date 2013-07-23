@@ -41,8 +41,8 @@ namespace DropIt.Models
         public Nullable<int> TranUserId { get; set; }
         public Nullable<System.DateTime> TranCreatedDate { get; set; }
         public Nullable<System.DateTime> TranModifiedDate { get; set; }
-        public Nullable<double> TranDeliveryServiceCost { get; set; }
         public string TranShipCode { get; set; }
+        public Nullable<int> TranPaymentStatus { get; set; }
     
         public virtual Event Event { get; set; }
         public virtual ICollection<TicketResponse> TicketResponses { get; set; }
