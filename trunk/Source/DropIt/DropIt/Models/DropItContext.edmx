@@ -154,7 +154,7 @@
           <Property Name="TranModifiedDate" Type="datetime" />
           <Property Name="TranDeliveryServiceCost" Type="float" />
           <Property Name="TranShipCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="TranPaymentStaus" Type="int" />
+          <Property Name="TranPaymentStatus" Type="int" />
         </EntityType>
         <EntityType Name="TicketResponse">
           <Key>
@@ -908,7 +908,7 @@
                 <ScalarProperty Name="TranModifiedDate" ColumnName="TranModifiedDate" />
                 <ScalarProperty Name="TranDeliveryServiceCost" ColumnName="TranDeliveryServiceCost" />
                 <ScalarProperty Name="TranShipCode" ColumnName="TranShipCode" />
-                <ScalarProperty Name="TranPaymentStatus" ColumnName="TranPaymentStaus" />
+                <ScalarProperty Name="TranPaymentStatus" ColumnName="TranPaymentStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
