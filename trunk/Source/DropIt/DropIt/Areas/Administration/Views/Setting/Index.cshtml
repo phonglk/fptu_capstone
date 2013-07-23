@@ -10,16 +10,14 @@
         Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove),
         Trading:@((int)DropIt.Common.Statuses.Event.Trading),
         Outdate:@((int)DropIt.Common.Statuses.Event.Outdate)
-    }
+        }
 </script>
 <style>
     table th:nth-child(1) {
-        
         min-width: 200px;
     }
 
     table th:nth-child(2) {
-        
     }
 
     table th:nth-child(3) {
@@ -35,8 +33,6 @@
 
     table th:nth-child(6) {
     }
-
-    
 </style>
 
 
@@ -52,10 +48,10 @@
     <tbody data-bind="foreach: data">
         <tr>
             <td>
-                <input data-bind="value: SettingName,disable:isEditing()==false,attr:{Id: 'setting_name_'+Id}" type="text" class="editable fill-up"/>
+                <input data-bind="value: SettingName,disable:isEditing()==false,attr:{Id: 'setting_name_'+Id}" type="text" class="editable fill-up" />
             </td>
             <td>
-                <input data-bind="value: Value,disable:isEditing()==false,attr:{Id: 'setting_value_'+Id}" type="text" class="editable fill-up"/>
+                <input data-bind="value: Value,disable:isEditing()==false,attr:{Id: 'setting_value_'+Id}" type="text" class="editable fill-up" />
             </td>
             <td>
                 <center>
@@ -78,14 +74,14 @@
     <tfoot>
         <tr>
             <form id="addnew">
-            <td>
-                <input type="text" placeholder="Tên thiết lập" id="SettingName" class="fill-up" required/>
-            </td>
-            <td>
-                <input type="text" placeholder="Giá trị" id="SettingValue" class="fill-up" required/>
-            </td>
-            <td>
-                <center>
+                <td>
+                    <input type="text" placeholder="Tên thiết lập" id="SettingName" class="fill-up" title="Cần phải điền tên thiết lập" required />
+                </td>
+                <td>
+                    <input type="text" placeholder="Giá trị" id="SettingValue" class="fill-up" title="Cần phải điền giá trị của thiết lập" required />
+                </td>
+                <td>
+                    <center>
                     <input type="submit" style="visibility:hidden;position:absolute" />
                 <a href="javascript:;"
                         class="button green"
@@ -93,7 +89,7 @@
                     id ="addButton">Thêm
                     </a>
                     </center>
-            </td>
+                </td>
             </form>
         </tr>
     </tfoot>
@@ -111,18 +107,21 @@
 
 <style>
     td input {
-        margin-top:7px;
+        margin-top: 7px;
     }
+
     td .button {
-        margin-top:10px;
+        margin-top: 10px;
     }
+
     tbody input {
-        background:none !important;
-        border:none !important;
+        background: none !important;
+        border: none !important;
         border-bottom: 2px dashed black !important;
     }
+
         tbody input[disabled] {
-            border:none !important;
+            border: none !important;
         }
 </style>
 <script>
@@ -157,6 +156,7 @@
     }
 
     list.Add = function(item){
+        if($("#addnew")[0].checkValidity()==true){
             list.AjaxAction({
                 item:item,
                 urlData:{Action:"Create",Data:{SettingName:$("#SettingName").val(),Value:$("#SettingValue").val()}},
@@ -166,10 +166,14 @@
                     $("#SettingName").focus();
                 }
             })
+                
+        }else{
+            $.fn.dialog2.helpers.alert("Cần phải điền đầy đủ tên và giá trị của thiết lập muốn thêm mới.");
+        }
     }
 
     list.Delete = function(item){
-        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa thiết lập \""+item.SettingName+"\" ?",
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa thiết lập \""+item.SettingName()+"\" ?",
             {
                 confirm:function(){
                     list.AjaxAction({
