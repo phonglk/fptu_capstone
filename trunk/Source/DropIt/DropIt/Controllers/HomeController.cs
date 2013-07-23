@@ -29,6 +29,15 @@ namespace DropIt.Controllers
             return View(events.ToList());
         }
 
+        public ActionResult NearEvent()
+        {
+            Session["Role"] = "Event";
+            var eventAll = this.unitOfWork.EventRepository.Get().Where(p => p.HoldDate != null);
+            var topEvent = eventAll.Where(p => p.HoldDate >= DateTime.Now).OrderBy(p=>p.HoldDate).Take(10);
+            
+            return View(topEvent);
+        }
+
         [ActionName("Buy")]
         public ActionResult BuyIndex()
         {
