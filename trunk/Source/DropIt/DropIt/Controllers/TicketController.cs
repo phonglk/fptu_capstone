@@ -162,6 +162,7 @@ namespace DropIt.Controllers
             BuyTicket buyTicket = new BuyTicket()
                                       {
                                           TicketId = getTicket.TicketId,
+                                          UserId = getTicket.UserId,
                                           SeriesNumber = getTicket.SeriesNumber,
                                           SellPrice = getTicket.SellPrice,
                                           ReceiveMoney = getTicket.ReceiveMoney,
