@@ -12,15 +12,13 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <div class="container"> 
+    <div class="container" id="content"> 
         <div>
-            <p></p>
-        </div>
-        <center>Xin lỗi admin không thể thực hiện giao dịch</center>
+             <h3> <center>Xin lỗi admin không thể thực hiện giao dịch</center></h3> 
         <center>
             <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
         </center>
-
+        </div>
     </div>
     
 }

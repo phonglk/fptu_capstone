@@ -27,19 +27,18 @@
     }
 
     table th:nth-child(4) {
-        width: 200px;
     }
 
     table th:nth-child(5) {
-
-    }
-    table th:nth-child(6) {
-      width:  200px;
+        width: 200px;
     }
 
     .popover {
         max-width: 600px;
         width: auto;
+    }
+    #transhipcode input[type="text"] {
+        width: 100%;
     }
 </style>
 <div class="row-fluid">
@@ -61,6 +60,10 @@
             <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Received })" class="btn btn-large">
                 <i class="icon-download-alt"></i>
                 <span>Đã nhận hàng</span>
+            </a>
+            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Received })" class="btn btn-large">
+                <i class="icon-share"></i>
+                <span>Đến hạn chuyển khoản</span>
             </a>
         </div>
         <br />
@@ -86,7 +89,6 @@
             <th>Ngày giao dịch</th>
             <!-- /ko -->
             <th>Người mua</th>
-            <th>Hình thức thanh toán</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -111,23 +113,22 @@
             </td>
             <!-- /ko -->
             <td data-bind="text: TranUser.UserName"></td>
-            <td data-bind="text: TranType"></td>
             <td>
                 <a href="javascript:;"
                     class="button green"
-                    data-bind="click:$root.Paid,visible:TranStatus==Statuses.Unpaid"> Thanh toán
+                    data-bind="click:$root.Paid,visible:TranStatus==Statuses.Unpaid">Thanh toán
                 </a>
-                 <a href="javascript:;"
+                <a href="javascript:;"
                     class="button red"
-                    data-bind="click:$root.Canceled,visible:TranStatus==Statuses.Unpaid"> Hủy bỏ
+                    data-bind="click:$root.Canceled,visible:TranStatus==Statuses.Unpaid">Hủy bỏ
                 </a>
                 <a href="javascript:;"
                     class="button blue"
-                    data-bind="click:$root.Delivered,visible:TranStatus==Statuses.Paid"> Giao hàng
+                    data-bind="click:$root.Delivered,visible:TranStatus==Statuses.Paid">Giao hàng
                 </a>
                 <a href="javascript:;"
-                    class="button black"
-                    data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered"> Nhận hàng
+                    class="button black show-prompt"
+                    data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
                 </a>
             </td>
         </tr>
@@ -198,21 +199,31 @@
                     autoDismiss:5
                 })
             }
-        })
+        }) 
+          
     }
 
     list.Received = function(item){
-        list.AjaxAction({
-            item:item,
-            urlData:{Action:"Received",Data:{Id:item.TicketId}},
-            callback:function(event){
-                Notifications.push({
-                    text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
-                    autoDismiss:5
+        $.fn.dialog2.helpers.prompt("Nhập mã vận đơn:", {
+            ok: function(event, value) { 
+                list.AjaxAction({
+                    item:item,
+                    urlData:{Action:"Received",Data:{Id:item.TicketId, TranShipCode: value}},
+                    callback:function(event){
+                        Notifications.push({
+                            text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
+                            autoDismiss:5
+                        })
+                    }
                 })
-            }
-        })
+            }, 
+            cancel: function() { 
+            },
+            title: "dkm",
+            id: "transhipcode",
+        });
     }
+
     list.Canceled = function(item){
         list.AjaxAction({
             item:item,
@@ -292,6 +303,4 @@
         e.preventDefault();
         return false;
     })
-    
-    
 </script>

@@ -54,6 +54,9 @@ namespace DropIt.Areas.Administration.Controllers
                     TranType = e.TranType,
                     TranAddress = e.TranAddress,
                     TranShipDate = e.TranShipDate,
+                    TranShipCode = e.TranShipCode,
+                    TranPaymentStatus = e.TranPaymentStatus,
+                    ShippingCost = e.ShippingCost,
                     TranUser = new {
                     e.TranUserId,
                     e.User.UserName
@@ -128,14 +131,14 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Received(int Id)
+        public JsonResult Received(int Id, string TranShipCode)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Received;
                 delete.TranShipDate = DateTime.Now;
-
+                delete.TranShipCode = TranShipCode;
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new

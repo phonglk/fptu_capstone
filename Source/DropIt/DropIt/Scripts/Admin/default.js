@@ -117,6 +117,9 @@ function Transaction(obj) {
         this.TranShipDate = Date.fromRawJSON(self.TranShipDate);
     }
     if (self.TranDescription == null) self.TranDescription = "";
+    if (self.ShippingCost == null) self.ShippingCost = "";
+    if (self.TranShipCode == null) self.TranShipCode = "";
+    if (self.TranPaymentStatus == null) self.TranPaymentStatus = "";
     html = "<strong>Địa chỉ</strong>: " + self.TranAddress;
     html += "<br/><strong>Chú thích</strong>: " + self.TranDescription;
     self.TranDetail = html.eval(self);

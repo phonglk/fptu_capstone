@@ -16,6 +16,9 @@ namespace DropIt.Areas.Administration.ViewModels
         public int TranType { get; set; }
         public string TranDescription { get; set; }
         public string TranAddress { get; set; }
+        public float ShippingCost { get; set; }
+        public string TranShipCode { get; set; }
+        public int TranPaymentStatus { get; set; }
         public System.DateTime TranShipDate { get; set; }
         public int TranStatus { get; set; }
         public int TranUserId { get; set; }
