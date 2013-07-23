@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="527fe9b83f7745d1b1b54ac9a070003b" Name="Diagram1">
+      <Diagram DiagramId="8b95309d53984a7a98f787736ad4d6bd" Name="Diagram1">
         <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
