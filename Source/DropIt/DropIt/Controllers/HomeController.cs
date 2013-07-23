@@ -26,6 +26,7 @@ namespace DropIt.Controllers
         {
             Session["Role"] = "Event";
             var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status!=4) && p.HoldDate>=DateTime.Now).Take(10);
+            
             return View(events.ToList());
         }
 

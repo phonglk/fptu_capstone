@@ -219,6 +219,7 @@
     <Compile Include="Areas\Administration\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Venue.cs" />
     <Compile Include="Common\AdminMenu.cs" />
+    <Compile Include="Common\DateTimeExtensions.cs" />
     <Compile Include="Common\DropDownGroupList.cs" />
     <Compile Include="Common\JSONResult.cs" />
     <Compile Include="Common\OrderByHelper.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
+    <Compile Include="DAL\CategoryRepository.cs" />
     <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\FollowEventRepository.cs" />
     <Compile Include="DAL\EventRepository.cs" />
@@ -1631,6 +1633,9 @@
     <Content Include="Views\Request\ManageRequestSeller.cshtml" />
     <Content Include="Views\CheckOut\Success.cshtml" />
     <Content Include="Views\Home\NearEvent.cshtml" />
+    <Content Include="Views\Shared\Partials\EventListFullByModel.cshtml" />
+    <Content Include="Views\Shared\Partials\EventDisplayMode.cshtml" />
+    <Content Include="Views\Event\Upcoming.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

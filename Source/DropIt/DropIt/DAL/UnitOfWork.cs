@@ -12,8 +12,8 @@ namespace DropIt.DAL
     {
         private DropItContext context = new DropItContext();
         private EventRepository eventRepository;
-        private GenericRepository<Category> categoryRepository;
-        private GenericRepository<Venue> venueRepository;
+        private CategoryRepository categoryRepository;
+        private VenueRepository venueRepository;
         private GenericRepository<Province> provinceRepository;
         private UserRepository userRepository;
         private TicketRepository ticketRepository;
@@ -35,26 +35,26 @@ namespace DropIt.DAL
             }
         }
 
-        public GenericRepository<Category> CategoryRepository
+        public CategoryRepository CategoryRepository
         {
             get
             {
 
                 if (this.categoryRepository == null)
                 {
-                    this.categoryRepository = new GenericRepository<Category>(context);
+                    this.categoryRepository = new CategoryRepository(context);
                 }
                 return categoryRepository;
             }
         }
-        public GenericRepository<Venue> VenueRepository
+        public VenueRepository VenueRepository
         {
             get
             {
 
                 if (this.venueRepository == null)
                 {
-                    this.venueRepository = new GenericRepository<Venue>(context);
+                    this.venueRepository = new VenueRepository(context);
                 }
                 return venueRepository;
             }

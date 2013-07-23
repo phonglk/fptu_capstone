@@ -131,7 +131,8 @@
     validateOptions = {
         rules: {
             EventName: {
-                required: true
+                required: true,
+                maxlength: 50
             },
             CategoryId: {
                 required: true
@@ -144,7 +145,7 @@
             }
         },
         messages: {
-            EventName: "Cần phải điền tên sự kiện",
+            EventName: "Tên sự kiện cần phải điền và <=50 ký tự",
             CategoryId: "Phải chọn danh mục",
             HoldDate: "Phải chọn ngày giờ diễn ra",
             VenueId: "Phải chọn địa điểm diễn ra sự kiện"

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
 using DropIt.DAL;
+using DropIt.Common;
 using WebMatrix.WebData;
 
 namespace DropIt.Controllers
@@ -27,6 +28,15 @@ namespace DropIt.Controllers
         {
             var events = this.unitOfWork.EventRepository.Get();
             return View(events.ToList());
+        }
+
+        public ActionResult Upcoming()
+        {
+            var events = Repository.GetAvailable()
+                .Where(e => e.HoldDate >= DateTime.Now)
+                .OrderBy(e => e.HoldDate);
+
+            return View(events);
         }
 
         //
@@ -172,6 +182,22 @@ namespace DropIt.Controllers
                 });
             }
 
+        }
+
+        public ActionResult Image(int Id)
+        {
+            var Event = Repository.GetById(Id);
+            String ImagePath = Settings.get("DefaultEventImage");
+            if (Event != null)
+            {
+                if (Event.EventImage != null)
+                {
+                    ImagePath = Event.EventImage;
+                }
+            }
+
+            return base.File(ImagePath, "image/jpeg");
+            
         }
 
         [HttpPost]
