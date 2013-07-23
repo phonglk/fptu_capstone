@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DropIt.Models;
+using DropIt.Common;
 
 namespace DropIt.DAL
 {
@@ -12,6 +13,11 @@ namespace DropIt.DAL
             : base(context)
         {
 
+        }
+
+        public IEnumerable<Venue> GetAvailable()
+        {
+            return this.Get(e => e.Status != (int)Statuses.Venue.Delete);
         }
     }
 }

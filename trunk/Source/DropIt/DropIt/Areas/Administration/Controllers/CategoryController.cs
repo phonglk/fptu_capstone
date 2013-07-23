@@ -128,7 +128,7 @@ namespace DropIt.Areas.Administration.Controllers
             String Error = "";
             try
             {
-                Category.Status = (int)Statuses.CategoryActive.Active;
+                Category.Status = (int)Statuses.Category.Active;
 
                 if (!ModelState.IsValid)
                 {
@@ -160,7 +160,7 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.CategoryActive.Active;
+                delete.Status = (int)Statuses.Category.Active;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -187,7 +187,7 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.CategoryActive.Deactive;
+                delete.Status = (int)Statuses.Category.Deactive;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -213,7 +213,7 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.CategoryActive.Delete;
+                delete.Status = (int)Statuses.Category.Delete;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();

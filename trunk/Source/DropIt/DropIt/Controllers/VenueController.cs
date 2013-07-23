@@ -84,6 +84,36 @@ namespace DropIt.Controllers
             return View(venue);
         }
 
+        [HttpPost]
+        public JsonResult getInfo(int VenueId)
+        {
+
+           var Venue = unitOfWork.VenueRepository.Get(e => e.VenueId == VenueId);
+
+            if (Venue != null)
+            {
+                return Json(new
+                {
+                    Result = "OK",
+                    Records = Venue.Select(e => new
+                    {
+                        e.Address,
+                        e.Province.ProvinceId,
+                        e.Province.ProvinceName
+                    })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = "Event not found"
+                });
+            }
+
+        }
+
         //
         // POST: /Venue/Edit/5
 

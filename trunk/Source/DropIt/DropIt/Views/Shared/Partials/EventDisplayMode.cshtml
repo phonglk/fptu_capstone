@@ -1,0 +1,31 @@
+﻿@{
+    if (Request["mode"] != null)
+    {
+        if (Request["mode"].Equals("list"))
+        {
+            Session["DisplayMode"] = "list";
+        }
+        else
+        {
+            Session["DisplayMode"] = "thumbnail";
+
+        }
+    }
+    if (Session["DisplayMode"] == null)
+    {
+        Session["DisplayMode"] = "thumbnail";
+    }
+}
+
+<div class="pull-right displayModeContainer">
+    <a href="?mode=thumbnail" class="displayMode @if (Session["DisplayMode"] == "thumbnail"){
+                                                                                <text>active</text>
+                                                                            }">
+        <span class="icon-th-large"></span>
+    </a>
+    <a href="?mode=list"  class="displayMode @if(Session["DisplayMode"]=="list"){
+                                                                                <text>active</text>
+        }">
+        <span class="icon-th-list"></span>
+    </a>
+</div>

@@ -30,7 +30,9 @@ else
             font-size: 12px;
             color: red;
         }
-
+        .select2-container {
+            width:280px !important;
+        }
     </style>
     <div class="container" id="content">
         <div class="form1">
@@ -46,7 +48,7 @@ else
                     <div class="controls">
                         <div class="input-append">
                             <span data-bind="visible: isCreateEvent() == false">
-                                @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}" })
+                                @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectEventChange}" })
                             </span>
                             @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                             <span class="add-on">
@@ -86,7 +88,7 @@ else
                         <div class="controls">
                             <div class="input-append">
                                 <span data-bind="visible: isCreateEvent() == true && isCreateVenue() == false">
-                                    @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId, new { data_bind = "select2:{}" })
+                                    @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId, new { data_bind = "select2:{},value : VenueId, event :{ change : selectVenueChange}" })
                                 </span>
                                 <input type="text" data-bind="value: VenueName,visible: isCreateEvent() == false" disabled />
                                 @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
@@ -151,14 +153,35 @@ else
         </div>
     </div>
 
-
+    <style>
+        .select2-results {
+            max-height: 300px;
+        }
+        .select2-result-label {
+            overflow:hidden;
+        }
+        .select2-result-label img {
+            float:left;
+            margin-right:5px;
+            width:60px;
+            height:80px;
+        }
+        .select2-result {
+            clear:both;
+        }
+    </style>
     <script type="text/javascript">
 
-    //$('body').on('change', '#SellPrice', function () {
-    //    var selectedValue = $(this).val();
-    //    document.getElementById("ReceiveMoney").value = (selectedValue * 0.93).toFixed(2);
-    //    //Url({ Controller: "Ticket", Action: "getEventInfo" });        
-    //});
+        function formatEventRow(state) {
+            if (!state.id) return state.text;
+            return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
+        }
+
+        $("#EventId").select2({
+            formatResult: formatEventRow,
+            escapeMarkup: function (m) { return m; },
+            //matcher: function (term, text) { return text.toLowerCase().VNFilter().indexOf(term.toLowerCase().VNFilter()) >= 0; }
+        });
 
         function CreateTicketViewModel() {
             var self = this;
@@ -168,6 +191,7 @@ else
 
             self.EventId = ko.observable();
             self.HoldDate = ko.observable();
+            self.VenueId = ko.observable();
             self.VenueName = ko.observable();
             self.VenueAddress = ko.observable();
             self.ProvinceId = ko.observable();
@@ -178,7 +202,7 @@ else
                 return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0, ".", ",");
             })
 
-            self.selectVenueChange = function() {
+            self.selectEventChange = function() {
                 $.ajax({
                     url: Url({ Controller: "Event", Action: "getInfo" }),
                     type: "POST",
@@ -188,6 +212,22 @@ else
                             var record = data.Records[0]
                             self.HoldDate(record.HoldDate)
                             self.VenueName(record.VenueName)
+                            self.VenueAddress(record.Address)
+                            self.ProvinceId(record.ProvinceId)
+                            self.CategoryId(record.CategoryId)
+                        }
+                    }
+                })
+            }
+
+            self.selectVenueChange = function () {
+                $.ajax({
+                    url: Url({ Controller: "Venue", Action: "getInfo" }),
+                    type: "POST",
+                    data: "VenueId=" + self.VenueId(),
+                    success: function (data) {
+                        if (data.Result && data.Result == "OK" && data.Records) {
+                            var record = data.Records[0]
                             self.VenueAddress(record.Address)
                             self.ProvinceId(record.ProvinceId)
                             self.CategoryId(record.CategoryId)

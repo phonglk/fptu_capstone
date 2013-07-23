@@ -40,3 +40,113 @@ h3,h2{
 .nav-tabs > li > a{
     font-family: UVNBaiSau;
 }
+#content{
+    position: relative;
+}
+.displayModeContainer{
+    position: absolute;
+    right: 50px;
+    top: 36px;
+
+    .displayMode{
+    font-size: 32px;
+    color: #999;
+    text-decoration: none;
+        &:hover{
+            color:#666;
+        }
+        &.active{
+            color: #333;
+        }
+    }
+}
+#ticket-show{
+    clear: both;
+}
+#event-show.list{
+    margin-left: 45px;
+    clear:both;
+
+    .event{
+        margin: 0px 0;
+        padding: 30px 0;
+        border-bottom: 1px solid #ccc;
+
+        .thumb{
+            .event-image{
+                width: 100%;
+                height: 200px;
+                background-position: center top;
+                background-size: 100% auto;
+            }
+        }
+        .description{
+            position: relative;
+	
+            .event-title{
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 120%;
+                color: black;
+                a{
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+            .event-detail{
+                font-style: italic;
+                margin-top: 13px;
+                line-height: 150%;
+                color: grey;
+            }
+            .misc{
+                position: absolute;
+                line-height: 25px;
+	            top:150px;
+                left: 0px;
+                color: #817e7e;
+                [class^="icon-"], [class*=" icon-"]{
+                    width: 20px;
+                    display: inline-block;
+                    font-size: 20px;
+                    color: #333;
+                }
+                .place{
+
+                }
+                .artist{
+
+                }
+            }
+            
+        }
+        .datetime{
+            text-align: center;
+            .date{
+                display: inline-block;
+                text-align: center;
+                width: 78px;
+                .month{
+                    background: #5cb2e3;
+                    border: 1px solid #52a2cf;
+                    border-bottom: 2px solid #3791d2;
+                    font-size: 20px;
+                    height: 25px;
+                    line-height: 25px;
+                }
+                .day{
+                    background: #484848;
+                    border-top: 2px solid #434343;
+                    color: #fff;
+                    font-size: 30px;
+                    height: 45px;
+                    line-height: 45px;
+                }
+            }
+            .time{
+                margin-top: 10px;
+                font-size: 16px;
+            }
+        }
+    }
+}
