@@ -11,6 +11,9 @@
     ViewBag.Title = "BuyTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    int currentUserId=WebSecurity.GetUserId(User.Identity.Name);   
+}
 @if (User.IsInRole("Administrator"))
 {
     <div class="container"> 
@@ -24,6 +27,19 @@
 
     </div>
     
+}
+else if (@Model.UserId==currentUserId)
+{
+  <div class="container"> 
+        <div>
+            <p></p>
+        </div>
+        <center>Xin lỗi bạn không thể giao dịch vé của mình</center>
+        <center>
+            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+        </center>
+
+    </div>
 }
 else
 {

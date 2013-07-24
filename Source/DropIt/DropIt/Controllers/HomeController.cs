@@ -33,10 +33,10 @@ namespace DropIt.Controllers
         public ActionResult NearEvent()
         {
             Session["Role"] = "Event";
-            var eventAll = this.unitOfWork.EventRepository.Get().Where(p => p.HoldDate != null);
-            var topEvent = eventAll.Where(p => p.HoldDate >= DateTime.Now).OrderBy(p=>p.HoldDate).Take(10);
             
-            return View(topEvent);
+            var topEvent = this.unitOfWork.EventRepository.Get().OrderBy(p => p.HoldDate).Where(p => p.HoldDate >= DateTime.Now).Take(10);
+            
+            return View(topEvent.ToList());
         }
 
         [ActionName("Buy")]
