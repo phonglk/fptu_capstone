@@ -69,3 +69,5 @@ fix button "đăng ký" -> "đăng yêu cầu"
 link:/Ticket/Request
 fix validate phone number
 Link: /User/Edit
+Thêm button "cancel" trong trang edit user
+link: trên ^
