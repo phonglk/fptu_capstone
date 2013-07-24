@@ -64,6 +64,10 @@ h2 {
   margin: 0px 0;
   padding: 30px 0;
   border-bottom: 1px solid #ccc;
+  transition: all 0.3s;
+}
+#event-show.list .event:hover {
+  background: #F5E4F5;
 }
 #event-show.list .event .thumb .event-image {
   width: 100%;
