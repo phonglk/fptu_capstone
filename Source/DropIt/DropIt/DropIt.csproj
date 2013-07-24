@@ -1206,6 +1206,18 @@
       <DependentUpon>DropItContext.edmx</DependentUpon>
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\Fonts\VNF-Semilla Script.ttf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Bold.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-BoldItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-CondensedBlack.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-CondensedBold.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Italic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Light.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-LightItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Medium.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-UltraLight.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-UltraLightItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue.otf" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">

@@ -72,6 +72,22 @@ Number.prototype.toLength = function (l) {
     for (var i = 0; i < l - n.length - 1; i++) prefix += "0";
     return prefix + n;
 }
+
+
+//http://stackoverflow.com/a/149099
+Number.prototype.formatMoney = function (c, d, t) {
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
+Number.prototype.formatVND = function () {
+    return this.formatMoney(0, ".", ",");
+}
 // Introduced in Javascript 1.8.5
 _JS185Extend = function (target, propNane, value) {
     Object.defineProperty(target, propNane, {
