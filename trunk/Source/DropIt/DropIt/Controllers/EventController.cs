@@ -34,7 +34,7 @@ namespace DropIt.Controllers
         {
             var events = Repository.GetAvailable()
                 .Where(e => e.HoldDate >= DateTime.Now)
-                .OrderBy(e => e.HoldDate);
+                .OrderBy(e => e.HoldDate).Take(10);
 
             return View(events);
         }
