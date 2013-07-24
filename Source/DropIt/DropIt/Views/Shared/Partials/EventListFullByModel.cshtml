@@ -110,6 +110,9 @@ else
             var limitWord = 50;
             if (text.split(" ").length > limitWord) {
                 text = text.split(" ", limitWord).join(" ");
+                if (text.length > 230) {
+                    text = text.substring(0, 230);
+                }
                 text += "...";
             } else {
                 
