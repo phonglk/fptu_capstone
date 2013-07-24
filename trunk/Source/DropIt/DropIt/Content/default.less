@@ -13,6 +13,21 @@
 	src: url('Fonts/architep.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: "Semilla";
+	src: url('Fonts/VNF-Semilla Script.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "HN";
+	src: url('Fonts/HelveticaNeue.otf') format('truetype');
+}
+
+@font-face {
+	font-family: "HN-Light";
+	src: url('Fonts/HelveticaNeue-Light.otf') format('truetype');
+}
+
 
 body {
     font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;	
@@ -64,7 +79,7 @@ h3,h2{
     clear: both;
 }
 #event-show.list{
-    margin-left: 45px;
+    margin-left: 25px;
     clear:both;
 
     .event{
@@ -79,7 +94,8 @@ h3,h2{
 
         .thumb{
             .event-image{
-                width: 100%;
+                width: 260px;
+                margin-left: 30px;
                 height: 200px;
                 background-position: center top;
                 background-size: 100% auto;
@@ -90,8 +106,8 @@ h3,h2{
 	
             .event-title{
                 font-size: 20px;
-                font-weight: bold;
                 line-height: 120%;
+                font-family:Semilla;
                 color: black;
                 a{
                     color: black;
@@ -103,6 +119,7 @@ h3,h2{
                 margin-top: 13px;
                 line-height: 150%;
                 color: grey;
+                font-family:HN;
             }
             .misc{
                 position: absolute;
@@ -130,6 +147,7 @@ h3,h2{
             .date{
                 display: inline-block;
                 text-align: center;
+                font-family:"HN-Light";
                 width: 78px;
                 .month{
                     background: #5cb2e3;

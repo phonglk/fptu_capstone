@@ -10,6 +10,18 @@
   font-family: "Architecture";
   src: url('Fonts/architep.ttf') format('truetype');
 }
+@font-face {
+  font-family: "Semilla";
+  src: url('Fonts/VNF-Semilla Script.ttf') format('truetype');
+}
+@font-face {
+  font-family: "HN";
+  src: url('Fonts/HelveticaNeue.otf') format('truetype');
+}
+@font-face {
+  font-family: "HN-Light";
+  src: url('Fonts/HelveticaNeue-Light.otf') format('truetype');
+}
 body {
   font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
 }
@@ -57,7 +69,7 @@ h2 {
   clear: both;
 }
 #event-show.list {
-  margin-left: 45px;
+  margin-left: 25px;
   clear: both;
 }
 #event-show.list .event {
@@ -70,7 +82,8 @@ h2 {
   background: #F5E4F5;
 }
 #event-show.list .event .thumb .event-image {
-  width: 100%;
+  width: 260px;
+  margin-left: 30px;
   height: 200px;
   background-position: center top;
   background-size: 100% auto;
@@ -80,8 +93,8 @@ h2 {
 }
 #event-show.list .event .description .event-title {
   font-size: 20px;
-  font-weight: bold;
   line-height: 120%;
+  font-family: Semilla;
   color: black;
 }
 #event-show.list .event .description .event-title a {
@@ -93,6 +106,7 @@ h2 {
   margin-top: 13px;
   line-height: 150%;
   color: grey;
+  font-family: HN;
 }
 #event-show.list .event .description .misc {
   position: absolute;
@@ -114,6 +128,7 @@ h2 {
 #event-show.list .event .datetime .date {
   display: inline-block;
   text-align: center;
+  font-family: "HN-Light";
   width: 78px;
 }
 #event-show.list .event .datetime .date .month {

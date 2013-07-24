@@ -4,6 +4,7 @@
     getTotalEvent();
     generateDataTracker();
     rawDateDisplay();
+    formatAllVNDLabel();
 })
 
 function generateData(type, target) {
@@ -148,5 +149,15 @@ function getTotalTicket() {
             }
 
         }
+    })
+}
+
+function formatAllVNDLabel() {
+    $("span[data-vnd]").each(function () {
+        if ($(this).data("vnd") == "formatted") {
+            return;
+        }
+        $(this).text(new Number($(this).text()).formatVND())
+        $(this).data("vnd","formatted")
     })
 }

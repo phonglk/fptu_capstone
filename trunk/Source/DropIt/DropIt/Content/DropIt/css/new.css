@@ -810,10 +810,10 @@ table.event-detail td.price {
         background: #666666;
     }
 
-.btn-follow {
+.event-detail .btn-follow {
     background: #5e4071;
     position: absolute;
-    top: 150px;
+    top: 40px;
 }
 
 .btn-buy:hover {

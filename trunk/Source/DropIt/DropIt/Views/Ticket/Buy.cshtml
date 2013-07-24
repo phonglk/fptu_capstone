@@ -48,6 +48,24 @@ else
             font-weight: bold !important;
             color: #431f59!important;
         }
+        thead th:nth-child(1){
+            min-width:200px;
+        }
+        thead th:nth-child(2){
+            
+        }
+
+        thead th:nth-child(3){
+            
+        }
+
+        thead th:nth-child(4){
+            width:100px; 
+        }
+
+        thead th:nth-child(5){
+            width:80px;
+        }
     </style>
     <div class="container" id="content">
         <div class="form1">
@@ -63,7 +81,7 @@ else
                         <thead>
                             <tr>
                                 <th colspan="5">
-                                    Tên sự kiện : @Model.EventName
+                                    Sự kiện : @Model.EventName
                                 </th>
                             </tr>
                             <tr class="header warning">
@@ -71,38 +89,38 @@ else
                                 <th class="">Thời gian</th>
                                 <th class="">Địa điểm</th>
                                 <th class="">Giá bán</th>
-                                <th class="">Thông tin ghế ngồi</th>
+                                <th class="">Chỗ ngồi</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="first">
+                                <td class="">
                                     @Model.EventName
                                 </td>
                                 <td class="user">
-                                    @Json.Encode(Model.HoldDate)
+                                    <span data-rawdate>@Json.Encode(Model.HoldDate)</span>
                                 </td>
-                                <td class="user">
+                                <td class="">
                                     @Model.VenueName
                                 </td>
-                                <td class="descript">
-                                    @Model.SellPrice
+                                <td class="">
+                                    <span data-vnd>@Model.SellPrice</span>
                                 </td>
-                                <td class="price">
+                                <td class="">
                                     @Model.Seat
                                 </td>
                                 
                             </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <br />
-                                    <br />
-                                    <strong>Thông tin chi tiết</strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                @if (@Model.Description == null)
+                        </tbody>
+                    </table>
+
+                    <table class="table table-condensed table-bordered event-detail" style="margin-left:5px"> 
+                        <tr>
+                            <td><strong>Thông tin chi tiết</strong></td>
+                        </tr>
+                        <tr>
+                            @if (@Model.Description == null)
                                 {
                                     <td colspan="5" style="text-align: left">
                                         Không có thông tin thêm!
@@ -114,8 +132,7 @@ else
                                         @Model.Description
                                     </td>
                                 }
-                            </tr>
-                        </tbody>
+                        </tr>
                     </table>
                 </div>
                 <h3>Thông tin người mua</h3>
