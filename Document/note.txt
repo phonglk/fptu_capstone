@@ -65,3 +65,7 @@ validate "Ngày diễn ra" trong tạo sự kiện mới
 link:/Administration/Event/Create
 fix thoi gian trong thong tin ve: "\/Date(1375448400000)\/"
 link: /Ticket/Buy/14
+fix button "đăng ký" -> "đăng yêu cầu"
+link:/Ticket/Request
+fix validate phone number
+Link: /User/Edit
