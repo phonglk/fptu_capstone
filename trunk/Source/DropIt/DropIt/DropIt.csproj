@@ -1648,6 +1648,7 @@
     <Content Include="Views\Shared\Partials\EventListFullByModel.cshtml" />
     <Content Include="Views\Shared\Partials\EventDisplayMode.cshtml" />
     <Content Include="Views\Event\Upcoming.cshtml" />
+    <Content Include="Views\CheckOut\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
