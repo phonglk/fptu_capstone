@@ -1,17 +1,20 @@
-﻿@{
+﻿@model DropIt.Models.Ticket
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/Bundles/jquery.validate")
 <script>
     var TranStatus = @ViewBag.TranStatus;
+    var TranPaymentStatus = @ViewBag.TranPaymentStatus;
     var Statuses = {
         Delivered : @((int)DropIt.Common.Statuses.Transaction.Delivered),
         Canceled : @((int)DropIt.Common.Statuses.Transaction.Canceled),
         Paid : @((int)DropIt.Common.Statuses.Transaction.Paid),
         Received : @((int)DropIt.Common.Statuses.Transaction.Received),
-        Unpaid : @((int)DropIt.Common.Statuses.Transaction.Unpaid)
-        }
+        Transfered: @((int)DropIt.Common.Statuses.Payment.Transfered),
+        Done: @((int)DropIt.Common.Statuses.Payment.Done)
+    }
 </script>
 <style>
     table th:nth-child(1) {
@@ -37,6 +40,7 @@
         max-width: 600px;
         width: auto;
     }
+
     #transhipcode input[type="text"] {
         width: 100%;
     }
@@ -44,7 +48,7 @@
 <div class="row-fluid">
     <div class="span8 status-filter">
         <div class="btn-group">
-            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Unpaid })" class="btn btn-large active">
+            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Unpaid })" class="btn btn-large active"  style="display: none;">
                 <i class="icon-warning-sign"></i>
                 <span>Chưa thanh toán</span>
             </a>
@@ -61,10 +65,11 @@
                 <i class="icon-download-alt"></i>
                 <span>Đã nhận hàng</span>
             </a>
-            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Received })" class="btn btn-large">
+            <a href="@Url.Action("Index", new { TranPaymentStatus = (int)DropIt.Common.Statuses.Payment.Transfered })" class="btn btn-large">
                 <i class="icon-share"></i>
                 <span>Đến hạn chuyển khoản</span>
             </a>
+
         </div>
         <br />
         <br />
@@ -84,11 +89,15 @@
     <thead>
         <tr>
             <th class="sortable" data-bind="click: function (data, event) { sort('TranFullName', data, event) }">Tên giao dịch</th>
+            <!-- ko if: list.TranStatus() == Statuses.Received -->
+            <th>Mã vận đơn</th>
+            <!-- /ko -->
             <th>Giá vé</th>
             <!-- ko if: list.TranStatus() == Statuses.Received -->
             <th>Ngày giao dịch</th>
             <!-- /ko -->
             <th>Người mua</th>
+            <th>Hình thức giao dịch</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -106,6 +115,9 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received -->
+            <td data-bind="text: TranShipCode"></td>
+            <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
             <!-- ko if: list.extraData.TranStatus == Statuses.Received -->
             <td>
@@ -113,11 +125,15 @@
             </td>
             <!-- /ko -->
             <td data-bind="text: TranUser.UserName"></td>
+            <td data-bind="text: TranType"></td>
             <td>
-                <a href="javascript:;"
-                    class="button green"
-                    data-bind="click:$root.Paid,visible:TranStatus==Statuses.Unpaid">Thanh toán
+                <!-- ko if: list.extraData.TranPaymentStatus == Statuses.Transfered -->
+                <a href="javascript:;" class="button blue " data-bind="click:$root.Transfered">Chi tiết</a>
+
+                <a href="javascript:;" class="button green" data-bind="click:$root.Done,visible:TranPaymentStatus==Statuses.Transfered">Hoàn thành
                 </a>
+                <!-- /ko -->
+                <!-- ko if: list.extraData.TranPaymentStatus != Statuses.Transfered -->
                 <a href="javascript:;"
                     class="button red"
                     data-bind="click:$root.Canceled,visible:TranStatus==Statuses.Unpaid">Hủy bỏ
@@ -130,6 +146,7 @@
                     class="button black show-prompt"
                     data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
                 </a>
+                <!-- /ko -->
             </td>
         </tr>
     </tbody>
@@ -143,7 +160,9 @@
         </li>
     </ul>
 </div>
-
+<div class="custom-dialog-content">
+   
+</div>
 
 <style>
 
@@ -152,15 +171,26 @@
    
     var list = new DataList();
     list.url_getList = {Controller:"Transaction",Action:"List"};
+    list.ReceiveMoney = "";
     list.dataClass = Transaction
     list.extraData = {
-        TranStatus:TranStatus
+        TranStatus:TranStatus,
+        TranPaymentStatus:TranPaymentStatus
     }
     list.TranStatus = ko.observable(TranStatus);
+    list.TranPaymentStatus = ko.observable(TranPaymentStatus);
     list.changeStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
         $(".status-filter > div > a").eq(transtt).addClass("active");
         list.extraData.TranStatus = transtt;
+        list.currentPage(1);
+        list.changePaymentStatus(0);
+        list.getList();
+    }
+    list.changePaymentStatus = function (transtt) {
+        $(".status-filter > div > a").removeClass("active");
+        $(".status-filter > div > a").eq(transtt).addClass("active");
+        list.extraData.TranPaymentStatus = transtt;
         list.currentPage(1);
         list.getList();
     }
@@ -205,6 +235,7 @@
 
     list.Received = function(item){
         $.fn.dialog2.helpers.prompt("Nhập mã vận đơn:", {
+
             ok: function(event, value) { 
                 list.AjaxAction({
                     item:item,
@@ -219,8 +250,14 @@
             }, 
             cancel: function() { 
             },
-            title: "dkm",
+            title: "Mã vận đơn",
             id: "transhipcode",
+        });
+    }
+
+    list.Transfered = function(item){
+        $(".custom-dialog-content").dialog2({
+            title: "Thông tin người dùng",
         });
     }
 
@@ -237,9 +274,28 @@
         })
     }
 
+    list.Done = function(item){
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn hoàn thành giao dịch\""+item.TranFullName+"\" ?",
+            {
+                confirm:function(){
+                    list.AjaxAction({
+                        item:item,
+                        urlData:{Action:"Done",Data:{Id:item.TicketId}},
+                        callback:function(event){
+                            Notifications.push({
+                                text:"Giao dịch \"#{TranFullName}\" đã được hoàn thành !".eval(event),
+                                autoDismiss:5
+                            })
+                        }
+                    })
+                }
+            }
+        )
+    }
+
     list.getList = function (callback) {
         Loading(true);
-        var data = { jtPageSize: list.pageSize, jtStartIndex: list.startIndex(), jtSorting: list.sorting, TranStatus: list.TranStatus };
+        var data = { jtPageSize: list.pageSize, jtStartIndex: list.startIndex(), jtSorting: list.sorting, TranStatus: list.TranStatus, TranPaymentStatus: list.TranPaymentStatus };
         $.extend(data, list.extraData);
         var urlData = { Action: "List", Controller: "Transaction", Data: data };
         $.extend(urlData, self.url_getList);
@@ -297,10 +353,12 @@
         return false;
     })
 
+   
     $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
-        list.changeStatus(4);
-        list.TranStatus(4);
+        list.changePaymentStatus(1);
+        list.TranPaymentStatus(1);
         e.preventDefault();
         return false;
     })
+
 </script>

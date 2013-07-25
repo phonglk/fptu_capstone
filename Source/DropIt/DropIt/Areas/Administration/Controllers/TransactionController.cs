@@ -25,31 +25,47 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Administration/Ticket/
 
-        public ActionResult Index(int TranStatus = 0)
+        public ActionResult Index(int TranStatus = 0, int TranPaymentStatus = 0)
         {
             ViewBag.TranStatus = TranStatus;
+            ViewBag.TranPaymentStatus = TranPaymentStatus;
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TranStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TranStatus = -1, int TranPaymentStatus = -1)
         {
             try
             {
                 IEnumerable<DropIt.Models.Ticket> records = null;
-                if (TranStatus == -1)
+                if (TranPaymentStatus == (int)Statuses.Payment.Transfered)
                 {
-                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-
+                    records = Repository.JTGetExp(e => e.TranPaymentStatus == (int)Statuses.Payment.Transfered, jtStartIndex, jtPageSize, jtSorting);
                 }
                 else
                 {
-                    records = Repository.JTGetExp(e => e.TranStatus == TranStatus, jtStartIndex, jtPageSize, jtSorting);
+                    if (TranStatus == -1)
+                    {
+                        records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                    }
+
+                    else
+                    {
+                        records = Repository.JTGetExp(e => e.TranStatus == TranStatus, jtStartIndex, jtPageSize, jtSorting);
+                    }
                 }
                 var Records = records.Select(e => new
                 {
                     TicketId = e.TicketId,
                     SellPrice = e.SellPrice,
+                    User = new
+                    {
+                        e.UserId,
+                        e.User.UserName,
+                        e.User.BankAccount,
+                        e.User.BankName
+                    },
+                    ReceiveMoney = e.ReceiveMoney,
                     TranFullName = e.TranFullName,
                     TranType = e.TranType,
                     TranAddress = e.TranAddress,
@@ -57,12 +73,13 @@ namespace DropIt.Areas.Administration.Controllers
                     TranShipCode = e.TranShipCode,
                     TranPaymentStatus = e.TranPaymentStatus,
                     ShippingCost = e.ShippingCost,
-                    TranUser = new {
-                    e.TranUserId,
-                    e.User.UserName
+                    TranUser = new
+                    {
+                        e.TranUserId,
+                        e.User.UserName
                     },
                     TranDescription = e.TranDescription,
-                    TranStatus = e.TranStatus
+                    TranStatus = e.TranStatus,
 
                 });
                 return Json(new JSONResult(Records)
@@ -83,7 +100,10 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Delivered;
-
+                if (delete.TranType == 0)
+                {
+                    delete.TranPaymentStatus = (int)Statuses.Payment.Transfered;
+                }
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
@@ -110,7 +130,33 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Paid;
+                
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = delete.TicketId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
 
+        [HttpPost]
+        public JsonResult Done(int Id)
+        {
+            try
+            {
+                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                delete.TranPaymentStatus = (int)Statuses.Payment.Done;
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
@@ -211,7 +257,7 @@ namespace DropIt.Areas.Administration.Controllers
             }
 
         }
-      
+
         //
         // GET: /Event/Edit/5
 
@@ -223,7 +269,7 @@ namespace DropIt.Areas.Administration.Controllers
                 TicketId = e.TicketId,
                 EventId = e.EventId,
                 UserId = e.UserId,
-                SellPrice = (float) e.SellPrice,
+                SellPrice = (float)e.SellPrice,
                 Seat = e.Seat,
                 Description = e.Description,
                 Status = e.Status
@@ -252,11 +298,12 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-                if (oldTicket.Status == 0) 
+                if (oldTicket.Status == 0)
                 {
                     Ticket.Status = 1;
                 }
-                else if (oldTicket.Status == 1) {
+                else if (oldTicket.Status == 1)
+                {
                     Ticket.Status = 3;
                 }
 
@@ -270,7 +317,7 @@ namespace DropIt.Areas.Administration.Controllers
             };
         }
 
-    
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
