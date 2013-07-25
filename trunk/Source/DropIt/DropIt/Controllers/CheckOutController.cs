@@ -50,41 +50,6 @@ namespace DropIt.Controllers
             return View(pp);
         }
 
-//        [HttpPost]
-//        public ActionResult Checkout(Ticket buyTicket)
-//        {
-//            Ticket getTicket = unitOfWork.TicketRepository.Get(u => u.TicketId == buyTicket.TicketId).FirstOrDefault();
-//            if (ModelState.IsValid)
-//            {
-//                Ticket checkout = new Ticket()
-//                                      {
-//                                          TicketId = getTicket.TicketId,
-//                                          SeriesNumber = getTicket.SeriesNumber,
-//                                          TranUserId = getTicket.TranUserId,
-//                                          TranFullName = getTicket.TranFullName,
-//                                          TranAddress = getTicket.TranAddress,
-//                                          TranType = getTicket.TranType,
-//                                          TranStatus = (int)Statuses.Transaction.Paid,
-//                                          EventId = getTicket.EventId,
-//                                          UserId = getTicket.UserId,
-//                                          SellPrice = getTicket.SellPrice,
-//                                          ReceiveMoney = getTicket.ReceiveMoney,
-//                                          ShippingCost = getTicket.ShippingCost,
-//                                          TranDeliveryServiceCost = getTicket.TranDeliveryServiceCost,
-//                                          Seat = getTicket.Seat,
-//                                          Status = getTicket.Status,
-//                                          Description = getTicket.Description,
-//                                          CreatedDate = getTicket.CreatedDate,
-//                                          TranCreatedDate = getTicket.TranCreatedDate,
-//                                          TranModifiedDate = DateTime.Now,
-//                                          TranDescription = getTicket.TranDescription
-//                                      };
-//                this.unitOfWork.TicketRepository.AddOrUpdate(checkout);
-//                this.unitOfWork.Save();
-//                return RedirectToAction("HistoryBuy", "Transaction", new { status = 1 });
-//            }
-//            return View(buyTicket);
-//        }
 
         public ActionResult Success()
         {
