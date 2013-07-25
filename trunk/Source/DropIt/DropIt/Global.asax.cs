@@ -53,13 +53,13 @@ namespace DropIt
             if(k.Equals("CheckEventExpire")){
 
 
-                //var EventsNeedExpire = unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Outdate && e.HoldDate <= DateTime.Now);
-                //foreach (Event Event in EventsNeedExpire)
-                //{
-                //    Event.Status = (int)Statuses.Event.Outdate;
-                //    unitOfWork.EventRepository.AddOrUpdate(Event);
-                //}
-                //unitOfWork.Save();
+                var EventsNeedExpire = unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Outdate && e.Status != (int)Statuses.Event.Delete && e.HoldDate <= DateTime.Now);
+                foreach (Event Event in EventsNeedExpire)
+                {
+                    Event.Status = (int)Statuses.Event.Outdate;
+                    unitOfWork.EventRepository.AddOrUpdate(Event);
+                }
+                unitOfWork.Save();
                 
             }
             AddTask(k, Convert.ToInt32(v));

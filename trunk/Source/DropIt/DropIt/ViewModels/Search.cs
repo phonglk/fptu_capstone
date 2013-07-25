@@ -9,6 +9,7 @@ namespace DropIt.ViewModels
     public class SearchResultViewModel
     {
         public List<ResultEvent> Result = new List<ResultEvent>();
+        public int TotalCount = 0;
     }
 
     public class ResultEvent :IComparable<ResultEvent>{
@@ -48,11 +49,11 @@ namespace DropIt.ViewModels
 
         public int CompareTo(ResultEvent other)
         {
-            if (this.EventName.Matches.Count < other.EventName.Matches.Count)
+            if ((this.EventName.Matches.Count + this.Artist.Matches.Count) < (other.EventName.Matches.Count + other.Artist.Matches.Count))
             {
                 return 1;
             }
-            else if (this.EventName.Matches.Count > other.EventName.Matches.Count)
+            else if ((this.EventName.Matches.Count + this.Artist.Matches.Count) > (other.EventName.Matches.Count + other.Artist.Matches.Count))
             {
                 return -1;
             }

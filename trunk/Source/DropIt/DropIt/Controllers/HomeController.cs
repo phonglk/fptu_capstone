@@ -86,10 +86,13 @@ namespace DropIt.Controllers
             return result;
         }
 
-        public ActionResult Search(string query, string sortBy = "relevant")
+        public ActionResult Search(string query, string sortBy = "relevant",int jtPageSize = 10,int jtStartIndex = 0)
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
+            foundEvent.TotalCount = events.Count();
+            events = events.Skip(jtStartIndex).Take(jtPageSize);
+
             if (!String.IsNullOrEmpty(query))
             {
                 //events = (from t in events
@@ -117,7 +120,7 @@ namespace DropIt.Controllers
                         String Artist = evt.Artist;
                         for (var i = 0; i <= Artist.Length - query.Length; i++)
                         {
-                            splittedArtist.Add(Utils.ConvertVN(Artist.Substring(i, query.Length)));
+                            splittedArtist.Add(Artist.Substring(i, query.Length));
                         }
 
                         foundbyArtist = FuzzySearch.Search(query.ToLower(), splittedArtist, 0.5);
