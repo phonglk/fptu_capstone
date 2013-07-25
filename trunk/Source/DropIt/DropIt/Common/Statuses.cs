@@ -20,6 +20,7 @@ namespace DropIt.Common
         public enum TranType { InstantPayment, HoldPayment};
         public enum Request { Open, Close};
         public enum Category { Deactive, Active, Delete };
+        public enum Payment { Hold ,Transfered, Done };
 
         public static string getText(String EnumName, int Value)
         {
