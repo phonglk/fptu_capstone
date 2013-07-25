@@ -1,4 +1,19 @@
-﻿function OptionRadio(arg) {
+﻿var standardCKEtoolbar = [
+		{ name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+		{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
+		{
+		    name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'
+		    ]
+		},
+                '/',
+		{ name: 'styles', items: ['Styles', 'Format', "TextColor", "Font", "FontSize"] },
+		{ name: 'basicstyles', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] },
+		{ name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+		{ name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+		{ name: 'tools', items: ['Maximize'] }
+];
+
+function OptionRadio(arg) {
     var self = this;
 
     this.value;
