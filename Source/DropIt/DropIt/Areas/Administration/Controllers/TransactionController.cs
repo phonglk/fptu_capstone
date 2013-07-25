@@ -25,7 +25,7 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Administration/Ticket/
 
-        public ActionResult Index(int TranStatus = 0, int TranPaymentStatus = 0)
+        public ActionResult Index(int TranStatus = (int)Statuses.Transaction.Paid, int TranPaymentStatus = 0)
         {
             ViewBag.TranStatus = TranStatus;
             ViewBag.TranPaymentStatus = TranPaymentStatus;
@@ -37,23 +37,21 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                IEnumerable<DropIt.Models.Ticket> records = null;
+                int TotalRecordCount = 0;
+                IEnumerable<DropIt.Models.Ticket> records = Repository.Get();
                 if (TranPaymentStatus == (int)Statuses.Payment.Transfered)
                 {
-                    records = Repository.JTGetExp(e => e.TranPaymentStatus == (int)Statuses.Payment.Transfered, jtStartIndex, jtPageSize, jtSorting);
+                    records = records.Where(e => e.TranPaymentStatus == (int)Statuses.Payment.Transfered);
                 }
                 else
                 {
-                    if (TranStatus == -1)
+                    if (TranStatus != -1)
                     {
-                        records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-                    }
-
-                    else
-                    {
-                        records = Repository.JTGetExp(e => e.TranStatus == TranStatus, jtStartIndex, jtPageSize, jtSorting);
+                        records = records.Where(e => e.TranStatus == TranStatus);
                     }
                 }
+                TotalRecordCount = records.Count();
+                records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
                 var Records = records.Select(e => new
                 {
                     TicketId = e.TicketId,
@@ -84,7 +82,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = (TranStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == TranStatus).Count()
+                    TotalRecordCount = TotalRecordCount
                 });
             }
             catch (Exception e)
@@ -94,16 +92,15 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delivered(int Id)
+        public JsonResult Delivered(int Id, string TranShipCode)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Delivered;
-                if (delete.TranType == 0)
-                {
-                    delete.TranPaymentStatus = (int)Statuses.Payment.Transfered;
-                }
+                
+                delete.TranShipCode = TranShipCode;
+
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
@@ -177,14 +174,14 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult Received(int Id, string TranShipCode)
+        public JsonResult Received(int Id)
         {
             try
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranStatus = (int)Statuses.Transaction.Received;
                 delete.TranShipDate = DateTime.Now;
-                delete.TranShipCode = TranShipCode;
+
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new

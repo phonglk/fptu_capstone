@@ -14,7 +14,7 @@
         Received : @((int)DropIt.Common.Statuses.Transaction.Received),
         Transfered: @((int)DropIt.Common.Statuses.Payment.Transfered),
         Done: @((int)DropIt.Common.Statuses.Payment.Done)
-    }
+        }
 </script>
 <style>
     table th:nth-child(1) {
@@ -48,11 +48,11 @@
 <div class="row-fluid">
     <div class="span8 status-filter">
         <div class="btn-group">
-            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Unpaid })" class="btn btn-large active"  style="display: none;">
+            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Unpaid })" class="btn btn-large "  style="display: none;">
                 <i class="icon-warning-sign"></i>
                 <span>Chưa thanh toán</span>
             </a>
-            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Paid })" class="btn btn-large">
+            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Paid })" class="btn btn-large active">
                 <i class="icon-ok-circle"></i>
                 <span>Đã thanh toán</span>
             </a>
@@ -161,9 +161,8 @@
     </ul>
 </div>
 <div class="custom-dialog-wrap">
-<div class="custom-dialog-content">
-
-</div>
+    <div class="custom-dialog-content">
+    </div>
 </div>
 <script>
     
@@ -182,12 +181,13 @@
         $(".status-filter > div > a").eq(transtt).addClass("active");
         list.extraData.TranStatus = transtt;
         list.currentPage(1);
-        list.changePaymentStatus(0);
+        list.TranPaymentStatus(0);
+        list.extraData.TranPaymentStatus = 0;
         list.getList();
     }
     list.changePaymentStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
-        $(".status-filter > div > a").eq(transtt).addClass("active");
+        $(".status-filter > div > a").eq(4).addClass("active");
         list.extraData.TranPaymentStatus = transtt;
         list.currentPage(1);
         list.getList();
@@ -218,39 +218,47 @@
         })
     }
     list.Delivered = function(item){
-        list.AjaxAction({
-            item:item,
-            urlData:{Action:"Delivered",Data:{Id:item.TicketId}},
-            callback:function(event){
-                Notifications.push({
-                    text:"Giao dịch \"#{TranFullName}\" đã giao hàng !".eval(event),
-                    autoDismiss:5
+        var action = function(event, value) {
+            if(value.trim() == ""){
+                ask();
+            }else{
+                list.AjaxAction({
+                    item:item,
+                    urlData:{Action:"Delivered",Data:{Id:item.TicketId, TranShipCode: value}},
+                    callback:function(event){
+                        Notifications.push({
+                            text:"Giao dịch \"#{TranFullName}\" đã giao hàng !".eval(event),
+                            autoDismiss:5
+                        })
+                    }
                 })
             }
-        }) 
-          
+        }
+
+        function ask(){
+            $.fn.dialog2.helpers.prompt("Nhập mã vận đơn:", {
+                ok: action, 
+                cancel: function(event, value) { 
+                    
+                },
+                title: "Mã vận đơn",
+                id: "transhipcode"
+            });
+        }
+        ask();
     }
 
     list.Received = function(item){
-        $.fn.dialog2.helpers.prompt("Nhập mã vận đơn:", {
-            ok: function(event, value) {
-                    list.AjaxAction({
-                        item:item,
-                        urlData:{Action:"Received",Data:{Id:item.TicketId, TranShipCode: value}},
-                        callback:function(event){
-                            Notifications.push({
-                                text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
-                                autoDismiss:5
-                            })
-                        }
-                    })
-            }, 
-            cancel: function(event, value) { 
-               
-            },
-            title: "Mã vận đơn",
-            id: "transhipcode"
-        });
+        list.AjaxAction({
+            item:item,
+            urlData:{Action:"Received",Data:{Id:item.TicketId}},
+            callback:function(event){
+                Notifications.push({
+                    text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
+                    autoDismiss:5
+                })
+            }
+        })
     }
 
     list.Transfered = function(item){
@@ -259,10 +267,10 @@
              +"<br/>" + "Tên ngân hàng: " + item.User.BankName
               +"<br/>" + "Số tài khoản: " + item.User.BankAccount
             , { 
-            title: "Thông tin người dùng",
-            close: function() {
-            }
-        });
+                title: "Thông tin người dùng",
+                close: function() {
+                }
+            });
     }
 
     list.Canceled = function(item){
