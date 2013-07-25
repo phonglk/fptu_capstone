@@ -160,15 +160,13 @@
         </li>
     </ul>
 </div>
+<div class="custom-dialog-wrap">
 <div class="custom-dialog-content">
-   
+
 </div>
-
-<style>
-
-</style>
+</div>
 <script>
-   
+    
     var list = new DataList();
     list.url_getList = {Controller:"Transaction",Action:"List"};
     list.ReceiveMoney = "";
@@ -235,29 +233,35 @@
 
     list.Received = function(item){
         $.fn.dialog2.helpers.prompt("Nhập mã vận đơn:", {
-
-            ok: function(event, value) { 
-                list.AjaxAction({
-                    item:item,
-                    urlData:{Action:"Received",Data:{Id:item.TicketId, TranShipCode: value}},
-                    callback:function(event){
-                        Notifications.push({
-                            text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
-                            autoDismiss:5
-                        })
-                    }
-                })
+            ok: function(event, value) {
+                    list.AjaxAction({
+                        item:item,
+                        urlData:{Action:"Received",Data:{Id:item.TicketId, TranShipCode: value}},
+                        callback:function(event){
+                            Notifications.push({
+                                text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
+                                autoDismiss:5
+                            })
+                        }
+                    })
             }, 
-            cancel: function() { 
+            cancel: function(event, value) { 
+               
             },
             title: "Mã vận đơn",
-            id: "transhipcode",
+            id: "transhipcode"
         });
     }
 
     list.Transfered = function(item){
-        $(".custom-dialog-content").dialog2({
+        $.fn.dialog2.helpers.alert("Số tiền cần thanh toán: " + item.ReceiveMoney 
+            +"<br/>" + "Tên tài khoản: " + item.User.UserName
+             +"<br/>" + "Tên ngân hàng: " + item.User.BankName
+              +"<br/>" + "Số tài khoản: " + item.User.BankAccount
+            , { 
             title: "Thông tin người dùng",
+            close: function() {
+            }
         });
     }
 
