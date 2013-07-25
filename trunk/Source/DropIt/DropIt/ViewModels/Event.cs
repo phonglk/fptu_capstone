@@ -15,27 +15,27 @@ namespace DropIt.ViewModels
         }
 
         public int EventId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập tên sự kiện!")]
         public string EventName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn thời điểm tổ chức sự kiện!")]
         [DataType(DataType.DateTime)]
         public System.DateTime HoldDate { get; set; }
 
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn trạng thái!")]
         public int Status { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn thể loại!")]
         public int CategoryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn địa điểm tổ chức!")]
         public int VenueId { get; set; }
 
-        [Required]
+        
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        [Required]
+        
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
 }

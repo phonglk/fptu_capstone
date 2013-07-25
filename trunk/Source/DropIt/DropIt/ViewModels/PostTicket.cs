@@ -52,7 +52,7 @@ namespace DropIt.ViewModels
         
         public int? ProvinceId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn thể loại!")]
         public int CategoryId { get; set; }
 
         public int? VenueId { get; set; }

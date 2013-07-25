@@ -12,7 +12,7 @@ namespace DropIt.ViewModels
         [Required(ErrorMessage = "Bạn chưa nhập họ tên nhận hàng")]
         public string TranFullName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn cần chọn hình thức thanh toán!")]
         public int? TranType { get; set; }
 
         public int UserId { get; set; }
