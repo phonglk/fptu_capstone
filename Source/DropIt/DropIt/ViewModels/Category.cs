@@ -11,10 +11,10 @@ namespace DropIt.ViewModels
 
         public int CategoryId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn cần phải nhập thể loại!")]
         public string CategoryName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập miêu tả!")]
         public string Description { get; set; }
 
         public int? ParentCategoryId { get; set; }

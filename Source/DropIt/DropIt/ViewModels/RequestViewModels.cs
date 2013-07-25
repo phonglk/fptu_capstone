@@ -17,10 +17,10 @@ namespace DropIt.ViewModels
         [Required]
         public int UserId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn sự kiện!")]
         public int EventId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải chọn trạng thái!")]
         public int Status { get; set; }
 
         public string Description { get; set; }
