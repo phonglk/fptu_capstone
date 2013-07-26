@@ -4,6 +4,7 @@
 @using BootstrapExtensions.Base.Form
 @using BootstrapExtensions.Base.Form.Label
 @using BootstrapExtensions.Components.Alert
+@using DropIt.Common
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,6 +26,7 @@
 }
 else
 {
+    double see = Double.Parse(Settings.get("ServiceFee"));
     <style>
         .form1 .error {
             font-size: 12px;
@@ -132,14 +134,13 @@ else
                         @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice", required = "required" })
                     </div>
                 </div>
-
+                <input type="hidden" id="servicefee" value="@see"/>
                 <div class="control-group">
                     <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate*100).toFixed(0)"></span>%):</label>
                     <div class="controls">
                         @Html.TextBox("ReceiveMoney", String.Empty, new { disabled = "true", data_bind = "value:RecievePrice" })
                     </div>
                 </div>
-
 
 
                 <div class="control-group">
@@ -170,8 +171,7 @@ else
             clear:both;
         }
     </style>
-    <script type="text/javascript">
-
+    <script type="text/javascript">        
         function formatEventRow(state) {
             if (!state.id) return state.text;
             return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
@@ -197,7 +197,7 @@ else
             self.ProvinceId = ko.observable();
             self.CategoryId = ko.observable();
             self.SellPrice = ko.observable();
-            self.ServiceRate = 0.07;
+            self.ServiceRate= $("#servicefee").val();
             self.RecievePrice = ko.computed(function() {
                 return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0, ".", ",");
             })
