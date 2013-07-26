@@ -96,7 +96,7 @@ namespace DropIt.Controllers
                     Ticket ticket = this.unitOfWork.TicketRepository.Get(t => t.TicketId == pTicketId).FirstOrDefault();
                     if (ModelState.IsValid)
                     {
-                        if (ticket.TranStatus!=null)
+                        if (ticket.TranStatus==null)
                         {
                             Ticket checkout = new Ticket()
                             {
