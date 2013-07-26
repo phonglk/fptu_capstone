@@ -1,4 +1,4 @@
-﻿// Default code generation is disabled for model 'C:\Users\NhuVu\Desktop\DropIt4\DropIt\Models\DropItContext.edmx'. 
+﻿// Default code generation is disabled for model 'D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\Models\DropItContext.edmx'. 
 // To enable default code generation, change the value of the 'Code Generation Strategy' designer
 // property to an alternate value. This property is available in the Properties Window when the model is
 // open in the designer.

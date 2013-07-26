@@ -282,6 +282,9 @@
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogOnViewModel.cs" />
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>DropItContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Province.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
@@ -303,6 +306,12 @@
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserFollowEvent.cs">
+      <DependentUpon>DropItContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserFollowUser.cs">
+      <DependentUpon>DropItContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserFollowVenue.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Venue.cs">
@@ -1189,6 +1198,18 @@
     <Content Include="Content\ckeditor\README.md" />
     <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
+    <Content Include="Content\Fonts\VNF-Semilla Script.ttf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Bold.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-BoldItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-CondensedBlack.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-CondensedBold.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Italic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Light.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-LightItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-Medium.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-UltraLight.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue-UltraLightItalic.otf" />
+    <Content Include="Content\Fonts\HelveticaNeue.otf" />
     <EntityDeploy Include="Models\DropItContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DropItContext.Designer.cs</LastGenOutput>
@@ -1206,18 +1227,6 @@
       <DependentUpon>DropItContext.edmx</DependentUpon>
       <LastGenOutput>DropItContext.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\Fonts\VNF-Semilla Script.ttf" />
-    <Content Include="Content\Fonts\HelveticaNeue-Bold.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-BoldItalic.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-CondensedBlack.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-CondensedBold.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-Italic.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-Light.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-LightItalic.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-Medium.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-UltraLight.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue-UltraLightItalic.otf" />
-    <Content Include="Content\Fonts\HelveticaNeue.otf" />
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.js">

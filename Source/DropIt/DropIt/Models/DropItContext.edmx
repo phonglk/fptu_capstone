@@ -8,6 +8,7 @@
         <EntityContainer Name="Drop_ItModelStoreContainer">
           <EntitySet Name="Category" EntityType="Drop_ItModel.Store.Category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Event" EntityType="Drop_ItModel.Store.Event" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="Drop_ItModel.Store.Notification" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Province" EntityType="Drop_ItModel.Store.Province" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Request" EntityType="Drop_ItModel.Store.Request" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Setting" EntityType="Drop_ItModel.Store.Setting" store:Type="Tables" Schema="dbo" />
@@ -15,6 +16,8 @@
           <EntitySet Name="TicketResponse" EntityType="Drop_ItModel.Store.TicketResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="Drop_ItModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserFollowEvent" EntityType="Drop_ItModel.Store.UserFollowEvent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserFollowUser" EntityType="Drop_ItModel.Store.UserFollowUser" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserFollowVenue" EntityType="Drop_ItModel.Store.UserFollowVenue" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Venue" EntityType="Drop_ItModel.Store.Venue" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Category_Category" Association="Drop_ItModel.Store.FK_Category_Category">
             <End Role="Category" EntitySet="Category" />
@@ -68,6 +71,26 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserFollowEvent" EntitySet="UserFollowEvent" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserFollowUser_User" Association="Drop_ItModel.Store.FK_UserFollowUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFollowUser" EntitySet="UserFollowUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowUser_UserFollow" Association="Drop_ItModel.Store.FK_UserFollowUser_UserFollow">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFollowUser" EntitySet="UserFollowUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowVenue_User" Association="Drop_ItModel.Store.FK_UserFollowVenue_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFollowVenue" EntitySet="UserFollowVenue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowVenue_Venue" Association="Drop_ItModel.Store.FK_UserFollowVenue_Venue">
+            <End Role="Venue" EntitySet="Venue" />
+            <End Role="UserFollowVenue" EntitySet="UserFollowVenue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserId_User" Association="Drop_ItModel.Store.FK_UserId_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
           <AssociationSet Name="FK_Venue_Province" Association="Drop_ItModel.Store.FK_Venue_Province">
             <End Role="Province" EntitySet="Province" />
             <End Role="Venue" EntitySet="Venue" />
@@ -98,6 +121,17 @@
           <Property Name="VenueId" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="Province">
           <Key>
@@ -189,11 +223,30 @@
         </EntityType>
         <EntityType Name="UserFollowEvent">
           <Key>
-            <PropertyRef Name="FollowEventId" />
+            <PropertyRef Name="UserFollowEventId" />
           </Key>
-          <Property Name="FollowEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserFollowEventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="FollowType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFollowUser">
+          <Key>
+            <PropertyRef Name="UserFollowUserId" />
+          </Key>
+          <Property Name="UserFollowUserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserFollowId" Type="int" Nullable="false" />
+          <Property Name="FollowType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFollowVenue">
+          <Key>
+            <PropertyRef Name="UserFollowVenueId" />
+          </Key>
+          <Property Name="UserFollowVenueId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="VenueId" Type="int" Nullable="false" />
+          <Property Name="FollowType" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Venue">
           <Key>
@@ -382,6 +435,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserFollowUser_User">
+          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1" />
+          <End Role="UserFollowUser" Type="Drop_ItModel.Store.UserFollowUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowUser_UserFollow">
+          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowUser" Type="Drop_ItModel.Store.UserFollowUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowUser">
+              <PropertyRef Name="UserFollowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowVenue_User">
+          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowVenue" Type="Drop_ItModel.Store.UserFollowVenue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowVenue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowVenue_Venue">
+          <End Role="Venue" Type="Drop_ItModel.Store.Venue" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowVenue" Type="Drop_ItModel.Store.UserFollowVenue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueId" />
+            </Principal>
+            <Dependent Role="UserFollowVenue">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserId_User">
+          <End Role="User" Type="Drop_ItModel.Store.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Drop_ItModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Venue_Province">
           <End Role="Province" Type="Drop_ItModel.Store.Province" Multiplicity="1" />
           <End Role="Venue" Type="Drop_ItModel.Store.Venue" Multiplicity="*" />
@@ -402,6 +521,7 @@
         <EntityContainer Name="DropItContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Drop_ItModel.Category" />
           <EntitySet Name="Events" EntityType="Drop_ItModel.Event" />
+          <EntitySet Name="Notifications" EntityType="Drop_ItModel.Notification" />
           <EntitySet Name="Provinces" EntityType="Drop_ItModel.Province" />
           <EntitySet Name="Requests" EntityType="Drop_ItModel.Request" />
           <EntitySet Name="Settings" EntityType="Drop_ItModel.Setting" />
@@ -409,6 +529,8 @@
           <EntitySet Name="TicketResponses" EntityType="Drop_ItModel.TicketResponse" />
           <EntitySet Name="Users" EntityType="Drop_ItModel.User" />
           <EntitySet Name="UserFollowEvents" EntityType="Drop_ItModel.UserFollowEvent" />
+          <EntitySet Name="UserFollowUsers" EntityType="Drop_ItModel.UserFollowUser" />
+          <EntitySet Name="UserFollowVenues" EntityType="Drop_ItModel.UserFollowVenue" />
           <EntitySet Name="Venues" EntityType="Drop_ItModel.Venue" />
           <AssociationSet Name="FK_Category_Category" Association="Drop_ItModel.FK_Category_Category">
             <End Role="Category" EntitySet="Categories" />
@@ -433,6 +555,10 @@
           <AssociationSet Name="FK_UserFollowEvent_Event" Association="Drop_ItModel.FK_UserFollowEvent_Event">
             <End Role="Event" EntitySet="Events" />
             <End Role="UserFollowEvent" EntitySet="UserFollowEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserId_User" Association="Drop_ItModel.FK_UserId_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Province" Association="Drop_ItModel.FK_User_Province">
             <End Role="Province" EntitySet="Provinces" />
@@ -465,6 +591,22 @@
           <AssociationSet Name="FK_UserFollowEvent_User" Association="Drop_ItModel.FK_UserFollowEvent_User">
             <End Role="User" EntitySet="Users" />
             <End Role="UserFollowEvent" EntitySet="UserFollowEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowUser_User" Association="Drop_ItModel.FK_UserFollowUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserFollowUser" EntitySet="UserFollowUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowUser_UserFollow" Association="Drop_ItModel.FK_UserFollowUser_UserFollow">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserFollowUser" EntitySet="UserFollowUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowVenue_User" Association="Drop_ItModel.FK_UserFollowVenue_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserFollowVenue" EntitySet="UserFollowVenues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFollowVenue_Venue" Association="Drop_ItModel.FK_UserFollowVenue_Venue">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="UserFollowVenue" EntitySet="UserFollowVenues" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
@@ -500,6 +642,18 @@
           <NavigationProperty Name="Requests" Relationship="Drop_ItModel.FK_Request_Event" FromRole="Event" ToRole="Request" />
           <NavigationProperty Name="Tickets" Relationship="Drop_ItModel.FK_Ticket_Event" FromRole="Event" ToRole="Ticket" />
           <NavigationProperty Name="UserFollowEvents" Relationship="Drop_ItModel.FK_UserFollowEvent_Event" FromRole="Event" ToRole="UserFollowEvent" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_UserId_User" FromRole="Notification" ToRole="User" />
         </EntityType>
         <EntityType Name="Province">
           <Key>
@@ -599,21 +753,48 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Notifications" Relationship="Drop_ItModel.FK_UserId_User" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="Province" Relationship="Drop_ItModel.FK_User_Province" FromRole="User" ToRole="Province" />
           <NavigationProperty Name="Requests" Relationship="Drop_ItModel.FK_Request_User" FromRole="User" ToRole="Request" />
           <NavigationProperty Name="Tickets" Relationship="Drop_ItModel.FK_Ticket_User" FromRole="User" ToRole="Ticket" />
           <NavigationProperty Name="Tickets1" Relationship="Drop_ItModel.FK_Ticket_User1" FromRole="User" ToRole="Ticket" />
           <NavigationProperty Name="UserFollowEvents" Relationship="Drop_ItModel.FK_UserFollowEvent_User" FromRole="User" ToRole="UserFollowEvent" />
+          <NavigationProperty Name="UserFollowUsers" Relationship="Drop_ItModel.FK_UserFollowUser_User" FromRole="User" ToRole="UserFollowUser" />
+          <NavigationProperty Name="UserFollowUsers1" Relationship="Drop_ItModel.FK_UserFollowUser_UserFollow" FromRole="User" ToRole="UserFollowUser" />
+          <NavigationProperty Name="UserFollowVenues" Relationship="Drop_ItModel.FK_UserFollowVenue_User" FromRole="User" ToRole="UserFollowVenue" />
         </EntityType>
         <EntityType Name="UserFollowEvent">
           <Key>
-            <PropertyRef Name="FollowEventId" />
+            <PropertyRef Name="UserFollowEventId" />
           </Key>
-          <Property Name="FollowEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFollowEventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="FollowType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Event" Relationship="Drop_ItModel.FK_UserFollowEvent_Event" FromRole="UserFollowEvent" ToRole="Event" />
           <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_UserFollowEvent_User" FromRole="UserFollowEvent" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserFollowUser">
+          <Key>
+            <PropertyRef Name="UserFollowUserId" />
+          </Key>
+          <Property Name="UserFollowUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserFollowId" Type="Int32" Nullable="false" />
+          <Property Name="FollowType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_UserFollowUser_User" FromRole="UserFollowUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Drop_ItModel.FK_UserFollowUser_UserFollow" FromRole="UserFollowUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserFollowVenue">
+          <Key>
+            <PropertyRef Name="UserFollowVenueId" />
+          </Key>
+          <Property Name="UserFollowVenueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="VenueId" Type="Int32" Nullable="false" />
+          <Property Name="FollowType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Drop_ItModel.FK_UserFollowVenue_User" FromRole="UserFollowVenue" ToRole="User" />
+          <NavigationProperty Name="Venue" Relationship="Drop_ItModel.FK_UserFollowVenue_Venue" FromRole="UserFollowVenue" ToRole="Venue" />
         </EntityType>
         <EntityType Name="Venue">
           <Key>
@@ -627,6 +808,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Events" Relationship="Drop_ItModel.FK_Event_Venue" FromRole="Venue" ToRole="Event" />
           <NavigationProperty Name="Province" Relationship="Drop_ItModel.FK_Venue_Province" FromRole="Venue" ToRole="Province" />
+          <NavigationProperty Name="UserFollowVenues" Relationship="Drop_ItModel.FK_UserFollowVenue_Venue" FromRole="Venue" ToRole="UserFollowVenue" />
         </EntityType>
         <Association Name="FK_Category_Category">
           <End Role="Category" Type="Drop_ItModel.Category" Multiplicity="0..1" />
@@ -707,6 +889,18 @@
             </Principal>
             <Dependent Role="UserFollowEvent">
               <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserId_User">
+          <End Role="User" Type="Drop_ItModel.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Drop_ItModel.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -816,6 +1010,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserFollowUser_User">
+          <End Role="User" Type="Drop_ItModel.User" Multiplicity="1" />
+          <End Role="UserFollowUser" Type="Drop_ItModel.UserFollowUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowUser_UserFollow">
+          <End Role="User" Type="Drop_ItModel.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowUser" Type="Drop_ItModel.UserFollowUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowUser">
+              <PropertyRef Name="UserFollowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowVenue_User">
+          <End Role="User" Type="Drop_ItModel.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowVenue" Type="Drop_ItModel.UserFollowVenue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserFollowVenue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFollowVenue_Venue">
+          <End Role="Venue" Type="Drop_ItModel.Venue" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserFollowVenue" Type="Drop_ItModel.UserFollowVenue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueId" />
+            </Principal>
+            <Dependent Role="UserFollowVenue">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -847,6 +1095,18 @@
                 <ScalarProperty Name="VenueId" ColumnName="VenueId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="Drop_ItModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -944,9 +1204,30 @@
           <EntitySetMapping Name="UserFollowEvents">
             <EntityTypeMapping TypeName="Drop_ItModel.UserFollowEvent">
               <MappingFragment StoreEntitySet="UserFollowEvent">
-                <ScalarProperty Name="FollowEventId" ColumnName="FollowEventId" />
+                <ScalarProperty Name="UserFollowEventId" ColumnName="UserFollowEventId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="FollowType" ColumnName="FollowType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFollowUsers">
+            <EntityTypeMapping TypeName="Drop_ItModel.UserFollowUser">
+              <MappingFragment StoreEntitySet="UserFollowUser">
+                <ScalarProperty Name="UserFollowUserId" ColumnName="UserFollowUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserFollowId" ColumnName="UserFollowId" />
+                <ScalarProperty Name="FollowType" ColumnName="FollowType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFollowVenues">
+            <EntityTypeMapping TypeName="Drop_ItModel.UserFollowVenue">
+              <MappingFragment StoreEntitySet="UserFollowVenue">
+                <ScalarProperty Name="UserFollowVenueId" ColumnName="UserFollowVenueId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+                <ScalarProperty Name="FollowType" ColumnName="FollowType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

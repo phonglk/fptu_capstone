@@ -12,14 +12,15 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserFollowEvent
+    public partial class Notification
     {
-        public int UserFollowEventId { get; set; }
-        public int UserId { get; set; }
-        public int EventId { get; set; }
-        public int FollowType { get; set; }
+        public int NotificationId { get; set; }
+        public string Content { get; set; }
+        public bool IsRead { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public Nullable<int> UserId { get; set; }
     
-        public virtual Event Event { get; set; }
         public virtual User User { get; set; }
     }
 }

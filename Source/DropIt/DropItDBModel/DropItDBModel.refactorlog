@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="37e719c4-3a0e-4904-957f-25fd3d866660" ChangeDateTime="07/26/2013 07:51:10">
+    <Property Name="ElementName" Value="[dbo].[UserFollowEvent].[FollowEventId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserFollowEvent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FollowVenueId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2093c7d1-d0d8-4ae4-928f-9f6dd014ce4e" ChangeDateTime="07/26/2013 08:00:59">
+    <Property Name="ElementName" Value="[dbo].[UserFollowUser].[FollowEventId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserFollowUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FollowUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4693a9fb-69e4-4cf1-b170-0f8b23b1b018" ChangeDateTime="07/26/2013 08:01:09">
+    <Property Name="ElementName" Value="[dbo].[UserFollowUser].[FollowUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserFollowUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserollowUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8a9293ff-b657-4664-9cbe-5b2bba6d50ca" ChangeDateTime="07/26/2013 08:01:13">
+    <Property Name="ElementName" Value="[dbo].[UserFollowUser].[UserollowUserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserFollowUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserFollowUserId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e6bd8868-f56b-42e2-8c82-3777647dcaf4" ChangeDateTime="07/26/2013 08:03:37">
+    <Property Name="ElementName" Value="[dbo].[UserFollowEvent].[FollowEventId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserFollowEvent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserFollowEventId" />
+  </Operation>
+</Operations>
