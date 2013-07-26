@@ -19,7 +19,7 @@
             <h2>Thông tin của vé</h2>
 
             @Html.HiddenFor(model => model.TicketId)
-
+            double see = Double.Parse(Settings.get("ServiceFee"));
             <div class="control-group">
                 <label class="control-label" for="EventId">Tên Sự kiện:</label>
                 <div class="controls">
@@ -65,20 +65,22 @@
                 <label class="control-label" for="EventId">Giá bán:</label>
                 <div class="controls">
                     <div class="input-append">
-                        @Html.EditorFor(model => model.SellPrice)
+                        @Html.TextBox("SellPrice", @Model.SellPrice, new {onchange="countMoney()"})
                     </div>
                     @Html.ValidationMessageFor(model => model.SellPrice)
                 </div>
             </div>
+            <input type="hidden" id="servicefee" value="@see"/>
             <div class="control-group">
                 <label class="control-label" for="EventId">Tiền nhận được:</label>
                 <div class="controls">
                     <div class="input-append">
-                        @Html.EditorFor(model => model.ReceiveMoney)
+                        @Html.TextBox("ReceiveMoney", @Model.ReceiveMoney, new { disabled = "true", data_bind = "value:RecievePrice" })
                     </div>
                     @Html.ValidationMessageFor(model => model.ReceiveMoney)
                 </div>
             </div>
+            
             <div class="edit-group">
                  <button type="submit" class="btn btn-inverse btn-buy btn-small">Đăng vé</button>
               <a href="@Url.Action("Manage", "Ticket")" class="btn btn-inverse btn-buy btn-small">Quay về</a>
@@ -89,6 +91,15 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $("#EventId").select2();
+
+    function countMoney() {
+        var serRate = $("#servicefee").val();
+        var sellprice = document.getElementById("SellPrice").value;
+        var receiveMoney = sellprice * (1 - serRate);
+        var money = Math.floor(receiveMoney / 500) * 500;
+        document.getElementById("ReceiveMoney").value = money.formatMoney(0,".", ",");
+    }
+    
 </script>
