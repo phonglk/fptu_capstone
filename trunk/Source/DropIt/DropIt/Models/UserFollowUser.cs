@@ -12,14 +12,14 @@ namespace DropIt.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserFollowEvent
+    public partial class UserFollowUser
     {
-        public int UserFollowEventId { get; set; }
+        public int UserFollowUserId { get; set; }
         public int UserId { get; set; }
-        public int EventId { get; set; }
+        public int UserFollowId { get; set; }
         public int FollowType { get; set; }
     
-        public virtual Event Event { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

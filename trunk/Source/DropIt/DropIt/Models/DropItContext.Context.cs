@@ -27,6 +27,7 @@ namespace DropIt.Models
     
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Setting> Settings { get; set; }
@@ -34,6 +35,8 @@ namespace DropIt.Models
         public DbSet<TicketResponse> TicketResponses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserFollowEvent> UserFollowEvents { get; set; }
+        public DbSet<UserFollowUser> UserFollowUsers { get; set; }
+        public DbSet<UserFollowVenue> UserFollowVenues { get; set; }
         public DbSet<Venue> Venues { get; set; }
     }
 }

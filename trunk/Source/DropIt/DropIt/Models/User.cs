@@ -16,10 +16,14 @@ namespace DropIt.Models
     {
         public User()
         {
+            this.Notifications = new HashSet<Notification>();
             this.Requests = new HashSet<Request>();
             this.Tickets = new HashSet<Ticket>();
             this.Tickets1 = new HashSet<Ticket>();
             this.UserFollowEvents = new HashSet<UserFollowEvent>();
+            this.UserFollowUsers = new HashSet<UserFollowUser>();
+            this.UserFollowUsers1 = new HashSet<UserFollowUser>();
+            this.UserFollowVenues = new HashSet<UserFollowVenue>();
         }
     
         public int UserId { get; set; }
@@ -38,10 +42,14 @@ namespace DropIt.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public int ProvinceId { get; set; }
     
+        public virtual ICollection<Notification> Notifications { get; set; }
         public virtual Province Province { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<Ticket> Tickets1 { get; set; }
         public virtual ICollection<UserFollowEvent> UserFollowEvents { get; set; }
+        public virtual ICollection<UserFollowUser> UserFollowUsers { get; set; }
+        public virtual ICollection<UserFollowUser> UserFollowUsers1 { get; set; }
+        public virtual ICollection<UserFollowVenue> UserFollowVenues { get; set; }
     }
 }
