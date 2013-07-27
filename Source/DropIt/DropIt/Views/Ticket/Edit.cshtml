@@ -16,7 +16,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-            <h2>Thông tin của vé</h2>
+            <h2>Sửa thông tin của vé</h2>
 
             @Html.HiddenFor(model => model.TicketId)
             double see = Double.Parse(Settings.get("ServiceFee"));
