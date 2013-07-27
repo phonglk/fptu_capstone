@@ -1,0 +1,31 @@
+﻿@{
+    var Paging = new {
+        TotalRecordCount = (decimal)(ViewBag.Paging_TotalRecordCount ?? 0),
+        PageSize = (decimal)(ViewBag.Paging_PageSize ?? 10),
+        StartIndex = (decimal)(ViewBag.Paging_StartIndex ?? 0),
+        ExtraParameters = ViewBag.Paging_ExtraParameters ?? ""
+    };
+
+    var PageCount = Math.Ceiling(Paging.TotalRecordCount / Paging.PageSize);
+    var CurrentPage = Math.Floor(Paging.StartIndex / Paging.PageSize);
+    
+   
+}
+
+<div class="pagination" data-currentpage="@CurrentPage">
+    <ul>
+        @for(int i=0;i<PageCount;i++){
+            var url = "?PageSize="+ Paging.PageSize +"&StartIndex="+(i*Paging.PageSize)+Paging.ExtraParameters;
+            if (i == CurrentPage)
+            {
+                <li class="active">
+                    <a href="javascript:void">@(i+1)</a>
+                </li>
+            }else{
+                <li>
+                    <a href="@url">@(i+1)</a>
+                </li>
+            }
+        }
+    </ul>
+</div>

@@ -1,0 +1,30 @@
+﻿@{
+    var Items = ViewBag.Items;
+    var no_item_message = ViewBag.Template_message_no_item;
+    var TemplateItem = ViewBag.Template_view_item;
+    if(no_item_message == null){
+        no_item_message =  "Không có event nào để hiển thị";
+    }
+    if (TemplateItem == null)
+    {
+        TemplateItem = "Partials/Templates/EventList_Item";
+    }
+    if(Items==null){
+        <div class="template-message">
+            @no_item_message
+        </div>
+    }
+    
+    var ItemViewBag = new ViewDataDictionary();
+    ItemViewBag.Add("Extra",ViewBag.Items_ExtraTemplate);
+}
+@if(Items !=null){
+    <div class="event-list @ViewBag.EventListClass">
+    @foreach (var item in Items)
+    {
+        <!-- Item -->
+        @Html.Partial((string)TemplateItem, (object)item,ItemViewBag);
+        <!-- /Item -->
+    }
+    </div>
+}

@@ -27,7 +27,7 @@ namespace DropIt.ViewModels
 
         public int Status { get; set; }
 
-        public string VenueName { get; set; }
+        public Venue Venue { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
 
@@ -42,7 +42,7 @@ namespace DropIt.ViewModels
             HoldDate = Event.HoldDate;
             Description = Event.Description;
             Status = Event.Status;
-            VenueName = Event.Venue.VenueName;
+            Venue = Event.Venue;
             CreatedDate = Event.CreatedDate;
             ModifiedDate = Event.ModifiedDate;
         }

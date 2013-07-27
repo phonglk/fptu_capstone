@@ -86,12 +86,12 @@ namespace DropIt.Controllers
             return result;
         }
 
-        public ActionResult Search(string query, string sortBy = "relevant",int jtPageSize = 10,int jtStartIndex = 0)
+        public ActionResult Search(string query, string sortBy = "relevant",int PageSize = 10,int StartIndex = 0)
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
             foundEvent.TotalCount = events.Count();
-            events = events.Skip(jtStartIndex).Take(jtPageSize);
+            events = events.Skip(StartIndex).Take(PageSize);
 
             if (!String.IsNullOrEmpty(query))
             {

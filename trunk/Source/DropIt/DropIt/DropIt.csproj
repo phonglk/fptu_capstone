@@ -1658,6 +1658,11 @@
     <Content Include="Views\Shared\Partials\EventDisplayMode.cshtml" />
     <Content Include="Views\Event\Upcoming.cshtml" />
     <Content Include="Views\CheckOut\Error.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\EventList.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\EventList_Item.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\Paging.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\EventList_Item_Extra_Search.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\EventList_ItemFull.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

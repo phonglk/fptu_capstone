@@ -78,22 +78,24 @@ h3,h2{
 #ticket-show{
     clear: both;
 }
-#event-show.list{
+#event-show.list,
+.event-list {
     margin-left: 25px;
-    clear:both;
+    clear: both;
 
-    .event{
+    .event {
+        position: relative;
         margin: 0px 0;
         padding: 30px 0;
         border-bottom: 1px solid #ccc;
         transition: all 0.3s;
 
-        &:hover{
-            background:#F5E4F5;
+        &:hover {
+            background: #F5E4F5;
         }
 
-        .thumb{
-            .event-image{
+        .thumb {
+            .event-image {
                 width: 260px;
                 margin-left: 30px;
                 height: 200px;
@@ -101,55 +103,62 @@ h3,h2{
                 background-size: 100% auto;
             }
         }
-        .description{
+
+        .description {
             position: relative;
-	
-            .event-title{
+
+            .event-title {
                 font-size: 20px;
                 line-height: 120%;
-                font-family:Semilla;
+                font-family: Semilla;
                 color: black;
-                a{
+
+                a {
                     color: black;
                     text-decoration: none;
                 }
             }
-            .event-detail{
+
+            .event-detail {
                 font-style: italic;
                 margin-top: 13px;
                 line-height: 150%;
                 color: grey;
-                font-family:HN;
+                font-family: HN;
             }
-            .misc{
+
+            .misc {
                 position: absolute;
                 line-height: 25px;
-	            top:150px;
+                top: 150px;
                 left: 0px;
                 color: #817e7e;
-                [class^="icon-"], [class*=" icon-"]{
+
+                [class^="icon-"], [class*=" icon-"] {
                     width: 20px;
                     display: inline-block;
                     font-size: 20px;
                     color: #333;
                 }
-                .place{
 
+                .place {
                 }
-                .artist{
 
+                .artist {
                 }
             }
-            
         }
-        .datetime{
+
+        .datetime {
             text-align: center;
-            .date{
+
+            .date {
                 display: inline-block;
                 text-align: center;
-                font-family:"HN-Light";
+                font-family: "HN-Light";
                 width: 78px;
-                .month{
+
+                .month {
                     background: #5cb2e3;
                     border: 1px solid #52a2cf;
                     border-bottom: 2px solid #3791d2;
@@ -157,7 +166,8 @@ h3,h2{
                     height: 25px;
                     line-height: 25px;
                 }
-                .day{
+
+                .day {
                     background: #484848;
                     border-top: 2px solid #434343;
                     color: #fff;
@@ -166,9 +176,67 @@ h3,h2{
                     line-height: 45px;
                 }
             }
-            .time{
+
+            .time {
                 margin-top: 10px;
                 font-size: 16px;
+            }
+        }
+    }
+
+    &.compact {
+        .event {
+
+
+            &:hover {
+            }
+
+            .thumb {
+                .event-image {
+                    width:200px;
+                    height: 150px;
+                    margin-left: 15px;
+                }
+            }
+
+            .description {
+
+
+                .event-title {
+
+                    a {
+                    }
+                }
+
+                .event-detail {
+                }
+
+                .misc {
+                    top:100px;
+                    [class^="icon-"], [class*=" icon-"] {
+                    }
+
+                    .place {
+                    }
+
+                    .artist {
+                    }
+                }
+            }
+
+            .datetime {
+
+                .date {
+
+                    .month {
+                    }
+
+                    .day {
+                    }
+                }
+
+                .time {
+                }
             }
         }
     }
