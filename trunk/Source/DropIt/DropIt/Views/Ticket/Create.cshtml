@@ -9,7 +9,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{
+    int noPost = int.Parse(Settings.get("TicketPostPerDay"));
+}
 @if (User.IsInRole("Administrator"))
 {
     <div class="container"> 
@@ -23,6 +25,19 @@
 
     </div>
     
+}
+else if (ViewBag.NoPostTicket>=noPost)
+{
+    <div class="container"> 
+        <div>
+            <p></p>
+        </div>
+        <center>Xin lỗi bạn đã thực hiện quá số lần đăng vé trong 1 ngày!</center>
+        <center>
+            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+        </center>
+
+    </div>
 }
 else
 {

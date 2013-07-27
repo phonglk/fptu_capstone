@@ -4,12 +4,15 @@
 @using BootstrapExtensions.Base.Form
 @using BootstrapExtensions.Base.Form.Label
 @using BootstrapExtensions.Components.Alert
+@using DropIt.Common
 
 @{
     ViewBag.Title = "RequestTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{
+    int noRequest = int.Parse(Settings.get("TicketRequestPerDay"));
+}
 @if (User.IsInRole("Administrator"))
 {
     <div class="container" id="content"> 
@@ -18,6 +21,18 @@
         <center>
             <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
         </center>
+        </div>
+    </div>
+    
+}
+else if (ViewBag.NoRequest >= noRequest)
+{
+    <div class="container" id="content"> 
+        <div>
+            <h3> <center>Xin lỗi bạn đã thực hiện quá số lần yêu cầu vé trong 1 ngày</center></h3> 
+            <center>
+                <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+            </center>
         </div>
     </div>
     
@@ -66,9 +81,9 @@ else
                     <div class="controls">
                         <div class="input-append">
                             <span data-bind="visible: isCreateEvent() == false">
-                                @Html.DropDownList("EventId", (SelectList) ViewBag.EventId, new {data_bind = "value : EventId, event :{ change : selectEventChange}"})
+                                @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectEventChange}" })
                             </span>
-                            @Html.TextBox("EventName", String.Empty, new {data_bind = "visible:isCreateEvent"})
+                            @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                             <span class="add-on">
                                 <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
                                 <label for="CreateEvent">Tạo mới</label>
@@ -81,7 +96,7 @@ else
                     <div class="control-group">
                         <label class="control-label" for="CategoryId">Thể loại:</label>
                         <div class="controls">
-                            @Html.DropDownList("CategoryId", (SelectList) ViewBag.CategoryId, new {data_bind = "enable: isCreateEvent(), value: CategoryId, select2: {}"})
+                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(), value: CategoryId, select2: {}" })
                         </div>
                     </div>
 
@@ -89,7 +104,7 @@ else
                         <label class="control-label" for="HoldDate">Thời gian:</label>
                         <div class="controls">
                             <div class="input-append">
-                                @Html.TextBox("HoldDate", String.Empty, new {data_bind = "enable: isCreateEvent(), date: HoldDate", data_format = "dd/MM/yyyy  hh:mm:ss"})
+                                @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate", data_format = "dd/MM/yyyy  hh:mm:ss" })
 
                                 <button class="btn" type="button" data-bind="visible: isCreateEvent()">
                                     <div class="add-on">
@@ -106,10 +121,10 @@ else
                         <div class="controls">
                             <div class="input-append">
                                 <span data-bind="visible: isCreateEvent() == true && isCreateVenue() == false">
-                                    @Html.DropDownList("VenueId", (SelectList) ViewBag.VenueId, new { data_bind = "select2:{},value : VenueId, event :{ change : selectVenueChange}" })
+                                    @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId, new { data_bind = "select2:{},value : VenueId, event :{ change : selectVenueChange}" })
                                 </span>
                                 <input type="text" data-bind="value: VenueName, visible: isCreateEvent() == false" disabled />
-                                @Html.TextBox("VenueName", String.Empty, new {data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true "})
+                                @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                                 <span class="add-on" data-bind="visible: isCreateEvent">
                                     <input type="checkbox" id="CreateVenue" data-bind="checked: isCreateVenue" name="CreateVenue">
                                     <label for="CreateVenue">Tạo mới</label>
@@ -121,14 +136,14 @@ else
                     <div class="control-group">
                         <label class="control-label" for="VenueId">Địa chỉ:</label>
                         <div class="controls">
-                            @Html.TextBox("Address", String.Empty, new {data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true, value: VenueAddress"})
+                            @Html.TextBox("Address", String.Empty, new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true, value: VenueAddress" })
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label" for="ProvinceId">Tỉnh thành:</label>
                         <div class="controls">
-                            @Html.DropDownList("ProvinceId", (SelectList) ViewBag.ProvinceId, new {data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true,value: ProvinceId,select2:{}"})
+                            @Html.DropDownList("ProvinceId", (SelectList)ViewBag.ProvinceId, new { data_bind = "enable: isCreateEvent() == true && isCreateVenue() == true,value: ProvinceId,select2:{}" })
                         </div>
                     </div>
 
