@@ -36,6 +36,11 @@ namespace DropIt.Controllers
 
         public ActionResult Create()
         {
+            var date = DateTime.Now;
+            var yesterday = DateTime.Now.AddDays(-1);
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            int noTicket = this.unitOfWork.TicketRepository.Get().Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId==UserId).Count();
+            ViewBag.NoPostTicket = noTicket;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
@@ -228,6 +233,12 @@ namespace DropIt.Controllers
         [ActionName("Request")]
         public ActionResult RequestTicket()
         {
+            var date = DateTime.Now;
+            var yesterday = DateTime.Now.AddDays(-1);
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var request = this.unitOfWork.RequestRepository.Get().Where(t => t.CreatedDate != null);
+            int noRequest = request.Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId == UserId).Count();
+            ViewBag.NoRequest = noRequest;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
@@ -276,6 +287,7 @@ namespace DropIt.Controllers
                             UserId = ticket.UserId,
                             EventId = newEvent.EventId,
                             Status = 1,
+                            CreatedDate = DateTime.Now,
                             Description = ticket.Description
                         };
                         this.unitOfWork.RequestRepository.AddOrUpdate(newrequest);
@@ -300,6 +312,7 @@ namespace DropIt.Controllers
                         {
                             UserId = ticket.UserId,
                             EventId = newevent.EventId,
+                            CreatedDate = DateTime.Now,
                             Description = ticket.Description,
                             Status = 1
                         };
@@ -313,6 +326,7 @@ namespace DropIt.Controllers
                         UserId = ticket.UserId,
                         EventId = (int)ticket.EventId,
                         Status = 1,
+                        CreatedDate = DateTime.Now,
                         Description = ticket.Description
                     };
                     this.unitOfWork.RequestRepository.AddOrUpdate(request);
