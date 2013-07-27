@@ -68,47 +68,57 @@ h2 {
 #ticket-show {
   clear: both;
 }
-#event-show.list {
+#event-show.list,
+.event-list {
   margin-left: 25px;
   clear: both;
 }
-#event-show.list .event {
+#event-show.list .event,
+.event-list .event {
+  position: relative;
   margin: 0px 0;
   padding: 30px 0;
   border-bottom: 1px solid #ccc;
   transition: all 0.3s;
 }
-#event-show.list .event:hover {
+#event-show.list .event:hover,
+.event-list .event:hover {
   background: #F5E4F5;
 }
-#event-show.list .event .thumb .event-image {
+#event-show.list .event .thumb .event-image,
+.event-list .event .thumb .event-image {
   width: 260px;
   margin-left: 30px;
   height: 200px;
   background-position: center top;
   background-size: 100% auto;
 }
-#event-show.list .event .description {
+#event-show.list .event .description,
+.event-list .event .description {
   position: relative;
 }
-#event-show.list .event .description .event-title {
+#event-show.list .event .description .event-title,
+.event-list .event .description .event-title {
   font-size: 20px;
   line-height: 120%;
   font-family: Semilla;
   color: black;
 }
-#event-show.list .event .description .event-title a {
+#event-show.list .event .description .event-title a,
+.event-list .event .description .event-title a {
   color: black;
   text-decoration: none;
 }
-#event-show.list .event .description .event-detail {
+#event-show.list .event .description .event-detail,
+.event-list .event .description .event-detail {
   font-style: italic;
   margin-top: 13px;
   line-height: 150%;
   color: grey;
   font-family: HN;
 }
-#event-show.list .event .description .misc {
+#event-show.list .event .description .misc,
+.event-list .event .description .misc {
   position: absolute;
   line-height: 25px;
   top: 150px;
@@ -116,22 +126,27 @@ h2 {
   color: #817e7e;
 }
 #event-show.list .event .description .misc [class^="icon-"],
-#event-show.list .event .description .misc [class*=" icon-"] {
+.event-list .event .description .misc [class^="icon-"],
+#event-show.list .event .description .misc [class*=" icon-"],
+.event-list .event .description .misc [class*=" icon-"] {
   width: 20px;
   display: inline-block;
   font-size: 20px;
   color: #333;
 }
-#event-show.list .event .datetime {
+#event-show.list .event .datetime,
+.event-list .event .datetime {
   text-align: center;
 }
-#event-show.list .event .datetime .date {
+#event-show.list .event .datetime .date,
+.event-list .event .datetime .date {
   display: inline-block;
   text-align: center;
   font-family: "HN-Light";
   width: 78px;
 }
-#event-show.list .event .datetime .date .month {
+#event-show.list .event .datetime .date .month,
+.event-list .event .datetime .date .month {
   background: #5cb2e3;
   border: 1px solid #52a2cf;
   border-bottom: 2px solid #3791d2;
@@ -139,7 +154,8 @@ h2 {
   height: 25px;
   line-height: 25px;
 }
-#event-show.list .event .datetime .date .day {
+#event-show.list .event .datetime .date .day,
+.event-list .event .datetime .date .day {
   background: #484848;
   border-top: 2px solid #434343;
   color: #fff;
@@ -147,7 +163,18 @@ h2 {
   height: 45px;
   line-height: 45px;
 }
-#event-show.list .event .datetime .time {
+#event-show.list .event .datetime .time,
+.event-list .event .datetime .time {
   margin-top: 10px;
   font-size: 16px;
+}
+#event-show.list.compact .event .thumb .event-image,
+.event-list.compact .event .thumb .event-image {
+  width: 200px;
+  height: 150px;
+  margin-left: 15px;
+}
+#event-show.list.compact .event .description .misc,
+.event-list.compact .event .description .misc {
+  top: 100px;
 }
