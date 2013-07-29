@@ -38,6 +38,7 @@ namespace DropIt
             DropIt.Common.AdminMenu.Init();
 
             AddTask("CheckEventExpire", 10);
+            AddTask("PayHoldCheck",5);
         }
 
         private void AddTask(string name, int seconds)
@@ -62,6 +63,29 @@ namespace DropIt
                 unitOfWork.Save();
                 
             }
+            else if (k.Equals("PayHoldCheck"))
+            {
+                try
+                {
+                    UnitOfWork unitOfWork2 = new UnitOfWork();
+                    var yesterday = DateTime.Now.AddDays(-5);
+                    var tranHoldPayment = unitOfWork2.TicketRepository.Get(t => t.TranType == (int)Statuses.TranType.HoldPayment);
+                    var checkTranShipDate = tranHoldPayment.Where(t => t.TranShipDate != null);
+                    var rr = checkTranShipDate.Where(t => t.TranPaymentStatus == null);
+                    var getTran = rr.Where(t => t.TranShipDate <= yesterday);
+                    foreach (Ticket ticket in getTran.ToList())
+                    {
+                        ticket.TranPaymentStatus = (int)Statuses.Payment.Transfered;
+                        unitOfWork2.TicketRepository.AddOrUpdate(ticket);
+                        unitOfWork2.TicketRepository.Save();
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                    
+            }
+            
             AddTask(k, Convert.ToInt32(v));
         }
     }
