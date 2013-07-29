@@ -542,6 +542,8 @@ INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (1, N'ServiceF
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (2, N'ShippingCost', N'15000')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'DollarRate', N'21233')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (4, N'DefaultEventImage', N'/Content/Images/no_image.jpg')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'TicketPostPerDay', N'10')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'TicketRequestPerDay', N'10')
 SET IDENTITY_INSERT [dbo].[Setting] OFF
 
 GO
