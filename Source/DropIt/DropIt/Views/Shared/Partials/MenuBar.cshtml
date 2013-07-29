@@ -45,6 +45,9 @@
             padding-bottom: 2px;
             border-bottom: 1px solid #808080;
         }
+            #ui-id-1 li a:hover {
+                text-decoration: none !important;
+            }
 
     DIV.list_item_container {
         height: 80px;
@@ -67,14 +70,11 @@
         color: #431f59;
         text-align: center;
     }
-    /*DIV.list_item_description {
-        font-style: italic;
-        font-size: 1.1em;
-        color: gray;
-        padding: 5px;
-        margin: 5px;
-    }*/
 
+        DIV.list_item_label:hover {
+            background-color: #3875d7;
+            color: #fff;
+        }
     #query {
         width: 300px;
     }
@@ -83,14 +83,15 @@
     $(document).ready(function () {
         $('#query').autocomplete({
             minLength: 3,
+            maxItemsToShow: 5,
             source: function (request, response) {
                 $.ajax({
                     url: "/Home/SearchAjax",
-                    data: { searchText: request.term, maxResults: 5 },
+                    data: { searchText: request.term},
                     dataType: "json",
                     success: function (data) {
 
-                        response($.map(data, function (item) {
+                        response($.map(data.slice(0, 5), function (item) {
                             return {
                                 value: item.EventName,
                                 image: item.EventImage != null && item.EventImage != '' ? item.EventImage.substr(1) : '/Event/Image/17',
