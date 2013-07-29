@@ -182,19 +182,6 @@ namespace DropIt.Areas.Administration.Controllers
                 delete.TranStatus = (int)Statuses.Transaction.Received;
                 delete.TranShipDate = DateTime.Now;
 
-                // them vao giao dich 5 ngay
-                var date = DateTime.Now;
-                var yesterday = DateTime.Now.AddDays(-5);
-
-                var tranHoldPayment = this.unitOfWork.TransactionRepository.Get(t => t.TranType == (int)Statuses.TranType.HoldPayment);
-                var checkTranShipDate = tranHoldPayment.Where(t => t.TranShipDate != null && t.TranPaymentStatus == null);
-                var getTran = checkTranShipDate.Where(t => t.TranShipDate <= yesterday);
-                foreach (var ticket in getTran)
-                {
-                    ticket.TranPaymentStatus = (int) Statuses.Payment.Transfered;
-                }
-                
-                // end
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
