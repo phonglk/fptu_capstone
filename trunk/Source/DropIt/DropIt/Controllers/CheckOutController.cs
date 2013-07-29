@@ -98,30 +98,62 @@ namespace DropIt.Controllers
                     {
                         if (ticket.TranStatus==null)
                         {
-                            Ticket checkout = new Ticket()
+                            if (ticket.TranType==(int)Statuses.TranType.InstantPayment)
                             {
-                                TicketId = ticket.TicketId,
-                                SeriesNumber = ticket.SeriesNumber,
-                                TranUserId = ticket.TranUserId,
-                                TranFullName = ticket.TranFullName,
-                                TranAddress = ticket.TranAddress,
-                                TranType = ticket.TranType,
-                                TranStatus = (int)Statuses.Transaction.Paid,
-                                EventId = ticket.EventId,
-                                UserId = ticket.UserId,
-                                SellPrice = ticket.SellPrice,
-                                ReceiveMoney = ticket.ReceiveMoney,
-                                ShippingCost = ticket.ShippingCost,
-                                Seat = ticket.Seat,
-                                Status = ticket.Status,
-                                Description = ticket.Description,
-                                CreatedDate = ticket.CreatedDate,
-                                TranCreatedDate = ticket.TranCreatedDate,
-                                TranModifiedDate = DateTime.Now,
-                                TranDescription = ticket.TranDescription
-                            };
-                            this.unitOfWork.TicketRepository.AddOrUpdate(checkout);
-                            this.unitOfWork.Save();                        
+                                Ticket checkout = new Ticket()
+                                {
+                                    TicketId = ticket.TicketId,
+                                    SeriesNumber = ticket.SeriesNumber,
+                                    TranUserId = ticket.TranUserId,
+                                    TranFullName = ticket.TranFullName,
+                                    TranAddress = ticket.TranAddress,
+                                    TranType = ticket.TranType,
+                                    TranStatus = (int)Statuses.Transaction.Paid,
+                                    EventId = ticket.EventId,
+                                    UserId = ticket.UserId,
+                                    SellPrice = ticket.SellPrice,
+                                    ReceiveMoney = ticket.ReceiveMoney,
+                                    ShippingCost = ticket.ShippingCost,
+                                    Seat = ticket.Seat,
+                                    Status = ticket.Status,
+                                    Description = ticket.Description,
+                                    CreatedDate = ticket.CreatedDate,
+                                    TranCreatedDate = ticket.TranCreatedDate,
+                                    TranModifiedDate = DateTime.Now,
+                                    TranDescription = ticket.TranDescription,
+                                    TranPaymentStatus = (int)Statuses.Payment.Transfered
+                                };
+                                this.unitOfWork.TicketRepository.AddOrUpdate(checkout);
+                                this.unitOfWork.Save();  
+                            }
+                            else
+                            {
+                                Ticket checkout = new Ticket()
+                                {
+                                    TicketId = ticket.TicketId,
+                                    SeriesNumber = ticket.SeriesNumber,
+                                    TranUserId = ticket.TranUserId,
+                                    TranFullName = ticket.TranFullName,
+                                    TranAddress = ticket.TranAddress,
+                                    TranType = ticket.TranType,
+                                    TranStatus = (int)Statuses.Transaction.Paid,
+                                    EventId = ticket.EventId,
+                                    UserId = ticket.UserId,
+                                    SellPrice = ticket.SellPrice,
+                                    ReceiveMoney = ticket.ReceiveMoney,
+                                    ShippingCost = ticket.ShippingCost,
+                                    Seat = ticket.Seat,
+                                    Status = ticket.Status,
+                                    Description = ticket.Description,
+                                    CreatedDate = ticket.CreatedDate,
+                                    TranCreatedDate = ticket.TranCreatedDate,
+                                    TranModifiedDate = DateTime.Now,
+                                    TranDescription = ticket.TranDescription
+                                };
+                                this.unitOfWork.TicketRepository.AddOrUpdate(checkout);
+                                this.unitOfWork.Save();  
+                            }
+                                                  
                         }
                         else
                         {
