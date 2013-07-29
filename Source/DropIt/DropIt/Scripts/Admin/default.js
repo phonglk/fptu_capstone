@@ -98,9 +98,11 @@ function Category(obj) {
     var self = this;
 
     this.CategoryId = -1;
+    this.ParetntCategoryId = "";
     this.CategoryName = "";
-
+    this.Status = "";
     $.extend(self, obj);
+    if (self.Description == null) self.Description = "";
 }
 
 function Ticket(obj) {
@@ -108,14 +110,14 @@ function Ticket(obj) {
 
     this.TicketId = -1;
     this.SellPrice = "";
-    this.SeriesNumber = "";
+    
     this.ReceiveMoney = "";
     this.Seat = "";
     this.Description = "";
 
     $.extend(self, obj);
     if (self.Description == null) self.Description = "";
-
+    if (self.SeriesNumber == null) self.SeriesNumber = "Không có";
 }
 
 function Transaction(obj) {
