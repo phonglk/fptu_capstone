@@ -93,7 +93,7 @@
             <th>Mã vận đơn</th>
             <!-- /ko -->
             <th>Giá vé</th>
-            <!-- ko if: list.TranStatus() == Statuses.Received -->
+            <!-- ko if: (list.TranStatus() == Statuses.Received || list.TranPaymentStatus() == Statuses.Transfered) -->
             <th>Ngày giao dịch</th>
             <!-- /ko -->
             <th>Người mua</th>
@@ -119,9 +119,9 @@
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received -->
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranPaymentStatus == Statuses.Transfered  -->
             <td>
-                <span data-bind="text: TranShipDate.toDateTimeString()"></span>
+                <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
             <!-- /ko -->
             <td data-bind="text: TranUser.UserName"></td>
@@ -188,6 +188,7 @@
     list.changePaymentStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
         $(".status-filter > div > a").eq(4).addClass("active");
+        list.TranPaymentStatus(transtt);
         list.extraData.TranPaymentStatus = transtt;
         list.currentPage(1);
         list.getList();
