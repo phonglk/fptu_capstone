@@ -502,13 +502,6 @@ GO
 
 -----------UserFollowEvent------------------
 
-SET IDENTITY_INSERT [dbo].[UserFollowEvent] ON
-INSERT INTO [dbo].[UserFollowEvent] ([FollowEventId], [UserId], [EventId]) VALUES (1, 12, 17)
-INSERT INTO [dbo].[UserFollowEvent] ([FollowEventId], [UserId], [EventId]) VALUES (2, 12, 10)
-SET IDENTITY_INSERT [dbo].[UserFollowEvent] OFF
-
-GO
-
 -----Ticket--------------
 
 SET IDENTITY_INSERT [dbo].[Ticket] ON
