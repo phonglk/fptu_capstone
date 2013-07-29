@@ -1,18 +1,21 @@
-﻿<div class="middle-header">
+﻿@{
+    <script src="~/Scripts/DropIt/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+}
+<div class="middle-header">
     <div class="container">
         <div class="search">
-                     @using (Html.BeginForm("Search","Home", FormMethod.Get))
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
             { 
-             <div class="input-prepend">
-                <span class="add-on"><i class="icon-search"></i>|</span>
-                   @Html.TextBox("query")
-                <input class="search-bar span4" id="prependedInput" type="submit"  value="search">
-            </div>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-search"></i>|</span>
+                    @Html.TextBox("query")
+                    <input class="search-bar span4" id="prependedInput" type="submit" value="search">
+                </div>
             }
         </div>
         <div id="home-nav" class="navbar span7 pull-right">
             <ul class="nav">
-                <li><a href="@Url.Action("Index","Home",null,"http")">TRANG CHỦ</a></li>
+                <li><a href="@Url.Action("Index", "Home", null, "http")">TRANG CHỦ</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">SỰ KIỆN </a>
                     <ul class="dropdown-menu" data-gen="category" data-gen-behavior="append">
@@ -21,34 +24,97 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="@Url.Action("GuideForNew","Home",null,"http")">DÀNH CHO NGƯỜI MỚI</a></li>
-                <li><a href="@Url.Action("About","Home",null,"http")">VỀ CHÚNG TÔI</a></li>
+                <li><a href="@Url.Action("GuideForNew", "Home", null, "http")">DÀNH CHO NGƯỜI MỚI</a></li>
+                <li><a href="@Url.Action("About", "Home", null, "http")">VỀ CHÚNG TÔI</a></li>
             </ul>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    //$('#eventnameofsearch').on("keyup", function () {
-    //    var self = $(this);
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/Home/SearchAjax",
-    //        data: {
-    //            eventnameofsearch: self.val()
-    //        },
-    //        dataType: "json"
-    //    }).done(function (data) {
-    //        console.log(data)
-    //    });
+<style type="text/css">
+    #ui-id-1 {
+        background: #fff;
+        font-size: 12px;
+        border: 1px solid #391147;
+        width: 300px;
+        overflow-x: auto;
+        max-height: 300px;
+    }
 
-    //});
-    var options;
-    jQuery(function () {
-        options = {
-            serviceUrl: '/Home/SearchAjax',
-            minChars: 2,
-            onSelect: function (value, data) { $(".search>form").submit(); },
+        #ui-id-1 li {
+            margin-top: -8px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #808080;
+        }
+
+    DIV.list_item_container {
+        height: 80px;
+    }
+
+    DIV.list_item_image {
+        max-height: 80px;
+        width: 80px;
+        float: left;
+    }
+
+        DIV.list_item_image > img {
+            height: 80px;
+            width: 80px;
+        }
+
+    DIV.list_item_label {
+        background: #fff;
+        height: 80px;
+        color: #431f59;
+        text-align: center;
+    }
+    /*DIV.list_item_description {
+        font-style: italic;
+        font-size: 1.1em;
+        color: gray;
+        padding: 5px;
+        margin: 5px;
+    }*/
+
+    #query {
+        width: 300px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#query').autocomplete({
+            minLength: 3,
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/SearchAjax",
+                    data: { searchText: request.term, maxResults: 5 },
+                    dataType: "json",
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            return {
+                                value: item.EventName,
+                                image: item.EventImage != null && item.EventImage != '' ? item.EventImage.substr(1) : '/Event/Image/17',
+                                //       artist: item.Artist,
+                                selectedId: item.EventId
+                            };
+                        }))
+                    }
+                })
+            },
+            select: function (event, ui) {
+                window.location.assign('@Request.Url.AbsoluteUri' + '/Event/Details/' + ui.item.selectedId)
+
+                return false;
+            }
+        }).data("uiAutocomplete")._renderItem = function (ul, item) {
+            var inner_html = '<a href="/Event/Details/' + item.selectedId + '"><div class="list_item_container"><div class="list_item_image"><img src="' + item.image + '"></div><div class="list_item_label"><h5>' + item.label + '</h5></div></a>';
+            return $("<li></li>")
+                    .data("item.autocomplete", item)
+                    .append(inner_html)
+                    .appendTo(ul);
         };
-        $('#query').autocomplete(options);
+
+
     });
 </script>
+
