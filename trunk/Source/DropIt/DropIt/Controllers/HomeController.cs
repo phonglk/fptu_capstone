@@ -25,17 +25,17 @@ namespace DropIt.Controllers
         public ActionResult Index()
         {
             Session["Role"] = "Event";
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status!=4) && p.HoldDate>=DateTime.Now).Take(10);
-            
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status != 4) && p.HoldDate >= DateTime.Now).Take(10);
+
             return View(events.ToList());
         }
 
         public ActionResult NearEvent()
         {
             Session["Role"] = "Event";
-            
+
             var topEvent = this.unitOfWork.EventRepository.Get().OrderBy(p => p.HoldDate).Where(p => p.HoldDate >= DateTime.Now).Take(10);
-            
+
             return View(topEvent.ToList());
         }
 
@@ -86,7 +86,7 @@ namespace DropIt.Controllers
             return result;
         }
 
-        public ActionResult Search(string query, string sortBy = "relevant",int PageSize = 10,int StartIndex = 0)
+        public ActionResult Search(string query, string sortBy = "relevant", int PageSize = 10, int StartIndex = 0)
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
@@ -157,30 +157,37 @@ namespace DropIt.Controllers
         }
 
         [ActionName("SearchAjax")]
-        public JsonResult SearchAjax(string query)
+        public JsonResult SearchAjax(string searchText)
         {
             var events = this.unitOfWork.EventRepository.Get();
-            List<String> listeventname = new List<string>();
-            if (!String.IsNullOrEmpty(query))
+            List<SearchAjax> listevent = new List<SearchAjax>();
+            if (!String.IsNullOrEmpty(searchText))
             {
+
                 foreach (Event evt in events.ToList())
                 {
-                    if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(query).ToLower()))
+                    var searchAjax = new SearchAjax
+                        {
+                            EventId = evt.EventId,
+                            Artist = evt.Artist,
+                            EventName = evt.EventName,
+                            EventImage = evt.EventImage
+                        };
+                    if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()))
                     {
-                        listeventname.Add(evt.EventName);
+                        listevent.Add(searchAjax);
                     }
-                    else if (Utils.ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(Utils.ConvertVN(query).ToLower()))
+                    else if (Utils.ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()))
                     {
-                        if (!listeventname.Contains(evt.Artist))
-                        { 
-                            listeventname.Add(evt.Artist); 
+                        if (!listevent.Contains(searchAjax))
+                        {
+                            listevent.Add(searchAjax);
                         }
 
                     }
                 }
-
             }
-            return Json(new { query = query, suggestions = listeventname, data = listeventname }, JsonRequestBehavior.AllowGet);
+            return Json(listevent, JsonRequestBehavior.AllowGet);
         }
 
 
