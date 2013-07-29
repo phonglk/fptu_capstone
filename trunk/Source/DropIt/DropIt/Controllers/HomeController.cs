@@ -90,8 +90,7 @@ namespace DropIt.Controllers
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
-            foundEvent.TotalCount = events.Count();
-            events = events.Skip(StartIndex).Take(PageSize);
+            
 
             if (!String.IsNullOrEmpty(query))
             {
@@ -136,6 +135,7 @@ namespace DropIt.Controllers
                     }
                 }
 
+                
 
                 ResultEventComparer comparer = new ResultEventComparer();
 
@@ -149,6 +149,9 @@ namespace DropIt.Controllers
                     comparer.ComparisonMethod = ResultEventComparer.ComparisonType.HoldDate;
                     foundEvent.Result.Sort(comparer);
                 }
+
+                foundEvent.TotalCount = foundEvent.Result.Count;
+                foundEvent.Result = foundEvent.Result.Skip(StartIndex).Take(PageSize).ToList();
 
             }
 
