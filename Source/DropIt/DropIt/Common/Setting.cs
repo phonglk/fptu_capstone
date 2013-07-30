@@ -12,7 +12,8 @@ namespace DropIt.Common
         private static SettingRepository Repository = new SettingRepository(new DropItContext());
         public static string get(string SettingName)
         {
-            Setting record = Repository.Get(s => s.SettingName == SettingName).FirstOrDefault();
+            UnitOfWork unitOfWork = new UnitOfWork();
+            Setting record = unitOfWork.SettingRepository.Get(s => s.SettingName == SettingName).FirstOrDefault();
             if(record == null)
             {
                 return null;
