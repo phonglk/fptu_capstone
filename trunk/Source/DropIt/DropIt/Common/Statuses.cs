@@ -21,6 +21,7 @@ namespace DropIt.Common
         public enum Request { Open, Close};
         public enum Category { Deactive, Active, Delete };
         public enum Payment { Hold ,Transfered, Done };
+        public enum FollowType { Sell,Buy,SellAndBuy }
 
         public static string getText(String EnumName, int Value)
         {

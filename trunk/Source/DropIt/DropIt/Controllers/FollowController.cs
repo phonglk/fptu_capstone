@@ -1,4 +1,5 @@
-﻿using DropIt.DAL;
+﻿using DropIt.Common;
+using DropIt.DAL;
 using DropIt.Models;
 using System;
 using System.Collections.Generic;
@@ -11,44 +12,67 @@ namespace DropIt.Controllers
 {
     public class FollowController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
-        private FollowEventRepository Repository;
+        private UnitOfWork uow = new UnitOfWork();
 
         public FollowController()
         {
-            Repository = unitOfWork.FollowEventRepository;
         }
 
         [HttpPost]
-        public JsonResult Event(int Id)
+        public JsonResult Event(int Id,int FollowType)
         {
             //try
             //{
                 int UserId = WebSecurity.GetUserId(User.Identity.Name);
-                Boolean IsFollow = true;
-                UserFollowEvent follow = Repository.Get(f => f.UserId == UserId && f.EventId == Id).FirstOrDefault();
-
-                if (follow == null)
+                GenericRepository<UserFollowEvent> Repository = uow.FollowEventRepository;
+                UserFollowEvent Follow = Repository.Get(f => f.UserId == UserId && f.EventId == Id).FirstOrDefault();
+                if (FollowType == -1)
                 {
-                    UserFollowEvent f = new UserFollowEvent
+                    if (Follow == null)
                     {
-                        UserId = UserId,
-                        EventId = Id
-                    };
-                    Repository.AddOrUpdate(f);
+                        //return Json(new
+                        //{
+                        //    Result = "ERROR",
+                        //    Message = "UserDoesNotFollow",
+                        //    FollowType = -1
+                        //});
+                    }
+                    else
+                    {
+                        Repository.Delete(Follow);
+                        Repository.Save();
+                        
+                    }
+                    return Json(new
+                    {
+                        Result = "OK",
+                        FollowType = -1
+                    });
+
                 }
                 else
                 {
-                    IsFollow = false;
-                    Repository.Delete(follow);
-                }
-                Repository.Save();
+                    if (Follow == null)
+                    {
+                        Follow = new UserFollowEvent
+                        {
+                            UserId = UserId,
+                            EventId = Id
+                        };
+                    }
+                    Follow.FollowType = FollowType;
+                    Repository.AddOrUpdate(Follow);
+                    Repository.Save();
 
-                return Json(new
-                {
-                    Result = "OK",
-                    IsFollow = IsFollow
-                });
+                    return Json(new
+                    {
+                        Result = "OK",
+                        FollowType = FollowType
+                    });
+                }
+                
+
+                
                 
             //}
             //catch (Exception e)
@@ -64,7 +88,7 @@ namespace DropIt.Controllers
         public ActionResult Events()
         {
             int UserId = WebSecurity.GetUserId(User.Identity.Name);
-            var follow = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
+            var follow = uow.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
             return View(follow);
         }
 

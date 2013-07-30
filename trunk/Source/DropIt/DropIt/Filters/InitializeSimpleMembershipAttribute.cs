@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using WebMatrix.WebData;
 using DropIt.Models;
 using System.Web.Security;
+using DropIt.DAL;
 
 namespace DropIt.Filters
 {

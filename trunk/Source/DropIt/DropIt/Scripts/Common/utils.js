@@ -297,3 +297,57 @@ function generateGroupDropDownList(data, $target, valueField, textField) {
         }
     }
 }
+
+function Notification(obj) {
+    var self = this;
+    self.NotificationId = -1;
+    self.Userid = null;
+    self.SenderId = null;
+    self.ActivityType = "not";
+    self.ObjectType = null;
+    self.ObjectTitle = "";
+    self.ObjectUrl = "";
+    self.Content = "";
+    self.IsUnread = true;
+    self.CreatedDate = null;
+    self.ModifiedDate = null;
+    $.extend(self, obj);
+
+    self.CreatedDate = Date.fromRawJSON(self.CreatedDate);
+    self.ModifiedDate = Date.fromRawJSON(self.ModifiedDate);
+    self.AvatarBG = "url('/Event/Image/" + self.SenderId + "')";
+    self.Description = ""
+    if (self.ObjectType == "Event") {
+        self.Description += "Sự kiện <strong>" + self.ObjectTitle + "</strong> đã có"
+        if (self.ActivityType == "Add") {
+            self.Description += " vé mới được đăng bán";
+        }
+    }
+}
+
+function NotificationViewModel() {
+    
+    var self = this;
+    self.data = ko.observableArray([]);
+    
+    self.LoadLastest = function () {
+        $.ajax({
+            type: "POST",
+            cache: false,
+            dataType: "json",
+            url: Url({ Controller: "Notification", Action: "List" }),
+            data: { FollowType: 1 },
+            success: function (data) {
+                if (data.Result == "OK") {
+                    self.data.removeAll();
+                    $.each(data.Records, function (i, e) {
+                        self.data.push(new Notification(e))
+                    })
+                } else {
+                    console.error("Fail while loading notifications: " + data.Message);
+                }
+            }
+        })
+    }
+
+}

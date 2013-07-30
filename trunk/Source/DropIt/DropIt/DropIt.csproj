@@ -237,6 +237,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FollowController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
@@ -244,8 +245,8 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
+    <Compile Include="DAL\NotificationRepository.cs" />
     <Compile Include="DAL\TransactionRepository.cs" />
-    <Compile Include="DAL\FollowEventRepository.cs" />
     <Compile Include="DAL\EventRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\RequestRepository.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="ViewModels\BuyTicket.cs" />
     <Compile Include="ViewModels\Category.cs" />
     <Compile Include="ViewModels\Event.cs" />
+    <Compile Include="ViewModels\Notification.cs" />
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
     <Compile Include="ViewModels\RequestViewModels.cs" />
@@ -2397,6 +2399,7 @@
     <Content Include="Views\Shared\Partials\Templates\Paging.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_Item_Extra_Search.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_ItemFull.cshtml" />
+    <Content Include="Views\Follow\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

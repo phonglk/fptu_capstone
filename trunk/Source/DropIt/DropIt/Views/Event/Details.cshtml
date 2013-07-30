@@ -9,6 +9,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!--Area: Page Header & Navigation & Search.END-->
+<style>
+    [data-follow] {
+        position: absolute;
+        top: 25px;
+        right: 20px;
+    }
+</style>
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
@@ -41,13 +48,14 @@
                 </div>
 
                 @{
-                    var follow = false;
+                    var follow = -1;
 
                     if (WebSecurity.IsAuthenticated)
                     {
-                        if (Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault() != null)
+                        var followData = Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault();
+                        if ( followData!= null)
                         {
-                            follow = true;
+                            follow = followData.FollowType;
                         }
                     }
                     else
@@ -59,10 +67,8 @@
                     
                     }
                 }
-                <a href="#" class="btn-follow btn btn-inverse pull-right" data-follow="@follow" data-eventId="@Model.EventId"
-                data-toggle="tooltip"
-                title="Theo dõi để nhận được thông báo khi có sự kiện này có vé mới"
-                >Theo dõi</a>
+                <span data-follow="Event" data-follow-status="@follow" data-follow-id="@Model.EventId"></span>
+                
             </div>
 
             <div class="event-des span9">
