@@ -26,6 +26,42 @@
                 </li>
                 <li><a href="@Url.Action("GuideForNew", "Home", null, "http")">DÀNH CHO NGƯỜI MỚI</a></li>
                 <li><a href="@Url.Action("About", "Home", null, "http")">VỀ CHÚNG TÔI</a></li>
+                <li class="noti5-wrapper buy">
+                    <a href="javascript:;">
+                        <span class="icon-bell noti5-icon ">
+                            <span class="badge">1</span>
+                        </span>
+                        
+                    </a>
+                    <div class="noti5-list-container">
+                        <!-- ko if: typeof data !='undefined' -->
+                            <ul class="noti5-list" data-bind="foreach: data">
+                                <li>
+                                    <a href="#">
+                                        <div class="container">
+                                            <div class="row-fluid">
+                                                <div class="span3 avatar" style="" data-bind="style: { backgroundImage: AvatarBG }">
+                                                    
+                                                </div>
+                                                <div class="span6 description">
+                                                    <span data-bind="html: Description"></span>
+                                                </div>
+                                                <div class="span3 misc">
+                                                    <center>14:03</center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        <!-- /ko -->
+                        </div>
+                </li>
+                <li class="noti5-wrapper sell">
+                    <a href="@Url.Action("About", "Home", null, "http")">
+                        <span class="icon-bell noti5-icon "></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

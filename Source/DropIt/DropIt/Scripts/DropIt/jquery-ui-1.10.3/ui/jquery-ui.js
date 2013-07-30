@@ -14642,7 +14642,7 @@ function removeDescribedBy( elem ) {
 		elem.removeAttr( "aria-describedby" );
 	}
 }
-
+/*
 $.widget( "ui.tooltip", {
 	version: "1.10.3",
 	options: {
@@ -14999,5 +14999,5 @@ $.widget( "ui.tooltip", {
 		});
 	}
 });
-
+*/
 }( jQuery ) );

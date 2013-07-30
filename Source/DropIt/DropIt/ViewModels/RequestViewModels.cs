@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DropIt.Models;
 using System.ComponentModel.DataAnnotations;
+using DropIt.DAL;
 
 namespace DropIt.ViewModels
 {

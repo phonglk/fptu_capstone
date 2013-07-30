@@ -15,11 +15,16 @@ namespace DropIt.Models
     public partial class Notification
     {
         public int NotificationId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> SenderId { get; set; }
+        public string ActivityType { get; set; }
+        public string ObjectType { get; set; }
+        public string ObjectTitle { get; set; }
+        public string ObjectUrl { get; set; }
         public string Content { get; set; }
-        public bool IsRead { get; set; }
+        public bool IsUnread { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> UserId { get; set; }
     
         public virtual User User { get; set; }
     }
