@@ -18,15 +18,17 @@ namespace DropIt.DAL
         private UserRepository userRepository;
         private TicketRepository ticketRepository;
         private RequestRepository requestRepository;
-        private FollowEventRepository followEventRepository;
+        private GenericRepository<UserFollowEvent> followEventRepository;
+        private GenericRepository<UserFollowUser> followUserRepository;
+        private GenericRepository<UserFollowVenue> followVenueRepository;
         private SettingRepository settingRepository;
         private TransactionRepository transactionRepository;
+        private NotificationRepository notificationRepository;
 
         public EventRepository EventRepository
         {
             get
             {
-
                 if (this.eventRepository == null)
                 {
                     this.eventRepository = new EventRepository(context);
@@ -141,16 +143,54 @@ namespace DropIt.DAL
             }
         }
 
-        public FollowEventRepository FollowEventRepository
+        public GenericRepository<UserFollowEvent> FollowEventRepository
         {
             get
             {
 
                 if (this.followEventRepository == null)
                 {
-                    this.followEventRepository = new FollowEventRepository(context);
+                    this.followEventRepository = new GenericRepository<UserFollowEvent>(context);
                 }
                 return followEventRepository;
+            }
+        }
+
+        public GenericRepository<UserFollowUser> FollowUserRepository
+        {
+            get
+            {
+
+                if (this.followUserRepository == null)
+                {
+                    this.followUserRepository = new GenericRepository<UserFollowUser>(context);
+                }
+                return followUserRepository;
+            }
+        }
+
+        public GenericRepository<UserFollowVenue> FollowVenueRepository
+        {
+            get
+            {
+
+                if (this.followVenueRepository == null)
+                {
+                    this.followVenueRepository = new GenericRepository<UserFollowVenue>(context);
+                }
+                return followVenueRepository;
+            }
+        }
+
+        public NotificationRepository NotificationRepository
+        {
+            get
+            {
+                if (this.notificationRepository == null)
+                {
+                    this.notificationRepository = new NotificationRepository(context);
+                }
+                return notificationRepository;
             }
         }
 
