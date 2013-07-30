@@ -1,11 +1,19 @@
 ﻿CREATE TABLE [dbo].[Notification] (
     [NotificationId] INT            NOT NULL,
-    [Content]        NVARCHAR (MAX) NOT NULL,
-    [IsRead]         BIT            DEFAULT ((0)) NOT NULL,
+	  [UserId]         INT            NULL,
+    [SenderId] INT NULL, 
+    [ActivityType] NVARCHAR(50) NULL, 
+    [ObjectType] NVARCHAR(50) NULL, 
+	[ObjectTitle] NVARCHAR(250) NULL, 
+	[ObjectUrl] NVARCHAR(MAX) NULL, 
+    [Content]        NVARCHAR (MAX) NULL,
+    [IsUnread]         BIT            DEFAULT 1 NOT NULL,
     [CreatedDate]    DATETIME       NULL,
     [ModifiedDate]   DATETIME       NULL,
-    [UserId]         INT            NULL,
-    PRIMARY KEY CLUSTERED ([NotificationId] ASC),
+  
+    
+    
+    CONSTRAINT [PK_Notification] PRIMARY KEY CLUSTERED ([NotificationId] ASC),
     CONSTRAINT [FK_UserId_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId])
 );
 
