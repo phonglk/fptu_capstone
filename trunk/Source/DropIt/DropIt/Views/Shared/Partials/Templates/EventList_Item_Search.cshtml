@@ -12,9 +12,12 @@
             <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
                 <span 
         class="event-name"
-        
+        data-matches ="@foreach(string matched in item.EventName.Matches)
+                        {
+                            @(matched+",")
+                        }"
                                 
-        >@item.EventName</span>
+        >@item.EventName.Value</span>
             </a>
         </p>
         <!--
@@ -32,9 +35,12 @@
                 <span class=" icon-star"></span>
                     <span 
             class="artist"
-            
+            data-matches ="@foreach(string matched in item.Artist.Matches)
+                            {
+                                @(matched+",")
+                            }"
                                 
-            >@item.Artist</span>
+            >@item.Artist.Value</span>
             </div>
         </div>
     </div>
