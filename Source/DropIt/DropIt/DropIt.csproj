@@ -1157,6 +1157,8 @@
     <Content Include="Areas\Administration\Views\Setting\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Transaction\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Transaction\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Category\Edit.cshtml" />
     <None Include="Content\Admin\font\fontawesome-webfont.eot" />
     <Content Include="Content\Admin\font\fontawesome-webfont.eot%40v=3.0.1" />
     <None Include="Content\Admin\font\fontawesome-webfont.ttf" />

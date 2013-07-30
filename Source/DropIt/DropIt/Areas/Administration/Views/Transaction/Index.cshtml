@@ -88,8 +88,8 @@
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th class="sortable" data-bind="click: function (data, event) { sort('TranFullName', data, event) }">Tên giao dịch</th>
-            <!-- ko if: list.TranStatus() == Statuses.Received -->
+            <th>Tên người bán</th>
+            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered -->
             <th>Mã vận đơn</th>
             <!-- /ko -->
             <th>Giá vé</th>
@@ -105,9 +105,9 @@
         <tr>
             <td data-bind="">
                 <a href="" data-bind="
-    text: TranFullName,
+    text: SellUser.UserName,
     attr: {
-        title: TranFullName,
+        title: SellUser.UserName,
         'data-content':TranDetail
     }
                     "
@@ -115,7 +115,7 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received -->
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Delivered-->
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>

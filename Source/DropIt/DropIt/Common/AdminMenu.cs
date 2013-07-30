@@ -166,6 +166,14 @@ namespace DropIt.Common
               };
             adminMenuList.Add(Venue);
 
+            AdminMainMenu Category = new AdminMainMenu()
+            {
+                Controller = "Category",
+                Title = "Danh mục",
+                Icon = "bookmark"
+            };
+            adminMenuList.Add(Category);
+
             AdminMainMenu Setting = new AdminMainMenu()
             {
                 Controller = "Setting",
