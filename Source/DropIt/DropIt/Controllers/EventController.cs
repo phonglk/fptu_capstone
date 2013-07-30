@@ -24,9 +24,14 @@ namespace DropIt.Controllers
             Repository = unitOfWork.EventRepository;
         }
 
-        public ActionResult List()
+        public ActionResult Index(int PageSize = 10, int StartIndex = 0)
         {
-            var events = this.unitOfWork.EventRepository.Get();
+            var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete && e.HoldDate >= DateTime.Now);
+            // Gia su sau khi select het dc event dung
+
+            ViewBag.TotalCount = events.Count();
+            events = events.Skip(StartIndex).Take(PageSize).ToList();
+           
             return View(events.ToList());
         }
 
@@ -52,7 +57,7 @@ namespace DropIt.Controllers
             return View(evt);
         }
 
-        
+
         public ActionResult FollowEvent()
         {
             int UserId = WebSecurity.GetUserId(User.Identity.Name);
@@ -70,7 +75,7 @@ namespace DropIt.Controllers
             //follow.Remove(ufe);
             //this.unitOfWork.Save();
             //return View(follow.ToList());
-            
+
             int UserId = WebSecurity.GetUserId(User.Identity.Name);
             UserFollowEvent follow = this.unitOfWork.FollowEventRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
             this.unitOfWork.FollowEventRepository.Delete(follow);
@@ -197,7 +202,7 @@ namespace DropIt.Controllers
             }
 
             return base.File(ImagePath, "image/jpeg");
-            
+
         }
 
         [HttpPost]
