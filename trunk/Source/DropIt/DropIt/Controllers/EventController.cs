@@ -24,11 +24,14 @@ namespace DropIt.Controllers
             Repository = unitOfWork.EventRepository;
         }
 
-        public ActionResult Index(int PageSize = 10, int StartIndex = 0)
+        public ActionResult Index(int PageSize = 10, int StartIndex = 0,int CategoryId = -1)
         {
-            var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete && e.HoldDate >= DateTime.Now);
-            // Gia su sau khi select het dc event dung
-
+            
+            var events = this.unitOfWork.EventRepository.Get(e => e.Status == (int)Statuses.Event.Approve || e.Status == (int)Statuses.Event.Trading);
+            if (CategoryId != -1)
+            {
+                events = events.Where(e => e.CategoryId == CategoryId);
+            }
             ViewBag.TotalCount = events.Count();
             events = events.Skip(StartIndex).Take(PageSize).ToList();
            
