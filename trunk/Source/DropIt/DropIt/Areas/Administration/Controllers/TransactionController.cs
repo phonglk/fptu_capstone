@@ -64,6 +64,10 @@ namespace DropIt.Areas.Administration.Controllers
                         e.User.BankName
                     },
                     ReceiveMoney = e.ReceiveMoney,
+                    SellUser = new {
+                        e.UserId,
+                        e.User.UserName
+                    },
                     TranFullName = e.TranFullName,
                     TranType = e.TranType,
                     TranAddress = e.TranAddress,

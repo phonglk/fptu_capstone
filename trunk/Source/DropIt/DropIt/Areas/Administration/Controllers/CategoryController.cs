@@ -1,11 +1,15 @@
-﻿using DropIt.Common;
-using DropIt.DAL;
-using DropIt.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DropIt.Models;
+using DropIt.DAL;
+using DropIt.Common;
+using System.Diagnostics;
+using DropIt.Areas.Administration.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
@@ -27,33 +31,6 @@ namespace DropIt.Areas.Administration.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null)
-        //{
-        //    try
-        //    {
-
-        //        var records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
-
-        //        var Records = records.Select(e => new
-        //        {
-        //            CategoryId = e.CategoryId,
-        //            CategoryName = e.CategoryName,
-        //            ParentCategoryId = e.ParentCategoryId,
-        //            Status = e.Status,
-        //            Description = e.Description
-        //        });
-        //        return Json(new JSONResult(Records)
-        //        {
-        //            TotalRecordCount = Repository.Count
-        //        });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Json(new JSONResult(e));
-        //    }
-        //}
-
         [HttpPost]
         public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int CategoryStatus = -1)
         {
@@ -69,20 +46,23 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     records = Repository.JTGetExp(e => e.Status == CategoryStatus, jtStartIndex, jtPageSize, jtSorting);
                 }
+
+
                 var Records = records.Select(e => new
                 {
                     CategoryId = e.CategoryId,
                     CategoryName = e.CategoryName,
-                    ParentCategoryId = e.ParentCategoryId,
                     Status = e.Status,
                     Description = e.Description,
-                    Category = new
+                    ParentCategory = e.Category2 == null ? null : new
                     {
-                        e.CategoryId,
-                        e.CategoryName,
-                        e.ParentCategoryId
+                        e.ParentCategoryId,
+                        e.Category2.CategoryId,
+                        e.Category2.CategoryName
                     }
+
                 });
+
                 return Json(new JSONResult(Records)
                 {
                     TotalRecordCount = (CategoryStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == CategoryStatus).Count()
@@ -101,29 +81,8 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Create(Category Category)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return Json(new JSONResult("Form is not valid"));
-                }
-
-                var addedRecord = Repository.AddOrUpdate(Category);
-                unitOfWork.Save();
-                return Json(new JSONResult(addedRecord, "Record"));
-
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-                throw;
-            }
-        }
-
-        [HttpPost]
-        public JsonResult Update(Category Category)
         {
             String Error = "";
             try
@@ -137,10 +96,12 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var addedRecord = Repository.AddOrUpdate(Category);
                 unitOfWork.Save();
+
+                TempData["Message"] = "Đã tạo thành công danh mục mới! " + Category.CategoryName;
                 return Json(new
-                    {
-                        Result = "OK"
-                    });
+                {
+                    Result = "OK"
+                });
             }
             catch (Exception e)
             {
@@ -152,6 +113,43 @@ namespace DropIt.Areas.Administration.Controllers
                 Result = "ERROR",
                 Message = Error
             });
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            Category e = Repository.GetById(Id);
+            CategoryViewModel cvm = new CategoryViewModel()
+            {
+                CategoryId = e.CategoryId,
+                CategoryName = e.CategoryName,
+                Status = e.Status,
+                Description = e.Description,
+                ParentCategoryId = (int)e.ParentCategoryId,
+              //  AllowEdit = e.Events.FirstOrDefault(t => t.Status == (int)Statuses.Event.Trading) == null
+            };
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAll(), "CategoryId", "CategoryName");
+            return View(cvm);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult Edit(Category Category)
+        {
+            Category oldCategory = Repository.GetById(Category.CategoryId);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json(new JSONResult("Form is invalid"));
+                }
+                Category.Status = oldCategory.Status;
+                Repository.AddOrUpdate(Category);
+                unitOfWork.Save();
+                return Json(new JSONResult());
+            }
+            catch (Exception e)
+            {
+                return Json(new JSONResult(e));
+            };
         }
 
         [HttpPost]
@@ -237,79 +235,16 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult GetOptions()
         {
-            //try
-            //{
-            //    var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
-            //        p => new
-            //        {
-            //            DisplayText = p.CategoryName,
-            //            Value = p.CategoryId,
-            //            Children = Repository.Get(x => x.ParentCategoryId == p.CategoryId).Select(c => new
-            //            {
-            //                DisplayText = c.CategoryName,
-            //                Value = c.CategoryId
-            //            })
-            //        });
-            //    return Json(new JSONResult(Records, "Options"));
-
-            //}
-            //catch (Exception e)
-            //{
-            //    return Json(new JSONResult(e));
-            //}
             try
             {
-                var Records = unitOfWork.CategoryRepository.GetAll().Select(
-                    p => new
-                    {
-                        DisplayText = p.CategoryName,
-                        Value = p.CategoryId,
-                        Children = unitOfWork.CategoryRepository.Get(x => x.ParentCategoryId == p.CategoryId).Select(c => new
-                        {
-                            DisplayText = c.CategoryName,
-                            Value = c.CategoryId
-                        })
-                    });
-                return Json(new JSONResult(Records, "Opptions"));
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
-        }
-
-        [HttpPost]
-        public JsonResult GetParentOptions()
-        {
-            //try
-            //{
-            //    var Records = Repository.Get(x => x.ParentCategoryId == null).Select(
-            //        p => new
-            //        {
-            //            DisplayText = p.CategoryName,
-            //            Value = p.CategoryId
-            //        });
-            //    return Json(new JSONResult(Records, "Options"));
-
-            //}
-            try
-            {
-                var Records = unitOfWork.CategoryRepository.GetAll().Select(
-                    p => new
-                    {
-                        DisplayText = p.CategoryName,
-                        Value = p.CategoryId,
-                        Parent = unitOfWork.CategoryRepository.Get(x => x.ParentCategoryId == null).Select(
-                        t => new
-                        {
-                            DisplayText = t.CategoryName,
-                            Value = t.CategoryId
-                        })
-                    });
+                var Records = Repository.GetAll().Select(
+                    p => new { DisplayText = p.CategoryName, Value = p.CategoryId });
                 return Json(new JSONResult(Records, "Options"));
+
             }
             catch (Exception e)
             {
+
                 return Json(new JSONResult(e));
             }
         }

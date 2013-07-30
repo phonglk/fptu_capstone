@@ -98,11 +98,11 @@ function Category(obj) {
     var self = this;
 
     this.CategoryId = -1;
-    this.ParetntCategoryId = "";
     this.CategoryName = "";
     this.Status = "";
     $.extend(self, obj);
     if (self.Description == null) self.Description = "";
+    if (self.ParentCategoryId == null) self.ParentCategoryId = "";
 }
 
 function Ticket(obj) {
