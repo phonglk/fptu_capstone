@@ -2399,6 +2399,7 @@
     <Content Include="Views\Shared\Partials\Templates\Paging.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_Item_Extra_Search.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_ItemFull.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\EventList_Item_Search.cshtml" />
     <Content Include="Views\Follow\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

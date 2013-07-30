@@ -64,9 +64,8 @@
                         ViewBag.Paging_StartIndex = Int32.Parse(Request["StartIndex"]);
                     }
                     catch (Exception e) { }
-                    ViewBag.Paging_ExtraParameters = String.Format("&query={0}&sortBy={1}",
-                        Request["query"],
-                        Request["sortBy"]);
+                    ViewBag.Paging_ExtraParameters = String.Format("&CategoryId={0}",
+                        Request["CategoryId"]);
                 }
                 @Html.Partial("Partials/Templates/EventList")
                 <div class="pull-right">
