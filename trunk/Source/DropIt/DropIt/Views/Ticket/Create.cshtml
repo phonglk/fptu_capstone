@@ -9,9 +9,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    int noPost = int.Parse(Settings.get("TicketPostPerDay"));
-}
+
 @if (User.IsInRole("Administrator"))
 {
     <div class="container"> 
@@ -26,7 +24,7 @@
     </div>
     
 }
-else if (ViewBag.NoPostTicket>=noPost)
+else if (ViewBag.NoPostTicket >= ViewBag.noSetting)
 {
     <div class="container"> 
         <div>

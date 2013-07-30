@@ -37,10 +37,12 @@ namespace DropIt.Controllers
         public ActionResult Create()
         {
             var date = DateTime.Now;
+            int noPost = int.Parse(Settings.get("TicketPostPerDay"));
             var yesterday = DateTime.Now.AddDays(-1);
             var UserId = WebSecurity.GetUserId(User.Identity.Name);
             int noTicket = this.unitOfWork.TicketRepository.Get().Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId==UserId).Count();
             ViewBag.NoPostTicket = noTicket;
+            ViewBag.noSetting = noPost;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
