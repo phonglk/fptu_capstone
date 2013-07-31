@@ -10,9 +10,6 @@
     ViewBag.Title = "RequestTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    int noRequest = int.Parse(Settings.get("TicketRequestPerDay"));
-}
 @if (User.IsInRole("Administrator"))
 {
     <div class="container" id="content"> 
@@ -25,7 +22,7 @@
     </div>
     
 }
-else if (ViewBag.NoRequest >= noRequest)
+else if (ViewBag.NoRequest >= ViewBag.NoRe)
 {
     <div class="container" id="content"> 
         <div>
