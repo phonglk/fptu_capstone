@@ -12,29 +12,33 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <div class="container"> 
-        <div>
-            <p></p>
+    <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
-        <center>Xin lỗi admin không thể thực hiện giao dịch</center>
-        <center>
+        <center><h3> Xin lỗi! admin không thể thực hiện giao dịch! </h3></center>
+        <br />
+        <center>    
             <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
         </center>
-
+        <br />
+        <br />
     </div>
     
 }
 else if (ViewBag.NoPostTicket >= ViewBag.noSetting)
 {
-    <div class="container"> 
-        <div>
-            <p></p>
+    <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
-        <center>Xin lỗi bạn đã thực hiện quá số lần đăng vé trong 1 ngày!</center>
-        <center>
+        <center><h3>Xin lỗi bạn đã thực hiện quá số lần đăng vé trong 1 ngày!</h3></center>
+        <br />
+        <center>    
             <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
         </center>
-
+        <br />
+        <br />
     </div>
 }
 else
@@ -45,8 +49,9 @@ else
             font-size: 12px;
             color: red;
         }
+
         .select2-container {
-            width:280px !important;
+            width: 280px !important;
         }
     </style>
     <div class="container" id="content">
@@ -67,7 +72,7 @@ else
                             </span>
                             @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                             <span class="add-on">
-                                <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name ="CreateEvent">
+                                <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
                                 <label for="CreateEvent">Tạo mới</label>
                             </span>
                         </div>
@@ -81,23 +86,23 @@ else
                             @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}" })
                         </div>
                     </div>
-            
+
                     <div class="control-group">
                         <label class="control-label" for="HoldDate">Thời gian:</label>
                         <div class="controls">
                             <div class="input-append">
                                 @Html.TextBox("HoldDate", String.Empty, new { data_bind = "enable: isCreateEvent(), date: HoldDate", data_format = "dd/MM/yyyy  hh:mm:ss" })
-                        
+
                                 <button class="btn" type="button" data-bind="visible: isCreateEvent()">
                                     <div class="add-on">
                                         <i class='icon-calendar'></i>
                                     </div>
                                 </button>
-                        
+
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="control-group">
                         <label class="control-label" for="VenueId">Nơi tổ chức</label>
                         <div class="controls">
@@ -105,16 +110,16 @@ else
                                 <span data-bind="visible: isCreateEvent() == true && isCreateVenue() == false">
                                     @Html.DropDownList("VenueId", (SelectList)ViewBag.VenueId, new { data_bind = "select2:{},value : VenueId, event :{ change : selectVenueChange}" })
                                 </span>
-                                <input type="text" data-bind="value: VenueName,visible: isCreateEvent() == false" disabled />
+                                <input type="text" data-bind="value: VenueName, visible: isCreateEvent() == false" disabled />
                                 @Html.TextBox("VenueName", String.Empty, new { data_bind = "visible: isCreateEvent() == true && isCreateVenue() == true " })
                                 <span class="add-on" data-bind="visible: isCreateEvent">
-                                    <input type="checkbox" id="CreateVenue" data-bind="checked: isCreateVenue"  name ="CreateVenue">
+                                    <input type="checkbox" id="CreateVenue" data-bind="checked: isCreateVenue" name="CreateVenue">
                                     <label for="CreateVenue">Tạo mới</label>
                                 </span>
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="control-group">
                         <label class="control-label" for="VenueId">Địa chỉ:</label>
                         <div class="controls">
@@ -149,7 +154,7 @@ else
                 </div>
                 <input type="hidden" id="servicefee" value="@see"/>
                 <div class="control-group">
-                    <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate*100).toFixed(0)"></span>%):</label>
+                    <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate * 100).toFixed(0)"></span>%):</label>
                     <div class="controls">
                         @Html.TextBox("ReceiveMoney", String.Empty, new { disabled = "true", data_bind = "value:RecievePrice" })
                     </div>
@@ -158,7 +163,7 @@ else
 
                 <div class="control-group">
                     <label class="checkbox">
-                        <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng"/>
+                        <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng" />
                         Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                     </label>
                 </div>
@@ -171,20 +176,23 @@ else
         .select2-results {
             max-height: 300px;
         }
+
         .select2-result-label {
-            overflow:hidden;
+            overflow: hidden;
         }
-        .select2-result-label img {
-            float:left;
-            margin-right:5px;
-            width:60px;
-            height:80px;
-        }
+
+            .select2-result-label img {
+                float: left;
+                margin-right: 5px;
+                width: 60px;
+                height: 80px;
+            }
+
         .select2-result {
-            clear:both;
+            clear: both;
         }
     </style>
-    <script type="text/javascript">        
+    <script type="text/javascript">
         function formatEventRow(state) {
             if (!state.id) return state.text;
             return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
@@ -210,17 +218,17 @@ else
             self.ProvinceId = ko.observable();
             self.CategoryId = ko.observable();
             self.SellPrice = ko.observable();
-            self.ServiceRate= $("#servicefee").val();
-            self.RecievePrice = ko.computed(function() {
+            self.ServiceRate = $("#servicefee").val();
+            self.RecievePrice = ko.computed(function () {
                 return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0, ".", ",");
             })
 
-            self.selectEventChange = function() {
+            self.selectEventChange = function () {
                 $.ajax({
                     url: Url({ Controller: "Event", Action: "getInfo" }),
                     type: "POST",
                     data: "EventId=" + self.EventId(),
-                    success: function(data) {
+                    success: function (data) {
                         if (data.Result && data.Result == "OK" && data.Records) {
                             var record = data.Records[0]
                             self.HoldDate(record.HoldDate)
@@ -257,7 +265,7 @@ else
                     required: true
                 },
                 EventName: {
-                    depends: function(element) {
+                    depends: function (element) {
                         return $("#createEvent:checked");
                     }
                 }
@@ -267,15 +275,15 @@ else
                 EventName: "Cần phải điền tên sự kiện khi tạo mới"
             }
             //,
-        //errorLabelContainer:$('.validation-summary-errors')
+            //errorLabelContainer:$('.validation-summary-errors')
         }
 
-        $(function() {
+        $(function () {
             ctvm = new CreateTicketViewModel();
             ko.applyBindings(ctvm);
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
             //$(".form1 form").validate(validateOptions);
-        })    
+        })
 
     </script>
 
