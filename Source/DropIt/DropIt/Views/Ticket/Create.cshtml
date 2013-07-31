@@ -19,7 +19,7 @@
         <center><h3> Xin lỗi! admin không thể thực hiện giao dịch! </h3></center>
         <br />
         <center>    
-            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
         </center>
         <br />
         <br />
@@ -35,7 +35,7 @@ else if (ViewBag.NoPostTicket >= ViewBag.noSetting)
         <center><h3>Xin lỗi bạn đã thực hiện quá số lần đăng vé trong 1 ngày!</h3></center>
         <br />
         <center>    
-            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
         </center>
         <br />
         <br />
@@ -51,11 +51,11 @@ else
         }
 
         .select2-container {
-            width: 280px !important;
+            width: 364px !important;
         }
     </style>
     <div class="container" id="content">
-        <div class="form1">
+        <div id="request-ticket" class="form1">
             @using (Html.HorizontalForm())
             {
                 @Html.AntiForgeryToken()
@@ -83,7 +83,7 @@ else
                     <div class="control-group">
                         <label class="control-label" for="CategoryId">Thể loại:</label>
                         <div class="controls">
-                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}" })
+                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}", style = "width:364px" })
                         </div>
                     </div>
 
@@ -161,13 +161,14 @@ else
                 </div>
 
 
-                <div class="control-group">
+                <div class="control-group" style="margin-left: 35%; margin-top: -20px;">
                     <label class="checkbox">
                         <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng" />
                         Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                     </label>
                 </div>
-                <button type="submit" class="btn btn-register btn-primary">Đăng vé</button>
+                <button type="submit" class="btn btn-mid btn-gen">Đăng vé</button>
+                <a href="@Url.Action("Sell", "Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
             }
         </div>
     </div>
@@ -190,6 +191,10 @@ else
 
         .select2-result {
             clear: both;
+        }
+
+        .control-group {
+            margin-left: 145px;
         }
     </style>
     <script type="text/javascript">

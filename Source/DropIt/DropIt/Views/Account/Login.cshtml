@@ -32,8 +32,9 @@
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
                 </div>
-        <button type="submit" class="btn btn-register btn-success" value="Log in">Đăng Nhập</button>
-                <p>
+        <button type="submit" class="btn btn-mid btn-gen" value="Log in">Đăng Nhập</button> <a href="@Url.Action("Index","Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
+               
+                <p style="padding-top:5px;">
                     @Html.ActionLink("Đăng Ký", "Register") nếu bạn chưa có tài khoản!!
                 </p>
             }

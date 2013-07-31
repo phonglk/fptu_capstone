@@ -2,10 +2,17 @@
     ViewBag.Title = "Error";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    <p></p>
+<div class="container" id="content">
+    <br />
+    <br />
+
+    <div class="sorry-image">
+        <img src="/Content/Images/SorryFace.png" />
+    </div>
+    <div style="padding:5%;"><center><h3>Xin lỗi, vé của bạn đã bị mua trước. Hãy liên hệ hotline của chúng tôi để lấy lại tiền!</h3></center></div>
+    <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
+        </center>
+    <br />
+    <br />
 </div>
-<div class="center">
-    <p>Xin lỗi, vé của bạn đã bị mua trước. Hãy liên hệ hotline của chúng tôi để lấy lại tiền!</p>
-</div>
-<a href="/Home/Index">Quay về trang chủ tiếp tục</a>

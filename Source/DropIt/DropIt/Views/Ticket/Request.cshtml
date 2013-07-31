@@ -12,25 +12,33 @@
 }
 @if (User.IsInRole("Administrator"))
 {
-    <div class="container" id="content"> 
-        <div>
-             <h3> <center>Xin lỗi admin không thể thực hiện giao dịch</center></h3> 
-        <center>
-            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
-        </center>
+     <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
+        <center><h3> Xin lỗi! admin không thể thực hiện giao dịch! </h3></center>
+        <br />
+        <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
+        </center>
+        <br />
+        <br />
     </div>
     
 }
 else if (ViewBag.NoRequest >= ViewBag.NoRe)
 {
-    <div class="container" id="content"> 
-        <div>
-            <h3> <center>Xin lỗi bạn đã thực hiện quá số lần yêu cầu vé trong 1 ngày</center></h3> 
-            <center>
-                <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
-            </center>
+    <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
+        <center><h3>Xin lỗi bạn đã thực hiện quá số lần yêu cầu vé trong 1 ngày!</h3></center>
+        <br />
+        <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
+        </center>
+        <br />
+        <br />
     </div>
     
 }
@@ -43,37 +51,18 @@ else
         }
 
         .select2-container {
-            width:280px !important;
+            width: 364px !important;
         }
-
     </style>
     <div class="container" id="content">
-        <div class="form1">
+        <div id="request-ticket" class="form1">
             @using (Html.HorizontalForm())
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
 
                 <h3>Đăng yêu cầu mua vé</h3>
-@*
-            
-            @Html.LabelAndControl("Tên Sự kiện:", @Html.DropDownList("EventId", String.Empty))  
-            @Html.LabelAndControl("Tên Sự kiện 2:", @Html.TextBox("EventName"))  
-            <label>
-                <input type="checkbox" id="newevent" onchange="doClick()">Tạo mới sự kiện
-            </label>             
-            @Html.LabelAndControl("Nơi tổ chức [not check]:", @Html.DropDownList("VenueId", String.Empty)) // khi chua tick vao chon new venue
-            <div><input type="checkbox"/>Tạo mới nơi tổ chức</div>                                                                                              
-            @Html.LabelAndControl("Nơi tổ chức [checked]:", Html.TextBox("VenueName")) // khi tick vao new venue
-            @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
-            @Html.LabelAndControl("Tỉnh thành:", Html.DropDownList("ProvinceId", String.Empty))
-            @Html.LabelAndControl("Thời gian:", Html.TextBox("HoldDate"))
-            @Html.LabelAndControl("Thể loại:", Html.DropDownList("CategoryId", String.Empty))
-            @Html.LabelAndControl("Ghi chú (tùy chọn):", Html.EditorFor(model=>model.Description))            
-                                    
-            *@
-
-                <div class="control-group">
+                <div class="control-group" style="margin-left: 145px;">
                     <label class="control-label" for="EventId">Tên Sự kiện:</label>
                     <div class="controls">
                         <div class="input-append">
@@ -93,7 +82,7 @@ else
                     <div class="control-group">
                         <label class="control-label" for="CategoryId">Thể loại:</label>
                         <div class="controls">
-                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(), value: CategoryId, select2: {}" })
+                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(), value: CategoryId, select2: {}", style = "width:364px" })
                         </div>
                     </div>
 
@@ -146,17 +135,23 @@ else
 
 
                 </fieldset>
-                @Html.LabelAndControl("Miêu tả (tùy chọn):", Html.EditorFor(model => model.Description))
-
+                //   @Html.LabelAndControl("Miêu tả (tùy chọn):", Html.EditorFor(model => model.Description))
+                <div class="control-group" style="margin-left: 145px;">
+                    <label class="control-label" for="Description">Miêu tả (tùy chọn):</label>
+                    <div class="controls">
+                        @Html.TextAreaFor(model => model.Description)
+                    </div>
+                </div>
 
                 // dieu khoan su dung
-                <div class="control-group">
+                <div class="control-group" style="margin-left: 35%;">
                     <label class="checkbox">
-                        <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng"/>
+                        <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng" />
                         Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                     </label>
                 </div>                
-                <button type="submit" class="btn btn-register btn-success">Đăng Ký</button>
+                <button type="submit" class="btn btn-mid btn-gen">Đăng Rao mua</button>
+                <a href="@Url.Action("Buy", "Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
             }
         </div>
     </div>
@@ -164,17 +159,20 @@ else
         .select2-results {
             max-height: 300px;
         }
+
         .select2-result-label {
-            overflow:hidden;
+            overflow: hidden;
         }
-        .select2-result-label img {
-            float:left;
-            margin-right:5px;
-            width:60px;
-            height:80px;
-        }
+
+            .select2-result-label img {
+                float: left;
+                margin-right: 5px;
+                width: 60px;
+                height: 80px;
+            }
+
         .select2-result {
-            clear:both;
+            clear: both;
         }
     </style>
     <script type="text/javascript">
@@ -203,12 +201,12 @@ else
             self.VenueAddress = ko.observable();
             self.ProvinceId = ko.observable();
 
-            self.selectEventChange = function() {
+            self.selectEventChange = function () {
                 $.ajax({
                     url: Url({ Controller: "Event", Action: "getInfo" }),
                     type: "POST",
                     data: "EventId=" + self.EventId(),
-                    success: function(data) {
+                    success: function (data) {
                         if (data.Result && data.Result == "OK" && data.Records) {
                             var record = data.Records[0]
                             self.HoldDate(record.HoldDate)
@@ -237,7 +235,7 @@ else
             }
         }
 
-        $(function() {
+        $(function () {
             ctvm = new CreateTicketViewModel();
             ko.applyBindings(ctvm);
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });

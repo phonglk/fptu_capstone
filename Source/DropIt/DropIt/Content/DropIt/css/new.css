@@ -471,11 +471,31 @@ hr {
     width: 20px;
 }
 
-.btn-register {
+.btn-mid {
     position: relative;
     left: 40%;
 }
+.btn-gen {
+    background: #5e4071;
+     color: #fff;   
+     border-radius: 0;
+}
 
+    .btn-gen:hover {
+        background: #6e3568;
+        color: #fff;
+    }
+
+    .btn-cancel {
+    background: #695d57;
+     color: #fff;   
+     border-radius: 0;
+}
+
+    .btn-cancel:hover {
+        background: #1c0921;
+        color: #fff;
+    }
 .register input:focus {
     border-color: none;
     outline: 0;
@@ -630,8 +650,8 @@ select.select2 {
     }
 
     .form1 fieldset {
-        width: 600px;
-        margin-left: 180px;
+        width: 685px;
+        margin-left: 145px;
         background: #e5e5e5;
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -808,10 +828,13 @@ table.event-detail td.price {
 
 .btn-sub {
     background: #5e4071;
+     color: #fff;   
+     border-radius: 0;
 }
 
     .btn-sub:hover {
         background: #666666;
+        color: #fff;
     }
 
 .event-detail .btn-follow {
@@ -873,4 +896,16 @@ table.event-detail td.price {
 .admin-image {
     position: relative;
     left: 20%;
+}
+.sorry-image {
+    position: relative;
+    left: 35%;
+}
+#request-ticket input[type='text']{
+    width: 350px;
+}
+
+#request-ticket  textarea {
+    width : 350px;
+    height : 150px;
 }

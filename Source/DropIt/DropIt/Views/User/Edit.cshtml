@@ -15,9 +15,11 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
+           
             <h3>Thông Tin Tài Khoản</h3>
   
             @Html.LabelAndControl("Tên đầy đủ", Html.TextBox("FullName"))      
+            <div class="controls validate"></div>
             @Html.LabelAndControl("Email:", Html.TextBox("Email"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.Email)</div>
             @Html.LabelAndControl("Số Điện thoại:", Html.TextBox("Phone"))
@@ -25,9 +27,9 @@
             @Html.LabelAndControl("Địa chỉ:", Html.TextBox("Address"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.Address)</div>
             @Html.LabelAndControl("Tên ngân hàng", Html.TextBox("BankName"))
-            
+            <div class="controls validate"></div>
             @Html.LabelAndControl("Tài khoản ngân hàng", Html.TextBox("BankAccount"))
-            
+            <div class="controls validate"></div>
             @Html.LabelAndControl("Số CMND", Html.TextBox("IdentityCard"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.IdentityCard)</div>        
         
@@ -37,10 +39,19 @@
                 @Html.ActionLink("Thay đổi mật khẩu", "Manage", "Account")
             </div>
             <p>
-                <button type="submit" class="btn btn-success" value="Save">Xác Nhận</button>
+                <button type="submit" class="btn btn-gen" value="Save">Xác Nhận</button>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-cancel">Hủy bỏ</a>
             </p>
         }
-    
+        <style>
+            select {
+                width: 280px;
+            }
+
+            .form-horizontal .control-group {
+                margin-bottom: 25px;
+            }
+        </style>
     </div>
 </div>
 @section Scripts {
