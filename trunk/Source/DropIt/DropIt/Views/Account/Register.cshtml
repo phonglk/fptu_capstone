@@ -77,22 +77,13 @@
             <div class="controls validate">@Html.ValidationMessageFor(m => m.IdentityCard)</div>
             
             </fieldset>
-
-            @*<div>
-            <label class="checkbox">
-                <span class="help-block">Điều Khoản Sử Dụng</span>
-                      <span class="condition"></span>  
-                <input type="checkbox">
-                Tôi Đồng ý với tất cả các điều kiện trên.
-            </label>
-                </div>*@
             <div>
                     <label class="checkbox">
                         <input type="checkbox" name="AgreeTerm1" id="AgreeTerm1" required title="Bạn phải đồng ý với điều khoản sử dụng"/>
                         Tôi Đồng ý với tất cả các điều kiện trên.
                     </label>
                 </div>
-            <button type="submit" class="btn btn-register btn-success" value="Register">Đăng Ký</button>
+             <button type="submit" class="btn btn-mid btn-gen" value="Register">Đăng Ký</button> <a href="@Url.Action("Index","Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
        
         }
     </div>
