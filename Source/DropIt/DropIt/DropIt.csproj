@@ -245,6 +245,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DAL\CategoryRepository.cs" />
+    <Compile Include="DAL\FollowEventRepository.cs" />
     <Compile Include="DAL\NotificationRepository.cs" />
     <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\EventRepository.cs" />

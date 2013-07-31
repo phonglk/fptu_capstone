@@ -7,6 +7,9 @@
 <h2>Giao dịch thành công</h2>
 
 <div>
-    
+    <div>Thank you @ViewBag.PayerFirstName @ViewBag.PayerLastName</div>
+    <div id="TransactionId">@Html.ViewBag.OrderId</div>
+    <div id="EventName">@Html.ViewBag.Name</div>
+    <div id="Price">@Html.ViewBag.Price @ViewBag.Currency</div>
 </div>
 <a href="/Home/Index">Quay về trang chủ tiếp tục</a>
