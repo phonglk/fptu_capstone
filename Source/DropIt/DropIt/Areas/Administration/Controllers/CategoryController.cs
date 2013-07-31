@@ -76,7 +76,7 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.Get(t=>t.ParentCategoryId!=null), "CategoryId", "CategoryName");
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.Get(t=>t.ParentCategoryId==null), "CategoryId", "CategoryName");
             return View();
         }
 
