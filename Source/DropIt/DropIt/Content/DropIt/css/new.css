@@ -59,9 +59,9 @@ h1, h2, h3, h4 {
     height: 43px;
 }
 
-.middle-header .navbar .nav > li > .dropdown-menu:after{
-    border-bottom: 6px solid #582e53;
-}
+    .middle-header .navbar .nav > li > .dropdown-menu:after {
+        border-bottom: 6px solid #582e53;
+    }
 
 .input-prepend {
     color: #ffffff;
@@ -868,4 +868,9 @@ table.event-detail td.price {
 
 .manage table th.last {
     width: 180px;
+}
+
+.admin-image {
+    position: relative;
+    left: 20%;
 }
