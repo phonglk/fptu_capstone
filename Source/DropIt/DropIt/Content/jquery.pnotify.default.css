@@ -1,0 +1,169 @@
+/*
+Document   : jquery.pnotify.default.css
+Created on : Nov 23, 2009, 3:14:10 PM
+Author     : Hunter Perrin
+Version    : 1.2.0
+Link       : http://pinesframework.org/pnotify/
+Description:
+	Default styling for Pines Notify jQuery plugin.
+*/
+/* -- Notice */
+.ui-pnotify {
+top: 25px;
+right: 25px;
+position: absolute;
+height: auto;
+/* Ensures notices are above everything */
+z-index: 9999;
+}
+/* Hides position: fixed from IE6 */
+html > body .ui-pnotify {
+position: fixed;
+}
+.ui-pnotify .ui-pnotify-shadow {
+-webkit-box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+-moz-box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+box-shadow: 0px 2px 10px rgba(50, 50, 50, 0.5);
+}
+.ui-pnotify-container {
+background-position: 0 0;
+padding: .8em;
+height: 100%;
+margin: 0;
+}
+.ui-pnotify-sharp {
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+}
+.ui-pnotify-closer, .ui-pnotify-sticker {
+float: right;
+margin-left: .2em;
+}
+.ui-pnotify-title {
+display: block;
+margin-bottom: .4em;
+}
+.ui-pnotify-text {
+display: block;
+}
+.ui-pnotify-icon, .ui-pnotify-icon span {
+display: block;
+float: left;
+margin-right: .2em;
+}
+/* -- History Pulldown */
+.ui-pnotify-history-container {
+position: absolute;
+top: 0;
+right: 18px;
+width: 70px;
+border-top: none;
+padding: 0;
+-webkit-border-top-left-radius: 0;
+-moz-border-top-left-radius: 0;
+border-top-left-radius: 0;
+-webkit-border-top-right-radius: 0;
+-moz-border-top-right-radius: 0;
+border-top-right-radius: 0;
+/* Ensures history container is above notices. */
+z-index: 10000;
+}
+.ui-pnotify-history-container .ui-pnotify-history-header {
+padding: 2px;
+}
+.ui-pnotify-history-container button {
+cursor: pointer;
+display: block;
+width: 100%;
+}
+.ui-pnotify-history-container .ui-pnotify-history-pulldown {
+display: block;
+margin: 0 auto;
+}
+
+
+.ui-pnotify.notification{
+    bottom: 25px;
+	left: 25px;
+	top: auto;
+	right: auto;
+    width:365px;
+}
+.ui-pnotify.notification .ui-pnotify-container {
+	background-color: #431f59 !important;
+	background-image: none !important;
+	border: none !important;
+    padding:5px;
+    position:relative;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+.ui-pnotify.notification .ui-pnotify-title,
+ .ui-pnotify.notification .ui-pnotify-text {
+	font-family: UVNBaiSau;
+	font-size: 10pt !important;
+	color: #FFF !important;
+	padding-left: 0px !important;
+    text-shadow:none !important;
+	/*line-height: 1 !important;*/
+    font-size:14px;
+	/*text-rendering: geometricPrecision !important;*/
+}
+.ui-pnotify.notification .ui-pnotify-title {
+	font-weight: bold;
+    display:none;
+}
+.ui-pnotify.notification .ui-pnotify-icon {
+	float: left;
+    display:none;
+}
+.ui-pnotify.notification .picon {
+	margin: 3px;
+	width: 33px;
+	height: 33px;
+}
+
+.ui-pnotify.notification .ui-pnotify-closer{
+    position:absolute;
+    right:5px;
+    top:5px;
+}
+.ui-pnotify.notification .ui-pnotify-sticker{
+    position:absolute;
+    right:15px;
+    top:5px;
+}
+
+
+
+
+.ui-pnotify.notification .ui-pnotify-text > a {
+  display: block;
+  height: 80px;
+  color:white;
+  
+  -webkit-transition: all 0.3s;
+}
+.ui-pnotify.notification .ui-pnotify-text > a:hover {
+  background-color: #431f59;
+}
+.ui-pnotify.notification .ui-pnotify-text > a .container{
+    width:auto;
+}
+.ui-pnotify.notification .ui-pnotify-text > a .container .row-fluid > div {
+  height: 80px;
+}
+.ui-pnotify.notification .ui-pnotify-text > a .avatar {
+  height: 100%;
+  background-size: 100%;
+}
+.ui-pnotify.notification .ui-pnotify-text > a .description {
+  font-family: HN;
+  font-size: 14px;
+}
+.ui-pnotify.notification .ui-pnotify-text > a .misc {
+  font-family: HN-Light;
+  font-size: 12px;
+}

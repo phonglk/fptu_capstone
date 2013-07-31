@@ -44,7 +44,7 @@ namespace DropIt.DAL
                     uow.NotificationRepository.Save();
                 }
             }
-            return null;
+            return UpdatedEntity;
         }
 
     }

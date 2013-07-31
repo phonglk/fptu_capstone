@@ -285,7 +285,7 @@ else
 
         $(function () {
             ctvm = new CreateTicketViewModel();
-            ko.applyBindings(ctvm);
+            ko.applyBindings(ctvm,$("#content")[0]);
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
             //$(".form1 form").validate(validateOptions);
         })

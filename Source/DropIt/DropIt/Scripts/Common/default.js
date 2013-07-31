@@ -5,7 +5,6 @@
     generateDataTracker();
     rawDateDisplay();
     formatAllVNDLabel();
-    noti5_init();
 })
 
 function generateData(type, target) {
@@ -276,34 +275,3 @@ function formatAllVNDLabel() {
     })
 }
 
-function noti5_init() {
-    function close_panel() {
-        var $this = $("li.noti5-wrapper");
-        $this.removeClass("dropdown").removeClass("open");
-        $this.find("> a").removeClass("dropdown-toggle");
-        $this.find(".noti5-list-container").removeClass("show");
-        $("#back-drop").remove();
-    }
-    function initVM() {
-        window.NotiBuy = new NotificationViewModel();
-        ko.applyBindings(NotiBuy, $(".noti5-wrapper.buy")[0]);
-        NotiBuy.LoadLastest();
-    }
-    $("li.noti5-wrapper").click(function(){
-        var $this = $(this);
-        if ($this.hasClass("open")) {
-            close_panel();
-        } else {
-            $this.addClass("dropdown").addClass("open");
-            $this.find("> a").addClass("dropdown-toggle");
-            $this.find(".noti5-list-container").addClass("show");
-            $(document.body).append("<div id='back-drop'></div>")
-            $("#back-drop").click(function(e){
-                close_panel();
-                $(document.elementFromPoint(e.clientX, e.clientY)).trigger("click")
-            })
-        }
-    })
-
-    initVM();
-}
