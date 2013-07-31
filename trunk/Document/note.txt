@@ -71,3 +71,7 @@ fix validate phone number
 Link: /User/Edit
 Thêm button "cancel" trong trang edit user
 link: trên ^
+Style lại trang mua vé thành công
+CheckOut/Success
+Thêm button "Đã nhận" trong tab "Đã giao"
+-> http://localhost:2065/Transaction/HistoryBuy?status=2
