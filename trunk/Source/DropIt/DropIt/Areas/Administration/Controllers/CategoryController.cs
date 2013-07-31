@@ -76,7 +76,7 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAll(), "CategoryId", "CategoryName");
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.Get(t=>t.ParentCategoryId!=null), "CategoryId", "CategoryName");
             return View();
         }
 
@@ -124,10 +124,9 @@ namespace DropIt.Areas.Administration.Controllers
                 CategoryName = e.CategoryName,
                 Status = e.Status,
                 Description = e.Description,
-                ParentCategoryId = (int)e.ParentCategoryId,
-              //  AllowEdit = e.Events.FirstOrDefault(t => t.Status == (int)Statuses.Event.Trading) == null
+                ParentCategoryId =e.ParentCategoryId,
             };
-            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAll(), "CategoryId", "CategoryName");
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.Get(t => t.ParentCategoryId == null && t.Status != (int)Statuses.Category.Delete), "CategoryId", "CategoryName");
             return View(cvm);
         }
         [HttpPost]
@@ -144,7 +143,9 @@ namespace DropIt.Areas.Administration.Controllers
                 Category.Status = oldCategory.Status;
                 Repository.AddOrUpdate(Category);
                 unitOfWork.Save();
+                
                 return Json(new JSONResult());
+                
             }
             catch (Exception e)
             {
@@ -211,7 +212,10 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
+                if (delete.Events.Where(p => p.Status !=(int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count()==0)
+                {
                 delete.Status = (int)Statuses.Category.Delete;
+                }
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -220,7 +224,7 @@ namespace DropIt.Areas.Administration.Controllers
                     Result = "OK",
                     CategoryId = delete.CategoryId
                 });
-            }
+                }  
             catch (Exception e)
             {
                 return Json(new

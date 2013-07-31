@@ -103,6 +103,8 @@ function Category(obj) {
     $.extend(self, obj);
     if (self.Description == null) self.Description = "";
     if (self.ParentCategoryId == null) self.ParentCategoryId = "";
+    html = "<strong>Chú thích</strong>: " + self.Description;
+    self.CategoryDetail = html.eval(self);
 }
 
 function Ticket(obj) {
