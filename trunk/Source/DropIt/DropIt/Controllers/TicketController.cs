@@ -236,11 +236,13 @@ namespace DropIt.Controllers
         public ActionResult RequestTicket()
         {
             var date = DateTime.Now;
+            int noRe = int.Parse(Settings.get("TicketRequestPerDay"));
             var yesterday = DateTime.Now.AddDays(-1);
             var UserId = WebSecurity.GetUserId(User.Identity.Name);
             var request = this.unitOfWork.RequestRepository.Get().Where(t => t.CreatedDate != null);
             int noRequest = request.Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId == UserId).Count();
             ViewBag.NoRequest = noRequest;
+            ViewBag.NoRe = noRe;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
