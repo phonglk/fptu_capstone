@@ -37,8 +37,8 @@
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th class="sortable" data-bind="click: function (data, event) { sort('CategoryName', data, category) }">Tên danh mục</th>
-            <th class="sortable" data-bind="click: function (data, event) { sort('CategoryParentName', data, category) }">Tên danh mục cha</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('CategoryName', data, event) }">Tên danh mục</th>
+            <th>Tên danh mục cha</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -50,7 +50,7 @@
     attr: {
         href: Url({ Action: 'Edit', Data: { Id: CategoryId } }),
         title: CategoryName,
-       // 'data-content':CategoryDetail
+        'data-content':CategoryDetail
     }
                     "
                     data-toggle="popover"
@@ -135,7 +135,7 @@
                         urlData:{Action:"Delete",Data:{Id:item.CategoryId}},
                         callback:function(event){
                             Notifications.push({
-                                text:"Danh mục \"#{CategoryId}\" đã được xóa !".eval(event),
+                                text:"Danh mục \"#{CategoryName}\" đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
                         }
