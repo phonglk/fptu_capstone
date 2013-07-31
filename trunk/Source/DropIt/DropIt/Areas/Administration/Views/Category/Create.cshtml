@@ -28,7 +28,7 @@
                     </div>
                     <div class="input">
                         <label for="categoryParentName">Danh mục cha</label>
-                        @Html.DropDownList("ParentCategoryId", (SelectList)ViewBag.CategoryId, new { id = "category", name = "CategoryId", style = "width:100%" })
+                        @Html.DropDownList("ParentCategoryId", (SelectList)ViewBag.CategoryId,"Không chọn" , new { id = "category", name = "CategoryId", style = "width:100%" })
                     </div>
                 </div>
             </div>
