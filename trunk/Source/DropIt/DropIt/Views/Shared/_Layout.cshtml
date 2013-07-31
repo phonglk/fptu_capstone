@@ -8,13 +8,25 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/ko")
+    <script src="~/Scripts/Common/jquery.pnotify.js"></script>
+    <script src="~/Scripts/jquery.signalR-1.1.2.js"></script>
+    <script src="~/signalr/hubs"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/utils")
+    <script src="~/Scripts/Common/Noti5.js"></script>
     @Scripts.Render("~/bundles/DropIt")
 
-
     @Styles.Render("~/Content/DropIt")
+    <link href="~/Content/jquery.pnotify.default.css" rel="stylesheet"/>
     <script>
+        var _isLogin = @((User.Identity.IsAuthenticated == true).ToString().ToLower());
+        var _username = null;
+
+        @if(User.Identity.IsAuthenticated){
+            <text>
+            _username = "@User.Identity.Name";
+            </text>
+        }
         var Routing = {
             Area: "@ViewContext.RouteData.DataTokens["area"]",
             Controller: "@ViewContext.RouteData.Values["controller"]",

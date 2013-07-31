@@ -3,4 +3,9 @@
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Online Users</h2>
+<ul>
+    @foreach(String UserName in ViewBag.UserOnlineList){
+     <li>@UserName</li>   
+    }
+</ul>

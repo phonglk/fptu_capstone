@@ -31,6 +31,19 @@
 @buy : #B6E38D;
 @mainColor : #582e53;
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: #dde;
+    border-radius: 0px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #bbd; 
+}
 
 body {
     font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;	
@@ -111,11 +124,42 @@ h3,h2{
         top:45px;
         right:0px;
         padding:5px;
+        padding-right:5px;
+        height:290px;
         padding-bottom:0;
-        width:350px;
+        width:355px;
         background-color:@mainColor;
         z-index:99999;
 
+        ::-webkit-scrollbar {
+                width: 8px;
+        }
+ 
+        ::-webkit-scrollbar-track {
+            background: rgba(221, 221, 238,0.5);
+        }
+ 
+        ::-webkit-scrollbar-thumb {
+            background: #270b3f; 
+        }
+        .see-all{
+            display:block;
+            /*margin:5px;*/
+            font-size:16px;
+            line-height:30px;
+            height:30px;
+            text-align:center;
+            &:hover{
+                background:#431f59;
+            }
+        }
+        .noti5-list-inner{
+            height:255px;
+            overflow:hidden;
+            overflow-y:scroll;
+
+            
+        }
         ul,li{
             list-style:none;
             margin:0;

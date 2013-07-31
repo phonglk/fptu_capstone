@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DropIt.DAL;
 using DropIt.Common;
 using WebMatrix.WebData;
+using DropIt.Models;
 
 namespace DropIt.Controllers
 {
@@ -25,14 +26,61 @@ namespace DropIt.Controllers
         }
 
         [HttpPost]
-        public JsonResult List(int FollowType = 2,String Object="*",Boolean IsUnread = true,int jTStartIndex = 0,int jtPageSize = 10,String jtSorting = "CreatedDate DESC")
+        public JsonResult ReadAll(int FollowType = 2)
+        {
+
+            try
+            {
+                int UserId = WebSecurity.GetUserId(User.Identity.Name);
+
+                var records = Repository.Get(n => n.IsUnread == true);
+                if (FollowType == (int)Statuses.FollowType.Buy)
+                {
+                    records = records.Where(n => n.ActivityType.Equals("Add"));
+                }
+                else if (FollowType == (int)Statuses.FollowType.Sell)
+                {
+                    records = records.Where(n => n.ActivityType.Equals("Request"));
+                }
+                else
+                {
+
+                }
+
+                foreach (Notification record in records)
+                {
+                    record.IsUnread = false;
+                    Repository.AddOrUpdate(record);
+                }
+                Repository.Save();
+
+                return Json(new
+                    {
+                        Result = "OK"
+                    });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    Message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult List(int FollowType = 2,String Object="*",Nullable<Boolean> IsUnread = null,int jTStartIndex = 0,int FromId = 0,int jtPageSize = 10,String jtSorting = "CreatedDate DESC")
         {
             try
             {
 
                 int UserId = WebSecurity.GetUserId(User.Identity.Name);
-
-                var records = Repository.Get(n => n.IsUnread == IsUnread);
+                var records = Repository.Get();
+                if (IsUnread != null)
+                {
+                    records = records.Where(n => n.IsUnread == IsUnread);
+                }
                 if (FollowType == (int)Statuses.FollowType.Buy)
                 {
                     records = records.Where(n => n.ActivityType.Equals("Add"));
@@ -41,6 +89,7 @@ namespace DropIt.Controllers
                 {
                     records = records.Where(n => n.ActivityType.Equals("Request"));
                 }
+
                 if (Object.Equals("*"))
                 {
 
@@ -51,9 +100,20 @@ namespace DropIt.Controllers
                 }
 
                 records = records.Where(n => n.UserId == UserId || n.UserId == null || n.UserId == -1);
+                int unreadCount = records.Where(n => n.IsUnread == true).Count();
 
+                records = records.OrderBy(jtSorting);
 
-                records = Repository.JT(records, jTStartIndex, jtPageSize, jtSorting);
+                if (FromId > 0)
+                {
+                    records = records.Where(n => n.NotificationId < FromId);
+                }else{
+                    records = records.Skip(jTStartIndex);
+                }
+
+                records = records.Take(jtPageSize);
+
+                //records = Repository.JT(records, jTStartIndex, jtPageSize, jtSorting);
 
                 return Json(new
                 {
@@ -70,7 +130,8 @@ namespace DropIt.Controllers
                         n.IsUnread,
                         n.CreatedDate,
                         n.ModifiedDate
-                    })
+                    }),
+                    UnreadCount = unreadCount
                 });
             }
             catch (Exception e)

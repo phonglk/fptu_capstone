@@ -22,6 +22,17 @@
   font-family: "HN-Light";
   src: url('Fonts/HelveticaNeue-Light.otf') format('truetype');
 }
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: #dde;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #bbd;
+}
 body {
   font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
 }
@@ -85,13 +96,41 @@ h2 {
   top: 45px;
   right: 0px;
   padding: 5px;
+  padding-right: 5px;
+  height: 290px;
   padding-bottom: 0;
-  width: 350px;
+  width: 355px;
   background-color: #582e53;
   z-index: 99999;
 }
 .noti5-wrapper .noti5-list-container.show {
   display: block;
+}
+.noti5-wrapper .noti5-list-container ::-webkit-scrollbar {
+  width: 8px;
+}
+.noti5-wrapper .noti5-list-container ::-webkit-scrollbar-track {
+  background: rgba(221, 221, 238, 0.5);
+}
+.noti5-wrapper .noti5-list-container ::-webkit-scrollbar-thumb {
+  background: #270b3f;
+}
+.noti5-wrapper .noti5-list-container .see-all {
+  display: block;
+  /*margin:5px;*/
+
+  font-size: 16px;
+  line-height: 30px;
+  height: 30px;
+  text-align: center;
+}
+.noti5-wrapper .noti5-list-container .see-all:hover {
+  background: #431f59;
+}
+.noti5-wrapper .noti5-list-container .noti5-list-inner {
+  height: 255px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .noti5-wrapper .noti5-list-container ul,
 .noti5-wrapper .noti5-list-container li {

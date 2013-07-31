@@ -126,7 +126,7 @@
           <Key>
             <PropertyRef Name="NotificationId" />
           </Key>
-          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="NotificationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" />
           <Property Name="SenderId" Type="int" />
           <Property Name="ActivityType" Type="nvarchar" MaxLength="50" />
@@ -652,7 +652,7 @@
           <Key>
             <PropertyRef Name="NotificationId" />
           </Key>
-          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="SenderId" Type="Int32" />
           <Property Name="ActivityType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
