@@ -92,8 +92,14 @@ namespace DropIt.Controllers
                     int pTicketId = int.Parse(pdt.Custom);
 //                    ViewBag.Text = string.Format("Thank you {0} {1} [{2}] for your payment of {3} {4}!",
 //                        pdt.PayerFirstName, pdt.PayerLastName, pdt.PayerEmail, pdt.GrossTotal, pdt.Custom);
-
+                    
                     Ticket ticket = this.unitOfWork.TicketRepository.Get(t => t.TicketId == pTicketId).FirstOrDefault();
+                    ViewBag.PayerFirstName = pdt.PayerFirstName;
+                    ViewBag.PayerLastName = pdt.PayerLastName;
+                    ViewBag.OrderId = pdt.TransactionId;
+                    ViewBag.Name = ticket.Event.EventName;
+                    ViewBag.Price = pdt.GrossTotal;
+                    ViewBag.Currency = pdt.Currency;
                     if (ModelState.IsValid)
                     {
                         if (ticket.TranStatus==null)
