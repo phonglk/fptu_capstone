@@ -4,5 +4,11 @@
         <li class="nav-header">Bán Vé</li>
         <li><a href="@Url.Action("Create","Ticket")">Bán vé</a></li>
         <li><a href="@Url.Action("SellerIndex","Request")">Danh sách rao mua</a></li>
+        @foreach (DropIt.Models.Category cat in ViewBag.Categories)
+        {
+        <li>
+            <a href="@Url.Action("index", "Event", new { CategoryId = cat.CategoryId })">@cat.CategoryName</a>
+        </li>
+        }
     </ul>
 </div>
