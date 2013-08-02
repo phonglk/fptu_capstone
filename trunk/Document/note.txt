@@ -98,4 +98,8 @@ http://localhost:2065/Transaction/HistoryBuy?status=1
 http://localhost:2065/Ticket/Manage
   --> Hiển thị số giao dịch, nhưng là số giao dịch bên mua
   
-- zzz
+- Khi chưa đăng nhập, vào xem 1 event, click "đăng rao mua" ko có response
+http://localhost:2065/Event/?CategoryId=1#
+
+- Style lại trang đăng rao mua 
+http://localhost:2065/Ticket/Request
