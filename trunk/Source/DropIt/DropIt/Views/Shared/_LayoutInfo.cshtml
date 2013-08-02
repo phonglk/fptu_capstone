@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using DropIt.DAL
+@{
+    UnitOfWork uow = new UnitOfWork();
+    ViewBag.Categories = uow.CategoryRepository.GetAvailable().Where(c => c.Category2 == null).ToList();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
