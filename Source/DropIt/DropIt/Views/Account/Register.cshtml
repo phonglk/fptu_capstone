@@ -27,6 +27,7 @@
         font-family:Oswald;
     }
 </style>
+
 <div class="container" id="content">
     <div class="register">
         @using (Html.HorizontalForm())
@@ -34,8 +35,8 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "alert alert-error" })   
             <h2>Đăng Ký</h2>
-
-            @Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))
+            <div class="controls-row">* @Html.ViewBag.Check</div>
+            <div>@Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))</div>
             <div class="controls validate">
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
@@ -83,7 +84,7 @@
                         Tôi Đồng ý với tất cả các điều kiện trên.
                     </label>
                 </div>
-             <button type="submit" class="btn btn-mid btn-gen" value="Register">Đăng Ký</button> <a href="@Url.Action("Index","Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
+             <button type="submit" class="btn btn-mid btn-gen" value="Register">Đăng Ký</button> <a href="@Url.Action("Index", "Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
        
         }
     </div>
