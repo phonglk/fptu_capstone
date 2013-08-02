@@ -1,5 +1,6 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Filters;
 using DropIt.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using WebMatrix.WebData;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class FollowController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();

@@ -6,9 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
+using DropIt.Filters;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class ProvinceController : Controller
     {
         private DropItContext db = new DropItContext();
