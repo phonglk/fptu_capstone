@@ -131,6 +131,7 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult Delete(int Id)
         {
             try
@@ -160,7 +161,6 @@ namespace DropIt.Areas.Administration.Controllers
       
         //
         // GET: /Event/Edit/5
-
         public ActionResult Edit(int Id)
         {
             Ticket e = Repository.GetById(Id);
