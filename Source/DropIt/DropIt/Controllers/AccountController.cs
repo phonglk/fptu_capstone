@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
+using DropIt.DAL;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using DropIt.Filters;
@@ -17,6 +18,7 @@ namespace DropIt.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UserRepository repository;
         //
         // GET: /Account/Login
         DropItContext db = new DropItContext();
@@ -68,7 +70,7 @@ namespace DropIt.Controllers
             ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
             return View();
         }
-
+       
         //
         // POST: /Account/Register
 
@@ -80,6 +82,17 @@ namespace DropIt.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
+                UnitOfWork unitOfWork = new UnitOfWork();
+                var getAllUser = unitOfWork.UserRepository.GetAll();
+                foreach (var user in getAllUser)
+                {
+                    if (user.UserName==model.UserName)
+                    {
+                        ViewBag.Check = "Xin lỗi, trùng tên đăng nhập rồi. Phiền bạn hãy chọn tên đăng nhập khác";
+                        ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
+                        return View("Register");
+                    }
+                }
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { 
