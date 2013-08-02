@@ -9,9 +9,11 @@ using DropIt.Models;
 using DropIt.DAL;
 using DropIt.Common;
 using WebMatrix.WebData;
+using DropIt.Filters;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class EventController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

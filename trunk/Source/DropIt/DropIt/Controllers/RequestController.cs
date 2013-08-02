@@ -10,9 +10,11 @@ using DropIt.DAL;
 using DropIt.Common;
 using WebMatrix.WebData;
 using DropIt.ViewModels;
+using DropIt.Filters;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class RequestController : Controller
     {
         //

@@ -1,5 +1,6 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Filters;
 using DropIt.Models;
 using DropIt.ViewModels;
 using gfoidl.StringSearching;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class HomeController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

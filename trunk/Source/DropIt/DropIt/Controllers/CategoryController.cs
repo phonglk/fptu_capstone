@@ -7,9 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using DropIt.Models;
 using DropIt.DAL;
+using DropIt.Filters;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class CategoryController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

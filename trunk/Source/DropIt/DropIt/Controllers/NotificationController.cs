@@ -7,9 +7,11 @@ using DropIt.DAL;
 using DropIt.Common;
 using WebMatrix.WebData;
 using DropIt.Models;
+using DropIt.Filters;
 
 namespace DropIt.Controllers
 {
+    [InitializeSimpleMembership]
     public class NotificationController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();
