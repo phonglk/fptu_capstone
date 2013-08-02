@@ -45,11 +45,15 @@ Bảng ReponseRequest sẽ có 3 khóa chính là UserId, EventId, TicketId
 Sẽ bị hỏi: tại sao vừa có UserId vừa Username: vì UserId xuất hiện ở nhiều bảng nên khi kết bảng thì dùng kiểu int để tăng tốc.
 
 Usecase
-Admin được thừa kế từ User. User ko được mua vé của chính mình bán.
+Admin được thừa kế từ User. User ko được mua vé của chính mình bán. -> fixed
+
 Thay Trade thành Buy và Sell
+
 Thay Order thành Transaction
+
 Xem lại generalization thay cho extend trong manage request.
 
+----------------
 Note ngày 04/06/2013
 
 Thay insert bằng add new
@@ -57,21 +61,41 @@ Bổ sung tính năng auto closed request sau khi sự kiện đã diễn ra.
 Thêm Manage auto 
 Config Request, Event
 
+-----------------------
 July 17
 Bỏ TranShipDate trong table Ticket
 
+-----------------------
 July 24
 validate "Ngày diễn ra" trong tạo sự kiện mới
 link:/Administration/Event/Create
+
 fix thoi gian trong thong tin ve: "\/Date(1375448400000)\/"
 link: /Ticket/Buy/14
+ --> fixed
+ 
 fix button "đăng ký" -> "đăng yêu cầu"
 link:/Ticket/Request
+
 fix validate phone number
 Link: /User/Edit
+
 Thêm button "cancel" trong trang edit user
 link: trên ^
-Style lại trang mua vé thành công
-CheckOut/Success
+
 Thêm button "Đã nhận" trong tab "Đã giao"
 -> http://localhost:2065/Transaction/HistoryBuy?status=2
+
+----------------------------
+Aug 02
+- Style lại trang mua vé thành công
+CheckOut/Success
+
+- Xem lại update transaction status của user
+http://localhost:2065/Transaction/HistoryBuy?status=1
+
+- Xem lại giao dịch đang thực hiện bên tab bán vé
+http://localhost:2065/Ticket/Manage
+  --> Hiển thị số giao dịch, nhưng là số giao dịch bên mua
+  
+- zzz
