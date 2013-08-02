@@ -68,6 +68,7 @@ namespace DropIt.Controllers
         public ActionResult Register()
         {            
             ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
+            ViewBag.Check = null;
             return View();
         }
        
