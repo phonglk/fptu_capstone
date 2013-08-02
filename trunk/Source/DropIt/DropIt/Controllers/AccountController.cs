@@ -89,7 +89,7 @@ namespace DropIt.Controllers
                 {
                     if (user.UserName==model.UserName)
                     {
-                        ViewBag.Check = "Xin lỗi, trùng tên đăng nhập rồi. Phiền bạn hãy chọn tên đăng nhập khác";
+                        ViewBag.Check = "Tên tài khoản đã tồn tại. Hãy chọn lại tên tài khoản khác!";
                         ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
                         return View("Register");
                     }

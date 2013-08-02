@@ -35,7 +35,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "alert alert-error" })   
             <h2>Đăng Ký</h2>
-            <div class="controls-row">* @Html.ViewBag.Check</div>
+            <div class="controls-row">@Html.ViewBag.Check</div>
             <div>@Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))</div>
             <div class="controls validate">
                 @Html.ValidationMessageFor(m => m.UserName)
