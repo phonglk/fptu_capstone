@@ -9,8 +9,9 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
 <div class="container" id="content">
-    <div class="form1">
+    <div class="form1" id="edit_ticket">
         @using (Html.HorizontalForm())
         {
             @Html.AntiForgeryToken()
@@ -25,7 +26,7 @@
                 <div class="controls">
                     <div class="input-append">
                         <span data-bind="visible: isCreateEvent() == false">
-                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style="width: 278.193182px;" })
+                            @Html.DropDownList("EventId", (SelectList)ViewBag.EventId, new { data_bind = "value : EventId, event :{ change : selectVenueChange}, select2:{}", style = "width: 364px;" })
                         </span>
                     </div>
                     @Html.ValidationMessageFor(model => model.EventId)
@@ -51,21 +52,11 @@
                     @Html.ValidationMessageFor(model => model.Seat)
                 </div>
             </div>
-            
-            <div class="control-group">
-                <label class="control-label">Ghi chú (tùy chọn):</label>
-                <div class="controls">
-                    <div class="input-append">
-                        @Html.EditorFor(model => model.Description)
-                    </div>
-                    @Html.ValidationMessageFor(model => model.Description)
-                </div>
-            </div>
             <div class="control-group">
                 <label class="control-label" for="EventId">Giá bán:</label>
                 <div class="controls">
                     <div class="input-append">
-                        @Html.TextBox("SellPrice", @Model.SellPrice, new {onchange="countMoney()"})
+                        @Html.TextBox("SellPrice", @Model.SellPrice, new { onchange = "countMoney()" })
                     </div>
                     @Html.ValidationMessageFor(model => model.SellPrice)
                 </div>
@@ -80,26 +71,50 @@
                     @Html.ValidationMessageFor(model => model.ReceiveMoney)
                 </div>
             </div>
-            
+            <div class="control-group">
+                <label class="control-label" for="description">Ghi chú (tùy chọn):</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <textarea name="Description" id="description" style="width: 100%; height: 100px;">@Model.Description</textarea>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
             <div class="edit-group">
-                 <button type="submit" class="btn btn-inverse btn-buy btn-small">Đăng vé</button>
-              <a href="@Url.Action("Manage", "Ticket")" class="btn btn-inverse btn-buy btn-small">Quay về</a>
+                <button type="submit" class="btn btn-gen">Đăng vé</button>
+                <a href="@Url.Action("Manage", "Ticket")" class="btn btn-cancel">Quay về</a>
             </div>
                     
         }
 
     </div>
 </div>
-
+<style>
+    .cke_inner {
+        width: 362px;
+    }
+</style>
 <script type="text/javascript">
-    $("#EventId").select2();
+    CKEDITOR.replace('description', {
+        toolbar: [
+   {
+       name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak']
+   },
+           '/',
+   { name: 'styles', items: ['Styles', 'Format'] },
+   { name: 'basicstyles', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] },
+   { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+   { name: 'links', items: ['Link', 'Unlink', 'Anchor'] }
+        ]
+    })
 
+    $("#EventId").select2();
     function countMoney() {
         var serRate = $("#servicefee").val();
         var sellprice = document.getElementById("SellPrice").value;
         var receiveMoney = sellprice * (1 - serRate);
         var money = Math.floor(receiveMoney / 500) * 500;
-        document.getElementById("ReceiveMoney").value = money.formatMoney(0,".", ",");
+        document.getElementById("ReceiveMoney").value = money.formatMoney(0, ".", ",");
     }
-    
+
 </script>
