@@ -12,3 +12,24 @@
 
 
 
+
+
+
+GO
+CREATE TRIGGER [dbo].[Update_Status_Delete_Request]
+	ON [dbo].[Request]
+	After UPDATE
+	AS
+	BEGIN
+		SET NOCOUNT ON
+		if not update([Status])
+		Return
+
+		if exists(select * from inserted where [Status] = 1)
+		begin 
+			delete from Request
+			where [EventId] = (select EventId from inserted)
+			and [UserId] = (select UserId from inserted)
+		end
+
+	END

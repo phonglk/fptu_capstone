@@ -112,6 +112,19 @@ Object.extend("eachOwnProperties", function (func) {
     }
 });
 
+location.request = function (name) {
+    var params = this.search.split(/[\?\&]/);
+    var rs = "";
+    $.each(params,function(i,e){
+        var pair = e.split("=");
+        if (name == pair[0]) {
+            rs = pair[1];
+            return;
+        }
+    })
+    return rs;
+}
+
 parsePrice = function (s) {
     try{
         return parseFloat(s.replace(/,/g, ""));

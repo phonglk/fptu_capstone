@@ -233,12 +233,20 @@ namespace DropIt.Controllers
 
         //Get: /ResquestTicket
         [ActionName("Request")]
-        public ActionResult RequestTicket()
+        public ActionResult RequestTicket(int EventId = 0)
         {
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+
+            if (EventId != 0 && this.unitOfWork.RequestRepository.Get(r => r.EventId == EventId && r.UserId == UserId).Count() != 0)
+            {
+                Session["Message"] = "Vé này bạn đã đăng rao mua, xin chờ người phản hồi!";
+                return RedirectToAction("Details", "Event", new { Id = EventId });
+            }
+
             var date = DateTime.Now;
             int noRe = int.Parse(Settings.get("TicketRequestPerDay"));
             var yesterday = DateTime.Now.AddDays(-1);
-            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            
             var request = this.unitOfWork.RequestRepository.Get().Where(t => t.CreatedDate != null);
             int noRequest = request.Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId == UserId).Count();
             ViewBag.NoRequest = noRequest;
@@ -290,7 +298,7 @@ namespace DropIt.Controllers
                         {
                             UserId = ticket.UserId,
                             EventId = newEvent.EventId,
-                            Status = 1,
+                            Status = (int)Statuses.Request.Open,
                             CreatedDate = DateTime.Now,
                             Description = ticket.Description
                         };
@@ -318,18 +326,25 @@ namespace DropIt.Controllers
                             EventId = newevent.EventId,
                             CreatedDate = DateTime.Now,
                             Description = ticket.Description,
-                            Status = 1
+                            Status = (int)Statuses.Request.Open,
                         };
                     }
                 }
                 else
                 {
                     // add to request
+
+                    if (this.unitOfWork.RequestRepository.Get(r => r.EventId == ticket.EventId && r.UserId == ticket.UserId).Count() != 0)
+                    {
+                        Session["Message"] = "Vé này bạn đã đăng rao mua, xin chờ người phản hồi!";
+                        return RedirectToAction("Details", "Event", new { Id = ticket.EventId });
+                    }
+
                     Request request = new Request()
                     {
                         UserId = ticket.UserId,
                         EventId = (int)ticket.EventId,
-                        Status = 1,
+                        Status = (int)Statuses.Request.Open,
                         CreatedDate = DateTime.Now,
                         Description = ticket.Description
                     };
