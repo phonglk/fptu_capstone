@@ -106,8 +106,9 @@ namespace DropIt.Models
         [Required(ErrorMessage = "Bạn phải nhập Email.")]
         [RegularExpression(@"^[a-zA-Z0-9\.-]*@[a-zA-Z0-9\.]*\.[a-zA-Z\.]{2,6}$", ErrorMessage = "Email Không Chính xác.")]
         public string Email { get; set; }
-
+        
         [Required(ErrorMessage = "Bạn phải nhập Số Điện Thoại.")]
+        [RegularExpression(@"^0[0-9]{6,10}$", ErrorMessage = "Số điện thoại không chính xác. Ví dụ: 0909666666 | 083991199")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập Địa chỉ.")]
