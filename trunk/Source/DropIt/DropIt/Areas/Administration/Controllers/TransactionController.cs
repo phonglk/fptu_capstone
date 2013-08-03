@@ -158,6 +158,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
                 delete.TranPaymentStatus = (int)Statuses.Payment.Done;
+                delete.Status = (int)Statuses.Ticket.Done;
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
