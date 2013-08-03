@@ -45,7 +45,8 @@
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
             
-            @Html.LabelAndControl("Tên đầy đủ", Html.TextBox("FullName"))            
+            @Html.LabelAndControl("Tên đầy đủ", Html.TextBox("FullName"))        
+            <div class="controls validate">@Html.ValidationMessageFor(m => m.FullName)</div>    
             
             @Html.LabelAndControl("Mật Khẩu", Html.Password("Password"))
             <div class="controls validate">@Html.ValidationMessageFor(m => m.Password)</div>
