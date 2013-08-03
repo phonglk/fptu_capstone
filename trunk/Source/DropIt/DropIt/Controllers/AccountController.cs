@@ -18,7 +18,13 @@ namespace DropIt.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UnitOfWork unitOfWork = new UnitOfWork();
         private UserRepository repository;
+
+        public AccountController()
+        {
+            repository = unitOfWork.UserRepository;
+        }
         //
         // GET: /Account/Login
         DropItContext db = new DropItContext();
@@ -35,17 +41,30 @@ namespace DropIt.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            var userid = WebSecurity.GetUserId(model.UserName);
+            UnitOfWork unitOfWork = new UnitOfWork();
+            User user = unitOfWork.UserRepository.GetById(userid);
+            if (user==null)
+            {
+                ModelState.AddModelError("", "Tên đăng nhập không tồn tại.");    
+            }
+            else if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe) && user.Active==true)
             {
                 Session["Role"] = "Buy";
                 return RedirectToLocal(returnUrl);
             }
-
+            else if (user.Active==false)
+            {
+                ModelState.AddModelError("", "Tài khoản bạn đã bị khóa");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");    
+            }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
             return View(model);
         }
 
