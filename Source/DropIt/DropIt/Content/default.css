@@ -392,23 +392,25 @@ h2 {
 }
 .ticket {
   width: 700px;
+  margin: 10px 0;
   height: 150px;
   background: url(../Images/ticket-bg.png) no-repeat;
   position: relative;
 }
 .ticket .info {
   position: absolute;
-  top: 10px;
+  top: 7px;
   left: 210px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 18px;
   font-family: HN;
 }
 .ticket .info .event-name {
   font-family: Semilla;
-  font-size: 25px;
+  font-size: 23px;
   color: black;
-  line-height: 30px;
+  min-height: 50px;
+  line-height: 25px;
 }
 .ticket .price {
   position: absolute;
