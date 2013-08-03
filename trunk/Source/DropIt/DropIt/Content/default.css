@@ -398,11 +398,13 @@ h2 {
   position: relative;
 }
 .ticket .info {
+  width: 400px;
   position: absolute;
   top: 7px;
   left: 210px;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #1c0921;
   font-family: HN;
 }
 .ticket .info .event-name {
@@ -412,13 +414,42 @@ h2 {
   min-height: 50px;
   line-height: 25px;
 }
+.ticket .buyer {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 15px;
+  line-height: 18px;
+  font-family: HN;
+}
+.ticket .serial {
+  position: absolute;
+  bottom: 7px;
+  width: 110px;
+  right: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  font-family: HN-light;
+}
+.ticket .qrcode {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .ticket .price {
   position: absolute;
-  bottom: 10px;
-  right: 520px;
+  bottom: 66px;
+  right: 17px;
+  -webkit-transform: rotateZ(45deg);
   font-size: 14px;
   line-height: 18px;
   font-family: Oswald;
   padding: 10px;
   border: 1px dashed black;
+}
+.ticket .action {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }

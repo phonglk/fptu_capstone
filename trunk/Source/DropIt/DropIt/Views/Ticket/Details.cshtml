@@ -22,52 +22,56 @@
             </div>
         </div>
         <div class="span9">
-            <form id="form-detailrequest" class="form-horizontal row">
-                <div class="control-group">
-                    <label class="control-label">Tên sự kiện:</label>
-                    <div class="controls">
-                        @Model.Event.EventName
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Ngày tổ chức:</label>
-                    <div class="controls">
-                        @Model.Event.HoldDate
-                    </div>
-                </div>
+            @{
+                var item = Model;
+                }
+            <div class="ticket">
+                                                               
+                            @if (@item.SeriesNumber != null)
+                            {
+                                <div class="serial">@item.SeriesNumber</div>
+                            }
+                            <div class="buyer">
+                                <div class="buyer-name">
+                                    <strong>Ngưới bán:</strong> @item.User.UserName
+                                </div>
+                                <div class="buyer-date">
+                                    <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
+                                </div>
+                            </div>
+                            <div class="info">
+                                <div class="event-name">
+                                    @item.Event.EventName
+                                </div>
+                                <div class="event-artist">
+                                    <span class="icon-star"></span> @item.Event.Artist
+                                </div>
+                                <div class="event-date">
+                                    <span class="icon-time"></span> @item.Event.HoldDate.ToLongDateString().ToUpper()
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;@item.Event.HoldDate.ToLongTimeString()
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="icon-map-marker"></span> @item.Event.Venue.VenueName
+                                </div>
+                                @*<div class="event-venue">
+                                    
+                                </div>*@
+                                <div>
+                                    <strong>Chú thích:</strong> @item.Description
+                                </div>
+                            </div>
+                            <div class="price">
+                                <span data-VND>@item.SellPrice</span> VNĐ
+                            </div>
+                            <div class="qrcode">
+                                @Html.QRCode(Url.Action("Buy","Ticket",new {Id = item.TicketId},Request.Url.Scheme),50,2)
+                            </div>
+                            <div class="action">
 
-                <div class="control-group">
-                    <label class="control-label">Giá bán:</label>
-                    <div class="controls">
-                        @Model.SellPrice
-                    </div>
-                </div>
+                                    <a href="@Url.Action("Edit", "Ticket", new { Id = @item.TicketId })" class="btn main buy-ticket">Sửa vé</a>
 
-                <div class="control-group">
-                    <label class="control-label">Tiền nhận:</label>
-                    <div class="controls">
-                        @Model.ReceiveMoney
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">Miêu tả ghế:</label>
-                    <div class="controls">
-                        @Model.Seat
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label">Ghi chú:</label>
-                    <div class="controls">
-                        @Html.Raw(Model.Description)
-                    </div>
-                </div>
-                <div class="control-group">
-                    @Html.ActionLink("Quay về", "Manage")
-                </div>
-
-            </form>
+                            </div>
+                            </div>
         </div>
     </div>
 </div>
