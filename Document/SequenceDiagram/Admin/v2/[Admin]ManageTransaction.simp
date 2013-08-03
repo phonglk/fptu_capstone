@@ -32,7 +32,7 @@
   <filters />
   <items />
   <models>
-    <model id="p834499409106282839" name="Model 1" type="" namespace="" order-index="1">
+    <model id="p834499409106282839" name="Model 1" type="model" namespace="" order-index="1">
       <meta>
         <authors>
           <author> </author>
@@ -46,7 +46,7 @@
       <tagged-values />
       <abstract-items />
       <sub-models />
-      <diagram type="uml-sequence" id="p914540388390542623" name="SequenceDiagram1" order-index="1" show-nullability="false">
+      <diagram type="uml-sequence" id="p914540388390542623" name="AdminManageTransaction" order-index="1" show-nullability="false">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -64,7 +64,7 @@
         </meta>
         <tagged-values />
         <abstract-items>
-          <item id="di538407572114150429" cid="LL001" type="lifeline" name="Browser" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:55:48">
+          <item id="di538407572114150429" cid="LL001" type="lifeline" name="Browser" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:55:48">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -72,22 +72,14 @@
             <style class="default" />
             <lifeline classifier-name="" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di804756350776434399" cid="AC001" type="actor" name="Admin" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:18">
+          <item id="di804756350776434399" cid="AC001" type="actor" name="Admin" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:18">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di303525284868075463" cid="LL002" type="lifeline" name="URL Routing" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:36">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <lifeline classifier-name="" is-active="false" is-multi-object="false" />
-          </item>
-          <item id="di689188598473700120" cid="LL003" type="lifeline" name="Transaction Controller" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:48">
+          <item id="di303525284868075463" cid="LL002" type="lifeline" name="URL Routing" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:36">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -95,7 +87,15 @@
             <style class="default" />
             <lifeline classifier-name="" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di140914034869059175" cid="LL004" type="lifeline" name="Model" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 12:00:07">
+          <item id="di689188598473700120" cid="LL003" type="lifeline" name="Transaction Controller" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 11:56:48">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <lifeline classifier-name="" is-active="false" is-multi-object="false" />
+          </item>
+          <item id="di140914034869059175" cid="LL004" type="lifeline" name="Model" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 12:00:07">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -103,7 +103,7 @@
             <style class="default" />
             <lifeline classifier-name="Transaction" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di691131519761408767" cid="LL005" type="lifeline" name="View" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 12:00:33">
+          <item id="di691131519761408767" cid="LL005" type="lifeline" name="View" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 12:00:33">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -111,7 +111,7 @@
             <style class="default" />
             <lifeline classifier-name="" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di236266028344107473" cid="AN001" type="sequence-action" name="Action1" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:46">
+          <item id="di236266028344107473" cid="AN001" type="sequence-action" name="Action1" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:46">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -121,14 +121,14 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di271483828119480184" cid="AB001" type="activation-bar" name="ActivationBar1" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:47">
+          <item id="di271483828119480184" cid="AB001" type="activation-bar" name="ActivationBar1" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:47">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di447150093205859615" cid="AB002" type="activation-bar" name="ActivationBar2" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:47">
+          <item id="di447150093205859615" cid="AB002" type="activation-bar" name="ActivationBar2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:11:47">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -136,7 +136,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di538407572114150429" />
           </item>
-          <item id="di513809080748114699" cid="AN002" type="sequence-action" name="Action2" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:14:48">
+          <item id="di513809080748114699" cid="AN002" type="sequence-action" name="Action2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:14:48">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -146,7 +146,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di167110350458469160" cid="AB003" type="activation-bar" name="ActivationBar3" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:14:51">
+          <item id="di167110350458469160" cid="AB003" type="activation-bar" name="ActivationBar3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:14:51">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -154,7 +154,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di303525284868075463" />
           </item>
-          <item id="di357079977753903348" cid="AN003" type="sequence-action" name="Action3" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:15:18">
+          <item id="di357079977753903348" cid="AN003" type="sequence-action" name="Action3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:15:18">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -164,7 +164,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di506000261767813152" cid="AB004" type="activation-bar" name="ActivationBar4" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:15:21">
+          <item id="di506000261767813152" cid="AB004" type="activation-bar" name="ActivationBar4" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:15:21">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -172,7 +172,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di689188598473700120" />
           </item>
-          <item id="di216736215491266287" cid="AN004" type="sequence-action" name="Action4" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:27:17">
+          <item id="di216736215491266287" cid="AN004" type="sequence-action" name="Action4" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:27:17">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -182,7 +182,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di459866304620338958" cid="AB005" type="activation-bar" name="ActivationBar5" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:27:20">
+          <item id="di459866304620338958" cid="AB005" type="activation-bar" name="ActivationBar5" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:27:20">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -190,7 +190,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di140914034869059175" />
           </item>
-          <item id="di500803638591910653" cid="AN005" type="sequence-action" name="Action5" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:28:08">
+          <item id="di500803638591910653" cid="AN005" type="sequence-action" name="Action5" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:28:08">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -200,7 +200,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di118943987719634530" cid="AN007" type="sequence-action" name="Action7" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:32:38">
+          <item id="di118943987719634530" cid="AN007" type="sequence-action" name="Action7" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:32:38">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -210,7 +210,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di674745442824435350" cid="AN017" type="sequence-action" name="Action17" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:45:19">
+          <item id="di674745442824435350" cid="AN017" type="sequence-action" name="Action17" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:45:19">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -220,7 +220,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di100950719262715493" cid="AN010" type="sequence-action" name="Action10" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:27">
+          <item id="di100950719262715493" cid="AN010" type="sequence-action" name="Action10" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:27">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -230,14 +230,14 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di308863009616415454" cid="AB006" type="activation-bar" name="ActivationBar6" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:29">
+          <item id="di308863009616415454" cid="AB006" type="activation-bar" name="ActivationBar6" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:29">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di135893680818098534" cid="AB007" type="activation-bar" name="ActivationBar7" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:29">
+          <item id="di135893680818098534" cid="AB007" type="activation-bar" name="ActivationBar7" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:36:29">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -245,7 +245,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di538407572114150429" />
           </item>
-          <item id="di466143103923275654" cid="AN011" type="sequence-action" name="Action11" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:37:00">
+          <item id="di466143103923275654" cid="AN011" type="sequence-action" name="Action11" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:37:00">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -255,7 +255,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di336271990411486618" cid="AB008" type="activation-bar" name="ActivationBar8" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:37:03">
+          <item id="di336271990411486618" cid="AB008" type="activation-bar" name="ActivationBar8" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:37:03">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -263,7 +263,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di303525284868075463" />
           </item>
-          <item id="di986923726247750944" cid="AN012" type="sequence-action" name="Action12" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:41:11">
+          <item id="di986923726247750944" cid="AN012" type="sequence-action" name="Action12" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:41:11">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -273,7 +273,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di229900460345556386" cid="AB009" type="activation-bar" name="ActivationBar9" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:41:15">
+          <item id="di229900460345556386" cid="AB009" type="activation-bar" name="ActivationBar9" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:41:15">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -281,7 +281,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di689188598473700120" />
           </item>
-          <item id="di711211587721499674" cid="AN013" type="sequence-action" name="Action13" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:17">
+          <item id="di711211587721499674" cid="AN013" type="sequence-action" name="Action13" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:17">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -291,7 +291,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di280084621952585391" cid="AB010" type="activation-bar" name="ActivationBar10" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:21">
+          <item id="di280084621952585391" cid="AB010" type="activation-bar" name="ActivationBar10" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:21">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -299,7 +299,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di140914034869059175" />
           </item>
-          <item id="di934736988417245432" cid="AN014" type="sequence-action" name="Action14" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:43">
+          <item id="di934736988417245432" cid="AN014" type="sequence-action" name="Action14" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:43">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -309,7 +309,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di815865960295158203" cid="AN015" type="sequence-action" name="Action15" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:56">
+          <item id="di815865960295158203" cid="AN015" type="sequence-action" name="Action15" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:42:56">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -319,7 +319,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di747846619221258816" cid="AN016" type="sequence-action" name="Action16" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 13:43:21">
+          <item id="di747846619221258816" cid="AN016" type="sequence-action" name="Action16" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 13:43:21">
             <stereotypes />
             <tagged-values />
             <documentation>
@@ -349,7 +349,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di351459590420022558" cid="AN018" type="sequence-action" name="Action18" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:12">
+          <item id="di351459590420022558" cid="AN018" type="sequence-action" name="Action18" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:12">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -359,14 +359,14 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di547484777941513796" cid="AB011" type="activation-bar" name="ActivationBar11" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:15">
+          <item id="di547484777941513796" cid="AB011" type="activation-bar" name="ActivationBar11" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:15">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di233312106738982760" cid="AB012" type="activation-bar" name="ActivationBar12" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:15">
+          <item id="di233312106738982760" cid="AB012" type="activation-bar" name="ActivationBar12" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:15">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -374,7 +374,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di538407572114150429" />
           </item>
-          <item id="di807890002787693405" cid="AN020" type="sequence-action" name="Action20" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:45">
+          <item id="di807890002787693405" cid="AN020" type="sequence-action" name="Action20" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:45">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -384,7 +384,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di370819485202674761" cid="AB014" type="activation-bar" name="ActivationBar14" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:49">
+          <item id="di370819485202674761" cid="AB014" type="activation-bar" name="ActivationBar14" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:48:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -392,7 +392,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di303525284868075463" />
           </item>
-          <item id="di565484317292521697" cid="AN021" type="sequence-action" name="Action21" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:52:18">
+          <item id="di565484317292521697" cid="AN021" type="sequence-action" name="Action21" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:52:18">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -402,7 +402,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di354156743709516097" cid="AB015" type="activation-bar" name="ActivationBar15" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:52:22">
+          <item id="di354156743709516097" cid="AB015" type="activation-bar" name="ActivationBar15" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:52:22">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -410,7 +410,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di689188598473700120" />
           </item>
-          <item id="di758313711686055376" cid="AN022" type="sequence-action" name="Action22" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:09">
+          <item id="di758313711686055376" cid="AN022" type="sequence-action" name="Action22" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:09">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -420,7 +420,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di502853011103520524" cid="AB016" type="activation-bar" name="ActivationBar16" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:12">
+          <item id="di502853011103520524" cid="AB016" type="activation-bar" name="ActivationBar16" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:12">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -428,7 +428,7 @@
             <style class="default" />
             <activation-bar lifeline-ref="di140914034869059175" />
           </item>
-          <item id="di392453801584336380" cid="AN023" type="sequence-action" name="Action23" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:29">
+          <item id="di392453801584336380" cid="AN023" type="sequence-action" name="Action23" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:29">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -438,7 +438,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di649555751611163040" cid="AN024" type="sequence-action" name="Action24" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:41">
+          <item id="di649555751611163040" cid="AN024" type="sequence-action" name="Action24" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:53:41">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -448,7 +448,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di485328554917181576" cid="AN025" type="sequence-action" name="Action25" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:55:14">
+          <item id="di485328554917181576" cid="AN025" type="sequence-action" name="Action25" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:55:14">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -458,7 +458,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di481689252167970561" cid="AN026" type="sequence-action" name="Action26" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:56:07">
+          <item id="di481689252167970561" cid="AN026" type="sequence-action" name="Action26" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:56:07">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -468,7 +468,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di330654381620631560" cid="AN027" type="sequence-action" name="Action27" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:59:05">
+          <item id="di330654381620631560" cid="AN027" type="sequence-action" name="Action27" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P06d7e5a957cc4eb3a3ce38bcf9b3df27" creation-date="08/03/2013 13:59:05">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -478,7 +478,7 @@
               <parameters />
             </sequence-action>
           </item>
-          <item id="di135265861504921061" cid="ELEM001" type="frame" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
+          <item id="di135265861504921061" cid="ELEM001" type="frame" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
             <stereotypes />
             <tagged-values />
             <documentation>
@@ -506,7 +506,7 @@
             <style class="default" />
             <frame type="Received" />
           </item>
-          <item id="di511458330655183029" cid="ELEM001" type="frame" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
+          <item id="di511458330655183029" cid="ELEM001" type="frame" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
             <stereotypes />
             <tagged-values />
             <documentation>
@@ -534,7 +534,7 @@
             <style class="default" />
             <frame type="Delivered" />
           </item>
-          <item id="di248188811992346630" cid="ELEM001" type="frame" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
+          <item id="di248188811992346630" cid="ELEM001" type="frame" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 14:21:34">
             <stereotypes />
             <tagged-values />
             <documentation>
