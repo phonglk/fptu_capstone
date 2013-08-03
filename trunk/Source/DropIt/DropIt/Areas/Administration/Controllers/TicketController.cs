@@ -90,7 +90,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+//                    EventId = delete.TicketId
                 });
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new
                 {
                     Result = "ERROR",
-                    EventId = Id,
+//                    EventId = Id,
                     Message = e.Message
                 });
             }
@@ -117,7 +117,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+//                    EventId = delete.TicketId
                 });
             }
             catch (Exception e)
@@ -125,7 +125,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new
                 {
                     Result = "ERROR",
-                    EventId = Id,
+//                    EventId = Id,
                     Message = e.Message
                 });
             }
