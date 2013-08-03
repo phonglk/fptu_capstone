@@ -27,7 +27,8 @@
         var _isLogin = @((User.Identity.IsAuthenticated == true).ToString().ToLower());
         var _username = null;
 
-        @if(User.Identity.IsAuthenticated){
+        @if (User.Identity.IsAuthenticated)
+        {
             <text>
             _username = "@User.Identity.Name";
             </text>
@@ -60,6 +61,22 @@
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                <div class="message-wrapper">
+                    @if (Session["Message"]!=null)
+                    {
+                        var classes ="";
+                        if(Session["MessageType"]!=null){
+                            classes="alert-"+Session["MessageType"].ToString();
+                        }
+                        <div class="alert @classes">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                          @Session["Message"]
+                        </div>
+                       
+                        Session["Message"] = null;
+                        Session["MessageType"] = null;
+                    }
+                </div>
                 @RenderBody()
             </section>
         </div>

@@ -29,7 +29,14 @@
 }
 @sell : #FFE07A;
 @buy : #B6E38D;
-@mainColor : #582e53;
+@mainColor : #451a54;
+@mainColor_: #6e3568;
+@black: #1c0921;
+@black_ : #d9d9d9;
+@blue: #37519e;
+@blue_ : #87c6e6;
+
+
 
 ::-webkit-scrollbar {
     width: 15px;
@@ -46,7 +53,7 @@
 }
 
 body {
-    font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;	
+    font-family: HN,Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;	
 }
 h3,h2{
     text-align: center;
@@ -219,13 +226,50 @@ h3,h2{
 }
 .btn{
     font-family: "UVNBaiSau";
+    color:white;
     font-size: 15px;
+    text-shadow:none;
+    border-radius:0;
+
+    &:hover{
+        color:white;
+    }
+
+    &.main{
+        background:@mainColor;
+        &:hover{
+            background:@mainColor_;
+        }
+    }
+
+    &.blue{
+        background:@blue;
+        &:hover{
+            background:@blue_;
+            color:@black;
+        }
+    }
+    &.black{
+        background:@black;
+        &:hover{
+            background:@black_;
+            color:@black;
+        }
+    }
 }
 .nav-tabs > li > a{
     font-family: UVNBaiSau;
 }
 #content{
     position: relative;
+}
+.message-wrapper{
+    width:960px;
+    margin:0 auto;
+
+    & > .alert{
+        margin-top:20px;
+    }
 }
 .dropdown-menu{
     .tooltip-inner{
@@ -445,3 +489,41 @@ h3,h2{
         }
     }
 } 
+.ticket-list > ul{
+    margin:0;padding:0;
+    list-style:none;
+}
+.ticket{
+    width:700px;
+    height:150px;
+    background:url(../Images/ticket-bg.png) no-repeat;
+    position:relative;
+
+    .info{
+        position:absolute;
+        top:10px;
+        left:210px;
+        font-size:14px;
+        line-height:18px;
+        font-family:HN;
+        .event-name{
+            font-family:Semilla;
+            font-size:25px;
+            color:black;
+            line-height:30px;
+            
+        }
+    }
+    .price{
+        position:absolute;
+        bottom:10px;
+        right:520px;
+        font-size:14px;
+        line-height:18px;
+        font-family:Oswald;
+        padding:10px;
+        border:1px dashed black;
+    }
+    
+
+}

@@ -237,8 +237,14 @@ else
 
         $(function () {
             ctvm = new CreateTicketViewModel();
-            ko.applyBindings(ctvm);
+            ko.applyBindings(ctvm,$("#request-ticket")[0]);
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
+
+            var defaultEvent = location.request("EventId");
+            if (defaultEvent != "") {
+                $("#EventId").select2("val", defaultEvent);
+                $("#EventId").trigger("change");
+            }
         })
     </script>
 

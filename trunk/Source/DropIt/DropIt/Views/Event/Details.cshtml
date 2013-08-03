@@ -15,6 +15,28 @@
         top: 25px;
         right: 20px;
     }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .controls {
+        font-family: HN-Light;
+    }
+
+    .event-des {
+        position: relative;
+    }
+
+        .event-des .action {
+            position: absolute;
+            right: 10px;
+            bottom: 0;
+        }
+
+    .table.event-detail .header {
+        color: #451a54;
+    }
 </style>
 <div class="container" id="content">
     <div id="bord">
@@ -24,7 +46,7 @@
     <div class="row">
         <div class="span3">
             <div class="sidebar-nav">
-                    @Html.Partial("Partials/SideBar")
+                @Html.Partial("Partials/SideBar")
             </div>
         </div>
         <div class="span9 event-detail">
@@ -39,7 +61,7 @@
                     if (WebSecurity.IsAuthenticated)
                     {
                         var followData = Model.UserFollowEvents.Where(t => t.UserId == WebSecurity.GetUserId(User.Identity.Name)).Where(p => p.EventId == Model.EventId).FirstOrDefault();
-                        if ( followData!= null)
+                        if (followData != null)
                         {
                             follow = followData.FollowType;
                         }
@@ -54,7 +76,7 @@
                     }
                 }
                 <span data-follow="Event" data-follow-status="@follow" data-follow-id="@Model.EventId"></span>
-                
+
             </div>
 
             <div class="event-des span9">
@@ -74,79 +96,117 @@
                     }
 
                 </div>
-                <div class="display-des span9">
+                @*<div class="display-des span9">
                     <div class="row">
                         @Html.Raw(Model.Description)
                     </div>
                     <br />
+                </div>*@
+                <div class="action">
+                    <a href="@Url.Action("Create", "Ticket", new { EventId = @Model.EventId })" class="btn main fl">Đăng vé</a>
+                    <a href="@Url.Action("Request", "Ticket", new { EventId = @Model.EventId })" class="btn blue fl">Yêu cầu vé</a>
                 </div>
             </div>
             <div class="row span9">
-                <div class="ticket-list">
-                    <table class="table table-condensed event-detail">
-                        <thead>
-
-                            <tr class="info">
-                                <td colspan="5">
-                                    <i class="icon-calendar"></i>@Html.DisplayFor(model => model.HoldDate)
-                                </td>
-                            </tr>
-                            <tr class="header warning">
-                                <th class="">Mã Vé</th>
-                                <th class="">Người bán</th>
-                                <th class="">Miêu tả</th>
-                                <th class="">Giá vé(VNĐ)</th>
-                                <th class="">Đặt vé</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- row -->
-                            @foreach (var item in Model.Tickets)
+                <ul class="nav nav-tabs" id="event-tab">
+                    <li><a href="#event-description">Thông tin thêm</a></li>
+                    <li class="active"><a href="#ticket-list">Danh sách vé</a></li>
+                    <li><a href="#request">Danh sách yêu cầu</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="event-description">
+                        <div>
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                    <div class="ticket-list tab-pane active" id="ticket-list">
+                        <ul>
+                        @foreach (var item in Model.Tickets)
+                        {
+                            <li class="ticket">
+                            @if ((item.TranStatus != null && (int)item.TranStatus == (int)DropIt.Common.Statuses.Transaction.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Pending)
                             {
-                                if ((item.TranStatus != null && (int)item.TranStatus == (int)DropIt.Common.Statuses.Transaction.Delivered) || item.Status == (int)DropIt.Common.Statuses.Ticket.Pending)
-                                {
-                                    continue;
-                                }
-                                <tr>
-                                    @if (@item.SeriesNumber==null)
-                                    {
-                                        <td class="first">
-                                            Không có
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="first">
-                                            @item.SeriesNumber
-                                        </td>
-                                    }
-                                    
-                                    <td class="user">
-                                        @item.User.UserName
-                                    </td>
-
-                                    <td class="descript">
-                                        @item.Description
-                                    </td>
-                                    <td class="price">
-                                        @item.SellPrice
-                                    </td>
-                                    <td class="action">
-                                        @if (item.TranStatus != null)
-                                        {
-                                            <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
-                                               data-toggle="tooltip"
-                                               title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
-                                        }
-                                        else
-                                        {
-                                            <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn btn-inverse btn-buy btn-small">Đặt vé</a>
-                                        }
-                                    </td>
-                                </tr>
+                                continue;
                             }
-                        </tbody>
-                    </table>
+                                    
+                            @if (@item.SeriesNumber != null)
+                            {
+                                <div class="serial">@item.SeriesNumber</div>
+                            }
+                            
+                                <div class="buyer-name">
+                                    @item.User.UserName
+                                </div>
+
+                            <div class="info">
+                                <div class="event-name">
+                                    @Model.EventName
+                                </div>
+                                <div class="event-artist">
+                                    @Model.Artist
+                                </div>
+                                <div class="event-date">
+                                    @Model.HoldDate
+                                </div>
+                                <div class="event-venue">
+                                    @Model.Venue.VenueName
+                                </div>
+                                <div>
+                                    @item.Description
+                                </div>
+                            </div>
+                            <div class="price">
+                                @item.SellPrice VNĐ
+                            </div>
+                                <!--
+                            <div>
+                                @if (item.TranStatus != null)
+                                {
+                                    <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
+                                        data-toggle="tooltip"
+                                        title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn main">Đặt vé</a>
+                                }
+                            </div>-->
+                            </li>
+                        }
+                        </ul>
+                    </div>
+
+                    <div class="ticket-list tab-pane" id="request">
+                        <table class="table table-condensed event-detail">
+                            <thead>
+                                <tr class="header warning">
+                                    <th class="">Người yêu cầu</th>
+                                    <th class="">Miêu tả</th>
+                                    <th class="" style="width: 100px">Phản hồi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- row -->
+                                @foreach (var item in Model.Requests)
+                                {
+                                    <tr>
+
+                                        <td class="user">
+                                            @item.User.UserName
+                                        </td>
+
+                                        <td class="descript">
+                                            @item.Description
+                                        </td>
+
+                                        <td class="action">
+                                            <a href="@Url.Action("Buy", "Ticket")" class="btn main pull-right">Phản hồi</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,6 +214,10 @@
     </div>
 </div>
 <script type="text/javascript">
+    $('#event-tab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
     follow_init();
 </script>
 
