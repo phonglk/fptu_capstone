@@ -92,7 +92,7 @@ namespace DropIt.Controllers
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
             SearchResultViewModel foundEvent = new SearchResultViewModel();
-            
+
 
             if (!String.IsNullOrEmpty(query))
             {
@@ -137,7 +137,7 @@ namespace DropIt.Controllers
                     }
                 }
 
-                
+
 
                 ResultEventComparer comparer = new ResultEventComparer();
 
@@ -176,19 +176,20 @@ namespace DropIt.Controllers
                             EventId = evt.EventId,
                             Artist = evt.Artist,
                             EventName = evt.EventName,
-                            EventImage = evt.EventImage
+                            EventImage = evt.EventImage,
+                            Status = evt.Status
                         };
-                    if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()))
+
+                    if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()) && (evt.Status == 3 || evt.Status == 1))
                     {
                         listevent.Add(searchAjax);
                     }
-                    else if (Utils.ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()))
+                    else if (Utils.ConvertVN(evt.Artist == null ? "" : evt.Artist).ToLower().Contains(Utils.ConvertVN(searchText).ToLower()) && (evt.Status == 3 || evt.Status == 1))
                     {
                         if (!listevent.Contains(searchAjax))
                         {
                             listevent.Add(searchAjax);
                         }
-
                     }
                 }
             }

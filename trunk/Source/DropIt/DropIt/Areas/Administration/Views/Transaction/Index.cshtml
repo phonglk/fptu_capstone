@@ -124,7 +124,7 @@
                 <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
             <!-- /ko -->
-            <td data-bind="text: TranUser.UserName"></td>
+            <td data-bind="text: TranUser.UserName==null? 'không có': TranUser.UserName"></td>
             <td data-bind="text: TranType"></td>
             <td>
                 <!-- ko if: list.extraData.TranPaymentStatus == Statuses.Transfered -->
