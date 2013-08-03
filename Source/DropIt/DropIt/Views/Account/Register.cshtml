@@ -35,11 +35,9 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "alert alert-error" })   
             <h2>Đăng Ký</h2>
-            <div class="alert alert-error" style="width: 450px; margin-left: 25%;">
+            <div class="error" style="width: 450px; margin-left: 25%; color: #e80c4d; font-size: 16px;">
                 <ul>
-                    <li>
                          @Html.ViewBag.Check
-                    </li>
                 </ul>
                </div>
             <div>@Html.LabelAndControl("Tên Tài khoản", Html.TextBox("UserName"))</div>
