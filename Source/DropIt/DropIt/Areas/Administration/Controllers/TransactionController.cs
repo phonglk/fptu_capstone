@@ -100,17 +100,17 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.TranStatus = (int)Statuses.Transaction.Delivered;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranStatus = (int)Statuses.Transaction.Delivered;
                 
-                delete.TranShipCode = TranShipCode;
+                ticket.TranShipCode = TranShipCode;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)
@@ -129,15 +129,15 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.TranStatus = (int)Statuses.Transaction.Paid;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranStatus = (int)Statuses.Transaction.Paid;
                 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)
@@ -156,15 +156,15 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.GetById(Id);
-                delete.TranPaymentStatus = (int)Statuses.Payment.Done;
-                delete.Status = (int)Statuses.Ticket.Done;
-                Repository.AddOrUpdate(delete);
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranPaymentStatus = (int)Statuses.Payment.Done;
+                ticket.Status = (int)Statuses.Ticket.Done;
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)
@@ -183,16 +183,16 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.TranStatus = (int)Statuses.Transaction.Received;
-                delete.TranShipDate = DateTime.Now;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranStatus = (int)Statuses.Transaction.Received;
+                ticket.TranShipDate = DateTime.Now;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)
@@ -211,15 +211,15 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.TranStatus = (int)Statuses.Transaction.Unpaid;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranStatus = (int)Statuses.Transaction.Unpaid;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)
@@ -237,15 +237,15 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.TranStatus = (int)Statuses.Transaction.Canceled;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.TranStatus = (int)Statuses.Transaction.Canceled;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    VenueId = delete.TicketId
+                    VenueId = ticket.TicketId
                 });
             }
             catch (Exception e)
