@@ -35,7 +35,7 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                var records = Repository.GetAll();
+                var records = Repository.Get(u=>u.UserName.Equals("admin"));
                 if (isActive != -1)
                 {
                     records = records.Where(u => u.Active == (isActive == 1));

@@ -143,16 +143,18 @@
                                     @Model.EventName
                                 </div>
                                 <div class="event-artist">
-                                    @Model.Artist
+                                    <span class="icon-star"></span> @Model.Artist
                                 </div>
                                 <div class="event-date">
-                                    @Model.HoldDate
+                                    <span class="icon-time"></span> @Model.HoldDate.ToLongDateString().ToUpper()
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;@Model.HoldDate.ToLongTimeString()
                                 </div>
                                 <div class="event-venue">
-                                    @Model.Venue.VenueName
+                                    <span class="icon-map-marker"></span> @Model.Venue.VenueName
                                 </div>
                                 <div>
-                                    @item.Description
+                                    <strong>Chú thích:</strong> @item.Description
                                 </div>
                             </div>
                             <div class="price">

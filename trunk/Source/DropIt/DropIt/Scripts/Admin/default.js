@@ -264,7 +264,7 @@ function User(obj) {
         self.Sellable.subscribe(function (newValue) {
             list.AjaxUpdate({
                 item: self,
-                urlData : {Action:"UpdateActive", Data : { UserId : self.UserId, Active: newValue }},
+                urlData : {Action:"UpdateSellable", Data : { UserId : self.UserId, Sellable: newValue }},
                 callback:function(user){
                     var text = "Người dùng <strong>#{UserName}</strong> đã ".eval(user);
                     if(newValue){
