@@ -136,7 +136,7 @@ function Transaction(obj) {
     if (self.TranShipDate != null) {
         this.TranShipDate = Date.fromRawJSON(self.TranShipDate);
     } 
-    
+    if (self.TranUser == null) self.TranUser = "";
     if (self.TranDescription == null) self.TranDescription = "";
     if (self.ShippingCost == null) self.ShippingCost = "";
     if (self.TranType == 0) { self.TranType = "Thanh toán ngay" }

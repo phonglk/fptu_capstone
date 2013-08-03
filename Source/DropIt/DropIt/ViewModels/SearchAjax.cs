@@ -12,5 +12,6 @@ namespace DropIt.ViewModels
         public string EventName { get; set; }
         public string Artist { get; set; }
         public string EventImage { get; set; }
+        public int Status { get; set; }
     }
 }

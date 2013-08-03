@@ -772,7 +772,9 @@
     <Content Include="Content\Images\column-asc.png" />
     <Content Include="Content\Images\column-desc.png" />
     <Content Include="Content\Images\column-sortable.png" />
+    <Content Include="Content\Images\No.JPG" />
     <Content Include="Content\Images\no_image.jpg" />
+    <Content Include="Content\Images\SorryFace.png" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Content\jquery-ui-bootstrap\images\ui-bg_glass_65_ffffff_1x400.png" />

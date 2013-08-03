@@ -75,10 +75,10 @@ namespace DropIt.Areas.Administration.Controllers
                     TranShipCode = e.TranShipCode,
                     TranPaymentStatus = e.TranPaymentStatus,
                     ShippingCost = e.ShippingCost,
-                    TranUser = new
+                    TranUser = e.User1 == null ? null : new
                     {
                         e.TranUserId,
-                        e.User.UserName
+                        e.User1.UserName
                     },
                     TranDescription = e.TranDescription,
                     TranStatus = e.TranStatus,
