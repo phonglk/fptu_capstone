@@ -475,10 +475,11 @@ hr {
     position: relative;
     left: 40%;
 }
+
 .btn-gen {
     background: #5e4071;
-     color: #fff;   
-     border-radius: 0;
+    color: #fff;
+    border-radius: 0;
 }
 
     .btn-gen:hover {
@@ -486,16 +487,17 @@ hr {
         color: #fff;
     }
 
-    .btn-cancel {
+.btn-cancel {
     background: #695d57;
-     color: #fff;   
-     border-radius: 0;
+    color: #fff;
+    border-radius: 0;
 }
 
     .btn-cancel:hover {
         background: #1c0921;
         color: #fff;
     }
+
 .register input:focus {
     border-color: none;
     outline: 0;
@@ -828,8 +830,8 @@ table.event-detail td.price {
 
 .btn-sub {
     background: #5e4071;
-     color: #fff;   
-     border-radius: 0;
+    color: #fff;
+    border-radius: 0;
 }
 
     .btn-sub:hover {
@@ -897,15 +899,26 @@ table.event-detail td.price {
     position: relative;
     left: 20%;
 }
+
 .sorry-image {
     position: relative;
     left: 35%;
 }
-#request-ticket input[type='text']{
+
+#request-ticket input[type='text'] {
     width: 350px;
 }
 
-#request-ticket  textarea {
-    width : 350px;
-    height : 150px;
+#request-ticket textarea {
+    width: 350px;
+    height: 150px;
+}
+
+#edit_ticket input[type='text'] {
+    width: 350px;
+}
+
+#edit_ticket textarea {
+    width: 350px;
+    height: 150px;
 }

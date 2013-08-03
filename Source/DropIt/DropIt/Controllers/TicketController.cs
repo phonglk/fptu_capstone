@@ -432,6 +432,7 @@ namespace DropIt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Ticket ticket)
         {
             Ticket getTicket = this.unitOfWork.TicketRepository.GetById(ticket.TicketId);

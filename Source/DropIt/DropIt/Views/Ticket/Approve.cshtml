@@ -41,7 +41,7 @@
             <div class="control-group">
                 <label class="control-label">Ghi chú:</label>
                 <div class="controls">
-                    @Model.Description
+                    @Html.Raw(Model.Description)
                 </div>
             </div>
 
@@ -55,7 +55,8 @@
             <div class="control-group">
                 <label class="control-label">Tiền nhận:</label>
                 <div class="controls">
-                    @Html.TextBox("ReceiveMoney", @Model.ReceiveMoney, new { disabled="true" , data_bind="value:RecievePrice"})
+                    @*                    @Html.TextBox("ReceiveMoney", @Model.ReceiveMoney, new { disabled="true" , data_bind="value:RecievePrice"})*@
+                    @Model.ReceiveMoney
                 </div>
             </div>
 

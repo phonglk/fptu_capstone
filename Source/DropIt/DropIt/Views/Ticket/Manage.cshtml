@@ -43,7 +43,7 @@
                 var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
                 foreach (int statusValue in statuses)
                 {
-                    if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction)
+                    if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction || statusValue==(int)Statuses.Ticket.Done)
                     {
                         continue;
                     }
