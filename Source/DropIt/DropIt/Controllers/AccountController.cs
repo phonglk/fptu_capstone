@@ -108,7 +108,7 @@ namespace DropIt.Controllers
                 {
                     if (user.UserName==model.UserName)
                     {
-                        ViewBag.Check = "Tên tài khoản đã tồn tại. Hãy chọn lại tên tài khoản khác!";
+                        ViewBag.Check = "* Tên tài khoản đã tồn tại. Hãy chọn lại tên tài khoản khác!";
                         ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName");
                         return View("Register");
                     }
