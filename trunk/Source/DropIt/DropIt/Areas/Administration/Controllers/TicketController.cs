@@ -82,10 +82,10 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Ready;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.Status = (int)Statuses.Ticket.Ready;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
@@ -109,10 +109,10 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Pending;
+                Ticket ticket = Repository.GetById(Id);
+                ticket.Status = (int)Statuses.Ticket.Pending;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
@@ -136,15 +136,15 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Ticket delete = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Ticket.Delete;
+                Ticket ticket = Repository.Get(e => e.TicketId == Id).FirstOrDefault();
+                ticket.Status = (int)Statuses.Ticket.Delete;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    VenueId = delete.TicketId
+                    VenueId = ticket.TicketId
                 });
             }
             catch (Exception e)
