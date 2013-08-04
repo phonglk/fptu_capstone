@@ -47,7 +47,7 @@ window.menuAdmins = [
     new MenuAdmin 
         Name : "Vé"
         Controller : "Ticket"
-        Action : "List"
+        Action : "Index"
     new MenuAdmin 
         Name : "Danh mục"
         Controller : "Category"
