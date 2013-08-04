@@ -8,44 +8,26 @@
       this.Name = _arg.Name, this.Controller = _arg.Controller, this.Action = _arg.Action, this.Url = _arg.Url, this.Icon = _arg.Icon, this.Childs = _arg.Childs;
       this.self = this;
       this.Area = "Administration";
-            if ((_ref = this.Name) != null) {
-        _ref;
-
-      } else {
+      if ((_ref = this.Name) == null) {
         this.Name = "NoName";
-      };
-            if ((_ref1 = this.Controller) != null) {
-        _ref1;
-
-      } else {
+      }
+      if ((_ref1 = this.Controller) == null) {
         this.Controller = null;
-      };
-            if ((_ref2 = this.Action) != null) {
-        _ref2;
-
-      } else {
+      }
+      if ((_ref2 = this.Action) == null) {
         this.Action = null;
-      };
-            if ((_ref3 = this.Url) != null) {
-        _ref3;
-
-      } else {
+      }
+      if ((_ref3 = this.Url) == null) {
         this.Url = null;
-      };
-            if ((_ref4 = this.Icon) != null) {
-        _ref4;
-
-      } else {
+      }
+      if ((_ref4 = this.Icon) == null) {
         this.Icon = "chevron-sign-right";
-      };
+      }
       this.IsActive = false;
       this.Parent = null;
-            if ((_ref5 = this.Childs) != null) {
-        _ref5;
-
-      } else {
+      if ((_ref5 = this.Childs) == null) {
         this.Childs = [];
-      };
+      }
       _ref6 = this.Childs;
       for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
         child = _ref6[_i];
@@ -92,7 +74,7 @@
     }), new MenuAdmin({
       Name: "Vé",
       Controller: "Ticket",
-      Action: "List"
+      Action: "Index"
     }), new MenuAdmin({
       Name: "Danh mục",
       Controller: "Category",
