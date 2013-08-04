@@ -921,3 +921,8 @@ table.event-detail td.price {
     width: 350px;
     height: 150px;
 }
+
+.tran-info {
+    color: #431f59;
+    margin: 20px;
+}
