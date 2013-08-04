@@ -769,6 +769,7 @@
     <Content Include="Content\dialog2\samples\pages\notice.html" />
     <Content Include="Content\DropIt\css\bootstrap-fix.css" />
     <Content Include="Content\DropIt\css\new.css" />
+    <Content Include="Content\Images\477.gif" />
     <Content Include="Content\Images\column-asc.png" />
     <Content Include="Content\Images\column-desc.png" />
     <Content Include="Content\Images\column-sortable.png" />

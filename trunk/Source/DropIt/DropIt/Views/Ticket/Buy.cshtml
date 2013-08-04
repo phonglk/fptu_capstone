@@ -16,29 +16,33 @@
 }
 @if (User.IsInRole("Administrator"))
 {
-    <div class="container"> 
-        <div>
-            <p></p>
+     <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
-        <center>Xin lỗi admin không thể thực hiện giao dịch</center>
-        <center>
-            <a href="/Home/Index" class="btn btn-inverse btn-buy btn-small">Quay về trang chủ</a>
+        <center><h3> Xin lỗi! admin không thể thực hiện giao dịch! </h3></center>
+        <br />
+        <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
         </center>
-
+        <br />
+        <br />
     </div>
     
 }
 else if (@Model.UserId==currentUserId)
 {
-  <div class="container"> 
-        <div>
-            <p></p>
+     <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/No.jpg" />
         </div>
-        <center>Xin lỗi bạn không thể giao dịch vé của mình</center>
-        <center>
-            <a href="/Home/Index" class="btn btn-mid btn-gen btn-small">Quay về trang chủ</a>
+        <center><h3> Xin lỗi bạn không thể giao dịch vé của mình! </h3></center>
+        <br />
+        <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
         </center>
-
+        <br />
+        <br />
     </div>
 }
 else
