@@ -129,6 +129,7 @@
     list.Delete = function(item){
         $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa danh mục \""+item.CategoryName+"\" ?",
             {
+                title: "Xác nhận",
                 confirm:function(){
                     list.AjaxAction({
                         item:item,

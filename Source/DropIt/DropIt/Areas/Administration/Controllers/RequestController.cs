@@ -1,21 +1,23 @@
-﻿using DropIt.Common;
-using DropIt.DAL;
-using DropIt.Filters;
-using DropIt.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DropIt.Models;
+using DropIt.DAL;
+using DropIt.Common;
+using System.Diagnostics;
+using DropIt.Areas.Administration.ViewModels;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Administrator")]
-    [InitializeSimpleMembership]
+    
     public class RequestController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        private RequestRepository Repository;
+        private GenericRepository<Request> Repository;
 
         public RequestController()
         {
@@ -24,101 +26,78 @@ namespace DropIt.Areas.Administration.Controllers
         //
         // GET: /Administration/Request/
 
-        public ActionResult Index()
+        public ActionResult Index(int RequestStatus = 0)
         {
+            ViewBag.RequestStatus = RequestStatus;
             return View();
         }
 
-        public ActionResult List()
+        [HttpPost]
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int RequestStatus = -1)
         {
-            var requestList = unitOfWork.RequestRepository.Get();
-            return View(requestList.ToList());
-        }
-
-        public ActionResult Details(int userid=0, int id = 0)
-        {
-            Request request = this.unitOfWork.RequestRepository.GetById(userid, id);
-            if (request == null)
+            try
             {
-                return HttpNotFound();
-            }
-            return View(request);
-        }
+                IEnumerable<DropIt.Models.Request> records = null;
 
-        public ActionResult Delete(int userid, int id)
-        {
-            Request request = this.unitOfWork.RequestRepository.GetById(userid, id);
-            if (request == null)
+                if (RequestStatus == -1)
+                {
+                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                }
+                else
+                {
+                    records = Repository.JTGetExp(e => e.Status == RequestStatus, jtStartIndex, jtPageSize, jtSorting);
+                }
+
+
+                var Records = records.Select(e => new
+                {
+                    ReportId = new {
+                        e.EventId,
+                        e.UserId
+                    },
+                    Status = e.Status,
+                    Description = e.Description                    
+                });
+
+                return Json(new JSONResult(Records)
+                {
+                    TotalRecordCount = (RequestStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == RequestStatus).Count()
+                });
+            }
+            catch (Exception e)
             {
-                return HttpNotFound();
+                return Json(new JSONResult(e));
             }
-            this.unitOfWork.RequestRepository.Delete(userid, id);
-            this.unitOfWork.RequestRepository.Save();
-            return RedirectToAction("List");
         }
-        //public ActionResult Delete(int id)
-        //{
-        //    Request request = this.unitOfWork.RequestRepository.GetById(id);
-        //    if (request == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    this.unitOfWork.RequestRepository.Delete(id);
-        //    this.unitOfWork.RequestRepository.Save();
-        //    return RedirectToAction("List");
-        //}
 
-        ////
-        //// GET: /Event/Edit/5
+        public JsonResult Delete(int Id)
+        {
+            try
+            {
+                Category delete = Repository.Get(e => e.RequestId == Id).FirstOrDefault();
+                if (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count() == 0)
+                {
+                    delete.Status = (int)Statuses.Category.Delete;
+                }
 
-        //public ActionResult Edit(int id = 0)
-        //{
-        //    Request request = this.unitOfWork.RequestRepository.GetById(id);
-        //    if (request == null)
-        //    {
-        //        HttpNotFound();
-        //    }
-        //    ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName", ticket.EventId);
-        //    return View(request);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(Request request)
-        //{
-        //    Request getRequest = unitOfWork.RequestRepository.Get(u => u.RequestId == ticket.TicketId).FirstOrDefault();
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        Ticket editTicket = new Ticket()
-        //        {
-        //            TicketId = ticket.TicketId,  // co TicketId de tim kiem 
-        //            TranUserId = getTicket.UserId,
-        //            TranFullName = getTicket.TranFullName,
-        //            TranAddress = getTicket.TranAddress,
-        //            TranType = getTicket.TranType,
-        //            TranStatus = getTicket.Status,
-        //            EventId = ticket.EventId,
-        //            UserId = getTicket.UserId,
-        //            SellPrice = getTicket.SellPrice,
-        //            ReceiveMoney = getTicket.ReceiveMoney,
-        //            Seat = ticket.Seat,
-        //            Status = ticket.Status,
-        //            Description = ticket.Description,
-        //            CreatedDate = getTicket.CreatedDate,
-        //            TranCreatedDate = getTicket.TranCreatedDate,
-        //            TranModifiedDate = getTicket.TranModifiedDate,
-        //            TranDescription = getTicket.TranDescription
-        //        };
-        //        this.unitOfWork.TicketRepository.AddOrUpdate(editTicket);
-        //        this.unitOfWork.TicketRepository.Save();
-        //        return RedirectToAction("List");
-        //    }
-        //    ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
-        //                                     ticket.EventId);
-        //    return View(ticket);
-
-        //}
+                Repository.AddOrUpdate(delete);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    CategoryId = delete.CategoryId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "Lỗi",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
