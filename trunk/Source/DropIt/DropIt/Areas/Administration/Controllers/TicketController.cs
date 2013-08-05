@@ -175,7 +175,7 @@ namespace DropIt.Areas.Administration.Controllers
                 Description = e.Description,
                 Status = e.Status
             };
-            ViewBag.EventId = new SelectList(unitOfWork.EventRepository.GetAll(), "EventId", "EventName", e.EventId);
+            ViewBag.EventId = new SelectList(unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName", e.EventId);
             ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.GetAll(), "VenueId", "VenueName", e.Event.VenueId);
             return View(tvm);
         }

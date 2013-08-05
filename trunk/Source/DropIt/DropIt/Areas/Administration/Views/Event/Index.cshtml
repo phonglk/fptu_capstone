@@ -10,7 +10,7 @@
         Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove),
         Trading:@((int)DropIt.Common.Statuses.Event.Trading),
         Outdate:@((int)DropIt.Common.Statuses.Event.Outdate)
-    }
+        }
 </script>
 <style>
     table th:nth-child(1) {
@@ -40,8 +40,6 @@
         max-width: 600px;
         width: auto;
     }
-
-    
 </style>
 <div class="row-fluid">
     <div class="span8 status-filter">
@@ -58,7 +56,7 @@
                 <i class="icon-ok"></i>
                 <span>Đã duyệt</span>
             </a>
-            <a style="display:none"></a>
+            <a style="display: none"></a>
             <a href="@Url.Action("Index", new { EventStatus = (int)DropIt.Common.Statuses.Event.Trading })" class="btn btn-large">
                 <i class="icon-road"></i>
                 <span>Đang giao dịch</span>
@@ -86,7 +84,6 @@
             <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Tên sự kiện</th>
             <th>Danh mục</th>
             <th class="sortable" data-bind="click: function (data, event) { sort('HoldDate', data, event) }">Ngày tổ chức</th>
-            @*<th>Danh mục</th>*@
             <th>Địa điểm</th>
             <th>Action</th>
         </tr>
@@ -116,7 +113,6 @@
     "
                     data-toggle="tooltip"></span>
             </td>
-            @*<td data-bind="text: Category.CategoryName"></td>*@
             <td>
                 <a data-bind="
     text: Venue.VenueName,
@@ -128,7 +124,7 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
-            
+
             <td>
                 <a href="javascript:;"
                     class="button green"
@@ -211,6 +207,7 @@
     list.Delete = function(item){
         $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa sự kiện \""+item.EventName+"\" ?",
             {
+                title: "Xác nhận",
                 confirm:function(){
                     list.AjaxAction({
                         item:item,
@@ -257,7 +254,4 @@
         return false;
     })
 
-    
-    
-    
 </script>

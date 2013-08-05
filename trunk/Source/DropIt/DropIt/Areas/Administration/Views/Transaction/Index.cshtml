@@ -290,6 +290,7 @@
     list.Done = function(item){
         $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn hoàn thành giao dịch\""+item.TranFullName+"\" ?",
             {
+                title: "Xác nhận",
                 confirm:function(){
                     list.AjaxAction({
                         item:item,

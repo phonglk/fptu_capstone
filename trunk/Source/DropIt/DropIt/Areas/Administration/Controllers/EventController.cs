@@ -32,7 +32,7 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null,int EventStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int EventStatus = -1)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace DropIt.Areas.Administration.Controllers
                 }
                 else
                 {
-                    records = Repository.JTGetExp(e=> e.Status == EventStatus,jtStartIndex, jtPageSize, jtSorting);
+                    records = Repository.JTGetExp(e => e.Status == EventStatus, jtStartIndex, jtPageSize, jtSorting);
                 }
                 var Records = records.Select(e => new
                 {
@@ -90,23 +90,31 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 r.CategoryId,
                 r.CategoryName,
-                Childs = r.Category1.Select(r2 => new {
+                Childs = r.Category1.Select(r2 => new
+                {
                     r2.CategoryId,
                     r2.CategoryName,
                     ParentId = r2.Category2.CategoryId
                 })
             });
 
-            ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.Get(v => v.Status == (int)Statuses.Venue.Approve),"VenueId","VenueName");
+            ViewBag.VenueId = new SelectList(unitOfWork.VenueRepository.Get(v => v.Status == (int)Statuses.Venue.Approve), "VenueId", "VenueName");
             return View();
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public JsonResult Create(Event Event,HttpPostedFileBase EventImage)
+        public JsonResult Create(Event Event, HttpPostedFileBase EventImage)
         {
             String Error = "";
-
+            if (Event.HoldDate < DateTime.Now)
+            {
+                return Json(new
+                {
+                    Result = "Lỗi",
+                    Message = "Ngày diễn ra sự kiện phải sau ngày hiện tại!"
+                });
+            }
             if (EventImage != null)
             {
                 if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
@@ -117,7 +125,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new
                     {
-                        Result = "ERROR",
+                        Result = "Lỗi",
                         Message = "Hình sự kiện phải ở định dạng hình ảnh và bé hơn 5MB"
                     });
                 }
@@ -146,8 +154,9 @@ namespace DropIt.Areas.Administration.Controllers
                 Error = "Có lỗi xảy ra";
             }
 
-            return Json(new {
-                Result = "ERROR",
+            return Json(new
+            {
+                Result = "Lỗi",
                 Message = Error
             });
         }
@@ -193,15 +202,23 @@ namespace DropIt.Areas.Administration.Controllers
         public JsonResult Edit(Event Event, HttpPostedFileBase EventImage)
         {
             Event oldEvent = Repository.GetById(Event.EventId);
-            if (oldEvent.Status== (int)Statuses.Event.Trading)
+            if (oldEvent.Status == (int)Statuses.Event.Trading)
             {
                 return Json(new JSONResult()
                     {
-                        Result = "ERROR",
+                        Result = "Lỗi",
                         Message = "Sự kiện này đã có vé đã hoặc đang giao dịch nên không thể sửa thông tin"
                     });
             }
 
+            if (Event.HoldDate < DateTime.Now)
+            {
+                return Json(new
+                {
+                    Result = "Lỗi",
+                    Message = "Ngày diễn ra sự kiện phải sau ngày hiện tại!"
+                });
+            }
             if (EventImage != null)
             {
                 if (EventImage.ContentLength <= 5000000 && EventImage.ContentType.IndexOf("image") > -1)
@@ -212,7 +229,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult()
                     {
-                        Result = "ERROR",
+                        Result = "Lỗi",
                         Message = "Phải là hình ảnh và kích thước < 5MB"
                     });
                 }
@@ -267,27 +284,13 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "ERROR",
-                    Message = "Event not found"
+                    Result = "Lỗi",
+                    Message = "Không tìm thấy sự kiện"
                 });
             }
 
         }
-        //public JsonResult Delete(int EventId)
-        //{
-        //    try
-        //    {
-        //        Repository.Delete(EventId);
-        //        unitOfWork.Save();
-
-        //        return Json(new JSONResult());
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Json(new JSONResult(e));
-        //    }
-
-        //}
+       
         [HttpPost]
         public JsonResult GetEventOption()
         {
@@ -323,7 +326,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "ERROR",
+                    Result = "Lỗi",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -350,7 +353,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "ERROR",
+                    Result = "Lỗi",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -377,7 +380,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "ERROR",
+                    Result = "Lỗi",
                     EventId = Id,
                     Message = e.Message
                 });

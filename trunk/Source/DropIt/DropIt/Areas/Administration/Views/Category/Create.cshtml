@@ -67,11 +67,12 @@
     validateOptions = {
         rules: {
             CategoryName: {
-                required: true
+                required: true,
+                maxlength: 50
             }
         },
         messages: {
-            CategoryName: "Cần phải điền tên danh mục",
+            CategoryName: "Tên danh mục không được bỏ trống và dài không quá 50 kí tự",
         }
         //,
         //errorLabelContainer:$('.validation-summary-errors')

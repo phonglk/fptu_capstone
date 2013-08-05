@@ -176,6 +176,7 @@
     list.Delete = function(item){
         $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa vé có mã số \""+item.TicketId+"\" ?",
             {
+                title: "Xác nhận",
                 confirm:function(){
                     list.AjaxAction({
                         item:item,

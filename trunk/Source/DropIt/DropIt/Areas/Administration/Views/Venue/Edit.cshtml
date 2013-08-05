@@ -83,7 +83,8 @@
     validateOptions = {
         rules: {
             VenueName: {
-                required: true
+                required: true,
+                maxlength: 50
             },
             Address: {
                 required: true
@@ -93,7 +94,7 @@
             }
         },
         messages: {
-            VenueName: "Cần phải điền tên địa điểm",
+            VenueName: "Cần phải điền tên địa điểm và dài không quá 50 kí tự",
             Address: "Cần phải điền địa chỉ",
             ProvinceId: "Phải chọn Tỉnh/Thành phố",
         }
