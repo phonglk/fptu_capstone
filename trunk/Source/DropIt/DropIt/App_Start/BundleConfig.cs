@@ -54,8 +54,7 @@ namespace DropIt
                 .Include(
                 "~/Scripts/jquery.format.date.js",
                 "~/Scripts/Common/utils.js",
-                "~/Scripts/Common/utilClasses.js",
-                "~/Scripts/Common/default.js"));
+                "~/Scripts/Common/utilClasses.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/utils-admin")
                 .Include(

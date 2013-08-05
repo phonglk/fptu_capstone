@@ -1,12 +1,23 @@
-﻿$(function () {
+﻿
+$(function () {
     getTotalTransaction();
     getTotalTicket();
     getTotalEvent();
     generateDataTracker();
     rawDateDisplay();
     formatAllVNDLabel();
+    text_overflow();
+    bootstrap();
+    unraw_html();
+
+    
 })
 
+
+function bootstrap() {
+    $("[data-toggle='tooltip']").tooltip();
+    $("[data-toggle='popover']").popover();
+}
 function generateData(type, target) {
     function getData(url, callback) {
         $.ajax({
@@ -79,12 +90,12 @@ function follow_btn_html($j) {
                 c1: "Theo dõi bán",
                 c2: "Theo dõi mua"
             },
-            tooltip:{
-                m:"Thông báo nếu sự kiện này có vé mới được đăng hay có yêu cầu vé mới",
-                c1:"Thông báo nếu sự kiện này có vé mới được bán",
-                c2:"Thông báo nếu sự kiện này có yêu cầu vé mới"
+            tooltip: {
+                m: "Thông báo nếu sự kiện này có vé mới được đăng hay có yêu cầu vé mới",
+                c1: "Thông báo nếu sự kiện này có vé mới được bán",
+                c2: "Thông báo nếu sự kiện này có yêu cầu vé mới"
             },
-            action : [2, 0, 1]
+            action: [2, 0, 1]
         },
         { // 0
             text: {
@@ -150,7 +161,7 @@ function follow_btn_html($j) {
         title: data_mapping[mapping_index].tooltip.c2
     })
 
-    
+
     $.each([btn_main, btn_child1, btn_child2], function (i, e) {
         e.click(function () {
             follow_action($j, data_mapping[mapping_index].action[i])
@@ -167,12 +178,12 @@ function follow_action($j, followType) {
         $.ajax({
             type: "POST",
             url: "/Follow/" + object + "/" + objectId,
-            data: {FollowType:followType},
+            data: { FollowType: followType },
             cache: false,
             dataType: "json",
             success: function (rs) {
                 if (rs.Result == "OK") {
-                    $j.data("follow-status",followType);
+                    $j.data("follow-status", followType);
                     follow_btn_html($j)
                 } else {
                     alert("Error:" + rs.Message)
@@ -272,6 +283,19 @@ function formatAllVNDLabel() {
         }
         $(this).text(new Number($(this).text()).formatVND())
         $(this).data("vnd", "formatted")
+    })
+}
+
+function text_overflow() {
+    $(".text-overflow").each(function () {
+        $(this).attr({
+            title: $(this).text().trim()
+        })
+    })
+}
+function unraw_html() {
+    $("[data-unraw]").each(function () {
+        $(this).html($(this).text());
     })
 }
 

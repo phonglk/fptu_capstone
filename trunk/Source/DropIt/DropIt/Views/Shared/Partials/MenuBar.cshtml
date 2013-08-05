@@ -45,6 +45,9 @@
                     </a>
                     <div class="noti5-list-container">
                         <div class="noti5-list-inner" data-bind="event: {scroll: listscroll}">
+                            <!-- ko if:data.length == 0 -->
+                            <center>Không có thông báo nào</center>
+                            <!-- /ko -->
                             <ul class="noti5-list" data-bind="foreach: data">
                                 <li>
                                     <a href="#" data-bind="attr: {href: ObjectUrl}">
@@ -72,11 +75,6 @@
                                 <a href="#" class="see-all">Xem tất cả</a>
                             
                         </div>
-                </li>
-                <li class="noti5-wrapper sell">
-                    <a href="@Url.Action("About", "Home", null, "http")">
-                        <span class="icon-bell noti5-icon "></span>
-                    </a>
                 </li>
                 }
             </ul>

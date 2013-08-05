@@ -53,13 +53,27 @@ namespace DropIt.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PostTicket ticket)
-        {            
+        {
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
+                                             ticket.ProvinceId);
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+                                             ticket.EventId);
+            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", ticket.CategoryId);
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
+
+
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             double receivemoney = (int) (ticket.SellPrice*(1 - service));
             if (ModelState.IsValid)
             {
                 if (Request.Form["CreateEvent"] != null) // create new event
                 {
+                    if (ticket.HoldDate <= DateTime.Now)
+                    {
+                        Session["Message"] = "Ngày diễn ra sự kiện không được nhỏ hơn hiện tại";
+                        Session["MessageType"] = "error";
+                        return View();
+                    }
                     if (Request.Form["CreateVenue"] != null) // create new venue
                     {
                         // add new venue 
@@ -151,12 +165,7 @@ namespace DropIt.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
-                                             ticket.ProvinceId);
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
-                                             ticket.EventId);
-            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", ticket.CategoryId);
-            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
+            
             return View(ticket);
         }
 
