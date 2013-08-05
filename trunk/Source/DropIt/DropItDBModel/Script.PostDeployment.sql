@@ -544,6 +544,8 @@ INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (3, N'DollarRa
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (4, N'DefaultEventImage', N'/Content/Images/no_image.jpg')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (5, N'TicketPostPerDay', N'10')
 INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (6, N'TicketRequestPerDay', N'10')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (7, N'MinSellPrice', N'10000')
+INSERT INTO [dbo].[Setting] ([Id], [SettingName], [Value]) VALUES (8, N'MaxSellPrice', N'10000000')
 SET IDENTITY_INSERT [dbo].[Setting] OFF
 
 GO
