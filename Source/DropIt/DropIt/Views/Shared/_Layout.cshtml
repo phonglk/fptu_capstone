@@ -23,6 +23,7 @@
 
     @Styles.Render("~/Content/DropIt")
     <link href="~/Content/jquery.pnotify.default.css" rel="stylesheet"/>
+    <script src="~/Scripts/Common/default.js"></script>
     <script>
         var _isLogin = @((User.Identity.IsAuthenticated == true).ToString().ToLower());
         var _username = null;
@@ -106,6 +107,7 @@
 
     </div>
     @RenderSection("scripts", required: false)
+    
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {

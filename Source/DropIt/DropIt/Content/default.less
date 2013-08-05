@@ -62,7 +62,11 @@ h3,h2{
     font-family: Oswald;
     font-size: 35px;
 }
-
+.text-overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .info-page{
     h2{
         margin-top:20px;
@@ -489,7 +493,7 @@ h3,h2{
         }
     }
 } 
-.ticket-list > ul{
+.ticket-list ul{
     margin:0;padding:0;
     list-style:none;
 }
@@ -506,7 +510,7 @@ h3,h2{
         top:7px;
         left:210px;
         font-size:14px;
-        line-height:22px;
+        line-height:26px;
         color:@black;
         
         font-family:HN;
@@ -514,8 +518,8 @@ h3,h2{
             font-family:Semilla;
             font-size:23px;
             color:black;
-            min-height:50px;
-            line-height:25px;   
+            height:35px;
+            line-height:35px;
         }
     }
     .buyer{
@@ -528,10 +532,10 @@ h3,h2{
     }
     .serial{
         position: absolute;
-        bottom: 7px;
+        bottom: 5px;
         width: 110px;
-        right: 10px;
-        text-align: center;
+        right: 5px;
+        text-align: right;
         font-size: 12px;
         line-height: 18px;
         font-family: HN-light;

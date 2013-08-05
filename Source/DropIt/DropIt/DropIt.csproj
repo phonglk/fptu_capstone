@@ -234,6 +234,7 @@
     <Compile Include="Areas\Administration\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Venue.cs" />
     <Compile Include="Common\AdminMenu.cs" />
+    <Compile Include="Common\CheckDate.cs" />
     <Compile Include="Common\DateTimeExtensions.cs" />
     <Compile Include="Common\DropDownGroupList.cs" />
     <Compile Include="Common\JSONResult.cs" />
@@ -1283,21 +1284,7 @@
     <Content Include="Scripts\class.js" />
     <Content Include="Scripts\Common\custom-binding.js" />
     <Content Include="Scripts\Common\default.js" />
-    <Content Include="Scripts\Common\GenericEntity.js">
-      <DependentUpon>GenericEntity.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\GenericEntity.min.js">
-      <DependentUpon>GenericEntity.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\GenericViewModels.js">
-      <DependentUpon>GenericViewModels.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\GenericViewModels.min.js">
-      <DependentUpon>GenericViewModels.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\GenericViewModels.coffee" />
     <Content Include="Scripts\Admin\Venue\Index.coffee" />
-    <Content Include="Scripts\Common\GenericEntity.coffee" />
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
       <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
     </Content>
@@ -2216,12 +2203,6 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\knockout-bootstrap.js" />
     <Content Include="Scripts\knockout-bootstrap.min.js" />
-    <Content Include="Scripts\Common\modal-helper.js">
-      <DependentUpon>modal-helper.coffee</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Common\modal-helper.min.js">
-      <DependentUpon>modal-helper.coffee</DependentUpon>
-    </Content>
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mootools-core-1.4.5-full-nocompat-yc.js" />
     <Content Include="Scripts\mootools-core-1.4.5-full-nocompat.js" />
@@ -2338,7 +2319,6 @@
     <Content Include="Scripts\knockout-bootstrap.min.js.map">
       <DependentUpon>knockout-bootstrap.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\Common\modal-helper.coffee" />
     <Content Include="Scripts\jtable\themes\metro\red\jtable.less" />
     <Content Include="Scripts\jtable\themes\metro\purple\jtable.less" />
     <Content Include="Scripts\jtable\themes\metro\pink\jtable.less" />

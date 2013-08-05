@@ -39,6 +39,24 @@ $.validator.unobtrusive.adapters.add(
     	options.messages['requiredif'] = options.message;
     });
 
+jQuery.validator.addMethod("greaterThan",
+        function (value, element, params) {
+
+            if (!/Invalid|NaN/.test(new Date(value))) {
+                return new Date(value) > new Date($(params).val());
+            }
+
+            return isNaN(value) && isNaN($(params).val())
+                || (Number(value) > Number($(params).val()));
+        }, 'Phải lớn hơn {0}.');
+
+jQuery.validator.addMethod("greaterThanToday", function (value, element) {
+    var now = new Date();
+    if (!/Invalid|NaN/.test(new Date(value))) {
+        return new Date(value) > now;
+    }
+    return isNaN(value) || (parseFloat(value) > now);
+}, "* The date should not be greater than today.");
 $(function () {
     $.validator.addMethod(
     "date",

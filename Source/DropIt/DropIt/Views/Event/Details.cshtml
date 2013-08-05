@@ -120,69 +120,76 @@
                         </div>
                     </div>
                     <div class="ticket-list tab-pane active" id="ticket-list">
-                        <ul>
-                        @foreach (var item in Model.Tickets.OrderByDescending(t => t.CreatedDate))
-                        {
-                            if (item.Status != (int)DropIt.Common.Statuses.Ticket.Ready)
-                            {
-                                continue;
-                            }
-                            <li class="ticket">
-                                                               
-                            @if (@item.SeriesNumber != null)
-                            {
-                                <div class="serial">@item.SeriesNumber</div>
-                            }
-                            <div class="buyer">
-                                <div class="buyer-name">
-                                    <strong>Ngưới bán:</strong> @item.User.UserName
-                                </div>
-                                <div class="buyer-date">
-                                    <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
-                                </div>
-                            </div>
-                            <div class="info">
-                                <div class="event-name">
-                                    @Model.EventName
-                                </div>
-                                <div class="event-artist">
-                                    <span class="icon-star"></span> @Model.Artist
-                                </div>
-                                <div class="event-date">
-                                    <span class="icon-time"></span> @Model.HoldDate.ToLongDateString().ToUpper()
-                                    <br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp;@Model.HoldDate.ToLongTimeString()
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class="icon-map-marker"></span> @Model.Venue.VenueName
-                                </div>
-                                @*<div class="event-venue">
+                        <div>
+                            <ul>
+                                @foreach (var item in Model.Tickets.OrderByDescending(t => t.CreatedDate))
+                                {
+                                    if (item.Status != (int)DropIt.Common.Statuses.Ticket.Ready)
+                                    {
+                                        continue;
+                                    }
+                                    <li class="ticket">
+
+                                        @if (@item.SeriesNumber != null)
+                                        {
+                                            <div class="serial"><strong>S\N: @item.SeriesNumber</strong></div>
+                                        }
+                                        <div class="buyer">
+                                            <div class="buyer-name">
+                                                <strong>Ngưới bán:</strong> @item.User.UserName
+                                            </div>
+                                            <div class="buyer-date">
+                                                <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <div class="event-name text-overflow">
+                                                @Model.EventName
+                                            </div>
+                                            <div class="event-artist">
+                                                <span class="icon-star"></span>@Model.Artist
+                                            </div>
+                                            <div class="event-date">
+                                                <span class="icon-calendar">&nbsp;</span>@Model.HoldDate.ToShortDateString().ToUpper()
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="icon-map-marker"></span>@Model.Venue.VenueName
+                                                <br />
+                                                <span class="icon-time"></span>&nbsp;@Model.HoldDate.ToLongTimeString()
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @if (item.Seat != null)
+                                    {
+                                        <span class="icon-random"></span> <text>Chỗ ngồi:</text> @item.Seat
+                                    }
+                                            </div>
+                                            @*<div class="event-venue">
                                     
                                 </div>*@
-                                <div>
-                                    <strong>Chú thích:</strong> @item.Description
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span data-VND>@item.SellPrice</span> VNĐ
-                            </div>
-                            <div class="qrcode">
-                                @Html.QRCode(Url.Action("Buy","Ticket",new {Id = item.TicketId},Request.Url.Scheme),50,2)
-                            </div>
-                            <div class="action">
-                                @if (item.TranStatus != null)
-                                {
-                                    <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
-                                        data-toggle="tooltip"
-                                        title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                                            <div>
+                                                <strong>Chú thích:</strong> <span data-unraw>@Html.Raw(item.Description)</span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span data-vnd>@item.SellPrice</span> VNĐ
+                                        </div>
+                                        <div class="qrcode">
+                                            @Html.QRCode(Url.Action("Buy", "Ticket", new { Id = item.TicketId }, Request.Url.Scheme), 50, 2)
+                                        </div>
+                                        <div class="action">
+                                            @if (item.TranStatus != null)
+                                            {
+                                                <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
+                                                    data-toggle="tooltip"
+                                                    title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn main buy-ticket">Đặt vé</a>
+                                            }
+                                        </div>
+                                    </li>
                                 }
-                                else
-                                {
-                                    <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn main buy-ticket">Đặt vé</a>
-                                }
-                            </div>
-                            </li>
-                        }
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="ticket-list tab-pane" id="request">
@@ -199,7 +206,9 @@
                                 @if (Model.Requests.Count == 0)
                                 {
                                     <tr>
-                                        <td colspan="3"><center> Sự kiện này chưa có yêu cầu mua vé nào</center></td>
+                                        <td colspan="3">
+                                            <center> Sự kiện này chưa có yêu cầu mua vé nào</center>
+                                        </td>
                                     </tr>
                                 }
                                 @foreach (var item in Model.Requests)

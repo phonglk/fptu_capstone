@@ -61,6 +61,7 @@ namespace DropIt.ViewModels
         //[DataType(DataType.Date),DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
         [DataType(DataType.Text)]
         [RequiredIf("CreateEvent", "checked", ErrorMessage = "Ngày tổ chức phải có khi tạo sự kiện mới")]
+        [FutureDate(ErrorMessage="Ngày tổ chức phải lớn hơn ngày hiện tại")]
         public DateTime? HoldDate { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }

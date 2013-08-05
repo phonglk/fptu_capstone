@@ -53,13 +53,17 @@ else
         .select2-container {
             width: 364px !important;
         }
+        /*.control-group .popover {
+            margin-left: 15px;
+            margin-top: -20px;
+        }*/
     </style>
     <div class="container" id="content">
         <div id="request-ticket" class="form1">
             @using (Html.HorizontalForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary()
+                @Html.ValidationSummary("", new { @class = "alert alert-error" })
 
                 <h3>Đăng vé</h3>
 
@@ -73,7 +77,9 @@ else
                             @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                             <span class="add-on">
                                 <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
-                                <label for="CreateEvent">Tạo mới</label>
+                                <label for="CreateEvent"
+                                      data-trigger="manual" data-toggle="popover" title="Sự kiện" data-content="Bạn nên xem kỹ danh sách các sự kiện để chọn đúng sự kiện trước khi tạo mới để vé của bạn được đăng lên ngay lập tức"
+                                    >Tạo mới</label>
                             </span>
                         </div>
                     </div>
@@ -95,7 +101,7 @@ else
 
                                 <button class="btn" type="button" data-bind="visible: isCreateEvent()">
                                     <div class="add-on">
-                                        <i class='icon-calendar'></i>
+                                        <i class='icon-calendar' style="color:black"></i>
                                     </div>
                                 </button>
 
@@ -198,6 +204,7 @@ else
         }
     </style>
     <script type="text/javascript">
+        $("[data-toggle='popover']").popover();
         function formatEventRow(state) {
             if (!state.id) return state.text;
             return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
@@ -261,7 +268,25 @@ else
                     }
                 })
             }
+
+            self.isCreateEvent.subscribe(function(value){
+                var pop = $("label[for='CreateEvent']");
+                if (value) {
+                    pop.popover("show");
+                    pop.parent().find(".popover").css({
+                        marginLeft: 15,
+                        marginTop: -20
+                    })
+                } else {
+                    pop.popover("hide");
+                    pop.parent().find(".popover").css({
+                        marginLeft: 0,
+                        marginTop: 0
+                    })
+                }
+            })
         }
+
 
         validateOptions = {
             //debug:true,
@@ -273,6 +298,9 @@ else
                     depends: function (element) {
                         return $("#createEvent:checked");
                     }
+                },
+                HoldDate: {
+                    greaterThanToday: true
                 }
             },
             messages: {
@@ -285,7 +313,7 @@ else
 
         $(function () {
             ctvm = new CreateTicketViewModel();
-            ko.applyBindings(ctvm,$("#content")[0]);
+            ko.applyBindings(ctvm, $("#content")[0]);
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
             //$(".form1 form").validate(validateOptions);
             var defaultEvent = location.request("EventId");
