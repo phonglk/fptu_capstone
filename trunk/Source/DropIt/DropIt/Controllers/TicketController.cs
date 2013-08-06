@@ -260,7 +260,7 @@ namespace DropIt.Controllers
             int noRequest = request.Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId == UserId).Count();
             ViewBag.NoRequest = noRequest;
             ViewBag.NoRe = noRe;
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetRequestAvailable(UserId), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
             ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.GetAvailable(), "CategoryId", "CategoryName");
