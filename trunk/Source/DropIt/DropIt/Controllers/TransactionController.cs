@@ -42,8 +42,30 @@ namespace DropIt.Controllers
             return View(historyTransaction.ToList());
         }
 
+        public ActionResult Receive(int Id)
+        {
+            var tran = Repository.GetById(Id);
+            if (tran == null)
+            {
+                Session["Message"] = "Không tồn tại vé này";
+                return RedirectToAction("HistoryBuy",new {status=2});
+            }
+            else if (tran.TranStatus != (int)Statuses.Transaction.Delivered)
+            {
+                Session["Message"] = "Giao dịch bạn yêu cầu không hợp lệ";
+                return RedirectToAction("HistoryBuy", new { status = 2 });
+            }
+            else
+            {
+                tran.TranStatus = (int)Statuses.Transaction.Received;
+                Repository.AddOrUpdate(tran);
+                Repository.Save();
+                Session["Message"] = "Vé của sự kiện <strong>"+tran.Event.EventName+"</strong> đã được chuyển sang đã nhận thành công!";
+                return RedirectToAction("HistoryBuy", new { status = 3 });
+            }
+        }
+
         [HttpPost]
-        
         public JsonResult Count(int id)
         {
             int status = id;

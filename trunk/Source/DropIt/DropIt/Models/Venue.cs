@@ -17,7 +17,6 @@ namespace DropIt.Models
         public Venue()
         {
             this.Events = new HashSet<Event>();
-            this.UserFollowVenues = new HashSet<UserFollowVenue>();
         }
     
         public int VenueId { get; set; }
@@ -29,6 +28,5 @@ namespace DropIt.Models
     
         public virtual ICollection<Event> Events { get; set; }
         public virtual Province Province { get; set; }
-        public virtual ICollection<UserFollowVenue> UserFollowVenues { get; set; }
     }
 }
