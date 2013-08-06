@@ -389,7 +389,7 @@ function DataList() {
                     }
                 } else {
                     if (obj.callbackOnFail) {
-                        obj.callbackOnFail.call();
+                        obj.callbackOnFail.call(this,rs.Message);
                     }
                 }
             }

@@ -139,6 +139,9 @@
                                 text:"Danh mục \"#{CategoryName}\" đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
+                        },
+                        callbackOnFail:function(message){
+                            $.fn.dialog2.helpers.alert(message,{title: "Lỗi"});
                         }
                     })
                 }
