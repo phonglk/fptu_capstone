@@ -412,12 +412,18 @@ h2 {
   color: #1c0921;
   font-family: HN;
 }
-.ticket .info .event-name {
+.ticket .info .event-name,
+.ticket .info .event-name a {
   font-family: Semilla;
   font-size: 23px;
   color: black;
   height: 35px;
   line-height: 35px;
+  text-decoration: none;
+}
+.ticket .info .event-name:hover,
+.ticket .info .event-name a:hover {
+  text-decoration: dotted;
 }
 .ticket .buyer {
   position: absolute;

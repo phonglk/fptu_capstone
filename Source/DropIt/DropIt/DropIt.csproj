@@ -2409,6 +2409,7 @@
     <Content Include="Views\Shared\Partials\Templates\EventList_ItemFull.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_Item_Search.cshtml" />
     <Content Include="Views\Follow\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\Templates\Event_List_Item_Extra_Request.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

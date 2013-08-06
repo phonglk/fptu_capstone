@@ -1,0 +1,22 @@
+﻿@{
+    var item = Model;
+    var follow = -1;
+
+    if (WebSecurity.IsAuthenticated)
+    {
+
+        System.Collections.Generic.HashSet<DropIt.Models.UserFollowEvent> follows = item.UserFollowEvents;
+        follow = follows.FirstOrDefault().FollowType;
+    }
+    else
+    {
+                    
+    <script>
+        isLogin = false;
+    </script>
+                    
+    }
+}
+
+                    
+<span data-follow="Event" data-follow-status="@follow" data-follow-id="@Model.EventId"></span>
