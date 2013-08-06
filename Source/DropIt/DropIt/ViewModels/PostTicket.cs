@@ -29,7 +29,8 @@ namespace DropIt.ViewModels
         public int? EventId { get; set; }
 
         [Required(ErrorMessage="Bạn phải nhập giá vé")]
-        [CustomValidation(typeof(SellPriceValidate), "RangeSellPrice")]     
+        [CustomValidation(typeof(SellPriceValidate), "RangeSellPrice")]
+        [RegularExpression(@"^[0-9]{5,8}", ErrorMessage = "Số tiền không chính xác")]
         public double SellPrice { get; set; }
 
         [Required]
