@@ -211,6 +211,7 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
+        [HttpPost]
         public JsonResult Delete(int Id)
         {
             try

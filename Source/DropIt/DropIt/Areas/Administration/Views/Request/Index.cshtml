@@ -29,13 +29,13 @@
         </div>*@
     </div>
 </div>
-
+<br />
+<br />
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th>Mã yêu cầu</th>
-            <th class="sortable" data-bind="click: function (data, event) { sort('EventName', data, event) }">Sự kiện</th>
-            <th class="sortable" data-bind="click: function (data, event) { sort('UserName', data, event) }">Người đăng</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('Event.EventName', data, event) }">Sự kiện</th>
+            <th class="sortable" data-bind="click: function (data, event) { sort('User.UserName', data, event) }">Người đăng</th>
             <th>Thao tác</th>
         </tr>
     </thead>
@@ -45,7 +45,7 @@
             <td data-bind="text: User.UserName"></td>
             <td>
                 <a href="javascript:;"
-                    class="button black"
+                    class="button red"
                     data-bind="click:$root.Close,visible:Status==Statuses.Open">Đóng
                 </a>
             </td>
@@ -80,16 +80,16 @@
     }
 
     list.Close = function(item){
-        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn đóng yêu cầu \""+item.RequestId+"\" ?",
+        $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn đóng yêu cầu của sự kiện \""+item.Event.EventName+"\" ?",
             {
                 title: "Xác nhận",
                 confirm:function(){
                     list.AjaxAction({
                         item:item,
-                        urlData:{Action:"Close",Data:{Id:item.RequestId}},
+                        urlData:{Action:"Close",Data:{UserId:item.User.UserId,EventId:item.Event.EventId}},
                         callback:function(event){
                             Notifications.push({
-                                text:"Danh mục \"#{RequestId}\" đã được xóa !".eval(event),
+                                text:"Yêu cầu của sự kiện \""+item.Event.EventName+"\" đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
                         }
