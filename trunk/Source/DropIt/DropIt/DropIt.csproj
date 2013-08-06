@@ -242,6 +242,7 @@
     <Compile Include="Common\Paypal.cs" />
     <Compile Include="Common\QRCodeHelper.cs" />
     <Compile Include="Common\RequiredIfAttribute.cs" />
+    <Compile Include="Common\SellPriceValidate.cs" />
     <Compile Include="Common\Setting.cs" />
     <Compile Include="Common\Statuses.cs" />
     <Compile Include="Common\Uploader.cs" />
