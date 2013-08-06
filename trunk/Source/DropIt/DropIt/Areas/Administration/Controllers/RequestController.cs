@@ -53,12 +53,12 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var Records = records.Select(e => new
                 {
-                    UserName = new
+                    User = new
                     {
                         e.UserId,
                         e.User.UserName
                     },
-                    EventName = new
+                    Event = new
                     {
                         e.EventId,
                         e.Event.EventName
@@ -78,11 +78,12 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        public JsonResult Delete(int Id)
+        [HttpPost]
+        public JsonResult Close(int UserId, int EventId)
         {
             try
             {
-                Request delete = Repository.GetById(Id);
+                Request delete = Repository.GetById(UserId, EventId);
 
                 delete.Status = (int)Statuses.Request.Close;
 
@@ -99,7 +100,7 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new
                 {
                     Result = "Lỗi",
-                    EventId = Id,
+                    EventId = EventId,
                     Message = e.Message
                 });
             }

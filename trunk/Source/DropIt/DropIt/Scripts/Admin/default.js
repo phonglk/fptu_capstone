@@ -110,7 +110,6 @@ function Category(obj) {
 function Request(obj) {
     var self = this;
 
-    this.Request = -1;
     this.UserId = "";
     this.EventId = "";
     this.Status = "";
