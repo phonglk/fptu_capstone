@@ -37,6 +37,10 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
+                if (jtSorting.Trim().Equals(""))
+                {
+                    jtSorting = "User.UserName ASC";
+                }
                 int TotalRecordCount = 0;
                 IEnumerable<DropIt.Models.Ticket> records = Repository.Get();
                 if (TranPaymentStatus == (int)Statuses.Payment.Transfered)

@@ -35,6 +35,10 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
+                if (jtSorting.Trim().Equals(""))
+                {
+                    jtSorting = "UserName ASC";
+                }
                 var records = Repository.Get(u=>u.UserName.Equals("admin")==false);
                 if (isActive != -1)
                 {

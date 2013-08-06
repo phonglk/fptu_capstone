@@ -107,6 +107,20 @@ function Category(obj) {
     self.CategoryDetail = html.eval(self);
 }
 
+function Request(obj) {
+    var self = this;
+
+    this.Request = -1;
+    this.UserId = "";
+    this.EventId = "";
+    this.Status = "";
+    $.extend(self, obj);
+    if (self.Description == null) self.Description = "";
+    html = "<strong>Chú thích</strong>: " + self.Description;
+    self.RequestDetail = html.eval(self);
+}
+
+
 function Ticket(obj) {
     var self = this;
 

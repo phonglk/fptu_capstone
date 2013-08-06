@@ -32,10 +32,14 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int CategoryStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = "CategoryName ASC", int CategoryStatus = -1)
         {
             try
             {
+                if (jtSorting.Trim().Equals(""))
+                {
+                    jtSorting = "CategoryName ASC";
+                }
                 IEnumerable<DropIt.Models.Category> records = null;
 
                 if (CategoryStatus == -1)

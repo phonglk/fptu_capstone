@@ -157,6 +157,14 @@ namespace DropIt.Common
             };
 
             adminMenuList.Add(Transaction);
+
+            AdminMainMenu Request = new AdminMainMenu()
+            {
+                Controller = "Request",
+                Title = "Yêu cầu",
+                Icon = "share"
+            };
+            adminMenuList.Add(Request);
             // category,event,province,venue
             AdminMainMenu Venue = new AdminMainMenu()
               {
@@ -173,6 +181,8 @@ namespace DropIt.Common
                 Icon = "bookmark"
             };
             adminMenuList.Add(Category);
+
+            
 
             AdminMainMenu Setting = new AdminMainMenu()
             {
