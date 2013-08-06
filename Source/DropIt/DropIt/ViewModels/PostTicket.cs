@@ -17,17 +17,21 @@ namespace DropIt.ViewModels
             this.ModifiedDate = DateTime.Now;
             this.CreateEvent = null;
             this.CreateVenue = null;
+//            this.MaxSellPrice = Double.Parse(Settings.get("MinSellPrice"));
+//            this.MaxSellPrice = Double.Parse(Settings.get("MaxSellPrice"));
+            
         }
-
-        
-
+//
+//        public double MinSellPrice { get; set; }
+//        public double MaxSellPrice { get; set; }
         public int TicketId { get; set; }
         
         public int? EventId { get; set; }
 
-        [Required(ErrorMessage="Phải quy định giá vé")]
+        [Required(ErrorMessage="Bạn phải nhập giá vé")]
+        [CustomValidation(typeof(SellPriceValidate), "RangeSellPrice")]     
         public double SellPrice { get; set; }
-        
+
         [Required]
         public double ReceiveMoney { get; set; }
 
