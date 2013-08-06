@@ -330,12 +330,6 @@
     <Compile Include="Models\UserFollowEvent.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserFollowUser.cs">
-      <DependentUpon>DropItContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserFollowVenue.cs">
-      <DependentUpon>DropItContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Venue.cs">
       <DependentUpon>DropItContext.tt</DependentUpon>
     </Compile>

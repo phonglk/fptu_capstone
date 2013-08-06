@@ -71,7 +71,7 @@
                         }
                         <div class="alert @classes">
                           <button type="button" class="close" data-dismiss="alert">&times;</button>
-                          @Session["Message"]
+                          @Html.Raw(Session["Message"])
                         </div>
                        
                         Session["Message"] = null;

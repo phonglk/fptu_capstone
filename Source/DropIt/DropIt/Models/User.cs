@@ -21,9 +21,6 @@ namespace DropIt.Models
             this.Tickets = new HashSet<Ticket>();
             this.Tickets1 = new HashSet<Ticket>();
             this.UserFollowEvents = new HashSet<UserFollowEvent>();
-            this.UserFollowUsers = new HashSet<UserFollowUser>();
-            this.UserFollowUsers1 = new HashSet<UserFollowUser>();
-            this.UserFollowVenues = new HashSet<UserFollowVenue>();
         }
     
         public int UserId { get; set; }
@@ -48,8 +45,5 @@ namespace DropIt.Models
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<Ticket> Tickets1 { get; set; }
         public virtual ICollection<UserFollowEvent> UserFollowEvents { get; set; }
-        public virtual ICollection<UserFollowUser> UserFollowUsers { get; set; }
-        public virtual ICollection<UserFollowUser> UserFollowUsers1 { get; set; }
-        public virtual ICollection<UserFollowVenue> UserFollowVenues { get; set; }
     }
 }

@@ -35,8 +35,6 @@ namespace DropIt.Models
         public DbSet<TicketResponse> TicketResponses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserFollowEvent> UserFollowEvents { get; set; }
-        public DbSet<UserFollowUser> UserFollowUsers { get; set; }
-        public DbSet<UserFollowVenue> UserFollowVenues { get; set; }
         public DbSet<Venue> Venues { get; set; }
     }
 }

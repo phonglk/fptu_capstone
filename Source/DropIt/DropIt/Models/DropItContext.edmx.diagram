@@ -4,20 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="502d3e216b30454091a6b5aaa691dc42" Name="Diagram1">
-        <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Notification" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+      <Diagram DiagramId="129c65d9fcc148b08b889779206c02ba" Name="Diagram1">
+        <EntityTypeShape EntityType="Drop_ItModel.Category" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Event" Width="1.5" PointX="8.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Notification" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Province" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Request" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Drop_ItModel.Setting" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Ticket" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.TicketResponse" Width="1.5" PointX="10.5" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.UserFollowEvent" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.UserFollowUser" Width="1.5" PointX="5.25" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.UserFollowVenue" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Drop_ItModel.Venue" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Ticket" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.TicketResponse" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.User" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.UserFollowEvent" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Drop_ItModel.Venue" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
         <AssociationConnector Association="Drop_ItModel.FK_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Event_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Event_Venue" ManuallyRouted="false" />
@@ -33,10 +31,6 @@
         <AssociationConnector Association="Drop_ItModel.FK_Ticket_User" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_Ticket_User1" ManuallyRouted="false" />
         <AssociationConnector Association="Drop_ItModel.FK_UserFollowEvent_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Drop_ItModel.FK_UserFollowUser_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Drop_ItModel.FK_UserFollowUser_UserFollow" ManuallyRouted="false" />
-        <AssociationConnector Association="Drop_ItModel.FK_UserFollowVenue_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Drop_ItModel.FK_UserFollowVenue_Venue" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
