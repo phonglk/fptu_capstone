@@ -264,12 +264,6 @@
           <style shadow-type="smooth" shadow-offset="1,1" shadow-visible="true" shadow-color="#3C000000" gloss-effect="true" wrap-name-text="true" wrap-other-text="true" padding="1" glow-color="#FFFFFFFF" name-color="#FF000000" name-font="Verdana;12;B" name-horizontal-alignment="center" name-vertical-alignment="center" part-header-color="#FF1E1E1E" part-header-font="Verdana;9;I" part-header-horizontal-alignment="center" part-header-vertical-alignment="center" text-color="#FF000000" text-font="Verdana;12;B" text-horizontal-alignment="left" text-vertical-alignment="center" tagged-value-color="#FF1E1E1E" tagged-value-font="Verdana;12;B" tagged-value-horizontal-alignment="center" tagged-value-vertical-alignment="center" stereotype-color="#FF1E1E1E" stereotype-font="Verdana;12;B" stereotype-horizontal-alignment="center" stereotype-vertical-alignment="center">
             <background type="vertical-linear" color="#FFD3D3D3" color2="#FFFFFFFF" />
             <border color="#FF000000" width="1" dash-style="solid" />
-            <alternate-styles>
-              <alternate-style shadow-type="smooth" shadow-offset="1,1" shadow-color="#3C000000" gloss-effect="true" wrap-name-text="true" wrap-other-text="true" padding="1" glow-color="#FFFFFFFF" name-color="#FF000000" name-font="Verdana;10;B" name-horizontal-alignment="center" name-vertical-alignment="center" part-header-color="#FF1E1E1E" part-header-font="Verdana;9;I" part-header-horizontal-alignment="center" part-header-vertical-alignment="center" text-color="#FF000000" text-font="Verdana;9;" text-horizontal-alignment="left" text-vertical-alignment="center" tagged-value-color="#FF1E1E1E" tagged-value-font="Verdana;9;I" tagged-value-horizontal-alignment="center" tagged-value-vertical-alignment="center" stereotype-color="#FF1E1E1E" stereotype-font="Verdana;9;I" stereotype-horizontal-alignment="center" stereotype-vertical-alignment="center">
-                <background type="vertical-linear" color="#FF1E90FF" color2="#FF87CEFA" />
-                <border color="#FF00008B" width="1" dash-style="solid" />
-              </alternate-style>
-            </alternate-styles>
           </style>
         </item>
         <item id="di144549690886644121" cid="UC001" type="use-case" name="Manage Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="Pffa0ed2a0f404470adb45f533ae20b3c" creation-date="06/03/2013 20:41:53">
@@ -1462,7 +1456,7 @@
             <style class="default" />
             <extend extension-point="" />
           </item>
-          <item id="di492805449340563050" cid="UC001" type="use-case" name="View History" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:08:14">
+          <item id="di492805449340563050" cid="UC001" type="use-case" name="View History" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:08:14">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1470,7 +1464,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di348829690490298003" cid="UC002" type="use-case" name="Request" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:08:44">
+          <item id="di348829690490298003" cid="UC002" type="use-case" name="Request" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:08:44">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1478,7 +1472,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di935791437549333691" cid="UC003" type="use-case" name="Create Event" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:20:43">
+          <item id="di935791437549333691" cid="UC003" type="use-case" name="Create Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:20:43">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1486,7 +1480,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di672633927296449981" cid="UC004" type="use-case" name="Create Venue" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:20:55">
+          <item id="di672633927296449981" cid="UC004" type="use-case" name="Create Venue" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:20:55">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1494,7 +1488,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di730295406572479764" cid="EX001" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:21:09">
+          <item id="di730295406572479764" cid="EX001" type="extend" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:21:09">
             <stereotypes>
               <stereotype name="extend" />
             </stereotypes>
@@ -1504,7 +1498,7 @@
             <style class="default" />
             <extend extension-point="" />
           </item>
-          <item id="di582593639312377644" cid="EX002" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:21:15">
+          <item id="di582593639312377644" cid="EX002" type="extend" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:21:15">
             <stereotypes>
               <stereotype name="extend" />
             </stereotypes>
@@ -2257,7 +2251,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di173183169867193738" cid="UC006" type="use-case" name="Login" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:28:46">
+          <item id="di173183169867193738" cid="UC006" type="use-case" name="Login" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/03/2013 03:28:46">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3519,14 +3513,14 @@
         </meta>
         <tagged-values />
         <abstract-items>
-          <item id="di918451379172825523" cid="AC001" type="actor" name="Customer" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="07/30/2013 18:03:03">
+          <item id="di918451379172825523" cid="AC001" type="actor" name="Admin" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="07/30/2013 18:03:03">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di366368627216278746" cid="UC001" type="use-case" name="View Follow List" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="07/30/2013 18:03:09">
+          <item id="di366368627216278746" cid="UC001" type="use-case" name="Close Request" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="07/30/2013 18:03:09">
             <stereotypes />
             <tagged-values />
             <documentation>
