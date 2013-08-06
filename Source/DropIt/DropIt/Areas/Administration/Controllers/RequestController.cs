@@ -10,6 +10,7 @@ using DropIt.DAL;
 using DropIt.Common;
 using System.Diagnostics;
 using DropIt.Areas.Administration.ViewModels;
+using WebMatrix.WebData;
 
 namespace DropIt.Areas.Administration.Controllers
 {
@@ -17,7 +18,7 @@ namespace DropIt.Areas.Administration.Controllers
     public class RequestController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
-        private GenericRepository<Request> Repository;
+        private RequestRepository Repository;
 
         public RequestController()
         {
@@ -74,18 +75,18 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Category delete = Repository.Get(e => e.RequestId == Id).FirstOrDefault();
-                if (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count() == 0)
+                int UserId = WebSecurity.GetUserId(User.Identity.Name);
+                Request delete = Repository.GetById(UserId,Id);
+                if (delete!=null)
                 {
-                    delete.Status = (int)Statuses.Category.Delete;
+                    delete.Status = (int)Statuses.Request.Close;
                 }
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
                 {
-                    Result = "OK",
-                    CategoryId = delete.CategoryId
+                    Result = "OK"
                 });
             }
             catch (Exception e)
