@@ -11,7 +11,7 @@ namespace DropIt.Common
     {
         public override bool IsValid(object value)
         {
-            if (value == null || (DateTime)value < DateTime.Now)
+            if (value != null && (DateTime)value < DateTime.Now)
                 return false;
 
             return true;
