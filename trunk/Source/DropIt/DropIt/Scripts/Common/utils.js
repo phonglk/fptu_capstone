@@ -26,7 +26,7 @@ Date.prototype.toDateTimeInputString = function () {
 
 String.prototype.makeExcerpt = function (length) {
     return "" + (this.substr(0, length)) + "...";
-};
+}
 
 String.prototype.eval = function () {
     var s = this.toString();

@@ -72,7 +72,9 @@ else
                             @Html.TextBox("EventName", String.Empty, new { data_bind = "visible:isCreateEvent" })
                             <span class="add-on">
                                 <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
-                                <label for="CreateEvent">Tạo mới</label>
+                                <label for="CreateEvent"
+                                      data-trigger="manual" data-toggle="popover" title="Sự kiện" data-content="Bạn nên xem kỹ danh sách các sự kiện để chọn đúng sự kiện trước khi tạo mới để yêu cầu của bạn được đăng lên ngay lập tức"
+                                    >Tạo mới</label>
                             </span>
                         </div>
                     </div>
@@ -94,7 +96,7 @@ else
 
                                 <button class="btn" type="button" data-bind="visible: isCreateEvent()">
                                     <div class="add-on">
-                                        <i class='icon-calendar'></i>
+                                        <i class='icon-calendar' style="color:black"></i>
                                     </div>
                                 </button>
 
@@ -176,7 +178,7 @@ else
         }
     </style>
     <script type="text/javascript">
-
+        $("[data-toggle='popover']").popover();
         function formatEventRow(state) {
             if (!state.id) return state.text;
             return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
@@ -233,12 +235,33 @@ else
                     }
                 })
             }
+
+            self.isCreateEvent.subscribe(function(value){
+                var pop = $("label[for='CreateEvent']");
+                if (value) {
+                    pop.popover("show");
+                    pop.parent().find(".popover").css({
+                        marginLeft: 15,
+                        marginTop: -20
+                    })
+                } else {
+                    pop.popover("hide");
+                    pop.parent().find(".popover").css({
+                        marginLeft: 0,
+                        marginTop: 0
+                    })
+                }
+            })
         }
+
+        var startDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1, 18, 0, 0, 0);
 
         $(function () {
             ctvm = new CreateTicketViewModel();
             ko.applyBindings(ctvm,$("#request-ticket")[0]);
-            $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
+            $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false, startDate: startDate });
+            var picker = $('#HoldDate').parent().data('datetimepicker');
+            picker.setLocalDate(startDate);
 
             var defaultEvent = location.request("EventId");
             if (defaultEvent != "") {

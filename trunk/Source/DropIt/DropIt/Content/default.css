@@ -64,6 +64,12 @@ h2 {
   background: none;
   z-index: 999;
 }
+.bootstrap-datetimepicker-widget .btn {
+  color: black;
+}
+.bootstrap-datetimepicker-widget .btn:hover {
+  color: #451a54;
+}
 .noti5-wrapper {
   position: relative;
 }

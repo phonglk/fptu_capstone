@@ -158,7 +158,7 @@ else
                         @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice", required = "required" })
                     </div>
                 </div>
-                <div class="controls validate">@Html.ValidationMessageFor(m => m.SellPrice)</div>
+                <div class="controls validate"></div>
                 <input type="hidden" id="servicefee" value="@see"/>
                 <div class="control-group">
                     <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate * 100).toFixed(0)"></span>%):</label>
@@ -312,10 +312,14 @@ else
             //errorLabelContainer:$('.validation-summary-errors')
         }
 
+        var startDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1,18,0,0,0);
+
         $(function () {
             ctvm = new CreateTicketViewModel();
             ko.applyBindings(ctvm, $("#content")[0]);
-            $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false });
+            $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false, startDate: startDate });
+            var picker = $('#HoldDate').parent().data('datetimepicker');
+            picker.setLocalDate(startDate);
             //$(".form1 form").validate(validateOptions);
             var defaultEvent = location.request("EventId");
             if (defaultEvent != "") {
