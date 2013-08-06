@@ -24,7 +24,7 @@ namespace DropIt.DAL
         public IEnumerable<Event> GetRequestAvailable(int UserId)
         {
             var events = uow.UserRepository.GetById(UserId).Requests.Select(t=>t.Event);
-            var event2 = this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate).Except(events);
+            var event2 = this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate).SkipWhile(e=>events.FirstOrDefault(x=>x.EventId == e.EventId) != null );
             return event2;
         }
     }
