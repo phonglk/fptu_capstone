@@ -36,6 +36,7 @@ namespace DropIt.Areas.Administration.Controllers
         [HttpPost]
         public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int RequestStatus = -1)
         {
+            
             try
             {
                 IEnumerable<DropIt.Models.Request> records = null;
@@ -52,12 +53,18 @@ namespace DropIt.Areas.Administration.Controllers
 
                 var Records = records.Select(e => new
                 {
-                    ReportId = new {
+                    UserName = new
+                    {
+                        e.UserId,
+                        e.User.UserName
+                    },
+                    EventName = new
+                    {
                         e.EventId,
-                        e.UserId
+                        e.Event.EventName
                     },
                     Status = e.Status,
-                    Description = e.Description                    
+                    Description = e.Description
                 });
 
                 return Json(new JSONResult(Records)
@@ -75,18 +82,16 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                int UserId = WebSecurity.GetUserId(User.Identity.Name);
-                Request delete = Repository.GetById(UserId,Id);
-                if (delete!=null)
-                {
-                    delete.Status = (int)Statuses.Request.Close;
-                }
+                Request delete = Repository.GetById(Id);
+
+                delete.Status = (int)Statuses.Request.Close;
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
                 {
-                    Result = "OK"
+                    Result = "OK",
+                    EventId = delete.EventId
                 });
             }
             catch (Exception e)

@@ -37,6 +37,10 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
+                if (jtSorting.Trim().Equals(""))
+                {
+                    jtSorting = "VenueName ASC";
+                }
                 IEnumerable<DropIt.Models.Venue> records = null;
                 if (VenueStatus == -1)
                 {

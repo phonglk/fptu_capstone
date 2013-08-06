@@ -229,6 +229,7 @@
     <Compile Include="Areas\Administration\Controllers\VenueController.cs" />
     <Compile Include="Areas\Administration\ViewModels\Category.cs" />
     <Compile Include="Areas\Administration\ViewModels\Event.cs" />
+    <Compile Include="Areas\Administration\ViewModels\Request.cs" />
     <Compile Include="Areas\Administration\ViewModels\Ticket.cs" />
     <Compile Include="Areas\Administration\ViewModels\Transaction.cs" />
     <Compile Include="Areas\Administration\ViewModels\UserViewModel.cs" />
@@ -1171,8 +1172,6 @@
     <Content Include="Areas\Administration\Views\Ticket\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\List.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Create.cshtml" />
-    <Content Include="Areas\Administration\Views\Request\Details.cshtml" />
-    <Content Include="Areas\Administration\Views\Request\List.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Event\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Venue\Create.cshtml" />
