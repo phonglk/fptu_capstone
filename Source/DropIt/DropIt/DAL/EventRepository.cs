@@ -9,6 +9,7 @@ namespace DropIt.DAL
 {
     public class EventRepository : GenericRepository<Event>
     {
+        private UnitOfWork uow = new UnitOfWork();
         public EventRepository(DropItContext context)
             : base(context)
         {
@@ -18,6 +19,13 @@ namespace DropIt.DAL
         public IEnumerable<Event> GetAvailable()
         {
             return this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate);
+        }
+
+        public IEnumerable<Event> GetRequestAvailable(int UserId)
+        {
+            var events = uow.UserRepository.GetById(UserId).Requests.Select(t=>t.Event);
+            var event2 = this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate).Except(events);
+            return event2;
         }
     }
 }
