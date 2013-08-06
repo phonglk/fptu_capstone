@@ -26,55 +26,25 @@
                 Bạn đang theo dõi <span class="badge badge-important">@Model.Count()</span> sự kiện
             </blockquote>
         </div>
-        <div class="row span9">
-
-            <div class="ticket-list">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr class="header warning">
-                            <th class="span3">Sự Kiện</th>
-                            <th class="">Thời gian</th>
-                            <th class="span3">Địa điểm</th>
-                            <th class="span2">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- row -->
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td class="first">
-                                    <a href="@Url.Action("Details","Event",new {Id = item.EventId})"
-                                        data-toggle="tooltip"
-                                        title="Đi đến sự kiện @item.Event.EventName">
-                                        @item.Event.EventName
-                                    </a>
-                                </td>
-                                <td class="date">
-                                    <a href="@Url.Action("Date","Event",new {Date = item.Event.HoldDate.ToString("dd/MM/yyyy")})"
-                                        data-toggle="tooltip"
-                                        title="Xem các sự kiện trong ngày @item.Event.HoldDate.ToString("dd/MM/yyyy")">
-                                        @item.Event.HoldDate
-                                    </a>
-                                </td>
-                                <td class="venue">
-                                    <a href="@Url.Action("Venue","Event",new {Id = item.Event.VenueId})"
-                                        data-toggle="tooltip"
-                                        title="Xem các sự kiện tổ chức ở @item.Event.Venue.VenueName">
-                                    @item.Event.Venue.VenueName
-                                </td>
-                                <td class="action">
-                                    
-                                    @*@using (Html.BeginForm("FollowEvent", "Event", FormMethod.Post,null)) {
-                                        @Html.Button("Bỏ theo dõi",new { type = "submit" });
-                                     @Html.Hidden("EventId", item.EventId);
-                                    }*@
-                                    <a href="#" class="btn-sub btn-follow btn btn-inverse" data-follow="true" data-eventId="@item.EventId">Theo dõi</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+        <div class="span9">
+            <div class="row">
+                @{
+                    ViewBag.Items = Model;
+                    //ViewBag.Items_ExtraTemplate = "Partials/Templates/EventList_Item_Extra_Search";
+                    ViewBag.EventListClass = "compact";
+                    ViewBag.Paging_TotalRecordCount = ViewBag.TotalCount;
+                    try
+                    {
+                        ViewBag.Paging_StartIndex = Int32.Parse(Request["StartIndex"]);
+                    }
+                    catch (Exception e) { }
+                    ViewBag.Paging_ExtraParameters = String.Format("&CategoryId={0}",
+                        Request["CategoryId"]);
+                }
+                @Html.Partial("Partials/Templates/EventList")
+                <div class="pull-right">
+                    @Html.Partial("Partials/Templates/Paging")
+                </div>
             </div>
         </div>
     </div>

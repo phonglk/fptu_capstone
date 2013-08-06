@@ -1,5 +1,8 @@
 ﻿@{
     var item = Model;
+    if(Model.Event){
+        item = item.Event;   
+    }
 }
 <div class="event row-fluid">
     <div class="span4 thumb">
