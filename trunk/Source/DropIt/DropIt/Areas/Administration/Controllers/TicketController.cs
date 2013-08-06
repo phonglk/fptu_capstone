@@ -199,19 +199,18 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult("Form is invalid"));
                 }
-                if (oldTicket.Status == 0) 
-                {
-                    Ticket.Status = 1;
-                }
-                else if (oldTicket.Status == 1) {
-                    Ticket.Status = 3;
-                }
-                else if (oldTicket.Status == 3)
-                {
-                    Ticket.Status = 3;
-                }
 
-                Repository.AddOrUpdate(Ticket);
+                if (oldTicket.Status == (int)Statuses.Ticket.Pending) 
+                {
+                    oldTicket.Status = (int)Statuses.Ticket.Ready;
+                }
+                else if (oldTicket.Status == (int)Statuses.Ticket.Ready)
+                {
+                    oldTicket.Status = (int)Statuses.Ticket.UserApprove;
+                }
+                oldTicket.EventId = Ticket.EventId;
+                oldTicket.Description = Ticket.Description;
+                Repository.AddOrUpdate(oldTicket);
                 unitOfWork.Save();
                 return Json(new JSONResult());
             }
