@@ -9,6 +9,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Partial("Partials/RoleTab")
+<style>
+    span[data-follow] {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+</style>
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
@@ -33,6 +40,7 @@
                     //ViewBag.Items_ExtraTemplate = "Partials/Templates/EventList_Item_Extra_Search";
                     ViewBag.EventListClass = "compact";
                     ViewBag.Paging_TotalRecordCount = ViewBag.TotalCount;
+                    ViewBag.Items_ExtraTemplate = "Partials/Templates/Event_List_Item_Extra_Request";
                     try
                     {
                         ViewBag.Paging_StartIndex = Int32.Parse(Request["StartIndex"]);

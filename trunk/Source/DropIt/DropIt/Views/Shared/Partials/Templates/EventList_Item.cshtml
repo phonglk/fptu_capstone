@@ -1,7 +1,10 @@
 ﻿@{
-    var item = Model;
-    if(Model.Event){
-        item = item.Event;   
+    dynamic item = Model;
+    
+    try{
+        item = item.Event;
+    }catch(Exception e){
+        
     }
 }
 <div class="event row-fluid">

@@ -8,7 +8,13 @@
     <div id="bord">
         &nbsp;
     </div>
-
+<style>
+    ul {
+        list-style: none;
+        margin:0;
+        padding:0;
+    }
+</style>
 <div class="row">
     <div class="span3">
         <div class="sidebar-nav">
@@ -53,56 +59,76 @@
             <p>Không có giao dịch nào @DropIt.Common.Statuses.getText("BuyTicketStrings",(int)ViewBag.CurrentStatus)</p>
         </center>
         }else{
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        <span class="line"></span>Thời gian tổ chức
-                    </th>
-                    <th>
-                        <span class="line"></span>Sự kiện
-                    </th>
-                    <th>
-                        <span class="line"></span>Miêu tả ghế
-                    </th>
-                    <th>
-                        <span class="line"></span>Tiền mua
-                    </th>
-                    <th>
-                        <span class="line"></span>Người bán
-                    </th>
-@*                  <th>
-                        <span class="line"></span>Tình trạng
-                    </th>*@
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row -->
-                @foreach (var item in Model)
+            <ul style="margin-top:-10px">
+            @foreach (var item in Model.OrderByDescending(t => t.CreatedDate))
+            {
+                //if (item.Status != (int)DropIt.Common.Statuses.Ticket.Ready)
+                //{
+                //    continue;
+                //}
+                <li class="ticket">
+
+                    @if (@item.SeriesNumber != null)
+                    {
+                        <div class="serial"><strong>S\N: @item.SeriesNumber</strong></div>
+                    }
+                    <div class="buyer">
+                        <div class="buyer-name">
+                            <strong>Ngưới bán:</strong> @item.User.UserName
+                        </div>
+                        <div class="buyer-date">
+                            <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="event-name text-overflow">
+                            <a href="@Url.Action("Details","Event",new {Id = @item.EventId})">
+                            @item.Event.EventName
+                                </a>
+                        </div>
+                        <div class="event-artist">
+                            <span class="icon-star"></span>@item.Event.Artist
+                        </div>
+                        <div class="event-date">
+                            <span class="icon-calendar">&nbsp;</span>@item.Event.HoldDate.ToShortDateString().ToUpper()
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="icon-map-marker"></span>@item.Event.Venue.VenueName
+                            <br />
+                            <span class="icon-time"></span>&nbsp;@item.Event.HoldDate.ToLongTimeString()
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                @if (item.Seat != null)
                 {
-                    <tr class="first">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.HoldDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.EventName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Seat)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SellPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.UserName)
-                        </td>
-@*                      <td>
-                            @Html.DisplayFor(modelItem => item.TranStatus)
-                        </td>*@
-                    </tr>
+                    <span class="icon-random"></span> <text>Chỗ ngồi:</text> @item.Seat
                 }
-            </tbody>
-        </table>
+                        </div>
+                        @*<div class="event-venue">
+                                    
+            </div>*@
+                        <div>
+                            <strong>Chú thích:</strong> <span data-unraw>@Html.Raw(item.Description)</span>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span data-vnd>@item.SellPrice</span> VNĐ
+                    </div>
+                    <div class="qrcode">
+                        @Html.QRCode(Url.Action("Buy", "Ticket", new { Id = item.TicketId }, Request.Url.Scheme), 50, 2)
+                    </div>
+                    <div class="action">
+                        @*@if (item.TranStatus != null)
+                        {
+                            <a href="#" class="btn btn-inverse btn-buy btn-small disabled" style="width: 85px"
+                                data-toggle="tooltip"
+                                title="Vé này đang được giao dịch, bấm theo dõi để nhận được thông báo nếu vé này bị hủy giao dịch">Đang giao dịch</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Buy", "Ticket", new { Id = @item.TicketId })" class="btn main buy-ticket">Đặt vé</a>
+                        }*@
+                    </div>
+                </li>
+            }
+        </ul>
         }
     </div>
 </div>
