@@ -37,19 +37,11 @@
                 </div>
             </div>
             <div class="span6">
-                @*@using (Html.HorizontalForm())
-                {
-                    @Html.LabelAndControl("Thời gian: ", Html.Value("Event.HoldDate"))
-                    @Html.LabelAndControl("Trạng thái: ", Html.Value("Status"))
-                    @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
-                    @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
-                    @Html.LabelAndControl("Miêu tả: ", Html.Value("Description"))
-                }*@
 
                 @using (Html.HorizontalForm())
                 {
                     @Html.LabelAndControl("Thời gian: ", Html.Value("Event.HoldDate"))
-                    <div class="control-group">
+                    @*<div class="control-group">
                         @Html.LabelFor(model => model.Status, new { @class = "control-label" })
                         <div class="controls">
                             
@@ -69,24 +61,18 @@
                             }
                             }
                         </div>
-                    </div>
+                    </div>*@
                     @Html.LabelAndControl("Danh mục: ", Html.Value("Event.Category.CategoryName"))
                     @Html.LabelAndControl("Địa điểm: ", Html.Value("Event.Venue.VenueName"))
                     @Html.LabelAndControl("Miêu tả: ", Html.Value("Description"))
                 }
 
             </div>
-            <div>
-            </div>
             <div class="span9">
-                <hr />
-                <a href="@Url.Action("Index", "Request")">Trở về trang Danh sách các loại vé đang được rao mua</a>
+                <br />
+                <br />
+                <a href="@Url.Action("Index", "Request")" class="btn btn-gen btn-mid">Quay về</a>
             </div>
-            @*<div class="display-des span9">
-             
-                <br />
-                <br />
-            </div>*@
         </div>
     </div>
 </div>
