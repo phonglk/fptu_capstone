@@ -320,7 +320,7 @@ namespace DropIt.Controllers
                         Event newevent = new Event()
                         {
                             EventName = ticket.EventName,
-                            Status = 0,
+                            Status = (int)Statuses.Request.Open,
                             HoldDate = (DateTime)ticket.HoldDate,
                             CategoryId = ticket.CategoryId,
                             VenueId = (int)ticket.VenueId
