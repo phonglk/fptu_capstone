@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DropIt.Models.TicketResponse>
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                @Html.Partial("Partials/SideBar")
+            </div>
+        </div>
+        <div class="span9">
+            <h3>Danh sách các loại vé đang được giới thiệu </h3>
+        </div>
+
+        <div class="row span9">
+            <div class="ticket-list">
+                <table class="table table-condensed event-detail">
+                    <thead>
+                        <tr class="header warning">
+                            <th class="">Tên sự kiện</th>
+                            <th class="">Người rao mua</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        { 
+                            <tr class="first">
+                                <td>@Html.DisplayFor(modelItem => item.Request.Event.EventName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Request.User.UserName)</td>
+                            </tr>
+             
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
