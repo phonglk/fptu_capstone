@@ -10,7 +10,7 @@ namespace DropIt.Common
     {
         public enum UserActive { Deactive, Active, Delete };
         public enum UserSellable { True,False };
-        public enum Ticket { Pending,Ready,Delete, UserApprove, OnTransaction, Done};
+        public enum Ticket { Pending,Ready,Delete, UserApprove, OnTransaction};
         public static String[] TicketStrings = new string[] {"Chưa được phép", "Được phép", "",""};
         public static String[] TicketString2 = new string[] { "Chưa được phép", "Được phép", "", "Đang đợi chấp nhận" };
         public enum Event { Disapprove, Approve, Delete, Trading , Outdate };

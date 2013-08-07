@@ -121,8 +121,20 @@
                     </div>
                     <div class="ticket-list tab-pane active" id="ticket-list">
                         <div>
+                            @{
+                                int eStartIndex;
+                                int ePageSize;
+                                int eTotalCount = Model.Tickets.Count;
+                                if(!Int32.TryParse(Request["eStartIndex"],out eStartIndex)){
+                                    eStartIndex = 0;
+                                }
+                                if (!Int32.TryParse(Request["ePageSize"], out ePageSize))
+                                {
+                                    ePageSize = 5;
+                                }
+                            }
                             <ul>
-                                @foreach (var item in Model.Tickets.OrderByDescending(t => t.CreatedDate))
+                                @foreach (var item in Model.Tickets.OrderByDescending(t => t.CreatedDate).Skip(eStartIndex).Take(ePageSize))
                                 {
                                     if (item.Status != (int)DropIt.Common.Statuses.Ticket.Ready)
                                     {

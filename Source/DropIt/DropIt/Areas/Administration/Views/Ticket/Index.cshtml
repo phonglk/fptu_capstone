@@ -162,16 +162,45 @@
         })
     }
     list.Approve = function(item){
-        list.AjaxAction({
-            item:item,
-            urlData:{Action:"Approve",Data:{Id:item.TicketId}},
-            callback:function(event){
-                Notifications.push({
-                    text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
-                    autoDismiss:5
-                })
+        if(item.Event.IsApprove == true && item.Event.IsVenueApprove ==true){
+            list.AjaxAction({
+                item:item,
+                urlData:{Action:"Approve",Data:{Id:item.TicketId}},
+                callback:function(event){
+                    Notifications.push({
+                        text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
+                        autoDismiss:5
+                    })
+                }
+            })
+        }else{
+            var msg = "";
+            if(item.Event.IsApprove == false){
+                msg+="Sự kiện <strong>"+item.Event.EventName+"</strong>.";
             }
-        })
+            if(item.Event.IsVenueApprove == false){
+                msg+="Địa điểm <strong>"+item.Event.VenueName+"</strong>";
+            }
+            msg+=" sẽ được duyệt khi bạn duyệt vé này. Bạn có chắc là muốn duyệt vé này ?";
+
+            $.fn.dialog2.helpers.confirm(msg,
+            {
+                title: "Xác nhận",
+                confirm:function(){
+                    list.AjaxAction({
+                        item:item,
+                        urlData:{Action:"Approve",Data:{Id:item.TicketId}},
+                        callback:function(event){
+                            Notifications.push({
+                                text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
+                                autoDismiss:5
+                            })
+                        }
+                    })
+                }
+            }
+        )
+        }
     }
     list.Delete = function(item){
         $.fn.dialog2.helpers.confirm("Bạn có chắc là muốn xóa vé có mã số \""+item.TicketId+"\" ?",

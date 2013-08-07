@@ -162,7 +162,6 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket ticket = Repository.GetById(Id);
                 ticket.TranPaymentStatus = (int)Statuses.Payment.Done;
-                ticket.Status = (int)Statuses.Ticket.Done;
                 Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new

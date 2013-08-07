@@ -394,7 +394,9 @@ hr {
     font-family: Arial;
 }
 
-    #left-nav > li > a:hover, #left-nav > li > a:focus {
+    #left-nav > li > a:hover, 
+    #left-nav > li > a:focus,
+    #left-nav > li > a.active {
         text-decoration: none;
         background-color: #fff;
         color: #582d52;

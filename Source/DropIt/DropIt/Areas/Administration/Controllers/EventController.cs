@@ -115,7 +115,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     Message = "Ngày diễn ra sự kiện phải sau ngày hiện tại!"
                 });
             }
@@ -129,7 +129,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new
                     {
-                        Result = "Lỗi",
+                        Result = "ERROR",
                         Message = "Hình sự kiện phải ở định dạng hình ảnh và bé hơn 5MB"
                     });
                 }
@@ -160,7 +160,7 @@ namespace DropIt.Areas.Administration.Controllers
 
             return Json(new
             {
-                Result = "Lỗi",
+                Result = "ERROR",
                 Message = Error
             });
         }
@@ -210,7 +210,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new JSONResult()
                     {
-                        Result = "Lỗi",
+                        Result = "ERROR",
                         Message = "Sự kiện này đã có vé đã hoặc đang giao dịch nên không thể sửa thông tin"
                     });
             }
@@ -219,7 +219,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     Message = "Ngày diễn ra sự kiện phải sau ngày hiện tại!"
                 });
             }
@@ -233,7 +233,7 @@ namespace DropIt.Areas.Administration.Controllers
                 {
                     return Json(new JSONResult()
                     {
-                        Result = "Lỗi",
+                        Result = "ERROR",
                         Message = "Phải là hình ảnh và kích thước < 5MB"
                     });
                 }
@@ -288,7 +288,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     Message = "Không tìm thấy sự kiện"
                 });
             }
@@ -330,7 +330,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -343,6 +343,23 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Event delete = Repository.Get(e => e.EventId == Id).FirstOrDefault();
+                if (delete == null)
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message = "Không tìm thấy sự kiện cần xóa"
+                    });
+                }
+                if (delete.Tickets.Where(t => t.Status != (int)Statuses.Ticket.Delete).Count() > 0)
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message = "Sự kiện này đã có vé được đăng không thể bỏ duyệt"
+                    });
+                }
+                 
                 delete.Status = (int)Statuses.Event.Disapprove;
 
                 Repository.AddOrUpdate(delete);
@@ -357,7 +374,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -384,7 +401,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
