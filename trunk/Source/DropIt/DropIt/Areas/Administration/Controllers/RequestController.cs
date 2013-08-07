@@ -99,7 +99,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = EventId,
                     Message = e.Message
                 });
