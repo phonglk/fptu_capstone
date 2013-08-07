@@ -449,7 +449,7 @@ namespace DropIt.Controllers
             {
                 HttpNotFound();
             }
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName",
                                              ticket.EventId);
             return View(ticket);
         }
@@ -487,6 +487,8 @@ namespace DropIt.Controllers
                                        };
                 this.unitOfWork.TicketRepository.AddOrUpdate(newTicket);
                 this.unitOfWork.TicketRepository.Save();
+
+                Session["Message"] = "Đã cập nhật vé thành công";
                 return RedirectToAction("Manage");
             }
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
@@ -505,38 +507,32 @@ namespace DropIt.Controllers
             return View(ticketList.ToList());
         }
 
-        //[HttpPost]
-        //public JsonResult Count(int id)
-        //{
-        //    int status = id;
-        //    var UserId = WebSecurity.GetUserId(User.Identity.Name);
-        //    int count = 0;
+        
+        public ActionResult Delete(int Id)
+        {
+            Ticket oldTicket = Repository.GetById(Id);
+            if (oldTicket.Status == (int)Statuses.Ticket.OnTransaction)
+            {
+                Session["Message"] = "Vé này đang giao dịch nên không thể sửa thông tin";
+                return RedirectToAction("Manage");
+            }
+            try
+            {
 
-        //    if (Request["extra"] != null && Request["extra"] == "ontransaction")
-        //    {
-        //        count = Repository.Get(r => r.UserId == UserId && r.TranStatus==null && (r.Status == (int)Statuses.Ticket.Ready || r.Status == (int)Statuses.Ticket.Pending) || r.Status ==(int)Statuses.Ticket.UserApprove).Count();
-        //        return Json(new
-        //        {
-        //            Result = "OK",
-        //            Count = count
-        //        });
-        //    }
+                oldTicket.Status = (int)Statuses.Ticket.Delete;
+                Repository.AddOrUpdate(oldTicket);
+                unitOfWork.Save();
 
-        //    if (id == -1)
-        //    {
-        //        count = Repository.Get(r => r.UserId== UserId && r.TranStatus==null && r.Status != null).Count();
-        //    }
-        //    else
-        //    {
-        //        count = Repository.Get(r => r.UserId == UserId && r.TranStatus == null && r.Status == status).Count();
-        //    }
+                Session["Message"] = "Đã xóa vé thành công";
+                return RedirectToAction("Manage");
+            }
+            catch (Exception e)
+            {
 
-        //    return Json(new
-        //    {
-        //        Result = "OK",
-        //        Count = count
-        //    });
-        //}
+                Session["Message"] = "Có lỗi trong quá trình xử lý. Xin liên hệ admin để cung cấp thông tin";
+                return RedirectToAction("Manage");
+            };
+        }
 
         public ActionResult Details (int id=0)
         {

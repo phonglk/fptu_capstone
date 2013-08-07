@@ -388,7 +388,9 @@ function DataList() {
                     }
                 } else {
                     if (obj.callbackOnFail) {
-                        obj.callbackOnFail.call(this,rs.Message);
+                        obj.callbackOnFail.call(this, rs.Message);
+                    } else {
+                        $.fn.dialog2.helpers.alert(rs.Message, { title: "Lỗi" })
                     }
                 }
             }
@@ -410,6 +412,8 @@ function DataList() {
                 } else {
                     if (obj.callbackOnFail) {
                         obj.callbackOnFail.call();
+                    } else {
+                        $.fn.dialog2.helpers.alert(rs.Message, {title:"Lỗi"})
                     }
                 }
             }

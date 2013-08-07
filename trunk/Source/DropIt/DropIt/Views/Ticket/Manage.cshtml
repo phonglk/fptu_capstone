@@ -37,7 +37,7 @@
                 var statuses = Enum.GetValues(typeof(DropIt.Common.Statuses.Ticket)).Cast<Int32>().ToList();
                 foreach (int statusValue in statuses)
                 {
-                    if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction || statusValue==(int)Statuses.Ticket.Done)
+                    if (statusValue == (int)DropIt.Common.Statuses.Ticket.Delete || statusValue == (int)DropIt.Common.Statuses.Ticket.OnTransaction || statusValue > 4)
                     {
                         continue;
                     }
@@ -73,7 +73,10 @@
                 //    continue;
                 //}
                 <li class="ticket">
-
+                    <div style="position: absolute; bottom: 10px; left: 10px;">
+                        <a href="@Url.Action("Delete", new { Id = @item.TicketId })" onclick="return confirm('Bạn có chắc chắn muốn xóa vé này?')" class="btn main">Xóa</a>
+                        <a href="@Url.Action("Edit", new { Id = @item.TicketId })" class="btn main">Sửa</a>
+                    </div>
                     @if (@item.SeriesNumber != null)
                     {
                         <div class="serial"><strong>S\N: @item.SeriesNumber</strong></div>

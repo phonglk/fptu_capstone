@@ -25,7 +25,7 @@
         <div class="span9">
             @using (Html.BeginForm())
             {     
-                <p>
+                <p> 
 
                     <ul class="nav nav-tabs">
                         @{                
@@ -53,14 +53,14 @@
                                 @if ((int)ViewBag.CurrentStatus == (int)Statuses.Transaction.Paid)
                                 {
                                     <span>
-                                    Các giao dịch đã được thanh toán, chờ chuyển vé
+                                    Người mua đã thanh toán, chờ lấy vé
                                     </span>
                                 }
                                 else if ((int)ViewBag.CurrentStatus == (int)Statuses.Transaction.Delivered)
                                 {
-                                    <span>Các vé đã được giao, xin bấm nhận hàng nếu nhận được</span>
+                                    <span>Các vé đang được giao cho người mua</span>
                                 }else if ((int)ViewBag.CurrentStatus == (int)Statuses.Transaction.Received){
-                                    <span>Các vé bạn đã nhận, xin liên hệ trực tiếp nếu có khiếu nại</span>
+                                    <span>Người mua đã nhận được vé</span>
                                 }
                             </li>
                         }

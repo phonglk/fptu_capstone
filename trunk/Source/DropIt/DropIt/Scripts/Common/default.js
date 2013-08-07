@@ -9,7 +9,7 @@ $(function () {
     text_overflow();
     bootstrap();
     unraw_html();
-
+    highlight_leftnav();
     
 })
 
@@ -299,3 +299,11 @@ function unraw_html() {
     })
 }
 
+function highlight_leftnav() {
+    if ($("#left-nav").length > 0) {
+        var path = location.pathname;
+        //if(location.search.indexOf())
+        $("#left-nav a[href*='" + path + "']").addClass("active");
+    }
+
+}

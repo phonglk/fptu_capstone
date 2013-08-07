@@ -61,7 +61,10 @@ namespace DropIt.Areas.Administration.Controllers
                     {
                         e.EventId,
                         e.Event.EventName,
-                        e.Event.HoldDate
+                        e.Event.HoldDate,
+                        IsApprove = e.Event.Status != (int)Statuses.Event.Disapprove,
+                        IsVenueApprove = e.Event.Venue.Status != (int)Statuses.Venue.Disapprove,
+                        VenueName = e.Event.Venue.VenueName
                     },
                     SellPrice = e.SellPrice,
                     SeriesNumber = e.SeriesNumber,
@@ -88,6 +91,16 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket ticket = Repository.GetById(Id);
                 ticket.Status = (int)Statuses.Ticket.Ready;
+
+                if (ticket.Event.Status == (int)Statuses.Event.Disapprove)
+                {
+                    ticket.Event.Status = (int)Statuses.Event.Approve;
+                }
+
+                if (ticket.Event.Venue.Status == (int)Statuses.Venue.Disapprove)
+                {
+                    ticket.Event.Venue.Status = (int)Statuses.Venue.Approve;
+                }
 
                 Repository.AddOrUpdate(ticket);
                 Repository.Save();
@@ -223,6 +236,8 @@ namespace DropIt.Areas.Administration.Controllers
                 return Json(new JSONResult(e));
             };
         }
+
+        
 
     
         protected override void Dispose(bool disposing)
