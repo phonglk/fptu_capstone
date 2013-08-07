@@ -14,10 +14,11 @@ using DropIt.Filters;
 
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class VenueController : Controller
     {
-        [Authorize(Roles = "Administrator")]
-        [InitializeSimpleMembership]
+        
         private UnitOfWork unitOfWork = new UnitOfWork();
         private GenericRepository<Venue> Repository;
         //
