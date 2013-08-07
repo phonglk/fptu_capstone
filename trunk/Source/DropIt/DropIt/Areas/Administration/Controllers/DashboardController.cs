@@ -4,8 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DropIt.Hubs;
+using DropIt.Filters;
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class DashboardController : Controller
     {
         //

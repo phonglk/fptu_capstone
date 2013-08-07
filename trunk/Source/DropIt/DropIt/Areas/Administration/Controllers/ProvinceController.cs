@@ -1,5 +1,6 @@
 ﻿using DropIt.Common;
 using DropIt.DAL;
+using DropIt.Filters;
 using DropIt.Models;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,8 @@ using System.Web.Mvc;
 
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class ProvinceController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

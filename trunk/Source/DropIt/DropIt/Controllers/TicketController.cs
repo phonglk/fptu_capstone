@@ -163,6 +163,9 @@ namespace DropIt.Controllers
                     this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
                     this.unitOfWork.Save();
                 }
+
+                Session["Message"] = "Bạn đã đăng vé thành công !";
+                Session["MessageType"] = "success";
                 return RedirectToAction("Index", "Home");
             }
             
@@ -360,6 +363,9 @@ namespace DropIt.Controllers
                     this.unitOfWork.RequestRepository.AddOrUpdate(request);
                     this.unitOfWork.Save();
                 }
+
+                Session["Message"] = "Bạn đã rao vé thành công, xin hãy chờ người phản hồi vé !";
+                Session["MessageType"] = "success";
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",

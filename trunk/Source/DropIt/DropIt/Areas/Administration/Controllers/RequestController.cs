@@ -11,10 +11,12 @@ using DropIt.Common;
 using System.Diagnostics;
 using DropIt.Areas.Administration.ViewModels;
 using WebMatrix.WebData;
+using DropIt.Filters;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class RequestController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
