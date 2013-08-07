@@ -1,5 +1,8 @@
 ﻿@{
     try{
+        if(Session["Role"]==null){
+            Session["Role"] = "Event";
+        }
         if (User.Identity.IsAuthenticated){
     
             <div id="role-tab" class="container">
@@ -13,12 +16,12 @@
                         </li>
                         <li class="@(Session["Role"].Equals("Sell")?"active":"")">
                             <a href="@Url.Action("Sell","Home")">Bán Vé</a>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
             </div>
         }
     }catch(Exception e){
-        
+        <!-- Error: @e.Message -->
     }
 }

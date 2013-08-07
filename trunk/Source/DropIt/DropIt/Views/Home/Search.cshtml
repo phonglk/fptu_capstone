@@ -5,11 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.Partial("Partials/RoleTab")
-<style>
-    .btn-group .btn {
-        color:black;
-    }
-</style>
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
@@ -108,12 +103,12 @@
             }
         }
         function init() {
-            $(".event-list .event-name").each(function () {
-                highlightResult($(this));
-            })
-            $(".event-list .artist").each(function () {
-                highlightResult($(this));
-            })
+            //$(".event-list .event-name").each(function () {
+            //    highlightResult($(this));
+            //})
+            //$(".event-list .artist").each(function () {
+            //    highlightResult($(this));
+            //})
             //$("#main-content .pagination li").not(".active").find("a").click(function (e) {
             //    var href = $(this)[0].href;
             //    $("#main-content").load(href + " #main-content .inner-content", function () {
