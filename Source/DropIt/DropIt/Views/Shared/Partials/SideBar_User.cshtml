@@ -3,10 +3,9 @@
 
 @if(Session["Role"]!=null && Session["Role"].Equals("Sell")){
     
-    <li><a href="@Url.Action("Manage","Ticket")">Giao dịch đang thực hiên <span
-    class="badge badge-info count-transaction">Updating</span></a></li>
+    <li><a href="@Url.Action("Manage","Ticket")">Quản lý vé</a></li>
 
-    <li><a href="@Url.Action("Manage", "Ticket", new { status = 1 })">Lịch sử giao dịch</a></li>
+    <li><a href="@Url.Action("HistorySell", "Transaction", new { status = 1 })">Quản lý giao dịch</a></li>
     <li class=""><a href="@Url.Action("Events","Follow",null,"http")">Danh sách theo dõi</a></li>
 }else{
     <li><a href="@Url.Action("HistoryBuy","Transaction")">Giao dịch đang thực hiên <span
