@@ -7,10 +7,12 @@ using DropIt.DAL;
 using DropIt.Models;
 using DropIt.ViewModels;
 using DropIt.Common;
+using DropIt.Filters;
 
 namespace DropIt.Areas.Administration.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class SettingController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

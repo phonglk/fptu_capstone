@@ -22,6 +22,12 @@
   font-family: "HN-Light";
   src: url('Fonts/HelveticaNeue-Light.otf') format('truetype');
 }
+.alert {
+  color: #9E814D;
+}
+.alert-success {
+  color: #326332;
+}
 ::-webkit-scrollbar {
   width: 15px;
 }

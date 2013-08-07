@@ -10,9 +10,12 @@ using DropIt.DAL;
 using DropIt.Common;
 using System.Diagnostics;
 using DropIt.Areas.Administration.ViewModels;
+using DropIt.Filters;
 
 namespace DropIt.Areas.Administration.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class TransactionController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
