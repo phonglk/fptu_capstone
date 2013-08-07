@@ -107,7 +107,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Event.HoldDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Event.EventName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Event.Venue.VenueName)</td>
-                                    <td>@(item.Status == 1 ? "Đang giao dịch" : "Đã đóng giao dịch")</td>
+                                    <td>@(item.Status == 1 ? "N/A" : "Đang yêu cầu")</td>
                                     <td class="action">
                                         <a href="@Url.Action("Details", "Request", new { UserId = item.UserId, EventId = item.EventId })"
                                             class="btn btn-inverse btn-buy btn-small">Chi tiết</a>
@@ -115,12 +115,12 @@
                                             if (item.Status == 0)
                                             {
                                                 <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
-                                                        class="btn btn-inverse btn-buy btn-small">Mở</a>
+                                                        class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
                                             }
                                             else if (item.Status == 1)
                                             {
                                                 <a href="@Url.Action("CloseorOpen", "Request", new { EventId = item.EventId })"
-                                                        class="btn btn-inverse btn-buy btn-small" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?')">Đóng</a>
+                                                        class="btn btn-inverse btn-buy btn-small">Mở</a>
                                             }
                                         }
                                         @*<a href="@Url.Action("CloseorOpen","Request",new { UserId = item.UserId, EventId = item.EventId})" class="btnClose" data-close="#" data-toggle="tooltip" onclick="return confirm('Bạn có chắc chắn muốn đóng giao dịch này?');">Đóng</a>*@
