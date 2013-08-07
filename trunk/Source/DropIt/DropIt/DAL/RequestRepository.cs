@@ -9,6 +9,8 @@ namespace DropIt.DAL
 {
     public class RequestRepository : GenericRepository<Request>
     {
+
+        UnitOfWork uow = new UnitOfWork();
         public RequestRepository(DropItContext context)
             : base(context)
         {
@@ -25,6 +27,30 @@ namespace DropIt.DAL
                 request.CreatedDate = now;
                 request.ModifiedDate = now;
                 context.Requests.Add(request);
+
+                Event Event = uow.EventRepository.GetById(request.EventId);
+                if (Event != null && Event.UserFollowEvents.Count > 0)
+                {
+                    foreach (UserFollowEvent follow in Event.UserFollowEvents)
+                    {
+                        if (follow.UserId == request.UserId)
+                        {
+                            continue;
+                        }
+                        Notification Noti = new Notification()
+                        {
+                            UserId = follow.UserId,
+                            SenderId = request.EventId,
+                            ObjectUrl = "/Event/Details/" + request.EventId+"#request",
+                            ObjectType = "Event",
+                            ObjectTitle = Event.EventName,
+                            ActivityType = "Request",
+                            IsUnread = true
+                        };
+                        uow.NotificationRepository.AddOrUpdate(Noti);
+                    }
+                    uow.NotificationRepository.Save();
+                }
             }
             else
             {

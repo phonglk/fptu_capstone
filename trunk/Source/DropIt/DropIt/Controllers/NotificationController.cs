@@ -28,7 +28,7 @@ namespace DropIt.Controllers
         }
 
         [HttpPost]
-        public JsonResult ReadAll(int FollowType = 2)
+        public JsonResult ReadAll(int FollowType = -1)
         {
 
             try

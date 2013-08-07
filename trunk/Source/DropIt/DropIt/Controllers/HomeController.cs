@@ -52,7 +52,8 @@ namespace DropIt.Controllers
         public ActionResult SellIndex()
         {
             Session["Role"] = "Sell";
-            return View();
+            IEnumerable<Event> TopRequestedEvent = unitOfWork.EventRepository.GetAvailable().OrderByDescending(e => e.Requests.Count).Take(5);
+            return View(TopRequestedEvent);
         }
 
         private List<string> ReduceRedundancy(List<string> strings)

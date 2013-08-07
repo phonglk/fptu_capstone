@@ -45,8 +45,14 @@
                     </a>
                     <div class="noti5-list-container">
                         <div class="noti5-list-inner" data-bind="event: {scroll: listscroll}">
-                            <!-- ko if:data.length == 0 -->
-                            <center>Không có thông báo nào</center>
+                            <!-- ko if:data().length == 0 -->
+                            <center style="color:white">Không có thông báo nào</center>
+                            <style>
+                                .noti5-wrapper .noti5-list-container {
+                                    height:25px;
+                                    overflow:hidden;
+                                }
+                            </style>
                             <!-- /ko -->
                             <ul class="noti5-list" data-bind="foreach: data">
                                 <li>
@@ -72,7 +78,7 @@
                             </ul>
                             </div>
                             
-                                <a href="#" class="see-all">Xem tất cả</a>
+                                @*<a href="#" class="see-all">Xem tất cả</a>*@
                             
                         </div>
                 </li>

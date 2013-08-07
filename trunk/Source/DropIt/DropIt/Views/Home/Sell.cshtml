@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<DropIt.Models.Event>
+@{
     ViewBag.Title = "Sell";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -15,7 +16,60 @@
             </div>
         </div>
         <div class="span9">
-            Buy
+            <h2>Top 5 Sự kiện được rao mua vé nhiều nhất</h2>
+            <div class="event-list compact">
+                @foreach (var item in Model)
+                {
+                    <div class="event row-fluid">
+                        <div class="span4 thumb">
+                            <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
+                                <div class="event-image" style="background-image:url('@Url.Action("Image", "Event", new { Id = item.EventId })')"></div>
+                            </a>
+                        </div>
+                        <div class="span6 description">
+                            <p class="event-title">
+                                <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
+                                    <span
+                                        class="event-name">@item.EventName</span>
+                                </a>
+                            </p>
+                            <div class="misc">
+                                <div>
+                                    <span class="icon-bullhorn"></span>
+                                    <span><span class="badge badge-info">@item.Requests.Count()</span> yêu cầu vé</span>
+                                </div>
+                                <div class="place">
+                                    <span class="icon-map-marker"></span>
+                                    <span title="@item.Venue.Address , @item.Venue.Province.ProvinceName">@item.Venue.VenueName</span>
+
+                                </div>
+                                <div class="artist">
+                                    <span class=" icon-star"></span>
+                                    <span
+                                        class="artist">@item.Artist</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span2 datetime">
+                            <div class="date">
+                                @{
+                    var clone = new DateTime(item.HoldDate.Ticks);
+                    var Month = clone.ToShortMonthName();
+                                }
+                                <div class="month">@Month</div>
+                                <div class="clr"></div>
+                                <div class="day">@item.HoldDate.ToString("dd")</div>
+                                <div class="start" style="display: none">7/26/2013 6:00:00 PM</div>
+                            </div>
+                            <div class="time">
+                                <span class="icon-time"></span>
+                                @item.HoldDate.ToString("hh") :
+                    @item.HoldDate.ToString("mm")
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
