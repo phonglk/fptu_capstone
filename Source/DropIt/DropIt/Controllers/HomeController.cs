@@ -138,6 +138,7 @@ namespace DropIt.Controllers
                             Event.EventName.Matches = new List<string>{
                                 query
                             };
+                            Event.IsFuzz = false;
                             foundEvent.Result.Add(Event);
                         }
                     }

@@ -13,10 +13,13 @@ namespace DropIt.ViewModels
         public int TotalCount = 0;
     }
 
-    public class ResultEvent :IComparable<ResultEvent>{
+    public class ResultEvent : IComparable<ResultEvent>
+    {
         public int EventId { get; set; }
 
         public SearchResultTextField EventName = new SearchResultTextField();
+
+        public bool IsFuzz { get; set; }
 
         public string EventImage { get; set; }
 
@@ -46,32 +49,45 @@ namespace DropIt.ViewModels
             Venue = Event.Venue;
             CreatedDate = Event.CreatedDate;
             ModifiedDate = Event.ModifiedDate;
+            IsFuzz = true;
         }
 
         public int CompareTo(ResultEvent other)
         {
-            if ((this.EventName.Matches.Count + this.Artist.Matches.Count) < (other.EventName.Matches.Count + other.Artist.Matches.Count))
-            {
-                return 1;
-            }
-            else if ((this.EventName.Matches.Count + this.Artist.Matches.Count) > (other.EventName.Matches.Count + other.Artist.Matches.Count))
+            if (this.IsFuzz == false && other.IsFuzz == true)
             {
                 return -1;
             }
+            else if (this.IsFuzz == true && other.IsFuzz == false)
+            {
+                return 1;
+            }
             else
             {
-                return 0;
+
+                if ((this.EventName.Matches.Count + this.Artist.Matches.Count) < (other.EventName.Matches.Count + other.Artist.Matches.Count))
+                {
+                    return 1;
+                }
+                else if ((this.EventName.Matches.Count + this.Artist.Matches.Count) > (other.EventName.Matches.Count + other.Artist.Matches.Count))
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 
-        public int CompareTo(ResultEvent other,ResultEventComparer.ComparisonType comparisonMethod)
+        public int CompareTo(ResultEvent other, ResultEventComparer.ComparisonType comparisonMethod)
         {
             switch (comparisonMethod)
             {
-                case ResultEventComparer.ComparisonType.Relevant :
+                case ResultEventComparer.ComparisonType.Relevant:
                     return this.CompareTo(other);
                     break;
-                case ResultEventComparer.ComparisonType.HoldDate :
+                case ResultEventComparer.ComparisonType.HoldDate:
                     if (this.HoldDate < other.HoldDate)
                     {
                         return 1;
@@ -105,7 +121,7 @@ namespace DropIt.ViewModels
 
         public int Compare(ResultEvent x, ResultEvent y)
         {
-            return x.CompareTo(y,ComparisonMethod);
+            return x.CompareTo(y, ComparisonMethod);
         }
     }
 
