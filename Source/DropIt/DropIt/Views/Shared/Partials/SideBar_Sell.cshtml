@@ -3,7 +3,7 @@
         @Html.Partial("Partials/SideBar_User")
         <li class="nav-header">Bán Vé</li>
         <li><a href="@Url.Action("Create","Ticket")">Bán vé</a></li>
-        <li><a href="@Url.Action("SellerIndex","Request")">Danh sách rao mua</a></li>
+        <li><a href="@Url.Action("Index","TicketResponse")">Danh sách giới thiệu</a></li>
         @foreach (DropIt.Models.Category cat in ViewBag.Categories)
         {
         <li>

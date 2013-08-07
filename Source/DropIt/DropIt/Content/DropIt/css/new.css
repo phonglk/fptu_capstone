@@ -926,3 +926,6 @@ table.event-detail td.price {
     color: #431f59;
     margin: 20px;
 }
+#event-description {
+    margin-right: 5px;
+}
