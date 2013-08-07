@@ -23,6 +23,10 @@ function Noti5(obj) {
         self.Description += "Sự kiện <strong>" + self.ObjectTitle + "</strong> đã có"
         if (self.ActivityType == "Add") {
             self.Description += " vé mới được đăng bán";
+        } else if (self.ActivityType == "Request") {
+            self.Description += " yêu cầu vé được rao";
+        } else {
+            self.Description += " gì đó";
         }
     }
     self.time = self.CreatedDate.getHours().toLength(2) + ":" + self.CreatedDate.getMinutes().toLength(2)
@@ -46,7 +50,7 @@ function NotificationViewModel() {
             cache: false,
             dataType: "json",
             url: Url({ Controller: "Notification", Action: "List" }),
-            data: { FollowType: self.FollowType, jtPageSize: 4 },
+            data: { FollowType: -1, jtPageSize: 4 },
             success: function (data) {
                 if (data.Result == "OK") {
                     self.data.removeAll();
@@ -176,7 +180,7 @@ function startConnection() {
 var noti5_stack = { "dir1": "up", "dir2": "right", "push": "top" }
 Noti5Hub.client.received = function (message) {
     console.log(message);
-    var html = '<a href="#{ObjectUrl}"><div class="container"><div class="row-fluid"><div class="span3 avatar" style="background-image: url(http://localhost:2065/#{ObjectType}/Image/1);" ></div><div class="span7 description"><span>#{Description}</span></div><div class="span2 misc"><br><center><span>#{time}</span></center></div></div></div></a>';
+    var html = '<a href="#{ObjectUrl}"><div class="container"><div class="row-fluid"><div class="span3 avatar" style="background-image: url(http://localhost:2065/#{ObjectType}/Image/#{SenderId});" ></div><div class="span7 description"><span>#{Description}</span></div><div class="span2 misc"><br><center><span>#{time}</span></center></div></div></div></a>';
     var noti = new Noti5(message.Object);
     html = html.eval(noti)
     $.pnotify({

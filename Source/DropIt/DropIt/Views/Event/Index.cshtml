@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{Session["Role"] = "Event";}
 @Html.Partial("Partials/RoleTab")
 <div class="container" id="content">
     <div id="bord">

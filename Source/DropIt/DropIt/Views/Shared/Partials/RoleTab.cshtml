@@ -1,19 +1,24 @@
-﻿@if (User.Identity.IsAuthenticated){
+﻿@{
+    try{
+        if (User.Identity.IsAuthenticated){
     
-<div id="role-tab" class="container">
-    <div class="user-tab">
-        <ul class="nav nav-tabs">
-              <li class="@((Session["Role"]==null||Session["Role"].Equals("Event"))?"active":"")">
-                <a href="@Url.Action("Index","Home")">Sự Kiện</a>
-            </li>
-            <li class="@((Session["Role"]==null||Session["Role"].Equals("Buy"))?"active":"")">
-                <a href="@Url.Action("Buy","Home")">Mua Vé</a>
-            </li>
-            <li class="@(Session["Role"].Equals("Sell")?"active":"")">
-                <a href="@Url.Action("Sell","Home")">Bán Vé</a>
-            </li>
-        </ul>
-    </div>
-</div>
-    
+            <div id="role-tab" class="container">
+                <div class="user-tab">
+                    <ul class="nav nav-tabs">
+                          <li class="@((Session["Role"]==null||Session["Role"].Equals("Event"))?"active":"")">
+                            <a href="@Url.Action("Index","Home")">Sự Kiện</a>
+                        </li>
+                        <li class="@((Session["Role"]==null||Session["Role"].Equals("Buy"))?"active":"")">
+                            <a href="@Url.Action("Buy","Home")">Mua Vé</a>
+                        </li>
+                        <li class="@(Session["Role"].Equals("Sell")?"active":"")">
+                            <a href="@Url.Action("Sell","Home")">Bán Vé</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    }catch(Exception e){
+        
+    }
 }

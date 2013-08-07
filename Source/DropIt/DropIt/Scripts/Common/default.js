@@ -303,7 +303,7 @@ function highlight_leftnav() {
     if ($("#left-nav").length > 0) {
         var path = location.pathname;
         //if(location.search.indexOf())
-        $("#left-nav a[href*='" + path + "']").addClass("active");
+        $("#left-nav a[href^='" + path + "']").addClass("active");
     }
 
 }

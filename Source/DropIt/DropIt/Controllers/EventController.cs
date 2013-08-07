@@ -32,7 +32,8 @@ namespace DropIt.Controllers
             var events = this.unitOfWork.EventRepository.Get(e => e.Status == (int)Statuses.Event.Approve || e.Status == (int)Statuses.Event.Trading);
             if (CategoryId != -1)
             {
-                events = events.Where(e => e.CategoryId == CategoryId);
+                events = events.Where(e => e.CategoryId == CategoryId || (e.Category.Category2!= null && e.Category.Category2.CategoryId == CategoryId));
+                
             }
             ViewBag.TotalCount = events.Count();
             events = events.Skip(StartIndex).Take(PageSize).ToList();
