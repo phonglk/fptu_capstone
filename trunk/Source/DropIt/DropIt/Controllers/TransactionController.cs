@@ -42,6 +42,20 @@ namespace DropIt.Controllers
             return View(historyTransaction.ToList());
         }
 
+        public ActionResult HistorySell()
+        {
+            var status = Request["status"];
+            if (status == null) status = "1";
+            int CurrentStatus = Int32.Parse(status);
+
+            //ViewBag.status = new SelectList(StatusList);
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var historyTransaction = this.unitOfWork.TicketRepository.Get(u => u.UserId == UserId && u.TranStatus == CurrentStatus);
+
+            ViewBag.CurrentStatus = CurrentStatus;
+            return View(historyTransaction.ToList());
+        }
+
         public ActionResult Receive(int Id)
         {
             var tran = Repository.GetById(Id);

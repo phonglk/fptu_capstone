@@ -402,11 +402,17 @@ h2 {
   list-style: none;
 }
 .ticket {
-  width: 700px;
+  width: 680px;
   margin: 10px 0;
+  margin-left: 10px;
   height: 150px;
   background: url(../Images/ticket-bg.png) no-repeat;
   position: relative;
+  -webkit-transition: all 0.3s;
+}
+.ticket:hover {
+  box-shadow: 0 0 20px #451a54;
+  -webkit-transform: scale(1.01);
 }
 .ticket .info {
   width: 400px;
