@@ -114,7 +114,7 @@ namespace DropIt.Areas.Administration.Controllers
 
             return Json(new
             {
-                Result = "Lỗi",
+                Result = "ERROR",
                 Message = Error
             });
         }
@@ -177,7 +177,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -204,7 +204,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
@@ -241,7 +241,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 return Json(new
                 {
-                    Result = "Lỗi",
+                    Result = "ERROR",
                     EventId = Id,
                     Message = e.Message
                 });
