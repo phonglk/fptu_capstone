@@ -27,7 +27,7 @@ namespace DropIt.Controllers
         public ActionResult Index()
         {
             Session["Role"] = "Event";
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status != 4) && p.HoldDate >= DateTime.Now && p.Status!=(int)Statuses.Event.Delete).Take(10);
+            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status != 4) && p.HoldDate >= DateTime.Now && p.Status != (int)Statuses.Event.Delete).Take(10);
 
             return View(events.ToList());
         }
@@ -97,12 +97,6 @@ namespace DropIt.Controllers
 
             if (!String.IsNullOrEmpty(query))
             {
-                //events = (from t in events
-                //          where t.EventName.ToLower().Contains(eventnameofsearch.ToLower())
-
-                //            || t.Artist.ToLower().Contains(eventnameofsearch.ToLower())
-                //            || t.Description.ToLower().Contains(eventnameofsearch.ToLower())
-                //          select t).ToList();
                 foreach (Event evt in events)
                 {
                     List<String> splittedEvent = new List<String>();
@@ -136,6 +130,17 @@ namespace DropIt.Controllers
 
                         foundEvent.Result.Add(Event);
                     }
+                    else
+                    {
+                        if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(query.ToLower())))
+                        {
+                            ResultEvent Event = new ResultEvent(evt);
+                            Event.EventName.Matches = new List<string>{
+                                query
+                            };
+                            foundEvent.Result.Add(Event);
+                        }
+                    }
                 }
 
 
@@ -156,6 +161,11 @@ namespace DropIt.Controllers
                 foundEvent.TotalCount = foundEvent.Result.Count;
                 foundEvent.Result = foundEvent.Result.Skip(StartIndex).Take(PageSize).ToList();
 
+            }
+            else
+            {
+                Session["Message"] = "Bạn muốn tìm kiếm gì ?";
+                Session["MessageType"] = "Error";
             }
 
             return View(foundEvent);
