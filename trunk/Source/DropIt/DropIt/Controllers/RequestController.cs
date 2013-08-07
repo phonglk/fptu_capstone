@@ -31,7 +31,7 @@ namespace DropIt.Controllers
         public ActionResult Index()
         {
             var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
-            var rqt = this.unitOfWork.RequestRepository.Get(u => u.UserId == CurUserId);
+            var rqt = this.unitOfWork.RequestRepository.Get(u => u.UserId == CurUserId && u.Status!=(int)Statuses.Request.Close);
 
             return View(rqt.ToList());
         }
