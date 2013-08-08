@@ -772,6 +772,7 @@
     <Content Include="Content\Images\column-asc.png" />
     <Content Include="Content\Images\column-desc.png" />
     <Content Include="Content\Images\column-sortable.png" />
+    <Content Include="Content\Images\error.png" />
     <Content Include="Content\Images\No.JPG" />
     <Content Include="Content\Images\no_image.jpg" />
     <Content Include="Content\Images\SorryFace.png" />
@@ -1252,10 +1253,24 @@
     </Content>
     <None Include="Properties\PublishProfiles\Localhost.pubxml" />
     <Content Include="Scripts\Admin\AdminMenu.coffee" />
+    <Content Include="Scripts\Admin\Venue\Index.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\Venue\Index.min.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap\bootstrap-modal.js" />
     <Content Include="Scripts\bootstrap\bootstrap-modalmanager.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\Admin\fullcalendar.js" />
+    <Content Include="Scripts\Admin\Event\Index.coffee" />
+    <Content Include="Scripts\Admin\Event\Index.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\Event\Index.min.js">
+      <DependentUpon>Index.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.coffee" />
     <Content Include="Scripts\bootstrap-modal.js" />
     <Content Include="Scripts\bootstrap-modalmanager.js" />
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.css" />
@@ -1265,6 +1280,7 @@
     <Content Include="Scripts\class.js" />
     <Content Include="Scripts\Common\custom-binding.js" />
     <Content Include="Scripts\Common\default.js" />
+    <Content Include="Scripts\Admin\Venue\Index.coffee" />
     <Content Include="Scripts\bootstrap\datetimepicker\bootstrap-datetimepicker.min.js.map">
       <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
     </Content>
@@ -1334,6 +1350,12 @@
     <Content Include="Scripts\Admin\morris.min.js" />
     <Content Include="Scripts\Admin\select2.min.js" />
     <Content Include="Scripts\Admin\theme.js" />
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.js">
+      <DependentUpon>AdminEvent.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Admin\ViewModels\AdminEvent.min.js">
+      <DependentUpon>AdminEvent.coffee</DependentUpon>
+    </Content>
     <Content Include="Scripts\Admin\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\bootstrap-wysihtml5-0.0.2.js" />
     <Content Include="Scripts\bootstrap.datepicker.js" />
@@ -2385,7 +2407,11 @@
     <Content Include="Views\Follow\Index.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\Event_List_Item_Extra_Request.cshtml" />
     <Content Include="Views\Transaction\HistorySell.cshtml" />
-    <Content Include="Views\TicketResponse\Index.cshtml" />
+    <Content Include="Views\TicketResponse\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\TicketResponse\Create.cshtml" />
+    <Content Include="Views\TicketResponse\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2393,9 +2419,6 @@
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="obj\" />
-    <Folder Include="Scripts\Admin\Event\" />
-    <Folder Include="Scripts\Admin\Venue\" />
-    <Folder Include="Scripts\Admin\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

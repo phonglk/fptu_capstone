@@ -28,11 +28,24 @@ namespace DropIt.Controllers
         }
         public ActionResult Index()
         {
-            var CurUserId = WebSecurity.GetUserId(User.Identity.Name);
-            var res = this.unitOfWork.TicketResponseRepository.Get(u => u.UserId == CurUserId);
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var res = this.unitOfWork.TicketRepository.Get(t => t.UserId == UserId).Select(t => t.EventId).Distinct().ToList();
+            var RequestUser = this.unitOfWork.RequestRepository.Get(t => res.Contains(t.EventId));
 
-            return View(res.ToList());
+            return View(RequestUser.ToList());
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+        public ActionResult List()
+        {
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var request = this.unitOfWork.RequestRepository.Get(t => t.UserId == UserId).Select(t => t.EventId).Distinct().ToList();
+            var respond = this.unitOfWork.TicketResponseRepository.Get(t => request.Contains(t.EventId));
+
+            return View(respond.ToList());
+        }
     }
 }

@@ -4,6 +4,7 @@
         <li class="nav-header">Mua Vé</li>
         <li><a href="@Url.Action("Request","Ticket")">Đăng rao mua</a></li>
         <li><a href="@Url.Action("Index","Request")">Quản lí rao mua</a></li>
+        <li><a href="@Url.Action("List","TicketResponse")">Vé được phản hồi</a></li>
         @foreach (DropIt.Models.Category cat in ViewBag.Categories)
         {
         <li>
