@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DropIt.Models.TicketResponse>
+﻿@model IEnumerable<DropIt.Models.Request>
 @using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
@@ -9,6 +9,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Html.Partial("Partials/RoleTab")
+
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
@@ -20,7 +22,8 @@
             </div>
         </div>
         <div class="span9">
-            <h3>Danh sách các loại vé đang được giới thiệu </h3>
+            <h3>Danh sách các yêu cầu bạn đang có vé phù hợp</h3>
+            <blockquote>Click vào "Phản hồi" để giới thiệu vé của bạn!</blockquote>
         </div>
 
         <div class="row span9">
@@ -30,14 +33,18 @@
                         <tr class="header warning">
                             <th class="">Tên sự kiện</th>
                             <th class="">Người rao mua</th>
+                            <th>Phản hồi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         { 
                             <tr class="first">
-                                <td>@Html.DisplayFor(modelItem => item.Request.Event.EventName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Request.User.UserName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Event.EventName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.User.UserName)</td>
+                                <td class="action">
+                                    <a href="@Url.Action("Create", "TicketResponse")" class="btn main pull-right">Phản hồi</a>
+                                </td>
                             </tr>
              
                         }
