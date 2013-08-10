@@ -73,6 +73,16 @@ h3,h2{
         color:#333;
     }
 }
+[data-follow] {
+    .btn-group .btn {
+        color: white;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
 .text-overflow{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -95,6 +105,13 @@ h3,h2{
     background:none;
     z-index:999;
     
+}
+.section-header{
+    border-bottom:2px solid @mainColor_;
+    color:@mainColor;
+    border-left:8px solid @mainColor_;
+    padding: 5px;
+    margin: 10px 5px 10px 0;
 }
 .bootstrap-datetimepicker-widget .btn{
     &:hover{
@@ -369,7 +386,7 @@ h3,h2{
                 font-style: italic;
                 margin-top: 13px;
                 line-height: 150%;
-                color: grey;
+                color: @black;
                 font-family: HN;
             }
 
@@ -517,10 +534,11 @@ h3,h2{
     list-style:none;
 }
 .ticket{
-    width:680px;
+    width:678px;
+    border:1px solid @mainColor;
     margin:10px 0;
     margin-left:10px;
-    height:150px;
+    height:148px;
     background:url(../Images/ticket-bg.png) no-repeat;
     position:relative;
     -webkit-transition: all 0.3s;
@@ -531,7 +549,7 @@ h3,h2{
     }
 
     .info{
-        width: 400px;
+        width: 350px;
         position:absolute;
         top:7px;
         left:210px;
@@ -594,4 +612,71 @@ h3,h2{
     }
     
 
+}
+.home {
+    .active {
+        a {
+            text-shadow: 0 0 20px @mainColor !important;
+        }
+    }
+
+    .navbar .nav {
+        a {
+            font-family: HN-Light !important;
+            font-size: 18px !important;
+            color: @black;
+        }
+
+        .dropdown-menu {
+            > .active {
+                > a {
+                    color: #ffffff;
+                    background-color: @mainColor_;
+                    border-color: @mainColor_;
+                }
+            }
+
+            > li {
+                > a {
+                    color: @mainColor;
+
+                    &:hover {
+                        color: white;
+                    }
+
+                    font-family: HN;
+                }
+            }
+        }
+
+        > li.dropdown.open {
+            a {
+                &:hover, &:focus {
+                    color: #ffffff !important;
+                    background-color: @mainColor_ !important;
+                    border-color: @mainColor_;
+                }
+            }
+        }
+
+        > .active {
+            > a {
+                color: #582e53;
+                text-decoration: none;
+                background-color: #fff;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+
+                &:hover, &:focus {
+                    color: #582e53;
+                    text-decoration: none;
+                    background-color: #fff;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
 }

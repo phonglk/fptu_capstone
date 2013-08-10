@@ -123,6 +123,14 @@ else
                                 @item.Requests.Count Yêu cầu
                             </div>    
                         }
+                        @if(ViewBag.sortBy == "selling"){
+                            <div>
+                                <span class="icon-tags">
+                                    
+                                </span>
+                                Đã bán @item.Tickets.Where(t=>t.Status == (int)Statuses.Ticket.OnTransaction).Count() vé
+                            </div>    
+                        }
                         @if(ViewBag.sortBy == "upcoming"){
                             <div>
                                 <span class="icon-forward">

@@ -39,7 +39,10 @@ namespace DropIt.DAL
 
             return response;
         }
-
+        public TicketResponse Add(TicketResponse response)
+        {
+           return dbSet.Add(response);
+        }
         public TicketResponse GetById(int UserId, int EventId, int TicketId)
         {
             var findResponse = context.TicketResponses.Find(UserId, EventId, TicketId);

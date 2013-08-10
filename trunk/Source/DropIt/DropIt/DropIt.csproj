@@ -343,6 +343,7 @@
     <Compile Include="ViewModels\PostTicket.cs" />
     <Compile Include="ViewModels\RequestTicket.cs" />
     <Compile Include="ViewModels\RequestViewModels.cs" />
+    <Compile Include="ViewModels\ResponseTicket.cs" />
     <Compile Include="ViewModels\Search.cs" />
     <Compile Include="ViewModels\SearchAjax.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
@@ -2412,6 +2413,7 @@
     </Content>
     <Content Include="Views\TicketResponse\Create.cshtml" />
     <Content Include="Views\TicketResponse\List.cshtml" />
+    <Content Include="Views\Home\_EventList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

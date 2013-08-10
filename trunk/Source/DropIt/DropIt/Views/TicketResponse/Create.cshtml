@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DropIt.Models.TicketResponse>
+﻿@model DropIt.ViewModels.CreateResponses
 @using BootstrapExtensions.Base
 @using BootstrapExtensions.Base.Button
 @using BootstrapExtensions.Base.Form
@@ -9,9 +9,181 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .control-group label {
+        font-weight:bold;
+    }
+    .response-description {
+        width: 160px;
+        height: 80px;
+        font-family:HN-Light;
+        font-size:14px;
+    }
+    .ticket:hover {
+        -webkit-transform:none !important;
+    }
+    .ticket * {
+        -webkit-transition: all 0.5s ease-out;
+    }
+    .ticket .buyer textarea {
+        opacity:0;
+    }
+    .ticket .action .btn.main {
+        position:absolute;
+        bottom:100px;
+        -webkit-transition: all 0.5s ease-out;
+    }
+    .ticket .action .btn.main .check-toggle{
+        opacity:0;
+    }
+    .ticket.response {
+        width:672px;
+        height:142px;
+        border:4px solid #87c6e6;
+    }
+        .ticket.response:hover {
+            box-shadow: 0 0 20px #87c6e6;
+            -webkit-transform:none !important;
+        }
+    .ticket.response .action .btn.main {
+        bottom:0;
+    }
+        .ticket.response .buyer textarea {
+            opacity:1;
+        }
+        .ticket.response .action .btn.main .check-toggle {
+            opacity:1;
+        }
+
+</style>
+@Html.Partial("Partials/RoleTab")
 <div class="container" id="content">
     <div id="bord">
         &nbsp;
     </div>
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                @Html.Partial("Partials/SideBar")
+            </div>
+        </div>
+        <div class="span9">
+            @if (ViewBag.IsExist == false)
+            {
+                <h2>Yêu cầu không hợp lệ</h2>
+            }
+            else
+            {
+                <h3 class="event-name">Phản hồi cho yêu cầu vé</h3>
+                <div class="event-des span9">
+                    <hr />
+                    <div class="event-image span3">
+                        <div class="display-field" style="padding: 1px">
+                            <img src="@Url.Action("Image", "Event", new { Id = ViewBag.Event.EventId })" />
+                        </div>
+                    </div>
+                    <div class="span5">
+                        @using (Html.HorizontalForm())
+                        {
+                            <div class="control-group">
+                                <label class="control-label" for=" ">Tên sự kiện: </label>
+                                <div class="controls">
+                                    @Html.ActionLink((string)ViewBag.Event.EventName, "Details", "Event", new { Id = ViewBag.Event.EventId }, new { })
+                                    
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="Ngày Tổ chức: ">Ngày Tổ chức: </label>
+                                <div class="controls">@ViewBag.Event.HoldDate.ToString("dd/MM/yyyy HH:mm")</div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="">Nghệ sĩ: </label>
+                                <div class="controls">@ViewBag.Event.Artist</div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="">Địa điểm::</label>
+                                <div class="controls">@ViewBag.Event.Venue.VenueName</div>
+                            </div>
+                            
+                            <br />
+                            <div class="control-group">
+                                <label class="control-label" for="">Người yêu cầu: </label>
+                                <div class="controls">@ViewBag.User.UserName</div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="">Chú thích: </label>
+                                <div class="controls">@ViewBag.Request.Description</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="span9">
+                    <form method="post" action="@Url.Action("Response")">
+                    <input type="hidden" name="UserId" value="@ViewBag.Request.UserId" />
+                    <input type="hidden" name="EventId" value="@ViewBag.Request.EventId" />
+                    <h4 class="section-header">Bạn có @Model.responses.Count() vé có thể phản hồi</h4>
+                    @if(Model.responses.Count() > 0){
+                        var entries = Model.responses.OrderByDescending(t=>t.TicketId).ToList();
+                        for (var i = 0; i<entries.Count();i++)
+                        {
 
+                            var item = ViewBag.Tickets[i];
+                                    <div class="ticket">
+                                        @Html.HiddenFor(x => x.responses[i].TicketId)
+                                        @Html.HiddenFor(x => x.responses[i].IsResponse, new { @class="isresponse" })
+                                        @*<input type="hidden" class="isresponse" name="[@i].IsResponse" value="false" />*@
+                                        @*<input type="hidden" name="[@i].TicketId" value="@item.TicketId" />*@
+                                        @if (@item.SeriesNumber != null)
+                                        {
+                                            <div class="serial"><strong>S\N: @item.SeriesNumber</strong></div>
+                                        }
+                                        <div class="buyer">
+                                            @Html.TextAreaFor(x=>x.responses[i].Description,new {maxlength = 100, @class = "response-description",placeholder="Chú thích nhắn kèm phản hồi. Ví dụ: vé này mình thấy hợp với nhu cầu cảu bạn vì blah blah blah..."})
+                                            @*<textarea name="[@i].Description" maxlength="100" class="response-description" placeholder="Chú thích nhắn kèm phản hồi. Ví dụ: vé này mình thấy hợp với nhu cầu cảu bạn vì blah blah blah..."></textarea>*@
+                                        </div>
+                                        <div class="info">
+
+                                            <span class="icon-random"></span>
+                                            <text>Chỗ ngồi:</text>
+                                            @Html.Raw(item.Seat != null ? item.Seat : "<i>Tự do</i>")
+
+                                            <div>
+                                                <strong>Chú thích:</strong> <span data-unraw>@Html.Raw(item.Description)</span>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span data-vnd>@item.SellPrice</span> VNĐ
+                                        </div>
+                                        <div class="qrcode">
+                                            @Html.QRCode(Url.Action("Buy", "Ticket", new { Id = item.TicketId }, Request.Url.Scheme), 50, 2)
+                                        </div>
+                                        <div class="action">
+                                            <a class="btn main" style="width:147px;text-align:center"><span class="check-toggle icon-check"></span>&nbsp;Phản hồi vé này</a>
+                                        </div>
+                                    </div>
+                        }
+                    }
+                        @if(Model.responses.Count() > 0){
+                            <input type="submit" class="btn main pull-right" style="margin-right:10px;" value="Phản hồi các vé trên" />
+                        }
+                    </form>
+                </div>
+            }
+
+        </div>
     </div>
+    <script>
+        $(".ticket .action .btn.main").click(function(){
+            var $this = $(this);
+            var parent = $this.parents(".ticket").eq(0);
+            if(parent.hasClass("response")){
+                parent.removeClass("response");
+                parent.find(".isresponse").val(false);
+            }else{
+                parent.addClass("response");
+                parent.find("textarea").focus();
+                parent.find(".isresponse").val(true);
+            }
+        })
+    </script>

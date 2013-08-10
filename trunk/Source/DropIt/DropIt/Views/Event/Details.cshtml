@@ -92,9 +92,9 @@
                     {
                         <div class="control-group">
                             <label class="control-label" for="Ngày Tổ chức: ">Ngày Tổ chức: </label>
-                            <div class="controls"> @Model.HoldDate.ToString("dd/MM/yyyy HH:mm")</div>
+                            <div class="controls">@Model.HoldDate.ToString("dd/MM/yyyy HH:mm")</div>
                         </div>
-                        @Html.LabelAndControl("Ca sĩ: ", Html.Value("Artist"))
+                        @Html.LabelAndControl("Nghệ sĩ: ", Html.Value("Artist"))
                         @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
                         @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
                     }
@@ -160,27 +160,11 @@
                                             </div>
                                         </div>
                                         <div class="info">
-                                            <div class="event-name text-overflow">
-                                                @Model.EventName
-                                            </div>
-                                            <div class="event-artist">
-                                                <span class="icon-star"></span>@Model.Artist
-                                            </div>
-                                            <div class="event-date">
-                                                <span class="icon-calendar">&nbsp;</span>@Model.HoldDate.ToShortDateString().ToUpper()
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class="icon-map-marker"></span>@Model.Venue.VenueName
-                                                <br />
-                                                <span class="icon-time"></span>&nbsp;@Model.HoldDate.ToLongTimeString()
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                    @if (item.Seat != null)
-                                    {
-                                        <span class="icon-random"></span> <text>Chỗ ngồi:</text> @item.Seat
-                                    }
-                                            </div>
-                                            @*<div class="event-venue">
-                                    
-                                </div>*@
+
+                                            <span class="icon-random"></span>
+                                            <text>Chỗ ngồi:</text>
+                                            @Html.Raw(item.Seat != null ? item.Seat : "<i>Tự do</i>")
+
                                             <div>
                                                 <strong>Chú thích:</strong> <span data-unraw>@Html.Raw(item.Description)</span>
                                             </div>
