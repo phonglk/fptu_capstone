@@ -320,7 +320,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di799961571874407206" />
     </item>
     <item id="di818904893294359455" cid="AB001" type="activation-bar" name="ActivationBar1" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P9e0508370b0f47daaa914b935872e2b3" creation-date="06/18/2013 11:49:57">
       <stereotypes />
@@ -345,7 +344,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di987749040417509501" />
     </item>
     <item id="di891580102387279710" cid="AB002" type="activation-bar" name="ActivationBar2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P9e0508370b0f47daaa914b935872e2b3" creation-date="06/18/2013 11:49:57">
       <stereotypes />
@@ -353,7 +351,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di464551434179284748" />
     </item>
     <item id="di291646495381762720" cid="LL003" type="lifeline" name="EF" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P9e0508370b0f47daaa914b935872e2b3" creation-date="06/18/2013 11:49:24">
       <stereotypes />
@@ -414,7 +411,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di445603672601350315" />
     </item>
     <item id="di140042011795046998" cid="AN002" type="sequence-action" name="Action2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:05">
       <stereotypes />
@@ -432,7 +428,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di445603672601350315" />
     </item>
     <item id="di453702532381007368" cid="AN003" type="sequence-action" name="Action3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:27">
       <stereotypes />
@@ -460,7 +455,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di606823226195128658" />
     </item>
     <item id="di695302559978126693" cid="AN006" type="sequence-action" name="Action6" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:13:18">
       <stereotypes />
@@ -468,7 +462,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="updateUser()" is-asynchronous="false" from="di678572242600090535" to="di963638801778308195" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="updateUser()" is-asynchronous="false" from="di678572242600090535" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -478,7 +472,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" from="di963638801778308195" to="di678572242600090535" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" to="di678572242600090535" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -518,7 +512,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di909161680652259558" to="di963678294424443749" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di909161680652259558" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -528,7 +522,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" from="di963678294424443749" to="di371536539103227246" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" to="di371536539103227246" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -538,7 +532,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di464551434179284748" />
     </item>
     <item id="di180044033200876514" cid="AN014" type="sequence-action" name="Action14" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:21:25">
       <stereotypes />
@@ -594,7 +587,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di483092334232395644" />
     </item>
     <item id="di280260414288787980" cid="AN004" type="sequence-action" name="Action4" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/18/2013 11:51:21">
       <stereotypes />
@@ -639,7 +631,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di108416695324857448" />
     </item>
     <item id="di395403583640971284" cid="AN002" type="sequence-action" name="Action2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:05">
       <stereotypes />
@@ -657,7 +648,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di108416695324857448" />
     </item>
     <item id="di170201391111689848" cid="AN003" type="sequence-action" name="Action3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:27">
       <stereotypes />
@@ -685,7 +675,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di585810096211754868" />
     </item>
     <item id="di668648867465197549" cid="AN006" type="sequence-action" name="Action6" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:13:18">
       <stereotypes />
@@ -693,7 +682,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="updateEvent()" is-asynchronous="false" from="di459913170906425927" to="di802779911870060597" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="updateEvent()" is-asynchronous="false" from="di459913170906425927" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -703,7 +692,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" from="di802779911870060597" to="di459913170906425927" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" to="di459913170906425927" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -743,7 +732,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di118803671450931762" to="di804294045618762903" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di118803671450931762" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -753,7 +742,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" from="di804294045618762903" to="di446211173213625034" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" to="di446211173213625034" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -763,7 +752,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di483092334232395644" />
     </item>
     <item id="di503487609796633584" cid="AN014" type="sequence-action" name="Action14" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:21:25">
       <stereotypes />
@@ -819,7 +807,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di900781865961217397" />
     </item>
     <item id="di316234427614224626" cid="AN004" type="sequence-action" name="Action4" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/18/2013 11:51:21">
       <stereotypes />
@@ -864,7 +851,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di608146844323993359" />
     </item>
     <item id="di610845076953859217" cid="AN002" type="sequence-action" name="Action2" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:05">
       <stereotypes />
@@ -882,7 +868,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di608146844323993359" />
     </item>
     <item id="di310498891941901721" cid="AN003" type="sequence-action" name="Action3" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:03:27">
       <stereotypes />
@@ -910,7 +895,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di166208928434795598" />
     </item>
     <item id="di684451883244777893" cid="AN006" type="sequence-action" name="Action6" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:13:18">
       <stereotypes />
@@ -918,7 +902,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="updateVenue()" is-asynchronous="false" from="di643244218655539443" to="di667004824253562899" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="updateVenue()" is-asynchronous="false" from="di643244218655539443" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -928,7 +912,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" from="di667004824253562899" to="di643244218655539443" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;return&gt;&gt;" is-asynchronous="false" to="di643244218655539443" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -968,7 +952,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di645124774518052825" to="di902855862397740617" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="Render (success mesage)" is-asynchronous="false" from="di645124774518052825" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -978,7 +962,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" from="di902855862397740617" to="di947136002940367265" return-value="" assign-to-variable="">
+      <sequence-action type="return" message="&lt;&lt;HTML (message)&gt;&gt;" is-asynchronous="false" to="di947136002940367265" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
@@ -988,7 +972,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di900781865961217397" />
     </item>
     <item id="di673039954646574121" cid="AN014" type="sequence-action" name="Action14" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:21:25">
       <stereotypes />
@@ -1064,7 +1047,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di799961571874407206" />
     </item>
     <item id="di478678297593470921" cid="AB008" type="activation-bar" name="ActivationBar8" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/19/2013 12:21:04">
       <stereotypes />
@@ -1072,7 +1054,6 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <activation-bar lifeline-ref="di799961571874407206" />
     </item>
     <item id="di109786660885836844" cid="AN001" type="sequence-action" name="Action7" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="06/20/2013 10:20:27">
       <stereotypes />
@@ -1100,7 +1081,7 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
-      <sequence-action type="call" message="2. Invoke Register()" is-asynchronous="false" from="di903412646538975920" to="di870167596519195786" return-value="" assign-to-variable="">
+      <sequence-action type="call" message="3. Invoke Register()" is-asynchronous="false" from="di903412646538975920" to="di870167596519195786" return-value="" assign-to-variable="">
         <parameters />
       </sequence-action>
     </item>
