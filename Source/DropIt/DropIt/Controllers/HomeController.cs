@@ -24,11 +24,21 @@ namespace DropIt.Controllers
             Repository = unitOfWork.EventRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortBy = "ticket")
         {
             Session["Role"] = "Event";
-            var events = this.unitOfWork.EventRepository.Get().OrderByDescending(t => t.Tickets.Count).Where(p => (p.Status != 2 || p.Status != 4) && p.HoldDate >= DateTime.Now && p.Status != (int)Statuses.Event.Delete).Take(10);
+            var events = this.unitOfWork.EventRepository.GetAvailable();
+            if(sortBy.Equals("request")){
+                events = events.OrderByDescending(t => t.Requests.Count);
+            }else if(sortBy.Equals("upcoming")){
+                events = events.Where(e => e.HoldDate >= DateTime.Now)
+                        .OrderBy(e => e.HoldDate);
+            }else{
+                events = events.OrderByDescending(t => t.Tickets.Count);
+            }
 
+            events = events.Take(10);
+            ViewBag.sortBy = sortBy;
             return View(events.ToList());
         }
 
