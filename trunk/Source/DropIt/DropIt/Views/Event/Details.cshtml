@@ -90,7 +90,10 @@
                 <div class="span5">
                     @using (Html.HorizontalForm())
                     {
-                        @Html.LabelAndControl("Ngày Tổ chức: ", Html.Value("HoldDate"))
+                        <div class="control-group">
+                            <label class="control-label" for="Ngày Tổ chức: ">Ngày Tổ chức: </label>
+                            <div class="controls"> @Model.HoldDate.ToString("dd/MM/yyyy HH:mm")</div>
+                        </div>
                         @Html.LabelAndControl("Ca sĩ: ", Html.Value("Artist"))
                         @Html.LabelAndControl("Danh mục: ", Html.Value("Category.CategoryName"))
                         @Html.LabelAndControl("Địa điểm: ", Html.Value("Venue.VenueName"))
@@ -126,7 +129,8 @@
                                 int eStartIndex;
                                 int ePageSize;
                                 int eTotalCount = Model.Tickets.Count;
-                                if(!Int32.TryParse(Request["eStartIndex"],out eStartIndex)){
+                                if (!Int32.TryParse(Request["eStartIndex"], out eStartIndex))
+                                {
                                     eStartIndex = 0;
                                 }
                                 if (!Int32.TryParse(Request["ePageSize"], out ePageSize))
