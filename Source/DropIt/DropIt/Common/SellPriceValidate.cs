@@ -18,7 +18,7 @@ namespace DropIt.Common
             }
             if (value >= Max)
             {
-                return new ValidationResult("Giá tiền vé tối đa từ " + Max + " đồng");
+                return new ValidationResult("Giá tiền vé tối đa " + Max + " đồng");
             }
             return ValidationResult.Success;
         }
