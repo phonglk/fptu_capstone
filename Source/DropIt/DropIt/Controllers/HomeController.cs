@@ -33,6 +33,11 @@ namespace DropIt.Controllers
             }else if(sortBy.Equals("upcoming")){
                 events = events.Where(e => e.HoldDate >= DateTime.Now)
                         .OrderBy(e => e.HoldDate);
+            }
+            else if (sortBy.Equals("selling"))
+            {
+                events = events.Where(e => e.Status == (int)Statuses.Event.Trading)
+                        .OrderByDescending(e => e.Tickets.Where( t=>t.Status == (int)Statuses.Ticket.OnTransaction).Count());
             }else{
                 events = events.OrderByDescending(t => t.Tickets.Count);
             }

@@ -17,11 +17,14 @@
         <div class="span12">
             <div id="main-nav" class="navbar span12">
                 <ul class="nav">
-                    <li class="dropdown @(ViewBag.sortBy=="ticket"||ViewBag.sortBy=="request"?"active":"")" >
+                    <li class="dropdown @(ViewBag.sortBy=="ticket"||ViewBag.sortBy=="request"||ViewBag.sortBy=="selling"?"active":"")" >
                         <a href="#" data-toggle="dropdown">Top Các Sự Kiện<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="@(ViewBag.sortBy=="ticket"?"active":"")">
                                 <a href="@Url.Action("Index", "Home", null, "http")">Có vé được đăng</a>
+                            </li>
+                            <li class="@(ViewBag.sortBy=="selling"?"active":"")">
+                                <a href="@Url.Action("Index", "Home", new { sortBy="selling" }, "http")">Được mua vé</a>
                             </li>
                             <li class="@(ViewBag.sortBy=="request"?"active":"")">
                                 <a href="@Url.Action("Index", "Home", new { sortBy="request" }, "http")">Có nhiều yêu cầu</a>

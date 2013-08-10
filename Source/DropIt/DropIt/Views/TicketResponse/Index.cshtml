@@ -43,7 +43,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Event.EventName)</td>
                                 <td>@Html.DisplayFor(modelItem => item.User.UserName)</td>
                                 <td class="action">
-                                    <a href="@Url.Action("Create", "TicketResponse")" class="btn main pull-right">Phản hồi</a>
+                                    <a href="@Url.Action("Create", "TicketResponse", new{item.UserId,item.EventId})" class="btn main pull-right">Phản hồi</a>
                                 </td>
                             </tr>
              
