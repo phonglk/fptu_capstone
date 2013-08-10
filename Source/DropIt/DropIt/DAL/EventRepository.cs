@@ -18,7 +18,7 @@ namespace DropIt.DAL
 
         public IEnumerable<Event> GetAvailable()
         {
-            return this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate);
+            return this.Get(e => e.Status != (int)Statuses.Event.Delete && e.Status != (int)Statuses.Event.Outdate && e.Status !=(int)Statuses.Event.Disapprove);
         }
 
         public IEnumerable<Event> GetRequestAvailable(int UserId)
