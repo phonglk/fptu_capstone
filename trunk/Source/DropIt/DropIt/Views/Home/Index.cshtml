@@ -8,7 +8,7 @@
 }
 @Html.Partial("Partials/RoleTab")
 <!--Area: Page Header & Navigation & Search.END-->
-<div class="container" id="content">
+<div class="container home" id="content">
     <div id="bord">
         &nbsp;
     </div>
@@ -17,15 +17,25 @@
         <div class="span12">
             <div id="main-nav" class="navbar span12">
                 <ul class="nav">
-                    <li class="active"><a href="@Url.Action("Index", "Home", null, "http")">Top Các Sự Kiện</a></li>
-                    <li>@Html.ActionLink("Sự kiện sắp tới","Upcoming","Event")</li>
+                    <li class="dropdown @(ViewBag.sortBy=="ticket"||ViewBag.sortBy=="request"?"active":"")" >
+                        <a href="#" data-toggle="dropdown">Top Các Sự Kiện<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="@(ViewBag.sortBy=="ticket"?"active":"")">
+                                <a href="@Url.Action("Index", "Home", null, "http")">Có vé được đăng</a>
+                            </li>
+                            <li class="@(ViewBag.sortBy=="request"?"active":"")">
+                                <a href="@Url.Action("Index", "Home", new { sortBy="request" }, "http")">Có nhiều yêu cầu</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="@(ViewBag.sortBy=="upcoming"?"active":"")">@Html.ActionLink("Sự kiện sắp tới","Index",new { sortBy="upcoming" })</li>
                     <li><a href="/Ticket/Request">Đăng Rao Mua</a></li>
                     <li><a href="/Ticket/Create">Đăng Bán Vé</a></li>
                 </ul>
                 
             </div>
             @Html.Partial("Partials/EventDisplayMode")
-            @Html.Partial("Partials/EventListFullByModel")
+            @Html.Partial("_EventList")
             
         </div>
     </div>
