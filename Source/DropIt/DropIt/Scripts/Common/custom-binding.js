@@ -12,7 +12,7 @@
                 if (typeof date == "string") {
                     date = Date.fromRawJSON(date);
                 }
-                return "" + (new Number(date.getDate())).toLength(2) + "/" + (new Number(date.getMonth())).toLength(2) + "/" + (date.getFullYear()) + " " + (new Number(date.getHours())).toLength(2) + ":" + (new Number(date.getMinutes())).toLength(2) + ":00";
+                return "" + (new Number(date.getDate())).toLength(2) + "/" + (new Number(date.getMonth()+1)).toLength(2) + "/" + (date.getFullYear()) + " " + (new Number(date.getHours())).toLength(2) + ":" + (new Number(date.getMinutes())).toLength(2) + ":00";
             } catch (e) {
                 console.error(e.message);
                 return date;
