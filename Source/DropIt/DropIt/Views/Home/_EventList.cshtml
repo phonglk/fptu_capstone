@@ -1,0 +1,167 @@
+﻿@model IEnumerable<DropIt.Models.Event>
+
+
+
+
+@if (Session["DisplayMode"] == "thumbnail")
+{
+    <div id="ticket-show" class="row">
+        @foreach (var item in Model)
+        { 
+            <a href="@Url.Action("Details", "Event", new { id = item.EventId })">
+                <div class="item">
+                    <div class="image-item" style="background-image:url('@HttpUtility.UrlPathEncode(Url.Content(item.EventImage == null ? "/Content/Images/no_image.jpg" : item.EventImage))')";>
+                    </div>
+                    <div class="item-event-date">
+                        <div class="item-date">
+                            @{if (@item.HoldDate.Day < 10)
+                              {<span>0 </span> @item.HoldDate.Day }
+                              else
+                              {
+                                @item.HoldDate.Day
+                              }                               
+                            }
+                            &nbsp;
+                        </div>
+                        <div class="item-time">
+                            <div class="item-month">
+                                @{if (@item.HoldDate.Month < 10)
+                                  {<span>0</span>@item.HoldDate.Month }
+                                  else
+                                  {
+                                    @item.HoldDate.Month
+                                  }                               
+                                }
+                            </div>
+                            <div class="item-year">@item.HoldDate.Year</div>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <h5 class="name-event">@item.EventName</h5>
+
+                        <p>Số Lượng Vé: @item.Tickets.Count</p>
+
+                        <p>
+                            Địa Điểm: @{if (@item.Venue.VenueName.Length > 18)
+                                        {@item.Venue.VenueName.Substring(0, 15)<span>...</span> }
+                                        else
+                                        { @item.Venue.VenueName }
+                            }
+                        </p>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+
+    <div class="event-list @ViewBag.EventListClass">
+        @foreach (var item in Model)
+        {
+            <div class="event row-fluid">
+                <div class="span4 thumb">
+                    <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
+                        <div class="event-image" style="background-image:url('@Url.Action("Image", "Event", new { Id = item.EventId })')"></div>
+                    </a>
+                </div>
+                <div class="span6 description">
+                    <p class="event-title">
+                        <a href="@Url.Action("Details", "Event", new { Id = item.EventId })">
+                            @item.EventName
+                        </a>
+                    </p>
+
+                    <div class="event-detail">
+                        @Html.Raw(item.Description)
+                    </div>
+
+                    <div class="misc">
+                        <div class="place">
+                            <span class="icon-map-marker"></span>
+                            <span title="@item.Venue.Address , @item.Venue.Province.ProvinceName">@item.Venue.VenueName</span>
+
+                        </div>
+                        <div class="artist">
+                            <span class=" icon-star"></span>
+                            @item.Artist
+                        </div>
+                    </div>
+                </div>
+                <div class="span2 datetime">
+                    <div class="date">
+                        @{
+            var clone = new DateTime(item.HoldDate.Ticks);
+            var Month = clone.ToShortMonthName();
+                        }
+                        <div class="month">@Month</div>
+                        <div class="clr"></div>
+                        <div class="day">@item.HoldDate.ToString("dd")</div>
+                        <div class="start" style="display: none">7/26/2013 6:00:00 PM</div>
+                    </div>
+                    <div class="time">
+                        <span class="icon-time"></span>
+                        @item.HoldDate.ToString("hh") :
+                        @item.HoldDate.ToString("mm")
+                    </div>
+                    <div>
+                        <br />
+                        @if(ViewBag.sortBy == "ticket"){
+                            <div>
+                                <span class="icon-tags">
+                                    
+                                </span>
+                                @item.Tickets.Count Vé
+                            </div>    
+                        }
+                        @if(ViewBag.sortBy == "request"){
+                            <div>
+                                <span class="icon-bullhorn">
+                                    
+                                </span>
+                                @item.Requests.Count Yêu cầu
+                            </div>    
+                        }
+                        @if(ViewBag.sortBy == "upcoming"){
+                            <div>
+                                <span class="icon-forward">
+                                    
+                                </span>
+                                Còn 
+                                @{
+                            TimeSpan range = item.HoldDate - DateTime.Now;
+                                        
+                                }
+                                @(range.Days==0?range.Hours+" giờ":range.Days+" ngày")
+                                   
+                            </div>    
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+}
+<script>
+    function limitDescription() {
+        $(".event-detail").each(function () {
+            var text = $(this).text().trim();
+            var original = text;
+            var limitWord = 50;
+            if (text.split(" ").length > limitWord) {
+                text = text.split(" ", limitWord).join(" ");
+                if (text.length > 230) {
+                    text = text.substring(0, 230);
+                }
+                text += "...";
+            } else {
+
+            }
+
+            $(this).text(text).attr("title", original);
+        });
+    }
+    limitDescription()
+</script>
