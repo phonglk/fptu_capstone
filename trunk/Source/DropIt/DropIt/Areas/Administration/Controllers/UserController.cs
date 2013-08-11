@@ -161,69 +161,6 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult Create(User user)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return Json(new JSONResult("Form is not valid"));
-                }
-
-                var addedRecord = Repository.AddOrUpdate(user);
-                unitOfWork.Save();
-                return Json(new JSONResult(addedRecord, "Record"));
-
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-                throw;
-            }
-        }
-
-        // Update
-        [HttpPost]
-        public JsonResult Update(User user)
-        {
-            try
-            {
-                user.UserName = unitOfWork.UserRepository.GetById(user.UserId).UserName;
-                user.CreatedDate = unitOfWork.UserRepository.GetById(user.UserId).CreatedDate;
-                if (!ModelState.IsValid)
-                {
-                    return Json(new JSONResult("Form is invalid"));
-                }
-                
-                
-                Repository.AddOrUpdate(user);
-                unitOfWork.Save();
-                return Json(new JSONResult());
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
-        }
-        [HttpPost]
-        public JsonResult GetUserOptions()
-        {
-            try
-            {
-                var usernames = unitOfWork.UserRepository.GetAll().Select(
-                    p => new { DisplayText = p.UserName, Value = p.UserId });
-
-                return Json(new JSONResult(usernames, "Options"));
-
-            }
-            catch (Exception e)
-            {
-
-                return Json(new JSONResult(e));
-            }
-        }
-
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

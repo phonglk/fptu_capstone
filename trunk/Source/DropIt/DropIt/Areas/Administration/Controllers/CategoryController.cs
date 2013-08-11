@@ -257,23 +257,6 @@ namespace DropIt.Areas.Administration.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult GetOptions()
-        {
-            try
-            {
-                var Records = Repository.GetAll().Select(
-                    p => new { DisplayText = p.CategoryName, Value = p.CategoryId });
-                return Json(new JSONResult(Records, "Options"));
-
-            }
-            catch (Exception e)
-            {
-
-                return Json(new JSONResult(e));
-            }
-        }
-
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
