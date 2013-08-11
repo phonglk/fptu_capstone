@@ -11,7 +11,7 @@ namespace DropIt.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Category
     {
         public Category()
@@ -19,13 +19,13 @@ namespace DropIt.Models
             this.Category1 = new HashSet<Category>();
             this.Events = new HashSet<Event>();
         }
-    
+
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public Nullable<int> ParentCategoryId { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
-    
+
         public virtual ICollection<Category> Category1 { get; set; }
         public virtual Category Category2 { get; set; }
         public virtual ICollection<Event> Events { get; set; }
