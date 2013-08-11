@@ -48,7 +48,7 @@ namespace DropIt.Controllers
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
-            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c => c.Status != 2).Select(r => new
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.GetAvailable().Where(c => c.Category2 == null).Select(r => new
             {
                 r.CategoryId,
                 r.CategoryName,
