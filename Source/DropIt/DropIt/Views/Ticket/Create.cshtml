@@ -43,6 +43,21 @@ else if (ViewBag.NoPostTicket >= ViewBag.noSetting)
         <br />
     </div>
 }
+else if (ViewBag.Sellable != true)
+{
+    <div class="container" id="content">
+        <div class="admin-image">
+            <img src="/Content/Images/error.png" />
+        </div>
+        <center><h3>Xin lỗi tài khoản của bạn không được phép bán!</h3></center>
+        <br />
+        <center>    
+            <a href="/Home/Index" class="btn btn-gen">Quay về trang chủ</a>
+        </center>
+        <br />
+        <br />
+    </div>
+}
 else
 {
     double see = Double.Parse(Settings.get("ServiceFee"));
