@@ -104,7 +104,18 @@
             </div>
             <!--Area: Footer.END-->
         </footer>
-
+        <div class="back-drop"></div>
+    
+    <div class="modal-box">
+        <div class="loader">
+            <img src="~/Content/Images/loader1.gif" />
+        </div>
+        <div class="confirm">
+            <h4 class="section-header" style="margin:10px;">Xin hãy xác nhận bạn muốn tạo sự kiện mới và tiếp tục bấm đăng vé</h4>
+            <button class="btn main pull-right" style="margin-right:10px;" onclick="close_modal()">Xác nhận</button>
+        </div>
+        <div class="suggest"></div>
+    </div>
     </div>
     @RenderSection("scripts", required: false)
     

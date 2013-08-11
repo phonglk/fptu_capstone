@@ -1,12 +1,22 @@
 ﻿@model IEnumerable<DropIt.Models.Event>
+@{  
+    var _Model = Model;
+    if(ViewBag.Model != null){
+        _Model = ViewBag.Model;   
+    }
+
+    Boolean ForceDisplayInList = false;
+    if (ViewBag.ForceDisplayInList == true){
+        ForceDisplayInList = true;
+    }
+}
 
 
 
-
-@if (Session["DisplayMode"] == "thumbnail")
+@if (Session["DisplayMode"] == "thumbnail" && ForceDisplayInList == false)
 {
     <div id="ticket-show" class="row">
-        @foreach (var item in Model)
+        @foreach (var item in _Model)
         { 
             <a href="@Url.Action("Details", "Event", new { id = item.EventId })">
                 <div class="item">
@@ -58,7 +68,7 @@ else
 {
 
     <div class="event-list @ViewBag.EventListClass">
-        @foreach (var item in Model)
+        @foreach (var item in _Model)
         {
             <div class="event row-fluid">
                 <div class="span4 thumb">

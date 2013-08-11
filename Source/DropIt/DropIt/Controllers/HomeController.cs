@@ -71,112 +71,17 @@ namespace DropIt.Controllers
             return View(TopRequestedEvent);
         }
 
-        private List<string> ReduceRedundancy(List<string> strings)
-        {
-            List<string> result = new List<string>();
-
-            foreach (string str in strings)
-            {
-                var str_c1 = str.ToLower().Trim();
-                bool IsSame = false;
-                foreach (string str2 in result)
-                {
-                    var str_c2 = str2.ToLower().Trim();
-                    if (str_c1.Equals(str_c2))
-                    {
-                        IsSame = true;
-                    }
-                    if (str_c1.IndexOf(str_c2) > -1)
-                    {
-                        IsSame = true;
-                    }
-                    if (str_c2.IndexOf(str_c1) > -1)
-                    {
-                        IsSame = true;
-                    }
-                }
-                if (IsSame == false)
-                {
-                    result.Add(str);
-                }
-            }
-
-            return result;
-        }
+        
 
         public ActionResult Search(string query, string sortBy = "relevant", int PageSize = 10, int StartIndex = 0)
         {
             var events = this.unitOfWork.EventRepository.Get(e => e.Status != (int)Statuses.Event.Disapprove && e.Status != (int)Statuses.Event.Delete);
-            SearchResultViewModel foundEvent = new SearchResultViewModel();
+            SearchResultViewModel foundEvent = null;
 
 
             if (!String.IsNullOrEmpty(query))
             {
-                foreach (Event evt in events)
-                {
-                    List<String> splittedEvent = new List<String>();
-                    String eventName = evt.EventName;
-                    for (var i = 0; i <= eventName.Length - query.Length; i++)
-                    {
-                        splittedEvent.Add(eventName.Substring(i, query.Length));
-                    }
-
-                    List<string> foundbyTitle = FuzzySearch.Search(query.ToLower(), splittedEvent, 0.50);
-
-                    List<String> splittedArtist = new List<String>();
-
-                    List<string> foundbyArtist = new List<string>();
-                    if (evt.Artist != null)
-                    {
-                        String Artist = evt.Artist;
-                        for (var i = 0; i <= Artist.Length - query.Length; i++)
-                        {
-                            splittedArtist.Add(Artist.Substring(i, query.Length));
-                        }
-
-                        foundbyArtist = FuzzySearch.Search(query.ToLower(), splittedArtist, 0.5);
-                    }
-
-                    if (foundbyTitle.Count > 0 || foundbyArtist.Count > 0)
-                    {
-                        ResultEvent Event = new ResultEvent(evt);
-                        Event.EventName.Matches = ReduceRedundancy(foundbyTitle);
-                        Event.Artist.Matches = ReduceRedundancy(foundbyArtist);
-
-                        foundEvent.Result.Add(Event);
-                    }
-                    else
-                    {
-                        if (Utils.ConvertVN(evt.EventName).ToLower().Contains(Utils.ConvertVN(query.ToLower())))
-                        {
-                            ResultEvent Event = new ResultEvent(evt);
-                            Event.EventName.Matches = new List<string>{
-                                query
-                            };
-                            Event.IsFuzz = false;
-                            foundEvent.Result.Add(Event);
-                        }
-                    }
-                }
-
-
-
-                ResultEventComparer comparer = new ResultEventComparer();
-
-                if (sortBy == "relevant")
-                {
-                    comparer.ComparisonMethod = ResultEventComparer.ComparisonType.Relevant;
-                    foundEvent.Result.Sort(comparer);
-                }
-                else if (sortBy == "HoldDate")
-                {
-                    comparer.ComparisonMethod = ResultEventComparer.ComparisonType.HoldDate;
-                    foundEvent.Result.Sort(comparer);
-                }
-
-                foundEvent.TotalCount = foundEvent.Result.Count;
-                foundEvent.Result = foundEvent.Result.Skip(StartIndex).Take(PageSize).ToList();
-
+                foundEvent = unitOfWork.EventRepository.Search(query, events, sortBy);
             }
             else
             {

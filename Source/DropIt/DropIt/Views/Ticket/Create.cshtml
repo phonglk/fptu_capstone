@@ -194,6 +194,7 @@ else
                         Tôi Đồng ý với tất cả các Điều Khoản Sử Dụng
                     </label>
                 </div>
+                <input type="hidden" id="passSuggestion" name="passSuggestion" required />
                 <button type="submit" class="btn btn-mid btn-gen">Đăng vé</button>
                 <a href="@Url.Action("Sell", "Home")" class="btn btn-mid btn-cancel">Hủy bỏ</a>
             }
@@ -307,6 +308,10 @@ else
             })
         }
 
+        
+
+
+        
 
         validateOptions = {
             //debug:true,
@@ -326,7 +331,8 @@ else
             messages: {
                 SellPrice: "Cần phải điền giá bán",
                 EventName: "Cần phải điền tên sự kiện khi tạo mới"
-            }
+            },
+            submitHandler:FormSubmitHandler
             //,
             //errorLabelContainer:$('.validation-summary-errors')
         }
@@ -339,17 +345,21 @@ else
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false, startDate: startDate });
             var picker = $('#HoldDate').parent().data('datetimepicker');
             picker.setLocalDate(startDate);
-            //$(".form1 form").validate(validateOptions);
+            $(".form1 form").submit(FormSubmitHandler);
             var defaultEvent = location.request("EventId");
             if (defaultEvent != "") {
                 $("#EventId").select2("val", defaultEvent);
                 $("#EventId").trigger("change");
             }
         })
+
         generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
         $("select").select2();
     </script>
-
+    
+    
+    
+    
     @Scripts.Render("~/bundles/jqueryval")
 
 }

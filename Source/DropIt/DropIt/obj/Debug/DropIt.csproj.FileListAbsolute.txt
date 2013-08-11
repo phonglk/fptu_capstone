@@ -1,101 +1,101 @@
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DropIt.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DropIt.pdb
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Antlr3.Runtime.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\BootstrapExtensions.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.AspNet.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.Core.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.Consumer.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\EntityFramework.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\gfoidl.StringSearching.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Core.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Owin.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Data.Edm.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Data.OData.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Owin.Host.SystemWeb.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Web.Infrastructure.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Web.WebPages.OAuth.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Newtonsoft.Json.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Owin.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.Formatting.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.WebRequest.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Spatial.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Helpers.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.OData.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.WebHost.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Mvc.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Optimization.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Razor.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.Deployment.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.Razor.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\WebGrease.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\WebMatrix.Data.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\WebMatrix.WebData.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\BootstrapExtensions.pdb
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Core.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Owin.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Owin.Host.SystemWeb.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\EntityFramework.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Newtonsoft.Json.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.Formatting.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Net.Http.WebRequest.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Helpers.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.WebHost.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Mvc.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Razor.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.Deployment.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.WebPages.Razor.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\WebMatrix.Data.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Web.WebPages.OAuth.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\WebMatrix.WebData.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.AspNet.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.Core.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.Consumer.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Web.Http.OData.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Data.Edm.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\Microsoft.Data.OData.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\System.Spatial.xml
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\de\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\es\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\fr\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\it\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ja\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ko\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ru\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\de\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\es\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\fr\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\it\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ja\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ko\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ru\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hans\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hant\Microsoft.Data.OData.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\de\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\es\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\fr\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\it\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ja\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ko\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\ru\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hans\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\bin\zh-Hant\System.Spatial.resources.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\obj\Debug\DropIt.csprojResolveAssemblyReference.cache
-E:\capstone 5b\Caps\Source\DropIt\DropIt\obj\Debug\DropIt.dll
-E:\capstone 5b\Caps\Source\DropIt\DropIt\obj\Debug\DropIt.pdb
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DropIt.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DropIt.pdb
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Antlr3.Runtime.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.AspNet.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.Core.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\EntityFramework.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\gfoidl.StringSearching.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Data.Edm.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Data.OData.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Web.WebPages.OAuth.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Newtonsoft.Json.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.Formatting.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.WebRequest.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Spatial.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Helpers.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.OData.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.WebHost.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Mvc.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Optimization.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Razor.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.Deployment.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.Razor.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\WebGrease.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\WebMatrix.Data.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\WebMatrix.WebData.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\EntityFramework.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Newtonsoft.Json.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.Formatting.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Net.Http.WebRequest.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Helpers.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.WebHost.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Mvc.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Razor.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.Deployment.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.WebPages.Razor.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\WebMatrix.Data.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Web.WebPages.OAuth.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\WebMatrix.WebData.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.AspNet.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.Core.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OAuth.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Web.Http.OData.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Data.Edm.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Data.OData.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\System.Spatial.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\de\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\es\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\it\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\de\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\es\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\fr\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\it\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ja\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ko\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ru\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\de\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\es\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\fr\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\it\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ja\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ko\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\ru\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hans\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\zh-Hant\System.Spatial.resources.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\obj\Debug\DropIt.csprojResolveAssemblyReference.cache
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\obj\Debug\DropIt.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\obj\Debug\DropIt.pdb
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\BootstrapExtensions.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\BootstrapExtensions.pdb
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Owin.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Owin.dll
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.Owin.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Projects\FU\Capstone\trunk\Source\DropIt\DropIt\bin\Microsoft.Owin.Host.SystemWeb.xml

@@ -774,6 +774,7 @@
     <Content Include="Content\Images\column-desc.png" />
     <Content Include="Content\Images\column-sortable.png" />
     <Content Include="Content\Images\error.png" />
+    <Content Include="Content\Images\loader1.gif" />
     <Content Include="Content\Images\No.JPG" />
     <Content Include="Content\Images\no_image.jpg" />
     <Content Include="Content\Images\SorryFace.png" />
@@ -2396,7 +2397,6 @@
     <Content Include="Views\Home\NearEvent.cshtml" />
     <Content Include="Views\Shared\Partials\EventListFullByModel.cshtml" />
     <Content Include="Views\Shared\Partials\EventDisplayMode.cshtml" />
-    <Content Include="Views\Event\Upcoming.cshtml" />
     <Content Include="Views\CheckOut\Error.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList.cshtml" />
     <Content Include="Views\Shared\Partials\Templates\EventList_Item.cshtml" />
@@ -2412,8 +2412,9 @@
     </Content>
     <Content Include="Views\TicketResponse\Create.cshtml" />
     <Content Include="Views\TicketResponse\List.cshtml" />
-    <Content Include="Views\Home\_EventList.cshtml" />
+    <Content Include="Views\Shared\_EventList.cshtml" />
     <Content Include="Views\Shared\_TicketPaging.cshtml" />
+    <Content Include="Views\Event\Suggestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

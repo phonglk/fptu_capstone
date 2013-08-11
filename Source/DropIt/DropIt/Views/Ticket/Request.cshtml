@@ -202,6 +202,7 @@ else
             self.VenueName = ko.observable();
             self.VenueAddress = ko.observable();
             self.ProvinceId = ko.observable();
+            self.CategoryId = ko.observable();
 
             self.selectEventChange = function () {
                 $.ajax({
@@ -215,6 +216,7 @@ else
                             self.VenueName(record.VenueName)
                             self.VenueAddress(record.Address)
                             self.ProvinceId(record.ProvinceId)
+                            self.CategoryId(record.CategoryId)
                         }
                     }
                 })
@@ -262,7 +264,7 @@ else
             $("#HoldDate").parent().datetimepicker({ pickSeconds: false, maskInput: false, startDate: startDate });
             var picker = $('#HoldDate').parent().data('datetimepicker');
             picker.setLocalDate(startDate);
-
+            $(".form1 form").submit(FormSubmitHandler);
             var defaultEvent = location.request("EventId");
             if (defaultEvent != "") {
                 $("#EventId").select2("val", defaultEvent);
