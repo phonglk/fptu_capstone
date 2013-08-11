@@ -124,22 +124,39 @@
                         </div>
                     </div>
                     <div class="ticket-list tab-pane active" id="ticket-list">
+                        @{
+                            var sorting = ViewBag.Sorting;
+                            Dictionary<String, String> SortOptions = new Dictionary<string, string>()
+                            {
+                                {"SellPrice ASC" ,"Giá từ thấp đến cao"},
+                                {"SellPrice DESC" ,"Giá từ cap đến đến thấp"}
+                            };
+                            var currentLabel = SortOptions[sorting];
+
+                            ViewBag.ExtraParameters = "&sorting=" + sorting;
+                        }
+                        <div class="btn-group pull-right">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                @currentLabel
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (KeyValuePair<String, String> entry in SortOptions)
+                                {
+                                    <li>
+                                        <a href="?StartIndex=@ViewBag.StartIndex&Sorting=@entry.Key">@entry.Value</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="cf"></div>
                         <div>
                             @{
-                                int eStartIndex;
-                                int ePageSize;
-                                int eTotalCount = Model.Tickets.Count;
-                                if (!Int32.TryParse(Request["eStartIndex"], out eStartIndex))
-                                {
-                                    eStartIndex = 0;
-                                }
-                                if (!Int32.TryParse(Request["ePageSize"], out ePageSize))
-                                {
-                                    ePageSize = 5;
-                                }
+
+                                
                             }
                             <ul>
-                                @foreach (var item in Model.Tickets.OrderByDescending(t => t.CreatedDate).Skip(eStartIndex).Take(ePageSize))
+                                @foreach (var item in Model.Tickets)
                                 {
                                     if (item.Status != (int)DropIt.Common.Statuses.Ticket.Ready)
                                     {
@@ -190,6 +207,12 @@
                                     </li>
                                 }
                             </ul>
+                            <div class="pull-right">
+                                @Html.Partial("_TicketPaging")
+                            </div>
+                            
+
+                            
                         </div>
                     </div>
 
@@ -214,8 +237,8 @@
                                 }
                                 @foreach (var item in Model.Requests)
                                 {
+                                    
                                     <tr>
-
                                         <td class="user">
                                             @item.User.UserName
                                         </td>
@@ -225,7 +248,13 @@
                                         </td>
 
                                         <td class="action">
-                                            <a href="@Url.Action("Create", "TicketResponse")" class="btn main pull-right">Phản hồi</a>
+                                            @if (Request.IsAuthenticated)
+                                            {
+                                                if (item.UserId != WebSecurity.CurrentUserId)
+                                                {
+                                                <a href="@Url.Action("Create", "TicketResponse", new { @item.EventId, @item.UserId })" class="btn main pull-right">Phản hồi</a>
+                                                }
+                                            }
                                         </td>
                                     </tr>
                                 }

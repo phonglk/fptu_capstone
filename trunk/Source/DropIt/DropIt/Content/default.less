@@ -67,12 +67,12 @@ h3,h2{
     font-family: Oswald;
     font-size: 35px;
 }
-.btn-group .btn{
+/*.btn-group .btn{
     color:black;
     &:hover{
         color:#333;
     }
-}
+}*/
 [data-follow] {
     .btn-group .btn {
         color: white;
@@ -262,6 +262,33 @@ h3,h2{
         margin-left:-45px;
     }
     
+}
+.cf{
+    clear:both;
+}
+.btn-group,
+.btn-group:focus{
+    > .btn{
+        border-radius:0 !important;
+    }
+    .caret {
+        border-top-color: #ffffff;
+        border-bottom-color: #ffffff;
+        }
+    a {
+        background: @mainColor !important;
+        color: white !important;
+        &:hover{
+            background:@mainColor_ !important;
+            color:white !important;
+        }
+    }
+    &.open{
+        .btn.dropdown-toggle{
+            background-color:@mainColor_;
+            color:white;
+        }
+    }
 }
 .btn{
     font-family: "UVNBaiSau";

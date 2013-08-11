@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Http.Routing;
+using System.Web.Mvc;
 
 namespace DropIt.DAL
 {
@@ -45,6 +47,11 @@ namespace DropIt.DAL
                 }
             }
             return UpdatedEntity;
+        }
+
+        public IEnumerable<Ticket> FilterHelper(HttpRequestBase Request,IEnumerable<Ticket> Tickets){
+
+            return Tickets;
         }
 
     }
