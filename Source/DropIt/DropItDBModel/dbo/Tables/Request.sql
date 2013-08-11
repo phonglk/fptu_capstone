@@ -15,6 +15,8 @@
 
 
 
+
+
 GO
 CREATE TRIGGER [dbo].[Update_Status_Delete_Request]
 	ON [dbo].[Request]
@@ -27,9 +29,13 @@ CREATE TRIGGER [dbo].[Update_Status_Delete_Request]
 
 		if exists(select * from inserted where [Status] = 1)
 		begin 
+			delete from TicketResponse
+			where [EventId] IN (select EventId from inserted where [Status] = 1)
+			and  UserId IN (select UserId from inserted where [Status] = 1)
+
 			delete from Request
-			where [EventId] = (select EventId from inserted)
-			and [UserId] = (select UserId from inserted)
+			where [EventId] IN (select EventId from inserted where [Status] = 1)
+			and [UserId] IN (select UserId from inserted where [Status] = 1)
 		end
 
 	END
