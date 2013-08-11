@@ -50,12 +50,12 @@ h2 {
   font-family: Oswald;
   font-size: 35px;
 }
-.btn-group .btn {
-  color: black;
-}
-.btn-group .btn:hover {
-  color: #333;
-}
+/*.btn-group .btn{
+    color:black;
+    &:hover{
+        color:#333;
+    }
+}*/
 [data-follow] .btn-group .btn {
   color: white;
 }
@@ -218,6 +218,33 @@ h2 {
 .middle-header .navbar .nav {
   margin-right: 0px;
   margin-left: -45px;
+}
+.cf {
+  clear: both;
+}
+.btn-group > .btn,
+.btn-group:focus > .btn {
+  border-radius: 0 !important;
+}
+.btn-group .caret,
+.btn-group:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.btn-group a,
+.btn-group:focus a {
+  background: #451a54 !important;
+  color: white !important;
+}
+.btn-group a:hover,
+.btn-group:focus a:hover {
+  background: #6e3568 !important;
+  color: white !important;
+}
+.btn-group.open .btn.dropdown-toggle,
+.btn-group:focus.open .btn.dropdown-toggle {
+  background-color: #6e3568;
+  color: white;
 }
 .btn {
   font-family: "UVNBaiSau";

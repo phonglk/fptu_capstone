@@ -10,6 +10,7 @@ using DropIt.DAL;
 using DropIt.Common;
 using WebMatrix.WebData;
 using DropIt.Filters;
+using DropIt.ViewModels;
 
 namespace DropIt.Controllers
 {
@@ -56,10 +57,26 @@ namespace DropIt.Controllers
         public ActionResult Details(int id = 0)
         {
             Event evt = this.unitOfWork.EventRepository.GetById(id);
+            String defaultSorting = "SellPrice ASC";
+            if (Request["Sorting"] == null)
+            {
+                ViewBag.Sorting = defaultSorting;
+            }
+            else
+            {
+                ViewBag.Sorting = Request["Sorting"];
+            }
+            dynamic Helper = unitOfWork.TicketRepository.ControllerHelper(Request, evt.Tickets,defaultSorting);
+            evt.Tickets = Helper.Records;
+            evt.Requests = (ICollection<Request>)evt.Requests.OrderBy(r => r.CreatedDate).ToList();
+            
             if (evt == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.TotalRecordCount = Helper.Paging.TotalRecordCount;
+            ViewBag.StartIndex = Helper.Paging.StartIndex;
+            ViewBag.PageSize = Helper.Paging.PageSize;
             return View(evt);
         }
 

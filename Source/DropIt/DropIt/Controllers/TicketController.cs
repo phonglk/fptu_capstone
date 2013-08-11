@@ -124,7 +124,7 @@ namespace DropIt.Controllers
                         };
                         this.unitOfWork.TicketRepository.AddOrUpdate(NewTicket);
                         this.unitOfWork.Save();
-                        Debug.WriteLine("khong co venueid");
+                        
                     }
 
                     else //if(ticket.EventId!=null)

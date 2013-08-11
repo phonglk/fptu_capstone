@@ -38,4 +38,12 @@ namespace DropIt.ViewModels
         
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
+
+    public class PagingData
+    {
+        public int StartIndex { get; set; }
+        public int PageSize { get; set; }
+        public string Sorting { get; set; }
+
+    }
 }

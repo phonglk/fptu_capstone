@@ -9,7 +9,8 @@ using System.Data;
 using DropIt.Common;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
-
+using System.Web;
+using System.Web.Mvc;
 namespace DropIt.DAL
 {
     public class GenericRepository<TEntity> where TEntity : class
@@ -46,6 +47,50 @@ namespace DropIt.DAL
 
             return records.ToList();
         }
+        //public virtual IEnumerable<TEntity> ControllerHelper(HttpRequestBase Request, ICollection<TEntity> records, Func<TEntity, bool> filter = null)
+        //{
+        //    return ControllerHelper(Request, records.GetEnumerator(), filter);
+        //}
+        public virtual dynamic ControllerHelper(HttpRequestBase Request,ICollection<TEntity> records,String defaultSorting = null)
+        {
+            int startIndex = 0;
+            int pageSize = 5;
+            int total = 0;
+            String sorting = Request["Sorting"];
+            Int32.TryParse(Request["StartIndex"], out startIndex);
+            if (Int32.TryParse(Request["PageSize"], out pageSize) == false)
+            {
+                pageSize = 5;
+            }
+
+            if (sorting != null)
+            {
+                records = (ICollection<TEntity>)records.OrderBy(sorting).ToList();
+            }
+            else
+            {
+                if (defaultSorting != null)
+                {
+                    records = (ICollection<TEntity>)records.OrderBy(defaultSorting).ToList();
+                }
+            }
+            total = records.Count;
+            if (pageSize != 0)
+            {
+                records = (ICollection<TEntity>)records.Skip(startIndex).Take(pageSize).ToList();
+            }
+            return new
+            {
+                Records = records,
+                Paging = new
+                {
+                    TotalRecordCount = total,
+                    StartIndex = startIndex,
+                    PageSize = pageSize
+                }
+            };
+        }
+
 
         public virtual IEnumerable<TEntity> JTGet(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {

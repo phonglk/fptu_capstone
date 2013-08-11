@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="info">
                                     <div class="event-name text-overflow">
-                                        @item.Ticket.Event.EventName
+                                        @Html.ActionLink((string)item.Ticket.Event.EventName, "Details", "Event", new { Id = item.EventId }, null)
                                     </div>
                                     <div class="event-artist">
                                         <span class="icon-star"></span>@item.Ticket.Event.Artist
