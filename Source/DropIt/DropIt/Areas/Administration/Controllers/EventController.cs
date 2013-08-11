@@ -93,7 +93,7 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c=> c.Status != 2).Select(r => new
             {
                 r.CategoryId,
                 r.CategoryName,

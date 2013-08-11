@@ -9,7 +9,9 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script>
+    var categories = @Html.Raw(Json.Encode(ViewBag.CategoryId))
+</script>
 @if (User.IsInRole("Administrator"))
 {
     <div class="container" id="content">
@@ -80,8 +82,8 @@ else
                             <span class="add-on">
                                 <input type="checkbox" id="CreateEvent" data-bind="checked: isCreateEvent" name="CreateEvent">
                                 <label for="CreateEvent"
-                                      data-trigger="manual" data-toggle="popover" title="Sự kiện" data-content="Bạn nên xem kỹ danh sách các sự kiện để chọn đúng sự kiện trước khi tạo mới để vé của bạn được đăng lên ngay lập tức"
-                                    >Tạo mới</label>
+                                    data-trigger="manual" data-toggle="popover" title="Sự kiện" data-content="Bạn nên xem kỹ danh sách các sự kiện để chọn đúng sự kiện trước khi tạo mới để vé của bạn được đăng lên ngay lập tức">
+                                    Tạo mới</label>
                             </span>
                         </div>
                     </div>
@@ -89,9 +91,11 @@ else
                 <fieldset>
                     <legend>Thông tin sự kiện</legend>
                     <div class="control-group">
-                        <label class="control-label" for="CategoryId">Thể loại:</label>
+                        <label class="control-label" for="category">Danh mục</label>
                         <div class="controls">
-                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}", style = "width:364px" })
+                            <select id="category" name="CategoryId" style="width: 100%">
+                            </select>
+                            @*@Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(),value: CategoryId,select2: {}", style = "width:364px" })*@
                         </div>
                     </div>
 
@@ -103,7 +107,7 @@ else
 
                                 <button class="btn" type="button" data-bind="visible: isCreateEvent()">
                                     <div class="add-on">
-                                        <i class='icon-calendar' style="color:black"></i>
+                                        <i class='icon-calendar' style="color: black"></i>
                                     </div>
                                 </button>
 
@@ -212,7 +216,6 @@ else
             if (!state.id) return state.text;
             return "<img src='/Event/Image/" + $(state.element).val() + "'/>" + state.text;
         }
-
         $("#EventId").select2({
             formatResult: formatEventRow,
             escapeMarkup: function (m) { return m; },
@@ -272,7 +275,7 @@ else
                 })
             }
 
-            self.isCreateEvent.subscribe(function(value){
+            self.isCreateEvent.subscribe(function (value) {
                 var pop = $("label[for='CreateEvent']");
                 if (value) {
                     pop.popover("show");
@@ -314,7 +317,7 @@ else
             //errorLabelContainer:$('.validation-summary-errors')
         }
 
-        var startDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1,18,0,0,0);
+        var startDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1, 18, 0, 0, 0);
 
         $(function () {
             ctvm = new CreateTicketViewModel();
@@ -329,7 +332,8 @@ else
                 $("#EventId").trigger("change");
             }
         })
-
+        generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
+        $("select").select2();
     </script>
 
     @Scripts.Render("~/bundles/jqueryval")

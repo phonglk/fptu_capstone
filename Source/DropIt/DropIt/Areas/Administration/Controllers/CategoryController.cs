@@ -193,8 +193,10 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Category.Deactive;
-
+                if (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count() == 0)
+                {
+                    delete.Status = (int)Statuses.Category.Deactive;
+                }
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
                 return Json(new
@@ -220,9 +222,13 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                if (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count() == 0)
+                if (delete.ParentCategoryId == null)
                 {
                     delete.Status = (int)Statuses.Category.Delete;
+                } else if (delete.ParentCategoryId != null)
+                {
+                    delete.Status = (int)Statuses.Category.Delete;
+                    
                 }
                 else {
                     return Json(new
