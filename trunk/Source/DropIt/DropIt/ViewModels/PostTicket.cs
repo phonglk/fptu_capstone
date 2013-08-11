@@ -80,4 +80,36 @@ namespace DropIt.ViewModels
 
         public virtual Venue Venue { get; set; }
     }
+    public class SuggestedEvent : IComparable<SuggestedEvent>
+    {
+        public double rate { get; set; }
+        public Event Event { get; set; }
+        public Boolean isMatchVenue { get; set; }
+        public Boolean isMatchTimeRange { get; set; }
+        public Boolean isMatchTime { get; set; }
+        public Boolean isMatchDate { get; set; }
+
+        public SuggestedEvent()
+        {
+            rate = 0;
+            Event = null;
+            isMatchDate = isMatchTime = isMatchTimeRange = isMatchVenue = false;
+        }
+
+        public int CompareTo(SuggestedEvent other)
+        {
+            if (this.rate < other.rate)
+            {
+                return 1;
+            }
+            else if (this.rate > other.rate)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
 }

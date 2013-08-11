@@ -42,18 +42,6 @@ namespace DropIt.Controllers
             return View(events.ToList());
         }
 
-        public ActionResult Upcoming()
-        {
-            var events = Repository.GetAvailable()
-                .Where(e => e.HoldDate >= DateTime.Now)
-                .OrderBy(e => e.HoldDate).Take(10);
-
-            return View(events);
-        }
-
-        //
-        // GET: /Event/Details/5
-
         public ActionResult Details(int id = 0)
         {
             Event evt = this.unitOfWork.EventRepository.GetById(id);
@@ -86,9 +74,8 @@ namespace DropIt.Controllers
             int UserId = WebSecurity.GetUserId(User.Identity.Name);
             var follow = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
             return View(follow.ToList());
-
-
         }
+
         [HttpPost]
         public ActionResult FollowEvent(int EventId = 0)
         {
@@ -115,6 +102,12 @@ namespace DropIt.Controllers
             return View();
         }
 
+        public ActionResult Suggestion(String EventName, int CategoryId, DateTime HoldDate, int VenueId)
+        {
+            List<SuggestedEvent> suggestion = unitOfWork.EventRepository.Suggestion( EventName,  CategoryId, HoldDate, VenueId);
+
+            return View(suggestion.Take(5).ToList());
+        }
         //
         // POST: /Event/Create
 

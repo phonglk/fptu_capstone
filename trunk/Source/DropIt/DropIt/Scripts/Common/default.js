@@ -307,3 +307,143 @@ function highlight_leftnav() {
     }
 
 }
+function loading_modal() {
+    $(".modal-box,.back-drop").css({
+        display: "block",
+        opacity:1,
+
+    })
+    $(".modal-box > div").css({
+        display:"none"
+    })
+    $(".modal-box > div.loader").css({
+        display: "block"
+    })
+    $(".modal-box").css({
+        width:128,
+        height:128,
+        padding: 4,
+        left: ($(window).width() - 132) / 2,
+        top: ($(window).height() - 132) / 2,
+    })
+}
+function confirm_modal() {
+    $(".modal-box,.back-drop").css({
+        display: "block",
+        opacity: 1,
+
+    })
+    $(".modal-box > div").css({
+        display: "none"
+    })
+    $(".modal-box > div.confirm").css({
+        display: "block"
+    })
+    $(".modal-box").css({
+        width: 640,
+        height: 90,
+        padding: 0,
+        left: ($(window).width() - 640) / 2,
+        top: ($(window).height() - 90) / 2,
+    })
+}
+function suggest_modal() {
+    $(".modal-box,.back-drop").css({
+        display: "block",
+        opacity: 1,
+
+    })
+    $(".modal-box > div").css({
+        display: "none"
+    })
+    $(".modal-box > div.suggest").css({
+        display: "block"
+    })
+    $(".modal-box").css({
+        width: 640,
+        height: 500,
+        padding: 0,
+        left: ($(window).width() - 640) / 2,
+        top: ($(window).height() - 500) / 2,
+    })
+}
+function close_modal() {
+    doubleCheck = true;
+    $(".modal-box").css({
+        width: 20,
+        left: ($(window).width() - 20) / 2,
+        opacity:0
+    })
+    $(".back-drop").css({
+        opacity:0
+    })
+    setTimeout(function(){
+        $(".modal-box,.back-drop").css({
+            display:"none"
+        })
+        $(".btn-gen").focus();
+    },600)
+}
+function selectEvent(eid) {
+    ctvm.EventId(eid);
+    ctvm.isCreateEvent(false);
+    close_modal();
+}
+var doubleCheck = false;
+function _limitDescription() {
+    $(".event-detail").each(function () {
+        var text = $(this).text().trim();
+        var original = text;
+        var limitWord = 30;
+        if (text.split(" ").length > limitWord) {
+            text = text.split(" ", limitWord).join(" ");
+            if (text.length > 150) {
+                text = text.substring(0, 150);
+            }
+            text += "...";
+        } else {
+
+        }
+
+        $(this).text(text).attr("title", original);
+    });
+}
+function FormSubmitHandler(form) {
+    if ($(".form1 form").valid() && ctvm.isCreateEvent() == true && ctvm.isCreateVenue() == false && doubleCheck == false) {
+        try {
+            loading_modal();
+            var CategoryId = $("#category").val();
+            if (CategoryId == null) {
+                CategoryId=$("#CategoryId").val()
+            }
+            $.ajax({
+                url: Url({ Controller: "Event", Action: "Suggestion" }),
+                type: "POST",
+                data: {
+                    EventName: $("#EventName").val(),
+                    CategoryId: CategoryId,
+                    VenueId: $("#VenueId").val(),
+                    HoldDate: $("#HoldDate").val()
+                },
+                success: function (html) {
+                    var doc = $(html);
+                    var area = doc.find("#suggestion-wrapper");
+                    if (doc.find(".event-list .event").length == 0) {
+
+                    } else {
+
+                    }
+                    suggest_modal();
+                    $(".modal-box .suggest").empty();
+                    $(".modal-box .suggest").append(area)
+                    _limitDescription();
+                }
+            })
+            return false;
+        } catch (e) {
+            console.error(e)
+            return false;
+        }
+    }
+    return true;
+}

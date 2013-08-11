@@ -1,0 +1,127 @@
+﻿@model IEnumerable<DropIt.ViewModels.SuggestedEvent>
+@using DropIt.ViewModels
+
+@{
+    ViewBag.Title = "Suggestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="suggestion-wrapper" style="width: 600px; margin: 0 auto; background: white; padding: 10px;">
+    <h4 class="section-header">Sự kiện gợi ý</h4>
+    <blockquote>Sự kiện bạn sắp tạo có thể là một trong số những sự kiện dưới đây, xin hãy xem kỹ trước khi đăng vé để vé của bạn được đăng bán thuận tiện nhất!</blockquote>
+    <div class="event-list @ViewBag.EventListClass" style="margin-left:0">
+        @foreach (var _item in Model)
+        {
+            var item = _item.Event;
+            <div class="event row-fluid"  data-rate="@_item.rate">
+                <div class="span4 thumb">
+                    <a href="@Url.Action("Details", "Event", new { Id = item.EventId })" target="_blank" title="Thông tin chi tiết sự kiện sẽ mở ra tab khác">
+                        <div class="event-image auto-width" style="background-image:url('@Url.Action("Image", "Event", new { Id = item.EventId })')"></div>
+                    </a>
+                </div>
+                <div class="span6 description">
+                    <p class="event-title">
+                        <a href="@Url.Action("Details", "Event", new { Id = item.EventId })" target="_blank" title="Thông tin chi tiết sự kiện sẽ mở ra tab khác">
+                            @item.EventName
+                        </a>
+                    </p>
+
+                    <div class="event-detail">
+                        @Html.Raw(item.Description)
+                    </div>
+
+                    <div class="misc">
+                        <div class="place">
+                            <span class="icon-map-marker"></span>
+                            
+                            <span title="@item.Venue.Address , @item.Venue.Province.ProvinceName" class="@(_item.isMatchVenue?"highlight":"")">@item.Venue.VenueName</span>
+
+                        </div>
+                        <div class="artist">
+                            <span class=" icon-star"></span>
+                            @item.Artist
+                        </div>
+                    </div>
+                </div>
+                <div class="span2 datetime">
+                    <div class="date @(_item.isMatchDate?"highlight":"")">
+                        @{
+            var clone = new DateTime(item.HoldDate.Ticks);
+            var Month = clone.ToShortMonthName();
+                        }
+                        <div class="month">@Month</div>
+                        <div class="clr"></div>
+                        <div class="day">@item.HoldDate.ToString("dd")</div>
+                        <div class="start" style="display: none">7/26/2013 6:00:00 PM</div>
+                    </div>
+                    <div class="time @(_item.isMatchTimeRange?"highlight":"")">
+                        <span class="icon-time"></span>
+                        @item.HoldDate.ToString("hh") :
+                        @item.HoldDate.ToString("mm")
+                    </div>
+                    <div>
+                        <button class="btn main selectEvent" style="margin-right:5px;margin-top:5px;" onclick="selectEvent(@item.EventId)">Chọn sự kiện này</button>
+                        <br />
+                        @if (ViewBag.sortBy == "ticket")
+                        {
+                            <div>
+                                <span class="icon-tags"></span>
+                                @item.Tickets.Count Vé
+                            </div>    
+                        }
+                        @if (ViewBag.sortBy == "request")
+                        {
+                            <div>
+                                <span class="icon-bullhorn"></span>
+                                @item.Requests.Count Yêu cầu
+                            </div>    
+                        }
+                        @if (ViewBag.sortBy == "selling")
+                        {
+                            <div>
+                                <span class="icon-tags"></span>
+                                Đã bán @item.Tickets.Where(t => t.Status == (int)Statuses.Ticket.OnTransaction).Count() vé
+                            </div>    
+                        }
+                        @if (ViewBag.sortBy == "upcoming")
+                        {
+                            <div>
+                                <span class="icon-forward"></span>
+                                Còn 
+                                @{
+                            TimeSpan range = item.HoldDate - DateTime.Now;
+                                        
+                                }
+                                @(range.Days == 0 ? range.Hours + " giờ" : range.Days + " ngày")
+
+                            </div>    
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+            <button class="btn main pull-right" style="margin:20px;margin-right:10px;" onclick="close_modal()">Dùng sự kiện của tôi</button>
+        </div>
+    </div>
+    <script>
+        function limitDescription() {
+            $(".event-detail").each(function () {
+                var text = $(this).text().trim();
+                var original = text;
+                var limitWord = 30;
+                if (text.split(" ").length > limitWord) {
+                    text = text.split(" ", limitWord).join(" ");
+                    if (text.length > 150) {
+                        text = text.substring(0, 150);
+                    }
+                    text += "...";
+                } else {
+
+                }
+
+                $(this).text(text).attr("title", original);
+            });
+        }
+        limitDescription()
+    </script>
+</div>

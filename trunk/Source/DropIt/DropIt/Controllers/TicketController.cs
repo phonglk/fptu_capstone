@@ -66,13 +66,20 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PostTicket ticket)
         {
-            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName",
-                                             ticket.ProvinceId);
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.Get(), "EventId", "EventName",
-                                             ticket.EventId);
-            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.Get(), "CategoryId", "CategoryName", ticket.CategoryId);
-            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.Get(), "VenueId", "VenueName", ticket.VenueId);
-
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c => c.Status != 2).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new
+                {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            });
 
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             double receivemoney = (int) (ticket.SellPrice*(1 - service));
@@ -183,6 +190,7 @@ namespace DropIt.Controllers
             
             return View(ticket);
         }
+        
 
         //Get: /
         public ActionResult Buy(int Id)
