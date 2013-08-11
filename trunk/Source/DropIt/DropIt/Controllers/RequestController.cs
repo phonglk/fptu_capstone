@@ -96,23 +96,6 @@ namespace DropIt.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        //public ActionResult CloseRequest()
-        //{
-        //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
-        //    var close = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
-        //    return View(close.ToList());
-        //}
-
-        //[HttpPost]
-        //public ActionResult CloseRequest(int EventId = 0)
-        //{
-        //    int UserId = WebSecurity.GetUserId(User.Identity.Name);
-        //    Request close = this.unitOfWork.RequestRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
-        //    this.unitOfWork.RequestRepository.Delete(close);
-        //    var closes = this.unitOfWork.RequestRepository.Get(x => x.UserId == UserId).ToList();
-        //    return View(closes.ToList());
-        //}
+        }       
     }
 }
