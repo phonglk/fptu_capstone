@@ -30,6 +30,7 @@
     }
 
     table th:nth-child(4) {
+        width: auto;
     }
 
     table th:nth-child(5) {
@@ -136,7 +137,7 @@
                 <!-- ko if: list.extraData.TranPaymentStatus != Statuses.Transfered -->
                 <a href="javascript:;"
                     class="button red"
-                    data-bind="click:$root.Canceled,visible:TranStatus==Statuses.Unpaid">Hủy bỏ
+                    data-bind="click:$root.Canceled,visible:TranStatus!=Statuses.Received">Hủy bỏ
                 </a>
                 <a href="javascript:;"
                     class="button blue"
@@ -255,7 +256,7 @@
             urlData:{Action:"Received",Data:{Id:item.TicketId}},
             callback:function(event){
                 Notifications.push({
-                    text:"Giao dịch \"#{TranFullName}\" đã nhận hàng !".eval(event),
+                    text:"Giao dịch \""+item.TranFullName+"\"  đã nhận hàng !".eval(event),
                     autoDismiss:5
                 })
             }
@@ -280,7 +281,7 @@
             urlData:{Action:"Canceled",Data:{Id:item.TicketId}},
             callback:function(event){
                 Notifications.push({
-                    text:"Giao dịch \"#{TranFullName}\" đã hủy bỏ !".eval(event),
+                    text:"Giao dịch \""+item.TranFullName+"\"  đã hủy bỏ !".eval(event),
                     autoDismiss:5
                 })
             }

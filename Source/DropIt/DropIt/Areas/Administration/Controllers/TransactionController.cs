@@ -245,13 +245,13 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Ticket ticket = Repository.GetById(Id);
                 ticket.TranStatus = (int)Statuses.Transaction.Canceled;
-
+                ticket.Status = (int)Statuses.Ticket.Invalid;
                 Repository.AddOrUpdate(ticket);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    VenueId = ticket.TicketId
+                    EventId = ticket.TicketId
                 });
             }
             catch (Exception e)

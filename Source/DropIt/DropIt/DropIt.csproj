@@ -1175,7 +1175,6 @@
     <Content Include="Areas\Administration\Views\Venue\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Venue\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Setting\Index.cshtml" />
-    <Content Include="Areas\Administration\Views\Transaction\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Transaction\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Category\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Category\Edit.cshtml" />
