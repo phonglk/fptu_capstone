@@ -299,21 +299,6 @@ namespace DropIt.Areas.Administration.Controllers
         }
        
         [HttpPost]
-        public JsonResult GetEventOption()
-        {
-            try
-            {
-                var eventnames = unitOfWork.EventRepository.GetAll().Select(
-                    p => new { DisplayText = p.EventName, Value = p.EventId });
-                return Json(new JSONResult(eventnames, "Options"));
-            }
-            catch (Exception e)
-            {
-                return Json(new JSONResult(e));
-            }
-        }
-
-        [HttpPost]
         public JsonResult Approve(int Id)
         {
             try
