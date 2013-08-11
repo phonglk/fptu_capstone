@@ -429,7 +429,8 @@ function FormSubmitHandler(form) {
                     var doc = $(html);
                     var area = doc.find("#suggestion-wrapper");
                     if (doc.find(".event-list .event").length == 0) {
-
+                        confirm_modal()
+                        return;
                     } else {
 
                     }
