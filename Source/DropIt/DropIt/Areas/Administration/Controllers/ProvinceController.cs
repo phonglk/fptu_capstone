@@ -114,23 +114,6 @@ namespace DropIt.Areas.Administration.Controllers
 
         }
 
-        [HttpPost]
-        public JsonResult GetProvinceOptions()
-        {
-            try
-            {
-                var provinces = unitOfWork.ProvinceRepository.GetAll().Select(
-                    p => new { DisplayText = p.ProvinceName, Value = p.ProvinceId });
-
-                return Json(new JSONResult(provinces, "Options"));
-
-            }
-            catch (Exception e)
-            {
-
-                return Json(new JSONResult(e));
-            }
-        }
 
         protected override void Dispose(bool disposing)
         {
