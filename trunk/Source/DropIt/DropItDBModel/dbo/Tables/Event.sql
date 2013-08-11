@@ -21,3 +21,44 @@
 
 
 
+
+
+
+GO
+CREATE TRIGGER Update_Other_When_EventOutDate
+	ON [dbo].[Event]
+	After UPDATE
+	AS
+	BEGIN
+		SET NOCOUNT ON
+		if not update([Status])
+		Return
+
+		if exists(select * from inserted where [Status] = 4)
+		begin 
+			declare @EventId int;
+			set @EventId = (select DISTINCT EventId from inserted)
+
+			--Delete ticket while not being traded
+			update Ticket
+			set [Status] = 2
+			where EventId = @EventId
+
+			--Cancel transaction while user cannot received ticket
+			update Ticket
+			set [TranStatus] = 4
+			where EventId = @EventId
+			and ([TranStatus]  = 1 or [TranStatus] = 2)
+
+			--Close related request
+			update Request
+			set [Status] = 1
+			where EventId = @EventId
+
+			----Delete related response
+			--delete TicketResponse
+			--where EventId = @EventId
+
+		end
+
+	END

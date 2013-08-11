@@ -62,27 +62,8 @@
 
 
 
-GO
 
-CREATE TRIGGER Update_Transaction_When_Cancel
-	ON [dbo].[Ticket]
-	After UPDATE
-	AS
-	BEGIN
-		SET NOCOUNT ON
-		if not update(TranStatus)
-		Return
 
-		if exists(select * from inserted where TranStatus = 4)
-		begin 
-			
-			update Ticket
-			set TranStatus = null,
-				[Status] = 1
-			where TicketId = (select TicketId from inserted)
-		end
-
-	END
 GO
 
 CREATE TRIGGER Update_Ticket_When_Transaction
