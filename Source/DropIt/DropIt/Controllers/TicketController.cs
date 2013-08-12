@@ -36,14 +36,13 @@ namespace DropIt.Controllers
 
         public ActionResult Create()
         {
-            var date = DateTime.Now;
-            int noPost = int.Parse(Settings.get("TicketPostPerDay"));
-            var yesterday = DateTime.Now.AddDays(-1);
+            
+            int postPerDay = int.Parse(Settings.get("TicketPostPerDay"));
             var UserId = WebSecurity.GetUserId(User.Identity.Name);
             Boolean checkSellable = unitOfWork.UserRepository.GetById(UserId).Sellable;     
-            int noTicket = this.unitOfWork.TicketRepository.Get().Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId==UserId).Count();
+            int noTicket = this.unitOfWork.TicketRepository.Get().Where(t => t.CreatedDate.Value.Date == DateTime.Today && t.UserId==UserId).Count();
             ViewBag.NoPostTicket = noTicket;
-            ViewBag.noSetting = noPost;
+            ViewBag.noSetting = postPerDay;
             ViewBag.Sellable = checkSellable;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
@@ -66,6 +65,13 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PostTicket ticket)
         {
+            int postPerDay = int.Parse(Settings.get("TicketPostPerDay"));
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            Boolean checkSellable = unitOfWork.UserRepository.GetById(UserId).Sellable;
+            int noTicket = this.unitOfWork.TicketRepository.Get().Where(t => t.CreatedDate.Value.Date == DateTime.Today && t.UserId == UserId).Count();
+            ViewBag.NoPostTicket = noTicket;
+            ViewBag.noSetting = postPerDay;
+            ViewBag.Sellable = checkSellable;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
@@ -275,18 +281,25 @@ namespace DropIt.Controllers
                 return RedirectToAction("Details", "Event", new { Id = EventId });
             }
 
-            var date = DateTime.Now;
             int noRe = int.Parse(Settings.get("TicketRequestPerDay"));
-            var yesterday = DateTime.Now.AddDays(-1);
-            
             var request = this.unitOfWork.RequestRepository.Get().Where(t => t.CreatedDate != null);
-            int noRequest = request.Where(t => t.CreatedDate <= date && t.CreatedDate > yesterday && t.UserId == UserId).Count();
+            int noRequest = request.Where(t => t.CreatedDate.Value.Date == DateTime.Today && t.UserId == UserId).Count();
             ViewBag.NoRequest = noRequest;
             ViewBag.NoRe = noRe;
             ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetRequestAvailable(UserId), "EventId", "EventName");
             ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
             ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
-            ViewBag.CategoryId = new SelectList(this.unitOfWork.CategoryRepository.GetAvailable(), "CategoryId", "CategoryName");
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c => c.Status != (int)Statuses.Category.Delete).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new
+                {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            });
             return View();
         }
 
@@ -295,6 +308,35 @@ namespace DropIt.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RequestTicket(RequestTicket ticket)
         {
+            var UserId = WebSecurity.GetUserId(User.Identity.Name);
+            var EventId = ticket.EventId;
+            if (EventId != 0 && this.unitOfWork.RequestRepository.Get(r => r.EventId == EventId && r.UserId == UserId).Count() != 0)
+            {
+                Session["Message"] = "Vé này bạn đã đăng rao mua, xin chờ người phản hồi!";
+                return RedirectToAction("Details", "Event", new { Id = EventId });
+            }
+
+            int noRe = int.Parse(Settings.get("TicketRequestPerDay"));
+            var request = this.unitOfWork.RequestRepository.Get().Where(t => t.CreatedDate != null);
+            int noRequest = request.Where(t => t.CreatedDate.Value.Date == DateTime.Today && t.UserId == UserId).Count();
+            ViewBag.NoRequest = noRequest;
+            ViewBag.NoRe = noRe;
+            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetRequestAvailable(UserId), "EventId", "EventName");
+            ViewBag.ProvinceId = new SelectList(this.unitOfWork.ProvinceRepository.Get(), "ProvinceId", "ProvinceName");
+            ViewBag.VenueId = new SelectList(this.unitOfWork.VenueRepository.GetAvailable(), "VenueId", "VenueName");
+            ViewBag.CategoryId = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c => c.Status != (int)Statuses.Category.Delete).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new
+                {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            });
+
+
             ticket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             if (ModelState.IsValid)
             {
@@ -372,7 +414,7 @@ namespace DropIt.Controllers
                         return RedirectToAction("Details", "Event", new { Id = ticket.EventId });
                     }
 
-                    Request request = new Request()
+                    Request addedRequest = new Request()
                     {
                         UserId = ticket.UserId,
                         EventId = (int)ticket.EventId,
@@ -380,7 +422,7 @@ namespace DropIt.Controllers
                         CreatedDate = DateTime.Now,
                         Description = ticket.Description
                     };
-                    this.unitOfWork.RequestRepository.AddOrUpdate(request);
+                    this.unitOfWork.RequestRepository.AddOrUpdate(addedRequest);
                     this.unitOfWork.Save();
                 }
 
