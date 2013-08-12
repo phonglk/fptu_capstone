@@ -159,6 +159,33 @@ namespace DropIt.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        public JsonResult Invalid(int Id)
+        {
+            try
+            {
+                Ticket ticket = Repository.GetById(Id);
+                ticket.Status = (int)Statuses.Ticket.Invalid;
+                ticket.TranStatus = (int)Statuses.Transaction.Canceled;
+                Repository.AddOrUpdate(ticket);
+                Repository.Save();
+                return Json(new
+                {
+                    Result = "OK",
+                    EventId = ticket.TicketId
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    Result = "ERROR",
+                    EventId = Id,
+                    Message = e.Message
+                });
+            }
+        }
+
+        [HttpPost]
         public JsonResult Done(int Id)
         {
             try

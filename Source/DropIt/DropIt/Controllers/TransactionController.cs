@@ -79,6 +79,24 @@ namespace DropIt.Controllers
             }
         }
 
+        public ActionResult Reported(int Id)
+        {
+            var tran = Repository.GetById(Id);
+            if (tran == null)
+            {
+                Session["Message"] = "Không tồn tại vé này";
+                return RedirectToAction("HistoryBuy", new { status = 2 });
+            }
+            else
+            {
+                tran.TranStatus = (int)Statuses.Transaction.Reported;
+                Repository.AddOrUpdate(tran);
+                Repository.Save();
+                Session["Message"] = " Bạn đã khiéu nại vé của sự kiện <strong>" + tran.Event.EventName + "</strong> thành công! Vui lòng đợi admin liên hệ để giải quyết.";
+                return RedirectToAction("HistoryBuy", new { status = 3 });
+            }
+        }
+
         [HttpPost]
         public JsonResult Count(int id)
         {
