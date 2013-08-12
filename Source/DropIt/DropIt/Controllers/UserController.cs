@@ -38,6 +38,13 @@ namespace DropIt.Controllers
             return View(newUser);
         }
 
+        public ActionResult Profile(int id = 0)
+        {
+            User user = this.unitOfWork.UserRepository.GetById(id);
+            
+            return View(user);
+        }
+
         //
         // POST: /User/Edit/
         [HttpPost]
