@@ -68,32 +68,12 @@ namespace DropIt.Controllers
             return View(evt);
         }
 
-        public ActionResult FollowEvent()
-        {
-            int UserId = WebSecurity.GetUserId(User.Identity.Name);
-            var follow = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
-            return View(follow.ToList());
-        }
-
-        [HttpPost]
-        public ActionResult FollowEvent(int EventId = 0)
-        {
-            int UserId = WebSecurity.GetUserId(User.Identity.Name);
-            UserFollowEvent follow = this.unitOfWork.FollowEventRepository.Get(r => r.UserId == UserId && r.EventId == EventId).FirstOrDefault();
-            this.unitOfWork.FollowEventRepository.Delete(follow);
-            var follows = this.unitOfWork.FollowEventRepository.Get(x => x.UserId == UserId).ToList();
-            return View(follows.ToList());
-        }
-
         public ActionResult Suggestion(String EventName, int CategoryId, DateTime HoldDate, int VenueId)
         {
             List<SuggestedEvent> suggestion = unitOfWork.EventRepository.Suggestion( EventName,  CategoryId, HoldDate, VenueId);
 
             return View(suggestion.Take(5).ToList());
         }
-
-
-
 
         [HttpPost]
         public JsonResult getInfo(int EventId)
