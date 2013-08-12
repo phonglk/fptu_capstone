@@ -3196,7 +3196,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di643091201129187589" cid="UC001" type="use-case" name="Create" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:23:38">
+          <item id="di643091201129187589" cid="UC001" type="use-case" name="Create" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:23:38">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3204,7 +3204,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di712105042236989283" cid="UC002" type="use-case" name="View Setting" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:24:08">
+          <item id="di712105042236989283" cid="UC002" type="use-case" name="View Setting" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:24:08">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3212,36 +3212,21 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di487335822138109210" cid="GNR001" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:25:16">
+          <item id="di487335822138109210" cid="GNR001" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:25:16">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di572849791830463614" cid="GNR002" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:25:59">
+          <item id="di572849791830463614" cid="GNR002" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:25:59">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di433818557243843325" cid="UC003" type="use-case" name="View Category" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:03">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <use-case />
-          </item>
-          <item id="di114640818959221638" cid="GNR003" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:16">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di524078337229263742" cid="UC004" type="use-case" name="View User" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:25">
+          <item id="di433818557243843325" cid="UC003" type="use-case" name="View Category" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:03">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3249,29 +3234,14 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di894215246153468660" cid="GNR006" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:31">
+          <item id="di114640818959221638" cid="GNR003" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:16">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di706330377823579737" cid="UC005" type="use-case" name="View Event" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:14">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <use-case />
-          </item>
-          <item id="di646451355141282665" cid="GNR005" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:26">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di555743541716051493" cid="UC006" type="use-case" name="View Request" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:29:38">
+          <item id="di524078337229263742" cid="UC004" type="use-case" name="View User" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:27:25">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3279,29 +3249,14 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di383380551449025012" cid="GNR007" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:29:56">
+          <item id="di894215246153468660" cid="GNR006" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:31">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di388768585333923227" cid="UC007" type="use-case" name="View Ticket" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:24">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <use-case />
-          </item>
-          <item id="di911908589742502423" cid="GNR008" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:35">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di177329002440964938" cid="UC008" type="use-case" name="View Venue" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:51">
+          <item id="di706330377823579737" cid="UC005" type="use-case" name="View Event" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:14">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3309,14 +3264,14 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di598653624443215764" cid="GNR009" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:00">
+          <item id="di646451355141282665" cid="GNR005" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:28:26">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di860720876664456515" cid="UC009" type="use-case" name="View Transaction" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:33">
+          <item id="di555743541716051493" cid="UC006" type="use-case" name="View Request" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:29:38">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3324,7 +3279,52 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di697716722442840034" cid="GNR010" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:45">
+          <item id="di383380551449025012" cid="GNR007" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:29:56">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di388768585333923227" cid="UC007" type="use-case" name="View Ticket" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:24">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di911908589742502423" cid="GNR008" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:35">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di177329002440964938" cid="UC008" type="use-case" name="View Venue" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:30:51">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di598653624443215764" cid="GNR009" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:00">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di860720876664456515" cid="UC009" type="use-case" name="View Transaction" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:33">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di697716722442840034" cid="GNR010" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/13/2013 03:31:45">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4328,7 +4328,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di663956802869745572" cid="UC001" type="use-case" name="Notification" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 16:31:32">
+          <item id="di663956802869745572" cid="UC001" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 16:31:32">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4336,7 +4336,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di661316527772994160" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 16:31:51">
+          <item id="di661316527772994160" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 16:31:51">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4352,20 +4352,20 @@
           <item id="di209942648878920759" iid="ae99c6a12df441bba07d487ec8536eba" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 13:09:55" order-index="0" type="entity">
             <layout ax="130" ay="110" awidth="80" aheight="130" x="130" y="110" width="80" height="130" angle="0" />
           </item>
-          <item id="di550703825481817488" iid="8893e50bb5174fc0b9081cf093cdcbb8" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 13:10:10" order-index="1" type="drawing-shape">
+          <item id="di652304685548336110" iid="8893e50bb5174fc0b9081cf093cdcbb8" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 13:10:10" order-index="1" type="drawing-shape">
             <layout ax="150" ay="100" awidth="40" aheight="40" x="150" y="100" width="40" height="40" angle="0" />
             <drawing-shape type="Rectangle" />
             <style class="default" />
           </item>
           <item id="di663956802869745572" iid="5e5da1a8e80f4fa3974d305d8d95a363" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 16:31:32" order-index="2" type="entity">
-            <layout ax="366" ay="130" awidth="120" aheight="75" x="366" y="130" width="120" height="75" angle="0" />
+            <layout ax="390" ay="130" awidth="120" aheight="75" x="390" y="130" width="120" height="75" angle="0" />
             <use-case />
           </item>
           <item id="di661316527772994160" iid="cee07430991040989eb89e306bf565e8" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 16:31:51" order-index="3" type="relation">
-            <layout line-style="perpendicular" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="210" y1="171.25" x2="366" y2="170.875" start-border-pos="0.372896634615385" end-border-pos="0.867864583333333">
+            <layout line-style="perpendicular" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="210" y1="170.375" x2="390" y2="170.3125" start-border-pos="0.365985576923077" end-border-pos="0.866666666666667" name-width="50">
               <points>
-                <point x="210" y="171.25" />
-                <point x="366" y="170.875" />
+                <point x="210" y="170.375" />
+                <point x="390" y="170.3125" />
               </points>
             </layout>
             <relation from="di209942648878920759" from-iid="ae99c6a12df441bba07d487ec8536eba" to="di663956802869745572" to-iid="5e5da1a8e80f4fa3974d305d8d95a363" />
