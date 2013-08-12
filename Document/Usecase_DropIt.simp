@@ -246,7 +246,7 @@
           <style class="default" />
           <use-case />
         </item>
-        <item id="di206346331307323208" cid="UC014" type="use-case" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="Pffa0ed2a0f404470adb45f533ae20b3c" creation-date="06/03/2013 20:47:09">
+        <item id="di206346331307323208" cid="UC014" type="use-case" name="Login" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="Pffa0ed2a0f404470adb45f533ae20b3c" creation-date="06/03/2013 20:47:09">
           <stereotypes />
           <tagged-values />
           <associated-diagrams />
@@ -696,14 +696,14 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di857018991755565914" cid="AC001" type="actor" name="System" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 12:59:29">
+          <item id="di857018991755565914" cid="AC001" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 12:59:29">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di931619580718844568" cid="UC001" type="use-case" name="Notification" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:01:21">
+          <item id="di931619580718844568" cid="UC001" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:01:21">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -711,7 +711,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di382508604270349973" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:01:26">
+          <item id="di382508604270349973" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:01:26">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1574,7 +1574,7 @@
             <style class="default" />
             <extend extension-point="" />
           </item>
-          <item id="di233881656370779810" cid="UC004" type="use-case" name="Notification" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:37:27">
+          <item id="di233881656370779810" cid="UC004" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:37:27">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1582,7 +1582,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di117982404656744762" cid="REL005" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:37:40">
+          <item id="di117982404656744762" cid="REL005" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:37:40">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3641,7 +3641,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di658543907278824813" cid="AC002" type="actor" name="System" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:09:55">
+          <item id="di658543907278824813" cid="AC002" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:09:55">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3687,21 +3687,21 @@
         </meta>
         <tagged-values />
         <abstract-items>
-          <item id="di818938645339067979" cid="AC002" type="actor" name="System" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:09:55">
+          <item id="di818938645339067979" cid="AC002" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:09:55">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di379870076249130126" cid="SYS001" type="system-boundary" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:11:07">
+          <item id="di379870076249130126" cid="SYS001" type="system-boundary" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:11:07">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di367534938977110647" cid="REL003" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:12:43">
+          <item id="di367534938977110647" cid="REL003" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:12:43">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3712,7 +3712,7 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di335288915709790117" cid="UC003" type="use-case" name="Notification" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:12:41">
+          <item id="di335288915709790117" cid="UC003" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 13:12:41">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -3747,7 +3747,7 @@
             <relation from="di818938645339067979" from-iid="fcfd8f92f7214e279646e6c78ed7f890" to="di335288915709790117" to-iid="734249985cf0492aa6ff5da5afe6824d" />
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
-          <item id="di673882711361768736" iid="c36a86368acc41fbb5b07e2d015a9123" name="Element4" container="di379870076249130126" container-iid="ca417554805245248f54cd24eb6a69b1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/02/2013 11:53:01" order-index="61" type="drawing-text">
+          <item id="di184315742435845583" iid="c36a86368acc41fbb5b07e2d015a9123" name="Element4" container="di379870076249130126" container-iid="ca417554805245248f54cd24eb6a69b1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/02/2013 11:53:01" order-index="61" type="drawing-text">
             <layout ax="270" ay="20" awidth="330" aheight="50" x="270" y="20" width="330" height="48" angle="0" />
             <drawing-text>
               <text>Notification System Overview - DropIt</text>
