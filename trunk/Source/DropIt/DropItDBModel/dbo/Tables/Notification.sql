@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Notification] (
     [NotificationId] INT            NOT NULL IDENTITY,
-	  [UserId]         INT            NULL,
+	  [UserId]         INT            NOT NULL,
     [SenderId] INT NULL, 
     [ActivityType] NVARCHAR(50) NULL, 
     [ObjectType] NVARCHAR(50) NULL, 

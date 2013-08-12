@@ -173,7 +173,7 @@
                                                 <strong>Người bán:</strong><a href="@Url.Action("Profile", "User", new { Id = @item.UserId })"> @item.User.UserName</a>
                                             </div>
                                             <div class="buyer-date">
-                                                <strong>Uy tín:</strong> @Utils.getUserRating(item.User) / 5
+                                                <strong>Uy tín:</strong> <span class="rating">@Utils.getUserRating(item.User)</span>
                                             </div>
                                             <div class="buyer-date">
                                                 <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
