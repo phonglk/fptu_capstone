@@ -609,6 +609,9 @@ h3,h2{
         font-size:15px;
         line-height:18px;
         font-family:HN;
+        .buyer-date{
+            padding-bottom:6px;
+        }
     }
     .serial{
         position: absolute;
@@ -768,4 +771,19 @@ h3,h2{
     overflow-y:scroll;
     opacity:0;
     display:none;
+}
+.rating{
+    background:url(Images/star-rating.png) no-repeat 0 -20px;
+    width:100px;
+    height:20px;
+    display:inline-block;
+    margin-bottom:-2px;
+
+    .inner-rating{
+        background:url(Images/star-rating.png) no-repeat 0 0;
+        width:100px;
+        height:20px;
+        display:inline-block;
+        -webkit-transition: all 1s;
+    }
 }

@@ -10,13 +10,27 @@ $(function () {
     bootstrap();
     unraw_html();
     highlight_leftnav();
-    
+    star_rating();
 })
 
 
 function bootstrap() {
     $("[data-toggle='tooltip']").tooltip();
     $("[data-toggle='popover']").popover();
+}
+function star_rating() {
+    $(".rating").each(function(){
+        var $this = $(this);
+        var rating = parseFloat($this.text());
+        $this.empty();
+        $this.attr("title",rating+"/5");
+        $this.append("<span class='inner-rating' style='width:0'></span>")
+        setTimeout(function () {
+            $this.find(".inner-rating").css({
+                width:(rating/5)*100
+            })
+        }, 500);
+    })
 }
 function generateData(type, target) {
     function getData(url, callback) {

@@ -504,6 +504,9 @@ h2 {
   line-height: 18px;
   font-family: HN;
 }
+.ticket .buyer .buyer-date {
+  padding-bottom: 6px;
+}
 .ticket .serial {
   position: absolute;
   bottom: 5px;
@@ -626,4 +629,18 @@ h2 {
   overflow-y: scroll;
   opacity: 0;
   display: none;
+}
+.rating {
+  background: url(Images/star-rating.png) no-repeat 0 -20px;
+  width: 100px;
+  height: 20px;
+  display: inline-block;
+  margin-bottom: -2px;
+}
+.rating .inner-rating {
+  background: url(Images/star-rating.png) no-repeat 0 0;
+  width: 100px;
+  height: 20px;
+  display: inline-block;
+  -webkit-transition: all 1s;
 }
