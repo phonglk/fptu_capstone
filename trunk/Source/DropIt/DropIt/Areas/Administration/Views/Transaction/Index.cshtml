@@ -13,6 +13,7 @@
         Paid : @((int)DropIt.Common.Statuses.Transaction.Paid),
         Received : @((int)DropIt.Common.Statuses.Transaction.Received),
         Transfered: @((int)DropIt.Common.Statuses.Payment.Transfered),
+        Reported: @((int)DropIt.Common.Statuses.Transaction.Reported),
         Done: @((int)DropIt.Common.Statuses.Payment.Done)
         }
 </script>
@@ -34,7 +35,7 @@
     }
 
     table th:nth-child(5) {
-        width: 200px;
+        width: 230px;
     }
 
     .popover {
@@ -66,6 +67,10 @@
                 <i class="icon-download-alt"></i>
                 <span>Đã nhận hàng</span>
             </a>
+            <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Reported })" class="btn btn-large">
+                <i class="icon-warning-sign"></i>
+                <span>Bị Khiếu nại</span>
+            </a>
             <a href="@Url.Action("Index", new { TranPaymentStatus = (int)DropIt.Common.Statuses.Payment.Transfered })" class="btn btn-large">
                 <i class="icon-share"></i>
                 <span>Đến hạn chuyển khoản</span>
@@ -90,7 +95,7 @@
     <thead>
         <tr>
             <th>Tên người bán</th>
-            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered -->
+            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered || list.TranStatus() == Statuses.Reported-->
             <th>Mã vận đơn</th>
             <!-- /ko -->
             <th>Giá vé</th>
@@ -116,11 +121,11 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Delivered-->
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Delivered || TranStatus == Statuses.Reported-->
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranPaymentStatus == Statuses.Transfered  -->
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received-->
             <td>
                 <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
@@ -134,7 +139,7 @@
                 <a href="javascript:;" class="button green" data-bind="click:$root.Done,visible:TranPaymentStatus==Statuses.Transfered">Hoàn thành
                 </a>
                 <!-- /ko -->
-                <!-- ko if: list.extraData.TranPaymentStatus != Statuses.Transfered -->
+                <!-- ko if: list.extraData.TranPaymentStatus != Statuses.Transfered && TranStatus != Statuses.Reported -->
                 <a href="javascript:;"
                     class="button red"
                     data-bind="click:$root.Canceled,visible:TranStatus!=Statuses.Received">Hủy bỏ
@@ -146,6 +151,16 @@
                 <a href="javascript:;"
                     class="button black show-prompt"
                     data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
+                </a>
+                <!-- /ko -->
+                <!-- ko if: list.extraData.TranStatus == Statuses.Reported -->
+                <a href="javascript:;"
+                    class="button red show-prompt"
+                    data-bind="click:$root.Invalid,visible:TranStatus==Statuses.Reported">Vé vi phạm
+                </a>
+                <a href="javascript:;"
+                    class="button green show-prompt"
+                    data-bind="click:$root.Received,visible:TranStatus==Statuses.Reported">Không vi phạm
                 </a>
                 <!-- /ko -->
             </td>
@@ -188,7 +203,7 @@
     }
     list.changePaymentStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
-        $(".status-filter > div > a").eq(4).addClass("active");
+        $(".status-filter > div > a").eq(5).addClass("active");
         list.TranPaymentStatus(transtt);
         list.extraData.TranPaymentStatus = transtt;
         list.currentPage(1);
@@ -257,6 +272,19 @@
             callback:function(event){
                 Notifications.push({
                     text:"Giao dịch \""+item.TranFullName+"\"  đã nhận hàng !".eval(event),
+                    autoDismiss:5
+                })
+            }
+        })
+    }
+
+    list.Invalid = function(item){
+        list.AjaxAction({
+            item:item,
+            urlData:{Action:"Invalid",Data:{Id:item.TicketId}},
+            callback:function(event){
+                Notifications.push({
+                    text:"Giao dịch \""+item.TranFullName+"\"  bị vi phạm!".eval(event),
                     autoDismiss:5
                 })
             }
@@ -367,9 +395,15 @@
         e.preventDefault();
         return false;
     })
+    $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
+        list.changeStatus(4);
+        list.TranStatus(4);
+        e.preventDefault();
+        return false;
+    })
 
    
-    $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
+    $(".status-filter > div > a").eq(5).attr("href","javascript:;").click(function(e){
         list.changePaymentStatus(1);
         list.TranPaymentStatus(1);
         e.preventDefault();

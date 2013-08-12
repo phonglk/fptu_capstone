@@ -95,6 +95,7 @@ namespace DropIt.Controllers
                     
                     Ticket ticket = this.unitOfWork.TicketRepository.Get(t => t.TicketId == pTicketId).FirstOrDefault();
                     ViewBag.PayerFirstName = pdt.PayerFirstName;
+                    ViewBag.User = ticket.User.UserName;
                     ViewBag.PayerLastName = pdt.PayerLastName;
                     ViewBag.OrderId = pdt.TransactionId;
                     ViewBag.Name = ticket.Event.EventName;

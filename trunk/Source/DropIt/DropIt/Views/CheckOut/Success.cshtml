@@ -3,19 +3,23 @@
     ViewBag.Title = "Success";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .label-info {
+        font-size: 16px;
+    }
+</style>
 <div class="container" id="content">
     <div class="tran-info">
         <h3>Giao dịch thành công</h3>
         <hr />
         <div class="user-name">
-            <h4>Cảm ơn bạn <span class="label label-info">@ViewBag.PayerFirstName @ViewBag.PayerLastName</span> đã hoàn thành giao dịch!</h4>
+            <h4>Cảm ơn bạn <span class="label label-info">@ViewBag.User</span> đã hoàn thành giao dịch!</h4>
         </div>
         <div class="Transaction-id">Mã giao dịch của bạn là: @Html.ViewBag.OrderId</div>
         <div class="event-name">Tên sự kiện: @Html.ViewBag.Name</div>
         <div class="Price">Số tiền thanh toán: @Html.ViewBag.Price @ViewBag.Currency</div>
         <br />
         <hr />
-        <a href="/Home/Index" class="btn btn-gen pull-left">Quay về trang chủ</a>
+        <a href="/Home/Index" class="btn btn-gen btn-mid">Quay về trang chủ</a>
     </div>
 </div>
