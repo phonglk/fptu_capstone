@@ -10,6 +10,9 @@
     ViewBag.Title = "RequestTicket";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    var categories = @Html.Raw(Json.Encode(ViewBag.CategoryId))
+</script>
 @if (User.IsInRole("Administrator"))
 {
      <div class="container" id="content">
@@ -82,9 +85,10 @@ else
                 <fieldset>
                     <legend>Thông tin sự kiện</legend>
                     <div class="control-group">
-                        <label class="control-label" for="CategoryId">Thể loại:</label>
+                        <label class="control-label" for="category">Danh mục</label>
                         <div class="controls">
-                            @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryId, new { data_bind = "enable: isCreateEvent(), value: CategoryId, select2: {}", style = "width:364px" })
+                            <select id="category" name="CategoryId" style="width: 100%">
+                            </select>
                         </div>
                     </div>
 
@@ -270,6 +274,8 @@ else
                 $("#EventId").select2("val", defaultEvent);
                 $("#EventId").trigger("change");
             }
+            generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
+            $("#category").select2();
         })
     </script>
 

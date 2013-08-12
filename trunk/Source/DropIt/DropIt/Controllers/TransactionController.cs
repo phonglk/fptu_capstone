@@ -72,6 +72,7 @@ namespace DropIt.Controllers
             else
             {
                 tran.TranStatus = (int)Statuses.Transaction.Received;
+                tran.TranShipDate = DateTime.Now;
                 Repository.AddOrUpdate(tran);
                 Repository.Save();
                 Session["Message"] = "Vé của sự kiện <strong>"+tran.Event.EventName+"</strong> đã được chuyển sang đã nhận thành công!";
