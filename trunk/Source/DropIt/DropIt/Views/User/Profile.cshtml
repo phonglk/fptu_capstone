@@ -1,0 +1,129 @@
+﻿@model DropIt.Models.User
+@using BootstrapExtensions.Base
+@using BootstrapExtensions.Base.Button
+@using BootstrapExtensions.Base.Form
+@using BootstrapExtensions.Base.Form.Label
+@using BootstrapExtensions.Components.Alert
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("Partials/RoleTab")
+<div class="container" id="content">
+    <div id="bord">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="sidebar-nav">
+                @Html.Partial("Partials/SideBar")
+            </div>
+        </div>
+        <div class="profile span9">
+            <h3>Thông Tin Tài Khoản</h3>
+            <hr />
+            @using (Html.HorizontalForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="control-group">
+                    <label class="control-label">Tên đầy đủ:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            <strong>
+                                @Html.DisplayFor(model => model.FullName)
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Địa chỉ:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.DisplayFor(model => model.Address)
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Tỉnh/Thành Phố:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.DisplayFor(model => model.Province.ProvinceName)
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Tên ngân hàng:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.DisplayFor(model => model.BankName)
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Tài khoản ngân hàng:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.DisplayFor(model => model.BankAccount)
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Số CMND:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.DisplayFor(model => model.IdentityCard)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="profile span9">
+            <h3>Thông tin giao dịch</h3>
+            <hr />
+             @using (Html.HorizontalForm())
+            {
+                  <div class="control-group">
+                    <label class="control-label">Số vé đã bán:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                              @Html.DisplayFor(model => model.Tickets.Count)
+                        </div>
+                    </div>
+                </div>
+                 <div class="control-group">
+                    <label class="control-label">Số giao dịch thành công:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.Display(Model.Tickets.Where(t => t.TranPaymentStatus == (int)Statuses.Payment.Done).Count().ToString())
+                        </div>
+                    </div>
+                </div> <div class="control-group">
+                    <label class="control-label">Số vé vi phạm:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @Html.Display(Model.Tickets.Where(t=> t.Status == (int)Statuses.Ticket.Invalid).Count().ToString())
+                        </div>
+                    </div>
+                </div>
+             }
+        </div>
+
+
+        <style>
+            .profile {
+                font-size: 18px;
+            }
+
+
+            .form-horizontal .control-group {
+                margin-bottom: 10px;
+                margin-left: 50px;
+            }
+
+            .display-profile {
+                margin-top: 5px;
+            }
+        </style>
+    </div>
+</div>
