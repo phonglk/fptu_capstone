@@ -2291,11 +2291,6 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Province\Index.cshtml" />
     <Content Include="Views\Province\Details.cshtml" />
     <Content Include="Views\Province\Create.cshtml" />
@@ -2308,11 +2303,7 @@
     <Content Include="Views\Venue\Delete.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
-    <Content Include="Views\Event\Create.cshtml" />
-    <Content Include="Views\Event\Edit.cshtml" />
-    <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Event\List.cshtml" />
     <Content Include="Scripts\knockout-bootstrap.min.js.map">
       <DependentUpon>knockout-bootstrap.js</DependentUpon>
     </Content>
@@ -2422,6 +2413,7 @@
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="obj\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
