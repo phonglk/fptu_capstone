@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DropIt.DAL;
+using DropIt.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,6 +10,7 @@ namespace DropIt.Common
 {
     public static class Utils
     {
+        private static UnitOfWork unitOfWork = new UnitOfWork();
         public static string GetVariableName<T>(Expression<Func<T>> expr)
         {
             var body = (MemberExpression)expr.Body;
@@ -109,6 +112,9 @@ namespace DropIt.Common
                 // Step 7
                 return d[n, m];
             }
+        }
+        public static double getUserRating(User user){
+            return unitOfWork.UserRepository.Rating(user);
         }
     }
 }
