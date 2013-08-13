@@ -155,10 +155,10 @@ else
                         <label for="trantype_instant" style="display: inline">Thanh toán ngay</label>
                     </div>
                 </div>
-                @Html.LabelAndControl("Giá vé:", Html.TextBox("SellPrice", @Model.SellPrice, new {@readonly = "readonly"}))
-                @Html.LabelAndControl("Tiền Ship hàng:", Html.TextBox("ShippingCost", @Model.ShippingCost, new {@readonly = "readonly"}))
-                @Html.LabelAndControl("Tổng cộng:", Html.TextBox("Tong", @Model.SellPrice + @Model.ShippingCost, new {@readonly = "readonly"}))
-                @Html.LabelAndControl("Ghi chú:", Html.TextBox("TranDescription"))
+@*                @Html.LabelAndControl("Giá vé:", Html.TextBox("SellPrice", @Model.SellPrice, new {@readonly = "readonly"}))*@
+@*                @Html.LabelAndControl("Tiền Ship hàng:", Html.TextBox("ShippingCost", @Model.ShippingCost, new {@readonly = "readonly"}))*@
+                @Html.LabelAndControl("Tổng cộng (Đã bao gồm phí giao hàng):", Html.TextBox("Tong", @Model.SellPrice + @Model.ShippingCost, new {@readonly = "readonly"}))
+                @Html.LabelAndControl("Ghi chú (Tùy chọn):", Html.TextBox("TranDescription"))
 
                 //captcha
 
