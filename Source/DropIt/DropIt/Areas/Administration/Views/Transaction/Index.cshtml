@@ -18,25 +18,34 @@
         }
 </script>
 <style>
-    table th:nth-child(1) {
-        min-width: 200px;
+    table th {
+        vertical-align:middle !important;
+    }
+    .button {
+        margin:3px;
+    }
+    /*table th:nth-child(1) {
+        min-width: 20%;
     }
 
     table th:nth-child(2) {
-        min-width: 150px;
+        min-width: 20%;
     }
 
     table th:nth-child(3) {
-        width: 200px;
+        width: 20%;
     }
 
     table th:nth-child(4) {
-        width: auto;
+        width: 20%;
     }
 
     table th:nth-child(5) {
-        width: 230px;
+        width: 20%;
     }
+    table th:nth-child(6) {
+        width: 20%;
+    }*/
 
     .popover {
         max-width: 600px;
@@ -67,6 +76,7 @@
                 <i class="icon-download-alt"></i>
                 <span>Đã nhận hàng</span>
             </a>
+            <a href="#" style="display:none"></a>
             <a href="@Url.Action("Index", new { TranStatus = (int)DropIt.Common.Statuses.Transaction.Reported })" class="btn btn-large">
                 <i class="icon-warning-sign"></i>
                 <span>Bị Khiếu nại</span>
@@ -121,11 +131,11 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Delivered || TranStatus == Statuses.Reported-->
+            <!-- ko if: TranStatus == Statuses.Received || TranStatus == Statuses.Delivered || TranStatus == Statuses.Reported-->
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Reported-->
+            <!-- ko if: TranStatus == Statuses.Received || TranStatus == Statuses.Reported-->
             <td>
                 <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
@@ -153,7 +163,7 @@
                     data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
                 </a>
                 <!-- /ko -->
-                <!-- ko if: list.extraData.TranStatus == Statuses.Reported -->
+                <!-- ko if: TranStatus == Statuses.Reported -->
                 <a href="javascript:;"
                     class="button red show-prompt"
                     data-bind="click:$root.Invalid,visible:TranStatus==Statuses.Reported">Vé vi phạm
@@ -196,6 +206,7 @@
         $(".status-filter > div > a").removeClass("active");
         $(".status-filter > div > a").eq(transtt).addClass("active");
         list.extraData.TranStatus = transtt;
+        list.TranStatus(transtt);
         list.currentPage(1);
         list.TranPaymentStatus(0);
         list.extraData.TranPaymentStatus = 0;
@@ -203,7 +214,7 @@
     }
     list.changePaymentStatus = function (transtt) {
         $(".status-filter > div > a").removeClass("active");
-        $(".status-filter > div > a").eq(5).addClass("active");
+        $(".status-filter > div > a").eq(6).addClass("active");
         list.TranPaymentStatus(transtt);
         list.extraData.TranPaymentStatus = transtt;
         list.currentPage(1);
@@ -395,7 +406,7 @@
         e.preventDefault();
         return false;
     })
-    $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
+    $(".status-filter > div > a").eq(5).attr("href","javascript:;").click(function(e){
         list.changeStatus(5);
         list.TranStatus(5);
         e.preventDefault();
@@ -403,7 +414,7 @@
     })
 
    
-    $(".status-filter > div > a").eq(5).attr("href","javascript:;").click(function(e){
+    $(".status-filter > div > a").eq(6).attr("href","javascript:;").click(function(e){
         list.changePaymentStatus(1);
         list.TranPaymentStatus(1);
         e.preventDefault();

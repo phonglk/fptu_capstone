@@ -94,7 +94,7 @@ namespace DropIt.Controllers
                 Repository.AddOrUpdate(tran);
                 Repository.Save();
                 Session["Message"] = " Bạn đã khiéu nại vé của sự kiện <strong>" + tran.Event.EventName + "</strong> thành công! Vui lòng đợi admin liên hệ để giải quyết.";
-                return RedirectToAction("HistoryBuy", new { status = 4 });
+                return RedirectToAction("HistoryBuy", new { status = 5 });
             }
         }
 
