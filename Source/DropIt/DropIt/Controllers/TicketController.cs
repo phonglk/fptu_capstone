@@ -216,10 +216,10 @@ namespace DropIt.Controllers
                                           Description = getTicket.Description,
                                           EventName = getTicket.Event.EventName,
                                           HoldDate = getTicket.Event.HoldDate,
-                                          VenueName = getTicket.Event.Venue.VenueName
+                                          VenueName = getTicket.Event.Venue.VenueName,
+                                          TranFullName = CurrentUser.FullName, 
+                                          TranAddress = CurrentUser.Address
                                       };
-            ViewBag.TranFullName = CurrentUser.FullName;
-            ViewBag.TranAddress = CurrentUser.Address;
             return View(buyTicket);
         }
 
@@ -235,7 +235,7 @@ namespace DropIt.Controllers
             {
                 buyTicket.TranType = (int) Statuses.TranType.InstantPayment;
             }
-            buyTicket.UserId = WebSecurity.GetUserId(User.Identity.Name);
+//            buyTicket.UserId = WebSecurity.GetUserId(User.Identity.Name);
             Ticket ticket = unitOfWork.TicketRepository.Get(u => u.TicketId == buyTicket.TicketId).FirstOrDefault();
             if (ModelState.IsValid)
             {
