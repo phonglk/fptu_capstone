@@ -1,11 +1,132 @@
-﻿@{
+﻿@using DropIt.DAL
+@using DropIt.Common
+@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+    UnitOfWork unitOfWork = new UnitOfWork();
 }
-
-<h2>Online Users</h2>
-<ul>
-    @foreach(String UserName in ViewBag.UserOnlineList){
-     <li>@UserName</li>   
+<style>
+    .button.status {
+        font-size: 14px;
+        font-family: Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+        line-height: 20px;
+        width: 100px;
+        height: 80px;
     }
-</ul>
+</style>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="padded">
+                Hiện có:
+                <a href="@Url.Action("Index","Event")">
+                    <span class="badge">
+                        @unitOfWork.EventRepository.Get(e=>e.Status==(int)Statuses.Event.Disapprove).Count()
+                    </span> sự kiện chờ duyệt
+                </a>
+                ,
+                <a href="@Url.Action("Index","Ticket")">
+                    <span class="badge green">
+                        @unitOfWork.TicketRepository.Get(e=>e.Status==(int)Statuses.Ticket.Pending).Count()
+                    </span> vé chờ duyệt
+                </a>
+                ,
+                <a href="@Url.Action("Index","Transaction")">
+                    <span class="badge red">
+                        @unitOfWork.TransactionRepository.Get(e=>e.TranStatus==(int)Statuses.Transaction.Reported).Count()
+                    </span> giao dịch bị khiếu nại
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span8">
+        <div class="box">
+            <div class="tab-header">
+                Tình hình bán và mua vé 7 ngày gần đây
+            </div>
+            <div class="padded">
+                <div id="ticket_sell_chart" style="width: 100%; height: 300px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="box">
+            <div class="tab-header">
+                Người dùng đang online (@ViewBag.UserOnlineList.Count)
+            </div>
+            <div class="padded">
+
+                @foreach(String UserName in ViewBag.UserOnlineList){
+                    @UserName<text>,</text>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
+
+
+
+    var data = [
+        {
+            label: "Vé được mua",
+            data: @ViewBag.TicketSellData
+            },
+        {
+            label: "Vé được đăng",
+            data: @ViewBag.TicketPostData
+            },
+    ]
+        var placeholder = $("#ticket_sell_chart")
+        var options = {
+            series: {
+                lines: { show: true },
+                points: { show: true }
+            },
+            grid: {
+                hoverable: true,
+                clickable:true
+            },
+            xaxis: {
+                ticks: @Html.Raw(ViewBag.TicketSellDataLabel)
+            }
+    }
+    $.plot(placeholder, data, options)
+
+    placeholder.bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+                    
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);
+                    
+                showTooltip(item.pageX, item.pageY,
+                            "Có " + Math.round(y) + " " + item.series.label );
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;            
+        }
+    });
+</script>
