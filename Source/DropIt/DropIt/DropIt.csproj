@@ -2406,6 +2406,9 @@
     <Content Include="Views\Shared\_EventList.cshtml" />
     <Content Include="Views\Shared\_TicketPaging.cshtml" />
     <Content Include="Views\Event\Suggestion.cshtml" />
+    <Content Include="Views\User\Profile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

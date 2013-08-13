@@ -53,66 +53,70 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Tên ngân hàng:</label>
+                    <label class="control-label">Tình trạng:</label>
                     <div class="controls">
                         <div class="display-profile">
-                            @Html.DisplayFor(model => model.BankName)
+                            @if (Model.Active == true)
+                            {
+                                @Html.Encode("Đang hoạt động")
+                            }
+                            @if (Model.Active == false)
+                            {
+                                @Html.Encode("Bị khóa")
+                            }
                         </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Tài khoản ngân hàng:</label>
-                    <div class="controls">
-                        <div class="display-profile">
-                            @Html.DisplayFor(model => model.BankAccount)
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Số CMND:</label>
-                    <div class="controls">
-                        <div class="display-profile">
-                            @Html.DisplayFor(model => model.IdentityCard)
-                        </div>
-                    </div>
-                </div>
+               
             }
         </div>
         <div class="profile span9">
             <h3>Thông tin giao dịch</h3>
             <hr />
-             @using (Html.HorizontalForm())
+            @using (Html.HorizontalForm())
             {
-                  <div class="control-group">
+                
+                <div class="control-group">
                     <label class="control-label">Số vé đã bán:</label>
                     <div class="controls">
                         <div class="display-profile">
-                              @Html.DisplayFor(model => model.Tickets.Count)
+                            @Html.DisplayFor(model => model.Tickets.Count)
                         </div>
                     </div>
                 </div>
-                 <div class="control-group">
+               
+                <div class="control-group">
                     <label class="control-label">Số giao dịch thành công:</label>
                     <div class="controls">
                         <div class="display-profile">
-                            @Html.Display(Model.Tickets.Where(t => t.TranPaymentStatus == (int)Statuses.Payment.Done).Count().ToString())
-                        </div>
-                    </div>
-                </div> <div class="control-group">
-                    <label class="control-label">Số vé vi phạm:</label>
-                    <div class="controls">
-                        <div class="display-profile">
-                            @Html.Display(Model.Tickets.Where(t=> t.Status == (int)Statuses.Ticket.Invalid).Count().ToString())
+                            @ViewBag.Success
                         </div>
                     </div>
                 </div>
-             }
+                <div class="control-group">
+                    <label class="control-label">Số vé vi phạm:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            @ViewBag.Invalid
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Đánh giá uy tín:</label>
+                    <div class="controls">
+                        <div class="display-profile">
+                            <span class="rating">@ViewBag.Rate</span>
+                        </div>
+                    </div>
+                </div>
+               
+            }
         </div>
 
 
         <style>
             .profile {
-                font-size: 18px;
+                font-size: 15px;
             }
 
 
