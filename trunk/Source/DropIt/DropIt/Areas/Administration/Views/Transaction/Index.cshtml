@@ -99,7 +99,7 @@
             <th>Mã vận đơn</th>
             <!-- /ko -->
             <th>Giá vé</th>
-            <!-- ko if: (list.TranStatus() == Statuses.Received || list.TranPaymentStatus() == Statuses.Transfered) -->
+            <!-- ko if: (list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Reported || list.TranPaymentStatus() == Statuses.Transfered) -->
             <th>Ngày giao dịch</th>
             <!-- /ko -->
             <th>Người mua</th>
@@ -125,7 +125,7 @@
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
-            <!-- ko if: list.extraData.TranStatus == Statuses.Received-->
+            <!-- ko if: list.extraData.TranStatus == Statuses.Received || TranStatus == Statuses.Reported-->
             <td>
                 <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
@@ -396,8 +396,8 @@
         return false;
     })
     $(".status-filter > div > a").eq(4).attr("href","javascript:;").click(function(e){
-        list.changeStatus(4);
-        list.TranStatus(4);
+        list.changeStatus(5);
+        list.TranStatus(5);
         e.preventDefault();
         return false;
     })
