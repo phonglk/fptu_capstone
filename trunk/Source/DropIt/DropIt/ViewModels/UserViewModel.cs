@@ -29,8 +29,9 @@ namespace DropIt.ViewModels
 
         [Required(ErrorMessage = "Bạn phải nhập Địa chỉ.")]
         public string Address { get; set; }
-
+        [UIHint("Active")]
         public bool Active { get; set; }
+        [UIHint("Sellable")]
         public bool Sellable { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }

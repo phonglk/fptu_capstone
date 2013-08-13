@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using DropIt.ViewModels;
 using WebMatrix.WebData;
+using DropIt.Common;
 
 namespace DropIt.Controllers
 {
@@ -41,7 +42,9 @@ namespace DropIt.Controllers
         public ActionResult Profile(int id = 0)
         {
             User user = this.unitOfWork.UserRepository.GetById(id);
-            
+            ViewBag.Success = this.unitOfWork.TicketRepository.Get(t => t.TranPaymentStatus == (int)Statuses.Payment.Done && t.UserId == user.UserId).Count();
+            ViewBag.Invalid = this.unitOfWork.TicketRepository.Get(t => t.Status == (int)Statuses.Ticket.Invalid && t.UserId == user.UserId).Count();
+            ViewBag.Rate = Utils.getUserRating(user);
             return View(user);
         }
 
