@@ -242,7 +242,7 @@ namespace DropIt.Controllers
                 Ticket newticket = new Ticket()
                 {
                     TicketId = buyTicket.TicketId,
-                    TranUserId = buyTicket.UserId,
+                    TranUserId = WebSecurity.GetUserId(User.Identity.Name),
                     TranFullName = buyTicket.TranFullName,
                     TranAddress = buyTicket.TranAddress,
                     TranType = buyTicket.TranType,
