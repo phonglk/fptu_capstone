@@ -112,9 +112,14 @@ else
                                     <span data-vnd>@Model.SellPrice</span>
                                 </td>
                                 <td class="">
-                                    @Model.Seat
+                                    @if (@Model.Seat == null)
+                                    {
+                                        <div>Không có thông tin</div>
+                                    }else
+                                    {
+                                        @Model.Seat    
+                                    }
                                 </td>
-                                
                             </tr>
                         </tbody>
                     </table>
