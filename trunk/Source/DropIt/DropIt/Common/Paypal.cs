@@ -11,7 +11,7 @@ namespace DropIt.Common
         public double shipping { get; set; }
         public int custom { get; set; }
         public string item_name { get; set; }
-        public string @return { get; set; }
+//        public string @return { get; set; }
 
         public double GrossTotal { get; set; }
         public int InvoiceNumber { get; set; }
