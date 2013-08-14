@@ -152,25 +152,25 @@
                 <!-- ko if: list.extraData.TranPaymentStatus != Statuses.Transfered && TranStatus != Statuses.Reported -->
                 <a href="javascript:;"
                     class="button red"
-                    data-bind="click:$root.Canceled,visible:TranStatus!=Statuses.Received">Hủy bỏ
+                    data-bind="click:$root.Canceled,visible:list.TranStatus()!=Statuses.Received">Hủy bỏ
                 </a>
                 <a href="javascript:;"
                     class="button blue"
-                    data-bind="click:$root.Delivered,visible:TranStatus==Statuses.Paid">Giao hàng
+                    data-bind="click:$root.Delivered,visible:list.TranStatus()==Statuses.Paid">Giao hàng
                 </a>
                 <a href="javascript:;"
                     class="button black show-prompt"
-                    data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
+                    data-bind="click:$root.Received,visible:list.TranStatus()==Statuses.Delivered">Nhận hàng
                 </a>
                 <!-- /ko -->
-                <!-- ko if: list.TranStatus() == Statuses.Reported -->
+                <!-- ko if: list.TranStatus() == Statuses.Reported && list.extraData.TranPaymentStatus != Statuses.Transfered  -->
                 <a href="javascript:;"
                     class="button red show-prompt"
-                    data-bind="click:$root.Invalid,visible:TranStatus==Statuses.Reported">Vé vi phạm
+                    data-bind="click:$root.Invalid">Vé vi phạm
                 </a>
                 <a href="javascript:;"
                     class="button green show-prompt"
-                    data-bind="click:$root.Received,visible:TranStatus==Statuses.Reported">Không vi phạm
+                    data-bind="click:$root.Received">Không vi phạm
                 </a>
                 <!-- /ko -->
             </td>
