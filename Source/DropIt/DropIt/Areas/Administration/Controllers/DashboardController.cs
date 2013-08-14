@@ -43,7 +43,7 @@ namespace DropIt.Areas.Administration.Controllers
                 }
                 dataSell += String.Format("[{0},{1}]", i, ticketSell);
                 dataPost += String.Format("[{0},{1}]", i, ticketPost);
-                label += String.Format("[{0},\"{1}\"]", i, doDate.ToString("dd/mm/yyyy"));
+                label += String.Format("[{0},\"{1}\"]", i, doDate.ToString("dd/MM/yyyy"));
             }
 
             dataSell += "]";

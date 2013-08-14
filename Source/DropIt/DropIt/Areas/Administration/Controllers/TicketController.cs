@@ -31,28 +31,50 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult Index(int TicketStatus = 0)
         {
             ViewBag.TicketStatus = TicketStatus;
+            var events = unitOfWork.EventRepository.GetAvailableIncludingDisapprove().ToList();
+            events.Insert(0, new Event()
+            {
+                EventName = "Tất cả",
+                EventId = -1
+            });
+            ViewBag.Events = new SelectList(events,"EventId","EventName");
+
+            var users = unitOfWork.UserRepository.Get(u => u.UserName.Equals("admin") == false).ToList();
+            users.Insert(0, new User()
+            {
+                UserName = "Tất cả",
+                UserId = -1
+            });
+            ViewBag.Users = new SelectList(users, "UserId", "UserName");
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TicketStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TicketStatus = -1,int UserId = -1,int EventId= -1)
         {
             try
             {
+                int totalRecord = 0;
                 if (jtSorting.Trim().Equals(""))
                 {
                     jtSorting = "Event.EventName ASC";
                 }
-                IEnumerable<DropIt.Models.Ticket> records = null;
-                if (TicketStatus == -1)
+                IEnumerable<DropIt.Models.Ticket> records = Repository.Get();
+                if (TicketStatus != -1)
                 {
-                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                    records = records.Where(e => e.Status == TicketStatus);
 
                 }
-                else
+                if (UserId > -1)
                 {
-                    records = Repository.JTGetExp(e => e.Status == TicketStatus, jtStartIndex, jtPageSize, jtSorting);
+                    records = records.Where(r => r.UserId == UserId);
                 }
+                if (EventId > -1)
+                {
+                    records = records.Where(r => r.EventId == EventId);
+                }
+                totalRecord = records.Count();
+                records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
                 var Records = records.Select(e => new
                 {
                     TicketId = e.TicketId,
@@ -78,7 +100,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = (TicketStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == TicketStatus).Count()
+                    TotalRecordCount = totalRecord
                 });
             }
             catch (Exception e)

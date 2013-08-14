@@ -2,6 +2,9 @@
 @{
     UnitOfWork uow = new UnitOfWork();
     ViewBag.Categories = uow.CategoryRepository.GetAvailable().Where(c => c.Category2 == null).ToList();
+    if (Request.IsAuthenticated && User.IsInRole("Administrator")){
+        Response.Redirect("/Administration/");   
+    }
 }
 <!DOCTYPE html>
 <html lang="en">
