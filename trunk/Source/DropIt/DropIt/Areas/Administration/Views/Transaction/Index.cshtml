@@ -105,7 +105,7 @@
     <thead>
         <tr>
             <th>Tên người bán</th>
-            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered || list.TranStatus() == Statuses.Reported-->
+            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered || list.TranStatus() == Statuses.Reported || list.TranPaymentStatus() == Statuses.Transfered-->
             <th>Mã vận đơn</th>
             <!-- /ko -->
             <th>Giá vé</th>
@@ -131,11 +131,11 @@
                     data-trigger="hover"
                     data-html="true"></a>
             </td>
-            <!-- ko if: TranStatus == Statuses.Received || TranStatus == Statuses.Delivered || TranStatus == Statuses.Reported-->
+            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered || list.TranStatus() == Statuses.Reported || list.extraData.TranPaymentStatus == Statuses.Transfered-->
             <td data-bind="text: TranShipCode"></td>
             <!-- /ko -->
             <td data-bind="text: SellPrice"></td>
-            <!-- ko if: TranStatus == Statuses.Received || TranStatus == Statuses.Reported-->
+            <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Reported || list.extraData.TranPaymentStatus == Statuses.Transfered-->
             <td>
                 <span data-bind="text: TranShipDate==null? 'Không có': TranShipDate.toDateString()"></span>
             </td>
