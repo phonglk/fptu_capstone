@@ -145,7 +145,7 @@ namespace DropIt.DAL
                         suggest.isMatchTime = true;
                     }
                     double timeRatio = 0.2;
-                    double timeSimilarRatio = (acceptanceRange - timeRange.Minutes) / acceptanceRange;
+                    double timeSimilarRatio = (acceptanceRange - rangeInMinute) / acceptanceRange;
                     mark += timeRatio * timeSimilarRatio;
 
                     if (Event.VenueId == VenueId)
