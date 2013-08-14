@@ -83,7 +83,7 @@ namespace DropIt.Areas.Administration.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAvailable().Where(t=>t.ParentCategoryId==null), "CategoryId", "CategoryName");
+            ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.GetAvailable().Where(t => t.ParentCategoryId == null), "CategoryId", "CategoryName");
             return View();
         }
 
@@ -131,7 +131,7 @@ namespace DropIt.Areas.Administration.Controllers
                 CategoryName = e.CategoryName,
                 Status = e.Status,
                 Description = e.Description,
-                ParentCategoryId =e.ParentCategoryId,
+                ParentCategoryId = e.ParentCategoryId,
             };
             ViewBag.CategoryId = new SelectList(unitOfWork.CategoryRepository.Get(t => t.ParentCategoryId == null && t.Status != (int)Statuses.Category.Delete), "CategoryId", "CategoryName");
             return View(cvm);
@@ -150,9 +150,9 @@ namespace DropIt.Areas.Administration.Controllers
                 Category.Status = oldCategory.Status;
                 Repository.AddOrUpdate(Category);
                 unitOfWork.Save();
-                
+
                 return Json(new JSONResult());
-                
+
             }
             catch (Exception e)
             {
@@ -193,7 +193,16 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                if (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete || p.Status != (int)Statuses.Event.Outdate).Count() == 0)
+                if
+                    (delete.Events.Where(p => p.Status == (int)Statuses.Event.Approve || p.Status != (int)Statuses.Event.Trading || p.Status != (int)Statuses.Event.Disapprove).Count() >= 1)
+                {
+                    return Json(new JSONResult()
+                    {
+                        Result = "ERROR",
+                        Message = "Không thể ẩn danh mục có sự kiện!"
+                    });
+                }
+                else
                 {
                     delete.Status = (int)Statuses.Category.Deactive;
                 }
@@ -225,18 +234,17 @@ namespace DropIt.Areas.Administration.Controllers
                 if (delete.ParentCategoryId == null)
                 {
                     delete.Status = (int)Statuses.Category.Delete;
-                } else if (delete.ParentCategoryId != null)
+                }
+                else if (delete.ParentCategoryId != null)
                 {
-                    delete.Status = (int)Statuses.Category.Delete;
-                    
-                }
-                else {
                     return Json(new
-                    {
-                        Result = "ERROR",
-                        Message = "Không thể xóa Danh mục có Sự kiện!"
-                    });
+                      {
+                          Result = "ERROR",
+                          Message = "Không thể xóa Danh mục có danh mục con!"
+                      });
                 }
+
+
 
                 Repository.AddOrUpdate(delete);
                 Repository.Save();
@@ -245,7 +253,7 @@ namespace DropIt.Areas.Administration.Controllers
                     Result = "OK",
                     CategoryId = delete.CategoryId
                 });
-                }  
+            }
             catch (Exception e)
             {
                 return Json(new
