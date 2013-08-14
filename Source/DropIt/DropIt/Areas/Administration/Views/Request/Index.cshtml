@@ -15,7 +15,7 @@
     <div class="span8 status-filter">
         <div class="btn-group">
             <a href="@Url.Action("Index", new { RequestStatus = (int)DropIt.Common.Statuses.Request.Open })" class="btn btn-large active">
-                 <i class="icon-bullhorn"></i>
+                <i class="icon-bullhorn"></i>
                 <span>Yêu cầu đang được mở</span>
             </a>
         </div>
@@ -41,7 +41,17 @@
     </thead>
     <tbody data-bind="foreach: data">
         <tr>
-            <td data-bind="text: Event.EventName"></td>
+            <td data-bind="">
+                <a href="" data-bind="
+    text: Event.EventName,
+    attr: {title: Event.EventName,
+        'data-content':RequestDetail
+    }"
+                    data-toggle="popover"
+                    data-trigger="hover"
+                    data-html="true"></a>
+
+            </td>
             <td data-bind="text: User.UserName"></td>
             <td>
                 <a href="javascript:;"
