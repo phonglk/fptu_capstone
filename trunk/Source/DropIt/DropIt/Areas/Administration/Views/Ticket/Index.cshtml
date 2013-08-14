@@ -13,28 +13,7 @@
         }
 </script>
 <style>
-    table th:nth-child(1) {
-        min-width: 100px;
-    }
-
-    table th:nth-child(2) {
-        width: 200px;
-    }
-
-    table th:nth-child(3) {
-        width: 200px;
-    }
-
-    table th:nth-child(4) {
-        width: 150px;
-    }
-    table th:nth-child(5) {
-    }
-
-    table th:nth-child(6) {
-        width: 280px;
-    }
-
+    
     .popover {
         max-width: 600px;
         width: auto;
@@ -75,14 +54,38 @@
     </div>
 </div>
 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box filter">
+            <div class="tab-header">
+                Bộ lọc
+            </div>
+            <form class="fill-up">
+                <div class="padded">
+                    <div class="row-fluid">
+
+                        <div class="span8">
+                            <h4>Sự kiện</h4>
+                            @Html.DropDownList("Events")
+                        </div>
+                        <div class="span4">
+                            <h4>Người bán</h4>
+                            @Html.DropDownList("Users")
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <table class="table table-bordered box">
     <thead>
         <tr>
             <th>Mã số vé</th>
-            <th>Người đăng</th>
+            <th  class="sortable" data-bind="    click: function (data, event) { sort('CreatedDate', data, event) }">Người đăng</th>
             <th>Tên sự kiện</th>
-            <th>Gía vé</th>
+            <th  class="sortable" data-bind="    click: function (data, event) { sort('SellPrice', data, event) }">Gía vé</th>
             <th>Số tiền nhận được</th>
             <th>Số ghế</th>
             <th>Thao tác</th>
@@ -223,7 +226,7 @@
     }
     list.getList = function (callback) {
         Loading(true);
-        var data = { jtPageSize: list.pageSize, jtStartIndex: list.startIndex(), jtSorting: list.sorting, TicketStatus: list.TichetStatus };
+        var data = { jtPageSize: list.pageSize, jtStartIndex: list.startIndex(), jtSorting: list.sorting, TicketStatus: list.TichetStatus};
         $.extend(data, list.extraData);
         var urlData = { Action: "List", Controller: "Ticket", Data: data };
         $.extend(urlData, self.url_getList);
@@ -275,6 +278,16 @@
         return false;
     })
     
-    
+    $("#Events,#Users").css({width:"100%"}).select2();
+    $("#Events").change(function(e){
+        var val = e.val;
+        list.extraData.EventId = val;
+        list.getList();
+    })
+    $("#Users").change(function(e){
+        var val = e.val;
+        list.extraData.UserId = val;
+        list.getList();
+    })
     
 </script>

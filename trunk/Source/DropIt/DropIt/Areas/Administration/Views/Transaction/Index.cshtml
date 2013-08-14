@@ -100,19 +100,47 @@
     </div>
 </div>
 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box filter">
+            <div class="tab-header">
+                Bộ lọc
+            </div>
+            <form class="fill-up">
+                <div class="padded">
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            <h4>Sự kiện</h4>
+                            @Html.DropDownList("Events")
+                        </div>
+                        <div class="span3">
+                            <h4>Người bán</h4>
+                            @Html.DropDownList("Users")
+                        </div>
+                        <div class="span3">
+                            <h4>Người mua</h4>
+                            @Html.DropDownList("TranUsers")
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th>Tên người bán</th>
+            <th  class="sortable" data-bind="    click: function (data, event) { sort('UserId', data, event) }">Tên người bán</th>
             <!-- ko if: list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Delivered || list.TranStatus() == Statuses.Reported || list.TranPaymentStatus() == Statuses.Transfered-->
             <th>Mã vận đơn</th>
             <!-- /ko -->
-            <th>Giá vé</th>
+            <th  class="sortable" data-bind="    click: function (data, event) { sort('SellPrice', data, event) }">Giá vé</th>
             <!-- ko if: (list.TranStatus() == Statuses.Received || list.TranStatus() == Statuses.Reported || list.TranPaymentStatus() == Statuses.Transfered) -->
-            <th>Ngày giao dịch</th>
+            <th  class="sortable" data-bind="    click: function (data, event) { sort('TranShipDate', data, event) }">Ngày giao dịch</th>
             <!-- /ko -->
-            <th>Người mua</th>
+            <th class="sortable" data-bind="    click: function (data, event) { sort('TranUserId', data, event) }">Người mua</th>
             <th>Hình thức giao dịch</th>
             <th>Thao tác</th>
         </tr>
@@ -419,6 +447,23 @@
         list.TranPaymentStatus(1);
         e.preventDefault();
         return false;
+    })
+
+    $("#Events,#Users,#TranUsers").css({width:"100%"}).select2();
+    $("#Events").change(function(e){
+        var val = e.val;
+        list.extraData.EventId = val;
+        list.getList();
+    })
+    $("#Users").change(function(e){
+        var val = e.val;
+        list.extraData.UserId = val;
+        list.getList();
+    })
+    $("#TranUsers").change(function(e){
+        var val = e.val;
+        list.extraData.TranUserId = val;
+        list.getList();
     })
 
 </script>

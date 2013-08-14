@@ -3,7 +3,12 @@
     <div class="row-fluid search-button-bar-container">
       <div class="span12">
         <ul class="breadcrumb">
-          <li><a href="@Url.Action("Index", "Home", new { area = "" })"><i class="icon-home"></i> Ra trang chính</a></li>
+            @using (Html.BeginForm("LogOff", "Account", new{ area="" }, FormMethod.Post, new { id = "logoutForm" }))
+            {
+            @Html.AntiForgeryToken()
+            <li class=""><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-signout" style="color:white"></i> Đăng xuất</a></li>
+            }
+          
         </ul>
         @*<a class="search-button-trigger" href="#"><i class="icon-search"></i></a>*@
       </div>

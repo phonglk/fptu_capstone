@@ -77,6 +77,32 @@
     </div>
 </div>
 
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box filter">
+            <div class="tab-header">
+                Bộ lọc
+            </div>
+            <form class="fill-up">
+                <div class="padded">
+                    <div class="row-fluid">
+
+                        <div class="span8">
+                            <h4>Địa điểm</h4>
+                            @Html.DropDownList("Venues")
+                        </div>
+                        <div class="span4">
+                            <h4>Danh mục</h4>
+                            <select id="category">
+                                <option value="-1">Tất cả</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <table class="table table-bordered box">
     <thead>
@@ -161,6 +187,9 @@
 <style>
 
 </style>
+<script>
+    var categories = @Html.Raw(Json.Encode(ViewBag.Categories))
+</script>
 <script>
     
     var list = new DataList();
@@ -254,4 +283,19 @@
         return false;
     })
 
+
+
+    generateGroupDropDownList(categories,$("#category"),"CategoryId","CategoryName");
+
+    $("#Venues,#category").css({width:"100%"}).select2();
+    $("#Venues").change(function(e){
+        var val = e.val;
+        list.extraData.VenueId = val;
+        list.getList();
+    })
+    $("#category").change(function(e){
+        var val = e.val;
+        list.extraData.CategoryId = val;
+        list.getList();
+    })
 </script>

@@ -32,17 +32,35 @@ namespace DropIt.Areas.Administration.Controllers
         {
             ViewBag.TranStatus = TranStatus;
             ViewBag.TranPaymentStatus = TranPaymentStatus;
+
+            var events = unitOfWork.EventRepository.GetAvailableIncludingDisapprove().ToList();
+            events.Insert(0, new Event()
+            {
+                EventName = "Tất cả",
+                EventId = -1
+            });
+            ViewBag.Events = new SelectList(events, "EventId", "EventName");
+
+            var users = unitOfWork.UserRepository.Get(u=>u.UserName.Equals("admin")==false).ToList();
+            users.Insert(0, new User()
+            {
+                UserName = "Tất cả",
+                UserId = -1
+            });
+            ViewBag.Users = ViewBag.TranUsers = new SelectList(users, "UserId", "UserName");
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TranStatus = -1, int TranPaymentStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = null, int TranStatus = -1, int TranPaymentStatus = -1, int UserId = -1, int TranUserId = -1, int EventId = -1)
         {
             try
             {
+                
                 if (jtSorting.Trim().Equals(""))
                 {
-                    jtSorting = "User.UserName ASC";
+                    jtSorting = "TranCreatedDate DESC";
                 }
                 int TotalRecordCount = 0;
                 IEnumerable<DropIt.Models.Ticket> records = Repository.Get();
@@ -57,6 +75,20 @@ namespace DropIt.Areas.Administration.Controllers
                         records = records.Where(e => e.TranStatus == TranStatus);
                     }
                 }
+
+                if (UserId > -1)
+                {
+                    records = records.Where(r => r.UserId == UserId);
+                }
+                if (TranUserId > -1)
+                {
+                    records = records.Where(r => r.TranUserId == TranUserId);
+                }
+                if (EventId > -1)
+                {
+                    records = records.Where(r => r.EventId == EventId);
+                }
+
                 TotalRecordCount = records.Count();
                 records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
                 var Records = records.Select(e => new

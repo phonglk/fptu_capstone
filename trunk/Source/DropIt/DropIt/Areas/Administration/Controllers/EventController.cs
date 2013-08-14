@@ -31,28 +31,56 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult Index(int EventStatus = 0)
         {
             ViewBag.EventStatus = EventStatus;
+            var venues = unitOfWork.VenueRepository.GetAll().ToList();
+            venues.Insert(0, new Venue()
+            {
+                VenueName = "Tất cả",
+                VenueId = -1
+            });
+            ViewBag.Venues = new SelectList(venues, "VenueId", "VenueName");
+
+            var categories = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
+            {
+                r.CategoryId,
+                r.CategoryName,
+                Childs = r.Category1.Select(r2 => new
+                {
+                    r2.CategoryId,
+                    r2.CategoryName,
+                    ParentId = r2.Category2.CategoryId
+                })
+            }).ToList();
+
+            ViewBag.Categories = categories;
             return View();
         }
 
         [HttpPost]
-        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = "HoldDate ASC", int EventStatus = -1)
+        public JsonResult List(int jtStartIndex = -1, int jtPageSize = 0, string jtSorting = "HoldDate ASC", int EventStatus = -1,int VenueId = -1,int CategoryId = -1)
         {
             try
             {
+                int totalRecord = 0;
                 if (jtSorting.Trim().Equals(""))
                 {
                     jtSorting = "HoldDate DESC";
                 }
-                IEnumerable<DropIt.Models.Event> records = null;
+                IEnumerable<DropIt.Models.Event> records = Repository.Get();
 
-                if (EventStatus == -1)
+                if (EventStatus != -1)
                 {
-                    records = Repository.JTGet(jtStartIndex, jtPageSize, jtSorting);
+                    records = records.Where(e => e.Status == EventStatus);
                 }
-                else
+                if (VenueId > -1)
                 {
-                    records = Repository.JTGetExp(e => e.Status == EventStatus, jtStartIndex, jtPageSize, jtSorting);
+                    records = records.Where(r => r.VenueId == VenueId);
                 }
+                if (CategoryId > -1)
+                {
+                    records = records.Where(r => r.CategoryId == CategoryId || (r.Category.Category2 != null && r.Category.Category2.CategoryId == CategoryId));
+                }
+                totalRecord = records.Count();
+                records = Repository.JT(records, jtStartIndex, jtPageSize, jtSorting);
                 var Records = records.Select(e => new
                 {
                     EventId = e.EventId,
@@ -82,7 +110,7 @@ namespace DropIt.Areas.Administration.Controllers
                 });
                 return Json(new JSONResult(Records)
                 {
-                    TotalRecordCount = (EventStatus == -1) ? Repository.Count : Repository.Get(e => e.Status == EventStatus).Count()
+                    TotalRecordCount = totalRecord
                 });
             }
             catch (Exception e)
