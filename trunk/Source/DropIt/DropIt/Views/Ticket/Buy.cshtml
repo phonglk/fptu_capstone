@@ -167,7 +167,7 @@ else
                 </div>
 @*                @Html.LabelAndControl("Giá vé:", Html.TextBox("SellPrice", @Model.SellPrice, new {@readonly = "readonly"}))*@
 @*                @Html.LabelAndControl("Tiền Ship hàng:", Html.TextBox("ShippingCost", @Model.ShippingCost, new {@readonly = "readonly"}))*@
-                @Html.LabelAndControl("Tổng cộng (Đã bao gồm phí giao hàng):", Html.TextBox("Tong", @Model.SellPrice + @Model.ShippingCost, new {@readonly = "readonly"}))
+                @Html.LabelAndControl("Tổng cộng (<span data-toggle='tooltip' title='Đã bao gồm phí giao hàng "+Model.ShippingCost+"'>?</span>):", Html.TextBox("Tong", @Model.SellPrice + @Model.ShippingCost, new {@readonly = "readonly"}))
                 @Html.LabelAndControl("Ghi chú (Tùy chọn):", Html.TextBox("TranDescription"))
 
                 //captcha

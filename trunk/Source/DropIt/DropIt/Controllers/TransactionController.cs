@@ -62,7 +62,7 @@ namespace DropIt.Controllers
             if (tran == null)
             {
                 Session["Message"] = "Không tồn tại vé này";
-                return RedirectToAction("HistoryBuy",new {status=2});
+                return RedirectToAction("HistoryBuy", new { status = 2 });
             }
             else if (tran.TranStatus != (int)Statuses.Transaction.Delivered)
             {
@@ -75,7 +75,7 @@ namespace DropIt.Controllers
                 tran.TranShipDate = DateTime.Now;
                 Repository.AddOrUpdate(tran);
                 Repository.Save();
-                Session["Message"] = "Vé của sự kiện <strong>"+tran.Event.EventName+"</strong> đã được chuyển sang đã nhận thành công!";
+                Session["Message"] = "Vé của sự kiện <strong>" + tran.Event.EventName + "</strong> đã được chuyển sang đã nhận thành công!";
                 return RedirectToAction("HistoryBuy", new { status = 3 });
             }
         }
@@ -90,10 +90,19 @@ namespace DropIt.Controllers
             }
             else
             {
-                tran.TranStatus = (int)Statuses.Transaction.Reported;
-                Repository.AddOrUpdate(tran);
-                Repository.Save();
-                Session["Message"] = " Bạn đã khiéu nại vé của sự kiện <strong>" + tran.Event.EventName + "</strong> thành công! Vui lòng đợi admin liên hệ để giải quyết.";
+                TimeSpan range = DateTime.Now - tran.TranShipDate.Value;
+
+                if (range.TotalDays > 5)
+                {
+                    Session["Message"] = "Không thể khiếu nại vì bạn đã quá 5 ngày sau khi nhận vé, xin vui lòng liên hệ chúng tôi.";
+                }
+                else
+                {
+                    tran.TranStatus = (int)Statuses.Transaction.Reported;
+                    Repository.AddOrUpdate(tran);
+                    Repository.Save();
+                    Session["Message"] = " Bạn đã khiéu nại vé của sự kiện <strong>" + tran.Event.EventName + "</strong> thành công! Vui lòng đợi admin liên hệ để giải quyết.";
+                }
                 return RedirectToAction("HistoryBuy", new { status = 5 });
             }
         }

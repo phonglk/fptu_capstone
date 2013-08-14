@@ -110,8 +110,15 @@
                                     <strong>Người bán:</strong><a href="@Url.Action("Profile", "User", new { Id = @item.UserId })"> @item.User.UserName</a>
                                 </div>
                                 <div class="buyer-date">
-                                    <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
+                                    <strong>Ngày mua:</strong> @item.TranCreatedDate.Value.ToString("dd/MM/yyyy")
                                 </div>
+                                @if (ViewBag.CurrentStatus >= 3)
+                                {
+                                <div class="buyer-date">
+                                    <strong>Ngày nhận:</strong> @item.TranShipDate.Value.ToString("dd/MM/yyyy")
+                                </div>
+                                }
+                               
                             </div>
                             <div class="info">
                                 <div class="event-name text-overflow">
