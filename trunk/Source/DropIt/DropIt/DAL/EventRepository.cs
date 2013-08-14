@@ -142,7 +142,7 @@ namespace DropIt.DAL
                     suggest.isMatchTimeRange = true;
                     if (rangeInMinute == 0)
                     {
-                        suggest.isMatchTimeRange = true;
+                        suggest.isMatchTime = true;
                     }
                     double timeRatio = 0.2;
                     double timeSimilarRatio = (acceptanceRange - timeRange.Minutes) / acceptanceRange;
