@@ -1,0 +1,12 @@
+﻿@foreach (DropIt.Models.Category cat in ViewBag.Categories)
+{
+<li>
+    <a href="@Url.Action("index", "Event", new { CategoryId = cat.CategoryId })">@cat.CategoryName</a>
+</li>
+    foreach (DropIt.Models.Category cc in cat.Category1)
+    {
+        <li>
+    <a href="@Url.Action("index", "Event", new { CategoryId = cc.CategoryId })">—  @cc.CategoryName</a>
+</li>
+    }
+}

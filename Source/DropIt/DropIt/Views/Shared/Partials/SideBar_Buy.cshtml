@@ -5,11 +5,6 @@
         <li><a href="@Url.Action("Request","Ticket")">Đăng rao mua</a></li>
         <li><a href="@Url.Action("Index","Request")">Quản lí rao mua</a></li>
         <li><a href="@Url.Action("List","TicketResponse")">Vé được phản hồi</a></li>
-        @foreach (DropIt.Models.Category cat in ViewBag.Categories)
-        {
-        <li>
-            <a href="@Url.Action("index", "Event", new { CategoryId = cat.CategoryId })">@cat.CategoryName</a>
-        </li>
-        }
+        @Html.Partial("Partials/Templates/SideBar_Category")
     </ul>
 </div>

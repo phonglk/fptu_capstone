@@ -316,8 +316,11 @@ function unraw_html() {
 function highlight_leftnav() {
     if ($("#left-nav").length > 0) {
         var path = location.pathname;
-        //if(location.search.indexOf())
-        $("#left-nav a[href^='" + path + "']").addClass("active");
+        if (location.search.length > 0) {
+            $("#left-nav a[href^='" + path + location.search + "']").addClass("active");
+        } else {
+            $("#left-nav a[href^='" + path + "']").addClass("active");
+        }
     }
 
 }

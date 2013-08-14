@@ -2409,6 +2409,7 @@
     <Content Include="Views\User\Profile.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\Partials\Templates\SideBar_Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
