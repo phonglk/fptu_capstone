@@ -163,7 +163,7 @@
                     data-bind="click:$root.Received,visible:TranStatus==Statuses.Delivered">Nhận hàng
                 </a>
                 <!-- /ko -->
-                <!-- ko if: TranStatus == Statuses.Reported -->
+                <!-- ko if: list.TranStatus() == Statuses.Reported -->
                 <a href="javascript:;"
                     class="button red show-prompt"
                     data-bind="click:$root.Invalid,visible:TranStatus==Statuses.Reported">Vé vi phạm
