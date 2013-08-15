@@ -194,7 +194,7 @@ namespace DropIt.Areas.Administration.Controllers
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
                 if
-                    (delete.Events.Where(p => p.Status == (int)Statuses.Event.Approve || p.Status != (int)Statuses.Event.Trading || p.Status != (int)Statuses.Event.Disapprove).Count() >= 1)
+                    (delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete && p.Status != (int)Statuses.Event.Disapprove).Count() >= 1)
                 {
                     return Json(new JSONResult()
                     {
