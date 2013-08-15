@@ -1199,6 +1199,7 @@
     <Content Include="Images\footerlogo.png" />
     <Content Include="Images\hr.png" />
     <Content Include="Images\icon.png" />
+    <Content Include="Images\icon_big.png" />
     <Content Include="Images\middle.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\upper.png" />
@@ -2410,6 +2411,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Shared\Partials\Templates\SideBar_Category.cshtml" />
+    <Content Include="Views\Account\AdminLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

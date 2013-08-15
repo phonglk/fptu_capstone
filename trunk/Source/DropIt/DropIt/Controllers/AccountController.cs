@@ -68,6 +68,46 @@ namespace DropIt.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult AdminLogin(String username, String password)
+        {
+            var userid = WebSecurity.GetUserId(username);
+            UnitOfWork unitOfWork = new UnitOfWork();
+            User user = unitOfWork.UserRepository.GetById(userid);
+            String message = "";
+            if (user == null)
+            {
+                message =  "Tên đăng nhập không tồn tại";
+            }
+            else if (WebSecurity.Login(username,password, true))
+            {
+                if (User.IsInRole("Administrator"))
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "Administration" });
+                }
+                else
+                {
+                    Session["Message"] = "Bạn không có quyền truy cập vào khu vực quản trị.";
+                    Session["MessageType"] = "error";
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+            }
+            else
+            {
+                message = "Tên đăng nhập hoặc mật khẩu không đúng.";
+            }
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult AdminLogin(LoginModel model, string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
         //
         // POST: /Account/LogOff
 
