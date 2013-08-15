@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * jQuery JavaScript Library v1.7.2
  * http://jquery.com/
  *
@@ -10581,8 +10581,7 @@ if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
     var _this = this;
     if ($("body").hasClass("login")) {
       Notifications.push({
-        imagePath: "../../images/cloud.png",
-        text: "<p>Welcome to the Plastique theme!</p><div>Click login to get a WOW wrong username/password effect, or write any username to enter</div> <div>Be sure to check all sections for features!</div>",
+        text: "<p>Chào mừng bạn đến với phần quản trị</p><div>Xin nhập thông tin đăng nhập và bấm đăng nhập để truy cập vào hệ thống</div>",
         autoDismiss: 10
       });
     } else {
@@ -34447,12 +34446,12 @@ plots, you can just fix the size of their placeholders.
       this.loginSubmit = this.container.find("#login-submit");
       this.loginSubmit.click(function(e) {
         var wrapper;
-        if ($(this).closest("form").find("#email").val().length === 0) {
+        if ($(this).closest("form").find("#email").val().length === 0 || $(this).closest("form").find("[type=password]").val().length==0) {
           e.preventDefault();
           wrapper = $(this).closest(".login-wrapper");
           wrapper.addClass("wobble");
           Notifications.push({
-            text: "<i class='icon-warning-sign'></i> invalid username or password",
+            text: "<i class='icon-warning-sign'></i> Xin nhập thông tin đăng nhập",
             autoDismiss: 3,
             "class": "error"
           });
