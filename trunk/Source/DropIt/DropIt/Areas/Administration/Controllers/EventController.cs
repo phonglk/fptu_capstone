@@ -31,7 +31,7 @@ namespace DropIt.Areas.Administration.Controllers
         public ActionResult Index(int EventStatus = 0)
         {
             ViewBag.EventStatus = EventStatus;
-            var venues = unitOfWork.VenueRepository.GetAll().ToList();
+            var venues = unitOfWork.VenueRepository.GetAvailable().ToList();
             venues.Insert(0, new Venue()
             {
                 VenueName = "Tất cả",
