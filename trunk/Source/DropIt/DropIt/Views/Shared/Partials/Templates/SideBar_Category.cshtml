@@ -5,6 +5,10 @@
 </li>
     foreach (DropIt.Models.Category cc in cat.Category1)
     {
+        if (cat.Status != (int)Statuses.Category.Active)
+        {
+            continue;
+        }
         <li>
     <a href="@Url.Action("index", "Event", new { CategoryId = cc.CategoryId })">—  @cc.CategoryName</a>
 </li>

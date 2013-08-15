@@ -26,6 +26,10 @@
                         </li>
                         @foreach (DropIt.Models.Category cat in ViewBag.Categories)
                         {
+                            if (cat.Status != (int)Statuses.Category.Active)
+                            {
+                                continue;
+                            }
                         <li>
                             <a href="@Url.Action("index", "Event", new { CategoryId = cat.CategoryId })">@cat.CategoryName</a>
                         </li>
