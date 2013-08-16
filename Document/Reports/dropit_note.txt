@@ -4,33 +4,60 @@ In trang
 r 17 [error: SMDH thay bằng DropIt]
 r 21 vẽ thêm use case extend Sort 
 r 26 vẽ thêm use case extend Search, Sort, Filter
+
 r 30 vẽ thêm use case extend Sort, Filter _ lỗi chính tả "Được bán"
 r 36 vẽ thêm use case extend Sort
 r 37 vẽ thêm use case extend Sort, Filter - View
 r 42 vẽ thêm use case extend Sort
+
 r 47 vẽ thêm use case extend Sort, Filter
+
 r 49 vẽ thêm use case extend Sort
 x 66 vẽ thêm use case extend Create Event, Create Venue  + alternative scenario
 68 
+Precondition: Event which customer followed has new request or ticket
+Step:
++1: User login system successful | user see number of notification at the bell
++2: User click the bell | User see detail of every notifcation
 
 69 sửa lại mối quan hệ extend chứ ko phải thừa kế Real-time notification
-Step:1
--- 
+Precondition: Event which customer followed has new request or ticket and user is online
+Step:
++1: User is online | User can see new notification at the bottom left
+
 74 Sửa lại actor là Authorized, miêu tả phía dưới actor chỉ còn Author, Customer
++1 Click on an event | navigate to Detail event page
+
 75 Sửa lại author là HieuCM, miêu tả dưới actor chỉ còn Author, Customer, Guest
 78 actor còn lại là Guest
 80 actor còn lại là Guest
+82 use case name: sort event 
+
 84 sửa use case actor hình đầu vuông
 Sum: This use case is about how system notifies customer when their follow events have new request or ticket.
-Goal: User has 
+Goal: User be notified about new request or new posted ticket of their followed events
+Preconditions: User post or request ticket
+Step:
++1 : Find user that followed event which has new ticket or request | set of user
++2 : Push notification to user's notification table | add success
+
 85 sửa use case actor hình đầu vuông và extend từ Notification
-86, 87 use case actor hinh đầu vuông
+use case name: real-time notification
+goal: Online user receive notification when followed event has new request or ticket
+pre-conditions: User post or request ticket
++1 : Find online user that followed event which has new ticket or request | set of user
++2 : Push notification to user's browser | push success
+
+86 use case actor hinh đầu vuông
+use case name: auto update tranpaymentstatus
+
+87 use case actor hinh đầu vuông
+user case name: auto update event status
 103 update dashboadcontroller action index "Display basic statistic about sell and buy ticket and current system status"
 112 sửa lại miểu tả hình Buy ticket activity diagram
 
 
 
 Lỗi chính tả: 
-27 action
-46 "Địa điểm"
-48 action
+
+
