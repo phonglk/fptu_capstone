@@ -215,6 +215,8 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Venue delete = Repository.Get(e => e.VenueId == Id).FirstOrDefault();
+                
+
                 delete.Status = (int)Statuses.Venue.Delete;
 
                 Repository.AddOrUpdate(delete);
