@@ -113,6 +113,7 @@
     })
 
     $("#EventId").select2();
+    $("#EventId").select2("val",@Model.EventId);
     function countMoney() {
         var serRate = $("#servicefee").val();
         var sellprice = document.getElementById("SellPrice").value;
