@@ -61,7 +61,7 @@ namespace DropIt.Controllers
         {
             Session["Role"] = "Buy";
               IEnumerable<Event> TopSellEvent = unitOfWork.EventRepository.GetAvailable().OrderByDescending(e => e.Tickets.Count).Take(5);
-              var TopRateUser = unitOfWork.UserRepository.Get().OrderByDescending(t => t.Tickets.Count).Take(5);
+             // var TopRateUser = unitOfWork.UserRepository.Get().OrderByDescending(t => t.Tickets.Count).Take(5);
               return View(TopSellEvent);
         }
 
