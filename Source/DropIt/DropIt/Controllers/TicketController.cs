@@ -531,6 +531,11 @@ namespace DropIt.Controllers
             double receivemoney = (int)(ticket.SellPrice * (1 - service));
             if (ModelState.IsValid)
             {
+                int newStt= (int)Statuses.Ticket.Ready;
+                if (getTicket.Status == (int)Statuses.Ticket.Pending)
+                {
+                    newStt = (int)Statuses.Ticket.Pending;
+                }
                 Ticket newTicket = new Ticket()
                                        {
                                            TicketId = getTicket.TicketId,
@@ -545,7 +550,7 @@ namespace DropIt.Controllers
                                            SellPrice = ticket.SellPrice,  // thay doi
                                            ReceiveMoney = (System.Math.Floor(receivemoney / 500)) * 500,  // thay doi
                                            Seat = ticket.Seat,  // thay doi
-                                           Status = (int)Statuses.Ticket.Ready,  // dua ve trang thai ready
+                                           Status = newStt,  // dua ve trang thai ready
                                            AdminModifiedDate = getTicket.AdminModifiedDate,
                                            Description = ticket.Description,  // thay doi
                                            CreatedDate = getTicket.CreatedDate,
