@@ -1,0 +1,26 @@
+﻿In trang
+17 [error: SMDH thay bằng DropIt]
+21 vẽ thêm use case extend Sort
+26 vẽ thêm use case extend Search, Sort, Filter
+30 vẽ thêm use case extend Sort, Filter _ lỗi chính tả "Được bán"
+36 vẽ thêm use case extend Sort
+37 vẽ thêm use case extend Sort, Filter
+42 vẽ thêm use case extend Sort
+47 vẽ thêm use case extend Sort, Filter
+49 vẽ thêm use case extend Sort
+66 vẽ thêm use case extend Create Event, Create Venue  + alternative scenario
+69 sửa lại mối quan hệ extend chứ ko phải thừa kế Real-time notification
+74 Sửa lại actor là Authorized, miêu tả phía dưới actor chỉ còn Author, Customer
+75 Sửa lại author là HieuCM, miêu tả dưới actor chỉ còn Author, Customer
+78 actor còn lại là Guest
+84 sửa use case actor hình đầu vuông
+85 sửa use case actor hình đầu vuông và extend từ Notification
+86, 87 use case actor hinh đầu vuông
+112 sửa lại miểu tả hình Buy ticket activity diagram
+
+
+
+Lỗi chính tả: 
+27 action
+46 "Địa điểm"
+48 action
