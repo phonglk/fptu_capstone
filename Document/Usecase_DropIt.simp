@@ -108,21 +108,6 @@
       <style class="default" />
       <extend extension-point="" />
     </item>
-    <item id="di887567898355984948" cid="GNR001" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/16/2013 00:10:33">
-      <stereotypes />
-      <tagged-values />
-      <associated-diagrams />
-      <owned-items />
-      <style class="default" />
-    </item>
-    <item id="di134403425304349487" cid="UC003" type="use-case" name="Post Ticket" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/16/2013 00:10:25">
-      <stereotypes />
-      <tagged-values />
-      <associated-diagrams />
-      <owned-items />
-      <style class="default" />
-      <use-case />
-    </item>
   </items>
   <models>
     <model id="p465001078942284053" name="Model 1" type="model" namespace="" order-index="1">
@@ -1339,12 +1324,12 @@
             <drawing-line start-point="880,-100" end-point="1000,-20" />
             <style class="default" />
           </item>
-          <item id="di437876801270380294" iid="601508e2b54343509a11446a93d65bb0" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:17" order-index="90" type="drawing-line">
+          <item id="di737663365491029321" iid="601508e2b54343509a11446a93d65bb0" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:17" order-index="90" type="drawing-line">
             <layout ax="878" ay="-100" awidth="3" aheight="17" x="50" y="50" width="140" height="160" angle="0" />
             <drawing-line start-point="880,-100" end-point="878,-84" />
             <style class="default" />
           </item>
-          <item id="di334259456672353076" iid="6fc2ab7cf76b49fdafa89f43594b8ea7" name="Element3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:24" order-index="91" type="drawing-line">
+          <item id="di158032920708824643" iid="6fc2ab7cf76b49fdafa89f43594b8ea7" name="Element3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:24" order-index="91" type="drawing-line">
             <layout ax="880" ay="-100" awidth="21" aheight="1" x="50" y="50" width="140" height="160" angle="0" />
             <drawing-line start-point="880,-100" end-point="900,-100" />
             <style class="default" />
@@ -4614,20 +4599,30 @@
           </authors>
           <description />
           <creation-date>08/15/2013 21:39:43</creation-date>
-          <change-date>08/17/2013 00:52:40</change-date>
+          <change-date>08/17/2013 03:49:15</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
         <tagged-values />
         <abstract-items>
-          <item id="di345413097229087940" cid="AC001" type="actor" name="Customer" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:45">
+          <item id="di345413097229087940" cid="AC001" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:45">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di755294125120383500" cid="UC002" type="use-case" name="Sell Ticket" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
+          <item id="di985813867334364918" cid="EX007" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 03:49:15">
+            <stereotypes>
+              <stereotype name="extend" />
+            </stereotypes>
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <extend extension-point="" />
+          </item>
+          <item id="di764742889312426322" cid="UC002" type="use-case" name="Receive Real-time Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4635,110 +4630,61 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di252401033736963422" cid="REL003" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:40:05">
+          <item id="di972956555347448082" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 01:41:02">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <relation from="di345413097229087940" to="di755294125120383500">
+            <relation from="di345413097229087940" to="di327642248897428707">
               <start-role id="" name="" navigability="" association-type="association" visibility="private" />
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di954972655187100410" cid="UC001" type="use-case" name="Create Event" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 00:52:03">
+          <item id="di327642248897428707" cid="UC002" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
             <use-case />
-          </item>
-          <item id="di774560579807654967" cid="EX001" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 00:52:24">
-            <stereotypes>
-              <stereotype name="extend" />
-            </stereotypes>
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <extend extension-point="" />
-          </item>
-          <item id="di960360689971998624" cid="UC001" type="use-case" name="Create Venue" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 00:52:03">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <use-case />
-          </item>
-          <item id="di657351577160628881" cid="EX002" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 00:52:40">
-            <stereotypes>
-              <stereotype name="extend" />
-            </stereotypes>
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <extend extension-point="" />
           </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di345413097229087940" iid="ef57fa6fa9784e1b95091d121be335b5" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:39:45" order-index="0" type="entity">
-            <layout ax="250" ay="160" awidth="90" aheight="160" x="250" y="160" width="90" height="160" angle="0" />
+            <layout ax="-10" ay="160" awidth="90" aheight="160" x="-10" y="160" width="90" height="160" angle="0" />
           </item>
-          <item id="di755294125120383500" iid="fc855b1ca02448be9ba3ac9be945046a" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:39:49" order-index="1" type="entity">
-            <layout ax="490" ay="200" awidth="130" aheight="81" x="490" y="200" width="130" height="80" angle="0" />
+          <item id="di327642248897428707" iid="dcdcab0c26024a14ad6ddcb2b5206b5f" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:39:49" order-index="1" type="entity">
+            <layout ax="230" ay="190" awidth="160" aheight="100" x="230" y="190" width="160" height="100" angle="0" />
             <use-case />
           </item>
-          <item id="di252401033736963422" iid="51a9b7bcd02f40bd924ff6df2369a637" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:40:05" order-index="2" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="340" y1="240" x2="490" y2="240" start-border-pos="0.375" end-border-pos="0.876543209876543">
+          <item id="di972956555347448082" iid="3eccdd28ea2b4a34bee0ce5dc6f58ae5" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 01:41:02" order-index="8" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="80" y1="240" x2="230" y2="240" start-border-pos="0.375" end-border-pos="0.875">
               <points>
-                <point x="340" y="240" />
-                <point x="490" y="240" />
+                <point x="80" y="240" />
+                <point x="230" y="240" />
               </points>
             </layout>
-            <relation from="di345413097229087940" from-iid="ef57fa6fa9784e1b95091d121be335b5" to="di755294125120383500" to-iid="fc855b1ca02448be9ba3ac9be945046a" />
+            <relation from="di345413097229087940" from-iid="ef57fa6fa9784e1b95091d121be335b5" to="di327642248897428707" to-iid="dcdcab0c26024a14ad6ddcb2b5206b5f" />
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
-          <item id="di887567898355984948" iid="94d004a02aa946dda3560ed5f9a35f33" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/16/2013 00:10:33" order-index="4" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="780" y1="240" x2="620" y2="240" start-border-pos="0.876543209876543" end-border-pos="0.373456790123457">
-              <points>
-                <point x="780" y="240" />
-                <point x="620" y="240" />
-              </points>
-            </layout>
-            <relation from="di134403425304349487" from-iid="6ef233151cc44cf784888cee71849b34" to="di755294125120383500" to-iid="fc855b1ca02448be9ba3ac9be945046a" />
+          <item id="di910694176461309678" iid="fc6a5439c0d34f4dafba975cf94dba67" name="Element1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 03:02:44" order-index="9" type="drawing-shape">
+            <layout ax="10" ay="150" awidth="50" aheight="50" x="10" y="150" width="50" height="50" angle="0" />
+            <drawing-shape type="Rectangle" />
+            <style class="default" />
           </item>
-          <item id="di134403425304349487" iid="6ef233151cc44cf784888cee71849b34" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/16/2013 00:10:25" order-index="3" type="entity">
-            <layout ax="780" ay="200" awidth="130" aheight="81" x="780" y="200" width="130" height="80" angle="0" />
+          <item id="di764742889312426322" iid="b936633e0c2d4910b8d0e846d0069f80" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:39:49" order-index="1" type="entity">
+            <layout ax="530" ay="190" awidth="160" aheight="100" x="530" y="190" width="160" height="100" angle="0" />
             <use-case />
           </item>
-          <item id="di954972655187100410" iid="c305965df58a4f7aa309b75e81a21d1e" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 00:52:03" order-index="5" type="entity">
-            <layout ax="1030" ay="200" awidth="130" aheight="81" x="1030" y="200" width="130" height="80" angle="0" />
-            <use-case />
-          </item>
-          <item id="di774560579807654967" iid="04479e278fae4bd4aa1432af0f17fef7" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 00:52:24" order-index="6" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1030" y1="240" x2="910" y2="240" start-border-pos="0.876543209876543" end-border-pos="0.373456790123457">
+          <item id="di985813867334364918" iid="87210cd412f1464683159e79fc5a2d91" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 03:49:15" order-index="10" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="530" y1="240" x2="390" y2="240" start-border-pos="0.875" end-border-pos="0.375">
               <points>
-                <point x="1030" y="240" />
-                <point x="910" y="240" />
+                <point x="530" y="240" />
+                <point x="390" y="240" />
               </points>
             </layout>
-            <relation from="di954972655187100410" from-iid="c305965df58a4f7aa309b75e81a21d1e" to="di134403425304349487" to-iid="6ef233151cc44cf784888cee71849b34" />
-          </item>
-          <item id="di960360689971998624" iid="e8721abbb22b4f9f9e700d0b02d9ad15" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 00:52:03" order-index="5" type="entity">
-            <layout ax="1270" ay="200" awidth="130" aheight="81" x="1270" y="200" width="130" height="80" angle="0" />
-            <use-case />
-          </item>
-          <item id="di657351577160628881" iid="95e9fc8814c348a9baa315b81b9d43e1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 00:52:40" order-index="7" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1270" y1="240" x2="1160" y2="240" start-border-pos="0.876543209876543" end-border-pos="0.373456790123457">
-              <points>
-                <point x="1270" y="240" />
-                <point x="1160" y="240" />
-              </points>
-            </layout>
-            <relation from="di960360689971998624" from-iid="e8721abbb22b4f9f9e700d0b02d9ad15" to="di954972655187100410" to-iid="c305965df58a4f7aa309b75e81a21d1e" />
+            <relation from="di764742889312426322" from-iid="b936633e0c2d4910b8d0e846d0069f80" to="di327642248897428707" to-iid="dcdcab0c26024a14ad6ddcb2b5206b5f" />
           </item>
         </layer>
       </diagram>
