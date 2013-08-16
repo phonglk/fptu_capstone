@@ -103,17 +103,20 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="icon-map-marker"></span>@item.Event.Venue.VenueName
                             <br />
+                            <div class="text-overflow">
                             <span class="icon-time"></span>&nbsp;@item.Event.HoldDate.ToLongTimeString()
                             &nbsp;&nbsp;&nbsp;&nbsp;
                 @if (item.Seat != null)
                 {
                     <span class="icon-random"></span> <text>Chỗ ngồi:</text> @item.Seat
                 }
+
+                            </div>
                         </div>
                         @*<div class="event-venue">
                                     
             </div>*@
-                        <div>
+                        <div class="text-overflow">
                             <strong>Chú thích:</strong> <span data-unraw>@Html.Raw(item.Description)</span>
                         </div>
                     </div>

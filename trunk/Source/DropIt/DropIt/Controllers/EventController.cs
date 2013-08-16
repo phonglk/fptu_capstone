@@ -54,6 +54,7 @@ namespace DropIt.Controllers
             {
                 ViewBag.Sorting = Request["Sorting"];
             }
+            evt.Tickets = evt.Tickets.Where(t => t.Status == (int)Statuses.Ticket.Ready).ToList();
             dynamic Helper = unitOfWork.TicketRepository.ControllerHelper(Request, evt.Tickets,defaultSorting);
             evt.Tickets = Helper.Records;
             evt.Requests = (ICollection<Request>)evt.Requests.OrderBy(r => r.CreatedDate).ToList();
