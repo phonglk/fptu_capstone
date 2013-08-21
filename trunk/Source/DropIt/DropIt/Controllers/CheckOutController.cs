@@ -47,6 +47,7 @@ namespace DropIt.Controllers
                                 shipping = System.Math.Round((shippingCost / dollarRate), 2),
                                 custom = ticket.TicketId,
                             };
+            Session["BuyingTicket"] = ticket;
             return View(pp);
         }
 
@@ -94,6 +95,20 @@ namespace DropIt.Controllers
 //                        pdt.PayerFirstName, pdt.PayerLastName, pdt.PayerEmail, pdt.GrossTotal, pdt.Custom);
                     
                     Ticket ticket = this.unitOfWork.TicketRepository.Get(t => t.TicketId == pTicketId).FirstOrDefault();
+
+                    Ticket oldTicket = (Ticket)Session["BuyingTicket"];
+                    if (oldTicket != null)
+                    {
+                        if (oldTicket.EventId != ticket.EventId ||
+                            oldTicket.SeriesNumber != ticket.SeriesNumber ||
+                            oldTicket.Seat != ticket.Seat ||
+                            oldTicket.SellPrice != ticket.SellPrice)
+                        {
+                            return View("Changed");
+                        }
+                    }
+
+
                     ViewBag.PayerFirstName = pdt.PayerFirstName;
                     ViewBag.User = ticket.User.UserName;
                     ViewBag.PayerLastName = pdt.PayerLastName;

@@ -1948,6 +1948,7 @@
     </Content>
     <Content Include="Views\Shared\Partials\Templates\SideBar_Category.cshtml" />
     <Content Include="Views\Account\AdminLogin.cshtml" />
+    <Content Include="Views\CheckOut\Changed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
