@@ -66,7 +66,8 @@ namespace DropIt.Areas.Administration.Controllers
                             e.Province.ProvinceName
                         },
                     Description = e.Description,
-                    Status = e.Status
+                    Status = e.Status,
+                    IsDisaaproveable = e.Events.Where(ev=>ev.Status!=(int)Statuses.Event.Delete).Count() == 0
                 });
                 return Json(new JSONResult(Records)
                 {
@@ -188,15 +189,24 @@ namespace DropIt.Areas.Administration.Controllers
         {
             try
             {
-                Venue delete = Repository.Get(e => e.VenueId == Id).FirstOrDefault();
-                delete.Status = (int)Statuses.Venue.Disapprove;
+                Venue venue = Repository.Get(e => e.VenueId == Id).FirstOrDefault();
+                if (venue.Events.Where(e => e.Status != (int)Statuses.Event.Delete).Count() > 0)
+                {
+                    return Json(new
+                    {
+                        Result = "ERROR",
+                        Message= "Địa điểm này đã có sự kiện, không thể bỏ duyệt.",
+                        EventId = venue.VenueId
+                    });
+                }
+                venue.Status = (int)Statuses.Venue.Disapprove;
 
-                Repository.AddOrUpdate(delete);
+                Repository.AddOrUpdate(venue);
                 Repository.Save();
                 return Json(new
                 {
                     Result = "OK",
-                    EventId = delete.VenueId
+                    EventId = venue.VenueId
                 });
             }
             catch (Exception e)
