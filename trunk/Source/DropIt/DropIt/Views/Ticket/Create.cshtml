@@ -258,10 +258,10 @@ else
 
             self.selectEventChange = function () {
                 $.ajax({
-                    url: Url({ Controller: "Event", Action: "getInfo" }),
+                    url: Url({ Controller: "Event", Action: "getInfo" }), // the URL to which the request is sent.
                     type: "POST",
-                    data: "EventId=" + self.EventId(),
-                    success: function (data) {
+                    data: "EventId=" + self.EventId(),                   // data send to server
+                    success: function (data) {                           //  A function to be called if the request succeeds, the data return form the server
                         if (data.Result && data.Result == "OK" && data.Records) {
                             var record = data.Records[0]
                             self.HoldDate(record.HoldDate)
