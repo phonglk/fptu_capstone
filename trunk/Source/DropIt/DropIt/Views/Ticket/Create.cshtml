@@ -177,8 +177,7 @@ else
                     <div class="controls">
                         @Html.TextBox("SellPrice", String.Empty, new { data_bind = "value: SellPrice", required = "required" })
                     </div>
-                </div>
-                <div class="controls validate"></div>
+                </div>               
                 <input type="hidden" id="servicefee" value="@see"/>
                 <div class="control-group">
                     <label class="control-label" for="ReceiveMoney">Số tiền nhận được sau khi trừ các khoản thuế (<span data-bind="text: (ServiceRate * 100).toFixed(0)"></span>%):</label>
@@ -186,8 +185,6 @@ else
                         @Html.TextBox("ReceiveMoney", String.Empty, new { disabled = "true", data_bind = "value:RecievePrice" })
                     </div>
                 </div>
-
-
                 <div class="control-group" style="margin-left: 35%; margin-top: -20px;">
                     <label class="checkbox">
                         <input type="checkbox" name="AgreeTerm" id="AgreeTerm" required title="Bạn phải đồng ý với điều khoản sử dụng" />
@@ -253,7 +250,9 @@ else
             self.SellPrice = ko.observable();
             self.ServiceRate = $("#servicefee").val();
             self.RecievePrice = ko.computed(function () {
-                return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0, ".", ",");
+                var receive = Math.floor((self.SellPrice() * (1 - self.ServiceRate)) / 500) * 500;
+                //                return new Number(parsePrice(self.SellPrice()) * (1 - self.ServiceRate)).formatMoney(0, ".", ",");
+                return receive.formatMoney(0, ".", ".");
             })
 
             self.selectEventChange = function () {
