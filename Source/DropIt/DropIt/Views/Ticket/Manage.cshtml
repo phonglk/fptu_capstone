@@ -77,10 +77,7 @@
                         <a href="@Url.Action("Delete", new { Id = @item.TicketId })" onclick="return confirm('Bạn có chắc chắn muốn xóa vé này?')" class="btn main">Xóa</a>
                         <a href="@Url.Action("Edit", new { Id = @item.TicketId })" class="btn main">Sửa</a>
                     </div>
-                    @if (@item.SeriesNumber != null)
-                    {
-                        <div class="serial"><strong>S\N: @item.SeriesNumber</strong></div>
-                    }
+                    
                     <div class="buyer">
                         <div class="buyer-name">
                             <strong>Người bán:</strong> @item.User.UserName
@@ -88,6 +85,10 @@
                         <div class="buyer-date">
                             <strong>Ngày đăng:</strong> @item.CreatedDate.Value.ToString("dd / MM / yyyy")
                         </div>
+                        @if (@item.SeriesNumber != null)
+                        {
+                            <div class="sn text-overflow"><strong>Mã vé: @item.SeriesNumber</strong></div>
+                        }
                     </div>
                     <div class="info">
                         <div class="event-name text-overflow">
