@@ -684,7 +684,7 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di857018991755565914" cid="AC001" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 12:59:29">
+          <item id="di857018991755565914" cid="AC001" type="actor" name="Auto System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/12/2013 12:59:29">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -1197,7 +1197,7 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di857018991755565914" iid="bc9b30b1c85843038dd038b325ee2e7f" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 12:59:29" order-index="72" type="entity">
-            <layout ax="568" ay="1142" awidth="102" aheight="148" x="568" y="1142" width="100" height="148" angle="0" />
+            <layout ax="568" ay="1152" awidth="102" aheight="148" x="568" y="1152" width="100" height="148" angle="0" />
           </item>
           <item id="di303162204114005307" iid="f9f354532b1b43348c6f6883b65e88c2" name="Element1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/12/2013 12:59:55" order-index="73" type="drawing-shape">
             <layout ax="600" ay="1140" awidth="40" aheight="40" x="600" y="1140" width="40" height="40" angle="0" />
@@ -1324,12 +1324,12 @@
             <drawing-line start-point="880,-100" end-point="1000,-20" />
             <style class="default" />
           </item>
-          <item id="di737663365491029321" iid="601508e2b54343509a11446a93d65bb0" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:17" order-index="90" type="drawing-line">
+          <item id="di280236557333038609" iid="601508e2b54343509a11446a93d65bb0" name="Element2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:17" order-index="90" type="drawing-line">
             <layout ax="878" ay="-100" awidth="3" aheight="17" x="50" y="50" width="140" height="160" angle="0" />
             <drawing-line start-point="880,-100" end-point="878,-84" />
             <style class="default" />
           </item>
-          <item id="di158032920708824643" iid="6fc2ab7cf76b49fdafa89f43594b8ea7" name="Element3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:24" order-index="91" type="drawing-line">
+          <item id="di797059744549081207" iid="6fc2ab7cf76b49fdafa89f43594b8ea7" name="Element3" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 20:54:24" order-index="91" type="drawing-line">
             <layout ax="880" ay="-100" awidth="21" aheight="1" x="50" y="50" width="140" height="160" angle="0" />
             <drawing-line start-point="880,-100" end-point="900,-100" />
             <style class="default" />
@@ -4599,20 +4599,20 @@
           </authors>
           <description />
           <creation-date>08/15/2013 21:39:43</creation-date>
-          <change-date>08/17/2013 03:49:15</change-date>
+          <change-date>08/23/2013 14:46:57</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
         <tagged-values />
         <abstract-items>
-          <item id="di345413097229087940" cid="AC001" type="actor" name="System" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:45">
+          <item id="di345413097229087940" cid="AC001" type="actor" name="Customer" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:45">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di985813867334364918" cid="EX007" type="extend" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 03:49:15">
+          <item id="di985813867334364918" cid="EX007" type="extend" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 03:49:15">
             <stereotypes>
               <stereotype name="extend" />
             </stereotypes>
@@ -4622,7 +4622,7 @@
             <style class="default" />
             <extend extension-point="" />
           </item>
-          <item id="di764742889312426322" cid="UC002" type="use-case" name="Receive Real-time Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
+          <item id="di764742889312426322" cid="UC002" type="use-case" name="Real-time Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4630,7 +4630,7 @@
             <style class="default" />
             <use-case />
           </item>
-          <item id="di972956555347448082" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 01:41:02">
+          <item id="di972956555347448082" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/17/2013 01:41:02">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4641,7 +4641,7 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di327642248897428707" cid="UC002" type="use-case" name="Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
+          <item id="di327642248897428707" cid="UC002" type="use-case" name="Receive Notification" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="08/15/2013 21:39:49">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -4667,11 +4667,6 @@
             </layout>
             <relation from="di345413097229087940" from-iid="ef57fa6fa9784e1b95091d121be335b5" to="di327642248897428707" to-iid="dcdcab0c26024a14ad6ddcb2b5206b5f" />
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
-          </item>
-          <item id="di910694176461309678" iid="fc6a5439c0d34f4dafba975cf94dba67" name="Element1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/17/2013 03:02:44" order-index="9" type="drawing-shape">
-            <layout ax="10" ay="150" awidth="50" aheight="50" x="10" y="150" width="50" height="50" angle="0" />
-            <drawing-shape type="Rectangle" />
-            <style class="default" />
           </item>
           <item id="di764742889312426322" iid="b936633e0c2d4910b8d0e846d0069f80" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="08/15/2013 21:39:49" order-index="1" type="entity">
             <layout ax="530" ay="190" awidth="160" aheight="100" x="530" y="190" width="160" height="100" angle="0" />
