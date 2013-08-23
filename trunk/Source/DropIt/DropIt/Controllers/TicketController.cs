@@ -517,8 +517,17 @@ namespace DropIt.Controllers
             {
                 HttpNotFound();
             }
-            ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName",
-                                             ticket.EventId);
+
+            if (ticket.Status == (int)Statuses.Ticket.Ready)
+            {
+                ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailable(), "EventId", "EventName",
+                                                 ticket.EventId);
+            }
+            else
+            {
+                ViewBag.EventId = new SelectList(this.unitOfWork.EventRepository.GetAvailableIncludingDisapprove(), "EventId", "EventName",
+                                                 ticket.EventId);
+            }
             return View(ticket);
         }
 

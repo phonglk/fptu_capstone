@@ -459,6 +459,9 @@ h2 {
   padding: 0;
   list-style: none;
 }
+.sn {
+  width: 175px;
+}
 .ticket {
   width: 678px;
   border: 1px solid #451a54;
@@ -498,8 +501,9 @@ h2 {
 }
 .ticket .buyer {
   position: absolute;
-  top: 7px;
+  top: 8px;
   left: 10px;
+  width: 175px;
   font-size: 15px;
   line-height: 18px;
   font-family: HN;

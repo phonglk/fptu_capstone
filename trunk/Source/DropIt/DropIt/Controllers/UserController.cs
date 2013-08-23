@@ -42,7 +42,7 @@ namespace DropIt.Controllers
         public ActionResult Profile(int id = 0)
         {
             User user = this.unitOfWork.UserRepository.GetById(id);
-            ViewBag.Success = user.Tickets1.Where(t=>t.TranStatus != null).Count();
+            ViewBag.Success = user.Tickets1.Where(t => t.TranStatus != null).Count() + user.Tickets.Where(t => t.TranStatus != null).Count();
             ViewBag.Invalid = this.unitOfWork.TicketRepository.Get(t => t.Status == (int)Statuses.Ticket.Invalid && t.UserId == user.UserId).Count();
             ViewBag.Rate = Utils.getUserRating(user);
             return View(user);
