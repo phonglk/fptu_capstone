@@ -60,7 +60,7 @@ namespace DropIt.DAL
                 {
                     sellingRatio += 0.2;
                 }
-                sellingRatio *= ((countTotalSell-countInvalidSell) / countTotalSell);
+                sellingRatio *= ((double)(countTotalSell-countInvalidSell) / countTotalSell);
             }
             ratio = (sellingRatio + buyingRatio) / 2;
             double realRatio = ratio * maximumRating;
