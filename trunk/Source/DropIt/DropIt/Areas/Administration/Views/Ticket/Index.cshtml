@@ -82,7 +82,7 @@
 <table class="table table-bordered box">
     <thead>
         <tr>
-            <th>Mã số vé</th>
+            <th style="width:80px;">Mã số vé</th>
             <th  class="sortable" data-bind="    click: function (data, event) { sort('CreatedDate', data, event) }">Người đăng</th>
             <th>Tên sự kiện</th>
             <th  class="sortable" data-bind="    click: function (data, event) { sort('SellPrice', data, event) }">Gía vé</th>
@@ -93,7 +93,9 @@
     </thead>
     <tbody data-bind="foreach: data">
         <tr>
-            <td data-bind=" text: SeriesNumber"></td>
+            <td>
+                <span data-bind=" text: SeriesNumber,attr:{title:SeriesNumber}" class="text-overflow" style="width:80px;display:block"></span>
+            </td>
             <td data-bind=" text: User.UserName"></td>
             <td data-bind=" text: Event.EventName"></td>
             <td data-bind="text: SellPrice"></td>
