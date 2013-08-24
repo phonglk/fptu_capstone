@@ -74,7 +74,12 @@
                 //}
                 <li class="ticket">
                     <div style="position: absolute; bottom: 10px; left: 10px;">
-                        <a href="@Url.Action("Delete", new { Id = @item.TicketId })" onclick="return confirm('Bạn có chắc chắn muốn xóa vé này?')" class="btn main">Xóa</a>
+                        @if ((int)ViewBag.CurrentStatus == (int)Statuses.Ticket.UserApprove)
+                        {
+                            <a href="@Url.Action("Approve", new { Id = @item.TicketId })" class="btn main">Chấp nhận</a>
+                        }else{
+                            <a href="@Url.Action("Delete", new { Id = @item.TicketId })" onclick="return confirm('Bạn có chắc chắn muốn xóa vé này?')" class="btn main">Xóa</a>
+                        }
                         <a href="@Url.Action("Edit", new { Id = @item.TicketId })" class="btn main">Sửa</a>
                     </div>
                     

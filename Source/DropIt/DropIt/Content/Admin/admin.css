@@ -33,6 +33,11 @@ img.previewUpload {
   margin: 0 auto;
   display: block;
 }
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 table thead tr th.sortable {
   background-position: center right;
   cursor: pointer;

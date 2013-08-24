@@ -101,6 +101,7 @@ namespace DropIt.Controllers
                     {
                         if (oldTicket.EventId != ticket.EventId ||
                             oldTicket.SeriesNumber != ticket.SeriesNumber ||
+                            oldTicket.Status != ticket.Status || 
                             oldTicket.Seat != ticket.Seat ||
                             oldTicket.SellPrice != ticket.SellPrice)
                         {
