@@ -3,15 +3,7 @@
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/Bundles/jquery.validate")
-<script>
-    var EventStatus = @ViewBag.EventStatus;
-    var Statuses = {
-        Approve : @((int)DropIt.Common.Statuses.Event.Approve),
-        Disapprove : @((int)DropIt.Common.Statuses.Event.Disapprove),
-        Trading:@((int)DropIt.Common.Statuses.Event.Trading),
-        Outdate:@((int)DropIt.Common.Statuses.Event.Outdate)
-        }
-</script>
+
 <style>
     table th:nth-child(1) {
         min-width: 200px;
