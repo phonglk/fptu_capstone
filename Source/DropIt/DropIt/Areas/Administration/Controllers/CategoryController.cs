@@ -231,17 +231,25 @@ namespace DropIt.Areas.Administration.Controllers
             try
             {
                 Category delete = Repository.Get(e => e.CategoryId == Id).FirstOrDefault();
-                if (delete.ParentCategoryId == null)
+                if (delete.Category1.Where(c=>c.Status != (int)Statuses.Category.Delete).Count() == 0)
                 {
                     delete.Status = (int)Statuses.Category.Delete;
                 }
-                else if (delete.ParentCategoryId != null)
+                else
                 {
                     return Json(new
                       {
                           Result = "ERROR",
                           Message = "Không thể xóa Danh mục có danh mục con!"
                       });
+                }
+                if(delete.Events.Where(p => p.Status != (int)Statuses.Event.Delete).Count() >= 1)
+                {
+                    return Json(new JSONResult()
+                    {
+                        Result = "ERROR",
+                        Message = "Không thể xóa danh mục có sự kiện!"
+                    });
                 }
 
 

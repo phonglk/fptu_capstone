@@ -160,7 +160,7 @@
             urlData:{Action:"Disapprove",Data:{Id:item.TicketId}},
             callback:function(event){
                 Notifications.push({
-                    text:"Vé có mã số \"#{TicketId}\" đã được bỏ duyệt !".eval(event),
+                    text:"Vé đã được bỏ duyệt !".eval(event),
                     autoDismiss:5
                 })
             }
@@ -173,7 +173,7 @@
                 urlData:{Action:"Approve",Data:{Id:item.TicketId}},
                 callback:function(event){
                     Notifications.push({
-                        text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
+                        text:" Vé đã được duyệt !".eval(event),
                         autoDismiss:5
                     })
                 }
@@ -197,7 +197,7 @@
                         urlData:{Action:"Approve",Data:{Id:item.TicketId}},
                         callback:function(event){
                             Notifications.push({
-                                text:" Vé có mã số \"#{TicketId}\" đã được duyệt !".eval(event),
+                                text:" Vé đã được duyệt !".eval(event),
                                 autoDismiss:5
                             })
                         }
@@ -217,7 +217,7 @@
                         urlData:{Action:"Delete",Data:{Id:item.TicketId}},
                         callback:function(event){
                             Notifications.push({
-                                text:"Vé có mã số \"#{TicketId}\" đã được xóa !".eval(event),
+                                text:"Vé đã được xóa !".eval(event),
                                 autoDismiss:5
                             })
                         }

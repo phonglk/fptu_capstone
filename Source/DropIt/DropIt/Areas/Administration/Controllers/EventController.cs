@@ -39,11 +39,11 @@ namespace DropIt.Areas.Administration.Controllers
             });
             ViewBag.Venues = new SelectList(venues, "VenueId", "VenueName");
 
-            var categories = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Select(r => new
+            var categories = unitOfWork.CategoryRepository.Get(c => c.Category2 == null).Where(c => c.Status != (int)Statuses.Category.Delete).Select(r => new
             {
                 r.CategoryId,
                 r.CategoryName,
-                Childs = r.Category1.Select(r2 => new
+                Childs = r.Category1.Where(c=>c.Status!=(int)Statuses.Category.Delete).Select(r2 => new
                 {
                     r2.CategoryId,
                     r2.CategoryName,
