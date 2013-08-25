@@ -119,7 +119,7 @@ namespace DropIt.DAL
                     {
                         Event = Event
                     };
-                if (Event.VenueId == VenueId)
+                if (Event.VenueId == VenueId) 
                 {
                     mark += 0.3;
                     suggest.isMatchVenue = true;
