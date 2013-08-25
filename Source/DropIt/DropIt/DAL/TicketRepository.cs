@@ -1,4 +1,5 @@
-﻿using DropIt.Models;
+﻿using DropIt.Common;
+using DropIt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,10 @@ namespace DropIt.DAL
                 {
                     foreach (UserFollowEvent follow in Event.UserFollowEvents)
                     {
+                        if (follow.FollowType == (int)Statuses.FollowType.Buy)
+                        {
+                            continue;
+                        }
                         Notification Noti = new Notification()
                         {
                             UserId = follow.UserId,
