@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DropIt.Common;
 
 namespace DropIt.DAL
 {
@@ -33,7 +34,7 @@ namespace DropIt.DAL
                 {
                     foreach (UserFollowEvent follow in Event.UserFollowEvents)
                     {
-                        if (follow.UserId == request.UserId)
+                        if (follow.UserId == request.UserId || follow.FollowType == (int)Statuses.FollowType.Sell)
                         {
                             continue;
                         }
