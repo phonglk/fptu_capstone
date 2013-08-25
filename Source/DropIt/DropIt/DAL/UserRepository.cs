@@ -38,7 +38,7 @@ namespace DropIt.DAL
             double buyingRatio = 0;
 
             int countBuy = user.Tickets1.Where(t=>t.TranStatus != null).Count();
-            int countTotalSell = user.Tickets.Count();
+            int countTotalSell = user.Tickets.Where(t => t.TranStatus != null).Count();
             int countInvalidSell = user.Tickets.Where(t=> t.Status == (int)Statuses.Ticket.Invalid).Count();
             if(countBuy>=1){
                 buyingRatio += 0.5;
@@ -52,11 +52,11 @@ namespace DropIt.DAL
             if (countTotalSell >= 1)
             {
                 sellingRatio += 0.5;
-                if (sellingRatio >= 10)
+                if (countTotalSell >= 10)
                 {
                     sellingRatio += 0.2;
                 }
-                else if (sellingRatio >= 50)
+                else if (countTotalSell >= 50)
                 {
                     sellingRatio += 0.2;
                 }
