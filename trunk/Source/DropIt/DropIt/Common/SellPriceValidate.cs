@@ -12,11 +12,11 @@ namespace DropIt.Common
         {
             double Min = Double.Parse(Settings.get("MinSellPrice"));
             double Max = Double.Parse(Settings.get("MaxSellPrice"));
-            if (value <= Min)
+            if (value < Min)
             {
                 return new ValidationResult("Giá tiền vé tối thiểu từ " + Min + " đồng");
             }
-            if (value >= Max)
+            if (value > Max)
             {
                 return new ValidationResult("Giá tiền vé tối đa " + Max + " đồng");
             }
