@@ -32,3 +32,13 @@ Team
 	 - Quality Assurance
 	 - Developer
 	 - Tester
+
+UI
+----
+![](https://github.com/phonglk/fptu_capstone/blob/master/HTML/dropit3.png?raw=true)
+
+**Registration**
+![](https://github.com/phonglk/fptu_capstone/blob/master/HTML/Register.png?raw=true)
+
+**Search**
+![](https://github.com/phonglk/fptu_capstone/blob/master/HTML/dropit_search.png?raw=true)
